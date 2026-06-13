@@ -71,6 +71,19 @@ COUNTEREXAMPLE  refutation of a proposed statement
 
 Do not promote conditional or experimental results to proved statements.
 
+### 5. Leave the main papers unchanged by default
+
+Treat Papers A-D as stable reference documents unless a maintainer explicitly asks for edits:
+
+```text
+tex/RS_disproof_v3.tex
+tex/slackMCA_v3.tex
+tex/cs25_cap_v4.tex
+tex/snarks_v4.tex
+```
+
+New contributions should be added as separate files instead: put proof notes, audits, theorem-label maps, and formalization plans in relevant `.tex` files under `tex/`, and put reproducible experiments or certificate generators in `.py` files under `scripts/`.
+
 ## Start here
 
 ### Minimal reading path
@@ -438,6 +451,7 @@ Do **not**:
 - cite Paper D’s cap as error-one in the forbidden band;
 - treat the universal cap as unconditional before auditing the imported conversion;
 - present a small-case experiment as a theorem.
+- edit the main Papers A-D directly unless a maintainer explicitly asks for that change; add companion `.tex` notes and `.py` scripts instead.
 
 ## Contribution template
 
