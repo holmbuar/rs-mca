@@ -82,7 +82,7 @@ tex/cs25_cap_v4.tex
 tex/snarks_v4.tex
 ```
 
-New contributions should be added as separate files instead: put proof notes, audits, theorem-label maps, and formalization plans in relevant `.tex` files under `tex/`, and put reproducible experiments or certificate generators in `.py` files under `scripts/`.
+New material should go into `experimental/` first. Use separate files there for proof notes, audits, theorem-label maps, formalization plans, reproducible experiments, and certificate generators. After review, stable `.tex` contributions can be promoted to `tex/`, and stable `.py` scripts can be promoted to `scripts/`.
 
 ## Start here
 
@@ -451,7 +451,7 @@ Do **not**:
 - cite Paper D’s cap as error-one in the forbidden band;
 - treat the universal cap as unconditional before auditing the imported conversion;
 - present a small-case experiment as a theorem.
-- edit the main Papers A-D directly unless a maintainer explicitly asks for that change; add companion `.tex` notes and `.py` scripts instead.
+- edit the main Papers A-D directly unless a maintainer explicitly asks for that change; put new material in `experimental/` first.
 
 ## Contribution template
 
