@@ -78,6 +78,12 @@ canonical_small_residual_slope_count_check
 canonical_small_residual_slope_multiplicity_check
 canonical_residual_packet_lift_count_check
 canonical_residual_packet_slope_consistency_check
+canonical_terminal_pure_zero_chain_check
+canonical_terminal_pure_zero_packet_count_check
+canonical_terminal_pure_zero_support_count_check
+canonical_first_nonzero_frontier_check
+canonical_first_nonzero_frontier_partition_check
+canonical_first_nonzero_frontier_original_slope_check
 canonical_first_superboundary_zero_slope_packet_count_check
 canonical_first_superboundary_zero_slope_support_count_check
 canonical_first_superboundary_zero_slope_coset_check
@@ -95,6 +101,24 @@ canonical_first_superboundary_shape_power_coset_slope_count
 canonical_first_superboundary_shape_power_coset_slope_count_check
 canonical_first_superboundary_shape_power_coset_slope_bound
 canonical_first_superboundary_shape_power_coset_slope_bound_check
+canonical_second_superboundary_lift_gate_active
+canonical_second_superboundary_lift_gate_remainder
+canonical_second_superboundary_lift_gate_whole_fibers
+canonical_second_superboundary_lift_gate_check
+canonical_second_superboundary_shape_packet_count_check
+canonical_second_superboundary_shape_support_slope_histogram_check
+canonical_second_superboundary_shape_zero_next_slack_parameter_count
+canonical_second_superboundary_next_slack_parameter_check
+canonical_second_superboundary_next_slack_active_parameter_check
+canonical_second_superboundary_next_slack_packet_count_check
+canonical_second_superboundary_next_slack_support_count_check
+canonical_second_superboundary_shape_active_nonzero_orbit_check
+canonical_second_superboundary_shape_nonzero_power_coset_count
+canonical_second_superboundary_shape_active_nonzero_power_coset_count
+canonical_second_superboundary_shape_power_image_size
+canonical_second_superboundary_shape_power_coset_slope_count
+canonical_second_superboundary_shape_power_coset_slope_count_check
+canonical_second_superboundary_shape_power_coset_slope_bound_check
 canonical_slack_two_shape_packet_count_check
 canonical_slack_two_shape_support_slope_histogram_check
 canonical_slack_two_shape_nonzero_square_coset_count
@@ -109,6 +133,28 @@ canonical_slack_two_shape_abstract_square_coset_slope_count
 canonical_slack_two_shape_square_coset_slope_count
 canonical_slack_two_shape_square_coset_slope_count_check
 canonical_slack_two_shape_square_coset_slope_bound_check
+canonical_slack_two_second_superboundary_lift_gate_active
+canonical_slack_two_second_superboundary_lift_gate_remainder
+canonical_slack_two_second_superboundary_lift_gate_whole_fibers
+canonical_slack_two_second_superboundary_lift_gate_check
+canonical_slack_two_second_superboundary_packet_count
+canonical_slack_two_second_superboundary_support_count
+canonical_slack_two_second_superboundary_slope_count
+canonical_slack_two_second_shape_packet_count_check
+canonical_slack_two_second_shape_support_slope_histogram_check
+canonical_slack_two_second_shape_zero_conic_parameter_count
+canonical_slack_two_second_shape_nonzero_square_coset_count
+canonical_slack_two_second_shape_active_nonzero_square_coset_count
+canonical_slack_two_second_shape_square_image_size
+canonical_slack_two_second_shape_square_coset_slope_count
+canonical_slack_two_second_shape_square_coset_slope_count_check
+canonical_slack_two_second_shape_square_coset_slope_bound_check
+canonical_slack_two_second_shape_high_index_slope_bound
+canonical_slack_two_second_shape_high_index_nontrivial
+canonical_slack_two_second_shape_high_index_bound_check
+canonical_slack_two_second_full_domain_saturates_nonzero_slopes
+canonical_slack_two_second_full_domain_nonzero_slope_image
+canonical_slack_two_second_full_domain_coset_count_check
 canonical_slack_two_full_domain_alpha_square_count
 canonical_slack_two_full_domain_alpha_nonsquare_count
 canonical_slack_two_full_domain_alpha_zero_count
@@ -255,6 +301,16 @@ the weighted slope histogram. The size and touched-fiber histograms of the
 residual packet catalog are reported as
 `canonical_residual_packet_size_histogram` and
 `canonical_residual_packet_touched_fiber_histogram`.
+The terminal pure-zero fields additionally check every active residual size
+`h=t+d<m` whose inherited zero chain reaches the power-coset endpoint:
+the observed packets must be exactly the `h`-power cosets, have slope zero,
+touch `h/gcd(h,m)` quotient fibers, and lift with the theorem's binomial
+multiplicity.
+The first-nonzero frontier fields partition every superboundary residual
+packet by the first nonzero coefficient `e_(t+j)`. They check that this
+partition exhausts the packet/support weights and that, at the original
+slack `t`, only the `j=0` frontier contributes nonzero slopes; later
+frontiers are inherited zero-slope packets for the original slack.
 
 The first superboundary layer has residual size `t+1`. In this layer the
 scanner checks the zero-slope classification: a zero-slope packet is exactly a
@@ -317,6 +373,40 @@ general field-capped power-coset slope bound
 The dedicated slack-two and slack-three ledgers below are lower-dimensional
 descriptions of this same theorem.
 
+The scanner also audits the generic second-superboundary shape-coset theorem
+for small slack. For residual packets of size `t+2`, it enumerates
+
+```text
+C_t^(2)(D) = { (u_1,...,u_(t+1)) in D^(t+1) :
+               1,u_1,...,u_(t+1) distinct,
+               e_j(1,u_1,...,u_(t+1))=0 for 1<=j<t },
+```
+
+and checks
+
+```text
+M_t^(2)(z) = (1/(t+2)!) sum_{u in C_t^(2)(D)}
+             binom(N-tau(u), (k+t-(t+2))/m)
+             * #{x in D : x^t b_t(u)=z},
+b_t(u)=(-1)^t e_t(1,u_1,...,u_(t+1)).
+```
+
+The `canonical_second_superboundary_*` fields report the lift gate `m | k-2`,
+the `(t+2)!` quotient check, reconstructed packet/support histograms, and the
+coset-compressed `D^t` slope count. The zero-slope parameter count is the
+first-superboundary shape catalog for slack `t+1`, making the scanner check
+the depth-two/next-slack transition explicitly.
+The `canonical_second_superboundary_next_slack_*_check` fields compare this
+zero-slope subcatalog with the first-superboundary ledger at fixed support
+size, equivalently after the dimension shift `(t,k) -> (t+1,k-1)`.
+The accompanying proof note states the same hierarchy for every residual
+depth `d`: zero slope at `(t,k,d)` is the depth-`d-1` catalog at
+`(t+1,k-1,d-1)`. The scanner currently audits the first nontrivial case
+`d=2`.
+Iterating this shift leaves only a finite first-nonzero-coefficient frontier;
+the scanner now records the exact frontier partition, while pure zero chains
+terminate in the counted power-coset ledger.
+
 For slack `t=2`, the scanner also verifies the complete first-superboundary
 shape ledger. It enumerates
 
@@ -354,6 +444,43 @@ The companion non-active fields report the abstract coset coverage of
 the abstract slack-two catalog hits every nonzero `D^2`-coset, while
 `canonical_slack_two_shape_active_saturates_nonzero_square_cosets` applies the
 same test after the exact-support lift filter.
+
+For slack `t=2`, the scanner also verifies the second-superboundary layer
+when the residual packet size four is below one quotient fiber. It enumerates
+
+```text
+P=x{1,u,v,-1-u-v}
+```
+
+and checks the twenty-four-to-one lifted slope formula
+
+```text
+M_2^(2)(z) = (1/24) sum_{u,v}
+             binom(N-tau(u,v), (k+2-4)/m)
+             * #{x in D : -x^2(u^2+v^2+uv+u+v+1)=z}.
+```
+
+The `canonical_slack_two_second_*` fields report the depth-two lift gate
+`m | k-2`, reconstructed packet/support counts and slope histograms, and the
+exact square-coset compressed slope count. The zero-slope parameter count is
+the slack-three conic catalog, so this audit checks the first concrete link
+between the slack-two depth-two layer and the slack-three depth-one layer.
+The `canonical_slack_two_second_shape_high_index_*` fields record the
+unconditional subgroup-size ceiling
+
+```text
+|Bad_{t=2,d=2}| <= min(p, 1+|D|^3/gcd(2,|D|)).
+```
+
+This bound is intentionally coarse, but it gives a quick non-field-filling
+certificate whenever the right side is below `p`.
+When `D=F_p^*`, the
+`canonical_slack_two_second_full_domain_*` fields also record the full-domain
+frontier saturation certificate: for `p>=11`, the values
+`-(u^2+v^2+uv+u+v+1)` hit both quadratic classes on admissible shapes, so
+the nonzero depth-two slope image is all of `F_p^*`. The analytic proof covers
+`p>=23`; `experimental/verify_m1_slack_two_depth_two_full_domain.py` checks
+`p=11,13,17,19` and records the tiny failures `p=5,7`.
 
 When `D=F_p^*`, the `canonical_slack_two_full_domain_*` fields also check the
 quadratic-character formula for the classes of `alpha(u)=-(1+u+u^2)`. For
@@ -579,6 +706,12 @@ more than one full fiber's worth of residual points.
 In the remaining `b>t` superboundary range, the residual-packet lift check
 separates the additive residual zero-prefix catalog from the already solved
 quotient-core choice of whole fibers.
+Inherited zero chains in that catalog terminate in the same power-coset
+ledger at residual size `h=t+d`; the scanner checks this terminal piece
+separately so it is not recounted as new aperiodic structure.
+The first-nonzero frontier check gives the complementary partition of the
+nonterminal packets by the coefficient that first survives the residual-depth
+shift.
 At residual size `t+1`, the zero-slope slice is also separated as a counted
 power-coset source.
 For `t=2`, the whole residual size-three catalog is separated further into

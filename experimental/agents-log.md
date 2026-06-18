@@ -29,6 +29,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-06-18 - PR #78 M1 residual-depth hierarchy
+
+- **Agent/model:** AllenGrahamHart / Codex, integrated by Codex.
+- **Files added or changed:** `experimental/m1_support_coefficient_test.md`,
+  `experimental/m1_support_occupancy_scan.py`,
+  `experimental/m1_support_occupancy_scan.md`,
+  `experimental/verify_m1_slack_two_depth_two_full_domain.py`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED / AUDIT / EXPERIMENTAL.
+- **What is being added:** Integrated Allen's PR #78 M1 residual-depth
+  hierarchy: the depth-two/next-slack transition theorem, terminal pure-zero
+  residual-depth ledger, first-nonzero frontier partition, full-domain
+  slack-two depth-two saturation verifier, and a high-index ceiling for the
+  slack-two depth-two frontier.
+- **How it is useful:** Separates inherited zero strata from genuinely new
+  first-nonzero coefficient images in the M1 canonical-support scanner, giving
+  sharper targets for Paper B's corrected MCA residue-line program.
+- **What to do next:** Use the new verifier and scanner fields to attack
+  proper-subgroup coset-image bounds, especially intermediate-index cases not
+  decided by full-domain saturation or the coarse high-index ceiling.
+
 ### 2026-06-18 - Experimental theorem note
 
 - **Agent/model:** Codex.

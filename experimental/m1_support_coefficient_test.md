@@ -618,6 +618,235 @@ nonzero-slope normalized packet has trivial multiplicative stabilizer: if
 shapes may have stabilizer, but they contribute only the single slope `0`.
 For `T=2` this recovers the square-coset slope bound below.
 
+The same normalization gives a uniform second-superboundary interface. Assume
+`T+2<m` and define
+
+```text
+C_T^(2)(D) = { (u_1,...,u_(T+1)) in D^(T+1) :
+               1,u_1,...,u_(T+1) are distinct,
+               e_j(1,u_1,...,u_(T+1))=0 for 1<=j<T }.
+```
+
+For `u in C_T^(2)(D)` put
+
+```text
+b_T(u)=(-1)^T e_T(1,u_1,...,u_(T+1)),
+tau(u)=#{quotient fibers met by {1,u_1,...,u_(T+1)}}.
+```
+
+At exact support size `s=Lm+T+2`, the depth-two residual-packet slope
+multiset is
+
+```text
+M_T^(2)(z) = (1/(T+2)!) sum_{u in C_T^(2)(D)}
+             binom(N-tau(u), L) * #{x in D : x^T b_T(u)=z}.
+```
+
+Indeed, every packet of size `T+2` has `T+2` choices of base point and
+`(T+1)!` orderings after normalization. Scaling by `x` multiplies
+`e_T` by `x^T`, while the quotient-core lift weight is again determined only
+by the touched fibers. Hence the nonzero depth-two slope image is a union of
+cosets `b_T(u)D^T`.
+
+The zero-slope slice of this depth-two catalog is exactly the
+first-superboundary shape catalog for the next slack:
+
+```text
+b_T(u)=0
+  <=> e_1=...=e_T=0 on {1,u_1,...,u_(T+1)}
+  <=> u in C_(T+1)(D).
+```
+
+Thus the low-slack residual-packet problem has a genuine hierarchy: the
+transition locus from depth two at slack `T` is the depth-one shape problem
+at slack `T+1`. Its exact-support lift gate is also uniform,
+
+```text
+m | (s-(T+2)) = k-2.
+```
+
+If the gate is closed, the whole second-superboundary catalog is absent at
+that quotient scale before any shape-count estimate is needed.
+
+There is a fixed-support way to read the same statement. Since
+
+```text
+k+T = (k-1)+(T+1),
+```
+
+the zero-slope second-superboundary residual packets for `(T,k)` at exact
+support size `s=k+T` are exactly the first-superboundary residual packets for
+`(T+1,k-1)` at the same exact support size. The lift congruence is the same
+in both views:
+
+```text
+m | k-2.
+```
+
+Only the slope label changes: the family contributes slope `0` to the
+slack-`T` depth-two catalog, while in the slack-`T+1` first-superboundary
+catalog its slope is governed by `(-1)^(T+1)e_(T+1)`.
+
+This is the first case of a general residual-depth shift. For any depth
+`d>=1` with `T+d<m`, define
+
+```text
+C_T^(d)(D) = { (u_1,...,u_(T+d-1)) in D^(T+d-1) :
+               1,u_1,...,u_(T+d-1) are distinct,
+               e_j(1,u_1,...,u_(T+d-1))=0 for 1<=j<T }.
+```
+
+For `u in C_T^(d)(D)` put
+
+```text
+c_T,d(u)=(-1)^T e_T(1,u_1,...,u_(T+d-1)),
+tau(u)=#{quotient fibers met by {1,u_1,...,u_(T+d-1)}}.
+```
+
+At exact support size `s=Lm+T+d`, the depth-`d` residual-packet slope
+multiset is
+
+```text
+M_T^(d)(z) = (1/(T+d)!) sum_{u in C_T^(d)(D)}
+             binom(N-tau(u), L) * #{x in D : x^T c_T,d(u)=z}.
+```
+
+For the canonical exact layer `s=k+T`, the lift gate is
+
+```text
+m | (s-(T+d)) = k-d.
+```
+
+Moreover, for `d>=2`, the zero-slope subcatalog satisfies
+
+```text
+c_T,d(u)=0
+  <=> u in C_(T+1)^(d-1)(D).
+```
+
+At fixed exact support this is the dimension shift
+
+```text
+(T,k,d)  ->  (T+1,k-1,d-1).
+```
+
+Thus every zero-slope layer is not a new shape problem: it is the previous
+residual-depth problem one slack higher. The genuinely new part at depth `d`
+is the nonzero image of `c_T,d` modulo the power cosets `D^T`.
+
+Iterating the shift gives a finite frontier description. A residual packet of
+size `T+d` can have a chain of inherited zero slopes
+
+```text
+e_T=e_(T+1)=...=e_(T+j-1)=0
+```
+
+for `0<=j<d`. After `j` such zero steps, the same packet is viewed as a
+depth-`d-j` packet at slack `T+j` and dimension `k-j`. If the zero chain
+continues all the way to `j=d-1`, the packet lands in the first-superboundary
+catalog at slack `T+d-1` and dimension `k-d+1`; its remaining zero-slope
+subcatalog is the already counted `(T+d)`-power-coset family.
+
+Therefore a residual-depth analysis can be organized by first nonzero
+coefficient. The new frontier at depth `d` is not the whole catalog
+`C_T^(d)(D)`, but the first nonzero image
+
+```text
+(-1)^(T+j) e_(T+j)
+```
+
+on the inherited zero stratum for some `0<=j<d`, modulo the corresponding
+power cosets `D^(T+j)`. Pure zero chains contribute only the terminal
+power-coset ledger. This is useful for M1 because it prevents lower-depth
+zero strata from being counted again as new aperiodic residual structure.
+
+Equivalently, there is an exact disjoint frontier partition. Put `h=T+d`.
+For `0<=j<d`, define
+
+```text
+F_T,d^(j) = { P subset D : |P|=h,
+              e_1(P)=...=e_(T+j-1)(P)=0,
+              e_(T+j)(P) != 0 }.
+```
+
+Also define the terminal stratum
+
+```text
+F_T,d^(infty) = { P subset D : |P|=h,
+                  e_1(P)=...=e_(h-1)(P)=0 }.
+```
+
+Then the residual-packet catalog `C_T^(d)(D)` is the disjoint union of the
+`F_T,d^(j)` and `F_T,d^(infty)`. On `F_T,d^(j)`, after `j` residual-depth
+shifts, the first nonzero slope is
+
+```text
+z_j(P)=(-1)^(T+j) e_(T+j)(P),
+```
+
+and scaling `P` by `x in D` sends `z_j` to `x^(T+j) z_j(P)`. Thus the
+`j`-th frontier slope image is a union of `D^(T+j)`-cosets. At the original
+slack `T`, only the `j=0` frontier contributes nonzero slopes; all
+`j>0` frontiers and the terminal stratum are inherited zero-slope packets.
+The lift gate is independent of `j`:
+
+```text
+m | s-h = k-d.
+```
+
+This partition is the useful bookkeeping for a depth-`d` attack: prove
+coset-image bounds separately on the nonzero frontiers, then add the
+terminal power-coset count below.
+
+The terminal pure-zero ledger is explicit. Let `h=T+d<m`. A packet of size
+`h` whose inherited zero chain reaches the terminal first-superboundary
+zero-slope stratum satisfies
+
+```text
+e_1(P)=e_2(P)=...=e_(h-1)(P)=0.
+```
+
+Equivalently its vanishing polynomial is
+
+```text
+L_P(X)=X^h-c,
+```
+
+so all elements of `P` have the same `h`-th power. In a cyclic
+multiplicative domain `D` of order `n`, such packets exist if and only if
+`h|n`; then they are exactly the `n/h` cosets of the subgroup of size `h`.
+At exact support size `s=k+T`, this terminal stratum is active only when
+
+```text
+m | s-h = k-d.
+```
+
+If active, each terminal packet touches
+
+```text
+h/gcd(h,m)
+```
+
+quotient fibers and has lift multiplicity
+
+```text
+binom(N - h/gcd(h,m), (k-d)/m).
+```
+
+Therefore the active terminal pure-zero support count at depth `d` is
+
+```text
+1_{h|n} * (n/h)
+  * binom(N - h/gcd(h,m), (k-d)/m),
+```
+
+with the convention that the binomial term is zero when the lift gate is
+closed or the requested number of whole fibers is outside
+`[0, N-h/gcd(h,m)]`. This formula closes the inherited-zero side of the
+residual-depth hierarchy: all remaining unclassified M1 content at depth
+`d` lies on a first nonzero coefficient frontier, not in another zero-slope
+subcatalog.
+
 This formula has an immediate dither gate. Since the residual packet has size
 `T+1` but the exact support size is `s=k+T`, a first-superboundary packet can
 lift only if
@@ -981,6 +1210,135 @@ multiplicative domain plus the cube-image map `x -> x^3` on `D`. Its nonzero
 slope image is exactly a union of cosets `beta(u,v)D^3`; since `D^3` is a
 subgroup, the same disjoint-or-equal coset compression applies. The zero
 slope slice is the already classified four-power-coset family.
+
+The same conic is also the exact zero-slope slice of the next residual layer
+for slack two. Keep `T=2`, assume `4<m`, and consider second-superboundary
+residual packets of size four. The only zero-prefix equation is `e_1(P)=0`.
+After scaling one packet point to `1`, every such residual packet has the
+form
+
+```text
+P = x {1,u,v,w},        w=-1-u-v,
+```
+
+with `u,v,w in D` and `1,u,v,w` distinct. Conversely every such pair
+`(u,v)` gives a packet with `e_1(P)=0`. The next canonical coefficient is
+
+```text
+e_2(x{1,u,v,w})
+  = -x^2 (u^2+v^2+uv+u+v+1).
+```
+
+Thus, putting
+
+```text
+A(u,v)=-(u^2+v^2+uv+u+v+1),
+tau(u,v)=#{quotient fibers met by {1,u,v,w}},
+```
+
+the full lifted slope multiset at exact support size `s=Lm+4` is
+
+```text
+M_2^(2)(z) = (1/24) sum_{u,v}
+             binom(N-tau(u,v), L) * #{x in D : x^2 A(u,v)=z},
+```
+
+where the sum is over the displayed admissible ordered pairs. The factor
+`24` is the number of choices of base point and ordered pair among the three
+remaining points of the same four-point packet.
+
+In particular the nonzero depth-two slack-two slope image is a union of
+square cosets `A(u,v)D^2`, while the zero-slope subcatalog is exactly
+
+```text
+u^2+v^2+uv+u+v+1=0.
+```
+
+This is precisely the slack-three first-superboundary conic shape equation.
+So the conic found above is not an isolated slack-three accident: it is the
+interface between slack-two depth two and slack-three depth one. The
+exact-support lift gate is the depth-two congruence
+
+```text
+m | (s-4) = k-2.
+```
+
+If this fails, the whole depth-two slack-two small-residual layer is inactive
+at that quotient scale before any conic or square-coset counting is needed.
+
+For the full multiplicative domain, the nonzero depth-two frontier saturates
+all nonzero slopes except in the two tiny cases `p=5,7`. Let `D=F_p^*`,
+`p>=11`, and keep the admissibility conditions above. Then the values
+
+```text
+A(u,v)=-(u^2+v^2+uv+u+v+1)
+```
+
+hit both quadratic classes among admissible pairs. Hence the nonzero
+depth-two slack-two slope image is all of `F_p^*`, because multiplying by
+`x^2` runs through the square class of `A(u,v)`.
+
+For `p>=23` this follows from a character-sum margin. Write `chi` for the
+quadratic character and `Q=-A`. For fixed `u`, the polynomial in `v`
+
+```text
+Q(u,v)=v^2+(u+1)v+u^2+u+1
+```
+
+has discriminant `-3u^2-2u-3`. Therefore
+
+```text
+sum_(u,v in F_p) chi(A(u,v)) = p chi(2),
+```
+
+because the discriminant has `1+chi(-2)` roots. Also the zero locus is a
+nondegenerate conic, so it has at most `p+1` points. Thus each nonzero
+quadratic class occurs at least
+
+```text
+(p^2-(p+1)-p)/2
+```
+
+times before the admissibility cuts. The forbidden conditions
+
+```text
+u=0, v=0, w=0, u=1, v=1, w=1, u=v, u=w, v=w
+```
+
+with `w=-1-u-v` lie in the union of nine affine lines, containing at most
+`9p` pairs. Since `(p^2-2p-1)/2 > 9p` for `p>=23`, both quadratic classes
+remain after the cuts. The remaining primes `p=11,13,17,19` are checked by
+
+```bash
+python3 experimental/verify_m1_slack_two_depth_two_full_domain.py
+```
+
+The same finite check records the sharp tiny failures: at `p=5` the
+admissible depth-two frontier is purely zero, and at `p=7` it hits only the
+square class.
+
+The complementary high-index ceiling is unconditional and works for every
+multiplicative subgroup `D`. Put `n=|D|` and `g=gcd(2,n)`. In the slack-two
+depth-two frontier, normalized ordered shapes are a subset of `D^2`, and each
+nonzero shape contributes at most one square coset `A(u,v)D^2`. Since
+`|D^2|=n/g`, the nonzero slope image has size at most
+
+```text
+n^2 * n/g.
+```
+
+Adding the possible zero slope gives the field-capped certificate
+
+```text
+|Bad_{T=2,d=2}| <= min(p, 1 + n^3/g).
+```
+
+This is crude compared with the exact square-coset scanner, but it is useful
+as a scale marker: whenever `1+n^3/g<p`, the depth-two slack-two frontier is
+provably non-field-filling before any character-sum estimate is invoked.
+Thus the full-domain saturation theorem above and this high-index ceiling
+bracket the first nonzero frontier: low-index/full-domain cases saturate,
+while sufficiently high-index subgroup cases are automatically sparse.
 
 For the full multiplicative domain this conic ledger has an exact elementary
 count. Take `D=F_p^*`, `p>3`, and write `chi` for the quadratic character.
