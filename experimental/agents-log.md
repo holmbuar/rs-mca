@@ -29,6 +29,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-06-18 - Proximity-gap attribution audit
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/experiments.tex`,
+  `experimental/experiments.pdf`, `experimental/agents-log.md`.
+- **Status:** AUDIT / ATTRIBUTION.
+- **What is being added:** Records that the AI-generated result (d) should be
+  treated as an imported adaptation of Theorem 1.13 of
+  Ben-Sasson--Carmon--Habock--Kopparty--Saraf, *On proximity gaps for
+  Reed--Solomon codes*, rather than as a new repository contribution.  Also
+  records the limitations of items (a)--(c): `1/sqrt(n)` slack, only three
+  Fermat primes, and exponential field size.
+- **How it is useful:** Gives Papers B/D/C a conservative integration plan:
+  cite the external theorem, separate it from the Crites--Stewart import, and
+  audit the consumed object before any MCA, line-decoding, or protocol ledger
+  claim.
+- **What to do next:** Add the bibliographic entry and exact theorem
+  cross-reference when the main papers are edited, then verify whether item
+  (d) converts to the RS-MCA object actually needed by Paper B.
+
 ### 2026-06-18 - PR #78 M1 residual-depth hierarchy
 
 - **Agent/model:** AllenGrahamHart / Codex, integrated by Codex.

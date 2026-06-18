@@ -39,6 +39,13 @@ quadratic-extension, slack-two, three-co-support toy window.  The statements
 are aimed at Paper B's residue-line normal form and per-fiber collision
 program, but they are not a proof of the corrected MCA conjecture and have no
 direct protocol consequence.
+
+The note also records an attribution audit for a separate AI-generated packet
+whose item (d) overlapped substantially with Theorem 1.13 of Ben-Sasson,
+Carmon, Habock, Kopparty, and Saraf, \emph{On proximity gaps for
+Reed--Solomon codes}, to appear at STOC 2026.  That overlap should be treated
+as an imported external theorem/proof pattern, not as a new contribution of
+this repository.
 \end{abstract}
 
 \section{Status and Scope}
@@ -77,6 +84,120 @@ The field ledgers remain distinct:
 The regime is sub-reserve, since \(\eta=\sigma/n=2/n\).  Thus none of the
 following proves a corrected-reserve list, CA, MCA, line-decoding, SNARK, or
 protocol theorem.
+
+\section{External Proximity-Gap Attribution Audit}
+
+\textbf{Status: AUDIT / ATTRIBUTION.}
+This section concerns a separate AI-generated packet with four advertised
+results, labeled here only as (a)--(d).  It should guide later edits to the
+main papers, but it is not itself a new theorem.
+
+The cited external source is:
+\[
+  \href{https://www.math.toronto.edu/swastik/rs-proximity-gaps-2025.pdf}
+  {\text{Ben-Sasson--Carmon--Habock--Kopparty--Saraf,
+  \emph{On proximity gaps for Reed--Solomon codes}}}.
+\]
+Swastik Kopparty's paper page lists the same paper with coauthors Eli
+Ben-Sasson, Dan Carmon, Ulrich Habock, and Shubhangi Saraf.  The paper is
+reported to appear at STOC 2026.  The relevant result to audit against is
+Theorem 1.13, with the subgroup/sumset construction and proof pattern around
+Theorem 7.1.
+
+\subsection*{Attribution correction}
+
+Any repository text or AI output claiming the proof of result (d) as a new
+contribution should be treated as incorrect.  The proof strategy of (d) is,
+up to notation and presentation, essentially the proof of Theorem 1.13 in the
+external proximity-gap paper.  In particular, even notation such as using
+\(\ell\) for the size of the chosen subset appears to track the external
+paper closely enough that the safe status is:
+\[
+  \text{result (d): imported theorem/proof pattern, not original.}
+\]
+Before any main-paper promotion, the text should cite the external theorem,
+state exactly which hypotheses are being imported, and explain whether the
+RS-MCA notation changes the object or merely renames it.
+
+\subsection*{How to treat the four advertised results}
+
+\begin{center}
+\begin{tabular}{p{0.12\linewidth}p{0.36\linewidth}p{0.40\linewidth}}
+\textbf{Item} & \textbf{Current limitation} & \textbf{Main-paper handling} \\
+\hline
+(a) & Works only at slack on the order of \(1/\sqrt n\). &
+Use at most as a weak-slack comparison point.  It does not clear Paper B's
+corrected-reserve objective and should not be stated as evidence for
+capacity-minus-explicit-floors MCA. \\
+(b) & Applies only to three Fermat-prime cases. &
+Treat as finite-prime evidence or a worked example.  It is not a uniform
+smooth-domain theorem and should not be allowed to drive asymptotic claims. \\
+(c) & Requires exponential field size. &
+Treat as a large-field construction or sanity check.  It is not directly
+usable for the polynomial-field or Proximity Prize parameter ledger. \\
+(d) & Most mathematically relevant, but the proof is essentially external. &
+Import, cite, and adapt from Theorem 1.13 of the proximity-gap paper.  Do not
+present it as an AI/repository proof.  Audit the exact object before using it
+in Paper B, D, or C. \\
+\end{tabular}
+\end{center}
+
+\subsection*{Main-paper integration plan}
+
+\textbf{Paper B.}
+Add a related-work and dependency paragraph near the local-limit/frontier
+discussion saying that the proximity-gap theorem of Ben-Sasson--Carmon--
+Habock--Kopparty--Saraf is the source for the item-(d) proof pattern.  If a
+Paper B statement uses the theorem, state it as an imported theorem with exact
+parameters: domain, rate, slack, field-size regime, and whether the object is
+a proximity gap, list statement, CA/MCA statement, or line-decoding statement.
+Do not let the \(1/\sqrt n\)-slack result (a), the three-Fermat-prime result
+(b), or the exponential-field result (c) substitute for the corrected-reserve
+MCA conjecture.
+
+\textbf{Paper D.}
+Keep the Crites--Stewart list-to-agreement import separate from this
+proximity-gap import.  If item (d) is relevant to the universal-cap narrative,
+it should be cited as external background or as a separately imported theorem,
+not folded into the cap proof unless the field ledger and radius normalization
+are checked line by line.
+
+\textbf{Paper C.}
+Protocol ledgers should not consume item (d) merely because it is a
+Reed--Solomon proximity theorem.  A protocol-facing use still needs a precise
+conversion into the consumed object: base-list size, interleaved-list size,
+CA, MCA, line-decoding, or curve-MCA.  Until such a conversion is proved, the
+ledger status is \textsc{conditional/imported} at best.
+
+\textbf{Paper A.}
+No change is forced.  These results do not rescue the old no-slack smooth
+support-wise MCA theorem refuted by Paper A.  They should be cited only if
+they clarify the landscape around proximity gaps and explicit slack regimes.
+
+\subsection*{Notation hygiene}
+
+When this material is eventually moved into the main papers, avoid copying the
+external notation silently.  If the external proof uses \(\ell\) for a chosen
+subset size, either keep that notation with an explicit citation or rename it,
+for example to \(\ell_{\rm pg}\), so it is not confused with RS-MCA slack
+\(t,\sigma\), support size, list size, or line-decoding parameters.  The
+ledger notation must still distinguish \(q_{\rm gen}\), \(q_{\rm line}\),
+\(q_{\rm chal}\), \(B\), and \(F\).
+
+\subsection*{Checklist before promotion}
+
+\begin{itemize}
+\item Add a BibTeX entry for the proximity-gap paper before citing it in
+  Papers A--D.
+\item Replace any claim of ``new proof of (d)'' by ``adapted from
+  Theorem 1.13 of Ben-Sasson--Carmon--Habock--Kopparty--Saraf.''
+\item Verify whether item (d)'s theorem object is list/proximity, CA, MCA,
+  line-decoding, or something only convertible under an additional theorem.
+\item Record which of (a)--(d) operate at \(1/\sqrt n\) slack, three Fermat
+  primes, exponential field size, and imported-theorem status.
+\item Re-run the field ledger: do not let an extension field pay a
+  generated-field entropy bill unless the cited theorem explicitly does so.
+\end{itemize}
 
 \section{Notation}
 
