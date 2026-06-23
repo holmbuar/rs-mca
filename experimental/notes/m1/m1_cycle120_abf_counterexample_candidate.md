@@ -31,6 +31,74 @@ Thus this row is a negative counterexample candidate at `delta=125/256` under
 the printed ABF formulation. It is not an accepted prize solution and it does
 not determine the exact value of `delta*_C`.
 
+## Scope Of The Counterexample
+
+This is a counterexample to a specific inequality at a specific radius for one
+specific smooth Reed-Solomon row. It is not a counterexample to the existence of
+the grand MCA challenge itself.
+
+More precisely, ABF asks, for a fixed row `C`, to understand the largest
+threshold radius `delta*_C` such that
+
+```text
+epsilon_mca(C,delta*_C) <= 2^-128.
+```
+
+For the row
+
+```text
+C = RS[F_17^32,H,256],
+|H| = 512,
+H = <theta>,
+```
+
+the finite proof chain claims one line `f1 + gamma f2` and
+
+```text
+N = 52,747,567,092
+```
+
+distinct `gamma in F_17^32` such that, for each `gamma`, there is a support
+`S_gamma` with
+
+```text
+|S_gamma| >= 262
+```
+
+where `f1 + gamma f2` is code-explained, but `f1` and `f2` are not
+simultaneously code-explained on that same support.
+
+ABF Definition 4.3 uses this support-wise same-support event, samples
+`gamma` uniformly from the code field, and uses the closed threshold
+
+```text
+|S| >= (1-delta)n.
+```
+
+At `delta=125/256` and `n=512`,
+
+```text
+(1-delta)n = (131/256)512 = 262.
+```
+
+Therefore, if the finite proof chain is correct,
+
+```text
+epsilon_mca(C,125/256)
+  >= 52,747,567,092 / 17^32
+  > 2^-128.
+```
+
+Equivalently, for this row and threshold,
+
+```text
+delta*_C < 125/256.
+```
+
+This is only the negative side at one concrete radius. It does not determine
+the exact value of `delta*_C`; it does not prove an ordinary list-decoding lower
+bound; and it does not imply protocol soundness failure.
+
 Cycle119 is still useful, but the ABF-critical dependency is Cycle116:
 
 ```text

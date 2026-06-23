@@ -66,7 +66,10 @@ Keep entries concise and link to the relevant files.
 - **What is being added:** A cleaned integration of the Cycle120 ABF-facing
   negative result. It records that Cycle116 agreement `262` is enough for the
   printed ABF closed threshold at `delta=125/256`, while Cycle119 agreement
-  `263` checks as a strict-ball strengthening.
+  `263` checks as a strict-ball strengthening. The note now states explicitly
+  that this is only a negative obstruction to
+  `epsilon_mca(C,125/256) <= 2^-128` for one row, not ordinary list decoding,
+  protocol soundness, or an exact determination of `delta*_C`.
 - **How it is useful:** Moves the useful part of PR #96 into a compact
   experimental note without importing zips, generated checkers, copied PDFs,
   rendered pages, or raw prompt archives. It gives the project a concrete
