@@ -69,7 +69,9 @@ Keep entries concise and link to the relevant files.
   `263` checks as a strict-ball strengthening. The note now states explicitly
   that this is only a negative obstruction to
   `epsilon_mca(C,125/256) <= 2^-128` for one row, not ordinary list decoding,
-  protocol soundness, or an exact determination of `delta*_C`.
+  protocol soundness, or an exact determination of `delta*_C`. It also records
+  the endpoint nuance: Cycle116 gives `delta*_C <= 125/256` under a supremum
+  convention, while Cycle119 gives `delta*_C <= 249/512 < 125/256`.
 - **How it is useful:** Moves the useful part of PR #96 into a compact
   experimental note without importing zips, generated checkers, copied PDFs,
   rendered pages, or raw prompt archives. It gives the project a concrete

@@ -89,15 +89,17 @@ epsilon_mca(C,125/256)
   > 2^-128.
 ```
 
-Equivalently, for this row and threshold,
+Equivalently, for this row and threshold, Cycle116 rules out safety at the
+endpoint:
 
 ```text
-delta*_C < 125/256.
+delta*_C <= 125/256
 ```
 
-This is only the negative side at one concrete radius. It does not determine
-the exact value of `delta*_C`; it does not prove an ordinary list-decoding lower
-bound; and it does not imply protocol soundness failure.
+if `delta*_C` is interpreted as a supremum of safe radii. This is only the
+negative side at one concrete radius. It does not determine the exact value of
+`delta*_C`; it does not prove an ordinary list-decoding lower bound; and it does
+not imply protocol soundness failure.
 
 Cycle119 is still useful, but the ABF-critical dependency is Cycle116:
 
@@ -115,6 +117,63 @@ At `n=512` and `delta=125/256`,
 ABF Definition 4.3 uses `|S| >= (1-delta)n`, so agreement `262` already meets
 the printed condition. Cycle119 gives distance at most `249`, hence also meets
 the stricter external convention `249 < 250 = (125/256)512`.
+
+If the threshold is interpreted as a supremum, Cycle119 gives the cleaner
+strict-below-`125/256` conclusion:
+
+```text
+delta*_C <= 249/512 < 125/256.
+```
+
+This follows because agreement `263` is exactly the closed threshold for
+`delta=249/512`.
+
+## Relation To The Proximity-Gap Framework
+
+This example fits the broader proximity-gap picture behind the ABF/Crites--
+Stewart framework: up-to-capacity Reed-Solomon proximity-gap expectations can
+fail, and CA, MCA, line-decoding, and list-decoding are closely linked but not
+interchangeable.
+
+The Cycle116/Cycle119 row is a concrete finite smooth-domain instance of that
+negative-side phenomenon:
+
+```text
+C = RS[F_17^32,H,256],
+|H| = 512,
+rate = 1/2,
+delta = 125/256 = 1/2 - 3/256.
+```
+
+The witness has the same event shape as support-wise MCA: one fixed line
+`f1 + gamma f2` and many bad challenges `gamma`, where the combination is
+explained on a large support but the two source words are not simultaneously
+explained on that same support. This makes it more directly relevant to the
+ABF grand MCA quantity than a bare ordinary list-size lower bound.
+
+The Crites--Stewart conversion used elsewhere in this repository is a general
+bridge between small correlated-agreement error and list decoding of a related
+Reed-Solomon code. The Cycle116/Cycle119 result is different in flavor: it lands
+directly in the support-wise MCA / line-decoding predicate for one concrete row.
+It should therefore be cited as a concrete finite MCA obstruction, not as an
+ordinary list-decoding theorem.
+
+## Extension-Field Context
+
+The row is over the large field `F_17^32`. If one used the full alphabet size
+naively, the rate-`1/2` q-ary list-capacity radius for `q=17^32` is about
+`0.49236`, so `125/256 ~= 0.48828` lies slightly below that full-field capacity
+point.
+
+The proximity-gap framework is more cautious for extension fields: large
+extension-field denominators should not automatically be treated as a free pass
+to full-field capacity. Measured against the base field `F_17`, the rate-`1/2`
+q-ary entropy radius is about `0.29284`, far below `125/256`.
+
+This row is not simply an instance of a subfield-domain theorem, because
+`H=<theta>` generates `F_17^32` rather than lying inside a proper base subfield.
+Still, it points in the same direction: extension fields do not by themselves
+remove smooth-domain MCA obstructions.
 
 ## What Was Checked
 

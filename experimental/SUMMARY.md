@@ -101,10 +101,12 @@ that Cycle116 agreement `262` already reaches the printed ABF closed threshold
 at `delta=125/256`; Cycle119 agreement `263` is a checked strict-ball
 strengthening. The counterexample is only to the ABF grand MCA inequality
 `epsilon_mca(C,125/256) <= 2^-128` for this one smooth row; equivalently, if
-the finite proof chain is correct then `delta*_C < 125/256` for this row. It is
-not an ordinary list-decoding claim, not a protocol soundness claim, and not an
-exact determination of `delta*_C`. The result remains conditional on the
-Cycle84/Cycle116 finite inputs and on independent source verification.
+the finite proof chain is correct then Cycle116 gives `delta*_C <= 125/256`
+under a supremum convention, and Cycle119 gives the sharper
+`delta*_C <= 249/512 < 125/256`. It is not an ordinary list-decoding claim, not
+a protocol soundness claim, and not an exact determination of `delta*_C`. The
+result remains conditional on the Cycle84/Cycle116 finite inputs and on
+independent source verification.
 
 ### Latest 2026-06-19 integration
 
