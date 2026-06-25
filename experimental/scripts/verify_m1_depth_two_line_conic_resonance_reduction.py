@@ -5987,9 +5987,11 @@ def verify_ratio_surface_full_trace_reduction() -> List[
 
 
 def verify_ratio_surface_quotient_trace_reduction() -> List[
-    Tuple[int, int, int, int, int, float, float]
+    Tuple[int, int, int, int, int, float, float, float, float, float, float]
 ]:
-    checked: List[Tuple[int, int, int, int, int, float, float]] = []
+    checked: List[
+        Tuple[int, int, int, int, int, float, float, float, float, float, float]
+    ] = []
     for p, suborder in RATIO_SURFACE_CASES:
         logs = log_table(p)
         direct_matrix = [[0 for _ in range(suborder)] for _ in range(suborder)]
@@ -6065,11 +6067,15 @@ def verify_ratio_surface_quotient_trace_reduction() -> List[
         if bad_bound > p + 19 * (p - 1):
             raise AssertionError((p, suborder, bad_bound))
 
-        max_bad_ratio = 0.0
-        max_total_ratio = 0.0
+        max_bad_two_sided_ratio = 0.0
+        max_good_two_sided_ratio = 0.0
+        max_good_beta2_ratio = 0.0
+        max_good_left_principal_ratio = 0.0
+        max_total_two_sided_ratio = 0.0
         max_recomposition_error = 0.0
+        good_spectral_energy = 0.0
         root = cmath.exp(2j * math.pi / suborder)
-        for left_character in range(1, suborder):
+        for left_character in range(suborder):
             for right_character in range(1, suborder):
                 direct = 0j
                 zero = 0j
@@ -6096,10 +6102,55 @@ def verify_ratio_surface_quotient_trace_reduction() -> List[
                     raise AssertionError(
                         (p, suborder, left_character, right_character)
                     )
-                max_bad_ratio = max(max_bad_ratio, abs(bad) / p)
-                max_total_ratio = max(max_total_ratio, abs(direct) / p)
+                max_good_beta2_ratio = max(max_good_beta2_ratio, abs(good) / p)
+                if left_character == 0:
+                    max_good_left_principal_ratio = max(
+                        max_good_left_principal_ratio,
+                        abs(good) / p,
+                    )
+                else:
+                    max_bad_two_sided_ratio = max(
+                        max_bad_two_sided_ratio,
+                        abs(bad) / p,
+                    )
+                    max_good_two_sided_ratio = max(
+                        max_good_two_sided_ratio,
+                        abs(good) / p,
+                    )
+                    max_total_two_sided_ratio = max(
+                        max_total_two_sided_ratio,
+                        abs(direct) / p,
+                    )
+                    good_spectral_energy += abs(good) ** 2
         if max_recomposition_error > 1000 * TOLERANCE:
             raise AssertionError((p, suborder, max_recomposition_error))
+
+        good_row_sums = [sum(row) for row in good_matrix]
+        good_column_sums = [
+            sum(good_matrix[row][column] for row in range(suborder))
+            for column in range(suborder)
+        ]
+        good_total = sum(good_row_sums)
+        good_centered_frobenius_sq = 0.0
+        for row in range(suborder):
+            for column in range(suborder):
+                centered = (
+                    good_matrix[row][column]
+                    - good_row_sums[row] / suborder
+                    - good_column_sums[column] / suborder
+                    + good_total / (suborder * suborder)
+                )
+                good_centered_frobenius_sq += centered * centered
+        if abs(
+            good_spectral_energy / (suborder * suborder)
+            - good_centered_frobenius_sq
+        ) > 1000 * TOLERANCE:
+            raise AssertionError(
+                (p, suborder, good_spectral_energy, good_centered_frobenius_sq)
+            )
+        good_centered_frobenius_ratio = (
+            math.sqrt(good_centered_frobenius_sq) / p
+        )
 
         checked.append(
             (
@@ -6108,8 +6159,12 @@ def verify_ratio_surface_quotient_trace_reduction() -> List[
                 good_point_count,
                 lower_count,
                 exceptional_point_count,
-                round(max_bad_ratio, 10),
-                round(max_total_ratio, 10),
+                round(max_bad_two_sided_ratio, 10),
+                round(max_good_two_sided_ratio, 10),
+                round(max_good_beta2_ratio, 10),
+                round(max_good_left_principal_ratio, 10),
+                round(good_centered_frobenius_ratio, 10),
+                round(max_total_two_sided_ratio, 10),
             )
         )
     return checked

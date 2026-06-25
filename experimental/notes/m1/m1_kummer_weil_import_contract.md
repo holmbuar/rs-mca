@@ -561,9 +561,291 @@ The imported estimate is:
   <= C_beta(e) p.                                      (BETA_2)
 ```
 
-Equivalently, the rank-two pushforward `pi_! K_{psi,phi}` to the `(a,r)`-base
-has bounded conductor depending only on `e`, has no geometrically constant
-summand when `phi != 1`, and its compactly supported trace is `O_e(p)`.
+The rank-two pushforward `pi_! K_{psi,phi}` to the `(a,r)`-base has bounded
+conductor depending only on `e`; the audited boundary monodromy is recorded
+below.  The finite spectral audit in
+`m1_beta_pushforward_spectral_audit.md` scans this exact good-pushforward
+trace over the current quotient test rows.  It is only evidence and a
+regression guard, but it checks the remaining `(BETA_2)` object directly
+rather than the surrounding exceptional ledger.  Its beta-line reformulation
+also sharpens the unresolved obstruction: after grouping by the beta
+coordinate, a full pointwise proof needs bounded conductor and no finite
+`phi^{-1}` Kummer-isotypic summand in the corresponding beta-line
+pushforward, or else a direct proof of the averaged matrix bound below.
+
+For the quotient-conic M1 application, the pointwise form above is stronger
+than necessary.  The full pointwise import permits `psi=1`, `phi != 1`, but
+the quotient-conic singular-excess ledger uses only the two-sided centered
+block.  It is enough to prove the averaged, row/column-centered matrix form
+
+```text
+||G_e^circ||_F <= C_beta^avg(e) p,                    (BETA_2^avg)
+```
+
+where `G_e` is the `e x e` quotient-label matrix of the good beta pushforward
+and `G_e^circ` is its row/column-centered part.  Equivalently,
+
+```text
+||G_e^circ||_F^2
+  = e^{-2} sum_{psi,phi != 1} |G_{psi,phi}|^2.
+```
+
+The pointwise `(BETA_2)` estimate implies `(BETA_2^avg)` with
+`C_beta^avg(e) <= ((e-1)/e) C_beta(e)`, but a direct averaged proof would be
+equally sufficient for the M1 ledger.  Combining `(BETA_2^avg)` with the
+already proved bad-ledger bound gives
+
+```text
+||Gamma_e^circ||_F
+  <= (C_beta^avg(e) + 20(e-1)/e) p,
+```
+
+and hence the same fixed-index conclusion
+`P_e=O_e(p^2)` and `M_e^o=O_e(p^2)`.  Thus the final analytic target can be
+phrased either as a pointwise conductor estimate for all `G_{psi,phi}` or as
+this averaged matrix estimate.
+
+There is also an exact pair-correlation form of the averaged target.  Let
+`x=(a_x,beta_x,r_x)` range over the good beta cover, put
+`epsilon(x)=chi(d_UV(x))`, and define
+
+```text
+kappa_e(x,y) = 1_{xK_e = yK_e} - 1/e.
+```
+
+Then
+
+```text
+||G_e^circ||_F^2
+  = sum_{x,y in Y_G(F_p)} epsilon(x) epsilon(y)
+      kappa_e(a_x,a_y) kappa_e(beta_x,beta_y).
+```
+
+Consequently a direct proof of `(BETA_2^avg)` is exactly an `O_e(p^2)` signed
+pair-correlation bound for the two quotient labels `(a,beta)`.  This
+reduction is useful because it separates the one-sided pointwise coefficients
+from the two-sided energy actually consumed by M1.
+
+The separation is orthogonal.  If `c_j=sum_i (G_e)_{i,j}` is the beta-column
+marginal and `R_e=G_e` with each row average subtracted, then
+
+```text
+e^{-2} sum_{psi any, phi != 1} |G_{psi,phi}|^2 = ||R_e||_F^2,
+
+e^{-2} sum_{phi != 1} |G_{1,phi}|^2
+  = e^{-1} sum_j |c_j - e^{-1}sum_l c_l|^2,
+
+||R_e||_F^2
+  = ||G_e^circ||_F^2
+    + e^{-1} sum_j |c_j - e^{-1}sum_l c_l|^2.
+```
+
+Thus a full averaged theorem allowing `psi=1` is exactly the M1 averaged
+target plus a beta-marginal bound.  The current quotient-conic M1 ledger does
+not consume this marginal term, but the full pointwise `(BETA_2)` route must
+control it.
+
+The centered target can also be written as a four-term signed fiber-product
+ledger.  With
+
+```text
+C_ab = sum_{i,j} (G_e)_{i,j}^2,
+C_a  = sum_i (sum_j (G_e)_{i,j})^2,
+C_b  = sum_j (sum_i (G_e)_{i,j})^2,
+C_0  = (sum_{i,j}(G_e)_{i,j})^2,
+```
+
+one has
+
+```text
+||G_e^circ||_F^2 = C_ab - e^{-1}C_a - e^{-1}C_b + e^{-2}C_0.
+```
+
+Here `C_ab`, `C_a`, `C_b`, and `C_0` are signed counts on the product of two
+good beta covers, with both quotient equalities, only the `a` equality, only
+the `beta` equality, or no quotient equality imposed.  This is the most
+literal finite fiber-product form of the direct `(BETA_2^avg)` target.
+
+Since the `C_a` and `C_b` terms are subtracted, a simpler sufficient route is
+
+```text
+C_ab = O_e(p^2),        C_0 = T^2 = O_e(p^2).
+```
+
+Indeed this gives
+
+```text
+||G_e^circ||_F^2 <= C_ab + e^{-2}C_0 = O_e(p^2).
+```
+
+The second positive estimate is now elementary.  On the good base the
+principal total trace is
+
+```text
+T = sum_{(a,r) in G} (chi(rM(a,r)) + chi(aH(a,r))).
+```
+
+The two summands extend to full-torus one-variable quadratic-character sums
+in `a` and `r`, respectively, and the deleted good-base boundary is a fixed
+union of curves.  Hence `|T|=O(p)` and `C_0=O(p^2)`.  Thus one can prove the
+averaged M1 target either by controlling the signed four-term
+inclusion-exclusion directly, or, in the nonnegative route, by proving the
+remaining joint quotient-collision estimate `C_ab=O_e(p^2)`.
+
+The joint-collision target is stronger than the centered M1 target.  It has
+the orthogonal block decomposition
+
+```text
+C_ab = ||G_e^circ||_F^2
+       + e^{-1} sum_i (r_i - T/e)^2
+       + e^{-1} sum_j (c_j - T/e)^2
+       + e^{-2}T^2,
+```
+
+where `r_i=sum_j(G_e)_{i,j}` and `c_j=sum_i(G_e)_{i,j}`.  The last block is
+now controlled by the principal trace formula.  Therefore the positive
+`C_ab` route would still need p-scale estimates for the centered block and
+for the alpha- and beta-marginal energies.  The centered block alone is the
+minimal averaged input consumed by the quotient-conic M1 ledger; the two
+one-sided marginal estimates are reduced below to one-dimensional trace
+inputs.
+
+The alpha marginal is simpler than the beta marginal.  For nonprincipal
+`psi`, its coefficient descends to
+
+```text
+sum_{(a,r) in G} psi(a)(chi(rM(a,r)) + chi(aH(a,r))).
+```
+
+The full-torus `H` half is explicit:
+
+```text
+sum_{a,r in F_p^*} psi(a)chi(aH(a,r))
+  = p(1 + psi(-2) + psi(-1/2)).
+```
+
+Thus, up to the same fixed boundary curves as the principal trace, the
+alpha-marginal estimate reduces to the rank-one torus trace
+`sum_{a,r} psi(a)chi(rM(a,r))`.  For fixed `a`, the polynomial `rM(a,r)` is
+an elliptic cubic with discriminant
+
+```text
+48a^2(a-1)^2(a+3)(3a+1).
+```
+
+The only torus singular parameters are `a=1,-3,-1/3`, and the branch-point
+cross-ratio varies with `a`.  Hence this middle term is the Mellin transform
+of a fixed-conductor non-isotrivial elliptic trace sheaf, giving the
+alpha-marginal `O_e(p)` bound by the standard curve Weil bound.  This closes
+the alpha marginal as a one-dimensional input; it is still not the centered
+M1 target itself.
+
+The beta marginal is less elementary but is also one-dimensional after
+forgetting the alpha character.  Setting `psi=1` gives
+
+```text
+B_phi = sum_{b in F_p^*} phi(b) tau_p(b),
+```
+
+where `tau_p(b)` is the signed trace on the bidegree `(3,3)` torus family
+`Delta_b(a,r)=0`, with Kummer divisor `chi(rM(a,r))`.  Eliminating `a` and
+`r` from `Delta_b=partial_a Delta_b=partial_r Delta_b=0` confines the finite
+singular beta-values to one explicit fixed polynomial support of degree `26`
+including beta zero, hence degree `25` on `G_m` (plus beta infinity), and the
+standalone verifier checks this support on the expanded prime rows.  The
+regular family has bounded conductor, the fixed singular fibers contribute
+`O(p)`, and the only remaining one-variable obstruction is a possible
+`phi^{-1}` Kummer-isotypic summand on the beta line.  Excluding that summand
+for every nonprincipal `phi` lets the standard one-variable middle-extension
+trace estimate give `B_phi=O_e(p)`.  Thus the beta marginal is reduced to a
+one-dimensional Kummer-isotypy check; it is still not the centered M1 target
+itself.
+
+This singular-support ledger is also compatible with the inversion quotient.
+After `z=b+b^{-1}`, the finite bad quotient support is contained in the
+degree-13 set
+
+```text
+(z-2)(z+1)(9z+14)(9z^2-6z-23)Q8(z)=0,
+```
+
+where `Q16(b)=b^8 Q8(b+b^{-1})`.  The quotient point at infinity accounts for
+`b=0,infinity`.  Thus the Chebyshev/dihedral beta-line formulation does not
+introduce a growing quotient singular set; the remaining obstruction is still
+the Kummer-isotypic or averaged matrix bound on a bounded-conductor family.
+
+The same beta-line localization applies to all character rows:
+
+```text
+G_{psi,phi} = sum_{b in F_p^*} phi(b) tau_{psi,p}(b),
+```
+
+where `tau_{psi,p}` is the beta-fiber trace with the extra factor `psi(a)`.
+The centered M1 block is exactly the `psi != 1, phi != 1` part of this
+beta-line Kummer spectrum.  Therefore a full pointwise `(BETA_2)` proof is
+equivalent to a bounded-conductor/no-`phi^{-1}`-Kummer-summand statement for
+these beta-line pushforwards.
+
+This beta-line formulation has an exact inversion symmetry.  The involution
+`(a,b,r) -> (a^{-1},b^{-1},r^{-1})` sends the beta equation to a torus-unit
+multiple of itself, preserves the good locus and the `U V` sign, and changes
+the character pair `(psi,phi)` to `(psi^{-1},phi^{-1})`.  Hence
+
+```text
+tau_{psi,p}(b) = tau_{psi^{-1},p}(b^{-1}),
+G_{psi,phi} = G_{psi^{-1},phi^{-1}}.
+```
+
+For `psi=1`, the beta marginal trace vector is inversion-invariant:
+`tau_p(b)=tau_p(b^{-1})`.  This is not the no-Kummer-summand proof, but it
+constrains any possible Kummer obstruction to occur compatibly with inversion.
+Equivalently, after setting `z=b+b^{-1}` the beta marginal descends
+trace-theoretically to
+
+```text
+B_phi = sum_z bar_tau_p(z) C_phi(z),
+C_phi(z)=sum_{b+b^{-1}=z} phi(b).
+```
+
+The kernel has exact second moment
+
+```text
+sum_z |C_phi(z)|^2 = p-3      if phi^2 != 1,
+sum_z |C_phi(z)|^2 = 2p-4     if phi is quadratic,
+```
+
+and pointwise size at most `2`.
+Thus the one-sided beta marginal can be viewed as a Chebyshev/Kummer transform
+on the inversion quotient of the beta line.  This is a structural reduction of
+the obstruction, not a square-root-cancellation theorem.
+
+For general `psi`, the scalar descent is replaced by a two-component dihedral
+descent.  On a two-point inversion orbit `{b,b^{-1}}`,
+
+```text
+tau_{psi,p}(b^{-1}) = tau_{psi^{-1},p}(b),
+G_{psi,phi}|_{orbit}
+  = phi(b)tau_{psi,p}(b) + phi(b)^{-1}tau_{psi^{-1},p}(b),
+```
+
+with the fixed orbits `b=1,-1` contributing single scalar terms.  Thus the
+centered `psi != 1, phi != 1` beta-line block also lives naturally on the
+inversion quotient, as a rank-two dihedral trace problem.
+
+The two beta sheets themselves have controlled quotient-character energy.  On
+each good split base fiber,
+
+```text
+sum_{phi in Phi_e, phi != 1} |phi(beta_1)+phi(beta_2)|^2
+  = 2e - 4 + 2e 1_{beta_1/beta_2 in K_e}.
+```
+
+The fixed-ratio resonance equation
+`lambda B_beta^2=A_beta C_beta(1+lambda)^2` has bidegree at most `(4,4)` on
+the torus, with `lambda=-1` contained in two lines.  Therefore
+`N_K <= 4(p-1)|K_e|` and the raw beta-sheet quotient energy is `O_e(p^2)`.
+This removes a possible sheet-multiplicity source of growth; the remaining
+problem is still the coherent beta-line trace or the averaged matrix bound.
 
 The elementary hypotheses behind this import are now audited in
 `verify_m1_depth_two_line_conic_resonance_reduction.py`:
@@ -631,9 +913,13 @@ The elementary hypotheses behind this import are now audited in
 - the verifier checks that the finite intersections lie in those displayed
   resultant root supports.
 
-Thus the only remaining non-elementary input in `(BETA_2)` is the standard
-bounded-conductor Deligne--Katz/Rojas-Leon style trace estimate for this
-explicit tame rank-two pushforward.  If `(BETA_2)` is accepted, then
+Thus the remaining non-elementary input in `(BETA_2)` is now localized to the
+beta-line trace families from `m1_beta_pushforward_spectral_audit.md`, not to a
+generic constant-sheaf assertion for the rank-two surface pushforward.
+For every left quotient character `psi`, one needs bounded conductor together
+with no finite Kummer-isotypic `phi^{-1}` summand before twisting by a
+nonprincipal right character `phi`; equivalently, prove the averaged
+`(BETA_2^avg)` matrix bound directly.  If `(BETA_2)` is accepted, then
 
 ```text
 ||Gamma_e^circ||_F = O_e(p),   P_e = O_e(p^2),   M_e^o = O_e(p^2),

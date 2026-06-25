@@ -30,6 +30,32 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-06-25 - Latest PR integration and estimate audit
+
+- **Agent/model:** AllenGrahamHart PRs #101--#107, ScottDHughes PR #99, and
+  Cycle120 audit material from PR #100/#105, integrated by Codex.
+- **Files added or changed:** `experimental/notes/triage/pr-triage-2026-06-25.md`,
+  `experimental/SUMMARY.md`, `experimental/agents-log.md`, plus new or updated
+  notes and scripts under `experimental/notes/{audits,f1,l1,l2,m1,m2,x1}/`,
+  `experimental/scripts/`, and `experimental/lean/rs_mca_formalization/`.
+- **Status:** AUDIT / EXPERIMENTAL / PROOF-CHECK-NEEDED / CONDITIONAL.
+- **What is being added:** A one-by-one integration of PRs #99--#107. The
+  Cycle120 numerator is unchanged at `52,747,567,092`; the useful improvements
+  are the standalone Cycle120 `LD_sw` proof note, the exact M2
+  `epsilon_mca = LD_sw/|F|` bridge, stronger F1 extension-line lower floors,
+  an M1 beta-pushforward spectral audit, and sharper L1/L2 proof-program
+  targets.
+- **How it is useful:** Gives future theory work better normalized estimates
+  without editing Papers A--D. In particular, the current ABF-row obstruction
+  still points to `epsilon_mca(C,125/256)>2^-128` and the Cycle119 strict
+  endpoint `delta*_C <= 249/512`, while L1/L2/F1/X1 now have cleaner
+  follow-up notes and standard-library verifiers.
+- **What to do next:** Do a human proof review of the standalone Cycle120
+  proof chain, then run selected nonmutating verifiers in a controlled pass.
+  Treat PR #100's raw generated packet as superseded by the compact audit and
+  standalone proof note unless a reviewer explicitly needs the raw replay
+  material.
+
 ### 2026-06-23 - Cycle119 admissibility review
 
 - **Agent/model:** DannyExperiments PR #96, reviewed by Codex.

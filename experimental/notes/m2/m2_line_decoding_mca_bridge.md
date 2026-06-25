@@ -403,23 +403,75 @@ why this support-wise numerator is the right expected object: a stronger
 close-point line-decoding theorem is welcome when available, but it should not
 be assumed to follow from the residue-line packing conjecture.
 
+The stronger ABF/GG line-decodability predicate is also not implied by an
+`LD_sw` bound.  The finite RS separation in
+`experimental/notes/m2/m2_ldsw_line_decoding_separation.md` gives a
+nonconstant received line with support-wise `LD_sw` contribution `0`, while an
+adversarial close-codeword assignment violates `(delta,a_LD,n+1)`
+line-decodability for every nonvacuous numerator.  Thus a genuine M2 theorem
+needs an additional assignment-collinearity input beyond residue-line packing.
+The structural reason is that every received line with codeword direction
+`r+gamma v`, `v in C`, is invisible to `LD_sw`: all explaining supports also
+explain the base and direction.  ABF/GG line-decodability can still fail because
+the close-codeword assignment need not come from one affine code-line.  After
+subtracting `gamma v`, the ABF/GG conclusion becomes an affine-graph incidence
+problem inside the ordinary close list of the base word `r`.  The general
+criterion is exact on code-direction lines, under the same greedy-extension
+size hypothesis: if `G_b(L_a(r))` denotes the largest partial assignment from
+slopes into the ordinary close list with no `b` points on an affine graph in
+the code space, then the code-direction slice satisfies the trigger numerator
+`a_LD` exactly when `G_b(L_a(r)) < a_LD` for every base word `r`.  The general
+`m`-bucket obstruction gives the concrete failure threshold
+`max(ceil(|F|/m),m)` for a base word with `m` close codewords.  Equivalently,
+at collinearity threshold `b`, line-decodability on such code-direction lines
+requires ordinary close-list size below `ceil(|F|/(b-1))` whenever that number
+is at most `b-1`.  Conversely, if the close list has size at most
+`floor((A-1)/(b-1))` for a trigger size `A`, pigeonhole already supplies the
+required `b` agreeing slopes on code-direction lines.
+More generally, `LD_sw` depends on the received direction only modulo `C`,
+whereas ABF/GG line-decodability depends on the shifted close-codeword
+assignment inside that quotient class.
+For full-field code-direction assignments, when
+`ceil(|F|/(b-1)) <= b-1`, this gives an exact criterion: the shifted close list
+of every base word must have size below `ceil(|F|/(b-1))`.
+In larger-field regimes, the necessary condition becomes geometric rather than
+purely cardinal: the ordinary close list may not contain
+`ceil(|F|/(b-1))` codewords with no `b` points on a nonconstant affine line in
+the code space, since such an affine cap can be bucketed across the slopes to
+defeat every `b`-slope code-line agreement.
+For such a `b`-affine-cap close list `L`, the exact graph-free number is
+`G_b(L)=min(|F|,(b-1)|L|)`.
+If `|C| > binom(|F|,2)` and `b >= 3`, the same obstruction works at the actual
+trigger numerator `a_LD`: a cap of size `ceil(a_LD/(b-1))` can be bucketed on
+`a_LD` close slopes and greedily extended to the remaining slopes without
+creating a `b`-point affine graph.
+The exact `G_b` formulation is genuinely stronger than the affine-cap
+necessary condition: a full affine code-line inside a close list already has
+`G_b=|F|` for every `3 <= b <= |F|`, by the nonlinear parametrization
+`gamma -> gamma^(b-1)` along that line.
+
 ## Follow-Up Checks
 
-- Match the external `(delta,a_LD,n+1)` line-decoding definition used in
-  protocol papers against `LD_sw(C,a)`.
-- Decide whether the `n+1` parameter is only a codeword-uniqueness threshold or
-  whether it hides an additional proximity-loss convention.
+- The external `(delta,a_LD,n+1)` line-decoding definition used in ABF/GG is
+  matched, source-conditionally, in
+  `experimental/notes/m2/m2_abf_gg_line_decoding_parameter_match.md`.  In that
+  convention `a_LD` is the line-decoding numerator, `b=n+1` is the
+  collinearity threshold in the imported MCA implication, and the line-decoding
+  section has no extra proximity-loss parameter.
+- The converse direction is false: bounded `LD_sw` does not imply ABF/GG
+  line-decodability.  See
+  `experimental/notes/m2/m2_ldsw_line_decoding_separation.md`.
 - Check whether protocol line-decoding imports have a common-support or
   code-line-proximity exception strong enough to avoid the spike-line
   close-point separation.
 
 ## Verifier
 
-The script `experimental/m2_line_decoding_separation.py` verifies the spike
-line on a tiny prime-field RS code by enumerating all degree-`<k` codewords and
-all supports of size `n-1`:
+The script `experimental/scripts/m2_line_decoding_separation.py` verifies the
+spike line on a tiny prime-field RS code by enumerating all degree-`<k`
+codewords and all supports of size `n-1`:
 
 ```bash
-python3 experimental/m2_line_decoding_separation.py
-python3 experimental/m2_line_decoding_separation.py --format json
+python3 experimental/scripts/m2_line_decoding_separation.py
+python3 experimental/scripts/m2_line_decoding_separation.py --format json
 ```

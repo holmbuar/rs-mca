@@ -3752,10 +3752,10 @@ A_beta=0, C_beta=0, D_beta=0, a=r, K_alpha=0, d_UV=0.
 ```
 
 Thus the finite pushforward has rank `2` and conductor bounded only in
-terms of the fixed quotient order, not in terms of `p`.  The remaining
-top-cohomology obstruction would be a geometrically constant summand.  For
-the centered M1 target `phi` is nonprincipal, and the beta-zero boundary
-rules this out visibly.  Namely
+terms of the fixed quotient order, not in terms of `p`.  The boundary
+calculations below record the local monodromy needed by a conductor theorem.
+They do not by themselves close the beta-line Kummer-isotypy obstruction
+isolated later in `m1_beta_pushforward_spectral_audit.md`.  Namely
 
 ```text
 C_beta = ar Q_beta(a,r),
@@ -3800,9 +3800,7 @@ lower-chart divisor `K_alpha=0`.  The verifier audits the corresponding
 finite intersections by checking that every intersection point lies in the
 displayed resultant root supports.  Hence at the generic point of the
 beta-zero boundary, the local monodromy of `K_{psi,phi}` is exactly `phi`,
-which is nontrivial.  Therefore the good pushforward has no geometrically
-constant summand in the nonprincipal `phi` rows relevant to the centered
-singular matrix.
+which is nontrivial after the right-character twist.
 
 The opposite vertical beta boundary is equally controlled.  Write
 `gamma=1/beta`; then the beta equation is
@@ -3875,8 +3873,8 @@ vertical-boundary audit above.  The verifier checks the resultant identity
 and confirms that there are no good-base common roots on the audited prime
 grid.
 
-Consequently, under the bounded-conductor rank-two beta-pushforward import
-`(BETA_2)` recorded in `m1_kummer_weil_import_contract.md`, the good
+Consequently, under the bounded-conductor/no-`phi^{-1}`-Kummer-summand
+beta-line import recorded in `m1_kummer_weil_import_contract.md`, the good
 pushforward satisfies
 
 ```text
@@ -3888,9 +3886,8 @@ for every fixed quotient order `e` and every centered character pair
 decomposition above, this conditionally gives the desired
 `S_{psi,phi}=O_e(p)` singular-trace bound for the depth-two M1
 determinant-surface target.  The conditional input is now isolated: it is
-only the bounded-conductor trace estimate for this explicitly charted
-rank-two beta pushforward, not any further combinatorial or bookkeeping
-loss.
+the analytic beta-line Kummer-isotypy statement for this explicitly charted
+rank-two beta pushforward, not any further combinatorial or bookkeeping loss.
 
 At the quotient-matrix level the implication is completely explicit.  Suppose
 the imported pushforward estimate gives
@@ -3933,6 +3930,72 @@ quotient-conic M1 target in the precise required form
 only on sample full-character pairs but on every nonprincipal quotient
 character pair for the tested quotient orders, using the quotient-label
 matrix before applying Fourier inversion.
+
+The pointwise hypothesis on every `G_{psi,phi}` is not logically necessary for
+the quotient-conic ledger.  Let `G_e` be the quotient-label matrix of the good
+beta pushforward alone, and let `G_e^circ` be its row/column-centered part.  If
+one can prove the averaged beta-pushforward estimate
+
+```text
+||G_e^circ||_F <= C_beta^avg(e) p,
+```
+
+then the same conclusion follows.  Indeed the bad ledger gives
+`|S_{psi,phi}-G_{psi,phi}| <= 20p` for every nonprincipal pair, so Parseval
+gives the centered bad-matrix bound
+
+```text
+||B_e^circ||_F <= 20((e-1)/e)p.
+```
+
+Therefore
+
+```text
+||Gamma_e^circ||_F
+  <= (C_beta^avg(e) + 20(e-1)/e)p,
+```
+
+and the projective excess satisfies
+
+```text
+|P_e|
+  <= e(e-1)(C_beta^avg(e) + 20(e-1)/e)p^2.
+```
+
+The closed boundary inequality then gives
+
+```text
+M_e^o
+  <= (sqrt(e(e-1)(C_beta^avg(e)+20(e-1)/e)) p
+      + 3(e-1)sqrt(p))^2.
+```
+
+Thus an averaged square-root-cancellation theorem for the good rank-two
+pushforward is already enough; a pointwise conductor theorem is one clean way
+to obtain it, but not the only possible route.  The beta-pushforward spectral
+audit records exactly this centered-Frobenius quantity on the finite test rows.
+It also separates the full pointwise `(BETA_2)` scan, which includes the
+left-principal block `psi=1`, from the two-sided centered block consumed here,
+and records the equivalent signed pair-correlation form of
+`||G_e^circ||_F^2`.  The remaining one-sided part is the beta-column marginal
+of the same good quotient matrix and is orthogonal to this M1-centered term.
+The centered pair-correlation is further expanded there into the four signed
+quotient-fiber-product components `C_ab`, `C_a`, `C_b`, and `C_0`.
+In particular, the nonnegative route reduces to the positive estimates
+`C_ab=O_e(p^2)` and `C_0=O_e(p^2)`.  The principal-trace term
+`C_0=T^2` is now elementary: on the good base,
+`T=sum_G(chi(rM)+chi(aH))`, the two sums extend to full-torus quadratic
+character sums, and the deleted boundary is a fixed union of curves.  Hence
+`C_0=O(p^2)`, leaving `C_ab=O_e(p^2)` as the remaining positive target in
+this nonnegative route.  The beta audit also records the orthogonal
+decomposition of `C_ab` into the centered block, the alpha marginal, the beta
+marginal, and the controlled principal block; the centered block is the
+minimal piece actually consumed by the M1 quotient-conic ledger.  The alpha
+marginal is further reduced there to an explicit full-torus `H` term plus
+the rank-one torus trace `sum psi(a)chi(rM(a,r))`; the latter is a
+fixed-conductor non-isotrivial elliptic trace sheaf on the `a`-line.  This
+leaves the beta marginal and centered rank-two block as the genuinely
+beta-pushforward pieces.
 
 ## Principal-Row Leakage
 

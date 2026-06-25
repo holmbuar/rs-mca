@@ -15,6 +15,9 @@ papers. The source triage records are:
 - `notes/triage/pr-triage-2026-06-22.md`: PRs #96 through #98, with #96
   integrated only as a compact Cycle84 public replay audit and #97/#98 added as
   experimental F1/L1 notes plus scripts.
+- `notes/triage/pr-triage-2026-06-25.md`: PRs #99 through #107, with #100 not
+  imported as a raw generated packet and the remaining useful material added as
+  experimental L1/M1/M2/F1/L2/X1 notes, verifiers, and Lean scaffolding.
 
 The common policy was: keep Papers A-D unchanged, land new material in
 `experimental/`, preserve explicit status labels, and require review before any
@@ -45,6 +48,40 @@ large theorem yet; it is the reduction of several vague hazards into named,
 script-checkable walls.
 
 ## What Was Added
+
+### Latest 2026-06-25 integration
+
+The 2026-06-25 PR round does not improve the Cycle120 numerator
+`52,747,567,092`. Its useful estimate changes are endpoint and bridge
+improvements:
+
+- `notes/m1/m1_cycle120_standalone_ldsw_proof.md` records a standalone
+  source-scoped proof note for
+  `LD_sw(RS[F_17^32,H,256],262) >= 52,747,567,092`. Together with the already
+  integrated Cycle119 strict-support note, the best current ABF-row obstruction
+  remains `epsilon_mca(C,125/256) >= 52,747,567,092/17^32 > 2^-128`, with the
+  sharper strict endpoint `delta*_C <= 249/512 < 125/256` if the finite inputs
+  are correct.
+- `notes/m2/m2_line_decoding_mca_bridge.md` gives the exact normalization
+  `epsilon_mca(C,delta)=LD_sw(C,ceil((1-delta)n))/|F|` for the support-wise
+  two-source object. This is the clean bridge future papers should use when
+  translating between MCA and line-decoding estimates.
+- `notes/f1/f1_fixed_rate_extension_counterexample.md` strengthens the F1
+  warning: fixed-rate extension-line families have floors on the order of
+  `(1-rho)^2/2` for sigma one and
+  `(1-rho)^(sigma+1)/(sigma+1)!` at fixed sigma before extension-degree
+  dilution.
+- `notes/m1/m1_beta_pushforward_spectral_audit.md` finds no hidden growing
+  `p^2` beta-pushforward mass in the scanned rows and leaves a conductor-style
+  proof target.
+- `notes/l2/l2_sharp_target_conjecture.md` sharpens the interleaved-list
+  target: charge quotient-core mass diagonally and avoid the naive Cartesian
+  numerator.
+
+The rest of the round is proof-program infrastructure: L1 characteristic-zero
+prefix reductions, quotient-budgeted locator targets, X1 deep-point and
+quotient-reduction bridges, audit notes, standard-library verifiers, and a
+small Lean formalization scaffold. No newly imported PR script was run locally.
 
 ### Latest 2026-06-22 integration
 
