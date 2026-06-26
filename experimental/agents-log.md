@@ -30,6 +30,25 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-06-26 - High-agreement tangent staircase
+
+- **Agent/model:** GPT-5.5 Pro tangent packet, audited and integrated by Codex.
+- **Files added or changed:** `experimental/data/tangent/`,
+  `experimental/experiments.tex`, `experimental/experiments.pdf`,
+  `experimental/SUMMARY.md`, `experimental/agents-log.md`.
+- **Status:** PROVED / ARITHMETIC-AUDIT / FINITE-SLOPE-THRESHOLD.
+- **What is being added:** A generic moving-root tangent floor
+  `LD_sw(C,a) >= n-a+1` for Reed--Solomon codes, plus a matching upper bound in
+  the very-high-agreement range `3a-2n >= k` using the common code-line
+  residual budget.
+- **How it is useful:** For `RS[F_17^32,H,256]` with `|H|=512`, this proves
+  `LD_sw(C,a)=513-a` for every `a>=427`, so `LD_sw(C,506)=7` and
+  `LD_sw(C,507)=6`.  Thus the finite-slope support-wise `2^-128` staircase is
+  pinned between agreements `506` and `507`; agreement `353` and the strict352
+  quotient-core frontier are superseded by the tangent floor.
+- **What to do next:** Human-review the endpoint convention and decide whether
+  any non-tangent mechanism survives past agreement `507`.
+
 ### 2026-06-26 - L1 d=2 cubic subgroup twisted bound
 
 - **Agent/model:** Scott Hughes PR #121, integrated by Codex.
@@ -79,14 +98,13 @@ Keep entries concise and link to the relevant files.
   `RS[F_17^32,H,256]`, `|H|=512`, showing `LD_sw(C,a) >= 7` for every
   agreement `264 <= a <= 352`, with `LD_sw(C,352) >= 16` under the
   finite-slope support-wise MCA convention.
-- **How it is useful:** Moves the lower-bound obstruction frontier from
-  strict264 to strict352, i.e. to radius `5/16`; the coarse dyadic
-  quotient-prefix route stops at agreement `353`, where it gives only three
-  slopes.
-- **What to do next:** Integrate the theorem packet into `experiments.tex`
-  after review, update the public site to show strict352 as the current
-  quotient-core frontier, and attack the agreement-353 quotient/tangent/
-  aperiodic branches.
+- **How it is useful:** Records a quotient-core mechanism for agreements up to
+  `352`.  This was briefly the lower-bound frontier, but it is now superseded
+  by the generic tangent floor, which gives `LD_sw(C,352) >= 161` and
+  `LD_sw(C,353) >= 160`.
+- **What to do next:** Keep the packet as a quotient-core mechanism record and
+  compare it against any non-tangent mechanisms that might survive past
+  agreement `507`.
 
 ### 2026-06-26 - Strict264 quotient-floor proof packet
 
@@ -104,9 +122,9 @@ Keep entries concise and link to the relevant files.
   `epsilon_mca(C,31/64)>2^-128`: `binom(64,33)` augmented-code list points
   imply at least nine support-wise bad slopes after the deep-point conversion,
   while seven slopes already clear the `F_17^32` denominator.
-- **What to do next:** Promote the theorem package into the main experimental
-  note after review, and shift the finite-threshold target from finding seven
-  agreement-264 slopes to proving or refuting the agreement-265 upper bound.
+- **What to do next:** Keep the theorem package as a quotient-core mechanism
+  record.  The moving-root tangent floor supersedes the old strict264/265
+  target by giving `LD_sw(C,264) >= 249`.
 
 ### 2026-06-26 - Towards-prize finite-threshold theorem section
 

@@ -229,8 +229,53 @@
           "source": "strict264 quotient-floor obstruction",
           "sourceHref": "https://github.com/przchojecki/rs-mca/blob/main/experimental/data/strict264/strict264_quotient_floor.md",
           "nonClaims": [
-            "Quotient-core lower floor, not an exact threshold.",
-            "The agreement-265 upper bound remains the next threshold-pinning target."
+            "Quotient-core mechanism record, not the active threshold pin.",
+            "Superseded as a lower-bound frontier by the generic tangent floor, which gives LD_sw(C,264) >= 249."
+          ]
+        },
+        {
+          "id": "tangent506-exact-gate",
+          "title": "High-agreement tangent exact gate",
+          "rho": "1/2",
+          "track": "mca",
+          "trackLabel": "support-wise MCA",
+          "direction": "exact-finite-slope-gate",
+          "n": "512",
+          "k": "256",
+          "field": "F_17^32",
+          "fieldSizeLog2": 130.8,
+          "domainKind": "multiplicative-subgroup",
+          "smoothPowerOfTwo": true,
+          "agreementA": "506 unsafe / 507 safe",
+          "sigma": "250 / 251",
+          "deltaExact": "3/256",
+          "deltaApprox": 0.011719,
+          "etaExact": "125/256",
+          "etaApprox": 0.488281,
+          "qGen": "17^32",
+          "qLine": "17^32",
+          "qChal": "not protocol-bound",
+          "nBad": "7 at a=506; 6 at a=507",
+          "failureMarginBits": 0.01,
+          "marginLabel": "exact 6/7 gate",
+          "prizeBox": {
+            "rate": true,
+            "smoothDomain": true,
+            "kBound": true,
+            "fieldBound": true,
+            "denominatorAudited": true,
+            "endpointConvention": true,
+            "publicSource": true,
+            "conditionalImport": false
+          },
+          "status": "exact-gate",
+          "statusLabel": "exact finite-slope gate",
+          "source": "high-agreement tangent staircase",
+          "sourceHref": "https://github.com/przchojecki/rs-mca/blob/main/experimental/data/tangent/tangent_staircase_summary.md",
+          "nonClaims": [
+            "Finite-slope support-wise MCA convention only.",
+            "Closed endpoint delta=3/256 is unsafe; radii below it have the agreement-507 support threshold.",
+            "Does not claim protocol soundness or curve-MCA consequences."
           ]
         },
         {
@@ -273,8 +318,8 @@
           "source": "strict352 quotient-core obstruction",
           "sourceHref": "https://github.com/przchojecki/rs-mca/blob/main/experimental/data/strict352/strict352_quotient_core_summary.md",
           "nonClaims": [
-            "Quotient-core lower floor, not an exact threshold.",
-            "Agreement 353 is the next quotient/tangent/aperiodic frontier."
+            "Quotient-core mechanism record, not the active lower-bound frontier.",
+            "The generic tangent floor gives LD_sw(C,352) >= 161 and LD_sw(C,353) >= 160."
           ]
         },
         {

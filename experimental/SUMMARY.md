@@ -27,6 +27,8 @@ papers. The source triage records are:
 - `notes/triage/pr-triage-2026-06-26-round2.md`: PRs #120 and #121, adding a
   full-affine Hooley--Katz route-cut audit and a `d=2` proper-subgroup cubic
   twisted collision bound.
+- `data/tangent/`: high-agreement tangent staircase packet, showing a generic
+  moving-root floor and an exact very-high-agreement staircase.
 
 The common policy was: keep Papers A-D unchanged, land new material in
 `experimental/`, preserve explicit status labels, and require review before any
@@ -57,6 +59,52 @@ large theorem yet; it is the reduction of several vague hazards into named,
 script-checkable walls.
 
 ## What Was Added
+
+### Latest tangent-staircase update
+
+The active finite-slope threshold picture for the concrete
+`RS[F_17^32,H,256]`, `|H|=512`, rate-`1/2` row changed substantially.  The
+tangent packet proves a generic moving-root floor
+
+```text
+LD_sw(C,a) >= n-a+1
+```
+
+for every Reed--Solomon code and every `k+1 <= a <= n`.  In the range
+
+```text
+3a - 2n >= k
+```
+
+the lower bound is exact:
+
+```text
+LD_sw(C,a) = n-a+1.
+```
+
+For the `F_17^32`, `n=512`, `k=256` row, exactness starts at `a=427`, hence
+
+```text
+LD_sw(C,a) = 513-a        for every a >= 427.
+```
+
+Because `floor(17^32/2^128)=6`, this pins the finite-slope support-wise
+`2^-128` staircase at
+
+```text
+LD_sw(C,506)=7   unsafe,
+LD_sw(C,507)=6   safe.
+```
+
+Thus the largest safe integer Hamming radius is `5`, while integer radius `6`
+is already unsafe.  Equivalently, the closed grid radius `3/256` fails and the
+real-radius safe supremum is approached from below.
+
+This supersedes the strict264/strict352 framing as a lower-bound frontier:
+agreement `353` already has the tangent lower bound `LD_sw(C,353)>=160`, and
+agreement `352` has `LD_sw(C,352)>=161`.  The quotient-core packets remain
+useful mechanism records, but the next threshold question is whether any
+non-tangent mechanism survives past agreement `507`.
 
 ### Latest 2026-06-26 round 2 integration
 
@@ -131,12 +179,16 @@ produce a new frontier point:
   M2 residual-budget verifiers pass.  The L2 profile run again shows why
   quotient-periodic mass must be split before claiming an interleaved saving.
 
-The next experimental task is therefore not another broad verifier run.  It is
-the narrow strict264 certificate:
+This paragraph is superseded by the tangent-staircase update above.  Before the
+tangent floor was isolated, the next experimental task was the narrow strict264
+certificate:
 
 ```text
 LD_sw(RS[F_17^32,H,256],264) >= 7.
 ```
+
+The tangent floor now gives much stronger lower bounds at agreements `264`,
+`352`, and `353`, and the exact high-agreement gate is `506/507`.
 
 ### Latest 2026-06-25 integration
 

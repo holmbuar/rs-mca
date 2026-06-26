@@ -67,7 +67,7 @@
     "label": "proof record",
     "radiusLabel": "31/64",
     "proof": "Quotient map x -> x^8 on |H|=512 gives an augmented C+ list of size binom(64,33); deep-point conversion yields at least nine support-wise noncontained slopes at agreement 264.",
-    "nonclaims": "Quotient-core lower floor, not an exact threshold; agreement-265 upper bound remains open.",
+    "nonclaims": "Quotient-core mechanism record superseded as a lower-bound frontier by the generic tangent floor, which gives LD_sw(C,264) >= 249.",
     "links": [
       {
         "label": "Strict264 quotient floor",
@@ -76,6 +76,34 @@
       {
         "label": "Entropy MCA package",
         "href": "https://github.com/przchojecki/rs-mca/blob/main/experimental/data/strict264/entropy_mca_new_results.md"
+      }
+    ]
+  },
+  {
+    "id": "tangent506-exact-gate",
+    "title": "High-agreement tangent exact gate",
+    "short": "Moving-root tangent staircase pins the finite-slope threshold at agreements 506/507.",
+    "row": "RS[F_17^32,H,256]",
+    "n": 512,
+    "k": 256,
+    "rho": 0.5,
+    "agreement": 506,
+    "badSlopes": "7",
+    "q": "17^32",
+    "status": "proved",
+    "tag": "proved",
+    "label": "exact gate",
+    "radiusLabel": "3/256",
+    "proof": "Generic moving-root tangent floor gives LD_sw(C,a) >= n-a+1 for all k+1 <= a <= n, and the common residual budget proves equality when 3a-2n >= k. For n=512,k=256 this gives LD_sw(C,506)=7 and LD_sw(C,507)=6.",
+    "nonclaims": "Finite-slope support-wise MCA convention only; closed endpoint delta=3/256 is unsafe, while the safe real-radius supremum is approached from below.",
+    "links": [
+      {
+        "label": "Tangent summary",
+        "href": "https://github.com/przchojecki/rs-mca/blob/main/experimental/data/tangent/tangent_staircase_summary.md"
+      },
+      {
+        "label": "Tangent verifier",
+        "href": "https://github.com/przchojecki/rs-mca/blob/main/experimental/data/tangent/verify_tangent_staircase.py"
       }
     ]
   },
@@ -95,7 +123,7 @@
     "label": "proof record",
     "radiusLabel": "5/16",
     "proof": "Dyadic quotient maps x -> x^c with c in {4,8,16,32}, quotient-prefix pigeonholing, and quantitative deep-point conversion give LD_sw(C,a) >= 7 for 264 <= a <= 352, with LD_sw(C,352) >= 16.",
-    "nonclaims": "Quotient-core lower floor, not an exact threshold; agreement 353 is the next frontier.",
+    "nonclaims": "Quotient-core mechanism record superseded as a lower-bound frontier by the generic tangent floor, which gives LD_sw(C,352) >= 161 and LD_sw(C,353) >= 160.",
     "links": [
       {
         "label": "Strict352 summary",

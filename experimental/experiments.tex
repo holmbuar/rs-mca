@@ -1448,6 +1448,207 @@ are counted.  Charging these private coordinates to slopes gives the stated
 packing bound.
 \end{proof}
 
+\section{High-Agreement Tangent Staircase}
+\label{sec:tangent-staircase}
+
+\textbf{Status: \textsc{New-local} finite MDS theorem.}
+This section records a generic moving-root tangent floor and, in the
+very-high-agreement range, a matching upper bound.  It is independent of
+quotient-periodic structure and does not use smoothness.  It is relevant to the
+finite row ledger because the bad slopes are paid with the actual line field
+\(\qline\).
+
+For a polynomial \(P\in F[X]\), write
+\[
+  P=P_{<k}+P_{\ge k},
+  \qquad \deg P_{<k}<k,
+\]
+where \(P_{\ge k}\) is the sum of the terms of degree at least \(k\).  Let
+\(\operatorname{LD}_{\rm sw}(C,a)\) denote the largest possible number of finite
+slopes on a received line that have a support-wise noncontained explanation on
+some support of size at least \(a\).
+
+\begin{theorem}[moving-root tangent floor]
+\label{thm:moving-root-tangent-floor}
+Let \(D\subset F\) have \(|D|=n\), and let
+\(C=\RS[F,D,k]\).  For every integer \(a\) with \(k+1\le a\le n\),
+\[
+  \operatorname{LD}_{\rm sw}(C,a)\ge n-a+1 .
+\]
+\end{theorem}
+
+\begin{proof}
+Choose a subset \(A\subset D\) of size \(a-1\), and put
+\[
+  B_A(X)=\prod_{x\in A}(X-x).
+\]
+Define the received line
+\[
+  f=(XB_A)_{\ge k},
+  \qquad
+  g=-(B_A)_{\ge k}.
+\]
+For every \(t\in D\setminus A\), set
+\[
+  L_t(X)=(X-t)B_A(X).
+\]
+Then \(L_t\) is the locator of the support \(A\cup\{t\}\), which has size
+\(a\), and linearity of truncation gives
+\[
+  f+t g=(L_t)_{\ge k}.
+\]
+On every root of \(L_t\), the word represented by \((L_t)_{\ge k}\) agrees with
+\(- (L_t)_{<k}\), a codeword of \(C\).  Thus the slope \(t\) is explained on
+\(A\cup\{t\}\).
+
+It remains to check support-wise noncontainment on this same support.  On
+\(A\), since \(B_A=0\), we have
+\[
+  g=-(B_A)_{\ge k}=(B_A)_{<k}.
+\]
+If \(g\) were explained on \(A\cup\{t\}\) by a degree-\(<k\) polynomial \(q\),
+then \(q=(B_A)_{<k}\), because \(|A|=a-1\ge k\).  At the remaining point \(t\),
+this would force
+\[
+  -(B_A)_{\ge k}(t)=(B_A)_{<k}(t),
+\]
+that is, \(B_A(t)=0\), contrary to \(t\notin A\).  Hence \(g\) is not
+separately explained on \(A\cup\{t\}\), so the slope is support-wise
+noncontained.  The slopes \(t\in D\setminus A\) are distinct, giving
+\(n-a+1\) bad finite slopes.
+\end{proof}
+
+\begin{theorem}[very-high-agreement tangent staircase]
+\label{thm:very-high-tangent-staircase}
+Let \(C=\RS[F,D,k]\) with \(|D|=n\).  If
+\[
+  3a-2n\ge k,
+\]
+then
+\[
+  \operatorname{LD}_{\rm sw}(C,a)=n-a+1 .
+\]
+\end{theorem}
+
+\begin{proof}
+The lower bound is Theorem~\ref{thm:moving-root-tangent-floor}.  For the upper
+bound, put \(s=n-a\).  If a received line has at most one support-wise
+noncontained finite slope at agreement at least \(a\), then the claimed upper
+bound is immediate.  Otherwise pick two such slopes \(z_1\ne z_2\), with
+explaining codewords \(p_1,p_2\in C\) on supports \(S_1,S_2\), respectively.
+Since \(|S_i|\ge a\),
+\[
+  |S_1\cap S_2|\ge 2a-n.
+\]
+On this intersection,
+\[
+  g=(p_1-p_2)/(z_1-z_2),
+  \qquad
+  f=p_1-z_1g .
+\]
+The condition \(3a-2n\ge k\) and the inequality \(a\le n\) imply
+\(2a-n\ge k\).  Therefore these two right-hand sides extend uniquely to
+codewords \(c_g,c_f\in C\).  Let \(S_0\) be a maximal common support on which
+\(f=c_f\) and \(g=c_g\), and put \(b=|S_0|\) and \(d=n-b\).  Then
+\[
+  b\ge2a-n,\qquad d\le2(n-a)=2s .
+\]
+By maximality, outside \(S_0\) there is no coordinate at which both residuals
+\(f-c_f\) and \(g-c_g\) vanish.
+
+The residual-budget proposition, Proposition~\ref{prop:common-residual}, is
+applicable because
+\[
+  a+b-n\ge a+(2a-n)-n=3a-2n\ge k .
+\]
+Here its common-zero parameter is \(c_0=0\).  If \(b\ge a\), then every
+noncontained slope needs at least one residual zero outside \(S_0\), and there
+are only \(d\le s\) such coordinates.  If \(b<a\), then every noncontained
+slope needs at least
+\[
+  h=a-b=d-s
+\]
+private residual zeros outside \(S_0\).  Since \(s<d\le2s\), the residual
+budget gives
+\[
+  \#\{\text{bad slopes}\}
+  \le
+  \left\lfloor \frac d{d-s}\right\rfloor
+  \le s+1
+  =n-a+1 .
+\]
+This proves the matching upper bound.
+\end{proof}
+
+\begin{corollary}[exact high-agreement gate for the \(\F_{17^{32}}\), rate-\(1/2\) row]
+\label{cor:f17-32-exact-tangent-gate}
+Let \(H\subset \F_{17^{32}}^*\) be any multiplicative subgroup of order
+\(512\), and let
+\[
+  C=\RS[\F_{17^{32}},H,256].
+\]
+For every \(a\ge427\),
+\[
+  \operatorname{LD}_{\rm sw}(C,a)=513-a.
+\]
+In particular,
+\[
+  \operatorname{LD}_{\rm sw}(C,506)=7,
+  \qquad
+  \operatorname{LD}_{\rm sw}(C,507)=6.
+\]
+Since
+\[
+  6\cdot2^{128}<17^{32}<7\cdot2^{128},
+\]
+we have
+\[
+  \frac{\operatorname{LD}_{\rm sw}(C,507)}{17^{32}}<2^{-128}
+  \quad\text{but}\quad
+  \frac{\operatorname{LD}_{\rm sw}(C,506)}{17^{32}}>2^{-128}.
+\]
+Thus, under the finite-slope support-wise MCA convention, the \(2^{-128}\)
+integer agreement staircase for this row is pinned between \(506\) and \(507\).
+The largest safe integer Hamming radius is \(5\), while integer radius \(6\) is
+already unsafe.  The corresponding normalized grid radii are
+\[
+  5/512
+  \quad\text{and}\quad
+  6/512=3/256.
+\]
+As a real-radius supremum, the transition is \(3/256\), but the closed endpoint
+\(\delta=3/256\) is on the unsafe side.
+\end{corollary}
+
+\begin{proof}
+Here \(n=512\) and \(k=256\).  The hypothesis
+\(3a-2n\ge k\) becomes \(3a-1024\ge256\), hence \(a\ge427\).  The exact formula
+is Theorem~\ref{thm:very-high-tangent-staircase}.  The arithmetic inequalities
+are
+\[
+  17^{32}-6\cdot2^{128}
+  =326217393234836465063858652730341978625>0
+\]
+and
+\[
+  7\cdot2^{128}-17^{32}
+  =14064973686101998399515954701426232831>0 .
+\]
+\end{proof}
+
+\begin{remark}[effect on the earlier agreement-353 target]
+The agreement-353 target is no longer a frontier for the rate-\(1/2\),
+\(\F_{17^{32}}\), \(n=512\) row: Theorem~\ref{thm:moving-root-tangent-floor}
+already gives
+\[
+  \operatorname{LD}_{\rm sw}(C,353)\ge512-353+1=160.
+\]
+The quotient-core strict352 packet remains a useful mechanism record, but the
+generic tangent floor gives a stronger lower bound at agreement \(352\) and
+beyond.  The next issue is whether any non-tangent mechanism survives past the
+exact tangent staircase at agreement \(507\).
+\end{remark}
+
 \section{Towards-Prize Finite-Threshold Theorems}
 \label{sec:towards-prize-thresholds}
 
@@ -1456,8 +1657,11 @@ packing bound.
 The results in this section are deliberately finite and certificate-facing.  They
 are meant to move the experimental ledger from lower-bound numerators toward the
 integer agreement staircase needed by the Proximity Prize.  They do not prove the
-corrected Paper B local-limit conjecture.  They isolate the exact checks that a
-strict264 certificate and a matching 265 upper bound must satisfy.
+corrected Paper B local-limit conjecture.  The later
+high-agreement tangent staircase supersedes the old strict264/265 search target
+as a threshold-pinning route for the \(\F_{17^{32}}\), \(n=512\), \(k=256\)
+row; the strict264 material below remains useful as certificate language and
+as a record of quotient-core mechanisms.
 
 For a received line \(\ell_z=f+zg\), write
 \[
@@ -1579,11 +1783,13 @@ upper bound on distinct slopes.
 \end{proof}
 
 \begin{remark}[why this helps the 265 upper bound]
-For the current \(n=512,k=256\) row, the proposed next-step upper bound
-\(\operatorname{LD}_{\rm sw}(C,265)\le6\) is a statement about degree
-\(247\) split locators with \(t=9\).  Proposition~\ref{prop:fixed-locator-unique-slope}
-reduces the finite all-line search to a duplicate-aware image problem for the
-rational map \(T\mapsto z_T\), plus the consistency and noncontainment tests.
+For the current \(n=512,k=256\) row, this proposition remains useful for
+duplicate-aware locator searches.  The old proposed upper bound
+\(\operatorname{LD}_{\rm sw}(C,265)\le6\) is now known to be false by
+Theorem~\ref{thm:moving-root-tangent-floor}, which already gives
+\(\operatorname{LD}_{\rm sw}(C,265)\ge248\).  Future upper-bound searches should
+therefore start beyond the exact tangent gate, at agreement \(507\) and higher,
+or explicitly isolate non-tangent mechanisms.
 \end{remark}
 
 \begin{theorem}[subfield confinement for base-valued lines]
@@ -1678,18 +1884,22 @@ safe on the next open interval below it, including the grid radius
 \(\delta_{a+1}\), while the continuous supremum of certified safe radii is
 \(\delta_a\) and is not attained under the closed endpoint convention.
 
-For \(\qline=17^{32}\), the special case
+Before the tangent staircase was isolated, the special case
 \[
   B(264)\ge7,
   \qquad
   B(265)\le6
 \]
-pins the finite row to an unsafe/safe transition between
+would have pinned the finite row to an unsafe/safe transition between
 \[
   \delta_{265}=247/512
   \qquad\text{and}\qquad
   \delta_{264}=31/64.
 \]
+For the \(\F_{17^{32}}\), \(n=512\), \(k=256\) row, the premise
+\(B(265)\le6\) is false by the moving-root tangent floor.  The actual
+finite-slope staircase gate supplied by Corollary~\ref{cor:f17-32-exact-tangent-gate}
+is \(B(506)=7\), \(B(507)=6\).
 \end{theorem}
 
 \begin{proof}

@@ -14,7 +14,7 @@
     "author": "Codex",
     "title": "Strict264 quotient-floor proof record",
     "summary": "The strict264 quotient-core construction uses the map x -> x^8, an augmented-code list of size binom(64,33), and deep-point conversion to produce at least nine support-wise bad slopes at agreement 264.",
-    "impact": "The rate-1/2 MCA board now has a proved strict264 row at delta = 31/64. The next threshold-pinning target is the agreement-265 upper bound.",
+    "impact": "This remains a quotient-core mechanism record. The moving-root tangent floor now gives stronger lower bounds at agreement 264, so 265 is not the threshold-pinning target.",
     "href": "https://github.com/przchojecki/rs-mca/blob/main/experimental/data/strict264/strict264_quotient_floor.md"
   },
   {
@@ -23,8 +23,17 @@
     "author": "Codex",
     "title": "Strict352 dyadic quotient-core proof record",
     "summary": "The strict352 dyadic quotient-core construction proves LD_sw(C,a) >= 7 for every agreement 264 <= a <= 352, and LD_sw(C,352) >= 16 for C = RS[F_17^32,H,256].",
-    "impact": "This extends the finite support-wise MCA lower floor from strict264/slack8 to strict352/slack96. The next unresolved rung is agreement 353, where the coarse dyadic quotient-prefix method gives only three slopes.",
+    "impact": "This was the quotient-core frontier before the tangent staircase was isolated. It remains a useful mechanism record, but agreement 353 is solved by the generic tangent floor.",
     "href": "https://github.com/przchojecki/rs-mca/blob/main/experimental/data/strict352/strict352_quotient_core_summary.md"
+  },
+  {
+    "date": "2026-06-26",
+    "status": "exact finite-slope gate",
+    "author": "GPT-5.5 Pro / Codex audit",
+    "title": "High-agreement tangent staircase pins the F_17^32 row",
+    "summary": "The moving-root tangent floor gives LD_sw(C,a) >= n-a+1 for every RS code, and the common residual budget proves equality when 3a-2n >= k.",
+    "impact": "For RS[F_17^32,H,256], |H|=512, this gives LD_sw(C,506)=7 and LD_sw(C,507)=6. Agreement 353 is no longer a frontier; the next question is whether non-tangent mechanisms survive past 507.",
+    "href": "https://github.com/przchojecki/rs-mca/blob/main/experimental/data/tangent/tangent_staircase_summary.md"
   },
   {
     "date": "2026-06-26",

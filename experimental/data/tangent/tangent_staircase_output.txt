@@ -1,0 +1,22 @@
+High-agreement tangent staircase arithmetic
+q_line = 17^32 = 2367911594760467245844106297320951247361
+n = 512, k = 256
+exact-staircase range starts at a = ceil((2n+k)/3) = 427
+floor(q_line / 2^128) = 6
+q_line - 6*2^128 = 326217393234836465063858652730341978625
+7*2^128 - q_line = 14064973686101998399515954701426232831
+
+a=353: LD_sw lower-bound value/floor = 160; tangent density > 2^-128
+a=384: LD_sw lower-bound value/floor = 129; tangent density > 2^-128
+a=427: LD_sw exact value/floor =  86; tangent density > 2^-128
+a=506: LD_sw exact value/floor =   7; tangent density > 2^-128
+a=507: LD_sw exact value/floor =   6; tangent density <= 2^-128
+a=508: LD_sw exact value/floor =   5; tangent density <= 2^-128
+a=512: LD_sw exact value/floor =   1; tangent density <= 2^-128
+
+last unsafe agreement from exact staircase: a = 506, LD_sw = 7
+first safe agreement from exact staircase:  a = 507, LD_sw = 6
+largest safe integer distance = 5
+first unsafe integer distance = 6
+safe grid radius = 5/512
+unsafe grid radius = 3/256
