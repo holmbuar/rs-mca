@@ -1645,6 +1645,48 @@
             "href": "https://github.com/przchojecki/rs-mca/tree/main/experimental/lean/rs_mca_formalization"
       }
 ];
+    const fallbackPapersRaw = [
+      {
+            "id": "paper-a",
+            "letter": "A",
+            "title": "Paper A: No-Slack Obstruction",
+            "file": "RS_disproof_v3.pdf",
+            "pdf": "papers/RS_disproof_v3.pdf",
+            "githubPdf": "https://github.com/przchojecki/rs-mca/blob/main/site/papers/RS_disproof_v3.pdf",
+            "tex": "https://github.com/przchojecki/rs-mca/blob/main/tex/RS_disproof_v3.tex",
+            "summary": "Refutes the old no-slack support-wise line-MCA statement for smooth multiplicative Reed-Solomon domains."
+      },
+      {
+            "id": "paper-b",
+            "letter": "B",
+            "title": "Paper B: Slack, Quotient, and Entropy Theory",
+            "file": "slackMCA_v3.pdf",
+            "pdf": "papers/slackMCA_v3.pdf",
+            "githubPdf": "https://github.com/przchojecki/rs-mca/blob/main/site/papers/slackMCA_v3.pdf",
+            "tex": "https://github.com/przchojecki/rs-mca/blob/main/tex/slackMCA_v3.tex",
+            "summary": "Builds the corrected-reserve theory and names the main local-limit, quotient, extension, and MCA proof targets."
+      },
+      {
+            "id": "paper-c",
+            "letter": "C",
+            "title": "Paper C: SNARK and Protocol Ledger",
+            "file": "snarks_v4.pdf",
+            "pdf": "papers/snarks_v4.pdf",
+            "githubPdf": "https://github.com/przchojecki/rs-mca/blob/main/site/papers/snarks_v4.pdf",
+            "tex": "https://github.com/przchojecki/rs-mca/blob/main/tex/snarks_v4.tex",
+            "summary": "Separates protocol soundness accounting from list, CA, MCA, line-decoding, extension, and interleaving ledgers."
+      },
+      {
+            "id": "paper-d",
+            "letter": "D",
+            "title": "Paper D: Universal Field-Size Cap",
+            "file": "cs25_cap_v4.pdf",
+            "pdf": "papers/cs25_cap_v4.pdf",
+            "githubPdf": "https://github.com/przchojecki/rs-mca/blob/main/site/papers/cs25_cap_v4.pdf",
+            "tex": "https://github.com/przchojecki/rs-mca/blob/main/tex/cs25_cap_v4.tex",
+            "summary": "Uses the Crites-Stewart list-to-agreement conversion to prove a universal MCA threshold cap in the relevant sub-capacity band."
+      }
+];
     const fallbackBenchmarksRaw = [
       {id:'zero-radius', label:'Baseline', title:'Zero-radius MCA', distance:'\\(\\delta=0\\)', error:'\\(\\varepsilon_{\\rm mca}(C,\\delta)=2/|F|\\)', reference:'trivial', summary:'At zero distance the bad-line event is the two endpoint challenges where the affine line equals one of its defining source words.'},
       {id:'unique-decoding', label:'Safe', title:'Below unique decoding', distance:'\\(\\delta<\\delta_{\\min}(C)/2\\)', error:'\\(\\varepsilon_{\\rm mca}(C,\\delta)\\le O(n)/|F|\\)', reference:'ACFY25; BCIKS20', summary:'CA and MCA coincide in the unique-decoding regime, and Reed-Solomon codes have small MCA error up to this boundary.'},
