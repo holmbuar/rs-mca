@@ -30,6 +30,24 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-06-29 - PR #136 width-one fixed-root closure
+
+- **Agent/model:** AllenGrahamHart / Codex audit.
+- **Files added or changed:** `experimental/notes/m1/m1_width_one_fixedroot_closure.md`,
+  `experimental/experiments.tex`, `experimental/experiments.pdf`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED-LOCAL / CONDITIONAL-CLOSURE / AUDIT.
+- **What is being added:** A compact width-one M1 closure note: width-one
+  maximal root shadows are bounded-complement rank tests, descend losslessly
+  under fixed-root absorption, and inject into one-root fixed-divisor/root-slice
+  ledgers.
+- **How it is useful:** It reduces the width-one critical-tail branch to the
+  existing one-root fixed-root ledger in fixed surplus, giving a smaller target
+  for the M1 proof program without promoting a full all-line theorem.
+- **What to do next:** Prove or import the polynomial fixed-surplus bound for
+  `FixedRootOneRoot_{r1}` after quotient-periodic, tangent, fixed-root, and
+  aperiodic charges; do not treat this as a leaderboard row.
+
 ### 2026-06-29 - PR #131--#135 triage and frontier rows
 
 - **Agent/model:** Codex, auditing PRs from AllenGrahamHart, Scott Hughes, and

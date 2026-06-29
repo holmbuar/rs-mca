@@ -1594,6 +1594,67 @@ defects and contained/tangent ledgers have been paid.
 normal form and its non-fixed variable-line hypotheses.  It is not the final
 all-line M1 theorem and does not add a leaderboard row.
 
+\subsection{M1: width-one fixed-root closure}
+
+PR \#136, due to AllenGrahamHart, extracts a compact closure criterion for the
+width-one critical-tail branch.  At a base-free canonical \(b=2\) node, let
+\[
+  V=\langle P,Q\rangle\subset F[X]_{<q},\qquad |D^{can}|=q+s.
+\]
+A root-free width-one certificate is a direction \(A\in V\) whose root shadow
+on \(D^{can}\) has maximal size \(q-1\).  Writing \(Z=Z(A)\) and
+\(O=D^{can}\setminus Z\), one has
+\[
+  A=c\ell_Z,\qquad |Z|=q-1,\qquad |O|=s+1.
+\]
+Equivalently, \(O\) supports a width-one certificate if and only if
+\[
+  L_O=\ell_{D^{can}\setminus O}\in V,
+\]
+or equivalently all \(3\times3\) coefficient minors of \(P,Q,L_O\) vanish.
+Thus width-one certificates are bounded-complement rank tests rather than an
+unstructured projective-direction family.
+
+The large width-one cube descends losslessly under fixed-root absorption.  If
+\(P_m\subset Z\), then
+\[
+  A^{P_m}=A/\ell_{P_m}=c\ell_{Z\setminus P_m},\qquad
+  D^{can}\setminus P_m=(Z\setminus P_m)\sqcup O,
+\]
+so the descended width remains one and the bounded complement \(O\) is
+unchanged.  With \(a=\lfloor(q-2)/2\rfloor\), the co-small flag cube has the
+first-root partition
+\[
+  \sum_{e=1}^a\binom{q-1}{e}
+  =
+  \sum_{x\in Z}\sum_{f=0}^{a-1}\binom{|Z_{>x}|}{f}.
+\]
+After exposing the first root \(x\), every nonempty width-one flag injects into
+a one-root absorbed fixed-divisor/root-slice family.  Quantitatively, for
+\[
+  M_x=\#\{F\subset Z_{>x}: |F|\le a-1\},
+\]
+one gets
+\[
+  \max_{x\in Z}M_x
+  \ge {1\over q-1}\sum_{e=1}^a\binom{q-1}{e}
+  \ge {2^{q-1}\over 2q^2}\qquad(q\ge4).
+\]
+Thus a large width-one cube already produces a large one-root slice; it cannot
+hide as a many-first-root averaging phenomenon.
+
+Consequently, in fixed surplus \(s_0\le\sigma\), small nodes are polynomial by
+the active-tree bound, and on \(q_S>s_S+2\) there is at most one width-one
+shadow per node.  The local closure criterion is
+\[
+  WO_1(A_0)
+  \le FixedRootOneRoot_{r1}(A_0)+O_\sigma(Q^{\sigma+1}),
+\]
+where \(Q\) is the initial quotient width.  This closes the width-one
+critical-tail branch only after a polynomial bound for the displayed one-root
+fixed-root/root-slice ledger is proved or imported.  It is not the final
+all-line M1 theorem and does not add a leaderboard row.
+
 \subsection{Challenge-map pullbacks and public status corrections}
 
 The adjacent-ledger update adds the missing pullback rule from slope ledgers to
