@@ -30,6 +30,35 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-06-30 - Late PR M1/audit integration
+
+- **Agent/model:** Codex, auditing and distilling PRs from AllenGrahamHart and
+  Scott Hughes.
+- **Files added or changed:** M1/audit notes and verifiers from PRs #150--#156
+  and #158 under `experimental/notes/` and `experimental/scripts/`;
+  `experimental/data/step5-envelope-map/envelope_map.json`;
+  `experimental/notes/m1/m1_packet_sift_popularity_digest.md`;
+  `experimental/scripts/verify_m1_packet_sift_popularity_digest.py`;
+  `experimental/notes/m1/m1_a327_rim_route_cut_digest.md`;
+  `experimental/data/m1_a327_rim_route_cut_digest.json`;
+  `experimental/scripts/verify_m1_a327_rim_route_cut_digest.py`;
+  `experimental/notes/triage/pr-triage-2026-06-30-late.md`.
+- **Status:** PROVED-LOCAL / CONDITIONAL / AUDIT / EXPERIMENTAL.
+- **What is being added:** AllenGrahamHart's M1 local lemmas, sampler
+  reconciliation audit, Step 5 high-agreement envelope map, and agreement-265
+  status audit were integrated as experimental material.  Allen's oversized
+  packet-sift PR #157 was distilled to a compact packet-overlap/popularity-gate
+  digest.  Scott Hughes's draft a=327 RIM obstruction PR #145 was distilled to
+  a compact interleaved-list route-cut digest and self-contained JSON ledger.
+- **How it is useful:** The batch preserves useful local M1 proof machinery,
+  audit corrections, and high-agreement bookkeeping without promoting any
+  conditional packet branch to a full M1 theorem or leaderboard row.
+- **What to do next:** Rebase future M1 packets against the v9 Hankel
+  certificate schema.  For the packet-sift branch, prove the nonlocal
+  model-entry/multiplicity theorem or isolate a new residual obstruction.  For
+  the a=327 RIM branch, turn RREF-derived pivots into deterministic pivot
+  schedules before claiming a global bound.
+
 ### 2026-06-30 - Paper D v9 Hankel certificate atlas promotion
 
 - **Agent/model:** Codex.
