@@ -6,7 +6,7 @@ Date: 2026-07-01
 
 This document is the current execution plan for turning the RS-MCA repository
 into a serious Proximity Prize submission package.  It replaces the older
-strict264/frontier-search roadmap.  The center of gravity is now Paper D v12:
+strict264/frontier-search roadmap.  Paper D v12 is the final-submission spine:
 the two-sided cap theorem, safe-side pincer, map/rational smooth extensions,
 explicit witness machinery, certificate grammar, and the corresponding
 proof-packet schema.
@@ -22,9 +22,10 @@ tex/towards-prize.tex
 towards-prize.pdf
 ```
 
-It is the prize-facing companion to Paper D v12.  Compared with the earlier
-roadmap drafts, the active note keeps the integer-staircase and deployed
-KoalaBear pincer, then adds the sparse residual layer:
+It is the prize-facing companion to Paper D v12, not the final-submission
+authority.  Compared with the earlier roadmap drafts, the active note keeps the
+integer-staircase and deployed KoalaBear pincer, then adds the sparse residual
+layer:
 
 ```text
 emca(C,delta) = max(eca(C,delta), sigma_C(delta)/q)
@@ -89,7 +90,8 @@ The no-slack smooth-domain MCA/RCA optimism is dead.  Paper A gives explicit
 obstructions.  Positive statements must include reserve and explicit quotient
 floors.
 
-Paper D v12 is the current Paper D package and the main object to audit.  It
+Paper D v12 is the current Paper D package, the final-submission spine, and the
+main object to audit.  It
 preserves the universal-cap package, first-grid cap, aperiodic Hankel chart
 atlas, and v10 quotient/extension ledgers, then adds the safe-side pincer and
 deployed-row certificate layer:

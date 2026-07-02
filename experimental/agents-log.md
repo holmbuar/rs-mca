@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-02 - Paper D final-submission spine framing
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `tex/cs25_cap_v12.tex`; `cs25_cap_v12.pdf`;
+  `tex/towards-prize.tex`; `towards-prize.pdf`; `readme.md`;
+  `towards-prize.md`; `site/data/papers.json`; `site/data/updates.json`;
+  `site/index.html`; `site/papers/cs25_cap_v12.pdf`;
+  `site/papers/towards-prize.pdf`; `experimental/agents-log.md`.
+- **Status:** AUDIT / PAPER-FRAMING / COMPILED.
+- **What is being added:** Paper D is now explicitly framed as the main
+  Proximity Prize submission paper.  Its title and introduction emphasize the
+  final-submission role: universal unsafe cap, safe-side pincer, deployed-row
+  two-sided intervals, model transfers, and certificate grammar.  The
+  `towards-prize` note now states that it is a compact companion, not a
+  competing authority.
+- **How it is useful:** This removes ambiguity in the package hierarchy:
+  public rows, scanner outputs, and companion notes should cite Paper D v12 for
+  final hypotheses, endpoint conventions, denominators, and proof status.
+- **What to do next:** Audit the strengthened Paper D introduction against the
+  theorem statements before external submission, especially model-transfer
+  scope and the optional imported half-distance theorem.
+
 ### 2026-07-02 - Towards-prize sparse note documentation pass
 
 - **Agent/model:** Codex.
@@ -182,8 +204,8 @@ Keep entries concise and link to the relevant files.
 - **Status:** AUDIT / DOCUMENTATION / VERSION-PROMOTION.
 - **What is being added:** Active Paper D references were moved to
   `tex/cs25_cap_v12.tex`, and contributor-facing text now says that v12 is the
-  main cap paper to audit.  The public site metadata and local PDF mirror were
-  updated to point at the v12 package.
+  final-submission cap paper to audit.  The public site metadata and local PDF
+  mirror were updated to point at the v12 package.
 - **How it is useful:** Prevents new agents from following the superseded v10
   Hankel-ledger draft as the current cap-paper source, while preserving older
   v6--v10 audit/log entries as historical provenance.

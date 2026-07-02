@@ -32,12 +32,12 @@
   {
     "id": "paper-d",
     "letter": "D",
-    "title": "Paper D: Two-Sided Cap and Certificate Grammar",
+    "title": "Paper D: Final Submission Spine",
     "file": "cs25_cap_v12.pdf",
     "pdf": "papers/cs25_cap_v12.pdf",
     "githubPdf": "https://github.com/przchojecki/rs-mca/blob/main/cs25_cap_v12.pdf",
     "tex": "https://github.com/przchojecki/rs-mca/blob/main/tex/cs25_cap_v12.tex",
-    "summary": "Current main Paper D draft: self-contained cap route, safe-side pincer, map/rational smooth extensions, explicit witnesses, optimized profile, and certificate grammar v2."
+    "summary": "Main Proximity Prize submission paper: self-contained cap route, safe-side pincer, deployed-row two-sided intervals, model transfers, explicit witnesses, optimized profile, and certificate grammar v2."
   },
   {
     "id": "towards-prize",
@@ -48,6 +48,6 @@
     "pdf": "papers/towards-prize.pdf",
     "githubPdf": "https://github.com/przchojecki/rs-mca/blob/main/towards-prize.pdf",
     "tex": "https://github.com/przchojecki/rs-mca/blob/main/tex/towards-prize.tex",
-    "summary": "Compact prize-facing theorem note: delta-star staircase, deployed KoalaBear pincer, and sparse residual reduction for the remaining MCA threshold task."
+    "summary": "Compact companion to Paper D: delta-star staircase, deployed KoalaBear pincer, and sparse residual reduction for the remaining MCA threshold task."
   }
 ]

@@ -67,6 +67,16 @@ For Reed--Solomon codes with $k\le2^{40}$ and $|\F|<2^{256}$ --- the parameter b
 
 The Proximity Prize \cite{ProximityPrize} and the challenge collection of Arnon, Boneh and Fenzi \cite{ABF26} ask for the largest proximity parameter $\delta$ at which mutual correlated agreement (MCA) holds for a Reed--Solomon code with error at most a stated target, and single out one parameter box: \emph{``we are mostly interested in determining $\delta^*_C$ when $L\subseteq\F$ is a smooth domain, $k\le2^{40}$, and $|\F|<2^{256}$.''} This paper gives a pincer answer for that box: a certified safe region, a certified unsafe region strictly below capacity, and an exact formulation of the residual kernel. Write $C=\RS[\F,D,k]$ for the code of polynomials of degree less than $k$ evaluated on a domain $D$ of size $n$, $\rho=k/n$, $q=|\F|$, and let $\delta^*_C(\varepsilon^*)$ be the threshold of \cref{def:dstar} below, at the grand challenge target $\varepsilon^*=2^{-128}$.
 
+This note is deliberately organized around the companion cap manuscript
+\cite{Cho26b}, which is the main Proximity Prize submission document in the
+RS--MCA package.  The role of the present note is narrower: it extracts the
+threshold pincer, sparse residual layer, and certificate target from that main
+paper, so that the remaining proof obligations can be audited without
+duplicating the full scanner, transport, and deployed-row certificate sections.
+Consequently, the hypotheses, endpoint conventions, denominators, and final
+submission claims should be read from \cite{Cho26b}; this note is a compact
+roadmap and theorem companion, not a competing authority.
+
 \begin{theorem}\label{thm:main}
 Let $q=|\F|<2^{256}$, let $D\subseteq\F^\times$ be a coset of a cyclic subgroup of even order $n$, and let $C=\RS[\F,D,k]$ with $\rho=k/n\in\{\tfrac12,\tfrac14,\tfrac18,\tfrac1{16}\}$, $k\le2^{40}$ and $n\ge2^{15}$. Put
 \[

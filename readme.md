@@ -19,7 +19,7 @@ The core repo consists of four main papers, one prize-facing theorem note, and t
 |---|---|---|
 | `RS_disproof_v3.tex` | **Paper A: no-slack obstruction** | Refutes the unslacked, support-wise line-MCA reading of “up to capacity” for smooth multiplicative RS domains. Provides explicit lower-bound mechanisms and deployed-field obstructions. |
 | `slackMCA_v4.tex` | **Paper B: slack / quotient / entropy theory** | Main theory paper. Builds the corrected reserve framework and now promotes the solved high-agreement line/list/curve boundary layer into the main theory. |
-| `cs25_cap_v12.tex` | **Paper D: two-sided cap, safe-side pincer, and certificate grammar** | This is now the main Paper D draft. It keeps the self-contained cap route and adds the safe-side pincer, map/rational smooth extensions, circle/genus-one transports, explicit witness machinery, optimized failure profile, and certificate grammar v2. |
+| `cs25_cap_v12.tex` | **Paper D: final submission spine** | This is the main Proximity Prize submission paper. It keeps the self-contained cap route and adds the safe-side pincer, deployed-row two-sided intervals, map/rational smooth extensions, circle/genus-one transports, explicit witness machinery, optimized failure profile, and certificate grammar v2. |
 | `snarks_v5.tex` | **Paper C: SNARK ledger** | Turns the corrected theory into a protocol-facing certificate and adds a theorem-backed high-agreement ledger compiler for line/list/curve coding numerators. |
 | `towards-prize.tex` | **Towards Prize: sparse threshold note** | Compact prize-facing note. It packages the `delta^*` staircase viewpoint, deployed KoalaBear pincer, and the new sparse residual reduction `emca = max(eca, sigma_C/q)` into the current execution target. |
 | `README.md` | Repo overview | Explains what the papers do, how they depend on each other, and what the project is trying to prove. |
@@ -85,20 +85,21 @@ The version changes matter for the website and scanner as follows:
   from experimental notes into the main theory. Public tangent and
   interleaved-list high-agreement rows should now cite `slackMCA_v4.tex` when
   they use this theorem package.
-- **Paper D v12** is now the main cap paper. It keeps the headline universal
-  MCA cap self-contained, adds a two-sided threshold sandwich, proves the
-  deep-regime safe theorem and MCA-from-CA pincer, extends the cap machinery to
-  map/rational smooth domains, and packages deployed-row claims in certificate
-  grammar v2. Auditing this paper is currently the main project focus.
+- **Paper D v12** is the main Proximity Prize submission paper. It keeps the
+  headline universal MCA cap self-contained, adds a two-sided threshold
+  sandwich, proves the deep-regime safe theorem and MCA-from-CA pincer, extends
+  the cap machinery to map/rational smooth domains, and packages deployed-row
+  claims in certificate grammar v2. Auditing this paper is currently the main
+  project focus.
 - **Paper C v5** adds the theorem-backed high-agreement ledger compiler for
   protocol-facing line/list/curve numerator accounting. It changes certificate
   packaging and denominator checks, not the mathematical value of the MCA cap
   rows.
-- **`towards-prize.tex`** is the current prize-facing theorem note and roadmap.
-  It does not add a new leaderboard row by itself. Its role is to state the
-  `delta^*` staircase problem compactly, record the deployed KoalaBear pincer,
-  and reduce the remaining MCA task to the sparse residual layer plus CA/list
-  certificates.
+- **`towards-prize.tex`** is a compact companion to Paper D v12, not the final
+  submission authority. It does not add a new leaderboard row by itself. Its
+  role is to state the `delta^*` staircase problem compactly, record the
+  deployed KoalaBear pincer, and reduce the remaining MCA task to the sparse
+  residual layer plus CA/list certificates.
 
 ## How the papers fit together
 
@@ -151,7 +152,7 @@ Paper B is where most new mathematics should land. It contains the theorem/conje
 
 ### Paper D: two-sided cap and certificate grammar
 
-`cs25_cap_v12.tex` is the main Paper D draft.
+`cs25_cap_v12.tex` is the main Proximity Prize submission paper.
 
 It keeps the self-contained universal MCA cap:
 
@@ -178,7 +179,9 @@ machinery, an optimized failure profile, and finite certificate grammar v2.
 
 Paper D supersedes the older internal cap in Paper B for final constants.
 Paper B keeps its native quotient-core cap because it explains the mechanism;
-Paper D v12 owns the current field-size-universal and two-sided cap package.
+Paper D v12 owns the current field-size-universal and two-sided cap package,
+and is the canonical source for final submission hypotheses, denominators,
+endpoint conventions, and proof status.
 
 Version v12 supersedes v10/v11 as the active draft. The main remaining work is
 audit: check the direct conversion/radius conventions, the optional BCIKS
