@@ -11,6 +11,10 @@ ffc284f8 Integrate DAG and threshold PR packets
 The integration commit was made by `przchojecki` so that the repository history
 stays on `main`, but the mathematical and experimental payload came from the
 PR authors below.  This note is the per-PR attribution ledger for that batch.
+GitHub co-author display requires account-linked trailer emails; the follow-up
+attribution commit therefore uses the recognized noreply addresses
+`216503854+AllenGrahamHart@users.noreply.github.com` and
+`13047840+avdeevvadim@users.noreply.github.com`.
 
 ## Majority contribution: AllenGrahamHart
 
