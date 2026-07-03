@@ -1,0 +1,347 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\definecolor{linkblue}{RGB}{25,60,120}
+\usepackage[colorlinks=true,linkcolor=linkblue,citecolor=linkblue,urlcolor=linkblue]{hyperref}
+\usepackage[capitalize]{cleveref}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\RS}{\mathrm{RS}}
+\newcommand{\ImgFib}{\operatorname{ImgFib}}
+\newcommand{\Stab}{\operatorname{Stab}}
+\newcommand{\Lst}{\Lambda}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+
+\title{L1 List-Side Compilers and Sunflower Residuals}
+\author{RS-MCA experimental note\\ \small integrated from AllenGrahamHart L1 PRs, with Codex editing}
+\date{July 3, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note consolidates the L1/list-side material that may be useful for a
+future CAP25 revision.  The proved parts are compiler statements: quotient-core
+planted lower counts, exact $2^{-128}$ budget windows, ordinary Johnson-region
+upper bounds, the sunflower auxiliary-list reduction, the few-petal Johnson
+regime, and fixed cofactor-excess full-petal layers.  The experimental parts
+stress-test the remaining mixed-petal and growing-defect sunflower residuals.
+
+The message for CAP25 is conservative.  The list-side planted obstruction gives
+clean unsafe rows and exact arithmetic windows.  The safe side still needs the
+full image-fiber theorem for primitive, non-planted lists.  Petal/PMA packets
+show which sunflower layers are already controlled and which layers remain as
+the true L1 obstruction.
+\end{abstract}
+
+\section{Status and Role}
+
+Let $C=\RS[F,H,k]$ be a Reed--Solomon code of length $n=|H|$ and let
+$s=k+\sigma$ be an agreement threshold.  For a received word $U:H\to F$, write
+\[
+        \ImgFib_U(s)=
+        \{P\in F[X]_{\deg<k}: |\{x\in H:U(x)=P(x)\}|\ge s\}.
+\]
+This is the actual list object; it avoids raw support multiplicity.
+
+The L1 positive target is not that quotient-periodic lists are small.  It is
+that, after quotient-periodic/stabilized structure is paid, the primitive
+remainder is polynomial once the generated-field reserve and lower cutoff clear.
+
+\begin{remark}[CAP25 fit]
+In Paper D/CAP25, L1 is a supporting safe-side and list-track input.  The
+material here can supply lower-side planted rows and bounded residual compiler
+pieces, but it does not prove the final safe-side image-fiber theorem.
+\end{remark}
+
+\section{Planted Quotient-Core Arithmetic}
+
+\begin{theorem}[planted quotient-core lower count]\label{thm:planted}
+Let $C=\RS[F,H,k]$, $|H|=n$, and suppose $M\mid\gcd(n,k)$ satisfies
+\[
+        1\le \sigma<M,\qquad k/M\le n/M-1.
+\]
+Then there is a received word with at least
+\[
+        P_M(n,k)=\binom{n/M-1}{k/M}
+\]
+codewords agreeing on $k+\sigma$ positions.  Consequently
+\[
+\max_U |\ImgFib_U(k+\sigma)|
+\ge
+\max_{\substack{M\mid\gcd(n,k)\\ \sigma<M\\ k/M\le n/M-1}}
+\binom{n/M-1}{k/M}.
+\]
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Choose a subgroup $K\le H$ of order $M$, a distinguished $K$-coset $C_0$, and
+a set $T\subset C_0$ of size $\sigma$.  For every $k/M$-subset of the quotient
+$H/K\setminus\{C_0\}$, the quotient-core construction gives a distinct
+degree-$<k$ codeword agreeing with the planted word on $k+\sigma$ positions.
+This gives the stated binomial count.
+\end{proof}
+
+\begin{corollary}[list unsafe test]\label{cor:list-unsafe}
+For a list denominator $q_{\mathrm{list}}$ and target $2^{-128}$, the planted
+quotient-core packet proves a list row unsafe whenever
+\[
+\max_M\binom{n/M-1}{k/M}>
+\floor{\frac{q_{\mathrm{list}}}{2^{128}}}.
+\]
+\end{corollary}
+
+\begin{proposition}[dyadic planted crossings]\label{prop:dyadic}
+For $n=2^m$, $k=\rho n$, and
+\[
+        \rho\in\{1/2,1/4,1/8,1/16\},
+\]
+the first dyadic quotient orders at which the planted count beats the largest
+budget $2^{128}-1$ are
+\[
+\begin{array}{c|cccc}
+\rho & 1/2 & 1/4 & 1/8 & 1/16\\ \hline
+N=n/M & 256 & 256 & 256 & 512 .
+\end{array}
+\]
+\end{proposition}
+
+\begin{remark}
+These are lower-side certificates only.  Above the displayed boundary, the
+planted dyadic scale may deactivate, but safety requires the primitive
+image-fiber theorem and the non-planted extras ledger.
+\end{remark}
+
+\section{Budget Windows}
+
+If a planted exact count is $P$ and the certified lower count is $L\le P$, then
+the only unresolved list budgets are
+\[
+        L\le \floor{q_{\mathrm{list}}/2^{128}}<P.
+\]
+Equivalently,
+\[
+        L2^{128}\le q_{\mathrm{list}}\le P2^{128}-1.
+\]
+This is the list-side analogue of the threshold compiler in
+`thresholds.tex`: no finite-field value-set issue remains once the planted word
+is constructed.
+
+\section{Ordinary Johnson Region}
+
+\begin{theorem}[full-list Johnson region]\label{thm:johnson}
+Let $H$ be any Reed--Solomon evaluation domain of size $n$ and
+$C=\RS[H,k]$.  For every received word $U$:
+\begin{enumerate}[label=(\roman*)]
+        \item if $2s>n+k-1$, then $|\ImgFib_U(s)|\le1$;
+        \item if $s^2>n(k-1)$, then
+        \[
+        |\ImgFib_U(s)|
+        \le
+        \frac{n(n-k+1)}{s^2-n(k-1)}.
+        \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For listed polynomials $P_i$, let $A_i$ be their agreement sets with $U$.
+Then $|A_i|\ge s$ and $|A_i\cap A_j|\le k-1$ for $i\ne j$.  The unique
+decoding claim follows from $2s-n>k-1$.  For the Johnson bound, write
+$m_x=\#\{i:x\in A_i\}$ and $I=\sum_x m_x$.  Then $I\ge Ls$ and
+\[
+\sum_x\binom{m_x}{2}\le\binom L2(k-1).
+\]
+Cauchy--Schwarz gives
+\[
+L^2s^2\le n\sum_x m_x^2
+\le n(Ln+L(L-1)(k-1)),
+\]
+which rearranges to the displayed bound.
+\end{proof}
+
+\begin{remark}
+The L1 problem begins below the ordinary Johnson region.  Above it, the
+primitive list remainder is already polynomial by \Cref{thm:johnson}.
+\end{remark}
+
+\section{Sunflower and Petal Reductions}
+
+The remaining L1 program analyzes non-planted list words through sunflower
+decompositions.  The following compiler statements are the pieces that can be
+used now.
+
+\subsection{Auxiliary petal-list reduction}
+
+Fix a missed-core set $D$ of size $d$ and a retained residual subset $R_0$ of
+size $r$.  Let $L_D$ be the missed-core locator.  Suppose petals
+$T_1,\ldots,T_M$ have size $\sigma+1$ and scalar labels $c_i$.  Define the
+auxiliary word on $T=\bigcup_i T_i$ by
+\[
+        U_D(x)=c_i L_D(x),\qquad x\in T_i.
+\]
+
+\begin{proposition}[sunflower core-defect reduction]\label{prop:pma}
+Every non-planted listed codeword in the fixed $(D,R_0)$ layer injects into an
+auxiliary Reed--Solomon list of degree at most $d$ on the petal domain $T$, at
+agreement
+\[
+        a=\sigma+d+1-r.
+\]
+Dropping the extra zero constraints on $R_0$ only enlarges this auxiliary list,
+so it is safe for upper bounds.
+\end{proposition}
+
+\subsection{Few-petal Johnson region}
+
+The auxiliary petal domain has size $|T|=M(\sigma+1)$ and effective dimension
+$d+1$.
+
+\begin{corollary}[few-petal Johnson boundary]\label{cor:pma-johnson}
+If
+\[
+        a^2>|T|d,
+\]
+then the fixed $(D,R_0)$ auxiliary list has size at most
+\[
+        \frac{|T|(|T|-d)}{a^2-|T|d}.
+\]
+Equivalently, for $d>0$, the few-petal Johnson-covered range is
+\[
+        M\le
+        \floor{\frac{a^2-1}{d(\sigma+1)}}.
+\]
+\end{corollary}
+
+\begin{proof}
+Apply \Cref{thm:johnson} to the auxiliary degree-$\le d$ code, whose dimension
+is $d+1$, and use the strict integer form of the Johnson inequality.
+\end{proof}
+
+\subsection{Fixed cofactor-excess full-petal layers}
+
+Let $d=\ell+e$, where $\ell$ is the petal size and $e$ is the cofactor excess.
+
+\begin{proposition}[fixed-excess full-petal compiler]\label{prop:fixed-excess}
+For every fixed $E\ge0$, the total number of non-planted listed codewords whose
+touched petals are all full and whose defect satisfies $\ell\le d\le\ell+E$
+is at most
+\[
+        \binom M2 q + 2^M\sum_{e=1}^{E}q^{e+1}.
+\]
+Equivalently, the layer bounds are
+\[
+        e=0:\ \binom M2 q,\qquad
+        e\ge1:\ 2^M q^{e+1}.
+\]
+\end{proposition}
+
+\begin{corollary}
+At the intended L1 lower cutoff, $M=O(\log n)$.  If $q\le n^Q$ and $E$ is
+fixed, then the fixed-excess full-petal contribution is polynomial in $n$.
+Thus a full-petal counterexample must force $e=d-\ell$ to grow with $n$.
+\end{corollary}
+
+\section{Evidence and Route Cuts}
+
+\subsection{Wide-regime auxiliary evidence}
+
+The petal auxiliary wide-regime scan over $F_{109}$ tests whether auxiliary
+lists behind the sunflower residual become large after the ordinary Johnson
+cutoff.  The tested rows show:
+\begin{enumerate}[label=(\roman*)]
+        \item Johnson-covered rows are empty;
+        \item wide rows are populated;
+        \item in the exact window, the largest list size is $2023<36^3$.
+\end{enumerate}
+This is evidence for a controlled mixed-petal residual, not a proof of
+polynomial growth.
+
+\subsection{Worst-word challenge}
+
+The small $F_{193}$ sweep refutes the literal statement that the planted word
+is always worst: at $n=16$, $\sigma=1$, several cells beat the planted count.
+The exceptions are mixed-petal sunflower extras.  For $\sigma\ge2$ in the
+tested exact cells, no challenger beats the planted count, and larger structured
+cells at $n=32,64$ found no non-planted structured challenger.
+
+\begin{remark}[corrected lesson]
+The safe formulation is not ``planted is always worst.''  It is that
+low-slack mixed-petal extras are a named residual branch, while planted
+quotient cores remain the clean lower-side certificate.
+\end{remark}
+
+\subsection{Growing-defect full-petal witnesses}
+
+Explicit full-petal witnesses exist with positive cofactor excess
+$d-\ell>0$: one at $d-\ell=2$ with three petals, and one at $d-\ell=5$ with
+five petals.  They show the full-petal growing-defect branch is not vacuous.
+They do not establish an asymptotic growth rate.
+
+\section{CAP25 Integration Checklist}
+
+A CAP25 revision can use this note as follows:
+\begin{enumerate}[label=(\arabic*)]
+        \item Use \Cref{thm:planted,cor:list-unsafe,prop:dyadic} for
+        lower-side list caps from planted quotient-core rows.
+        \item Use the budget-window arithmetic to print exact unresolved field
+        intervals for list denominators.
+        \item Use \Cref{thm:johnson} to close ordinary Johnson-region list
+        tails without quotient machinery.
+        \item Use \Cref{prop:pma,cor:pma-johnson,prop:fixed-excess} as paid
+        compiler pieces inside the sunflower residual proof program.
+        \item State the mixed-petal and growing-defect layers as the remaining
+        L1 obstruction; do not hide them inside ``planted worst'' language.
+\end{enumerate}
+
+\section{Open Problems}
+
+\begin{problem}[primitive image-fiber theorem]
+Prove a polynomial bound for the stabilizer-primitive part of
+$\ImgFib_U(k+\sigma)$ once generated-field entropy reserve and the lower cutoff
+clear, with quotient-periodic codewords charged separately.
+\end{problem}
+
+\begin{problem}[mixed-petal amplification]
+Classify or bound mixed-petal sunflower extras in the sub-Johnson region, after
+the few-petal Johnson and fixed-excess full-petal layers are paid.
+\end{problem}
+
+\begin{problem}[growing-defect full-petal branch]
+Determine whether the full-petal branch with $d-\ell\to\infty$ remains
+polynomial or produces a new obstruction ledger.
+\end{problem}
+
+\begin{thebibliography}{9}
+\bibitem{ABF26}
+S. Arnon, D. Boneh, and N. Fenzi.
+\newblock Open problems in list decoding and correlated agreement.
+\newblock ePrint 2026/680, 2026.
+
+\bibitem{Cho26B}
+P. Chojecki.
+\newblock Smooth-domain Reed--Solomon slack MCA and quotient-profile ledgers.
+\newblock RS-MCA repository, Paper B, 2026.
+
+\bibitem{Cho26D}
+P. Chojecki.
+\newblock Universal field-size caps and a two-sided sandwich for mutual
+correlated agreement on smooth Reed--Solomon domains.
+\newblock RS-MCA repository, Paper D/CAP25 v12, 2026.
+\end{thebibliography}
+
+\end{document}

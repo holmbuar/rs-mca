@@ -30,6 +30,31 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-03 - Consolidated threshold, M1, and L1 TeX notes
+
+- **Agent/model:** Codex, consolidating threshold/M1/L1 material contributed
+  primarily by AllenGrahamHart in the recent PR batch.
+- **Files added or changed:** `experimental/thresholds.tex`;
+  `experimental/thresholds.pdf`; `experimental/m1.tex`;
+  `experimental/m1.pdf`; `experimental/l1.tex`; `experimental/l1.pdf`;
+  `experimental/agents-log.md`.
+- **Status:** DOCUMENTATION / COMPILER-NOTES / COMPILED.
+- **What is being added:** Three self-contained experimental TeX notes:
+  threshold certificate compilers for CAP25, the M1 residue-line and
+  Conjecture-F proof program, and the L1 list-side compiler/petal program.
+  The notes integrate the markdown material into paper-shaped statements,
+  definitions, proof sketches, status warnings, and CAP25 integration
+  checklists.
+- **How it is useful:** This gives the project editable working-paper inputs
+  for the next CAP25/towards-prize pass without requiring readers to reconstruct
+  the story from many PR notes.  It also separates proved compiler arithmetic
+  and local lemmas from evidence, conjectural reductions, and open theorem
+  gaps.
+- **What to do next:** Audit each theorem/lemma statement against the source
+  PR notes before promoting it into Paper D or a submission-facing paper.
+  In particular, keep L1 sunflower evidence and M1 Conjecture-F evidence out
+  of the PROVED ledger until the corresponding residual bounds are complete.
+
 ### 2026-07-03 - PR batch: DAG, threshold compilers, and A425/A426 finite gate
 
 - **Agent/model:** Codex integrating PRs from AllenGrahamHart, Vadim Avdeev,

@@ -1,0 +1,483 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\definecolor{linkblue}{RGB}{25,60,120}
+\usepackage[colorlinks=true,linkcolor=linkblue,citecolor=linkblue,urlcolor=linkblue]{hyperref}
+\usepackage[capitalize]{cleveref}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\RS}{\mathrm{RS}}
+\newcommand{\D}{\mathcal D}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+
+\title{M1 Residue-Line Tools and Conjecture F Reductions}
+\author{RS-MCA experimental note\\ \small integrated from AllenGrahamHart proof-program PRs, with Codex editing}
+\date{July 3, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note consolidates the M1 and Conjecture F material that may be useful for
+a future CAP25 revision.  The results here do not close the M1 safe-side
+residue-line local limit.  They do, however, isolate several reusable theorem
+blocks: exact first and second moments for split-locator alignment in the
+random-word model; reductions removing common divisors and quotient-pullbacks
+from Conjecture F; fixed-dimensional and dimension-two incidence bounds;
+quotient seam arithmetic; subgroup Hankel displacement identities; Johnson
+exchange-mixing bounds; and a deficiency-one SPI eliminant-or-residual chart.
+
+The intended use in Paper D/CAP25 is as a residual-branch toolkit.  Paid
+tangent and quotient cells are separated first.  What remains is the aperiodic
+residue-line branch.  This note says which parts of that branch are already
+formal algebra/combinatorics and which parts remain genuine inverse or
+incidence theorems.
+\end{abstract}
+
+\section{Status and Interface with CAP25}
+
+The CAP25 safe-side program asks for upper bounds on bad line parameters after
+known tangent, quotient, and extension cells have been charged.  In the
+notation of exact agreement $A$,
+\[
+        j=n-A,\qquad t=A-k,\qquad j+t=n-k.
+\]
+The M1 problem is to control aperiodic residue-line packings in this
+$(j,t)$-window.
+
+This note has three status levels:
+\begin{enumerate}[label=(\roman*)]
+        \item proved local algebra/combinatorics, such as the first-moment,
+        Conjecture F reductions, quotient seam, displacement identities,
+        Johnson mixing, and deficiency-one chart;
+        \item experimental toy evidence, such as small-field Conjecture F
+        censuses;
+        \item open inverse/classification steps, such as the full M1 local
+        limit, XR inverse theorem, high-dimensional Conjecture F, and
+        identically valid SPI residuals.
+\end{enumerate}
+
+\section{Split-Locator Moment Calculus}
+
+Let $F=\F_q$, let $D\subset F^*$ have size $n$, and let $k<A\le n$.  Put
+\[
+        t=A-k,\qquad j=n-A.
+\]
+For $R\subset D$ with $|R|=j$, define
+\[
+        \ell_R(X)=\prod_{r\in R}(X-r).
+\]
+For a word $w:D\to F$, define the locator-syndrome vector
+\[
+        S_R(w)=
+        \left(\sum_{x\in D} w(x)\ell_R(x)x^m\right)_{m=1}^{t}
+        \in F^t.
+\]
+For independent uniform words $u,v:D\to F$, call $R$ \emph{aligned} if
+$S_R(v)\ne0$ and $S_R(u)\in F S_R(v)$.
+
+\begin{theorem}[exact first moment]\label{thm:first-moment}
+The expected number $N_A(u,v)$ of aligned split locators is
+\[
+        \E N_A
+        =
+        \binom{n}{j}(1-q^{-t})q^{1-t}.
+\]
+\end{theorem}
+
+\begin{proof}
+For fixed $R$, the map $w\mapsto S_R(w)$ is surjective.  Indeed, on
+$E=D\setminus R$ its matrix has entries $\ell_R(x)x^m$; after nonzero column
+scaling it is a $t\times A$ Vandermonde block of rank $t$.  Thus
+$(S_R(u),S_R(v))$ is uniform on $F^t\times F^t$.  The number of pairs
+$(a,b)$ with $b\ne0$ and $a\in F b$ is $(q^t-1)q$, giving probability
+$(1-q^{-t})q^{1-t}$.  Sum over $\binom nj$ locators.
+\end{proof}
+
+\begin{theorem}[two-locator joint rank]\label{thm:joint-rank}
+For $R,T\subset D$ of size $j$, put $c=|R\cap T|$.  The map
+\[
+        w\mapsto (S_R(w),S_T(w))
+\]
+has rank
+\[
+        2t-\max(0,t-j+c).
+\]
+\end{theorem}
+
+\begin{proof}
+A linear relation between the two syndrome blocks has the form
+\[
+        \ell_R A+\ell_T B=0,\qquad \deg A,\deg B\le t-1.
+\]
+Writing $G=\gcd(\ell_R,\ell_T)$, $\ell_R=Gr$, $\ell_T=Gs$, with
+$\deg G=c$ and $(r,s)=1$, gives $rA+sB=0$.  Hence $A=sH$ and $B=-rH$ with
+\[
+        \deg H\le t-1-(j-c).
+\]
+The relation space therefore has dimension $\max(0,t-j+c)$.
+\end{proof}
+
+\begin{corollary}[covariance support]\label{cor:covariance}
+The alignment indicators for $R$ and $T$ are pairwise independent whenever
+\[
+        d(R,T):=j-|R\cap T|\ge t.
+\]
+All covariance is supported in the radius-$(t-1)$ Johnson neighborhood.
+\end{corollary}
+
+\begin{theorem}[exact second moment]\label{thm:second-moment}
+Put
+\[
+        h(c)=\max(0,t-j+c).
+\]
+For $0\le h\le t$, define
+\[
+P_h=
+\frac{q(q^h-1)q^{2(t-h)}+q^2(q^{t-h}-1)^2}{q^{4t-2h}}.
+\]
+Then
+\[
+\E N_A^2
+=
+\sum_c
+\binom{n}{j}\binom{j}{c}\binom{n-j}{j-c}
+P_{h(c)},
+\]
+where the sum ranges over valid overlaps $c$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+\Cref{thm:joint-rank} puts the joint image into a standard fiber product
+$U_h=\{(z,p;z,q)\}$.  If the common part of $S_R(v),S_T(v)$ is nonzero, the two
+alignment scalars coincide; if it is zero, the two tail scalars are independent.
+Counting these two cases gives $P_h$, and summing over ordered pairs of
+locators gives the formula.
+\end{proof}
+
+\begin{corollary}[dependency-degree concentration]\label{cor:dependency}
+Let
+\[
+        D_t(n,j)=
+        \sum_{d=0}^{\min(t-1,j,n-j)}
+        \binom jd\binom{n-j}{d}.
+\]
+Then
+\[
+        \Var(N_A)\le \E N_A\cdot D_t(n,j).
+\]
+Consequently, if $\E N_A\ge n^{2(t-1)+s}$, then
+\[
+        \frac{\Var(N_A)}{(\E N_A)^2}\le n^{-s}.
+\]
+\end{corollary}
+
+\begin{remark}[CAP25 meaning]
+FM1 is an average-over-random-word-pairs calculation.  It shows that in the
+regular M3 window for the $F_{17^{32}}$, $n=512$, $k=256$ row, random aligned
+split locators are astronomically unlikely.  It does not bound worst-case
+pairs; those require Conjecture F or exchange-rigidity input.
+\end{remark}
+
+\section{Conjecture F Reductions}
+
+Let $K$ be a field, $H\subset K$ finite, and
+\[
+        P_H(X)=\prod_{h\in H}(X-h).
+\]
+Let $\D_j(H)$ be the set of monic squarefree degree-$j$ divisors of $P_H$.
+Equivalently, $\D_j(H)$ is the set of locator polynomials
+$L_S(X)=\prod_{h\in S}(X-h)$ for $|S|=j$.
+
+\begin{lemma}[common-GCD reduction]\label{lem:gcd}
+Let $P$ be a projective linear space of polynomials of degree at most $j$, and
+let $E=P\cap \D_j(H)$.  If every locator in $E$ is divisible by a fixed monic
+divisor $G$ of $P_H$, with $\deg G=w$, then division by $G$ injects $E$ into
+\[
+        \D_{j-w}(H\setminus Z(G))
+\]
+inside a projective linear space of dimension at most $\dim P$.
+\end{lemma}
+
+\begin{lemma}[quotient-pullback recursion]\label{lem:quot-pullback}
+Assume $H=\mu_n$ and $\operatorname{char}K\nmid n$.  If $M\mid\gcd(n,j)$, then
+\[
+        g(Y)\longmapsto g(X^M)
+\]
+maps $\D_{j/M}(\mu_{n/M})$ bijectively onto the $M$-periodic stratum of
+$\D_j(\mu_n)$.  Intersecting with a projective linear space descends to an
+intersection with a projective linear space of no larger dimension in the
+quotient locator space.
+\end{lemma}
+
+\begin{lemma}[dimension-one voting]\label{lem:dim1}
+Let $P=\PP(\Span(L_0,L_1))$ be a projective line in $K[X]_{\le j}$, and assume
+no $h\in H$ is a common zero of $L_0$ and $L_1$.  Then
+\[
+        |P\cap \D_j(H)|\le \floor{\frac{|H|}{j}}.
+\]
+For an affine parameter $L_0+zL_1$, one may add the point at infinity
+separately.
+\end{lemma}
+
+\begin{proof}
+Each $h\in H$ votes for the unique projective parameter for which
+$aL_0(h)+bL_1(h)=0$.  Every degree-$j$ locator receives exactly $j$ votes.
+\end{proof}
+
+\begin{lemma}[hyperplane concurrency]\label{lem:concurrency}
+Let $W\le K[X]_{\le j}$ be nonzero and assume no $h\in H$ is a common root of
+all elements of $W$.  For each $h$, let
+\[
+        E_h=\{[L]\in\PP(W): L(h)=0\}.
+\]
+Then $P(W)\cap \D_j(H)$ is exactly the set of projective points lying on at
+least $j$ of the hyperplanes $E_h$.
+\end{lemma}
+
+\begin{theorem}[projective-plane pair bound]\label{thm:dim2}
+Under the hypotheses of \Cref{lem:concurrency}, if $\dim \PP(W)=2$, then
+\[
+        |\PP(W)\cap \D_j(H)|
+        \le
+        \frac{\binom{|H|}{2}}{j-1}.
+\]
+If the evaluation lines $E_h$ are pairwise distinct, the sharper bound
+\[
+        |\PP(W)\cap \D_j(H)|
+        \le
+        \frac{\binom{|H|}{2}}{\binom{j}{2}}
+\]
+holds.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Group coincident evaluation lines by multiplicity.  A high-incidence point
+with total multiplicity at least $j$ receives at least $j-1$ cross-pairs of
+roots unless all lines are simple, in which case it receives at least
+$\binom j2$ pairs.  Distinct line pairs meet in at most one projective point,
+so the total number of charges is bounded by $\binom{|H|}{2}$.
+\end{proof}
+
+\begin{theorem}[fixed-dimensional Conjecture F bound]\label{thm:fixeddim}
+Let $W\le K[X]_{\le j}$ have vector dimension $d+1$, and assume $W$ is
+gcd-trivial on $H$.  Then
+\[
+        |\PP(W)\cap \D_j(H)|\le \binom{|H|}{d}.
+\]
+If $C$ is the common root set of $W$ on $H$, the general bound after removing
+common roots is
+\[
+        |\PP(W)\cap \D_j(H)|\le \binom{|H|-|C|}{d}.
+\]
+\end{theorem}
+
+\begin{proof}
+For a locator point $[L]$ with root set $R$, the space $W(-R)$ has dimension
+one.  Hence some $d$ roots of $R$ already cut the projective space down to the
+point $[L]$.  Choosing the first such $d$-subset injects the locator points
+into the $d$-subsets of $H$.  The common-root version follows by division by
+the common divisor.
+\end{proof}
+
+\begin{remark}[what remains open]
+\Cref{thm:fixeddim} shows that the primitive Conjecture F core is a
+dimension-growing problem.  The small-field evidence packets find expected
+common-root, twin-line, sparse-dependence, and quotient-compatible structures,
+but they do not prove the growing-dimensional incidence theorem.
+\end{remark}
+
+\section{Quotient Seam Arithmetic}
+
+\begin{lemma}[GAP-2 quotient seam]\label{lem:gap2}
+Let $n,k,A$ be fixed and put $j=n-A$, $t=A-k$, $r=n-k$, so $j+t=r$.  If
+$M\mid\gcd(n,k)$, then $M\mid r$, and hence
+\[
+        M\mid j \quad\Longleftrightarrow\quad M\mid t.
+\]
+On such buckets all quotient parameters $n/M,k/M,A/M,j/M,t/M$ are integral.
+If $M\mid n$ and $M\mid j$ but $M\nmid k$, then the support descends but the
+dimension and window do not; this is a non-rate-preserving seam.
+\end{lemma}
+
+\begin{proof}
+The implication follows from $r=j+t$ modulo $M$.  The last statement follows
+from $A=n-j$ and $t=A-k$.
+\end{proof}
+
+\section{Subgroup Hankel and Exchange Tools}
+
+Let $H=\langle\alpha\rangle$ be a finite multiplicative subgroup of a field
+$F$, and let $V_m[x,r]=x^r$ for $0\le r<m$.
+
+\begin{proposition}[Hankel factorization]\label{prop:hankel}
+For any word $w:H\to F$, the rectangular syndrome Hankel block satisfies
+\[
+        H_{t,s}(w)=V_t(H)^T\operatorname{diag}(w(x))V_s(H).
+\]
+If $X=\{x_0,\ldots,x_{m-1}\}$ is a set of distinct nonzero points and
+\[
+        A_h(X)=V_X^T\operatorname{diag}(x^h:x\in X)V_X,
+\]
+then
+\[
+        \det A_h(X)=\det(V_X)^2\prod_{x\in X}x^h.
+\]
+\end{proposition}
+
+\begin{proposition}[Johnson exchange mixing]\label{prop:johnson}
+Let $J(n,j)$ be the Johnson graph on $j$-subsets, with degree
+$d=j(n-j)$.  If $\mathcal A$ has density $\delta$ and $T_1$ is obtained from
+uniform $T_0$ by one exchange, then
+\[
+        \Pr[T_0,T_1\in\mathcal A]
+        \le
+        \delta^2+\left(1-\frac{n}{d}\right)\delta(1-\delta).
+\]
+Point dictators attain equality.
+\end{proposition}
+
+\begin{proof}
+This is the standard spectral bound for the normalized adjacency operator of
+$J(n,j)$.  The first nontrivial eigenvalue is $1-n/(j(n-j))$.
+\end{proof}
+
+\begin{proposition}[anticode packing]\label{prop:anticode}
+If a family $\mathcal F$ of $j$-subsets satisfies $|A\setminus B|>s$ for all
+distinct $A,B\in\mathcal F$, then
+\[
+        |\mathcal F|\binom js\le \binom n{j-s}.
+\]
+\end{proposition}
+
+\begin{remark}
+These Johnson-scheme tools are support-combinatorial.  They identify paid
+dictator/common-root shapes and packing losses, but cannot by themselves
+produce the finite-field $q$-scale value-set input needed for the prize
+corridor.
+\end{remark}
+
+\section{SPI Deficiency-One Chart}
+
+The SPI route studies one-parameter Hankel pencils in a deficiency-one chart.
+Let
+\[
+        M(Z)=M_0+Z M_1
+\]
+be a $t\times(j+1)$ matrix pencil with affine-linear entries, and assume
+$t=j$.  For $0\le i\le j$, let $M_i(Z)$ be the maximal minor after deleting
+column $i$ and put
+\[
+        c_i(Z)=(-1)^iM_i(Z),\qquad
+        L_Z(X)=\sum_{i=0}^{j}c_i(Z)X^i.
+\]
+
+\begin{theorem}[deficiency-one eliminant or residual]\label{thm:spi}
+Assume $H$ is the full root set of $X^n-1$ and $\operatorname{char}F\nmid n$.
+Every finite slope of the deficiency-one chart lies in one of the following
+classes:
+\begin{enumerate}[label=(\roman*)]
+        \item rank drop: all maximal minors vanish, bounded by the roots of a
+        nonzero maximal minor of degree at most $t$;
+        \item low-degree full-rank chart: $c_j(z)=0$, hence the Cramer locator
+        has degree $<j$ and is charged to a contained higher-agreement branch;
+        \item top chart: $c_j(z)\ne0$, and validity is equivalent to
+        $L_z(X)\mid X^n-1$.
+\end{enumerate}
+On the top chart, pseudo-division gives
+\[
+        c_j(Z)^\Delta(X^n-1)=Q(Z,X)L_Z(X)+R(Z,X),
+        \qquad \Delta=n-j+1,
+\]
+with $\deg_Z R_m\le (n-j+1)t$ for every remainder coefficient.  Therefore
+either a nonzero remainder coefficient gives a finite eliminant of degree at
+most $t+(n-j+1)t$, or all remainder coefficients vanish identically and the
+family is a named valid residual branch.
+\end{theorem}
+
+\begin{remark}
+For $n=512$, $k=256$, $A=384$, one has $t=j=128$, hence the global
+one-parameter cap is
+\[
+        128+385\cdot128=49408.
+\]
+This is a bounded eliminant problem unless the identically valid residual
+branch occurs.  The theorem does not classify higher-dimensional SPI charts.
+\end{remark}
+
+\section{CAP25 Integration Checklist}
+
+A CAP25 v13-style M1 section can cite this note as follows:
+\begin{enumerate}[label=(\arabic*)]
+        \item Use \Cref{lem:gcd,lem:quot-pullback,lem:gap2} to remove paid
+        common-divisor and quotient-periodic strata before calling a branch
+        aperiodic.
+        \item Use \Cref{thm:fixeddim,thm:dim2} to dispose of fixed-dimensional
+        and projective-plane Conjecture F subcases.
+        \item Use \Cref{prop:hankel,prop:johnson,prop:anticode} as the algebra
+        and support-combinatorial input for XR or spectral routes, without
+        claiming a full inverse theorem.
+        \item Use \Cref{thm:spi} to state the first SPI chart as
+        eliminant-or-residual, not as an unpriced black box.
+        \item Treat FM1, \Cref{thm:first-moment,thm:second-moment}, as
+        random-pair evidence and a moment ledger, not a worst-case safe-side
+        theorem.
+\end{enumerate}
+
+\section{Open Problems}
+
+\begin{problem}[M1 local limit]
+After tangent, quotient, extension, and fixed-dimensional cells are paid, prove
+a polynomial or target-level upper bound for all remaining aperiodic
+support-wise MCA residue-line parameters.
+\end{problem}
+
+\begin{problem}[Conjecture F in growing dimension]
+Prove the primitive incidence bound for $\PP(W)\cap\D_j(H)$ when
+$\dim\PP(W)$ grows with $n$, after common divisors, quotient-pullbacks, twins,
+and sparse-dependence descents are removed.
+\end{problem}
+
+\begin{problem}[XR inverse theorem]
+Classify near-extremizers of the Johnson exchange energy for aligned-locator
+families after paid common-root and quotient structures are stripped.
+\end{problem}
+
+\begin{thebibliography}{9}
+\bibitem{ABF26}
+S. Arnon, D. Boneh, and N. Fenzi.
+\newblock Open problems in list decoding and correlated agreement.
+\newblock ePrint 2026/680, 2026.
+
+\bibitem{Cho26B}
+P. Chojecki.
+\newblock Smooth-domain Reed--Solomon slack MCA and quotient-profile ledgers.
+\newblock RS-MCA repository, Paper B, 2026.
+
+\bibitem{Cho26D}
+P. Chojecki.
+\newblock Universal field-size caps and a two-sided sandwich for mutual
+correlated agreement on smooth Reed--Solomon domains.
+\newblock RS-MCA repository, Paper D/CAP25 v12, 2026.
+\end{thebibliography}
+
+\end{document}

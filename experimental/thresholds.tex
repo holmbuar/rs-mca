@@ -1,0 +1,448 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\definecolor{linkblue}{RGB}{25,60,120}
+\usepackage[colorlinks=true,linkcolor=linkblue,citecolor=linkblue,urlcolor=linkblue]{hyperref}
+\usepackage[capitalize]{cleveref}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{problem}[theorem]{Problem}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\RS}{\mathrm{RS}}
+\newcommand{\emca}{\varepsilon_{\mathrm{mca}}}
+\newcommand{\eca}{\varepsilon_{\mathrm{ca}}}
+\newcommand{\Lst}{\Lambda}
+\newcommand{\Ht}{\mathrm H_2}
+\newcommand{\Paid}{\operatorname{Paid}}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+
+\title{Threshold Certificate Compilers for the CAP25 Reed--Solomon Program}
+\author{RS-MCA experimental note\\ \small integrated from AllenGrahamHart PRs, with Codex editing}
+\date{July 3, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note packages the threshold and compiler material that is useful for a
+future revision of the CAP25/Paper D threshold paper.  It is deliberately not a
+new MCA theorem.  Its role is to make row-specific certificates mechanically
+auditable: numerator staircases, safe/unsafe corridors, already-paid tangent,
+quotient, and extension cells, dyadic quotient census windows, dodge-selection
+arithmetic, and integrality margins are all stated as typed compiler lemmas.
+
+The main output is a reusable certificate grammar.  Given a row-specific packet
+with a denominator, certified lower and upper numerators, and branch coverage,
+the grammar tells where the first safe agreement may lie, which already-paid
+terms may be charged, which quotient census windows remain unresolved, and when
+large entropy margins make polynomial residual factors irrelevant.  The note is
+self-contained at the level of these arithmetic compilers; it cites the
+Reed--Solomon and proximity background papers only for the code-theoretic
+objects and the already-proved ledgers.
+\end{abstract}
+
+\section{Purpose and Status}
+
+Paper D/CAP25 reduces a prize-facing threshold claim to exact integer ledgers:
+one prints a row, a radius convention, a denominator, an unsafe lower numerator,
+and a safe upper numerator or residual certificate.  The threshold work in this
+note provides the arithmetic layer around those row-specific packets.  It should
+be read as \emph{proved compiler arithmetic} plus a few experimental margin
+tables, not as a proof of the missing aperiodic safe-side theorem.
+
+\begin{remark}[How this fits Paper D v12]
+The note supplies supporting infrastructure for the certificate grammar of
+Paper D v12.  It should be used in a future CAP25 revision to replace informal
+phrases such as ``the crossing is adjacent'' or ``the quotient window is small''
+by explicit lemmas.  It does not alter Paper D's universal cap theorem, its
+safe-side reductions, or any deployed-row theorem by itself.
+\end{remark}
+
+\section{Integer Staircases}
+
+\begin{definition}[integer numerator staircase]
+Fix an agreement interval
+\[
+        I=\{a_{\min},a_{\min}+1,\ldots,a_{\max}\}
+\]
+and a nonincreasing function
+\[
+        N:I\longrightarrow \mathbb Z_{\ge 0}.
+\]
+For MCA or line-MCA, $N(a)$ is the number of bad sampled parameters at
+agreement at least $a$; the closed Hamming radius is $r=n-a$.  For list
+decoding, one may use agreement coordinates $a=n-r$, so the list numerator is
+also nonincreasing in $a$.
+
+Given a denominator $Q$ and target $\varepsilon^*$, put
+\[
+        B_*=\floor{\varepsilon^* Q}.
+\]
+An agreement $a$ is \emph{safe} if $N(a)\le B_*$ and \emph{unsafe} if
+$N(a)>B_*$.
+\end{definition}
+
+\begin{theorem}[staircase localization]\label{thm:staircase}
+Let $N:I\to\mathbb Z_{\ge0}$ be nonincreasing.  Exactly one of the following
+holds:
+\begin{enumerate}[label=(\roman*)]
+        \item all $a\in I$ are safe;
+        \item all $a\in I$ are unsafe;
+        \item there is a unique first safe agreement $a_*\in I$ such that
+        \[
+                N(a_*-1)>B_*\ge N(a_*),
+        \]
+        with $a_*-1\in I$.
+\end{enumerate}
+In the interior case the safe set is the upper interval $\{a\ge a_*\}$ and the
+unsafe set is the lower interval $\{a<a_*\}$.
+\end{theorem}
+
+\begin{proof}
+The predicate $N(a)\le B_*$ is monotone nondecreasing in $a$.  A monotone
+Boolean function on a finite interval is identically false, identically true,
+or has a unique first true point.
+\end{proof}
+
+\begin{corollary}[closed-radius endpoint convention]\label{cor:endpoint}
+In the interior MCA case, the largest safe closed integer radius is
+\[
+        r_{\mathrm{safe}}=n-a_*,
+\]
+and the first unsafe closed integer radius is $r_{\mathrm{safe}}+1$.  As a
+real closed-ball threshold, the supremum of safe radii is
+\[
+        \frac{n-a_*+1}{n},
+\]
+but that endpoint is not attained if $N(a_*-1)>B_*$.
+\end{corollary}
+
+\begin{theorem}[corridor from lower and upper certificates]\label{thm:corridor}
+Suppose $L(a)\le N(a)\le U(a)$ are certified lower and upper bounds on the same
+staircase.  Define
+\[
+        A_{\mathrm{unsafe}}=\{a\in I: L(a)>B_*\},
+        \qquad
+        A_{\mathrm{safe}}=\{a\in I: U(a)\le B_*\}.
+\]
+Every interior first safe agreement satisfies
+\[
+        1+\max A_{\mathrm{unsafe}}\le a_* \le \min A_{\mathrm{safe}},
+\]
+with the conventions $1+\max\varnothing=a_{\min}$ and
+$\min\varnothing=a_{\max}$.
+\end{theorem}
+
+\begin{proof}
+If $L(a)>B_*$ then $N(a)>B_*$, so the first safe point is strictly after $a$.
+If $U(a)\le B_*$ then $N(a)\le B_*$, so the first safe point is at most $a$.
+Taking the strongest certified unsafe and safe agreements gives the interval.
+\end{proof}
+
+\begin{theorem}[coarse steepness compiler]\label{thm:steepness}
+Let $M(a)>0$ be a positive model count and suppose a row packet proves
+\[
+        \frac{M(a)}{E}\le N(a)\le E M(a)
+        \qquad(E\ge1)
+\]
+on consecutive agreements.  If
+\[
+        \frac{M(a)}{M(a+1)}>E^2,
+\]
+then the ambiguity intervals $[M(a)/E, E M(a)]$ and
+$[M(a+1)/E, E M(a+1)]$ are disjoint.  Hence a fixed budget $B_*$ can lie in at
+most one consecutive ambiguity interval, and all other agreements have their
+safe/unsafe sign certified by the coarse envelope.
+\end{theorem}
+
+\begin{proof}
+The separation hypothesis is exactly $M(a)/E>E M(a+1)$.  The sign implications
+are immediate from the lower and upper envelope.
+\end{proof}
+
+\section{Paid Ledger Functions}
+
+The CAP25 certificate grammar should separate branches that are already paid
+from residual branches that require new structural input.
+
+\subsection{Tangent cell}
+
+\begin{definition}[high-agreement tangent cell]
+For a Reed--Solomon row of length $n$ and dimension $k$, write $r(A)=n-A$ and
+\[
+        R_{\tan}=\floor{\frac{n-k}{3}}.
+\]
+Define the partial paid tangent cell
+\[
+        \Paid_{\tan}^{\mathrm{hi}}(n,k,A)=r(A)+1
+\]
+when $0\le r(A)\le R_{\tan}$, and leave it unavailable otherwise.
+\end{definition}
+
+\begin{proposition}[tangent cell usage]\label{prop:tangent}
+In the high-agreement range $0\le n-A\le\floor{(n-k)/3}$, the finite affine
+support-wise MCA line numerator is exactly $n-A+1$.  Therefore
+$\Paid_{\tan}^{\mathrm{hi}}$ is an exact paid cell in this range.  Outside this
+range it should not be used without a separate tangent/common-line theorem.
+\end{proposition}
+
+\begin{remark}
+For the row $n=512$, $k=256$, and denominator $Q=17^{32}$, one has
+$\floor{Q/2^{128}}=6$, while
+\[
+        \Paid_{\tan}^{\mathrm{hi}}(512,256,506)=7,\qquad
+        \Paid_{\tan}^{\mathrm{hi}}(512,256,507)=6.
+\]
+This recovers the high-agreement exact gate in the finite-slope convention.
+\end{remark}
+
+\subsection{Quotient cell}
+
+Let $C$ be a finite set of quotient fiber sizes $c\mid n$.  A conservative
+support upper cell at agreement $A$ is
+\[
+U_{\mathrm{sum}}(n,A,C)=
+\sum_{c\in C}\sum_{B=A}^{n}
+\binom{n/c}{\floor{B/c}}
+\binom{n-c\floor{B/c}}{B-c\floor{B/c}}.
+\]
+If an exact support-union or image-lcm certificate is available, that sharper
+integer may replace $U_{\mathrm{sum}}$.
+
+\begin{definition}[quotient paid status]
+The quotient paid cell at $(n,A,C)$ is status-valued:
+\[
+\Paid_{\mathrm{quot}}=
+\begin{cases}
+\mathrm{EXACT\_IMAGE}(\deg R) & \text{if an image lcm certificate is supplied},\\
+\mathrm{EXACT\_SUPPORT}(U_{\mathrm{supp}}) & \text{if a block-profile union is supplied},\\
+\mathrm{SAFE\_SUM}(U_{\mathrm{sum}}) & \text{otherwise}.
+\end{cases}
+\]
+\end{definition}
+
+\begin{remark}[zone tags]
+Unsafe quotient lower cells should carry one of the following tags:
+\[
+\begin{array}{ll}
+\mathrm{ZONE\_A\_NORM\_EXACT} & \text{the norm-exact gate holds},\\
+\mathrm{ZONE\_B\_COLLISION\_OPEN} & \text{collisions remain unresolved},\\
+\mathrm{ZONE\_C\_CAP\_FLOOR} & \text{a cap/floor theorem supplies the mass}.
+\end{array}
+\]
+Zone B is interval-valued.  A CAP25 table should never silently replace it by a
+point estimate.
+\end{remark}
+
+\subsection{Extension cell}
+
+Let $B$ be the generated field and $F$ the line field, with
+$|B|=q_{\mathrm{gen}}$ and $|F|=q_{\mathrm{line}}$.
+
+\begin{proposition}[extension paid cell]\label{prop:extension}
+If $q_{\mathrm{gen}}=q_{\mathrm{line}}$, then there is no proper extension-only
+line-parameter cell:
+\[
+        \Paid_{\mathrm{ext}}^{\mathrm{only}}=0.
+\]
+If $q_{\mathrm{gen}}<q_{\mathrm{line}}$, the extension-pole lower mechanism
+maps a base list lower bound $L$ to
+\[
+        \mathrm{ExtPole}(q_{\mathrm{line}},q_{\mathrm{gen}},k,L)
+        =
+        \left\lceil
+        \frac{L(q_{\mathrm{line}}-q_{\mathrm{gen}})}
+        {q_{\mathrm{line}}-q_{\mathrm{gen}}+kL}
+        \right\rceil .
+\]
+For safe-side extension charts over $B$, a closed parameter set of degree
+$\Delta$ and dimension $e$ contributes at most $\Delta q_{\mathrm{gen}}^e$
+affine extension parameters.
+\end{proposition}
+
+\section{Dyadic Quotient Census}
+
+For a $2$-power quotient order $N'=2^a$, let $n_1=N'/2$.  The characteristic
+zero antipodal quotient count used by Paper B is
+\[
+        A_2(N',\ell')=
+        \sum_{\substack{u\ge0\\ t=\ell'-2u\ge0\\u\le n_1-t}}
+        \binom{n_1}{t}2^t.
+\]
+At rate $1/2$, where $\ell'=n_1+1$,
+\[
+        A_2(N',n_1+1)=\frac{3^{n_1}-1}{2}.
+\]
+
+\begin{theorem}[bounded quotient census]\label{thm:census}
+Let $B_{\max}=2^{128}-1$, corresponding to the largest possible
+$\floor{q/2^{128}}$ under $q<2^{256}$.  In the relaxed even-scale model, the
+first scales at which $A_2(N',\rho N'+1)>B_{\max}$ are
+\[
+\begin{array}{c|cccc}
+\rho & 1/2 & 1/4 & 1/8 & 1/16\\ \hline
+N'_{\mathrm{relaxed}} & 164 & 176 & 248 & 384 .
+\end{array}
+\]
+For actual dyadic quotient orders, the corresponding first dyadic scales are
+\[
+\begin{array}{c|cccc}
+\rho & 1/2 & 1/4 & 1/8 & 1/16\\ \hline
+N'_{\mathrm{dyadic}} & 256 & 256 & 256 & 512 .
+\end{array}
+\]
+Thus the exact integer quotient endgame sees only bounded quotient scales,
+independent of the deployed blocklength, once the row has been reduced to this
+canonical quotient-count model.
+\end{theorem}
+
+\begin{remark}
+The theorem is a compiler fact, not a collision theorem.  It says which finite
+scales must be inspected; it does not prove that a row-specific lower packet
+survives reduction modulo a finite field.
+\end{remark}
+
+\begin{theorem}[budget windows and dodge selection]\label{thm:windows}
+Let $K$ be an exact count and $L\le K$ a certified lower count for the same
+object.  Put $B(q)=\floor{q/2^{128}}$.  Then
+\[
+        B(q)<L \Rightarrow \text{certified unsafe},\qquad
+        B(q)\ge K \Rightarrow \text{certified safe},
+\]
+and the only unresolved budgets are
+\[
+        L\le B(q)<K.
+\]
+Equivalently the unresolved field-size interval is
+\[
+        L2^{128}\le q\le K2^{128}-1.
+\]
+If the lower proof is $L=K-g$, then the largest tolerable missing mass while
+still proving unsafe is
+\[
+        g_{\max}=K-B(q)-1.
+\]
+\end{theorem}
+
+\begin{proof}
+All assertions are restatements of the integer inequalities $L\le N\le K$ and
+the target condition $N\le \floor{q/2^{128}}$.
+\end{proof}
+
+\section{Dyadic Quotient Profile}
+
+For $n=2^m$, $k=\rho n$, and integer slack
+$\sigma=\ceil{\eta n}$, define the exact dyadic quotient-profile count
+\[
+K_Q(n,k,\sigma)=
+\max_{\substack{M=2^e\mid \gcd(n,k)\\ \sigma<M\\ k/M\le n/M-1}}
+\binom{n/M-1}{k/M},
+\]
+with value $0$ if the active set is empty.  This is the integer form of the
+Paper B quotient profile and avoids floating-point logarithms.
+
+\begin{proposition}[bounded active quotient order]\label{prop:qprofile}
+If $\sigma\ge n/256$, then every active scale in $K_Q$ has quotient order
+$N=n/M\le128$.  If $\sigma\ge n/128$, then every active scale has
+$N\le64$.
+\end{proposition}
+
+\begin{proof}
+Activity requires $\sigma<M=n/N$.  Therefore $N<n/\sigma$.  The displayed
+claims follow from the two lower bounds on $\sigma$.
+\end{proof}
+
+\section{Integrality Margins}
+
+The integrality-margin tables are experimental arithmetic evidence, but their
+logical use is simple and worth isolating.
+
+\begin{proposition}[polynomial residual absorption]\label{prop:integrality}
+Fix a candidate scale and suppose a future theorem bounds an unpaid residual
+contribution by
+\[
+        n^C \Phi(n,q)
+\]
+for some explicit proxy $\Phi$.  If the verified entropy calculation gives
+\[
+        -\log_2(n^C\Phi(n,q))>0,
+\]
+then the residual integer contribution is zero.
+\end{proposition}
+
+\begin{proof}
+The residual contribution is a nonnegative integer bounded above by a real
+number strictly smaller than $1$.
+\end{proof}
+
+\begin{remark}[recorded margin]
+The integrated verifier evaluates max official-dimension rows
+$k=2^{40}$, $n\in\{2k,4k,8k,16k\}$, and budget bits $64,96,128$.  For the
+tested candidate crossing scales, even an $n^3$ multiplier is absorbed with
+very large margins; the worst recorded margin is about $9.68\cdot10^7$ bits.
+This says the hard remaining question is structural classification, not
+constant sharpening.
+\end{remark}
+
+\section{CAP25 Packet Schema}
+
+A future CAP25 threshold packet can cite this note by printing the following
+fields:
+\[
+\begin{array}{ll}
+\text{row} & (F,D,k,n,\rho),\\
+\text{denominators} & q_{\mathrm{gen}},q_{\mathrm{line}},q_{\mathrm{chal}},\\
+\text{target} & \varepsilon^*,\quad B_*=\floor{\varepsilon^* Q},\\
+\text{agreement interval} & I=[a_{\min},a_{\max}]\cap\mathbb Z,\\
+\text{unsafe certificates} & L(a)>B_*,\\
+\text{safe certificates} & U(a)\le B_*,\\
+\text{paid cells} & \Paid_{\tan},\Paid_{\mathrm{quot}},\Paid_{\mathrm{ext}},\\
+\text{residual cells} & \text{named aperiodic/extension/list branch},\\
+\text{deduplication rule} & \text{support/image/root coalescing theorem},\\
+\text{endpoint convention} & \text{closed integer ball and real supremum}.
+\end{array}
+\]
+Then \Cref{thm:staircase,thm:corridor} locate the remaining threshold
+corridor; \Cref{thm:windows} translates quotient or planted counts into exact
+field-size windows; and \Cref{prop:integrality} turns sufficiently strong
+entropy margins into zero residual integer contributions.
+
+\section{Non-Claims}
+
+This note does not prove an aperiodic M1 local limit, an L1 image-fiber upper
+bound, an extension-line transfer theorem, a protocol soundness theorem, or a
+new Paper D cap.  It is a compiler layer: once those mathematical inputs are
+available, it makes the threshold conclusion exact and auditable.
+
+\begin{thebibliography}{9}
+\bibitem{ABF26}
+S. Arnon, D. Boneh, and N. Fenzi.
+\newblock Open problems in list decoding and correlated agreement.
+\newblock ePrint 2026/680, 2026.
+
+\bibitem{Cho26B}
+P. Chojecki.
+\newblock Smooth-domain Reed--Solomon slack MCA and quotient-profile ledgers.
+\newblock RS-MCA repository, Paper B, 2026.
+
+\bibitem{Cho26D}
+P. Chojecki.
+\newblock Universal field-size caps and a two-sided sandwich for mutual
+correlated agreement on smooth Reed--Solomon domains.
+\newblock RS-MCA repository, Paper D/CAP25 v12, 2026.
+\end{thebibliography}
+
+\end{document}
