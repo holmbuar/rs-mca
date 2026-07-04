@@ -15,6 +15,27 @@ snarks_v5.tex           Paper C: SNARK / protocol ledger
 
 Use logical order **A → B → D → C** unless you are working specifically on protocol ledgers.
 
+## Top to-do: close the deployed threshold band
+
+The prize-facing metric is the radius threshold `delta*_C(2^-128)`, not the
+largest displayed error margin.  For the deployed KoalaBear sextic row, the best
+current deployed unsafe edge is
+
+```text
+delta = 15331/32768 ~= 0.467865.
+```
+
+The remaining task is to close the open band below that edge, ideally by
+adjacent staircase certificates:
+
+```text
+B_mca(a0)   > 2^-128 q_line,
+B_mca(a0+1) <= 2^-128 q_line.
+```
+
+Agents should prefer work that shrinks this interval for `delta*_C(2^-128)` over
+work that merely increases the already-supercritical error at a larger radius.
+
 ## Current priority: audit Paper D v12 and `towards-prize.tex`
 
 The main focus is now **auditing Paper D v12**:

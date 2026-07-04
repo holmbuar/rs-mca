@@ -48,6 +48,38 @@ There are two linked threshold problems.
 1. **MCA / correlated-agreement threshold.** Determine how close the radius `delta` can get to `1 - rho` while the MCA error remains negligible.
 2. **Interleaved-list threshold.** Determine how close `delta` can get to `1 - rho` while the relevant interleaved list size is at most a negligible fraction of the challenge field.
 
+The prize-facing metric is the **radius threshold**, not the largest displayed
+error margin.  For target `epsilon* = 2^-128`, the object to determine is
+
+```text
+delta*_C(epsilon*) = sup { delta : epsilon_mca(C, delta) <= epsilon* }.
+```
+
+Large error at a large radius is useful only as an auditable crossing
+certificate.  A barely-supercritical certificate at a smaller radius is more
+important.  Equivalently, on the integer agreement grid `a = (1-delta)n`, if
+`B_mca(a)` denotes the number of MCA-bad line parameters at agreement at least
+`a`, the ideal certificate is an adjacent staircase:
+
+```text
+B_mca(a0)   > epsilon* q_line,
+B_mca(a0+1) <= epsilon* q_line.
+```
+
+Such a pair pins `delta*_C(epsilon*)` to one integer agreement step.  The
+leaderboard and submission notes should therefore rank results primarily by the
+smallest certified unsafe radius, or by the tightest proven interval for
+`delta*_C(2^-128)`, with error size used as supporting evidence.
+
+For the deployed KoalaBear sextic row, the best current deployed unsafe edge is
+
+```text
+delta = 15331/32768 ~= 0.467865.
+```
+
+The remaining task is to close the open band below that edge, ideally by
+adjacent staircase certificates.
+
 These are protocol-relevant because many proximity/SNARK reductions have a soundness term schematically like
 
 ```text
