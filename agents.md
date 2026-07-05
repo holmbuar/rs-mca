@@ -18,15 +18,25 @@ Use logical order **A → B → D → C** unless you are working specifically on
 ## Top to-do: close the deployed threshold band
 
 The prize-facing metric is the radius threshold `delta*_C(2^-128)`, not the
-largest displayed error margin.  For the deployed KoalaBear sextic row, the best
-current deployed unsafe edge is
+largest displayed error margin.  For the deployed KoalaBear sextic row, the
+current Paper-D-v12 authority edge is
 
 ```text
 delta = 15331/32768 ~= 0.467865.
 ```
 
-The remaining task is to close the open band below that edge, ideally by
-adjacent staircase certificates:
+The active experimental v13 identity-scale check improves the candidate unsafe
+edge to
+
+```text
+delta = 981109/2097152 ~= 0.4678292,
+unsafe agreement a0 = 1116043,
+conjectured first safe agreement = 1116044.
+```
+
+Do not mix these statuses: v12 is the current paper authority; v13 is the
+current experimental final-resolution spine.  The remaining task is to close the
+open band below the active edge by adjacent staircase certificates:
 
 ```text
 B_mca(a0)   > 2^-128 q_line,
@@ -35,6 +45,155 @@ B_mca(a0+1) <= 2^-128 q_line.
 
 Agents should prefer work that shrinks this interval for `delta*_C(2^-128)` over
 work that merely increases the already-supercritical error at a larger radius.
+
+## Final road toward FULL RESOLUTION -- experimental v13 spine
+
+**Status:** CONJECTURAL / EXPERIMENTAL until promoted into Paper D and replayed
+by exact certificates.
+
+The project should now distinguish three levels of resolution.
+
+1. **Finite deployed one-step resolution.**  For each deployed row, prove an
+   adjacent staircase certificate
+
+   ```text
+   U(a0 + 1) <= B* < L(a0),
+   ```
+
+   where `L` is the exact lower/unsafe staircase, `U` is the complete
+   upper/safe ledger, and `B* = floor(epsilon* Q)` is the row's challenge
+   budget.  This proves the first safe agreement is `a0 + 1`.
+
+2. **Asymptotic frontier resolution.**  Prove or refute the conjectural match
+
+   ```text
+   delta*_C(epsilon*) = 1 - rho - g*(rho, log2 |B|) + o(1)
+   ```
+
+   for smooth multiplicative and circle line-round rows.  Polynomial-loss
+   quotient equidistribution may be enough here once the agreement reserve is
+   larger than `O(log n)`, but it is **not** enough for the finite adjacent
+   deployed step unless the constants fit inside the printed bit margins.
+
+3. **Protocol resolution.**  Feed the finite/asymptotic theorem into the Paper C
+   ledger: generated field, line field, challenge field, interleaved-list arity,
+   MCA/CA/line-decoding object, and endpoint convention must all be printed
+   separately.
+
+### Current experimental v13 frontier targets
+
+The identity-scale prefix floor supersedes the old `c=16/32` optimized rows and
+the proposed `c=2` terminal-scale rows, unless the identity map is intentionally
+excluded.  The finite conjecture is that the first safe agreement is one step
+after the best proved unsafe agreement:
+
+| row | proved unsafe agreement `a0` | conjectured first safe agreement |
+| --- | ---: | ---: |
+| KoalaBear MCA | `1116043` | `1116044` |
+| KoalaBear list | `1116046` | `1116047` |
+| Mersenne-31 MCA | `1116021` | `1116022` |
+| Mersenne-31 list | `1116022` | `1116023` |
+
+Do not call these Paper-D theorem rows until the exact adjacent upper ledger is
+printed and replayed.  Until then, call them `EXPERIMENTAL`, `CONDITIONAL`, or
+`AUDIT`, as appropriate.
+
+### The complete upper ledger to build at `a0 + 1`
+
+For each row, a safe upper certificate must be a first-match, deduplicated sum
+of paid and residual cells:
+
+```text
+U(a) =
+  paid_tangent(a)
++ paid_quotient(a)
++ paid_extension(a)
++ paid_plain_CA_or_sparse_layer(a)
++ paid_L1/interleaved_list_layer(a)
++ paid_M1_aperiodic_or_SPI_layer(a)
++ explicitly named residuals.
+```
+
+A residual branch may not be hidden inside a point estimate.  It must be one of:
+
+```text
+PAID_BY_THEOREM
+PAID_BY_EXACT_CERTIFICATE
+CONDITIONAL_ON_NAMED_INPUT
+CONJECTURAL_WITH_FALSIFIER
+COUNTEREXAMPLE_NEW_FLOOR
+```
+
+The finite one-step theorem requires actual constants.  A statement of the form
+`poly(n)` or `n^C` is only finite-useful if `C` and all constants are printed and
+fit inside the row's bit margin.  Otherwise it belongs to the asymptotic road,
+not the deployed adjacent proof.
+
+### Row-packet schema for final-resolution work
+
+Every final-resolution packet must print:
+
+```text
+row:                   (F, D, k, n, rho)
+denominators:          q_gen, q_line, q_chal, q_list
+target:                epsilon*, B* = floor(epsilon* Q)
+agreement interval:    I = [a_min, a_max] cap Z
+unsafe certificates:   L(a) > B*
+safe certificates:     U(a) <= B*
+paid cells:            tangent, quotient, extension, sparse/M1, L1/list
+residual cells:        named aperiodic, extension, list, SPI, or protocol branch
+deduplication rule:    support/image/root coalescing theorem used
+endpoint convention:   closed integer ball and real supremum
+replay:                script path, command, seed/hash, JSON certificate
+status:                PROVED / CONDITIONAL / CONJECTURAL / EXPERIMENTAL / AUDIT / COUNTEREXAMPLE
+```
+
+If the packet adds or materially changes files under `experimental/`, it must
+also add an entry to `experimental/agents-log.md` with the date, agent/model,
+files changed, status, usefulness, and next step.
+
+### Final-resolution DAG
+
+The closure dependency should be treated as:
+
+```text
+FULL RESOLUTION
+  = finite deployed adjacent theorem
+  + asymptotic frontier theorem/refutation
+  + protocol ledger compiler
+  + exact certificate replay
+  + promotion/audit into Paper D/C.
+```
+
+The finite MCA node is:
+
+```text
+B_C(a_safe - 1) > B*
+B_C(a_safe)     <= B*
+```
+
+The unsafe side is supplied by the identity-prefix lower staircase.  The safe
+side is the stratified upper sum `tan + quot + ap + ext`, with first-match
+deduplication and an aperiodic rigidity input such as R2 / Conjecture-F / SPI /
+XR, or a counterexample that becomes a new obstruction floor.
+
+### What counts as progress now
+
+Highest-value contributions are:
+
+1. exact adjacent upper certificates for the four v13 frontier rows;
+2. a complete `frontier-adjacent/*.json` packet family replayed by the
+   certificate scanner;
+3. a proof or falsifier for the aperiodic M1/R2 residual;
+4. a proof or falsifier for the primitive L1 image-fiber theorem and
+   mixed-petal/growing-defect residuals;
+5. an extension-line MCA theorem or explicit corrected-reserve counterexample;
+6. a Paper C protocol certificate consuming the exact row packet without
+   merging field ledgers;
+7. a Lean/formal replay of the staircase, row-packet, and paid-cell compilers.
+
+A negative result is still a resolution if it identifies the new obstruction
+floor and updates the certificate logic.
 
 ## Current priority: audit Paper D v12 and `towards-prize.tex`
 
