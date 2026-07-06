@@ -30,6 +30,55 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-06 - PRs #356-#361 experimental integration
+
+- **Agent/model:** Holm Buar via PRs #358, #359, and #361; LegaSage via
+  PRs #356 and #357; Scott Hughes via PR #360; Codex for static review,
+  cleanup, and integration.
+- **Files added or changed:** `experimental/data/certificates/annulus-corrected-cluster/`;
+  `experimental/data/certificates/finite-reachability-map/`;
+  `experimental/data/certificates/frontier-adjacent/kb_mca_conjq_rung_audit_v1.json`;
+  `experimental/data/certificates/l1-e3-law/`;
+  `experimental/data/certificates/l1-ell19/`;
+  `experimental/notes/m1/annulus_corrected_cluster.md`;
+  `experimental/notes/m1/finite_reachability_map.md`;
+  `experimental/notes/thresholds/cap25_v13_qfin_rung_audit.md`;
+  `experimental/notes/l1/l1_e3_*.md`;
+  `experimental/notes/l1/l1_ell19_attainment.md`;
+  `experimental/notes/roadmaps/l1_e3_*.md`;
+  `experimental/lean/l1_e3_level_set/`;
+  `experimental/l1_e3_obligation*.md`;
+  `experimental/scripts/verify_annulus_corrected_cluster*.py`;
+  `experimental/scripts/verify_finite_reachability_map*.py`;
+  `experimental/scripts/verify_kb_mca_conjq_rung_audit.py`;
+  `experimental/scripts/verify_l1_e3_*.sage`;
+  `experimental/scripts/verify_l1_e3_flint_crosscheck.py`;
+  `experimental/scripts/verify_l1_e3_law_refuted.py`;
+  `experimental/scripts/verify_l1_ell19_attainment.py`;
+  and supporting Sage/GP/M2/Python scripts.
+- **Status:** AUDIT / EXPERIMENTAL / COUNTEREXAMPLE / FORMALIZATION-SKELETON.
+- **What is being added:** Banks five additive PR packets and a sanitized L1
+  E3 proof-program packet.  The M1 packets add finite-reachability and
+  annulus bounded-cluster insufficiency scope maps.  The threshold packet
+  audits the KB-MCA `a0+1` divisor-lattice rungs and leaves the primitive
+  `conj:Q` fiber as the named residual.  The L1 packets refute the proposed
+  `E_3<=ell` law at `T>=5`, add an `ell=19` attainment witness, and reduce
+  the sharper `E_3<=ell-2` ceiling to the `dim Syz<=K` rank crux with CAS
+  cross-checks and a Lean skeleton containing an explicit `sorry`.
+- **How it is useful:** Clarifies the current proof boundary for the v13 raw
+  adjacent program: nonprimitive quotient rungs are ledger-audited for the
+  KB-MCA row, while the finite max-fiber/L1 problem is narrowed to a concrete
+  cyclotomic level-set rank statement.  The M1 maps mark which finite checks
+  are only scope evidence and which growing-dimensional aperiodic branches
+  remain live.
+- **What to do next:** Do not promote these packets into Paper D without
+  independent replay.  The expensive KB-MCA rung verifier should be run only
+  intentionally.  The next proof work is the primitive `conj:Q` max-fiber
+  bound, the L1 `dim Syz<=K` theorem for `K>=3`, and a growing-dimensional
+  M1 aperiodic upper ledger.  Draft PR #355 was not integrated because it
+  overwrites existing M1 triage paths and carries a large route-cut evidence
+  archive that should be split or summarized first.
+
 ### 2026-07-06 - Threshold and F1 audit PR integration
 
 - **Agent/model:** DannyExperiments via PRs #352 and #354; Latif Kasuli via

@@ -1,3 +1,9 @@
 .DS_Store
 __pycache__/
 *.pyc
+
+# Sage preparser artifacts
+*.sage.py
+
+# Research literature library: ignore PDFs (copyrighted/bulky), keep the annotated index
+experimental/literature/**/*.pdf

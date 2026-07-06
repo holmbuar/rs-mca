@@ -1,0 +1,11 @@
+name = "l1_e3_level_set"
+defaultTargets = ["l1_e3_level_set"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "v4.28.0"
+
+[[lean_lib]]
+name = "l1_e3_level_set"
+globs = ["l1_e3_level_set.+"]
