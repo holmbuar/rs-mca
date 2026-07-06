@@ -44,11 +44,14 @@ function, Fouvry–Kowalski–Michel).
 
 ## b2 and L1: a shared barrier (not a proved equivalence)
 
-The b2 giant-extras bound and the L1 `E₃ ≤ ℓ−2` max-fiber ceiling **share the same `√p` barrier and
-inverse-theorem framing** (`:7367`, `:7543`, `:8471`): per-frequency Weil is insufficient in both, and b2
-stops at head depth `w_0=21` for the same reason L1 route A hit the wall. This is a shared obstruction and
-framing — **no equivalence or difficulty-class theorem is proved**; the two reductions are independent and
-land on structurally analogous additive-combinatorics / cohomological cores.
+The b2 giant-extras bound and the L1 prime-`ℓ` **max-fiber problem** (the `E_3`/moment ceiling; NB the
+sharp form `E_3 ≤ ℓ−2` is *refuted* in-repo — `l1_prime_ell_key_lemma_refuted.md`, from-scratch
+counterexamples with `E_3` up to `ℓ`; even `E_3 ≤ ℓ` fails at `T≥5`, max `ℓ+2`; the surviving statement is
+`T≤4 ⟹ E_3 ≤ ℓ`, and the corrected target is `E_3 ≤ ℓ+C` / a scarcity theorem) **share the same `√p`
+barrier and inverse-theorem framing** (`:7367`, `:7543`, `:8471`): per-frequency Weil is insufficient in
+both, and b2 stops at head depth `w_0=21` for the same reason the L1 moment route hit the wall. This is a
+shared *barrier and framing* — **no equivalence or difficulty-class theorem is proved**; the two reductions
+are independent.
 
 ## Routes found insufficient at toy scale (with evidence)
 
