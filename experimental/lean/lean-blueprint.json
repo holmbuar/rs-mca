@@ -1337,7 +1337,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Main.lean",
         "lean_name": "RSCap.caBad",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -1389,7 +1389,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Main.lean",
         "lean_name": "RSCap.mcaBad",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -1441,7 +1441,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Main.lean",
         "lean_name": "RSCap.dStar",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "mixed",
         "audit_status": "mapped_needs_statement_audit",
         "related_lean": [
@@ -1492,7 +1492,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Main.lean",
         "lean_name": "RSCap.emca_mono",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -1909,7 +1909,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Fiber.lean",
         "lean_name": "RSCap.lem_fiber_ii",
         "statement_status": "lean_mixed_proved_and_skeleton_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_split_package_needs_statement_audit",
         "related_lean": [
@@ -2058,7 +2058,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientRemainder.lean",
         "lean_name": "RSCap.lem_quotient_remainder_prefix",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -2133,7 +2133,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientRemainder.lean",
         "lean_name": "RSCap.lem_heaviest_prefix_locator_floor",
         "statement_status": "lean_mixed_proved_and_skeleton_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_split_package_needs_statement_audit",
         "related_lean": [
@@ -2195,7 +2195,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientRemainder.lean",
         "lean_name": "RSCap.thm_quotient_remainder_deep_floor",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -2250,7 +2250,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientRemainder.lean",
         "lean_name": "RSCap.cor_quotient_remainder_trigger",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -2292,7 +2292,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientRemainder.lean",
         "lean_name": "RSCap.cor_quantitative_first_grid_floor",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -2413,7 +2413,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientRemainder.lean",
         "lean_name": "RSCap.cor_first_grid_cap",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -2480,7 +2480,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientLedgers.lean",
         "lean_name": "RSCap.lem_one_support_one_line",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 4 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 4 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -2547,7 +2547,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientLedgers.lean",
         "lean_name": "RSCap.lem_one_support_d_curve",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -2626,7 +2626,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientLedgers.lean",
         "lean_name": "RSCap.prop_support_family_line_ledger",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -2978,7 +2978,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientLedgers.lean",
         "lean_name": "RSCap.prop_support_family_line_ledger",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -3183,7 +3183,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/QuotientLedgers.lean",
         "lean_name": "RSCap.prop_support_family_curve_ledger",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -3429,7 +3429,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/AperiodicHankel.lean",
         "lean_name": "RSCap.RegularHankelCert",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -3469,7 +3469,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/AperiodicHankel.lean",
         "lean_name": "RSCap.lem_regular_exact_agreement_eliminant",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -3511,7 +3511,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/AperiodicHankel.lean",
         "lean_name": "RSCap.thm_regular_closed_ball_hankel_packing",
         "statement_status": "lean_mixed_proved_and_skeleton_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_split_package_needs_statement_audit",
         "related_lean": [
@@ -4212,7 +4212,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/AperiodicHankel.lean",
         "lean_name": "RSCap.thm_scanner_checkable_residual_aperiodic_ledger",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -4618,7 +4618,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/InterleavingTransfer.lean",
         "lean_name": "RSCap.lem_inter_emca",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -4678,7 +4678,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/MainCap.lean",
         "lean_name": "RSCap.universal_cap_emca_of_fiber_list",
         "statement_status": "lean_mixed_proved_and_skeleton_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_split_package_needs_statement_audit",
         "related_lean": [
@@ -5132,7 +5132,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/BlueprintCommon.lean",
         "lean_name": "RSCap.DomSmooth",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -5175,7 +5175,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Fiber.lean",
         "lean_name": "RSCap.lem_phi_fiber_ii",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -5265,7 +5265,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Fiber.lean",
         "lean_name": "RSCap.thm_phi_cap",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -5408,7 +5408,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/CircleCode.lean",
         "lean_name": "RSCap.lem_cheb_fibers",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -5484,7 +5484,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Main.lean",
         "lean_name": "RSCap.caBad_diag_imp_mcaBad",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -5527,7 +5527,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/CircleCode.lean",
         "lean_name": "RSCap.lem_circle_rs",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -5573,7 +5573,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/CircleCode.lean",
         "lean_name": "RSCap.cor_circle_grand",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -5769,7 +5769,7 @@
         "lean_file": "experimental/lean/staircase_logic/StaircaseLogic/Staircase.lean",
         "lean_name": "StaircaseLogic.Staircase.oneStep_isFirstSafe",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -6069,7 +6069,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/DeepMCA.lean",
         "lean_name": "RSCap.emcaErr_le_deep",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 5 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 5 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -6403,7 +6403,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Johnson.lean",
         "lean_name": "RSCap.johnson_list_bound",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -6600,7 +6600,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Scanner.lean",
         "lean_name": "RSCap.dStar_eq_zero_of_small_field",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -6698,7 +6698,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/Scanner.lean",
         "lean_name": "RSCap.scanner_deep_safe_ca",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 4 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 4 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "mixed",
         "audit_status": "mapped_needs_statement_audit",
         "related_lean": [
@@ -6803,7 +6803,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/ECFFT.lean",
         "lean_name": "RSCap.RationalSmooth",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -6857,7 +6857,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/ECFFT.lean",
         "lean_name": "RSCap.prop_rational_floor",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -6902,7 +6902,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/ECFFT.lean",
         "lean_name": "RSCap.cor_ecfft_onestep",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -7024,7 +7024,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/SafeSide.lean",
         "lean_name": "RSCap.emca_le_max_eca_tangent",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -7107,7 +7107,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/SafeSide.lean",
         "lean_name": "RSCap.emca_le_of_eca_le",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -7463,7 +7463,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/ECFFT.lean",
         "lean_name": "RSCap.prop_graded_rational_floor",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -7511,7 +7511,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/ECFFT.lean",
         "lean_name": "RSCap.cor_ecfft_macroscopic",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -7594,7 +7594,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/CircleCode.lean",
         "lean_name": "RSCap.lem_stereographic",
         "statement_status": "lean_statement_skeleton_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_skeleton_needs_proof",
         "related_lean": [
@@ -7682,7 +7682,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/InterleavingTransfer.lean",
         "lean_name": "RSCap.thm_explicit_head_floor_even",
         "statement_status": "lean_mixed_proved_and_skeleton_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 4 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 4 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_split_package_needs_statement_audit",
         "related_lean": [
@@ -7789,7 +7789,7 @@
         "lean_file": "experimental/lean/cs25_cap_v12/cs25_cap_v12/InterleavingTransfer.lean",
         "lean_name": "RSCap.thm_explicit_pairs",
         "statement_status": "lean_mixed_proved_and_skeleton_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "exact_label_match",
         "audit_status": "mapped_split_package_needs_statement_audit",
         "related_lean": [
@@ -8091,7 +8091,7 @@
         "lean_file": "experimental/lean/staircase_logic/StaircaseLogic/Staircase.lean",
         "lean_name": "StaircaseLogic.Staircase",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -8131,7 +8131,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ThresholdCompilers.lean",
         "lean_name": "CAP25V13.Threshold.staircase_localization",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -8197,7 +8197,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ThresholdCompilers.lean",
         "lean_name": "CAP25V13.Threshold.endpoint_radius",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -8253,7 +8253,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ThresholdCompilers.lean",
         "lean_name": "CAP25V13.Threshold.corridor_lower",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -8339,7 +8339,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ThresholdCompilers.lean",
         "lean_name": "CAP25V13.Threshold.steepness_disjoint",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 3 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -8543,7 +8543,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ThresholdCompilers.lean",
         "lean_name": "CAP25V13.Threshold.extPole_exists",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -8618,7 +8618,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ThresholdCompilers.lean",
         "lean_name": "CAP25V13.Threshold.budget_unsafe",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 4 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 4 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -8685,7 +8685,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ThresholdCompilers.lean",
         "lean_name": "CAP25V13.Threshold.census_identity",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -8725,7 +8725,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ThresholdCompilers.lean",
         "lean_name": "CAP25V13.Threshold.census_crossing_relaxed_half",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 6 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 6 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -8839,7 +8839,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ThresholdCompilers.lean",
         "lean_name": "CAP25V13.Threshold.qprofile_bounded",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 2 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -8890,7 +8890,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ThresholdCompilers.lean",
         "lean_name": "CAP25V13.Threshold.residual_absorption",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -9023,7 +9023,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ListSideCompilers.lean",
         "lean_name": "CAP25V13.ListSide.list_unsafe",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -9065,7 +9065,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ListSideCompilers.lean",
         "lean_name": "CAP25V13.ListSide.dyadic_planted_crossing_half",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 4 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 4 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -9132,7 +9132,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ListSideCompilers.lean",
         "lean_name": "CAP25V13.ListSide.planted_budget_window",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -9507,7 +9507,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ListSideCompilers.lean",
         "lean_name": "CAP25V13.ListSide.fixed_excess_bound",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -9552,7 +9552,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ListSideCompilers.lean",
         "lean_name": "CAP25V13.ListSide.few_petal_range",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -9939,7 +9939,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ResidueLineTools.lean",
         "lean_name": "CAP25V13.ResidueLine.dim_one_voting",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -10010,7 +10010,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ResidueLineTools.lean",
         "lean_name": "CAP25V13.ResidueLine.conjF_fixed_dim",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -10117,7 +10117,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ResidueLineTools.lean",
         "lean_name": "CAP25V13.ResidueLine.gap2_seam",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -10157,7 +10157,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ResidueLineTools.lean",
         "lean_name": "CAP25V13.ResidueLine.hankel_det",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -10197,7 +10197,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ResidueLineTools.lean",
         "lean_name": "CAP25V13.ResidueLine.johnson_ball_count",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -10237,7 +10237,7 @@
         "lean_file": "experimental/lean/cs25_cap_v13_experimental/cs25_cap_v13_experimental/ResidueLineTools.lean",
         "lean_name": "CAP25V13.ResidueLine.anticode_packing",
         "statement_status": "lean_statement_present_no_sorry_source_scan",
-        "notes": "Mapped from existing Lean source by update-blueprint-map.py. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
+        "notes": "Mapped from existing Lean source by manual correspondence audit. Primary selected from 1 related declaration(s); source-level scan only, Lake not run.",
         "mapping_confidence": "curated_alias",
         "audit_status": "mapped_source_scanned_not_built",
         "related_lean": [
@@ -14514,7 +14514,7 @@
       },
       "statement_excerpt": "After quotient-pulled-back and planted strata are charged, primitive prefix fibers are bounded by the entropy-average up to e^{o(n)} asymptotically, and by explicit row constants for finite adjacent certificates.",
       "depends_on": [
-        "prop:capg-aperiodic-floor",
+        "thm:capg-aperiodic-floor",
         "lem:capg-witness",
         "lem:capg-prefix-rigidity",
         "thm:capg-second-moment",
@@ -14553,7 +14553,7 @@
       "statement_excerpt": "After tangent, quotient, extension, common-GCD, bounded chart, and Q-boundary cells are paid, interior split-pencil counts obey the base-field-normalized model with e^{o(n)} loss asymptotically and explicit constants at deployed adjacent rows.",
       "depends_on": [
         "prop:capg-census-floor",
-        "rem:capg-split-pencil-B",
+        "prob:capg-split-pencil-B",
         "prop:capg-final-active-package"
       ],
       "implies": [
@@ -17905,9 +17905,9 @@
       "in_blueprint": true
     },
     {
-      "from": "prop:capg-aperiodic-floor",
+      "from": "thm:capg-aperiodic-floor",
       "to": "target:Q_prefix_flatness",
-      "in_blueprint": false
+      "in_blueprint": true
     },
     {
       "from": "lem:capg-witness",
@@ -17935,9 +17935,9 @@
       "in_blueprint": true
     },
     {
-      "from": "rem:capg-split-pencil-B",
+      "from": "prob:capg-split-pencil-B",
       "to": "target:BC_base_field_split_pencil",
-      "in_blueprint": false
+      "in_blueprint": true
     },
     {
       "from": "prop:capg-final-active-package",
@@ -18099,11 +18099,11 @@
     "Computation nodes are mined from TeX artifact mentions and need curation against actual scripts/certificates before formal proof replay.",
     "Curated computation nodes were added for active frontier-adjacent packet/verifier artifacts even when not explicitly texttt-mentioned in the raw TeX.",
     "Computations may include a supports field for artifacts that guide or certify a target without being mathematical prerequisites.",
-    "Lean mapping pass 1 fills existing formalization slots from declarations under experimental/lean; related_lean entries record split theorem packages and skeleton/proved source status.",
-    "Lean mapping is generated by experimental/lean/update-blueprint-map.py; related_lean entries record split theorem packages and source-scan proof status."
+    "Formalization slots are manually curated from declarations under experimental/lean; related_lean entries record split theorem packages and skeleton/proved source status.",
+    "Do not auto-fill Lean mappings from generic declaration names. Each TeX/Lean correspondence needs statement audit."
   ],
   "mapping_policy": {
-    "direction": "Lean-to-blueprint: existing Lean declarations and correspondence notes are mapped into TeX blueprint nodes, not used to create new blueprint nodes.",
+    "direction": "Manual Lean-to-blueprint correspondence: existing Lean declarations and correspondence notes are linked to TeX blueprint nodes after statement audit.",
     "verification_scope": "Source-level scan only. statement_status records whether the mapped declaration block visibly contains sorry/admit; no Lake build was run.",
     "primary_selection": "A primary lean_file/lean_name is selected for convenience. related_lean preserves all matched declarations for split Lean proof packages.",
     "confidence_values": {
