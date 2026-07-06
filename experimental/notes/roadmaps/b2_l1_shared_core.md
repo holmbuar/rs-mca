@@ -29,6 +29,19 @@ Discharging CORE gives `E_3 ≤ ℓ−2` (L1) **and** the giant-extras `≤ n^3`
 decomposition this is the right milestone: one lemma, two lanes. **b2 is the more tractable entry point**
 — its 123-bit cushion (`2^100`-lossy OK) means CORE need only be crude for b2, whereas L1 needs it sharp.
 
+> **CORRECTION (2026-07-06, after the D1 literature dive + D3 structure computation — see
+> `b2_l1_lemma_draft.md`).** "One CORE lemma discharges both lanes" is an OVER-UNIFICATION. The two
+> lanes share the `√p` barrier and the "inverse theorem" *framing*, but NOT one dischargeable lemma:
+> - **b2** (large subgroup `|H|=2^41 ≥ q^{0.16}`, cushion): a crude BGK/Heath-Brown–Konyagin single-sum
+>   bound is IN-REGIME and precise enough — essentially citeable.
+> - **L1** (needs uniformity over all `ℓ|p−1` incl. tiny `ℓ`, and the EXACT `ℓ−2`): every subgroup
+>   moment/energy method is out of regime and out of precision (only `p^{-ν}` / log savings; Carlitz–
+>   McConnel collapses to linear over prime fields). The moment/BGK route — including the Step-3
+>   monodromy handle — is a **DEAD END for L1's sharp bound**. L1's real route is the **rank statement
+>   `dim Syz ≤ K`** (the lane's pre-existing crux), NOT an inverse theorem.
+> So: refocus L1 on `dim Syz ≤ K`; take the BGK draft only for b2. The "shared core" is the barrier +
+> the extremal-rigidity picture, not a common proof.
+
 ## Shared computable object: the pencil monodromy (structure detection)
 
 Both moments are governed by the monodromy `G = Gal(pencil / 𝔽_p(t))` of `ψ: X ↦ X^ℓ/Γ(X)`
