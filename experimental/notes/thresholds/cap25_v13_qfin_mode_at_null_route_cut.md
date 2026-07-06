@@ -15,7 +15,7 @@ twist-orbit max-fiber target.
 
 ## Live adjacent row
 
-The current committee-facing CAP25 v13/v14 status memo uses the KoalaBear MCA
+The current committee-facing CAP25 v13 raw status memo uses the KoalaBear MCA
 adjacent pair
 
 ```text

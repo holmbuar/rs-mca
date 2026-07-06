@@ -4,7 +4,7 @@
   "source_draft": "wave9_extension_targets.md / wave9_extension_numbers.json (session draft, 2026-07-05)",
   "companion_note": "experimental/notes/frontier-adjacent/frontier_extension_cell_targets_v1.md",
   "companion_verifier": "experimental/scripts/verify_frontier_extension_cell_targets.py",
-  "topic": "paid_extension cell targets for the U(a0+1) ledger, four deployed v14 rows",
+  "topic": "paid_extension cell targets for the U(a0+1) ledger, four deployed v13 raw rows",
   "date": "2026-07-05",
   "repo_head": "5e50037",
   "status": "CONDITIONAL / AUDIT-derived (exact integer margins; open-part target is a named-input specification, not a proof)",
@@ -122,12 +122,12 @@
    "kind": "mca",
    "a0": 1116047,
    "a0_plus_1": 1116048,
-   "line_pair_v14": [
+   "line_pair_v13_raw": [
     1116047,
     1116048
    ],
    "w_at_a0": 67470,
-   "frontier": "v14-moved (was a0=1116043 in v13)",
+   "frontier": "v13-raw-moved (was a0=1116043 in v13)",
    "fail_margin_bits": 22.197,
    "unsafe_a0_exact": true,
    "safe_a0p1_exact": true,
@@ -145,12 +145,12 @@
    "kind": "list",
    "a0": 1116046,
    "a0_plus_1": 1116047,
-   "line_pair_v14": [
+   "line_pair_v13_raw": [
     1116046,
     1116047
    ],
    "w_at_a0": 67470,
-   "frontier": "unchanged v13/v14",
+   "frontier": "unchanged v13 raw",
    "fail_margin_bits": 22.011,
    "unsafe_a0_exact": true,
    "safe_a0p1_exact": true,
@@ -168,12 +168,12 @@
    "kind": "mca",
    "a0": 1116023,
    "a0_plus_1": 1116024,
-   "line_pair_v14": [
+   "line_pair_v13_raw": [
     1116023,
     1116024
    ],
    "w_at_a0": 67446,
-   "frontier": "v14-moved (was a0=1116021 in v13)",
+   "frontier": "v13-raw-moved (was a0=1116021 in v13)",
    "fail_margin_bits": 3.259,
    "unsafe_a0_exact": true,
    "safe_a0p1_exact": true,
@@ -191,12 +191,12 @@
    "kind": "list",
    "a0": 1116022,
    "a0_plus_1": 1116023,
-   "line_pair_v14": [
+   "line_pair_v13_raw": [
     1116022,
     1116023
    ],
    "w_at_a0": 67446,
-   "frontier": "unchanged v13/v14",
+   "frontier": "unchanged v13 raw",
    "fail_margin_bits": 3.073,
    "unsafe_a0_exact": true,
    "safe_a0p1_exact": true,

@@ -1,4 +1,4 @@
-# Frontier-extension-cell targets: naming the `paid_extension` open cell for the four deployed v14 rows
+# Frontier-extension-cell targets: naming the `paid_extension` open cell for the four deployed v13 raw rows
 
 **Repo head this note was audited against:** `5e50037` (upstream `main`).
 **Data:** `experimental/data/certificates/frontier-adjacent/extension_cell_targets_v1.json`.
@@ -54,7 +54,7 @@ The exact coordinate object is fixed by `f1_extension_coordinate_transfer`
 exactly the bad parameters of this structured `{M_γ : γ∈F} ⊂ Mat_e(B)` slice.
 `thm:weil-lines` proves `B_ext(a)` is *definitionally* a base interleaved
 numerator — **weave: CONSISTENT** — but the arity-`e` band bound it reduces to
-is `Open Problem prob:band` at arity `e` — **weave: AWAITS**. The v13/v14
+is `Open Problem prob:band` at arity `e` — **weave: AWAITS**. The v13 raw
 ledger keeps `paid_extension` as a *separate* cell precisely because that
 arity-`e` residue is not covered by the arity-1 base cells.
 
@@ -112,8 +112,8 @@ for the deployed `K=F` residual**. That missing `(Δ,e_Y)` is `#329`'s TBD.
 Budgets (exact, independently re-derived by the verifier): `B*_KB =
 ⌊p^6/2^128⌋ = 274980728111395087 = 2^57.93`; `B*_M31 = ⌊p'^4/2^100⌋ =
 16777215 = 2^24.00`. Fail-margins (headroom at `a0+1`) come from the same
-identity-prefix construction as `cap25_v14_moved_frontier_checks.py` (MCA
-rows, v14-moved) and `prop:v13f1-identity-frontier` (list rows, unchanged):
+identity-prefix construction as `cap25_v13_raw_moved_frontier_checks.py` (MCA
+rows, v13-raw-moved) and `prop:v13f1-identity-frontier` (list rows, unchanged):
 
 **Cost of a positive-dimensional chart** (`e_Y≥1` ⇒ `≥ q_gen` bad slopes):
 
@@ -129,9 +129,9 @@ field-size-independent constant, and must fit the fail-margin:
 
 | row | `(a0, a0+1)` | frontier | fail-margin | `e_Y` | `Δ_ext` ceiling (exact) | binding constraint |
 |---|---|---|---|---|---|---|
-| **KB-MCA** | (1116047,1116048) | v14-moved | **22.197 b** | `0` | `≤ 4,807,520` | fail-margin only |
+| **KB-MCA** | (1116047,1116048) | v13-raw-moved | **22.197 b** | `0` | `≤ 4,807,520` | fail-margin only |
 | **KB-list** | (1116046,1116047) | unchanged | **22.011 b** | `0` | `≤ 4,226,236` | fail-margin only |
-| **M31-MCA** | (1116023,1116024) | v14-moved | **3.259 b** | `0` | `≤ 9` | **absolute budget** + margin |
+| **M31-MCA** | (1116023,1116024) | v13-raw-moved | **3.259 b** | `0` | `≤ 9` | **absolute budget** + margin |
 | **M31-list** | (1116022,1116023) | unchanged | **3.073 b** | `0` | `≤ 8` | **absolute budget** + margin (row binds the whole cell) |
 
 *Exact integer ceiling `= floor(p^(w+1)·B* / L(a0+1))`, computed as an exact
@@ -142,7 +142,7 @@ the session draft this note is built from.*
 Design target across all rows: **`e_Y=0`, `Δ_ext = O(1)` constant.** The
 **M31-list row is the binding constraint**: the genuinely-`F`-valued residual
 must have total degree `≤ 8`. (Contrast the v13 frontier, where KB-MCA at 5.5 b
-was tightest; the v14 MCA move `1116043→1116047` / `1116021→1116023` relocated
+was tightest; the v13 raw MCA move `1116043→1116047` / `1116021→1116023` relocated
 the tightness to the M31 pair.)
 
 Note the exact-integer replay confirms `unsafe(a0)=True` and `safe(a0+1)=True`
@@ -404,7 +404,7 @@ dependency either direction:
 - **S** scanner: `extension_chart_upper` / `extension_only_cell` — `experimental/scripts/verify_paid_ledger_functions.py` L108-130; non-claim L265.
 - **N** numbers + exact replay: `experimental/data/certificates/frontier-adjacent/extension_cell_targets_v1.json`,
   `experimental/scripts/verify_frontier_extension_cell_targets.py`,
-  `experimental/scripts/towards v13/cap25_v14_moved_frontier_checks.py`.
+  `experimental/scripts/towards v13/cap25_v13_raw_moved_frontier_checks.py`.
 - **F1S** F1 full-orbit toy scanner (shipped, §5.1): `experimental/scripts/f1_extension_full_orbit_scan.py`
   (zero-arg, deterministic, `--tamper-selftest`); certificate
   `experimental/data/certificates/frontier-adjacent/f1_full_orbit_scan_v1.json`.

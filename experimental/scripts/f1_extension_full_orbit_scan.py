@@ -3,7 +3,7 @@
 
 Proof status: EXPERIMENTAL / falsifier hunt (CONJECTURAL_WITH_FALSIFIER test).
 
-Follow-up of PR #343 ("v14: extension-cell targets",
+Follow-up of PR #343 ("v13 raw: extension-cell targets",
 experimental/notes/frontier-adjacent/frontier_extension_cell_targets_v1.md, S:5,
 "Q4"), named next step in that note and in the wave9_E1.json packet ("Write the
 stdlib-only toy scanner f1_extension_full_orbit_scan.py"). Implements the exact

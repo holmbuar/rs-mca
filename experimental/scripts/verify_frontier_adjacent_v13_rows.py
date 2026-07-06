@@ -35,17 +35,17 @@ Gates:
       c=1 fail-margin M, which G5 does cross-check (see
       cross_check_c1_identity_margins below) -- the derived ceilings
       themselves are hand-confirmed correct but not separately gated here.
-  G7  v14 moved-frontier recompute (added 2026-07-05, upstream #310 commit
+  G7  v13-raw moved-frontier recompute (added 2026-07-05, upstream #310 commit
       f049b91): independently recomputes, from n/k/p alone via the
       identity-prefix-floor -> deep-point-count route
       (L=ceil(C(n,m)/p^w), M=ceil(L(q-n)/(q-n+k(L-1))), margin=log2(M/B*)),
-      every field of the kb_mca_v1/m31_mca_v1 packets' v14_moved_pair block
+      every field of the kb_mca_v1/m31_mca_v1 packets' v13_raw_moved_pair block
       (the moved pair, L, M, pass/fail margins, deficit-to-cross-B*, and the
       M31-MCA Gceil c=2048 tight-rung finding), and cross-checks the
       recomputed margins against the maintainer's
-      "experimental/scripts/towards v13/cap25_v14_moved_frontier_checks.py"
+      "experimental/scripts/towards v13/cap25_v13_raw_moved_frontier_checks.py"
       (commit 2b5b7ce) printed margins to within 0.1 bit. The KB-list and
-      M31-list packets' v14_status block (unchanged_in_v14=true) is not a
+      M31-list packets' v13_raw_status block (unchanged_in_v13_raw=true) is not a
       numeric claim and is not separately gated.
 
 There is deliberately no "NEEDS_A1" master gate: this script either passes
@@ -104,13 +104,13 @@ for _r in ROWS:
     _r["a1"] = _r["a0"] + 1
 
 # ---------------------------------------------------------------------------
-# v14 moved-frontier pairs (G7): upstream #310 commit f049b91 composes
+# v13-raw moved-frontier pairs (G7): upstream #310 commit f049b91 composes
 # lem:v13f1-identity-prefix-floor with prop:quantitative-deep-list-floor and
 # moves the two MCA rows' frontier pairs forward. Only the MCA rows move
 # (K=k+1); the two list rows (K=k) compare their list floor directly against
 # B* with no deep-point conversion, so their edges are untouched -- see
 # experimental/notes/frontier-adjacent/frontier_adjacent_v13_rows_v1.md sec
-# "V14 moved-frontier addendum (2026-07-05)".
+# "V13 raw moved-frontier addendum (2026-07-05)".
 # ---------------------------------------------------------------------------
 MOVED_PAIRS = [
     dict(name="KB MCA", slug="kb_mca", base=p_kb, q=q_kb, K=k + 1, a0p=1116047, tight_rung=None),
@@ -300,7 +300,7 @@ def build_identity_binomials() -> dict:
     needed = []
     for row in ROWS:
         needed += [row["a0"], row["a1"]]
-    # v14 (G7): a0p for each moved row is already an existing row's a1 (KB
+    # v13 raw (G7): a0p for each moved row is already an existing row's a1 (KB
     # MCA a0p=1116047=KB list a1; M31 MCA a0p=1116023=M31 list a1); only
     # a1p=a0p+1 is genuinely new. Folding it into this ONE shared batch call
     # keeps G7's marginal cost to a handful of cheap O(size) ratio-update
@@ -731,14 +731,14 @@ def run_gate_rung_table(packets: dict) -> None:
 
 
 # ---------------------------------------------------------------------------
-# G7: v14 moved-frontier recompute (upstream #310 commit f049b91)
+# G7: v13-raw moved-frontier recompute (upstream #310 commit f049b91)
 # ---------------------------------------------------------------------------
 # Literal margins printed by the maintainer's
-# "experimental/scripts/towards v13/cap25_v14_moved_frontier_checks.py"
+# "experimental/scripts/towards v13/cap25_v13_raw_moved_frontier_checks.py"
 # (commit 2b5b7ce), re-run this session; cited here (not imported/executed,
 # since that script lives at a commit this branch does not merge) purely as
 # a cross-check reference for the 0.1-bit tolerance below.
-V14_SCRIPT_MARGINS = {
+V13_RAW_SCRIPT_MARGINS = {
     "KB MCA": (8.978, -22.197),
     "M31 MCA": (27.927, -3.259),
 }
@@ -752,8 +752,8 @@ def deep_point_M(L: int, q: int, n_: int, k_: int) -> int:
     return -(-num // den)
 
 
-def run_gate_v14_moved_frontier(packets: dict, Bstars: dict, C_n: dict) -> None:
-    g = gate("G7_v14_moved_frontier_recompute")
+def run_gate_v13_raw_moved_frontier(packets: dict, Bstars: dict, C_n: dict) -> None:
+    g = gate("G7_v13_raw_moved_frontier_recompute")
     mism: list[str] = []
     lines: list[str] = []
     for spec in MOVED_PAIRS:
@@ -776,17 +776,17 @@ def run_gate_v14_moved_frontier(packets: dict, Bstars: dict, C_n: dict) -> None:
             continue
 
         pk = packets[name]
-        vmp = pk.get("v14_moved_pair")
+        vmp = pk.get("v13_raw_moved_pair")
         if vmp is None:
-            mism.append(f"{name}: packet missing v14_moved_pair block")
+            mism.append(f"{name}: packet missing v13_raw_moved_pair block")
             continue
 
         def check(label: str, got, want, tol: float | None = None) -> None:
             if tol is None:
                 if got != want:
-                    mism.append(f"{name}.v14_moved_pair.{label}: got {got!r} want {want!r}")
+                    mism.append(f"{name}.v13_raw_moved_pair.{label}: got {got!r} want {want!r}")
             elif abs(got - want) > tol:
-                mism.append(f"{name}.v14_moved_pair.{label}: got {got!r} want {want!r} (tol {tol})")
+                mism.append(f"{name}.v13_raw_moved_pair.{label}: got {got!r} want {want!r} (tol {tol})")
 
         check("new_pair.a0_prime", vmp["new_pair"]["a0_prime"], a0p)
         check("new_pair.a0_prime_plus_1", vmp["new_pair"]["a0_prime_plus_1"], a1p)
@@ -804,11 +804,11 @@ def run_gate_v14_moved_frontier(packets: dict, Bstars: dict, C_n: dict) -> None:
         deficit_cross = (Bstar + 1) - M1
         check("deficit_to_cross_Bstar_a1p", vmp["deficit_to_cross_Bstar_a1p"], deficit_cross)
 
-        v14_pass, v14_fail = V14_SCRIPT_MARGINS[name]
-        if abs(margin0 - v14_pass) > 0.1:
-            mism.append(f"{name}: recomputed pass margin {margin0:.4f} vs v14 script {v14_pass} exceeds 0.1 bit")
-        if abs(margin1 - v14_fail) > 0.1:
-            mism.append(f"{name}: recomputed fail margin {margin1:.4f} vs v14 script {v14_fail} exceeds 0.1 bit")
+        v13_raw_pass, v13_raw_fail = V13_RAW_SCRIPT_MARGINS[name]
+        if abs(margin0 - v13_raw_pass) > 0.1:
+            mism.append(f"{name}: recomputed pass margin {margin0:.4f} vs v13 raw script {v13_raw_pass} exceeds 0.1 bit")
+        if abs(margin1 - v13_raw_fail) > 0.1:
+            mism.append(f"{name}: recomputed fail margin {margin1:.4f} vs v13 raw script {v13_raw_fail} exceeds 0.1 bit")
 
         tr_spec = spec["tight_rung"]
         if tr_spec is None:
@@ -846,7 +846,7 @@ def run_gate_v14_moved_frontier(packets: dict, Bstars: dict, C_n: dict) -> None:
 
         lines.append(
             f"{name}: a0'={a0p} pass={margin0:.4f}b (fires); a0'+1={a1p} fail={margin1:.4f}b (quiet); "
-            f"within 0.1b of v14 script {V14_SCRIPT_MARGINS[name]}"
+            f"within 0.1b of v13 raw script {V13_RAW_SCRIPT_MARGINS[name]}"
         )
 
     if mism:
@@ -891,13 +891,13 @@ def main() -> int:
     except Exception as exc:  # noqa: BLE001 -- surface as a failed gate, not a crash
         gate("G5_packet_consistency_scalar_fields").failed(f"could not load packets: {exc}")
         gate("G6_full_rung_table_recompute").failed("skipped: packets did not load")
-        gate("G7_v14_moved_frontier_recompute").failed("skipped: packets did not load")
+        gate("G7_v13_raw_moved_frontier_recompute").failed("skipped: packets did not load")
         packets = None
 
     if packets is not None:
         run_gate_packet_consistency(packets, gap_tables, Bstars, C_n)
         run_gate_rung_table(packets)
-        run_gate_v14_moved_frontier(packets, Bstars, C_n)
+        run_gate_v13_raw_moved_frontier(packets, Bstars, C_n)
         print_info_open_cells(packets)
 
     print()

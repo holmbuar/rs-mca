@@ -30,18 +30,158 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
-### 2026-07-06 - CAP25 v13 raw and compact frontier status
+### 2026-07-06 - Grande finale proof-plan note
 
-- **Agent/model:** Maintainer-added v13 raw manuscripts summarized and aligned
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/grande_finale.tex`;
+  `experimental/grande_finale.pdf`; `experimental/agents-log.md`.
+- **Status:** PROVED REDUCTIONS / CONJECTURAL / PROOF STRATEGY / AUDIT.
+- **What is being added:** A standalone `amsart` note that isolates the final
+  RS-MCA proof obligations and proves the reusable reductions currently needed
+  for that attempt: identity-prefix witness exactness, prefix-collision
+  rigidity, the exact second-moment ledger, pole-line transport from prefix
+  fibers to support-wise MCA bad slopes, the fiber-to-slope averaging theorem
+  that produces many distinct MCA-bad slopes from a large prefix fiber,
+  quotient pullback for shift pairs, coefficient-scale quotient extraction for
+  shift pairs,
+  the primitive `L^2` ledger, twist-orbit symmetry, slope elimination, the
+  interpolation-lattice split-pencil reduction, the fact that Q is the boundary
+  split-pencil profile, and the base-field floor that any interior BC census
+  must include.  It also proves the head-depth prefix-flatness theorem in the
+  Weil range, including the solved KoalaBear head-depth part of Q.  It also
+  adds the exponential aperiodic-floor theorem below the entropy-subfield
+  envelope, ruling out the old unnormalized polynomial aperiodic-band target.
+  A Fourier-audit proposition now explains why individual square-root
+  character estimates cannot close Q by triangle inequality.  A rank-one
+  pole-line floor shows the same base-field normalization is forced in the
+  line/support census and is genuinely extension-valued.  The finite packet
+  audit now explicitly separates historical adjacent-pair fields from the
+  active moved MCA pairs and records the Mersenne-31 `c=2048` quiet watch item.
+  The latest update also integrates the near-rational lattice dichotomy:
+  small first shifted-degree words are exactly classified, and after the
+  common-proximity paid branch is removed, the BC residual starts only in the
+  balanced two-generator split-pencil core.  A deficiency-one split-test
+  eliminant theorem now pays bounded SPI charts unless the chart is
+  identically split or identically rank-deficient, in which case it is named
+  as a residual rather than hidden in the BC estimate.  The note now also
+  proves the two broad safe anchors directly: the self-contained deep-regime
+  MCA bound below one third of minimum distance, and the reduction of MCA to
+  CA plus explicit tangent slopes below half distance.  Subfield confinement
+  is now included as a theorem too: any bad slope of a \(\mathbb B\)-valued
+  pair over an extension row lies in \(\mathbb B\), so target-level extension
+  failures must be genuinely extension-valued after common scalar removal.
+  The BC floor has also been strengthened from a raw agreement-census lower
+  bound to an interior split-pencil theorem: under the printed degree
+  inequalities, the constructed \(\mathbb B\)-valued received word has
+  minimal shifted degree exactly \(d_1\), so the base-field-normalized floor
+  occurs in a genuine interior profile rather than only at the Q boundary.
+  The Q section now includes a quantitative moment criterion:
+  \(\log_2\Gamma_r+w\log_2|\mathbb B|\le r\Delta\) is the finite adjacent
+  high-moment gate for proving a max-fiber ratio \(2^\Delta\), explaining why
+  low fixed moments cannot settle the deployed one-step rows.  The lower-side
+  MCA route is now self-contained as well: a quantitative simple-pole
+  list-to-MCA theorem converts any \(L\)-word \(C^+\) list into at least
+  \(\lceil L(q-n)/(q-n+k(L-1))\rceil\) bad finite slopes, matching the moved
+  v13 raw MCA packet formula.
+  The finite-adjacent section now packages the row-packet consequences as
+  propositions: the four active rows have exact unsafe lower certificates at
+  their printed \(a_0\)'s, the same lower route stops at \(a_0+1\), and the
+  dyadic rung audit is only a lower-floor veto rather than a quotient-image
+  upper bound.  The note now also includes a first-match upper-ledger
+  definition and lemma, making the safe-side finite target precise: a
+  row-specific certificate must cover every bad slope by ordered paid/residual
+  cells and prove the sum of certified cell bounds is at most \(B^*\).  The
+  integer-budget convention is now also proved explicitly, so all finite safe
+  and unsafe statements reduce to comparisons with
+  \(B^*=\lfloor\varepsilon^*Q\rfloor\).
+  A finite safe-anchor gap proposition now records that the broad deep,
+  half-distance, half-Johnson, and conditional BCHKS anchors miss the active
+  adjacent agreements by hundreds of thousands of positions, so the final
+  certificate must use row-specific first-match upper ledgers or a genuinely
+  stronger theorem.
+  It also proves that composite prefix directions descend
+  exactly to quotient scales, justifying the divisor-lattice separation before
+  primitive Q/SP flatness is attempted.  It now also proves twist-orbit moment
+  amplification: a heavy primitive prefix fiber contributes an entire orbit to
+  the high-moment ledger, while stabilized heavy values are quotient/composite
+  objects.  The SP section adds a top-stratum quotient sieve showing that every
+  non-primitive top-stratum shift pair descends to a quotient constant-shift
+  cell, leaving only coefficient-primitive constant shifts in that residual.
+  The BC section adds a distinct-slope extension-valued rank-one floor, so the
+  base-field floor cannot be dismissed as a support-count artifact or a
+  purely \(\mathbb B\)-rational phenomenon.
+  The note now defines the closed-grid
+  support-wise CA/MCA events directly, proves the CA-to-MCA comparison, and
+  records the agreement-threshold monotonicity needed to interpret adjacent
+  certificates as radius-threshold statements.  The note also records the finite-adjacent artifact status:
+  active MCA lower-route values, the non-firing dyadic rung audit, and the
+  extension-cell degree ceilings, with explicit warnings that these are not
+  safe certificates.  The latest update turns the extension-cell ceilings into
+  a formal full-extension target proposition: in the active packet grammar,
+  any genuinely full-orbit extension chart fitting the adjacent margin must be
+  zero-dimensional, with degree at most `4807520`, `4226236`, `9`, and `8` in
+  the four deployed rows.  This is an exact arithmetic target for the missing
+  branch, not a payment of that branch.  The Q section now also includes the
+  exact `F_17^*`, `m=9`, `w=1` route cut showing raw mode-at-null is false
+  (`N_9(0)=672`, `N_9(s)=673` for `s != 0`), so the finite Q target is
+  primitive max-orbit flatness or exchange-compression after quotient routing.
+  The BC/SPI part now also proves that an identically split deficiency-one
+  chart is tangent-borne: the split-annihilator dictionary first turns a fixed
+  split locator into a codeword-plus-error decomposition, constant-divisor
+  rigidity makes the locator fixed, and the line contributes only tangent
+  ratios rather than a new aperiodic split-pencil cell.  The safe-anchor
+  section now records the exact high-agreement tangent paid cell as well:
+  when \(A=n-r\) and \(3r\le n-k\), the maximum CA/MCA bad-slope numerator is
+  exactly `r+1 = n-A+1`.  The finite adjacent closure theorem now uses a
+  row-object numerator \(B(a)\), separating MCA bad-slope numerators from list
+  numerators, so the four-row statement no longer silently treats list rows as
+  MCA rows.
+  The remaining inputs are Q prefix flatness, BC
+  base-field-normalized interior split-pencil census, SP primitive shift-pair
+  control, and the finite adjacent certificate program at the four deployed
+  v13 raw rows.
+- **How it is useful:** This gives agents a compact, publishable-style target
+  document for the final resolution attempt without copying the long v13 raw
+  manuscript.  It records which reductions are now theorem-level, what remains
+  conjectural, which part of Q is already solved by direct Weil bounds, and
+  what computations would pin the finite deployed thresholds.
+- **What to do next:** Fill in Q, BC, and SP proof packets one by one, starting
+  with exact rung audits and KoalaBear MCA at `a0+1 = 1116048`.  The next Q
+  work must attack frontier-depth maximum fibers directly, not by a uniform
+  per-character square-root bound.  Do not promote the conditional closure
+  theorem until the safe upper ledgers are replayed and audited.
+
+### 2026-07-06 - v13 raw final-form roadmap alignment
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `towards-prize.md`;
+  `experimental/cap25_v13_missing_inputs_strategy.md`;
+  `experimental/agents-log.md`.
+- **Status:** EXPERIMENTAL / CONJECTURAL / AUDIT.
+- **What is being added:** The roadmap now records the v13 raw final-form
+  update: the entropy-subfield envelope, the four exact deployed unsafe edges,
+  the Q/BC/SP safe-side input split, the adjacent finite target pairs, and the
+  explicit falsifier shape.  The missing-input strategy now separates proved
+  anchors from the still-conjectural finite adjacent safe certificates.
+- **How it is useful:** This aligns the human-facing roadmap with the v13 raw
+  package without promoting it into Paper D.  It tells agents
+  that the useful next work is exact safe-side certification at `a0+1`, or a
+  primitive prefix-fiber / split-pencil counterexample that becomes a new floor.
+- **What to do next:** Keep Paper D v12 as the paper authority until the v13 raw
+  material is promoted and audited.  Build exact Q, BC, and
+  SP certificates with constants fitting the `22.2 / 22.0 / 3.3 / 3.1` bit
+  adjacent margins.
+
+### 2026-07-06 - CAP25 v13 raw frontier status
+
+- **Agent/model:** Maintainer-added v13 raw manuscript summarized and aligned
   by Codex.
 - **Files added or changed:** `experimental/cap25_cap_v13_raw.tex`;
-  `experimental/cap25_cap_v13_raw_compact.tex`;
   `experimental/cap25_v13_missing_inputs_strategy.md`; `agents.md`;
   `experimental/agents-log.md`.
 - **Status:** EXPERIMENTAL / CONDITIONAL / AUDIT.
 - **What is being added:** `cap25_cap_v13_raw.tex` is the extended
-  raw-working master; `cap25_cap_v13_raw_compact.tex` is its compact companion.
-  Their TLDR is: the unsafe side is exact and elementary via identity-prefix
+  raw-working master.  Its TLDR is: the unsafe side is exact and elementary via identity-prefix
   floors plus flexible simple-pole conversion; the generic safe anchors are
   deep-regime MCA, MCA-from-CA below half distance, and one isolated
   half-distance CA import; the near-capacity safe side is reduced to exactly
@@ -54,13 +194,13 @@ Keep entries concise and link to the relevant files.
   asymptotic frontier with logarithmic reserve; exact constants fitting the
   printed `22.2 / 22.0 / 3.3 / 3.1` bit margins are needed for the finite
   adjacent pairs.
-- **What to do next:** Do not promote v13 raw/compact into Paper D until the
+- **What to do next:** Do not promote v13 raw into Paper D until the
   safe upper ledgers are proved, replayed, and audited.  Work should focus on
   finite Q maximum-fiber certificates, finite BC split-pencil census
   certificates, finite SP primitive shift-pair certificates, and the matching
   certificate scanner rows.  The strategy note now maps the old `(A)` aperiodic
   umbrella to the current BC/SP inputs and should be kept compatible with the
-  raw/compact source names.  This entry supersedes earlier log entries that
+  v13 raw source names.  This entry supersedes earlier log entries that
   mention `experimental/cap25_v13_experimental.tex` or the older `1116043`
   KoalaBear MCA experimental edge.
 
@@ -81,7 +221,7 @@ Keep entries concise and link to the relevant files.
   M1/M2/L1 local-limit packets, finite staircase rows, mode-at-null and
   prefix-collision ledgers, optional GPU engines with provenance checks, and
   Lean staircase/towards-prize arithmetic anchors.
-- **How it is useful:** The batch strengthens the experimental v13/v14
+- **How it is useful:** The batch strengthens the experimental v13 raw
   final-resolution spine without promoting it to Paper-D authority: it gives
   more exact packet material for the unsafe/safe adjacent staircase program,
   records several route cuts and counterexamples, and supplies verifier-facing
@@ -89,10 +229,10 @@ Keep entries concise and link to the relevant files.
 - **What to do next:** Re-run individual verifier scripts before citing any
   packet.  Do not run the optional GPU engines or Lean/Lake builds unless a
   maintainer explicitly asks.  Keep the Scott `a=327, mu_8` packet as route-cut
-  evidence, not a board-ready MCA/list claim, and keep all v13/v14 adjacent
+  evidence, not a board-ready MCA/list claim, and keep all v13 raw adjacent
   rows experimental until the safe upper ledgers are printed and replayed.
 
-### 2026-07-05 - Proximity Prize status memo for v12/v13/v14 picture
+### 2026-07-05 - Proximity Prize status memo for v12/v13 raw picture
 
 - **Agent/model:** Maintainer-added status memo reviewed and integrated by
   Codex.
@@ -100,7 +240,7 @@ Keep entries concise and link to the relevant files.
   `readme.md`; `agents.md`; `experimental/agents-log.md`.
 - **Status:** EXPERIMENTAL / CONJECTURAL / AUDIT.
 - **What is being added:** A committee-facing status draft summarizing the
-  current CAP25 v12/v13/v14 picture: the entropy-subfield-envelope thesis,
+  current CAP25 v12/v13 raw picture: the entropy-subfield-envelope thesis,
   exact unsafe-side certificates near the deployed frontier, proved
   high-agreement/safe-side components, and the remaining `(Q)` prefix-fiber /
   split-pencil safe-side inputs.
@@ -138,10 +278,11 @@ Keep entries concise and link to the relevant files.
   has been superseded, and keep constants/status labels explicit when moving
   material into Paper D or `towards-prize`.
 
-### 2026-07-05 - CAP25 v13/v14 auxiliary script batch for missing inputs
+### 2026-07-05 - CAP25 v13 raw auxiliary script batch for missing inputs
 
 - **Agent/model:** Maintainer-added scripts reviewed by Codex.
-- **Files added or changed:** `experimental/scripts/towards v13/cap25_v14_moved_frontier_checks.py`;
+- **Files added or changed:** frontier-check helper scripts under
+  `experimental/scripts/towards v13/`;
   `experimental/scripts/towards v13/collision_margins.py`;
   `experimental/scripts/towards v13/gamma_census.py`;
   `experimental/scripts/towards v13/lattice_check.py`;
@@ -152,7 +293,7 @@ Keep entries concise and link to the relevant files.
   `experimental/scripts/towards v13/r1_model.py`;
   `experimental/agents-log.md`.
 - **Status:** EXPERIMENTAL / AUDIT.
-- **What is being added:** A small batch of auxiliary v13/v14 scripts supporting
+- **What is being added:** A small batch of auxiliary v13 raw scripts supporting
   the missing-inputs strategy: group-algebra collision census calibration,
   toy lattice dictionary checks, packing-bound negative calibration,
   twisted-smooth identity checks, quotient-unification checks, rank-one
@@ -169,7 +310,7 @@ Keep entries concise and link to the relevant files.
   either dependency documentation or pure-Python fallbacks.  `q_unify_check.py`
   currently verifies one toy regime only partially (`m=6,w=3` reports `54/60`),
   so its prescribed-prefix divisor identity should be repaired or restricted
-  before being cited as a verifier.  The v14 moved-frontier checker confirms the
+  before being cited as a verifier.  The moved-frontier checker confirms the
   lower-floor cutoff, not a complete adjacent safe upper ledger.
 
 ### 2026-07-05 - CAP25 v13 missing-inputs proof strategy

@@ -25,14 +25,13 @@ current Paper-D-v12 authority edge is
 delta = 15331/32768 ~= 0.467865.
 ```
 
-The active experimental v13 raw sources are:
+The active experimental v13 raw source is:
 
 ```text
 experimental/cap25_cap_v13_raw.tex          extended raw-working master
-experimental/cap25_cap_v13_raw_compact.tex  compact companion to the raw master
 ```
 
-They move the KoalaBear MCA experimental unsafe edge to
+It moves the KoalaBear MCA experimental unsafe edge to
 
 ```text
 delta = 981105/2097152 ~= 0.467827320,
@@ -40,7 +39,7 @@ unsafe agreement a0 = 1116047,
 conjectured first safe agreement = 1116048.
 ```
 
-Do not mix these statuses: v12 is the current paper authority; v13 raw/compact
+Do not mix these statuses: v12 is the current paper authority; v13 raw
 is the current experimental final-resolution spine.  In paper-authority mode,
 close the band below the v12 edge; in v13 experimental mode, close the adjacent
 band below the raw-v13 candidate edge by adjacent staircase certificates:
@@ -57,8 +56,8 @@ work that merely increases the already-supercritical error at a larger radius.
 
 ## Final road toward FULL RESOLUTION -- experimental v13 raw spine
 
-**Status:** The unsafe side in the v13 raw/compact sources is theorem-level
-inside those experimental drafts.  The exact threshold remains CONJECTURAL /
+**Status:** The unsafe side in the v13 raw source is theorem-level
+inside that experimental draft.  The exact threshold remains CONJECTURAL /
 CONDITIONAL until the safe upper ledgers Q, BC, and SP are proved with constants,
 replayed, audited, and promoted into Paper D.
 
@@ -216,9 +215,9 @@ priority: promotion of any v13 frontier packet requires the v12/towards-prize
 audit gates below to be clean or explicitly waived by a maintainer.
 
 The experimental memo `experimental/rs_mca_proximity_prize_status.md` is a
-committee-facing status draft for the v12/v13/v14 picture.  Use it to orient
+committee-facing status draft for the v12/v13 raw picture.  Use it to orient
 the entropy-subfield-envelope thesis and the current unsafe certificate
-frontier, but do not treat its v14/matching-safe-side language as paper
+frontier, but do not treat its matching-safe-side language as paper
 authority until the corresponding claims are promoted into Paper D or
 `towards-prize` with replayable certificates.
 
@@ -261,25 +260,24 @@ Near-term useful tasks from that note are:
 - test the mode-at-null / exchange-compression extremality conjectures on small
   rows.
 
-## Current priority: audit v13 raw/compact before promotion
+## Current priority: audit v13 raw before promotion
 
-The main focus is now **auditing the experimental v13 raw/compact package**
+The main focus is now **auditing the experimental v13 raw package**
 against Paper D v12:
 
 ```text
 tex/cs25_cap_v12.tex
 tex/towards-prize.tex
 experimental/cap25_cap_v13_raw.tex
-experimental/cap25_cap_v13_raw_compact.tex
 ```
 
 `cs25_cap_v12.tex` is the current complete Paper D candidate.  It supersedes
 v10/v11 for new work unless a maintainer asks for a historical comparison.
 `tex/towards-prize.tex` is the compact prize-facing theorem note.  It should be
 kept aligned with v12, but it is not a replacement for the full Paper D ledger.
-The v13 raw/compact files are experimental successors: use them to work on the
-final-resolution package, but do not cite them as Paper-D authority until a
-maintainer promotes them.
+The v13 raw file is an experimental successor: use it to work on the
+final-resolution package, but do not cite it as Paper-D authority until a
+maintainer promotes it.
 
 ### Main audit task: CS25 / Paper-D cap correctness
 
@@ -290,14 +288,14 @@ Before adding more computations, audit the cap paper itself.  The priority is:
 2. Audit the optional BCIKS half-distance import in the exact normalization of
    `eca` used in v12.
 3. Verify that every "verified exactly" deployed-row inequality in v12 and the
-   v13 raw/compact package has a reproducible script or a printed integer
+   v13 raw package has a reproducible script or a printed integer
    certificate.
 4. Check the rational-scale/genus-one and circle/stereographic transports
    against the actual deployed code models.
 5. Keep `towards-prize.tex` scoped correctly: it is a compact theorem note for
    the smooth multiplicative prize box, not the full ledger paper.
-6. Check that any v13 promotion keeps the raw/compact status split: unsafe
-   exact certificates are theorem-level in the draft, while first-safe adjacent
+6. Check that any v13 promotion keeps the status split: unsafe
+   exact certificates are theorem-level in the raw draft, while first-safe adjacent
    rows remain conditional on finite Q/BC/SP.
 7. Report any issue as `AUDIT`, not as a theorem change, unless the proof fix is
    already written and local.
@@ -391,8 +389,8 @@ Whenever you add or materially change something under `experimental/`, add an en
    grammar, and open problems of `cs25_cap_v12.tex`.
 4. Read `tex/towards-prize.tex` as the compact prize-facing version of the v12
    theorem package.
-5. For v13 work, read `experimental/cap25_cap_v13_raw_compact.tex` first, then
-   use `experimental/cap25_cap_v13_raw.tex` as the extended master ledger.
+5. For v13 work, read `experimental/cap25_cap_v13_raw.tex` as the active raw
+   master ledger.
 6. Read the certificate ledgers and open problems of `snarks_v5.tex`.
 7. Return to Paper B for the exact theorem labels relevant to your task.
 
@@ -405,7 +403,7 @@ Paper A gives explicit no-slack lower bounds.
 Paper B builds the corrected reserve theory and states the main missing local limits.
 Paper D v12 gives the current two-sided cap, safe-side pincer, map/rational
 smooth extensions, and finite certificate grammar.
-Experimental v13 raw/compact moves the unsafe frontier and reduces the final
+Experimental v13 raw moves the unsafe frontier and reduces the final
 safe side to Q, BC, and SP, but it is not yet Paper-D authority.
 Paper C says how a protocol must consume the theory without mixing ledgers.
 ```

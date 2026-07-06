@@ -68,9 +68,9 @@
    "source": "thm:deep-mca, self-contained, no imports"
   }
  },
- "v14_moved_pair": {
+ "v13_raw_moved_pair": {
   "status": "MOVED",
-  "source": "upstream #310 commit f049b91 (composes lem:v13f1-identity-prefix-floor with prop:quantitative-deep-list-floor); maintainer v14 scripts experimental/scripts/towards v13/{cap25_v14_moved_frontier_checks,collision_margins}.py @ commit 2b5b7ce",
+  "source": "upstream #310 commit f049b91 (composes lem:v13f1-identity-prefix-floor with prop:quantitative-deep-list-floor); maintainer v13 raw scripts experimental/scripts/towards v13/{cap25_v13_raw_moved_frontier_checks,collision_margins}.py @ commit 2b5b7ce",
   "route": "v13f1-windows: L=ceil(C(n,m)/p^w) --prop:quantitative-deep-list-floor--> M=ceil(L(q-n)/(q-n+k(L-1))) vs B*",
   "old_v13_pair": {
    "a0": 1116021,
@@ -104,17 +104,17 @@
    "margin_bits": -0.3938,
    "fires": false,
    "TIGHT": true,
-   "note": "watch-item: non-firing (quiet), sub-1-bit vs B*_M31=16777215; the only frontier-covering rung within 1 bit anywhere in the v14 moved-pair audit. Would refute the M31-MCA adjacent pair if a construction ever pushed it to fire (needs 4007457 more codewords at agreement 1116160)."
+   "note": "watch-item: non-firing (quiet), sub-1-bit vs B*_M31=16777215; the only frontier-covering rung within 1 bit anywhere in the v13-raw moved-pair audit. Would refute the M31-MCA adjacent pair if a construction ever pushed it to fire (needs 4007457 more codewords at agreement 1116160)."
   },
   "rung_audit_verdict": "TIGHT (Gceil c=2048 at -0.3938 b; no inversion anywhere)",
-  "cross_check_vs_v14_script": {
-   "v14_pass_margin_bits": 27.927,
-   "v14_fail_margin_bits": -3.259,
+  "cross_check_vs_v13_raw_script": {
+   "v13_raw_pass_margin_bits": 27.927,
+   "v13_raw_fail_margin_bits": -3.259,
    "recomputed_pass_margin_bits": 27.927,
    "recomputed_fail_margin_bits": -3.2589,
    "max_abs_diff_bits": 0.0001
   },
-  "reference": "experimental/notes/frontier-adjacent/frontier_adjacent_v13_rows_v1.md sec 'V14 moved-frontier addendum (2026-07-05)'"
+  "reference": "experimental/notes/frontier-adjacent/frontier_adjacent_v13_rows_v1.md sec 'V13 raw moved-frontier addendum (2026-07-05)'"
  },
  "unsafe_certificates": {
   "statement": "L(a0) > Theta_mca  ==>  (via thm:A deep-point conversion) row error exceeds B*",

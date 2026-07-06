@@ -8,7 +8,7 @@ experimental/notes/frontier-adjacent/frontier_extension_cell_targets_v1.md.
 
 This packet does NOT certify U(a0+1) <= B_star and does NOT pay the
 paid_extension cell. It is a TARGET specification for the open K=F
-(full-orbit) branch of that cell, at the four deployed v14 rows (KoalaBear
+(full-orbit) branch of that cell, at the four deployed v13 raw rows (KoalaBear
 MCA/list, Mersenne-31 MCA/list). This verifier's job is to independently
 recompute every numeric field in the packet from n, k, and the two field
 primes alone -- not to trust the packet's own arithmetic -- and to confirm
@@ -30,7 +30,7 @@ Ten gate classes; exit 0 iff ALL pass, nonzero on ANY failure:
       proper-subfield ambient count sum_{d|e,d<e} p^d.
   G5  e_Y cost verdicts: p vs B* and p^2 vs B* (exact integer), matching the
       packet's "fits"/"EXCEEDS absolute budget" verdict strings.
-  G6  The four v14 (a0, a0+1) pairs -- checked against a hardcoded canonical
+  G6  The four v13 raw (a0, a0+1) pairs -- checked against a hardcoded canonical
       list independent of the JSON (KB MCA (1116047,1116048), KB list
       (1116046,1116047), M31 MCA (1116023,1116024), M31 list
       (1116022,1116023)) -- plus w_at_a0 = a0-k-1 (mca) / a0-k (list).
@@ -42,7 +42,7 @@ Ten gate classes; exit 0 iff ALL pass, nonzero on ANY failure:
             ratio of huge integers, not via math.log2/lgamma.
       Also cross-checks fail_margin_bits itself (a float, via the same
       log2-binomial/lgamma route used by compute_ext.py and
-      "towards v13/cap25_v14_moved_frontier_checks.py") at loose tolerance,
+      "towards v13/cap25_v13_raw_moved_frontier_checks.py") at loose tolerance,
       and confirms e_Y_forced=0 follows from log2(p) exceeding every row's
       fail_margin_bits.
       NOTE ON A CAUGHT BUG: the session draft (wave9_extension_numbers.json)
@@ -65,7 +65,7 @@ Ten gate classes; exit 0 iff ALL pass, nonzero on ANY failure:
       cited experimental/notes/{f1,ef}/*.md file exists; the scanner
       function (extension_chart_upper) and its printed non-claim string
       exist in verify_paid_ledger_functions.py at the cited neighborhood;
-      "towards v13/cap25_v14_moved_frontier_checks.py" exists.
+      "towards v13/cap25_v13_raw_moved_frontier_checks.py" exists.
   G9  Packet/note hygiene: meta.n/meta.k match n/k, the audit_corrections
       block is internally consistent (corrected_value + 1 ==
       source_draft_value for both entries), the shipped JSON's filename
@@ -147,7 +147,7 @@ FIELD = {
     "M31": dict(p=p_M31, e=4, t=100),
 }
 
-# canonical v14 pairs, hardcoded independently of the JSON (task ground truth)
+# canonical v13 raw pairs, hardcoded independently of the JSON (task ground truth)
 CANON_PAIRS = {
     "KB-MCA": (1116047, 1116048, "KB", "mca"),
     "KB-list": (1116046, 1116047, "KB", "list"),
@@ -192,7 +192,7 @@ SCRIPT_SNIPPETS = [
      "does not classify every extension-valued residual chart"),
 ]
 TOWARDS_V13_SCRIPT = os.path.join("experimental", "scripts", "towards v13",
-                                   "cap25_v14_moved_frontier_checks.py")
+                                   "cap25_v13_raw_moved_frontier_checks.py")
 
 
 # ---------------------------------------------------------------------------
@@ -453,7 +453,7 @@ def gate_G5_ey_cost(packet, tamper=False):
 
 
 # ---------------------------------------------------------------------------
-# G6 -- the four v14 pairs + w_at_a0 (canonical, independent of JSON)
+# G6 -- the four v13 raw pairs + w_at_a0 (canonical, independent of JSON)
 # ---------------------------------------------------------------------------
 def gate_G6_pairs(packet, tamper=False):
     ok = True
@@ -464,7 +464,7 @@ def gate_G6_pairs(packet, tamper=False):
         row = rows_by_name[row_name]
         ok_a0 = (row["a0"] == canon_a0)
         ok_a1 = (row["a0_plus_1"] == a1) and (row["a0_plus_1"] == row["a0"] + 1)
-        ok_pair = (row["line_pair_v14"] == [row["a0"], row["a0_plus_1"]])
+        ok_pair = (row["line_pair_v13_raw"] == [row["a0"], row["a0_plus_1"]])
         w_expect = (a0 - k - 1) if kind == "mca" else (a0 - k)
         ok_w = (row["w_at_a0"] == w_expect)
         ok_i = ok_a0 and ok_a1 and ok_pair and ok_w
@@ -666,7 +666,7 @@ GATE_SPECS = [
     ("G3 subfield lattice + confinement dens.  ", lambda packet, t: gate_G3_subfields(packet, t)),
     ("G4 full K=F stratum (Mobius + orbits)    ", lambda packet, t: gate_G4_full_stratum(packet, t)),
     ("G5 e_Y cost verdicts                     ", lambda packet, t: gate_G5_ey_cost(packet, t)),
-    ("G6 four v14 pairs + w_at_a0              ", lambda packet, t: gate_G6_pairs(packet, t)),
+    ("G6 four v13 raw pairs + w_at_a0              ", lambda packet, t: gate_G6_pairs(packet, t)),
     ("G7 exact unsafe/safe + Delta_ext ceiling ", lambda packet, t: gate_G7_exact_ledger(packet, t)),
     ("G8 tex/md/script reference existence     ", lambda packet, t: gate_G8_refs_exist(t)),
     ("G9 packet/note hygiene                   ", lambda packet, t: gate_G9_hygiene(packet, t)),
@@ -682,7 +682,7 @@ def main() -> int:
         print(" TAMPER SELF-TEST: each gate must FAIL when its guarded datum is corrupted")
     else:
         print(" verify_frontier_extension_cell_targets  (zero-arg)")
-        print(" paid_extension cell targets, 4 deployed v14 rows -- TARGETS ONLY, does not pay the cell")
+        print(" paid_extension cell targets, 4 deployed v13 raw rows -- TARGETS ONLY, does not pay the cell")
     print("=" * 90)
 
     try:

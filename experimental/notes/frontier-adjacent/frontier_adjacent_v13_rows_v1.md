@@ -1,14 +1,14 @@
 # Frontier-adjacent packet family: exact adjacent-budget ledgers and the complete rung-margin audit for the four deployed v13 rows
 
-> **v14 status note (2026-07-05).** The KB-MCA and M31-MCA `(a0, a0+1)` pairs
+> **v13 raw status note (2026-07-05).** The KB-MCA and M31-MCA `(a0, a0+1)` pairs
 > analyzed throughout this note's original content below are **(v13 identity
-> pairs -- superseded for the two MCA rows by the v14 composition; retained
+> pairs -- superseded for the two MCA rows by the v13 raw composition; retained
 > as the strategy-note Audit-1 record)**. Upstream PR #310, commit
 > `f049b91`, composes `lem:v13f1-identity-prefix-floor` with
 > `prop:quantitative-deep-list-floor` to move the two MCA rows' frontier
 > pairs to `(1116047, 1116048)` (KB) and `(1116023, 1116024)` (M31); the two
 > **list** rows (KB list, M31 list) are unchanged. Nothing in the original
-> v13-pair content below is altered by this note -- see "V14 moved-frontier
+> v13-pair content below is altered by this note -- see "V13 raw moved-frontier
 > addendum (2026-07-05)" at the end of this file for the full re-audit at
 > the moved pairs.
 
@@ -27,12 +27,12 @@ exact bracket $[2^{5.4}, 2^{5.5})$ — an independent cross-validation
 `f049b91` ("Material correction: quantitative-deep-list-floor flips
 1116044–1116047") later composed `lem:v13f1-identity-prefix-floor` with
 `prop:quantitative-deep-list-floor` and moved both MCA rows' frontier pairs
-forward; #310's original framing is superseded by its own v14 correction
-(see "V14 moved-frontier addendum (2026-07-05)" at the end of this file).
+forward; #310's original framing is superseded by its own v13 raw correction
+(see "V13 raw moved-frontier addendum (2026-07-05)" at the end of this file).
 This family additionally covers the KB-list and both Mersenne-31 rows, the
 complete 21-scale x 3-profile rung-margin audit at both $a_0$ and $a_0+1$,
 the applicability-gap tables, and the named-input targets; no dependency on
-#310 is taken for any of that, and the v14 addendum below independently
+#310 is taken for any of that, and the v13 raw addendum below independently
 re-derives the moved-pair numbers from $n,k,p$ alone rather than from
 #310's PR text.
 
@@ -677,20 +677,20 @@ certificates this note's ledger section is built on).
   the same numbers from scratch rather than depending on that branch's
   artifact, since the two submissions are not guaranteed to land in the same
   order.
-- **Maintainer v14 auxiliary scripts** (commit `2b5b7ce`, "Add v13 v14
-  auxiliary frontier scripts"): `experimental/scripts/towards v13/cap25_v14_moved_frontier_checks.py`
+- **Maintainer v13 raw auxiliary scripts** (commit `2b5b7ce`, "Add v13 v13 raw
+  auxiliary frontier scripts"): `experimental/scripts/towards v13/cap25_v13_raw_moved_frontier_checks.py`
   and `.../collision_margins.py` -- both re-run in this session (exit 0).
   The former's printed margins (`8.978`/`-22.197` bits KB-MCA,
   `27.927`/`-3.259` bits M31-MCA) are **cross-validated to <0.05 bit** by
-  this note's own independent recompute (see "V14 moved-frontier addendum"
+  this note's own independent recompute (see "V13 raw moved-frontier addendum"
   below and verifier gate `G7`); the latter is confirmed `EXPERIMENTAL`
-  (its own header) and not updated to v14 m-values, as expected (it checks a
+  (its own header) and not updated to v13 raw m-values, as expected (it checks a
   different, calibration-only quantity).
 
-## V14 moved-frontier addendum (2026-07-05)
+## V13 raw moved-frontier addendum (2026-07-05)
 
-**This section is the packet family's own v14 successor chapter**: it
-documents the two MCA frontier pairs that moved between v13 and v14
+**This section is the packet family's own v13 raw successor chapter**: it
+documents the two MCA frontier pairs that moved between v13 and v13 raw
 (upstream #310, commit `f049b91`), recomputes their full adjacent-budget
 ledgers and the complete 21-scale x 3-profile rung-margin audit at the moved
 pairs from `n, k, p` alone, and states the updated named-input targets. The
@@ -700,8 +700,8 @@ here; their content earlier in this file stands untouched.
 **Provenance of the move.**
 - Upstream **PR #310, commit `f049b91`** ("Material correction: quantitative
   deep-list floor flips 1116044–1116047; corrected pair {1116047, 1116048}").
-- The maintainer's v14 auxiliary scripts at **commit `2b5b7ce`**:
-  `experimental/scripts/towards v13/cap25_v14_moved_frontier_checks.py` and
+- The maintainer's v13 raw auxiliary scripts at **commit `2b5b7ce`**:
+  `experimental/scripts/towards v13/cap25_v13_raw_moved_frontier_checks.py` and
   `.../collision_margins.py` (both re-run here; outputs reproduced exactly).
 - Recompute machinery: `experimental/scripts/verify_frontier_adjacent_v13_rows.py`
   (#329), **imported, not re-derived**; its pre-existing `G1`-`G6` replay is
@@ -710,7 +710,7 @@ here; their content earlier in this file stands untouched.
   `G7` (added by this commit) is what gates the moved-pair recompute below.
 
 **Status labels.** Every arithmetic/verification claim below is **`AUDIT`**
-(pure integer comparison, independently recomputed, cross-checked to the v14
+(pure integer comparison, independently recomputed, cross-checked to the v13 raw
 script within `0.0003` bit). The "`a0'+1` is the first MCA-safe agreement"
 statements stay **`CONJECTURAL_WITH_FALSIFIER`** (`prob:v13f1-frontier`). No
 `COUNTEREXAMPLE_NEW_FLOOR` beyond the ones #310 already establishes at
@@ -805,7 +805,7 @@ The certified MCA-unsafe interval widens from `[981109/2097152, 1/2)` to
 refuted; no proved-*safe* statement is contradicted (nearest unconditional safe
 radius `δ ≈ 0.2045`; Johnson at `a = 1482910`; exactness zone at `a ≥ 1747627`).
 
-#### 1.3 The v14 four-row adjacent map
+#### 1.3 The v13 raw four-row adjacent map
 
 | row-object | pair `(a0, a0+1)` | status vs v13 |
 |---|---|---|
@@ -820,7 +820,7 @@ crossing `B*`, and the K=k list rows already compare their list floor against
 
 #### 1.4 Maintainer-script reproduction (AUDIT)
 
-`cap25_v14_moved_frontier_checks.py` re-run from repo root — all exact checks
+`cap25_v13_raw_moved_frontier_checks.py` re-run from repo root — all exact checks
 pass:
 
 ```
@@ -828,10 +828,10 @@ KoalaBear MCA:  m=1116047, w=67470, edge=981105/2097152
   pass/fail margins: 8.978 / 22.197 bits ;  safe adjacent=1116048 ;  finite moment order ≈ 94196
 Mersenne-31 MCA: m=1116023, w=67446, edge=981129/2097152
   pass/fail margins: 27.927 / 3.259 bits ;  safe adjacent=1116024 ;  finite moment order ≈ 641593
-All exact v14 moved-frontier checks passed.
+All exact v13-raw moved-frontier checks passed.
 ```
 
-The v14 script checks only the identity-scale (`c=1`) edge/open orientation
+The v13 raw script checks only the identity-scale (`c=1`) edge/open orientation
 (fires at `a0'`, quiet at `a0'+1`); the full 21-scale × 3-profile rung audit of
 §3 is **additive** to it and is where the M31 sub-bit rung surfaces.
 
@@ -839,14 +839,14 @@ The v14 script checks only the identity-scale (`c=1`) edge/open orientation
 calibration; it is an **`EXPERIMENTAL` calibration cross-check only** (its own
 header) and still evaluates the *old* frontier `m` values (KB MCA `1116043`,
 `w0 = 21`; M31 line-round `1116021`, `w0 = 10`) — a different quantity from the
-`B*` edge, not updated to v14 (expected).
+`B*` edge, not updated to v13 raw (expected).
 
 ---
 
 ### 2. The moved-pair adjacent-budget ledger (AUDIT)
 
 All integers recomputed from `n=2^{21}, k=2^{20}, p` via #329's imported exact
-routines; margins cross-checked to the v14 script within `0.0003` bit.
+routines; margins cross-checked to the v13 raw script within `0.0003` bit.
 
 | ledger cell | KoalaBear MCA `(1116047, 1116048)` | Mersenne-31 MCA `(1116023, 1116024)` |
 |---|---:|---:|
@@ -1033,20 +1033,20 @@ inconsistency.
   M31-MCA adjacent pair; it currently misses by `0.3938` bit
   (`16777215 − 12769758 = 4007457` codewords of headroom).
 - **Reproducibility:**
-  `python3 "experimental/scripts/towards v13/cap25_v14_moved_frontier_checks.py"`
+  `python3 "experimental/scripts/towards v13/cap25_v13_raw_moved_frontier_checks.py"`
   (maintainer script, commit `2b5b7ce`; edge/open orientation, exact) and
   `python3 experimental/scripts/verify_frontier_adjacent_v13_rows.py` --
   now **7/7 gates green** (`G1`-`G6` on the four deployed v13 rows,
   unchanged; the new `G7` independently recomputes every field of this
   section's moved-pair ledger and the M31 tight-rung finding from `n, k, p`
   alone, and cross-checks the maintainer script's margins to <0.1 bit). The
-  moved-pair ledger fields are committed in the `v14_moved_pair` block of
+  moved-pair ledger fields are committed in the `v13_raw_moved_pair` block of
   `kb_mca_v1.packet.json` / `m31_mca_v1.packet.json` (this note's own
-  companion packets, superseding the scratch-only `wave7_v14_numbers.json`
+  companion packets, superseding the scratch-only `wave7_v13_raw_numbers.json`
   this addendum was originally drafted against); the KB anchors
   `L(1116044), M(1116044), M=L(1116047), M=L(1116048)` byte-match `f049b91`.
 
-### Constants (v14 addendum)
+### Constants (v13 raw addendum)
 
 | constant | value |
 |---|---|
