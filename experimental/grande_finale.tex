@@ -841,14 +841,16 @@ This gives the first inequality, and the second follows by rearranging.
 \end{proof}
 
 \begin{proposition}[composite prefix directions descend]\label{prop:composite-descend}
-Let \(S\) be a multiplicative coset of order \(N\) in \(\F_p^\times\), let \(e\mid N\), and let \(\psi:\F_p\to\mathbb C^\times\) be a nontrivial additive character.  Suppose \(g(x)=h(x^e)\).  If \(S_e=\{a^e:a\in S\}\), then for every \(m\)
+Let \(S\) be a multiplicative coset of order \(N\) in \(\F_p^\times\), let \(e\ge1\), put \(c=\gcd(e,N)\), and let \(\psi:\F_p\to\mathbb C^\times\) be a nontrivial additive character.  Suppose \(g(x)=h(x^e)\).  If \(S_e=\{a^e:a\in S\}\), then for every \(m\)
 \[
         \sum_{\substack{A\subseteq S\\ |A|=m}}
         \psi\!\left(\sum_{a\in A}g(a)\right)
         =
-        [T^m]\prod_{b\in S_e}\bigl(1+T\psi(h(b))\bigr)^e .
+        [T^m]\prod_{b\in S_e}\bigl(1+T\psi(h(b))\bigr)^c .
 \]
-Thus any Fourier direction whose active indices share the divisor \(e\) is a quotient-scale object, not primitive mass.
+Thus a composite Fourier direction contributes through the image coset \(S_e\)
+with power-map multiplicity \(c\); when \(c>1\) it is a quotient-scale object
+rather than primitive mass.
 \end{proposition}
 
 \begin{proof}
@@ -856,7 +858,7 @@ The left side is the coefficient of \(T^m\) in
 \[
         \prod_{a\in S}(1+T\psi(g(a))).
 \]
-Since \(g(a)=h(a^e)\) is constant on fibers of \(a\mapsto a^e\), and each \(b\in S_e\) has exactly \(e\) preimages in the coset \(S\), the product factors as displayed.
+Since \(g(a)=h(a^e)\) is constant on fibers of \(a\mapsto a^e\), and the power map has exactly \(c=\gcd(e,N)\) preimages over each point of its image on the coset \(S\), the product factors as displayed.
 \end{proof}
 
 \begin{theorem}[proved head-depth prefix flatness]\label{thm:head-flatness}
@@ -917,7 +919,7 @@ turns this into explicit finite inequalities in \(p,N,m,w\), which are the head-
 \end{proof}
 
 \begin{remark}[why head-depth Q does not close the dense frontier]\label{rem:head-does-not-close-q}
-\Cref{thm:head-flatness} pays one square-root loss per active power-sum direction.  This is why it reaches only \(w=21\) or \(22\) in the KoalaBear head regimes, while the deployed frontier rows have \(w\approx 67466\).  The next Q target is therefore not a uniform per-character bound.  Composite Fourier directions are quotient-scale objects by \cref{prop:composite-descend}, and primitive character maxima face the usual Parseval square-root barrier.  The remaining statement must bound the maximum prefix fiber itself, after quotient and planted strata have been paid.
+\Cref{thm:head-flatness} pays one square-root loss per active power-sum direction.  This is why it reaches only \(w=21\) or \(22\) in the KoalaBear head regimes, while the deployed frontier rows have \(w\approx 67466\).  The next Q target is therefore not a uniform per-character bound.  Composite Fourier directions with nontrivial power-map multiplicity are quotient-scale objects by \cref{prop:composite-descend}; the \(c=1\) composite directions and primitive character maxima still face the usual Parseval square-root barrier.  The remaining statement must bound the maximum prefix fiber itself, after quotient and planted strata have been paid.
 \end{remark}
 
 \begin{proposition}[Fourier audit for Q]\label{prop:fourier-audit}
