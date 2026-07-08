@@ -30,6 +30,62 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-08 - Signed-e_m inverse = Fourier participation-ratio bound (KB-MCA a=1116048)
+
+- **Agent/model:** Claude Fable 5 (packet builder).
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_q_em_inverse_participation_ratio.md`,
+  `experimental/scripts/verify_q_em_inverse_participation_ratio.py`,
+  `experimental/agents-log.md`.
+- **Status:** REDUCED (headline exact equivalence) / OPEN≡crux (the bound; its
+  masked-residual variant) / PROVED (three lemmas + full-group collapse + the
+  L∞ route-cut energy dichotomy) / REFERENCE (parent-floor recovery, four-row
+  budget) / MEASURED (primitive-stratum mass, sparsity).
+- **What is being added:** A focused follow-on to the concentration-floor packet
+  (`cap25_v13_q_pw2_concentration_floor.md`, integrated e83962ae, was PR #412).
+  The exact L^1 certificate `(STAR): Σ_{t≠0}|e_m(v_t)| ≤ (Krem-1)·C` — per the
+  masked-residual audit (`cap25_v13_signed_em_masked_residual_audit.md`,
+  integrated e83962ae, was #413) a sufficient but possibly overstrong route to
+  `prob:row-sharp-q` — is shown, by Parseval, to be **algebraically equivalent**
+  to a Fourier participation-ratio / effective-support bound `PR(Rhat) ≤ nu* :=
+  (Krem-1)^2/(Gamma2-1)`, `Rhat(t)=e_m(v_t)`, `PR=‖Rhat‖₁²/‖Rhat‖₂²` — never
+  claimed equivalent to the atom itself. The parent `p^{w/2}` floor is recovered
+  exactly as the trivial-support special case (`1,045,396.58` bits, to the
+  digit); the `L-infinity` per-direction route is separately dead by
+  `2,090,815.35` bits, now unconditional via a proved energy dichotomy (either
+  `Gamma2-1 ≤ 2^-2090793.15` and trivial-support Cauchy-Schwarz closes `(STAR)`
+  outright, or `max|e_m|/C ≥ sqrt((Gamma2-1)/(p^w-1)) > beta*`). Ships three
+  exactly-verified lemmas (L1 value-distribution reduction, L2
+  quotient-convolution self-similarity, L3 monomial collapse) and the full-group
+  `w=1` cyclotomic collapse `|e_m|=1`; measures that the **primitive stratum
+  carries 83–93% of the L^1 mass** in every `w≥2` toy (primitive per-direction
+  sup gated at `0.029–0.434`), and independently replays the audit's F_17
+  counterpacket (`2.672 < 8.4152 < 10.473`). Reference budgets:
+  `nu*_ref=(Krem-1)^2=23088082660036=2^44.392214`; binding row Mersenne-31 list
+  `nu*_ref≈2^5.78≈55` effective spikes out of `2^2090857`.
+- **How it is useful:** Names the open input of the `(STAR)` route as an
+  effective-Fourier-support bound — the finite-row, moment-order-free
+  counterpart of the rewritten `prob:entropy-inverse-q` (primitive entropic
+  inverse theorem for Vandermonde slice sums; open structural steps =
+  `rem:entropy-inverse-skeleton` 4–6 or the Sidon/free-energy alternative), and
+  the finite-side complement of the new conditional asymptotic closure
+  (`thm:asymptotic-rs-mca-closure-combined`) and of `thm:fourier-flat-q` (whose
+  conclusion line defers exactly to the finite margins quantified here).
+  Consistent with the integrated Route-D reductions (was #397; primal side of
+  the same object, mass measurement independent) and the integrated `kappa ≤
+  1.221` calibration (was #407). Convergent-independent with Hughes's
+  `b2_conjq_partial_results.md` Round (o) (was #398; identical base identity and
+  `(STAR)` target — our new content is the PR/nu* equivalence, lemmas, and
+  measurements); non-conflation with his `pi_odd` rounds and the x4b column (was
+  #402) retained.
+- **What to do next:** The bound stays OPEN≡crux — no norm inequality closes it
+  (now the theorem for the L² and L∞ families). Attack `PR(Rhat) ≤ nu*`, its
+  tighter masked-residual variant `PR(E_Q on P_Q)` (the audit's repaired
+  target, minding `rem:mass-aware-logmoment`), or the M31-list `~55`-spike
+  target. Run
+  `python3 experimental/scripts/verify_q_em_inverse_participation_ratio.py`
+  (~90 s, 54 checks) before promotion.
+
 ### 2026-07-08 - Entropic inverse route and asymptotic closure in Grande Finale
 
 - **Agent/model:** Maintainer-added TeX drafts integrated by Codex.
