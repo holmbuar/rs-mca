@@ -1,0 +1,130 @@
+{
+ "_note": "Claim I: the F_p-span cell. rho=ones makes Phi F_p-linear on the {-1,0,1}^T slice, so image(Phi) subset V_T=span_Fp{rho(t)v_t}; the image equals the predicted subgroup W exactly (n_occ==pred_W), rank_K stays FULL while dim_span_Fp<ambient_Fp, and the 110x-120x/23x excess is the index [K^R:W] (exc_cond ~ 1). twist breaks both laws.",
+ "configs": [
+  {
+   "tag": "S27@R4:ones",
+   "law0_violations": 0,
+   "lawp_violations": 0,
+   "n_occ": 2187,
+   "pred_W": 2187,
+   "index": 243,
+   "dim_span_Fp": 7,
+   "ambient_Fp": 12,
+   "V_T": 2187,
+   "K_rank": 4,
+   "K_rank_full": 4,
+   "free": [
+    1,
+    2
+   ],
+   "red": [
+    3
+   ],
+   "W_occupancy": 1.0,
+   "exc_cond": 0.9979801241245693,
+   "G2": 243.7159306289596,
+   "excess_multi": 110.29098896258037,
+   "offset_over_N": -0.019622583653880556,
+   "offset_bits": -0.2747161711543278,
+   "rho": "ones",
+   "R": 4,
+   "N": 14,
+   "a": 7,
+   "signed": true
+  },
+  {
+   "tag": "S27@R4:twist",
+   "law0_violations": 268570,
+   "lawp_violations": 291136,
+   "n_occ": 302456,
+   "pred_W": 2187,
+   "index": 243,
+   "dim_span_Fp": 12,
+   "ambient_Fp": 12,
+   "V_T": 531441,
+   "K_rank": 4,
+   "K_rank_full": 4,
+   "free": [
+    1,
+    2
+   ],
+   "red": [
+    3
+   ],
+   "W_occupancy": 138.29721079103794,
+   "exc_cond": 0.00880428035383001,
+   "G2": 2.1500862873739073,
+   "excess_multi": 0.9729981227627366,
+   "offset_over_N": -0.019622583653880556,
+   "offset_bits": -0.2747161711543278,
+   "rho": "twist",
+   "R": 4,
+   "N": 14,
+   "a": 7,
+   "signed": true
+  },
+  {
+   "tag": "U16o@R4:ones",
+   "law0_violations": 0,
+   "lawp_violations": 0,
+   "n_occ": 256,
+   "pred_W": 256,
+   "index": 256,
+   "dim_span_Fp": 9,
+   "ambient_Fp": 16,
+   "V_T": 512,
+   "K_rank": 4,
+   "K_rank_full": 4,
+   "free": [
+    1,
+    3
+   ],
+   "red": [
+    2
+   ],
+   "W_occupancy": 1.0,
+   "exc_cond": 0.9760969473973957,
+   "G2": 259.7828556318067,
+   "excess_multi": 23.227770959992718,
+   "offset_over_N": -0.22321837112612902,
+   "offset_bits": -3.3482755668919353,
+   "rho": "ones",
+   "R": 4,
+   "N": 15,
+   "a": 8,
+   "signed": false
+  },
+  {
+   "tag": "F64-firstN@R3:ones",
+   "law0_violations": 0,
+   "lawp_violations": 0,
+   "n_occ": 32,
+   "pred_W": 64,
+   "index": 4096,
+   "dim_span_Fp": 6,
+   "ambient_Fp": 18,
+   "V_T": 64,
+   "K_rank": 3,
+   "K_rank_full": 3,
+   "free": [
+    1
+   ],
+   "red": [
+    2
+   ],
+   "W_occupancy": 0.5,
+   "exc_cond": 1.9996854540137705,
+   "G2": 8192.174595042816,
+   "excess_multi": 4699.469397805224,
+   "offset_over_N": 0.020387975981608502,
+   "offset_bits": 0.4281474956137785,
+   "rho": "ones",
+   "R": 3,
+   "N": 21,
+   "a": 10,
+   "signed": false
+  }
+ ],
+ "S27_excess_generic_ones": 120.1027835341153,
+ "S27_generic_baseline_G2": 2.0292279950342023
+}

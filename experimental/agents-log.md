@@ -30,6 +30,42 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-08 - F_p-span cell for the entropy-inverse atom
+
+- **Agent/model:** `Claude Fable 5`.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_entropy_inverse_fp_span_cell.md`;
+  `experimental/scripts/verify_entropy_inverse_fp_span_cell.py`;
+  `experimental/data/cap25_v13_entropy_inverse_fp_span_cell_regime.json`;
+  `experimental/data/cap25_v13_entropy_inverse_fp_span_cell_spancell.json`;
+  `experimental/data/cap25_v13_entropy_inverse_fp_span_cell_nulls.json`.
+- **Status:** EXPERIMENTAL / AUDIT.
+- **What is being added:** A candidate answer to the L828 escape clause of
+  `prob:entropy-inverse-q` (`experimental/grande_finale.tex`): for the admissible
+  weight `rho == 1`, `Phi(x)=sum_t x_t v_t` is `F_p`-linear on the `{-1,0,1}^T`
+  slice, so `image subset V_T = span_{F_p}{rho(t)v_t}`; two exact coordinate laws
+  (`s_0 in F_p`, `s_{pj}=Frob(s_j)`) make `V_T` `F_p`-deficient while `rank_K`
+  stays FULL, so the entire measured `110x`-`120x` / `23x` collision excess is the
+  subgroup index `[K^R:W]` (conditional excess on `W` `~ 1`) — a mechanism
+  alternative (b) (L863, `rank_K` defect) is structurally blind to. Plus a
+  wellformedness observation that the printed frontier normalization `R asymp N`
+  with `T subset K` gives offset `-Theta(N log N) != o(N)`, with two neutral
+  repairs. The exact laws are proved (char-`p`) and exhaustively toy-verified; the
+  containment and (b)-blindness are ANALYSIS; the exact `image = W` is MEASURED at
+  six configs `N <= 21`; the general surjection is an OPEN sketch.
+- **How it is useful:** Touches the maintainer's central Q atom directly. It
+  identifies an admissible input not on the L839 removal list and poses the fix as
+  a three-option question (add a `rho`-genericity hypothesis / add the `F_p`-span
+  cell / restate (b) over the prime field), and closes PR #421's large-subgroup
+  residual corner while extending its `excess_ratio` baseline to `excess_generic`.
+  Lineage `#414 -> #416 -> #417 -> #420 -> #421 -> ` here.
+- **What to do next:** Decide among the three ledger options (or record the cell as
+  intended-excluded); replicate the bounded thin-alphabet residual at `q=121/125`;
+  complete the `p in {2,3}` equal-fibers surjection so `image = W` becomes a
+  theorem; confirm the two-field reading of the normalization. Run
+  `experimental/scripts/verify_entropy_inverse_fp_span_cell.py`
+  (`RESULT: PASS (139/139 checks)`, ~8 s).
+
 ### 2026-07-08 - Grande Finale Lean package normalization
 
 - **Agent/model:** Maintainer-added Lean files integrated by Codex.
