@@ -30,6 +30,75 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-08 - Masked residual E_Q participation ratio (KB-MCA a=1116048)
+
+- **Agent/model:** Claude Fable 5 (packet builder).
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_q_eq_masked_participation_ratio.md`,
+  `experimental/scripts/verify_q_eq_masked_participation_ratio.py`,
+  `experimental/agents-log.md`.
+- **Status:** REDUCED (the PR #414 equivalence transfers verbatim to `E_Q`, for
+  `K_Q >= 1`) / MEASURED+CONDITIONAL (the #413-row headline — conditional on the
+  ledger's still-open lift-class support-removal cost model ever being paid) /
+  MEASURED (the survives-vs-breaks dichotomy, the
+  four-mask/five-toy grid, the floor factors, the falsifier) / PROVED (what
+  survives: Fourier inversion, Parseval, the CS flip, the trivial-support floor,
+  Hermitian symmetry) / CAVEAT (the `tau<1` raw-avg-units artifact —
+  `rem:mass-aware-logmoment`) / OPEN≡crux (the masked PR bound itself) /
+  REFERENCE (integrated ledger + parent-floor constants).
+- **What is being added:** The **masked-residual follow-on** to the OPEN PR #414
+  (`cap25_v13_q_em_inverse_participation_ratio`, branch
+  `thresholds-em-inverse-participation-ratio` @`54f8129`), answering the tighter
+  masked variant #414 explicitly leaves open. The theorem-facing object after
+  first-match deletion is the masked residual `E_Q(t) = Σ_{M in P_Q}
+  psi(t·Phi_w(M))` (introduced by the integrated audit
+  `cap25_v13_signed_em_masked_residual_audit.md`, was PR #413). Result: the #414
+  equivalence `(STAR) <=> PR(Rhat) <= nu*` transfers **verbatim** to `E_Q` with
+  `C->T_Q=tau*C`, `K_rem->K_Q=K_rem/tau`, `Gamma2->Gamma2^Q` and exact masked
+  Parseval `||E_Q||_2^2 = T_Q^2(Gamma2^Q-1)` (relerr `<= 3.8e-15`). At #413's own
+  counterexample row `(17,16,8,3)` support-side generated-field masking (`M_gen`,
+  branch-7 largest-honest-class model) pulls the primitive L1 triangle from
+  `10.4728` (raw, over the `8.4152 = 16777215/1993678` M31-list budget;
+  reproduces #413's printed `10.472846`) to `5.967/6.071 < 8.4152` — **viable
+  exactly where raw is overstrong**, CONDITIONAL: the `tau<1` removal is exactly
+  the support-removal payment the ledger does NOT grant (branch 7's proved
+  deduction is the image-cell count `<= t*p`, not support removal; keep-largest
+  lift-class removal is the ledger's still-open "finite-field lift-class cost
+  model"), so the fit holds iff that cost model is ever paid — while the
+  frequency-quotient cell alone
+  (`M_quot`, branch 4) WORSENS it to `11.89`. The mask is genuinely support-side:
+  `4880 of 4912` directions are frequency-mixed (`0<|E_Q|!=|e_m|`, `0` mass born)
+  — **not** a character projection — so #414's raw L1/L2/L3 lemmas and the
+  full-group collapse do not transfer; only Parseval (the reduction engine) does.
+  The `p^{w/2}` floor is INHERITED (masking rescales only `sqrt(Gamma2^Q-1)`,
+  `0.371->0.274`), so masked `L^2`/`L-infinity` are dead by essentially the
+  parent `1,045,396.58`-bit margin; `PR(E_Q) <= nu*_masked` is the sole non-floor
+  route = the masked crux.
+- **How it is useful:** Concretizes the exact open variant #414 names and answers
+  #413's masked-side question affirmatively-with-caveat. The **first-class
+  caveat** (not a footnote): the entire toy win is the `tau<1` mass factor in
+  raw-avg units — in intrinsic masked-avg/PR units masking RAISES `PR`
+  (`666->2520`) and effective support (`0.14->0.51`), and at toy scale
+  `nu*_masked=5039 > ndir=4912` is vacuous; the toy-informative object is the
+  triangle constant, the deployment object is `PR(E_Q) <= nu*_masked` with
+  NUMERATOR `nu*_ref,masked = (K_rem/tau-1)^2` (`Theta(1)` tau => `2^44.4`–`2^51.1`,
+  non-vacuous vs `2^2090837` directions -- the toy vacuity is a small-scale
+  artifact, not `tau`; the numerator-vs-ndir comparison assumes `Gamma2^Q-1 =
+  Omega(1)`, and the tiny-`Gamma2^Q` regime is closed by the L2 dichotomy). This
+  instantiates `rem:mass-aware-logmoment` (units caveat, not vacuity), and the
+  over-pruning falsifier (single largest class => full-support delta, `PR=p^w-1`,
+  triangle`=p^w`) instantiates its dense-heavy-fiber precondition. Consistent
+  with avdeev Route-D (primitive `83–93%` Fourier share survives masking,
+  `0.920->0.957`) and unaffected by Hughes b2 Round (o) (raw identity).
+- **What to do next:** Scope explicitly that the masks MODEL, not replicate, the
+  deployed ten-branch ledger (verified against
+  `kb_mca_1116048_first_match_ledger_v1.md`: `M_quot`=branch 4, `M_gen`=branch 7
+  largest-exact-class worst-case, F_17 z=1 replay `757/193/20/737`). Prove or
+  refute the masked PR bound in masked-avg units; keep the `tau` factor explicit
+  in any `Gamma2^Q`/PR ledger on `P_Q`. Replay:
+  `python3 experimental/scripts/verify_q_eq_masked_participation_ratio.py`
+  (`PASS 61/61`, exit 0, ~17 s).
+
 ### 2026-07-08 - Grande Finale Lean package normalization
 
 - **Agent/model:** Maintainer-added Lean files integrated by Codex.
