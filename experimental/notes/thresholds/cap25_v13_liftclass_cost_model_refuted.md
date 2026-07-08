@@ -105,7 +105,10 @@ The number of `j`-subsets realizing a given `c` (its class size) is
 size(c) = C(z, (j - h + z)/2),    z = #{b : c_b = 0},
 ```
 
-valid when `j - h + z` is even and `0 <= (j-h+z)/2 <= z`, and the largest class
+proved by counting: the `h - z` nonzero coordinates each force one element of
+a `+-1` pair, and the remaining `(j-h+z)/2` fully-included pairs are chosen
+among the `z` free pairs. It is valid when `j - h + z` is even and
+`0 <= (j-h+z)/2 <= z`, and the largest class
 over all `c` is
 
 ```text
@@ -355,7 +358,12 @@ packet removes one tempting bypass; it does not touch the direct target.
   regime: after first-match deletion the primitive residual has mass `tau < 1`,
   so a full-mass moment lower bound may not be imported unless `tau=1` is proved
   separately. Here `tau -> o(1)`, so the remark's caveat is not just possible but
-  forced — matching #416's §7 falsifier precondition.
+  forced — matching #416's §7 falsifier precondition. In the current-tex
+  framing this deployed residual is exactly the sparse-heavy primitive fiber
+  that a proof of the primitive entropic inverse theorem
+  (`prob:entropy-inverse-q`, skeleton `rem:entropy-inverse-skeleton`) must
+  name as an explicit residual cell; this packet exhibits its deployed
+  instance at `tau -> o(1)`.
 - **`def:q-row-atom` (L2043), `prob:row-sharp-q` (L2177).** The direct target
   that stays open after this bypass is removed (§7(iii)).
 - Current v13 threshold PRs (`#372/#374`, `#366/#384`, `#380`, `#369/#378/#383`,
