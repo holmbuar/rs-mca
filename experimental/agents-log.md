@@ -30,6 +30,55 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-08 - Grande Finale Lean-tex correspondence audit
+
+- **Agent/model:** Claude Fable 5.
+- **Files added or changed:**
+  `experimental/notes/audits/lean_grande_finale_correspondence_audit.md`,
+  `experimental/scripts/verify_lean_correspondence_audit.py`,
+  `experimental/agents-log.md`.
+- **Status:** AUDIT.
+- **What is being added:** Discharges the maintainer's asked next step after the
+  `b99b2c4` Lean package normalization: a textual audit of the correspondence
+  between the Lean declaration docstrings and the labels in
+  `experimental/grande_finale.tex`.  All 112 declarations across
+  `GrandeFinale.lean` and the six `GrandeFinale/*.lean` modules were read
+  against the tex: 93 FAITHFUL, 13 DRIFT, 1 STRONGER-THAN-TEX
+  (`SP.prefix_rigidity`, documented), 5 NO-TEX-COUNTERPART (honest).  Zero
+  `sorry`/`admit`/`axiom` across the package, and the 12 `native_decide`
+  constants match the tex decimals.  `lake build` was not run (Mathlib-pinned
+  toolchain unavailable; the package README forbids casual builds), so all
+  verdicts are textual and the `native_decide` numbers are checked by hand, not
+  re-executed.
+- **How it is useful:** Isolates a systemic provenance drift.  Every declaration
+  in `QEntropyInverse.lean` and `QFourierTao.lean`, plus the Q=>SP section of
+  `SP.lean` and the file headers of
+  `BC.lean`/`Frontier.lean`/`QPrimitiveCollision.lean`, cites labels (`conj:Q`,
+  `conj:SP`, `conj:BC`, `thm:asymptotic`, `lem:log-moment-to-q`,
+  `cor:asymp-q-fourier-tao`, `thm:primitive-log-collision`) and a manuscript
+  file (`q_fourier_tao_finish_patch.tex`) that exist nowhere in the repo -
+  pre-restructuring leftovers from the tex's "Former Q/BC/SP Cells" section.
+  The note supplies a phantom->real retarget map (the real content is
+  `thm:moment-q`, `thm:logmoment-equivalence`, `def:primitive-logmoment`,
+  `prop:vandermonde-kills-low-rank`, `prop:moment-sandwich`, `thm:q-implies-sp`).
+  The one content finding: `SP.lean`'s `sp_from_q` / `sp_from_q_normalized`
+  state a bound weaker than their own proof establishes - the internal `key`
+  step derives the sharp `thm:q-implies-sp` form, then a final `linarith` drops
+  the `-Nsub` correction term.  Tightening the statement and retargeting the
+  citation is RECOMMENDED but NOT APPLIED here (a statement change needs kernel
+  re-elaboration, which is unavailable).
+- **What to do next:** Fix the phantom docstrings to the real labels; the
+  verifier's lean-side gates then flip from DRIFT-PRESENT to DRIFT-FIXED and
+  still exit 0.  Apply the `sp_from_q` tightening in a Mathlib-enabled
+  environment.  Then close the ranked coverage gaps, cheapest first: the finite
+  row-sharp Q constant tables (`prop:q-moment-order-floor` /
+  `prop:q-exact-target`), the four broad safe-anchor theorems
+  (`thm:gf-deep-mca`, `prop:exact-tangent-cell`, `thm:gf-mca-from-ca`,
+  `thm:subfield-confinement`), and `thm:head-flatness` toward the Q inverse
+  theorem.  Verifier
+  `experimental/scripts/verify_lean_correspondence_audit.py` is zero-arg,
+  stdlib-only, PASS 53/53, ~0.1 s, with 4 tamper self-tests.
+
 ### 2026-07-08 - Grande Finale Lean package normalization
 
 - **Agent/model:** Maintainer-added Lean files integrated by Codex.
