@@ -53,8 +53,9 @@ Keep entries concise and link to the relevant files.
   `H(Y-Y') ~ 2H(Y)`) leaving the entropy-small-doubling branch with no input, while
   those same popular levels have **growing** `Gamma_ell` (`fe_slope` up to `+1.41`)
   so free-energy decay also fails; decay fires only on the deep sub-random level
-  `j=-2`. Triple-checked (dual entropy paths, dual free-energy paths, robust to any
-  `O(1)` threshold) and corroborated by trade geometry: the minimum trade support
+  `j=-2`. Triple-checked (dual entropy estimators, dual free-energy code paths (a
+  factoring identity), ES verdict flips only at ~4x the threshold convention,
+  FE side sign-robust) and corroborated by trade geometry: the minimum trade support
   **saturates the `2(w+1)` BCH/Vandermonde barrier** with Vandermonde rank-defect
   `0` everywhere (trades provably spread `=>` high doubling forced).
   **Finding 2:** the dense-heavy-fiber hypothesis of `rem:mass-aware-logmoment`

@@ -135,7 +135,11 @@ the measurement honest, every choice is fixed here and gated by the verifier.
   `fe_slope <= -DECAY_C * N` with `DECAY_C=0.05`. At the anchor `N=16` these are
   the gap threshold **`1.60`** and the slope threshold **`-0.80`**. The constants
   are arbitrary at toy scale; the verdicts below are robust to any `O(1)` choice
-  because the measured gaps and slopes miss both thresholds by wide margins.
+  because the measured gaps and slopes miss both thresholds by wide margins: the
+  ES branch fires only at `DOUB_C >~ 0.40` (~4x the `0.10` convention; nearest
+  at the anchor, `gap/N = 0.395`), and the FE branch is **sign-robust** — every
+  trade-bearing `fe_slope` is positive, so no positive decay threshold fires at
+  all.
 - **Dense/sparse rule (inherited from #416 §7).** Over prime `F_p` there are no
   proper subfields, so every structured class is an exact `Z[zeta_n]` lift class.
   Per fiber, dominance `rho = largest_class / N`; a fiber is **dense-heavy** iff
@@ -191,7 +195,11 @@ full-spectrum free-energy pass):
 | `(23,22,11,3)` `N=22` | `-1` | 5214 | — | — | — | — | `-0.095` | near-FE |
 | | `0` | 6953 | 1200\* | `9.987` | `19.491` | `0.952` | `+0.105` | **NEITHER** |
 
-\* pooled trade population capped at `P_CAP=1200`.
+\* pooled trade population capped at `P_CAP=1200`. The `(19,18,9,3)` /
+`(23,22,11,3)` trade-geometry and dichotomy rows are byte-gated against the
+committed data (their census + dense-heavy decomposition are recomputed from
+scratch); the `(17,16,8,3)` and `(13,12,6,2)` trade/dichotomy rows are
+recomputed in full — see §0.
 
 **Why NEITHER.** The two branches fail for complementary reasons, at the **same**
 levels:
@@ -210,9 +218,9 @@ levels:
 
 **Triple-check (all gated).** (i) `H(Y)` agrees across two estimators — sparse
 trade key vs dense length-`n` signed vector — at every row (`ok_HY`). (ii) The
-per-level free-energy contribution agrees across two paths — dyadic-fraction
-`*Gamma_ell` vs direct `sum_{s in j} N^ell` — to `<= 1e-6` relative
-(`ok_fe_2path`). (iii) The verdicts are robust across all four toys and to any
+per-level free-energy contribution agrees across two code paths — dyadic-fraction
+`*Gamma_ell` vs direct `sum_{s in j} N^ell`, a factoring identity, exact by
+construction — to `<= 1e-6` relative (`ok_fe_2path`). (iii) The verdicts are robust across all four toys and to any
 `O(1)` threshold, since every measured gap and slope misses its threshold by a
 wide margin.
 
