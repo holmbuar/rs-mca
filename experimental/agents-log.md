@@ -30,6 +30,59 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-08 - Entropic inverse atom toy dichotomy instrumentation
+
+- **Agent/model:** Claude Fable 5.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_entropy_inverse_toy_dichotomy.md`;
+  `experimental/scripts/verify_entropy_inverse_toy_dichotomy.py`;
+  `experimental/data/cap25_v13_entropy_inverse_toy_dichotomy_17_16_8_3.json`;
+  `experimental/data/cap25_v13_entropy_inverse_toy_dichotomy_13_12_6_2.json`;
+  `experimental/data/cap25_v13_entropy_inverse_toy_dichotomy_19_18_9_3.json`;
+  `experimental/data/cap25_v13_entropy_inverse_toy_dichotomy_23_22_11_3.json`.
+- **Status:** EXPERIMENTAL / AUDIT.
+- **What is being added:** First toy-scale instrumentation of the Q1 atom
+  `prob:entropy-inverse-q` (grande_finale.tex L827) and its L869 Sidon/free-energy
+  dichotomy, on four exact toys
+  `(p,n,m,w) in {(17,16,8,3),(13,12,6,2),(19,18,9,3),(23,22,11,3)}`. The anchor
+  independently replays shipped PR #416/#413 gates (`tau=5286/12870=0.4107`,
+  `Gamma2=1.13769` via census and Parseval, `PR(E)` raw`->`M_gen `666.52->2519.95`,
+  raw primitive triangle `10.4728`). **Finding 1 (headline):** every trade-bearing
+  above-random dyadic level, at every toy, lands on **NEITHER** branch — the
+  level-typical trades are near-Sidon (relative doubling `0.82`–`0.95`, so
+  `H(Y-Y') ~ 2H(Y)`) leaving the entropy-small-doubling branch with no input, while
+  those same popular levels have **growing** `Gamma_ell` (`fe_slope` up to `+1.41`)
+  so free-energy decay also fails; decay fires only on the deep sub-random level
+  `j=-2`. Triple-checked (dual entropy paths, dual free-energy paths, robust to any
+  `O(1)` threshold) and corroborated by trade geometry: the minimum trade support
+  **saturates the `2(w+1)` BCH/Vandermonde barrier** with Vandermonde rank-defect
+  `0` everywhere (trades provably spread `=>` high doubling forced).
+  **Finding 2:** the dense-heavy-fiber hypothesis of `rem:mass-aware-logmoment`
+  HOLDS (dense-mass fraction `0.90`–`1.00`, strengthening with `p`), and `M_gen`
+  degenerates to #416 §7's full-support-delta falsifier **exactly** (`p=23`:
+  `tau=39/2261`, `PR(E_Q)=12166=p^w-1`), one measurement tying
+  `rem:mass-aware-logmoment -> ` #416 §7 falsifier `-> ` #417's lift-class
+  refutation.
+- **Scope:** this is **instrumentation, consistent with the atom, not a
+  counterexample** — the toy popular excess is carried by paid algebraic cells (the
+  atom's alternative (a), lift-class structure) that the two-branch test excludes
+  by construction, and the `o(N)` frontier slack exceeds the signal at `N <= 22`;
+  the steering content is that the robust route's entropy-small-doubling input is
+  empirically **absent** at toy scale.
+- **How it is useful:** Locates, at exact small scale, exactly where the primitive
+  entropic inverse route stands — its Sidon/free-energy branch has no toy input, so
+  the finite structure must come from alternative-(a) lift-class bookkeeping (#417)
+  or from regimes toys do not reach. Ties the mass-aware caveat to the #416/#417
+  lineage with one exact degeneracy measurement.
+- **What to do next:** The §7 next-measure list — plant subgroup-coset / AP
+  structure into popular fibers to try to realize the entropy-small-doubling branch
+  and make a rank defect appear; switch to off-diagonal / falling-factorial
+  collision moments to de-inflate the `M_gen` `Gamma_8=202` blow-up; push `w -> p`
+  at fixed `p` to exit the near-Fourier-flat regime (`p=23` is already near-flat,
+  `Gamma_8=1.25` vs `13.1` at `p=17`). Verifier
+  `experimental/scripts/verify_entropy_inverse_toy_dichotomy.py` recomputes and
+  gates every number: `RESULT: PASS (234/234 checks)`, ~20 s.
+
 ### 2026-07-08 - Grande Finale Lean package normalization
 
 - **Agent/model:** Maintainer-added Lean files integrated by Codex.
