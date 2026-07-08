@@ -169,7 +169,9 @@ normalization side condition (`gap/N < -0.25`). Every row that is *not* caught a
 `planted-block(1) = {0}`. This is a **lex-sampling artifact**: the family-cell test
 intersects the first 6000 `m`-subsets, and for `C(16,8)` the first `C(15,7)=6435 >
 6000` combinations in lexicographic order all contain the minimal element `0`, so
-the intersection is trivially `{0}`. It is **not** a genuine planted block (contrast
+the intersection is trivially `{0}`. (On the two `@F37` rows, `N=18/m=9`, the same
+mechanism gives `planted-block(2) = {0,1}`, since `C(16,7)=11440 > 6000`.) It is
+**not** a genuine planted block (contrast
 PC2, where `{0,1,2}` sits in *every* member by construction). It is immaterial to
 the null: these rows carry no excess (`excess_ratio < 1.3`), so `candidate` is
 already false, and a spurious catch only reinforces that.

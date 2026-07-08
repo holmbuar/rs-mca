@@ -884,7 +884,9 @@ def main():
     fp_bad[some] += 1
     if sorted(fp_bad.values()) != sorted(fl.values()):
         tampers += 1
-    # T6: a heavy-fiber trap forced through as a candidate must be blocked by norm_ok
+    # T6: the norm_ok AP row must still NOT surface as a candidate -- it passes norm_ok
+    #     yet fails the excess AND ES conjunction (norm_ok alone never yields a candidate;
+    #     the heavy-fiber norm_ok-kill itself is gated at trap.*.norm_kills / .not_candidate).
     faux_candidate = (r_ap["excess"] and r_ap["any_ES"] and not r_ap["caught"] and r_ap["norm_ok"])
     if faux_candidate is False:
         tampers += 1
