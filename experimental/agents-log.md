@@ -45,8 +45,9 @@ Keep entries concise and link to the relevant files.
   weight `rho == 1`, `Phi(x)=sum_t x_t v_t` is `F_p`-linear on the `{-1,0,1}^T`
   slice, so `image subset V_T = span_{F_p}{rho(t)v_t}`; two exact coordinate laws
   (`s_0 in F_p`, `s_{pj}=Frob(s_j)`) make `V_T` `F_p`-deficient while `rank_K`
-  stays FULL, so the entire measured `110x`-`120x` / `23x` collision excess is the
-  subgroup index `[K^R:W]` (conditional excess on `W` `~ 1`) — a mechanism
+  stays FULL; the raw `Gamma_2` sits on the subgroup index `[K^R:W]` exactly
+  (`243.72` vs `243`, `259.78` vs `256` — the `110x`-`120x` / `23x` figures are
+  that index against the `~2` generic baseline; conditional excess on `W` `~ 1`) — a mechanism
   alternative (b) (L863, `rank_K` defect) is structurally blind to. Plus a
   wellformedness observation that the printed frontier normalization `R asymp N`
   with `T subset K` gives offset `-Theta(N log N) != o(N)`, with two neutral

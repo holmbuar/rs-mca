@@ -175,7 +175,10 @@ violations on every slice point in all six configs, `PROVED-AT-TOYS`):
   `free = {j in [1,R): p nmid j}` and `red = {j: p | j}`.
 
 So `V_T` collapses onto `W := {s in K^R : s_0 in F_p, s_{pj} = s_j^{p}}`, of index
-`(q/p)^{[s0 free]} q^{#red}`. Measured `F_p`-span dimensions (verifier-gated):
+`q^{1+#red} / p^{[s0 free]}` (the head contributes `q/p` when free in `F_p`
+(signed) and `q` when pinned to one residue (unsigned); each reducible column
+contributes `q`) — `243`, `256`, `4096` for the three rows below. Measured
+`F_p`-span dimensions (verifier-gated):
 
 | config | `p^k` | `R` | `dim_Fp V_T` | ambient `Rk` | `rank_K {v_t}` | `min(N,R)` |
 |---|---:|---:|---:|---:|---:|---:|
@@ -195,8 +198,10 @@ ambient (S27 `dim_Fp` `7 -> 12`, verifier-gated); so the cell is a `rho == 1`
 
 ### 2.2 The image is the subgroup `W` exactly, and the excess is the index `MEASURED`
 
-The containment `image subset V_T` is realized as `image = W` **exactly** at every
-toy (occupancy `= 1.000`), and conditioning on `W` removes all the excess:
+The containment `image subset V_T` is realized as `image = W` **exactly** at the
+two surjective configs below (`S27`, `U16o`; occupancy `= 1.000`); at `F64` the
+image is a half-`W` coset (occupancy `0.5`, `exc_cond = 2`), so the general
+surjection stays `OPEN` (§2.3). Conditioning on `W` removes all the excess:
 
 | config | `R` | `law0`/`lawp` viol | `n_occ` | `|W|` = `pred_W` | index `[K^R:W]` | `exc_multi` (uncond.) | `exc_cond` on `W` |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -206,8 +211,10 @@ toy (occupancy `= 1.000`), and conditioning on `W` removes all the excess:
 
 For the signed S27 the head is free so `W = V_T` (`|W| = 3^7 = 2187`); for the
 unsigned U16o the head is pinned `s_0 = a mod 2` so `W = V_T / p` (`|W| = 2^9/2 =
-256`). In both, `n_occ = |W|` on the nose and `exc_cond ~ 1`: **the entire measured
-`110x`–`120x` / `23x` collision excess is precisely the index factor `[K^R:W]`**,
+256`). In both, `n_occ = |W|` on the nose and `exc_cond ~ 1`: the **raw** Renyi moment
+`Gamma_2` sits on the index `[K^R:W]` exactly (`243.72` vs `243`, `259.78` vs
+`256`), and the `110x`–`120x` / `23x` figures are that index read against the
+`~2` generic/Poisson baseline — the excess is **entirely** the `F_p`-span index,
 uniform on `W`. The unconditional `excess_generic` at balance is `120.10` (S27,
 `R=4`) — two orders of magnitude of structural excess, all of it the `F_p`-span
 index. The **frontier-normalization side condition passes**: S27 `R=4` is exactly
@@ -233,7 +240,14 @@ equality is only exact-enumerated at toys.
 ### 2.4 The consequence for the ledger — a question, not a correction `ANALYSIS`
 
 State neutrally. The cell is admissible input to `prob:entropy-inverse-q` (a legal
-`rho == 1`, at balance, `rank_K` full), and it is not one of the L839 removals. Three
+`rho == 1`, at balance, `rank_K` full), and it is not one of the L839 removals.
+The nearest listed cells are the **extension** and **differential-locator
+low-defect** cells, but both constrain the *support/locator* side (an
+extension-valued slope, or a `rank_K` defect among the columns), whereas the
+`F_p`-span cell constrains the *image subspace* at **full** `rank_K` and generic
+support (§4: `98`–`100%` support-invisible, matching the `96.5%` random null);
+alternative (a) fires only for a cell *already* on the list, and this one is
+not. Three
 options resolve it, any one sufficient; the choice is the program's:
 
 1. add a **`rho`-genericity hypothesis** to the atom (restrict to weights for which
@@ -305,7 +319,7 @@ question seen from two sides.
 
 - **Generic-`rho` null — no excess survives balance in any regime.** Dividing by the
   generic-map baseline, the balance-point `excess_generic` under a generic (twist)
-  weight is `<= 1.08` across all eight regimes (S27t `1.060`, S49t `1.056`, U16
+  weight is `<= 1.08` across all eight swept regimes (four serialized in the gated JSON: S27t `1.060`, S49t `1.056`, U16
   `0.475`, U64 `0.479`; the sub-`1` values are additive-image effects, not deficits).
   The `rho=1` cell (S27 `120.10`, U16o `88.70`) is the sole structural excess, and it
   is exactly the `F_p`-span index. This is the twin of §2's mechanism seen through the
