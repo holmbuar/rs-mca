@@ -30,6 +30,62 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-08 - Entropic inverse atom planted-structure missing-cell hunt
+
+- **Agent/model:** Claude Fable 5.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_entropy_inverse_missing_cell_hunt.md`;
+  `experimental/scripts/verify_entropy_inverse_missing_cell_hunt.py`;
+  `experimental/data/cap25_v13_entropy_inverse_missing_cell_hunt_controls.json`;
+  `experimental/data/cap25_v13_entropy_inverse_missing_cell_hunt_hunt.json`;
+  `experimental/data/cap25_v13_entropy_inverse_missing_cell_hunt_wpush.json`.
+- **Status:** EXPERIMENTAL / AUDIT.
+- **What is being added:** Toy-scale instrumentation of the **escape clause** of the
+  Q1 atom `prob:entropy-inverse-q` (grande_finale.tex L828: "Prove ..., or identify
+  the extra obstruction cell that must be added to the first-match ledger").
+  Sibling / follow-on to PR #420 (toy dichotomy instrumentation), whose conventions
+  it inherits verbatim. **Headline (measured null):** across a planted catalog
+  (arithmetic / geometric progressions, Sidon sets, coset unions, two-subgroup
+  composites, shift towers, single-heaviest-fiber families) the escape clause returns
+  **zero** candidate missing cells — every plant generating genuine collision excess
+  is either **CAUGHT** by a removal-list cell (quotient / dihedral / planted-block,
+  pinned at `prop:sp-pullback` L1189 / `lem:coeff-scale` L1217 / `thm:near-rational`
+  L1350 / `thm:head-flatness` L1095) or **KILLED** by the frontier normalization side
+  condition `log|Omega'| - R log|K| = o(N)` (L840). **Core tension:** excess ⟺
+  multiplicative-subgroup identification ⟺ small (and caught) family; additive /
+  composite structure at normalization-valid sizes is collision-neutral, so
+  large-family and real-excess never co-occur off the caught cells. **AP invisibility:**
+  arithmetic progressions produce no power-sum excess at any tested `(p,w)`
+  (`excess_ratio` 0.93–1.05, random-identical) and no rank defect (distinct points ⟹
+  full Vandermonde), which is why the removal list is purely multiplicative/algebraic;
+  only a faint additive signature survives in trade rel-doubling (AP `0.715` vs random
+  `0.747` at `w=1`), far from the ES threshold. **`w`-robustness:** sweeping `w=1..7`
+  (`mu_16`) / `1..6` (AP), `NEITHER` is not a `w=3` artifact — past the Fourier-flat
+  edge the popular band goes sparse (trade levels `-> 0`), min trade support saturates
+  `2(w+1)` BCH and rank-defect stays `0`; the exploding raw `rho_max`/`Gamma_8` is pure
+  sub-sampling. **Attribution:** the natural `mu_16` popular-level trades are
+  substantially removal-list-borne (at `j=1`, 37.7% dihedral / 28.3% quotient; 30.9% /
+  24.1% at `j=0`) — direct measured support for alternative **(a)**.
+- **Scope:** measured completeness support for alternative (a) **at toy scale**
+  (`N <= 18`, `R = w`) — instrumentation, **not** a proof of cell-list completeness and
+  **not** a claim on the atom. Two corners are named as the residual hunt space: the
+  `R > w` moment-curve wall (alternative (b) and the differential-locator cell are
+  untriggerable at `R=w`, `prop:vandermonde-kills-low-rank` L876), and the
+  large-family normalization-valid excess corner. The tangent / extension / saturation
+  cells are not instantiable in the pure `Psi` subset-sum toy over a prime field.
+- **How it is useful:** exercises the atom's escape clause at exact small scale,
+  measuring that the deployed removal list (L839) has no toy-visible gap and that the
+  finite structure must come from alternative-(a) lift-class bookkeeping (#417) or from
+  the two named regimes toys do not reach. Trade-side complement to #417's lift-class
+  cost-model refutation.
+- **What to do next:** the §11 next-measure list — build an `R > w` moment-curve toy
+  (received word `u+zv`) so alternative (b) and the differential-locator cell become
+  triggerable; probe the large-subgroup normalization-valid excess corner (small-index
+  `mu_n` kept exponentially large; composite two-subgroup locators with coeff-scale 1);
+  instantiate the decoding-layer cells. Verifier
+  `experimental/scripts/verify_entropy_inverse_missing_cell_hunt.py` recomputes and
+  gates every number: `RESULT: PASS (199/199 checks)`, ~17 s.
+
 ### 2026-07-08 - Grande Finale Lean package normalization
 
 - **Agent/model:** Maintainer-added Lean files integrated by Codex.
