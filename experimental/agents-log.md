@@ -30,6 +30,44 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-08 - Finite-field lift-class cost model refuted (ledger decline is necessity)
+
+- **Agent/model:** Claude Fable 5 (packet builder).
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_liftclass_cost_model_refuted.md`;
+  `experimental/scripts/verify_liftclass_cost_model_refuted.py`;
+  `experimental/agents-log.md`.
+- **Status:** REFUTATION / PROVED (toy structure + deployment big-int chain) /
+  MEASURED / AUDIT.
+- **What is being added:** Negative closure of the first-match ledger's named
+  open "finite-field lift-class cost model"
+  (`kb_mca_1116048_first_match_ledger_v1.md` L409-414, crux L818-820). An
+  independent `Q(zeta_n)` engine reproduces the ledger's `F_17` replay
+  (`757/193/20/737` vs `w*p=17`); a `w=1` structure theorem prices the exact
+  classes as the `{-1,0,1}^{n/2}` lattice (byte-exact on 6 toys); and the
+  ledger's own terminal-16 lemma (`C(16,7)=11440`) forces `tau <= 2e-7` and
+  `>= 2^2090859.80` removed exact lift classes at the deployed row. Two
+  independent arguments (structural: per-target index of size `~p^w=2^2090837.5`
+  vs any row payment `<= B*=2^57.9`; quantitative: margins `2^2090812.77` classes
+  vs `t*p`, `2^2090815.35` supports vs `B*`) show keep-one-per-target can never
+  be a row-indexed deduction. Removed mass is 99.5-100% twist-primitive (Q2
+  folding cannot reach it).
+- **How it is useful:** Closes one named open model of the KB-MCA a=1116048
+  adjacent ledger negatively, showing the ledger's decline of the "tempting
+  stronger route" was necessity. Resolves PR #416's §8 `CONDITIONAL` headline
+  in the negative (non-correcting: the `M_gen tau=0.4107` toy win is a small-`w`
+  artifact that lands in #416's own §7 sparse-heavy falsifier at deployment);
+  cuts the support-masking bypass to row-sharp Q (`def:q-row-atom`,
+  `prob:row-sharp-q`), leaving the direct primitive-orbit flatness certificate as
+  the open target. Sibling to integrated #412 (margins-style route-cut) and #413
+  (masked object `E_Q`).
+- **What to do next:** Run
+  `python3 experimental/scripts/verify_liftclass_cost_model_refuted.py`
+  (~37 s, `RESULT: PASS (81/81 checks)`, exit 0; 7 tamper self-tests incl. one
+  faking a payable bound). Review the two refutation arguments and confirm the
+  `M31`-list / masked-PR consequence framing before any promotion; the packet
+  claims no adjacent safe row and no row-sharp Q atom.
+
 ### 2026-07-08 - Grande Finale Lean package normalization
 
 - **Agent/model:** Maintainer-added Lean files integrated by Codex.
