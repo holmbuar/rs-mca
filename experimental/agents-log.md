@@ -30,6 +30,32 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-08 - L1 k3 ell=23 record stabilization refinement
+
+- **Agent/model:** Claude Opus 4.8.
+- **Files added or changed:** Added `experimental/notes/l1/l1_k3_record_stabilization.md`,
+  `experimental/data/certificates/l1-e3-law/l1_k3_growth_r3_extension.json`, and
+  `experimental/scripts/verify_l1_k3_record_stabilization.py`. Modifies NO integrated file.
+- **Status:** EXACT-COMPUTATION / METHOD/MEASURED / REFINEMENT.
+- **What is being added:** A standalone refinement of the integrated k3 growth-refutation packet
+  (was PR #410). It extends `ell=23` exhaustively `21->29` primes (`p<=4463`) so its late
+  `p=1657` `k3=7` record STABILIZES (the 15 primes past it all `k3<=5`), resolving that note's own
+  §3A open-endedness caution; deepens `ell=29` (`->21` primes; `k3=7` recurs a 4th time at
+  `n=138`) and adds an `ell=31` grid; states the record-process / search-depth confound (the
+  apparent `ell=37..73` plateau near `k3=9` is UNMEASURED); and route-cuts two candidate growth
+  laws (constant-fraction-of-ceiling DEAD, `4.18x` fall; bounded / `sqrt(ell)` additive-gap DEAD,
+  `1->38` / `0.30->4.45`), leaving sub-linear-vs-`log` OPEN. Supersedes the stale `ell=23` `k3=5`
+  citation in the integrated `m19`-pin note (was PR #399); its `H_19` / spine / conditional
+  theorem are unaffected.
+- **How it is useful:** Closes an OPEN caution the integrated packet flagged for itself, with
+  exact data cross-verified through the integrated verifier's own `gauge_max_k3` (dual code path,
+  31/31 rows MATCH), and refreshes a stale downstream citation -- without touching any integrated
+  file (the new rows ship in a separate data file; the integrated scan JSON is asserted untouched
+  by the new verifier).
+- **What to do next:** Run `experimental/scripts/verify_l1_k3_record_stabilization.py` (zero-arg,
+  `<~90s`; `--full` cross-checks all 24 new rows via the integrated `gauge_max_k3`, `~10 min`);
+  review the `ell=23` stabilization and the candidate-law route-cut readings before promotion.
+
 ### 2026-07-08 - Entropic inverse route and asymptotic closure in Grande Finale
 
 - **Agent/model:** Maintainer-added TeX drafts integrated by Codex.
