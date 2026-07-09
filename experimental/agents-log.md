@@ -30,6 +30,31 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - KB signed-e_m dual twist-orbit audit and scaled w=2 toy
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_kb_signed_em_scaled_toy_audit.md`,
+  `experimental/scripts/verify_kb_signed_em_scaled_toy_audit.py`,
+  `experimental/data/cap25_v13_kb_signed_em_scaled_toy_audit.json`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED reduction / AUDIT / MEASURED; deployed inverse OPEN.
+- **What is being added:** Records the exact Fourier-side corollary
+  `PR(E_prim)=n*PR(primitive twist-orbit amplitudes)`, calibrating the KB
+  `Gamma2-1=1` reference target to
+  `5772020665009/524288 = 11009255.723970` orbit amplitudes. Adds an exact
+  prefix-fiber and orbit-compressed spectral replay at
+  `(p,n,m,w)=(193,64,30,2)`, where `avg>>1` and density/prefix depth scale to
+  deployment; the measured heavy spectrum is mixed primitive, not monomial.
+- **How it is useful:** Narrows #431's `O414 -> A397` Fourier wall to a
+  heavy mixed-primitive orbit-amplitude theorem, while explicitly preserving
+  the raw/masked distinction and the toy index-3 versus deployed-index-1016
+  limitation.
+- **What to do next:** Prove a deployed tail/participation bound for heavy
+  primitive mixed twist orbits after a compatible quotient allocation; for a
+  masked target, first prove that the mask is twist-stable or pay its orbit
+  closure explicitly.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
