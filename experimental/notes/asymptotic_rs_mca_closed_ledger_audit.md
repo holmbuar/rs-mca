@@ -84,6 +84,41 @@ whose Fourier/Sidon *routing* payment is cited to two manuscripts that are not i
 the repository; the three definitional joints B1/B3/B4 are `FOUND-WEAKER` in
 named, repairable ways.
 
+## 1b. Steering alignment — the mandated audit vocabulary (`eb42b82`) `REFERENCE`
+
+While this audit was being assembled, the steering was rewritten
+(`agents.md`, commit `eb42b82`, "Update agent priorities for asymptotic RS
+MCA proof"): adversarial proof audits are now priority 2, and every attack
+must end as `NO ISSUE` / `FIXED` / `OPEN GAP` / `COUNTEREXAMPLE_NEW_FLOOR`
+with exact file/label references. This packet is that audit class for the
+citation layer. Translation (gated in the data JSON `steering_alignment`
+block):
+
+| mandated verdict | count | composition |
+|---|---:|---|
+| `NO ISSUE` | 51 | 48 `FOUND-EXACT` cell citations + the B2 structural map + the BSG and quasicube checks (§C) |
+| `OPEN GAP` | 6 | 3 `PHANTOM` (all C9/moduli, FINDING-1) + B1 normalization bridge + B3 window uniformity + B4 lower-side collision loss |
+| `FIXED` | 0 | — |
+| `COUNTEREXAMPLE_NEW_FLOOR` | 0 | — |
+
+Against the steering's seven assigned failure modes: *missing cell in the
+bad-line classification* → `NO ISSUE` (B2); *wrong field denominator or
+base/extension-field ledger* → `OPEN GAP` (B1); *unsupported Fourier/Sidon
+payment* → `OPEN GAP` (FINDING-1); *misuse of BSG or quasicube growth* →
+`NO ISSUE` (§C); *incorrect first-match disjointization* and
+*entropy-frontier algebra error* were **not attacked here** (out of
+citation-audit scope; natural follow-up packets); *mismatch between
+asymptotic proof and finite deployed rows* is partially covered — the
+paper's own closing Remark scopes finite rows out, and the nearest audited
+joint is B3.
+
+The rewritten steering also **names the moduli manuscript's expected path**
+— `experimental/rs_mca_moduli_ledger_final.tex` — which does **not** exist
+in the tree at `eb42b82`. This sharpens FINDING-1 from "cited manuscripts
+unlocatable" to "steering-referenced file absent": the one missing source
+now has a definite expected location, and dropping the manuscript there
+resolves C9's three `PHANTOM` citations in place.
+
 ## 2. `FINDING-1` — the C9 moduli manuscripts are absent `AUDIT`
 
 Severity: **promotion-blocking for C9.** C9 (paper L128) cites, to

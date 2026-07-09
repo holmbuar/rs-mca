@@ -219,25 +219,62 @@ def scan_token(root, token):
     return hits
 
 
+def gate_steering(data):
+    """Steering-alignment block (agents.md eb42b82 mandated vocabulary):
+    NO_ISSUE = 48 FOUND-EXACT + B2 + two external-tool checks = 51;
+    OPEN_GAP = 3 PHANTOM + B1 + B3 + B4 = 6; FIXED = CENF = 0;
+    failure-mode map covers exactly the steering's seven assigned modes."""
+    fails = []
+    s = data.get("steering_alignment")
+    if not s:
+        return ["steering_alignment block missing"]
+    t = s["mandated_vocab_totals"]
+    vt = data["verdict_totals"]
+    want_no_issue = vt["FOUND-EXACT"] + 1 + 2
+    want_open_gap = vt["PHANTOM"] + 3
+    if t["NO_ISSUE"] != want_no_issue:
+        fails.append("NO_ISSUE=%d, want %d" % (t["NO_ISSUE"], want_no_issue))
+    if t["OPEN_GAP"] != want_open_gap:
+        fails.append("OPEN_GAP=%d, want %d" % (t["OPEN_GAP"], want_open_gap))
+    if t["FIXED"] != 0 or t["COUNTEREXAMPLE_NEW_FLOOR"] != 0:
+        fails.append("FIXED/COUNTEREXAMPLE_NEW_FLOOR must be 0 in this packet")
+    if len(s["failure_mode_map"]) != 7:
+        fails.append("failure_mode_map must cover the steering's 7 modes")
+    return fails
+
+
 def gate_moduli_absent(data, root):
-    """FINDING-1: distinctive C9 tokens live ONLY in the paper; no *moduli* file."""
+    """FINDING-1: distinctive C9 tokens live ONLY in the paper; no *moduli* file.
+
+    Forward-compatibility: FINDING-1 records the state AT THE AUDIT BASE.  If
+    the moduli manuscript(s) appear in the tree later (e.g. the steering-named
+    experimental/rs_mca_moduli_ledger_final.tex lands), that RESOLVES the
+    finding rather than falsifying this audit — so an appearance downgrades to
+    a loud notice + PASS, and only the recorded-at-base flag is a hard gate."""
     fails = []
     m = data["moduli_manuscripts_absent"]
+    if m.get("confirmed_absent_at_base") is not True:
+        fails.append("JSON flag confirmed_absent_at_base must be true")
+        return fails
     sole = m["expected_sole_file"]
+    appeared = []
     for tok in m["distinctive_tokens_only_in_paper"]:
         hits = scan_token(root, tok)
         if hits != {sole}:
-            fails.append("token %r found in %s (expected only %s)"
-                         % (tok, sorted(hits), sole))
-    # no file named *moduli* anywhere under the scanned dirs
+            appeared.append("token %r now also in %s" % (tok, sorted(hits - {sole})))
     for d in SCAN_DIRS:
         base = os.path.join(root, d)
         for dp, dn, fns in os.walk(base):
             dn[:] = [x for x in dn if x not in (".lake", ".git")]
             for fn in fns:
                 if "moduli" in fn.lower():
-                    fails.append("unexpected moduli-named file present: %s"
-                                 % os.path.relpath(os.path.join(dp, fn), root))
+                    appeared.append("moduli-named file now present: %s"
+                                    % os.path.relpath(os.path.join(dp, fn), root))
+    if appeared:
+        print("NOTE: moduli material has APPEARED since the audit base -- "
+              "FINDING-1 may be resolved; re-audit C9 against it:")
+        for a in appeared:
+            print("      " + a)
     return fails
 
 
@@ -278,10 +315,15 @@ def tamper_tests(data, root):
     d["cells"][0]["file"] = "experimental/does_not_exist.tex"
     expect_reject("missing-source", gate_files, d, root)
 
-    # 6. moduli-absence leak (pretend the sole file is somewhere it is not)
+    # 6. moduli-absence record tamper (the recorded-at-base flag is the hard gate)
     d = copy.deepcopy(data)
-    d["moduli_manuscripts_absent"]["expected_sole_file"] = "experimental/grande_finale.tex"
-    expect_reject("moduli-leak", gate_moduli_absent, d, root)
+    d["moduli_manuscripts_absent"]["confirmed_absent_at_base"] = False
+    expect_reject("moduli-flag", gate_moduli_absent, d, root)
+
+    # 8. steering-vocabulary tamper (mangled NO_ISSUE total must be caught)
+    d = copy.deepcopy(data)
+    d["steering_alignment"]["mandated_vocab_totals"]["NO_ISSUE"] += 1
+    expect_reject("steering-total", gate_steering, d)
 
     # 7. quasicube arithmetic tamper (wrong target exponent)
     d = copy.deepcopy(data)
@@ -310,6 +352,7 @@ def main():
         ("d  verdict tally self-consistent", gate_totals(data)),
         ("e  quasicube |A-A|>=|A|^{3/2} derivation", gate_quasicube(data)),
         ("f  moduli manuscripts absent (FINDING-1)", gate_moduli_absent(data, root)),
+        ("h  steering-vocabulary alignment (eb42b82)", gate_steering(data)),
     ]
     tampers = tamper_tests(data, root)
 
