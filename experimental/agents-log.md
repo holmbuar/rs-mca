@@ -30,6 +30,51 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - F_p-span cell: review repairs (projective form, sharp criterion)
+
+- **Agent/model:** `Claude Fable 5`.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_entropy_inverse_fp_span_cell.md`;
+  `experimental/scripts/verify_entropy_inverse_fp_span_cell.py`;
+  `experimental/data/cap25_v13_entropy_inverse_fp_span_cell_spancell.json`
+  (edits in place on the open PR #422 branch).
+- **Status:** EXPERIMENTAL / AUDIT.
+- **What is being added:** The seven repairs from the PR #422 review
+  (DannyExperiments, 2026-07-08), applied and verifier-gated. (1) `Phi` restated
+  as `F_p`-linear on the ambient `F_p^T`, the slice image inside its image;
+  (2) the cell condition generalized to the projective class
+  `rho(T) subset c F_p^x` with laws `s_0 in c F_p` and `s_{pj} = c^{1-p} s_j^p`
+  — two new exhaustive `proj` configs (`c = g`, not in `F_p`) pass with zero
+  violations and reproduce every `ones` statistic bit-identically (mul-by-`c`
+  is an `F_p`-automorphism carrying `W_1` to `W_c`); (3) the toy balance guard
+  decoupled from the printed asymptotic `o(N)` clause — no claim it is
+  satisfied as printed; (4) the bounded-field trigger replaced by the sharp
+  criterion `floor((R-1)/p) log|K| = Omega(N)` (closed-form index identity
+  gated per config; under the one-field repair the cell still fires at every
+  bounded characteristic and dies only when the characteristic outruns the
+  depth); (5) `image = W_c` and the generic-`rho` nulls demoted to toy-measured
+  throughout; (6) verifier packaging fixed for out-of-tree audits (best-effort
+  `RLIMIT_AS` via `FP_SPAN_AS_CAP_GB`, never fatal; `FP_SPAN_DATA_DIR` data
+  override; RSS/timing scoped to the authoring box, ungated); (7) explicit
+  nonclaims (no `prob:entropy-inverse-q` resolution, no row-sharp Q, no
+  deployed finite safe row, no `U(a_0+1) <= B*` certificate; deployed rows
+  outside the mechanism twice over — prime field, and depth below the
+  characteristic). Verifier now `PASS (197/197)` (was 139), adding a
+  containment+Jensen gate `Gamma_2 >= index` on all five projective-class
+  configs and a seventh tamper test (the proj census must break the `c = 1`
+  laws).
+- **How it is useful:** Brings the packet to the review's suggested merge shape
+  — an experimental/audit note on an asymptotic missing image-span cell plus a
+  normalization repair proposal — with the theorem-level obstruction now
+  standing on containment + Jensen alone, independent of the OPEN surjection.
+  Credits and cross-checks the first external engagement with the
+  #414 -> #422 lineage.
+- **What to do next:** §6 OPEN list unchanged (q=121/125 replication, p=7
+  full-alphabet control, twist span-codimension census, the `p in {2,3}`
+  equal-fibers surjection, two-field-reading confirmation); the review's
+  remaining ask — a separately proved theorem promoting `image = W_c` — stays
+  OPEN.
+
 ### 2026-07-08 - F_p-span cell for the entropy-inverse atom
 
 - **Agent/model:** `Claude Fable 5`.

@@ -5,12 +5,15 @@ frontier normalization, and alternatives (a)/(b) quoted verbatim with line refs)
 `CONVENTION` (§1 — the R-sweep regimes, balance `R*`, the `excess_generic` datum
 extending PR #421's `excess_ratio`, the slice / weight definitions, and the
 `gamma`-scaling equivalence honesty item, each tex-pinned) / `ANALYSIS` (§2 the
-span-cell mechanism: `Phi` is `F_p`-linear on the slice so `image subset V_T`, a
-containment with a complete argument; the two coordinate laws have a one-line
-char-`p` proof; and alternative (b) as printed is structurally blind to an
+span-cell mechanism: `Phi` extends to an `F_p`-linear map on the ambient `F_p^T`
+and the slice is a subset of it, so `image subset V_T`, a containment with a
+complete argument; the two coordinate laws, in projective `c`-form, have a
+one-line char-`p` proof; containment + Jensen already force `Gamma_2 >= index`;
+and alternative (b) as printed is structurally blind to an
 `F_p`-span defect at full `rank_K`) / `PROVED-AT-TOYS` (§2 the two laws verified
-with zero violations on every slice point in all six configs; `MEASURED` the exact
-`image = W`, `exc_cond`, span-dim, and index numbers) / `AUDIT` (§3 the
+with zero violations on every slice point in all five projective-class
+configs (`ones` + `proj`); `MEASURED` the exact `image = W_c`, `exc_cond`,
+span-dim, and index numbers, toy-exact only) / `AUDIT` (§3 the
 normalization wellformedness observation, scoped to one clause, framed as an
 intended-semantics question with two neutral repairs) / `MEASURED` (§4 the
 generic-`rho` null, the min-support Vandermonde barrier, the closed corners, the
@@ -18,29 +21,41 @@ support-invisibility, the bounded thin-alphabet residual, the plant-hunt null) /
 `OPEN` (§6 next measures).
 
 **Verifier:** `experimental/scripts/verify_entropy_inverse_fp_span_cell.py`
-(zero-arg, stdlib-only, self-contained — no lane imports; `RESULT: PASS (139/139
-checks)`, exit 0, ~8 s, 63 MB RSS, `RLIMIT_AS` 2 GB). One script that
+(zero-arg, stdlib-only, self-contained — no lane imports; `RESULT: PASS (197/197
+checks)`, exit 0; ~11 s and ~63 MB peak RSS **on the authoring box** — timing and
+RSS are environment-specific and deliberately not gated; best-effort `RLIMIT_AS`
+guard, default 2 GB, tune or disable via `FP_SPAN_AS_CAP_GB`, never fatal on
+platforms that refuse the cap; the data JSONs are resolved relative to the
+script's own location — the in-tree `experimental/data/` layout — and
+`FP_SPAN_DATA_DIR` overrides for out-of-tree runs). One script that
 **recomputes from scratch** — the finite-field arithmetic (smallest-irreducible
-modulus), the moment-curve census, the two exact coordinate laws with their
-Frobenius `free`/`red` split, the `image = W` occupancies, the conditional excess
-on `W`, the `F_p`-span dimension against the `K`-rank, the baseline-relative
-`excess_generic`, the frontier-normalization offset table, the `-Theta(N log N)`
-tension arithmetic, a generic-`rho` null row and a large-subgroup row, and the
-exact Vandermonde min signed-dependency `R+1` — then gates every recomputed number
-against the three committed data JSONs (exact on ints / rationals / strings /
-bools, `1e-9` on floats). Dual paths: the field multiply **table vs log/antilog**
-backend (full `F_27` and `F_16` sweeps), and `Gamma_2` by **census vs
-additive-character Parseval**. It ends with six tamper self-tests including a
-**faked `K`-rank defect** and a **faked `F_p`-span dimension**.
+modulus), the moment-curve census, the two exact coordinate laws in projective
+`c`-form with their Frobenius `free`/`red` split, the red-count identity
+`#red = floor((R-1)/p)` behind the sharp trigger criterion, the `image = W_c`
+occupancies, the conditional excess on `W_c`, the containment-only Jensen bound
+`Gamma_2 >= index`, the `F_p`-span dimension against the `K`-rank, the
+baseline-relative `excess_generic`, the frontier-normalization offset table, the
+`-Theta(N log N)` tension arithmetic, a generic-`rho` null row and a
+large-subgroup row, and the exact Vandermonde min signed-dependency `R+1` — then
+gates every recomputed number against the three committed data JSONs (exact on
+ints / rationals / strings / bools, `1e-9` on floats). Dual paths: the field
+multiply **table vs log/antilog** backend (full `F_27` and `F_16` sweeps), and
+`Gamma_2` by **census vs additive-character Parseval**. It ends with seven
+tamper self-tests including a **faked `K`-rank defect**, a **faked `F_p`-span
+dimension**, and a **`c`-form load-bearing test** (the projective census must
+break the `c = 1` laws).
 
 **What this is / is not.** This is a **candidate answer to the atom's own escape
 clause** (L828: "or identify the extra obstruction cell that must be added to the
 first-match ledger"), plus a **wellformedness observation** on the printed frontier
 normalization. It is **not** a proof or refutation of `prob:entropy-inverse-q`,
 **not** a claim that the removal list is incomplete as intended, and **not** a
-correction demand. The span-cell **containment** (`image(Phi) subset V_T`) and the
+correction demand. **Merge framing: an experimental/audit note on an asymptotic
+missing image-span cell plus a normalization repair proposal — no finite
+adjacent-row progress is claimed (§7 nonclaims).** The span-cell **containment**
+(`image(Phi) subset V_T`) and the
 **blindness of alternative (b)** to it are a complete structural argument
-(`ANALYSIS`); the **exact** `image = W`, the index-only excess, and the span-dims
+(`ANALYSIS`); the **exact** `image = W_c`, the index-only excess, and the span-dims
 are exact toy enumerations (`MEASURED` / `PROVED-AT-TOYS`) at six configs `N <= 21`.
 The consequence for the ledger is stated as a **three-option question to the
 program**, not as a verdict. Conventions are inherited from PR #420/#421 and
@@ -66,8 +81,10 @@ sentence is the **escape clause** this packet answers (L828, verbatim):
 > Prove the following standalone additive-combinatorics statement, or identify the
 > extra obstruction cell that must be added to the first-match ledger.
 
-The **weights are the chooser's** (L828, verbatim) — so `rho(t) == 1` is an
-admissible instance, and it is the one that exhibits the cell:
+The **weights are the chooser's** (L828, verbatim) — so every weight in a
+projective prime-field class `rho(T) subset c F_p^times` is an admissible
+instance, and `rho(t) == 1` (the `c = 1` representative) is the simplest one
+that exhibits the cell:
 
 > Let \(\K=\K_N\) be a finite field, let \(T=T_N\subseteq\K\) have \(|T|=N\), let
 > \(R=R_N\asymp N\), and choose nonzero weights \(\rho(t)\in\K^\times\).
@@ -123,9 +140,12 @@ live), with the **full** moment-curve columns and `R` swept past the prefix dept
   `size = q^R`, `C = |Omega|`, exact via integer sums.
 - **Balance `R*`.** `R* = log|Omega| / log q` (the `R` at which `log|Omega| - R log q`
   crosses `0`); a config is *at balance* at the integer `R` nearest `R*`. The atom's
-  side condition is exactly `offset := log|Omega| - R log|K| = o(N)`, and the toys
-  sit **on** it (offsets straddle `0`), so the cell fires at the atom's own scale,
-  not off it (`AUDIT` §3, `MEASURED` §2).
+  printed side condition is `offset := log|Omega| - R log|K| = o(N)` — an
+  asymptotic clause a finite toy can neither satisfy nor falsify, and one §3
+  shows is asymptotically incompatible with the one-field reading as printed.
+  The toys sit at the **finite balance point** (per-config offsets straddling
+  `0`), which realizes the repaired reading's intent (§3); no claim is made that
+  the toys satisfy the printed `o(N)` clause itself (`AUDIT` §3, `MEASURED` §2).
 - **`excess_generic` (the datum, extending #421's `excess_ratio`).** #421 divided
   `Gamma_2` by the exact multinomial `E[Gamma_2] = p^w/C + (C-1)/C` — a Poisson
   gauge. This packet divides instead by `Gamma_2` of a **generic random linear map
@@ -137,8 +157,14 @@ live), with the **full** moment-curve columns and `R` swept past the prefix dept
   reading of #421's discipline, and it is what isolates the `rho=ones` cell (huge)
   from the generic-`rho` null (`~ 1`).
 - **Weights.** `ones` = `rho == 1` (the pure moment curve, `Phi_0 =` signed count);
-  `twist` = deterministic pseudo-random `rho(t) in K^times` (the atom's generic
-  weight). The `ones` weight is admissible (L828); it is where the cell lives.
+  `proj` = `rho(t) = c a_t` with `c = g` the field generator (never in `F_p` for
+  `k >= 2`, since its order `q-1` exceeds `p-1`) and deterministic
+  `a_t in F_p^times` — a genuinely projective representative of the class
+  `rho(T) subset c F_p^times`; `twist` = deterministic pseudo-random
+  `rho(t) in K^times` (the atom's generic weight). The cell lives exactly on the
+  projective classes `c F_p^times` (§2.1); `ones` is the admissible (L828)
+  `c = 1` representative, and the `proj` configs verify the class-invariance
+  exactly.
 - **`gamma`-scaling equivalence (honesty item, `AUDIT`).** Two domains `T` are
   *census-equivalent* when related by `t -> gamma t`, which acts on the syndrome by
   `s_j -> gamma^j s_j` — a bijection of fibers, so identical `Gamma_ell`. The
@@ -153,32 +179,40 @@ live), with the **full** moment-curve columns and `R` swept past the prefix dept
 
 ### 2.1 The mechanism — a complete containment argument `ANALYSIS`
 
-Because the profile coefficients `x_t in {-1,0,1} subset F_p`, the map
-`Phi(x) = sum_t x_t v_t` is **`F_p`-linear in `x`**. Hence, for *any* weight `rho`,
+The map `Phi(x) = sum_t x_t v_t` extends to an **`F_p`-linear map on the ambient
+`F_p^T`**; the profile slice (`{-1,0,1}^T`, exactly `a` active) is a *subset* of
+`F_p^T`, not a subspace, so its `Phi`-image lies inside the image of the ambient
+linear map. Hence, for *any* weight `rho`,
 
 > `image(Phi) subset V_T := span_{F_p}{ rho(t) v_t : t in T } subset K^R`
 
-viewed as an `F_p`-space (`ANALYSIS`, complete — it is the definition of the
-`F_p`-span). The excess is therefore forced by `[K^R : V_T]` whenever `V_T` is
-`F_p`-deficient. Two **exact coordinate laws** make it deficient for `rho == 1`
-(each a one-line char-`p` proof, `ANALYSIS`; each additionally verified with zero
-violations on every slice point in all six configs, `PROVED-AT-TOYS`):
+viewed as an `F_p`-space (`ANALYSIS`, complete — the slice image sits inside the
+image of the ambient `F_p`-linear map, which is contained in the `F_p`-span of
+the columns). The excess is therefore forced by `[K^R : V_T]` whenever `V_T` is
+`F_p`-deficient. Two **exact coordinate laws** make it deficient exactly on the
+**projective classes** `rho(T) subset c F_p^times`, `c in K^times` — stated for
+general `c`, with `rho == 1` the `c = 1` instance (each law a one-line char-`p`
+proof, `ANALYSIS`; each verified with zero violations on every slice point in
+all five projective-class configs (`ones` + `proj`), `PROVED-AT-TOYS`). Write
+`rho(t) = c a_t`, `a_t in F_p^times`:
 
-- **coord-0 collapse:** `s_0 = sum_t x_t rho(t) = sum_t x_t in F_p` for `rho == 1`
-  (`= a mod p` for the unsigned slice, since exactly `a` ones). The head lands in
-  the prime field.
-- **Frobenius law:** `s_{pj} = Frob(s_j) = s_j^{p}` whenever `pj < R`, because
-  `s_j^{p} = (sum_t x_t t^j)^{p} = sum_t x_t^{p} t^{pj} = sum_t x_t t^{pj} = s_{pj}`
-  (Frobenius is additive in char `p`, and `x_t^{p} = x_t` for `x_t in F_p`). Every
-  `t^{pj}`-column is thus the `F_p`-linear Frobenius image of the `t^j`-column and
+- **coord-0 collapse:** `s_0 = sum_t x_t rho(t) = c sum_t x_t a_t in c F_p`
+  (`= c (a mod p)` for the unsigned slice at `p = 2`, where `a_t == 1`). The head
+  lands in a fixed `F_p`-line of `K`.
+- **Frobenius law:** `s_{pj} = c^{1-p} s_j^{p}` whenever `pj < R`, because
+  `s_j^{p} = (c sum_t x_t a_t t^j)^{p} = c^{p} sum_t x_t a_t t^{pj} = c^{p-1} s_{pj}`
+  (Frobenius is additive in char `p`, and `(x_t a_t)^{p} = x_t a_t` for
+  `x_t a_t in F_p`). At `c = 1` this is `s_{pj} = Frob(s_j)`. Every
+  `t^{pj}`-column is thus an `F_p`-linear image of the `t^j`-column and
   **adds zero new `F_p`-dimensions**. The verifier reports the split as
   `free = {j in [1,R): p nmid j}` and `red = {j: p | j}`.
 
-So `V_T` collapses onto `W := {s in K^R : s_0 in F_p, s_{pj} = s_j^{p}}`, of index
-`q^{1+#red} / p^{[s0 free]}` (the head contributes `q/p` when free in `F_p`
-(signed) and `q` when pinned to one residue (unsigned); each reducible column
-contributes `q`) — `243`, `256`, `4096` for the three rows below. Measured
-`F_p`-span dimensions (verifier-gated):
+So `V_T` collapses onto `W_c := {s in K^R : s_0 in c F_p, s_{pj} = c^{1-p} s_j^{p}}
+= c W_1` (multiplication by `c` is an `F_p`-linear automorphism of `K^R`), whose
+index is `c`-independent: `q^{1+#red} / p^{[s0 free]}` (the head contributes
+`q/p` when free in `c F_p` (signed) and `q` when pinned to one residue
+(unsigned); each reducible column contributes `q`) — `243`, `256`, `4096` for
+the three rows below. Measured `F_p`-span dimensions (verifier-gated):
 
 | config | `p^k` | `R` | `dim_Fp V_T` | ambient `Rk` | `rank_K {v_t}` | `min(N,R)` |
 |---|---:|---:|---:|---:|---:|---:|
@@ -191,17 +225,31 @@ contributes `q`) — `243`, `256`, `4096` for the three rows below. Measured
 `K`-independent — while the `F_p`-span is **deficient** (`6<18`, `7<12`, `9<16`).
 Alternative (b) as printed asks for a `rank_K` defect (L863:
 `rank_K Span{v_t} < min(|U|,R)`); there is none. **The `F_p`-span defect is exactly
-the mechanism (b) is structurally blind to.** Under a generic `rho` the twist scrambles
-the heads and the Frobenius alignment, the laws break, and `V_T` fills to the full
-ambient (S27 `dim_Fp` `7 -> 12`, verifier-gated); so the cell is a `rho == 1`
-(more precisely `rho in F_p^times`) phenomenon.
+the mechanism (b) is structurally blind to.** The cell is a **projective-class
+phenomenon**: the `proj` configs (`c = g not in F_p`, deterministic
+`a_t in F_p^times`) satisfy the `c`-laws with zero violations and reproduce
+**every** census statistic of the `ones` instance exactly (span-dim, index,
+`G2`, `exc_cond` bit-identical; verifier-gated) — as they must, since
+mul-by-`c` is an `F_p`-automorphism carrying `W_1` to `W_c` and the `a_t`
+factors act by slice symmetries. Under a generic `rho` (no single class
+`c F_p^times` containing `rho(T)`) the twist scrambles the heads and the
+Frobenius alignment, the laws break, and `V_T` fills to the full ambient
+(S27 `dim_Fp` `7 -> 12`, verifier-gated).
 
-### 2.2 The image is the subgroup `W` exactly, and the excess is the index `MEASURED`
+### 2.2 The image is the subgroup `W_c` exactly at toys, and the excess is the index `MEASURED`
 
-The containment `image subset V_T` is realized as `image = W` **exactly** at the
-two surjective configs below (`S27`, `U16o`; occupancy `= 1.000`); at `F64` the
-image is a half-`W` coset (occupancy `0.5`, `exc_cond = 2`), so the general
-surjection stays `OPEN` (§2.3). Conditioning on `W` removes all the excess:
+The containment `image subset V_T` is realized as `image = W_c` **exactly** at
+the two surjective configs below (`S27`, `U16o`; occupancy `= 1.000`, with the
+`proj` twins bit-identical); at `F64` the image is a half-`W` coset (occupancy
+`0.5`, `exc_cond = 2`), so the general surjection stays `OPEN` (§2.3) and
+`image = W_c` stays a **toy-measured** statement throughout. **The obstruction
+does not need it (`ANALYSIS`):** containment alone gives, by Cauchy–Schwarz over
+the `<= |W_c|` occupied fibers,
+`Gamma_2 = q^R sum_s N(s)^2 / C^2 >= q^R / n_occ >= [K^R : W_c]`, and the
+power-mean inequality lifts this to `Gamma_ell >= index^{ell-1}` — the verifier
+gates `Gamma_2 >= index` on all five projective-class configs. The exact
+`image = W_c` / equal-fiber rows below are **tightness evidence**, not
+load-bearing. Conditioning on `W` removes all the excess:
 
 | config | `R` | `law0`/`lawp` viol | `n_occ` | `|W|` = `pred_W` | index `[K^R:W]` | `exc_multi` (uncond.) | `exc_cond` on `W` |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -217,30 +265,48 @@ unsigned U16o the head is pinned `s_0 = a mod 2` so `W = V_T / p` (`|W| = 2^9/2 
 `~2` generic/Poisson baseline — the excess is **entirely** the `F_p`-span index,
 uniform on `W`. The unconditional `excess_generic` at balance is `120.10` (S27,
 `R=4`) — two orders of magnitude of structural excess, all of it the `F_p`-span
-index. The **frontier-normalization side condition passes**: S27 `R=4` is exactly
-at balance, `offset/N = -0.020` (`> -0.25`), so this is **not** the small-family
-Poisson trap #421's guard rejects — the excess is real and sits on the atom's own
-side condition.
+index. **Balance guard:** S27 `R=4` sits exactly at the finite balance `R*`
+(`offset/N = -0.020` `> -0.25`), so this is **not** the small-family Poisson
+trap #421's guard rejects. That is a statement about §1's finite balance
+convention, **not** a claim that the toys satisfy the printed asymptotic `o(N)`
+normalization — per §3 the printed one-field clause is asymptotically
+incompatible as stated, and the toys realize the repaired reading (fixed `q`,
+offsets straddling `0`).
 
-### 2.3 What the excess is at the deployed scale, and the labeling `ANALYSIS`
+### 2.3 The sharp trigger criterion, and the labeling `ANALYSIS`
 
-Under the repaired feasible reading (fixed `q`, `R asymp N`; §3), the reducible
-column count is `#red = #{j in [1,R): p | j} = Theta(N)`, so `index = q^{#red} =
-exp(Theta(N))` and `Gamma_ell` is inflated by `index^{ell-1} = exp(Theta(N ell))`
-— exactly the atom's own trigger `exp(eta N ell)` (L857). The cell therefore fires
-at the trigger scale, not below it. **Labels.** The containment `image subset V_T`
-and the blindness of (b) are `ANALYSIS` with a complete argument; the two coordinate
-laws are `ANALYSIS` (one-line char-`p` proofs) additionally `PROVED-AT-TOYS`
-(exhaustive zero-violation); the exact `image = W`, `exc_cond`, span-dims, and index
-are `MEASURED` at six configs. The **general surjection** `image = W` (that the
-weight-`a` slice covers every `s_0`-correct coset of `ker Phi`, i.e. the `p in {2,3}`
-equal-fibers claim) is left an **`OPEN` sketch**: the containment is proved, the
-equality is only exact-enumerated at toys.
+The trigger arithmetic is the log-index closed form (verifier-gated per config,
+with `#red = floor((R-1)/p)` exactly):
+
+> `log index = floor((R-1)/p) log|K| + (head correction)`, head correction
+> `in {log q - log p, log q}`,
+
+so `Gamma_ell` is inflated by `index^{ell-1}`, hitting the atom's own trigger
+`exp(eta N ell)` (L857) **iff `floor((R-1)/p) log|K| = Omega(N)`** (the head
+correction is lower-order once `#red >= 1`). The **bounded-field regime**
+(`|K| = O(1)`, `R asymp N`, so `#red = Theta(N)` and `index = exp(Theta(N))`) is
+a *sufficient special case, not the sharp condition*: under the one-field repair
+(B) of §3 (`R log|K| asymp N`) the index is `exp(Theta(N/p))`, so the cell still
+fires at every **bounded characteristic** even with `|K| -> infinity`, and it
+dies only when the characteristic outruns the depth — `R - 1 < p` gives
+`floor((R-1)/p) = 0`, zero reducible columns, no cell. (The deployed CAP25 v13
+rows sit in that dead corner twice over: prime field `K = F_p`, where the
+`F_p`-span *is* the `K`-span, and active prefix depth below the large
+characteristic — §7 nonclaims.) **Labels.** The containment `image subset V_T`,
+the blindness of (b), the `c`-form laws, and the Jensen bound
+`Gamma_ell >= index^{ell-1}` are `ANALYSIS` with complete arguments; the laws
+are additionally `PROVED-AT-TOYS` (exhaustive zero-violation, `ones` + `proj`);
+the exact `image = W_c`, `exc_cond`, span-dims, and index are `MEASURED` at toys
+only. The **general surjection** `image = W_c` (that the weight-`a` slice covers
+every `s_0`-correct coset of `ker Phi`, i.e. the `p in {2,3}` equal-fibers
+claim) is left an **`OPEN` sketch**: the containment is proved, the equality is
+only exact-enumerated at toys.
 
 ### 2.4 The consequence for the ledger — a question, not a correction `ANALYSIS`
 
 State neutrally. The cell is admissible input to `prob:entropy-inverse-q` (a legal
-`rho == 1`, at balance, `rank_K` full), and it is not one of the L839 removals.
+projective-class weight `rho(T) subset c F_p^times`, at balance, `rank_K` full),
+and it is not one of the L839 removals.
 The nearest listed cells are the **extension** and **differential-locator
 low-defect** cells, but both constrain the *support/locator* side (an
 extension-valued slope, or a `rank_K` defect among the columns), whereas the
@@ -251,21 +317,23 @@ not. Three
 options resolve it, any one sufficient; the choice is the program's:
 
 1. add a **`rho`-genericity hypothesis** to the atom (restrict to weights for which
-   `V_T` is `F_p`-full — the twist null of §4 shows generic `rho` already kills the
-   cell); or
+   `V_T` is `F_p`-full — equivalently, exclude the projective classes
+   `rho(T) subset c F_p^times` and any residual `F_p`-deficient weights; the
+   twist null of §4 shows generic `rho` already kills the cell); or
 2. add the **`F_p`-span cell** to the L839 removal list (a bounded-complexity
-   algebraic cell: "positive-density restriction lying in `Phi^{-1}(W)` for an
+   algebraic cell: "positive-density restriction lying in `Phi^{-1}(W_c)` for an
    `F_p`-deficient `V_T`"); or
 3. restate alternative **(b) over the prime field** — replace
    `rank_K Span{v_t} < min(|U|,R)` by an `F_p`-span / `F_p`-rank defect, which the
    present column geometry *does* exhibit, so that (b) catches the cell it now
    misses.
 
-Which option is asymptotically forced depends on the normalization repair (§3): the
-cell's `exp(Theta(N ell))` inflation requires `|K| = O(1)` with `R asymp N`, i.e.
-the two-field reading's bounded base field (or the `|K|=O(1)` branch of the
-one-field reading). This packet does not choose among the three; it identifies the
-cell and the question.
+Which option is asymptotically forced depends on the sharp criterion of §2.3
+(`floor((R-1)/p) log|K| = Omega(N)`): under **either** §3 repair the cell fires
+whenever the characteristic stays bounded (reading (A) trivially; reading (B)
+with index `exp(Theta(N/p))`), and it is absent when the characteristic outruns
+the depth. This packet does not choose among the three; it identifies the cell
+and the question.
 
 ---
 
@@ -305,19 +373,22 @@ fields with `q = p^k` **fixed** realize the feasible reading (`log q = O(1)`, so
   `|Omega^circ| ~ |K|^R = exp(Theta(N)) <= 3^N` is achievable and the printed
   normalization holds; the over-strong clause is `R asymp N`.
 
-**Which reading the span cell needs.** The span cell's asymptotic mandatoriness
-(§2.3) depends on the **bounded-field regime**: `|K| = O(1)` with `R asymp N`, which
-is reading (A)'s base field `B`, or equivalently the `|K| = O(1)` branch of (B).
-Under (B) with `|K| -> infinity` and `R = o(N)` the index is `|K|^{o(N)}` and the
-cell may be sub-exponential. So the same normalization repair the program adopts
-also settles whether the span cell must be added — the two observations are one
-question seen from two sides.
+**Which reading the span cell needs.** By the sharp criterion of §2.3
+(`floor((R-1)/p) log|K| = Omega(N)`), the cell's asymptotic mandatoriness tracks
+the **characteristic**, not the reading: under (A) it fires outright
+(`log|B| = O(1)`, `R asymp N`); under (B) with `R log|K| asymp N` the index is
+`exp(Theta(N/p))` — still trigger-scale for every bounded `p`, and
+sub-exponential only if `p -> infinity` along the sequence (e.g. prime `K`,
+where the cell is definitionally absent: the `F_p`-span *is* the `K`-span). So
+the normalization repair and the span cell remain one question seen from two
+sides, with the characteristic as the hinge.
 
 ---
 
 ## 4. Supporting instrumentation `MEASURED`
 
-- **Generic-`rho` null — no excess survives balance in any regime.** Dividing by the
+- **Generic-`rho` null (finite/toy evidence, not promoted) — no excess survives
+  balance in any tested regime.** Dividing by the
   generic-map baseline, the balance-point `excess_generic` under a generic (twist)
   weight is `<= 1.08` across all eight swept regimes (four serialized in the gated JSON: S27t `1.060`, S49t `1.056`, U16
   `0.475`, U64 `0.479`; the sub-`1` values are additive-image effects, not deficits).
@@ -362,20 +433,27 @@ question seen from two sides.
 
 ## 5. Guards and verification `AUDIT`
 
-The verifier PASSES **139/139** checks in ~8 s (63 MB RSS, `RLIMIT_AS` 2 GB),
-recomputing from scratch and gating against the committed data. Dual-path and
+The verifier PASSES **197/197** checks (~11 s, ~63 MB peak RSS **on the
+authoring box** — both environment-specific, neither gated), recomputing from
+scratch and gating against the committed data. Reproducibility knobs for
+out-of-tree audits: the `RLIMIT_AS` guard is best-effort (default 2 GB;
+`FP_SPAN_AS_CAP_GB` tunes or disables it; never fatal on platforms that refuse
+the cap), and `FP_SPAN_DATA_DIR` overrides the data location (default:
+`experimental/data/` resolved relative to the script itself). Dual-path and
 tamper guards:
 
 - **Field multiply dual path.** The table multiply equals the log/antilog backend on
   the full `F_27` and `F_16` product tables (`0` mismatch).
 - **Parseval dual path.** `Gamma_2` by census equals `Gamma_2` by additive-character
   Parseval on a small `F_9` moment census (`< 1e-7`).
-- **Six tamper self-tests** (each must be caught): a **faked `K`-rank defect** (distinct
+- **Seven tamper self-tests** (each must be caught): a **faked `K`-rank defect** (distinct
   `<= R` columns are always independent, defect `0`); a **faked `F_p`-span dimension**
   (`p^{dim-1} != V_T`); the laws holding for `ones` and breaking for `twist`; the exact
   `image = W` (off-by-one would miss the census); a Parseval falsification (corrupt one
-  fiber count); and the conditional-excess guard (`exc_cond ~ 1` while `exc_multi >
-  100`, so the claim is the index and not raw over-counting).
+  fiber count); the conditional-excess guard (`exc_cond ~ 1` while `exc_multi >
+  100`, so the claim is the index and not raw over-counting); and the **`c`-form
+  load-bearing test** (the projective census must break the `c = 1` laws — its
+  heads land in `c F_p`, not `F_p`).
 
 ---
 
@@ -391,7 +469,7 @@ tamper guards:
   twist entropy of `rho` — quantify how much genericity a `rho`-genericity hypothesis
   (option 1) would need to demand.
 - **The `p in {2,3}` equal-fibers surjection.** Complete (or refute) the general
-  `image = W` surjection so the `MEASURED` exact-equality becomes a theorem, not a toy
+  `image = W_c` surjection so the `MEASURED` exact-equality becomes a theorem, not a toy
   enumeration.
 - **Two-field-reading confirmation.** Instantiate the point-field `E` vs base-field
   `B` split of repair (A) directly (columns over `E >= N`, normalization over
@@ -416,19 +494,38 @@ tamper guards:
   `= R+1`, `rel_doubling 0.69–0.88`, `fe_slope > 0`).
 - **#417 / #416 (lift-class / masked-participation).** The `rho=1` support-invisibility
   (§4) is the coefficient-side complement of #417's support-side refutation.
+- **The #422 review (DannyExperiments, 2026-07-08, on this PR).** The projective
+  `c`-form of the laws (§2.1), the sharp `floor((R-1)/p) log|K| = Omega(N)`
+  trigger criterion replacing the bounded-field sufficient condition (§2.3), and
+  the containment+Jensen route that frees the obstruction from the `image = W_c`
+  surjection (§2.2) were adopted from that review's repair list; the §1/§2.2/§3
+  normalization demotions, the `MEASURED`-only labeling of `image = W_c` and the
+  generic-`rho` nulls, and the §5 packaging knobs likewise. The review
+  independently confirms the mechanism and the (b)-blindness, and concurs that
+  the deployed finite rows are unaffected.
 - **This packet consumes no upper cell and instantiates no `U(1116048)` certificate.**
 
 **Nonclaims.**
 
 - This note does **not** prove or refute `prob:entropy-inverse-q`, and does **not**
   claim the removal list is incomplete as intended — it identifies an admissible input
-  (`rho=1`, at balance, `rank_K` full) not on the L839 list and asks how the program
-  wants it resolved.
-- The span-cell **containment** (`image subset V_T`) and the **blindness of (b)** are a
-  complete argument (`ANALYSIS`); the **exact** `image = W`, the index-only excess, and
-  the span-dims are exact toy enumerations at six configs `N <= 21` (`MEASURED` /
-  `PROVED-AT-TOYS`). The **general** `image = W` surjection (the `p in {2,3}`
-  equal-fibers claim) is an `OPEN` sketch.
+  (the projective class `c F_p^times`, at balance, `rank_K` full) not on the L839
+  list and asks how the program wants it resolved.
+- **No finite claim of any kind:** nothing here proves anything about
+  `prob:row-sharp-q` / `def:q-row-atom`, certifies **no deployed finite safe
+  row**, and instantiates **no `U(a_0+1) <= B*` certificate** at any deployed
+  row. The deployed KoalaBear / Mersenne-31 rows are outside the mechanism twice
+  over: they are prime-field (`K = F_p`, where the `F_p`-span *is* the `K`-span,
+  so the cell is definitionally absent) and their active prefix depth sits below
+  the large characteristic (`R - 1 < p`, so `floor((R-1)/p) = 0` — zero
+  reducible columns). This packet is asymptotic-lane only.
+- The span-cell **containment** (`image subset V_T`), the **blindness of (b)**, and
+  the containment+Jensen bound `Gamma_ell >= index^{ell-1}` are complete
+  arguments (`ANALYSIS`); the **exact** `image = W_c`, the equal fibers, and
+  the span-dims are exact toy enumerations at the five projective-class
+  configs `N <= 21` (`MEASURED` / `PROVED-AT-TOYS`), promoted by no theorem here.
+  The **general** `image = W_c` surjection (the `p in {2,3}` equal-fibers claim)
+  is an `OPEN` sketch.
 - The normalization observation (§3) is scoped to one clause and framed as an
   intended-semantics question with two neutral repairs; it is **not** a correction
   demand, and both repairs keep the rest of the atom intact.

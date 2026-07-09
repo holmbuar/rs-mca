@@ -5,27 +5,35 @@ prob:entropy-inverse-q (experimental/grande_finale.tex L827-870).  The atom's
 escape clause (L828) reads: "Prove the following standalone additive-combinatorics
 statement, or identify the extra obstruction cell that must be added to the
 first-match ledger."  This verifier recomputes, at exact toy scale, the candidate
-extra cell: for the admissible weight rho == 1 the map Phi(x)=sum_t x_t v_t is
-F_p-LINEAR on the profile slice x in {-1,0,1}^T, so its image lies in the
-F_p-span V_T = span_{F_p}{rho(t) v_t}, which can be F_p-deficient WHILE rank_K
-stays full -- exactly the case alternative (b) (L863: rank_K Span{v_t} defect)
-is blind to.  Two exact coordinate laws pin the image: s_0 = sum_t x_t in F_p and
-s_{pj} = Frob(s_j) whenever pj < R; both hold on every slice point for rho == 1
-and break under a generic twist.  The measured 110x-120x / 23x collision excess
-is the subgroup index [K^R : W] exactly (conditional excess on W ~ 1).
+extra cell: the map Phi(x)=sum_t x_t v_t extends to an F_p-LINEAR map on the
+ambient F_p^T, and the profile slice x in {-1,0,1}^T is a subset of F_p^T, so the
+slice image lies in the F_p-span V_T = span_{F_p}{rho(t) v_t}, which can be
+F_p-deficient WHILE rank_K stays full -- exactly the case alternative (b) (L863:
+rank_K Span{v_t} defect) is blind to.  The cell condition is PROJECTIVE:
+rho(T) subset c F_p^x for a single c in K^x (rho == 1 is the c = 1 instance).
+Two exact coordinate laws pin the image: s_0 in c F_p and
+s_{pj} = c^{1-p} s_j^p whenever pj < R; both hold on every slice point for every
+tested projective weight (c = 1 "ones" and c = g "proj" configs) and break under
+a generic twist.  The measured 110x-120x / 23x collision excess is the subgroup
+index [K^R : W_c] exactly (conditional excess on W_c ~ 1); by containment +
+Cauchy-Schwarz/Jensen alone, Gamma_2 >= index (gated), so the obstruction does
+not need the (toy-exact, in-general-OPEN) image = W_c surjection.
 
 This verifier is standalone (no lane imports).  It RECOMPUTES FROM SCRATCH the
 finite-field arithmetic (smallest-irreducible modulus), the moment-curve census,
-the two exact laws + Frobenius free/red split, image = W occupancies, conditional
-excess on W, the F_p-span dimension vs the K-rank, the baseline-relative
+the two exact laws (in projective c-form) + Frobenius free/red split, the
+red-count identity #red == floor((R-1)/p) behind the sharp index criterion,
+image = W_c occupancies, conditional excess on W_c, the containment-only Jensen
+bound Gamma_2 >= index, the F_p-span dimension vs the K-rank, the baseline-relative
 excess_generic (moment curve vs a generic random linear map of the same shape),
 the frontier-normalization offset table, the -Theta(N log N) tension arithmetic,
 a generic-rho null row and a large-subgroup row, and the exact Vandermonde min
 signed-dependency (R+1) -- then gates every recomputed number against the three
 committed data JSONs (exact on ints / rationals / strings / bools, 1e-9 on
 floats).  Dual paths: the field multiply table vs the log/antilog backend, and
-Gamma_2 by census vs additive-character Parseval.  Ends with >=5 tamper
-self-tests, including a faked K-rank defect and a faked F_p-span dimension.
+Gamma_2 by census vs additive-character Parseval.  Ends with 7 tamper
+self-tests, including a faked K-rank defect, a faked F_p-span dimension, and
+a c-form load-bearing test.
 
 Lineage #414 -> #416 -> #417 -> #420 -> #421 -> this packet.  Conventions
 (excess_ratio baseline, R=w wall, norm_ok gap/N > -0.25) inherited from #420/#421
@@ -34,8 +42,17 @@ and extended by the excess_generic datum and the R>w moment-curve reading.
 Note: experimental/notes/thresholds/cap25_v13_entropy_inverse_fp_span_cell.md
 Data: experimental/data/cap25_v13_entropy_inverse_fp_span_cell_{regime,spancell,nulls}.json
 
-Zero-arg, stdlib-only.  RLIMIT_AS 2 GB, target < 90 s.  Prints
-RESULT: PASS (N/N checks) and exits 0.
+Zero-arg, stdlib-only.  Prints RESULT: PASS (N/N checks) and exits 0.
+
+Environment knobs (both optional; defaults reproduce the committed run):
+  FP_SPAN_AS_CAP_GB   best-effort RLIMIT_AS guard in GB (default 2; 0 disables).
+                      Applying the cap is NEVER fatal: if the platform refuses
+                      it, the script proceeds uncapped and prints a notice.
+  FP_SPAN_DATA_DIR    directory holding the three committed data JSONs
+                      (default: ../data relative to this script, i.e. the
+                      in-tree experimental/data/ layout).
+Timing (~11 s) and peak-RSS figures quoted in the note are from the authoring
+box only -- they are environment-specific and deliberately NOT gated here.
 
 Claim labels mirror the note:
   ANALYSIS   the containment image(Phi) subset V_T and the (b)-blindness argument.
@@ -53,10 +70,30 @@ import resource
 import itertools
 from collections import Counter
 
-resource.setrlimit(resource.RLIMIT_AS, (2 * 2**30, 2 * 2**30))
+def _apply_as_cap():
+    """Best-effort address-space guard: honor FP_SPAN_AS_CAP_GB (default 2 GB,
+    0 disables) but never fail on platforms that refuse the cap."""
+    try:
+        gb = float(os.environ.get("FP_SPAN_AS_CAP_GB", "2"))
+    except ValueError:
+        gb = 2.0
+    if gb <= 0:
+        return
+    cap = int(gb * 2**30)
+    try:
+        soft, hard = resource.getrlimit(resource.RLIMIT_AS)
+        if hard != resource.RLIM_INFINITY and hard < cap:
+            cap = hard
+        resource.setrlimit(resource.RLIMIT_AS, (cap, hard))
+    except (ValueError, OSError, resource.error):
+        print("note: RLIMIT_AS cap unavailable on this platform; running uncapped")
+
+
+_apply_as_cap()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.normpath(os.path.join(HERE, "..", "data"))
+DATA = os.environ.get("FP_SPAN_DATA_DIR") or os.path.normpath(
+    os.path.join(HERE, "..", "data"))
 PREFIX = "cap25_v13_entropy_inverse_fp_span_cell"
 
 CHECKS = 0
@@ -305,7 +342,22 @@ def build_rho(F, T, mode, seed=12345):
     if mode == "ones":
         return [1] * len(T)
     rnd = random.Random(seed)
+    if mode == "proj":
+        # the projective class rho(T) subset c F_p^x with c = F.g (g is never in
+        # the prime subfield for k >= 2: its order q-1 exceeds p-1) and
+        # deterministic a_t in F_p^x; for p = 2, a_t == 1 and rho == c * ones
+        return [F.mul(F.g, 1 + rnd.randrange(F.p - 1)) for _ in T]
     return [1 + rnd.randrange(F.q - 1) for _ in T]
+
+
+def proj_c(F, rho_mode):
+    """the projective scalar c of the weight class rho(T) subset c F_p^x:
+    1 for "ones", the field generator for "proj", None (no class) for "twist"."""
+    if rho_mode == "ones":
+        return 1
+    if rho_mode == "proj":
+        return F.g
+    return None
 
 
 def moment_columns(F, T, R, rho):
@@ -445,7 +497,10 @@ def frob_free_red(p, R):
 
 
 def law_check(F, T, a, signed, R, rho_mode):
-    """exact coordinate laws + image = W + conditional excess + F_p-span vs K-rank."""
+    """exact coordinate laws in projective c-form (s_0 in c F_p and
+    s_{pj} = c^{1-p} s_j^p; c = 1 is the rho == 1 instance, and "twist" is
+    evaluated at c = 1 -- its law break is the point) + image = W_c +
+    conditional excess + F_p-span vs K-rank."""
     p, q, k = F.p, F.q, F.k
     N = len(T)
     rho = build_rho(F, T, rho_mode)
@@ -454,14 +509,21 @@ def law_check(F, T, a, signed, R, rho_mode):
     counts, C = census(F, VT, R, fam, signed)
     size = q ** R
     free, red = frob_free_red(p, R)
+    c = proj_c(F, rho_mode) or 1
+    c_inv = F.inv(c)
+    c_1mp = F.mul(c, F.inv(F.powr(c, p)))            # c^(1-p)
     law0 = lawp = 0
-    a_const = (a % p) if (not signed or p == 2) else None
+    # the head is a pinned constant only when the active weights sum identically
+    # over the slice: unsigned "ones" (sum = a mod p), or p = 2 (signs collapse
+    # and, for "proj", a_t == 1); signed p > 2 and "proj" unsigned p > 2 are free
+    a_const = (a % p) if ((not signed or p == 2) and (rho_mode != "proj" or p == 2)) else None
     for key in counts:
         s = decode(key, q, R)
-        if s[0] >= p or (a_const is not None and s[0] != a_const):
+        y0 = F.mul(c_inv, s[0])                       # s_0 in c F_p  <=>  y0 in F_p
+        if y0 >= p or (a_const is not None and y0 != a_const):
             law0 += 1
         for j in range(1, R):
-            if p * j < R and s[p * j] != F.powr(s[j], p):
+            if p * j < R and s[p * j] != F.mul(c_1mp, F.powr(s[j], p)):
                 lawp += 1
     c0 = 1 if a_const is not None else p
     pred_W = c0 * (q ** len(free))
@@ -684,6 +746,54 @@ def main():
     feq("span.S27.excess_generic_ones", eg_ones, Dspan["S27_excess_generic_ones"])
     want_true("span.S27.excess_generic_big", eg_ones > 100.0)
 
+    # PROJECTIVE form (repair per the #422 review): the c-form laws hold        #
+    # exhaustively on rho(T) subset c F_p^x with c = g not in F_p, and every    #
+    # census statistic equals the ones instance EXACTLY -- mul-by-c is an       #
+    # F_p-automorphism of K^R carrying W_1 to W_c, and the a_t in F_p^x factors #
+    # act by slice symmetries.  The cell is a projective-class phenomenon.      #
+    want_true("proj.c27_not_in_Fp", F27.g >= F27.p)
+    want_true("proj.c16_not_in_Fp", F16.g >= F16.p)
+    Dproj = Dspan["projective"]
+    geq("proj.c27", F27.g, Dproj["c_S27"])
+    geq("proj.c16", F16.g, Dproj["c_U16"])
+    geq("proj.stats_flag", Dproj["stats_equal_ones_exactly"], True)
+    s27_proj = law_check(F27, T27, 7, True, 4, "proj")
+    gate_span("span.S27.proj", s27_proj, find(Dspan["configs"], "tag", "S27@R4:proj"))
+    want_true("span.S27.proj_laws_hold",
+              s27_proj["law0_violations"] == 0 and s27_proj["lawp_violations"] == 0)
+    want_true("span.S27.proj_stats_eq_ones",
+              all(s27_proj[key] == s27_ones[key] for key in
+                  ("n_occ", "pred_W", "index", "dim_span_Fp", "K_rank",
+                   "G2", "exc_cond", "excess_multi", "W_occupancy")))
+    u16_proj = law_check(F16, build_T(F16, 15), 8, False, 4, "proj")
+    gate_span("span.U16o.proj", u16_proj, find(Dspan["configs"], "tag", "U16o@R4:proj"))
+    want_true("span.U16o.proj_laws_hold",
+              u16_proj["law0_violations"] == 0 and u16_proj["lawp_violations"] == 0)
+    want_true("span.U16o.proj_stats_eq_ones",
+              all(u16_proj[key] == u16_ones[key] for key in
+                  ("n_occ", "pred_W", "index", "dim_span_Fp", "K_rank",
+                   "G2", "exc_cond", "excess_multi", "W_occupancy")))
+
+    # containment + Jensen alone forces the excess (review sharpening): the raw #
+    # Gamma_2 >= [K^R : W_c] with NO use of the toy-exact, in-general-OPEN      #
+    # image = W_c surjection (Cauchy-Schwarz over <= |W_c| occupied fibers)     #
+    for jtag, jd in (("S27.ones", s27_ones), ("U16o.ones", u16_ones),
+                     ("F64.ones", f64_ones), ("S27.proj", s27_proj),
+                     ("U16o.proj", u16_proj)):
+        want_true(f"jensen.{jtag}.G2_ge_index", jd["G2"] >= jd["index"] - 1e-9)
+
+    # the sharp trigger criterion's arithmetic (review repair of the bounded-   #
+    # field trigger): #red == floor((R-1)/p) exactly, and the closed form       #
+    # q^(1+#red)/p^[s0 free] equals the recomputed index exactly, so            #
+    # log index = floor((R-1)/p) log|K| + head-coordinate correction            #
+    for ctag, cd, Fld in (("S27.ones", s27_ones, F27), ("U16o.ones", u16_ones, F16),
+                          ("F64.ones", f64_ones, F64), ("S27.proj", s27_proj, F27),
+                          ("U16o.proj", u16_proj, F16)):
+        geq(f"crit.{ctag}.red_floor", len(cd["red"]), (cd["R"] - 1) // Fld.p)
+        s0_free = 1 if (cd["signed"] and Fld.p > 2) else 0
+        geq(f"crit.{ctag}.index_closed_form", cd["index"],
+            Fld.q ** (1 + len(cd["red"])) // (Fld.p ** s0_free))
+
     # ===================================================================== #
     #  (II) NORMALIZATION WELLFORMEDNESS -- the -Theta(N log N) tension       #
     # ===================================================================== #
@@ -772,7 +882,7 @@ def main():
     feq("dual.parseval.census_vs_char", g2c, g2p, tol=1e-7)
 
     # ===================================================================== #
-    #  TAMPER SELF-TESTS (>=5) -- each MUST be caught                        #
+    #  TAMPER SELF-TESTS (7) -- each MUST be caught                          #
     # ===================================================================== #
     tampers = 0
     # T1: a faked K-rank defect -- distinct moment columns are always K-independent #
@@ -796,8 +906,15 @@ def main():
     # T6: conditional excess is ~1 (index-only), NOT the raw 110x -- guards the claim #
     if s27_ones["exc_cond"] < 1.05 and s27_ones["excess_multi"] > 100.0:
         tampers += 1
+    # T7: the c-form is load-bearing -- the same proj census must BREAK the c = 1 #
+    # laws (s_0 lands in c F_p, not in F_p, on every nonzero-head fiber)          #
+    cnts_p7, _C7 = census(F27, moment_columns(F27, T27, 4, build_rho(F27, T27, "proj")),
+                          4, lambda: itertools.combinations(range(14), 7), True)
+    bad_head = sum(1 for key in cnts_p7 if decode(key, F27.q, 4)[0] >= F27.p)
+    if bad_head > 0:
+        tampers += 1
     geq("tamper.count>=5", tampers >= 5, True)
-    geq("tamper.count", tampers, 6)
+    geq("tamper.count", tampers, 7)
 
     # ===================================================================== #
     print("=" * 74)
@@ -807,8 +924,9 @@ def main():
         print(f"RESULT: FAIL ({len(FAILS)} of {CHECKS} checks failed)")
         raise SystemExit(1)
     rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024.0
-    print("F_p-span cell: image(Phi) subset V_T (F_p-deficient) while rank_K FULL "
-          "=> alternative (b) is blind to it.")
+    print("F_p-span cell (projective class c F_p^x): image(Phi) subset V_T "
+          "(F_p-deficient) while rank_K FULL => alternative (b) is blind to it; "
+          "Gamma_2 >= index by containment + Jensen alone.")
     print(f"RESULT: PASS ({CHECKS}/{CHECKS} checks)  RSS={rss:.0f} MB")
     raise SystemExit(0)
 
