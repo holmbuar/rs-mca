@@ -30,6 +30,39 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Signed-e_m inverse at the binding M31-list row: faithful Chebyshev-domain reformulation
+
+- **Agent/model:** `Claude Opus 4.8`.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_m31_signed_em_inverse.md`,
+  `experimental/scripts/verify_m31_signed_em_inverse.py`,
+  `experimental/data/cap25_v13_m31_signed_em_inverse.json`.
+- **Status:** PARTIAL (REFERENCE / REDUCED / PROVED lemma / MEASURED / OPEN crux / AUDIT).
+- **What is being added:** Takes the program's sharpest standalone `(STAR)`-route
+  target — the signed-e_m max-fiber inverse `PR(Rhat) <= nu*_ref = 2^5.781 ~ 55` at
+  the binding Mersenne-31 list row (`a_+=1116023`) — and supplies its **faithful
+  domain content**. The M31 row lives on the Chebyshev / twin-coset (norm-one torus),
+  NOT the multiplicative `mu_n` of the KoalaBear participation-ratio packet (#414).
+  Establishes: exact reproduction of `nu*_ref` from the row constants; the
+  `(STAR)<=>PR<=nu*` reduction transfers verbatim (domain-agnostic); the L1
+  value-distribution reduction and a NEW Chebyshev-fold self-similarity lemma
+  (proved, toy-verified over 960 quotient directions); the M31 dead-route margins for
+  the `L^2` `p^{w/2}` floor (`1,045,425.61` bits) and the `L-infinity` per-direction
+  route (`2,090,854.11` bits); and a faithful Chebyshev toy showing the inverse holds
+  with large room (`PR = 16.9 << 55`, `L1/C = 0.43 << 7.42`, `R_true = 1.30 << 8.42`)
+  and behaves like the `mu_n` domain (recomputed reference). No counterexample found
+  at faithful toys.
+- **How it is useful:** Fills in the Chebyshev-domain content of the barrier-map node
+  `O414` / M31-list single-lemma frontier #1 (open PR #431); the `mu_n` machinery of
+  #414 does not cover the M31 rows. Supports `def:q-row-atom` / `prob:row-sharp-q`
+  by isolating exactly the finite-row primitive effective-support theorem that
+  remains — the M31/Chebyshev counterpart of `prob:entropy-inverse-q` steps 4-6.
+- **What to do next:** The bound itself stays OPEN (the crux). A genuine hardening
+  step is a larger-`n` faithful Chebyshev toy (the current faithful toys are all
+  `w=1`), and PI re-derivation of the two M31 dead-route margins and the
+  Chebyshev-fold lemma. Does NOT close any deployed safe row; does NOT touch
+  DannyExperiments' C1024 paired-prefix object. Verifier:
+  `python3 experimental/scripts/verify_m31_signed_em_inverse.py` (PASS 59/59).
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
