@@ -30,6 +30,48 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - F_p-span cell: image-structure theorem (closes the #422 surjection)
+
+- **Agent/model:** `Claude Opus 4.8`.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_entropy_inverse_fp_span_surjection.md`;
+  `experimental/scripts/verify_entropy_inverse_fp_span_surjection.py`;
+  `experimental/data/cap25_v13_entropy_inverse_fp_span_surjection.json`.
+- **Status:** ANALYSIS / PROVED (under a stated connectivity hypothesis) /
+  MEASURED / EXPERIMENTAL.
+- **What is being added:** The image-structure theorem for the `F_p`-span cell of
+  `prob:entropy-inverse-q`, closing the surjection PR #422 left `OPEN`. Let
+  `D` be the move-subspace (`= V_T` signed, `= span{v_t+v_t'}` even column sums
+  unsigned). **(A, PROVED, no hypothesis)** `image(Phi|_a)` is a single coset
+  `Phi(x_0) + D` with `D <= W_c^0`, so `n_occ <= |D|`. **(D, PROVED)** hence
+  `Gamma_2 >= index * p^{defect}` from containment + Cauchy–Schwarz alone —
+  strictly stronger than #422's `Gamma_2 >= index`, and free of the surjection.
+  **(B/C, PROVED under the connectivity hypothesis `Conn_a`, verified exhaustively
+  at all toys)** `occupancy = |image|/|W_c| = p^{-defect}` and `image = W_c <=>
+  defect = 0`, where `defect = dim W_c^flat - dim V_T = ` the number of pinned
+  functionals `ell(s)=Tr(mu s_1)` (`T` in an intersection of `defect`
+  trace-hyperplanes). Corollaries derive the #422 occupancies: `S27`/`U16o`
+  `defect 0 -> 1`; `F64-firstN` `defect 1` (located: `T subset {Tr(t)=0}`,
+  `ell=Tr(s_1)`) `-> 1/2`. **`m = 2` realized** (designed `F32-2HP`, `F64-2HP`:
+  two independent pinned functionals, occupancy `1/4`). `S27-1HP` shows `Conn_a`
+  is load-bearing (`defect 1` yet occ `!= 1/3` at `N = 8`). The exact
+  connectivity band is MEASURED (a coset weight-distribution of the kernel code,
+  min-distance `R+1`): clean `[R,N-R]` in the large-kernel regime, isolated
+  interior holes for small kernels.
+- **How it is useful:** Answers the #422 review's (DannyExperiments) remaining
+  ask — a separately proved theorem promoting `image = W_c` from MEASURED to a
+  characterization — and reframes the `F64` "half" as a non-spanning-`T`
+  structure statement. The obstruction the atom cares about now stands on
+  containment alone and a factor `p^{defect}` stronger. Lineage
+  `#414 -> #416 -> #417 -> #420 -> #421 -> #422 -> ` here.
+- **What to do next:** Run
+  `experimental/scripts/verify_entropy_inverse_fp_span_surjection.py`
+  (`RESULT: PASS (252/252 checks)`, ~13 s). Open: a closed-form connectivity
+  threshold; a signed non-spanning witness large enough for `Conn` to hold;
+  `m >= 3` and affine-trace-hyperplane pinning. Nonclaims unchanged from #422
+  (no `prob:entropy-inverse-q` resolution, no row-sharp Q, no deployed finite
+  safe row; asymptotic-lane only).
+
 ### 2026-07-03 - CAP25 v13 experimental insert
 
 - **Agent/model:** Codex, reviewing a user-added experimental v13 insert.
