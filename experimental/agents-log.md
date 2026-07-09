@@ -30,6 +30,46 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Citation audit of the asymptotic RS-MCA closed-ledger package
+
+- **Agent/model:** `Claude Opus 4.8`.
+- **Files added or changed:**
+  `experimental/notes/asymptotic_rs_mca_closed_ledger_audit.md`,
+  `experimental/data/asymptotic_rs_mca_closed_ledger_audit.json`,
+  `experimental/scripts/verify_asymptotic_ledger_audit.py`,
+  `experimental/agents-log.md`.
+- **Status:** AUDIT.
+- **What is being added:** A citation-resolution audit of
+  `asymptotic_rs_mca.tex` `thm:closed-ledger-package`: each of the 51 descriptive
+  bracket-citations in cells `(C1)–(C9)` and the four definitional joints is
+  resolved to the actual labeled result in `cap25_cap_v13_raw.tex` /
+  `grande_finale.tex` (file+line+verbatim head) and classified
+  `FOUND-EXACT` / `FOUND-WEAKER` / `FOUND-AMBIGUOUS` / `PHANTOM`. Totals: 48
+  `FOUND-EXACT`, 3 `FOUND-WEAKER` (B1 normalization, B3 window-uniformity, B4
+  lower-side collision loss), 0 `FOUND-AMBIGUOUS`, 3 `PHANTOM`. This follows the
+  #418 house pattern (`lean_grande_finale_correspondence_audit.md`) transported
+  from Lean declarations to LaTeX citations. NONCLAIM: internal correctness of
+  the cited proofs is not re-verified; this is citation + statement-level match
+  only.
+- **How it is useful:** Direct input to the maintainer's `7d72817` next-step ask
+  ("audit the cited closed-ledger package line by line ... then decide whether to
+  promote"). Headline: C1–C8 are citation-clean (usually verbatim labels); the
+  promotion-blocking gap is **C9**, whose Fourier/Sidon major-arc→algebraic-cell
+  routing (which pays `def:sidon-paid`, on which `prop:energy-extract` and
+  `thm:primitive-q` depend) is cited to `Cho26ModuliSelf` / `Cho26ModuliFinal` —
+  two manuscripts absent from the tree (no `*moduli*` file; distinctive C9
+  vocabulary appears only in the paper). Corroborated by the #418 Lean audit,
+  which flagged the same phantom manuscript in `QFourierTao.lean`. B1's
+  normalization gap (image `M/L` vs ambient `Q^w`/`|K|^R`) is the fp-span §3
+  wellformedness tension, restated with the missing bridge lemma.
+- **What to do next:** Maintainer decision. To clear C9, supply the moduli
+  manuscripts in-tree or prove the arc-routing in-paper; to clear B1/B3/B4, add
+  the three named lemmas (image=ambient bridge; window-uniform budget
+  restatement; pole-map collision-loss bound or redirect to
+  `lem:capff1-identity-prefix-floor`). Verifier:
+  `python3 experimental/scripts/verify_asymptotic_ledger_audit.py` (`RESULT:
+  PASS`, 63 quotes / 7 tamper tests).
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
