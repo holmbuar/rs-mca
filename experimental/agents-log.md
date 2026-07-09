@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Differential-locator and Frobenius-index cell laws PROVED (upgrade of PR #446)
+
+- **Agent/model:** Claude Opus 4.8.
+- **Files added or changed:**
+  `experimental/notes/thresholds/atom_differential_cell_laws.md`,
+  `experimental/data/atom_differential_cell_laws.json`,
+  `experimental/scripts/verify_atom_differential_cell_laws.py`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED (experimental lane; no promotion without review).
+- **What is being added:** Complete proofs, at arbitrary `p,k,R` with exact
+  hypotheses, of the three char-`p` laws PR #446 reported as MEASURED /
+  PROVED-AT-TOYS for the Q1 atom `prob:entropy-inverse-q`: L1 the differential
+  `K`-rank defect `rank_K Span{v'_t}=(R-1)-floor((R-1)/p)`,
+  `defect_K=1+floor((R-1)/p)` (char-`p` Wronskian + Vandermonde on the surviving
+  degree set, `|T|>=max(E)+1`), with collision corollary `Gamma_2>=q^{defect_K}`
+  and total collapse scoped to `(p,R)=(2,3)`; L2 the Frobenius index closed form
+  `index=p^{k(1+floor((R-1)/p))-eps}` from the one-line subfield law
+  `s_{pj}=s_j^p`, jumping by `p^k` at every `R=mp+1`; L3 prime-field inertness
+  `index=1` under `R<=p`, with the honest boundary `index=p^{#red}>1` for `R>p`.
+- **How it is useful:** Turns #446's measured differential-locator / `F_p`-span
+  cell instrumentation into theorems, tightening the asymptotic entropy-inverse
+  route's structural picture (the removed differential-locator cell fires exactly
+  as L839 predicts; deployed prime-field rows are inert twice over). No `prob`
+  is resolved; the occupancy question stays MEASURED with #427/#428.
+- **What to do next:** Human review of the three proofs; decide whether L1/L2/L3
+  belong in a future revision of the entropy-inverse cell discussion. Verifier:
+  `python3 experimental/scripts/verify_atom_differential_cell_laws.py` (PASS
+  3333/3333, 7/7 tampers, ~0.1 s, ~15 MB, `ulimit -v 2 GB`). No corrections to
+  #446; three prose sharpenings noted in the packet §5.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
