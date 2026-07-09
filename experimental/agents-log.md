@@ -30,6 +30,41 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - B3 window-uniformity of the closed paid ledger (scope + discharge)
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:** `experimental/notes/audits/asymptotic_window_uniformity.md`,
+  `experimental/scripts/verify_asymptotic_window_uniformity.py`,
+  `experimental/agents-log.md`.
+- **Status:** AUDIT / FIXED (established cells) + OPEN GAP (inherited residual).
+- **What is being added:** Scopes and discharges the B3 finding of the PR #433
+  closed-ledger citation audit — `thm:frontier` assumes the closed paid ledger
+  holds uniformly in every `o(n)`-window around the crossing, which the cited
+  per-row payments never state. Formalizes the uniformity condition as
+  (U0)-(U3), proves Lemma W (`\barN_{n,a}` moves by `exp(o(n))` across an
+  `o(n)`-window in the frontier interior) and Lemma B (bounded-complexity budgets
+  have `o(n)` log-variation), and classifies each cell: 6 UNIFORM-BY-INSPECTION
+  (C3-C8), 2 UNIFORM-WITH-PROOF (C1,C2), 1 NOT-ESTABLISHED (C9, and it is
+  FINDING-1's phantom-source gap, not a window defect). Names the residual
+  `ass:window-uniform-ledger` (= single-agreement closure) with falsifiers F1-F5.
+  Verifier recomputes the window arithmetic from exact big-int binomials:
+  34/34 live gates PASS, 8/8 tamper self-tests (7 rejected + 1 control), ~5.5 s,
+  under a 2 GB `RLIMIT_AS` cap.
+- **How it is useful:** Removes B3 from the list of *independent* load-bearing
+  gaps in `asymptotic_rs_mca.tex`: the `o(n)` window slide is elementary
+  arithmetic, free given single-agreement closure, because every C1-C8 budget is
+  a bounded-complexity `(n,a)`-formula valid on an `a`-interval. The residual
+  reduces to the pre-existing C9-routing (FINDING-1) and `prob:entropy-inverse-q`
+  atom gaps, whose window-uniformity is either phantom-moot or built into the
+  atom's `R`-range. Complements #439 (which already made "(C1)-(C8) uniform in
+  the window" an explicit assumption): this note shows that assumption is
+  dischargeable to single-point closure.
+- **What to do next:** If #439 wishes, weaken `thm:frontier`'s window hypothesis
+  to single-agreement closure via the "window slide is free" lemma described in
+  the note's proposed-tex-delta subsection (note-only here; the tex is
+  #439/#441/#442's shared file). The genuine open work stays with the C9
+  moduli-source and primitive-inverse-theorem lanes.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
