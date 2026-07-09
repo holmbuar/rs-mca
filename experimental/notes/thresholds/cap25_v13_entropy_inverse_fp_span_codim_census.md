@@ -7,25 +7,28 @@ unchanged) / `MEASURED` (§2–§5 — every `dim_Fp V_T` / `codim` number in th
 four family tables, the naive-law match/violation counts, the
 `fill_j`/`fill_h`/`fill_m`/`fill_d` distributions, the three `excess_generic`
 spot-check ties, all verifier-gated exact) / `PROVED-AT-TOYS` (§4 — the
-per-subfield Frobenius^`d` law, exhaustive zero-violation on one enumerable
-config; the F2 `j=0` control is exactly the pure single-class weight, exact
-list equality) / `AUDIT` (§6 — the N-column structural floor, a bookkeeping
+per-subfield Frobenius^`d` law only, exhaustive zero-violation on one
+enumerable config, the same epistemic status #422 uses for its own `c`-form
+laws; the F2 `j=0` exact-equality is internal tamper machinery (T2), not a
+note-level claim) / `AUDIT` (§6 — the N-column structural floor, a bookkeeping
 observation, not a new mechanism) / `OPEN` (§7 — the asymptotic
 extrapolation; every number in this note is a finite-toy measurement).
 
 **Verifier:** `experimental/scripts/verify_entropy_inverse_fp_span_codim_census.py`
-(zero-arg, stdlib-only, self-contained; `RESULT: PASS (861/861 checks)`,
+(zero-arg, stdlib-only, self-contained; `RESULT: PASS (862/862 checks)`,
 exit 0; ~2 s, ~31 MB peak RSS **on the authoring box**, not gated;
 best-effort `RLIMIT_AS` guard, default 2 GB, `FP_CODIM_AS_CAP_GB` tunes/
 disables, never fatal on platforms that refuse the cap; `FP_CODIM_DATA_DIR`
 overrides the data location). The `GF` finite-field class, `fp_span_dim`,
-and `moment_columns` are copied verbatim from PR #422's
-`verify_entropy_inverse_fp_span_cell.py` (repo convention: standalone
-scripts, no cross-imports); the four rho families, the class enumerator, the
-exhaustive census/`Gamma_2`/`excess_generic` helpers, and the Frobenius^`d`
-law check are new here. Six tamper self-tests, each must be caught,
-including a faked span-dimension, an uncapped-law load-bearing check, and
-the per-subfield law's wrong-degree break.
+`moment_columns`, `gamma2`, `generic_cols`, and `decode` are copied verbatim
+from PR #422's `verify_entropy_inverse_fp_span_cell.py`, and its
+`census`/`gamma2_generic` are adapted (same algorithm, refactored
+signatures; repo convention: standalone scripts, no cross-imports); new here
+are the four rho families, the class enumerator, and the Frobenius^`d` law
+check. Six tamper self-tests — five corruption catches plus one structural
+sanity check (T4) — including a faked span-dimension fed through the live
+gate, the uncapped-law cap validation, and the per-subfield law's
+wrong-degree break.
 
 **What this is / is not.** A **measurement-only** follow-on to PR #422
 (`cap25_v13_entropy_inverse_fp_span_cell.md`, fetched read-only from branch
@@ -42,10 +45,9 @@ row-sharp `Q`, or touch any deployed finite row (§8).
 Lineage `#414 -> #416 -> #417 -> #420 -> #421 -> #422 -> ` this packet. #422
 found: for a projective weight `rho(T) subset c F_p^x`, `V_T = span_Fp{rho(t)
 v_t}` is `F_p`-deficient in the ambient `K^R` while `rank_K` stays full, and
-posed three ledger options in §2.4 (credited to **the #422 review**,
-DannyExperiments, 2026-07-08): (1) a `rho`-genericity hypothesis, (2) add the
-cell to the removal list, (3) restate alternative (b) over the prime field.
-This packet sizes option 1.
+posed three ledger options in its §2.4: (1) a `rho`-genericity hypothesis,
+(2) add the cell to the removal list, (3) restate alternative (b) over the
+prime field. This packet sizes option 1.
 
 ---
 
@@ -90,7 +92,11 @@ Primary point (`R=4,N=16`), `dim(m)` for `m=1..6`:
 | F49 | 8 | `7, 8, 8, 8, 8, 8` |
 | F125 | 12 | `9, 11, 11, 11, 11, 11` |
 
-**Non-monotonicity, gated exact.** F27 *dips* at `m=3` (`11->10`, `4`
+**Non-monotonicity, gated exact — and expected in kind, if not in shape.**
+The `m`-class families are **not nested** in `m` (the round-robin assignment
+`classes[i % m]` re-partitions every position when `m` changes), so `dim(m)`
+has no a priori reason to be monotone; the finding is the measured shape,
+not a paradox. And the shape is striking: F27 *dips* at `m=3` (`11->10`, `4`
 columns of slack over `N=16`): a **third** class strictly shrinks the span
 before recovering at `m=5`. F16/F64 dip `m=3->4` too, but sit at/past the
 `ambient<=N` boundary (§6), so are not independent confirmations — F27's
@@ -209,30 +215,38 @@ interchangeable with it.
 
 ## 6. The N-column structural floor, and verification `AUDIT`
 
-Bookkeeping, not a new mechanism: `dim_Fp(V_T) <= min(N, ambient)` always (a
-rank-of-`N`-vectors bound), so `ambient=R*k > N` forces `codim >= ambient-N`
-**regardless of genericity**. Binds F64's primary point (`ambient=24>16`,
-floor `8`) and F27's `R=6` point (`ambient=18>16`, floor `2`); F16's primary
-point and F27's `N=12` point sit exactly at the boundary (floor `0`, no
-slack). A *bona fide* generic twist at `N=16,R=4` gives `codim=0` for
-F27/F49/F125 but `codim=1` for F16 (an accidental rank deficiency right at
-the `N=ambient` boundary — unsurprising, since a random square matrix over
-`F_2` is full rank only `~29%` of the time) and `codim=8` for F64
-(structurally forced) — so the verifier's full-twist tamper control (T3
-below) instead runs at `N=21,R=2` (comfortable slack everywhere). Rows in
+Bookkeeping, not a new mechanism: `dim_Fp(V_T) <= min(N_real, ambient)`
+always (a rank-of-`N_real`-vectors bound). One disclosure first: `T = firstN`
+can only draw on the `q-1` nonzero field elements, so F16's `N16`-tagged
+rows actually run on `N_real = 15` columns (the JSON's `N` field records the
+request; the floor arithmetic here uses `N_real`). With that,
+`ambient = R*k > N_real` forces `codim >= ambient - N_real` **regardless of
+genericity**: it binds F64's primary point (`ambient=24>16`, floor `8`),
+F27's `R=6` point (`ambient=18>16`, floor `2`), and **every F16 `R=4` row**
+(`ambient=16 > N_real=15`, floor `1` — any F16 generic-twist codim there is
+structurally forced, the same mechanism as F64's floor, not an accidental
+rank deficiency); F27's `N=12` point sits exactly at the boundary (floor
+`0`, no slack). The verifier's full-twist tamper control (T3 below)
+therefore runs at `N=21,R=2` (comfortable slack everywhere: `ambient = 2k
+<= 12` while `N_real >= 15` across the five fields). Rows in
 the data JSON carry `ambient` and `N` alongside `codim` for this cross-check.
 
-`861/861` checks, ~2 s, ~31 MB RSS. Recomputes every `dim_Fp`/`codim`/
+`862/862` checks, ~2 s, ~31 MB RSS. Recomputes every `dim_Fp`/`codim`/
 `excess_generic` number from scratch and gates against the committed JSON
-(exact ints, `1e-9` floats). Six tamper self-tests, each must be caught:
-(T1) a **faked span-dimension** (`p**(dim-1) != p**dim`); (T2) the **F2 `j=0`
+(exact ints, `1e-9` floats). Six tamper self-tests — five corruption
+catches plus one structural sanity check (T4): (T1) a **faked
+span-dimension fed through the live `geq` gate** with a freshly recomputed
+`dim` against a corrupted expectation (must append a FAIL, which is then
+retracted — exercises the actual gating pipeline, not an arithmetic
+tautology); (T2) the **F2 `j=0`
 control** is exact list-equal to the pure single-class weight (not just
 dimension-equal), `j=1` must differ; (T3) a **full-twist control** gives
-`codim=0` at `N=21,R=2` (see above for why the grid's own primary point is
-unsuitable); (T4) the **uncapped m-class law** (`m*dim_1`, no
-`min(ambient,.)` cap) fails to match measured `dim` at every instance it
-overshoots the ambient — a structural certainty (`dim<=ambient<m*dim_1`
-there), not a coincidence; (T5) the **F3 law wrong-degree break** (`d=1`
+`codim=0` at `N=21,R=2` (see above for why the grid's own primary points are
+unsuitable); (T4, structural sanity check) the **uncapped m-class law**
+(`m*dim_1`, no `min(ambient,.)` cap) fails to match measured `dim` at every
+instance it overshoots the ambient — a structural certainty
+(`dim<=ambient<m*dim_1` there) validating the cap's presence, not a
+corruption catch; (T5) the **F3 law wrong-degree break** (`d=1`
 instead of `d=2` breaks head-containment on `40/70` fibers); (T6)
 **codim/excess co-monotonicity** at spot-check A (both strictly decrease
 `j=0->1->2`, ratio drop `>2x`).

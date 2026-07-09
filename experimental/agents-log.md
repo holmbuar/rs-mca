@@ -55,7 +55,7 @@ Keep entries concise and link to the relevant files.
   `codim` per perturbed column), with a single perturbed column filling the
   ambient in only `1/12` configs; the subfield ladder never fills within any
   tested proper subfield, including the largest available. Verifier: `RESULT:
-  PASS (861/861 checks)`, ~2 s, ~31 MB RSS.
+  PASS (862/862 checks)`, ~2 s, ~31 MB RSS.
 - **How it is useful:** Sizes option 1 of the (also not-yet-merged) #422
   ledger question for `prob:entropy-inverse-q` (`experimental/grande_finale.tex`
   L827) — a `rho`-genericity hypothesis would need to exclude a substantial

@@ -47,13 +47,14 @@ exhaustive config (F16 R=5 N=8 a=4 unsigned, d=2) is dedicated solely to the
 F3 Frobenius^d law verification, not the excess tie.
 
 This script COPIES (per repo convention: standalone stdlib-only scripts, no
-cross-imports) the finite-field GF class, fp_span_dim, and moment_columns
-helpers verbatim from experimental/scripts/verify_entropy_inverse_fp_span_cell.py
+cross-imports) the finite-field GF class, fp_span_dim, moment_columns,
+gamma2, generic_cols, and decode helpers verbatim from
+experimental/scripts/verify_entropy_inverse_fp_span_cell.py
 (PR #422; that script's own header credits these as recomputing from scratch
 the smallest-irreducible-modulus field arithmetic and the F_p-span Gaussian
-elimination). Everything else here (the four rho families, the class
-enumerator, the exhaustive census/Gamma_2/excess_generic helpers, the
-Frobenius^d law check) is new to this packet.
+elimination), and ADAPTS its census/gamma2_generic (same algorithm,
+refactored signatures).  New to this packet: the four rho families, the
+class enumerator, and the Frobenius^d law check.
 
 This is a MEASUREMENT-ONLY packet. It claims no theorem: every law tested
 against the grid is reported with its exact match/violation count, not
@@ -82,10 +83,11 @@ Data: experimental/data/cap25_v13_entropy_inverse_fp_span_codim_census.json
 Claim labels mirror the note:
   MEASURED    every dim_Fp / codim / excess_generic number recomputed and
               gated here.
-  PROVED      the two exhaustively-checked identities (the F3 Frobenius^d
-              law, and the F2 j=0 control's exact equality to the pure
-              single-class weight) -- exhaustive zero-violation recomputes,
-              not general theorems.
+  PROVED-AT-TOYS  the F3 Frobenius^d law only -- an exhaustive
+              zero-violation recompute on the dedicated F16 d=2 config, the
+              same epistemic status PR #422 uses for its own c-form laws,
+              not a general theorem.  (The F2 j=0 exact-equality is internal
+              tamper machinery, not a note-level claim.)
   CONVENTION  the grid, the round-robin class assignment, the deterministic
               contamination/perturbation positions, the excess_generic
               baseline (inherited from #421/#422).
@@ -683,7 +685,7 @@ def main():
                 tag = f"F2|{name}|R{R}|N{N}|j{j}"
                 got = dict(dim=dim, ambient=amb, codim=codim)
                 gate_dim_row(tag, got, find(Wf2["rows"], tag))
-                # T2 (PROVED, exact): j=0 must equal the pure single-class weight
+                # T2 (internal tamper check, exact): j=0 must equal the pure single-class weight
                 if j == 0:
                     want_true(f"{tag}.j0_is_pure_class",
                               rho_epsilon_contam(F, T, 0) == [1] * len(T))
@@ -877,10 +879,19 @@ def main():
     # ===================================================================== #
     tampers = 0
 
-    # T1: a faked F_p-span dimension -- corrupting dim breaks the p**dim gate #
-    ref_dim = find(Wf1["rows"], "F1|F27|R4|N16|m1")["dim"]
-    faked_dim = ref_dim - 1
-    if FS["F27"].p ** faked_dim != FS["F27"].p ** ref_dim:
+    # T1: a faked F_p-span dimension must be CAUGHT by the live gate -- feed #
+    # a freshly recomputed dim through the same geq() the real rows use with #
+    # a corrupted expectation, confirm FAILS grows, then retract the scratch #
+    # entry (exercises the actual gating pipeline, not an arithmetic         #
+    # tautology)                                                             #
+    ref_row_t1 = find(Wf1["rows"], "F1|F27|R4|N16|m1")
+    F27t1 = FS["F27"]; T27t1 = build_T(F27t1, 16)
+    dim_t1, _amb_t1, _cod_t1 = measure(
+        F27t1, T27t1, rho_m_class(F27t1, T27t1, classes_of(F27t1, 6)[:1]), 4)
+    pre_fails_t1 = len(FAILS)
+    geq("tamper.T1.scratch_corrupted_dim", dim_t1, ref_row_t1["dim"] - 1)
+    if len(FAILS) == pre_fails_t1 + 1 and dim_t1 == ref_row_t1["dim"]:
+        FAILS.pop()
         tampers += 1
 
     # T2: the j=0 control is EXACTLY the pure single-class weight, not just  #
@@ -894,12 +905,13 @@ def main():
     # T3: a full-twist (fully generic) control must be codim 0 exactly --   #
     # validates this script's OWN copy of fp_span_dim/moment_columns        #
     # against #422's established fact that a generic twist fills the ambient. #
-    # Uses N=21, R=2 (ambient = 2k <= 12 for every field here) so N clears   #
-    # ambient with comfortable slack: dim_Fp(V_T) <= min(N, ambient) always, #
-    # and at N=16,R=4 that structural bound alone already forces codim >= 8  #
-    # for F64 (ambient=24) and leaves F16 at the exact boundary (ambient=16) #
-    # where a generic twist can be accidentally rank-deficient by chance --  #
-    # this control must isolate genuine genericity from that N<ambient trap. #
+    # Uses N=21, R=2 (ambient = 2k <= 12 for every field here) so N_real     #
+    # clears ambient with comfortable slack (build_T caps at the q-1 nonzero #
+    # elements -- e.g. F16 yields N_real = 15): dim_Fp(V_T) <=               #
+    # min(N_real, ambient) always, and at the grid's N=16,R=4 points that    #
+    # structural bound alone already forces codim >= 8 for F64 (ambient=24)  #
+    # and codim >= 1 for F16 (ambient=16 > N_real=15, structurally forced)   #
+    # -- this control must isolate genuine genericity from that trap.        #
     full_twist_ok = True
     for name, p, k in FIELDS:
         F = FS[name]; T = build_T(F, 21)
