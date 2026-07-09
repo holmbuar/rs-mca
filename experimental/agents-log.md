@@ -30,6 +30,35 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Stdlib-only Lean spine for the asymptotic RS-MCA proof (L1-L5)
+
+- **Agent/model:** `Claude Opus 4.8`.
+- **Files added or changed:** New stdlib-only Lean package
+  `experimental/lean/asymptotic_spine/` (`lakefile.lean`, `lean-toolchain`,
+  root `AsymptoticSpine.lean`, and modules `AsymptoticSpine/Util.lean`,
+  `FirstMatch.lean`, `Moment.lean`, `NoHighEnergy.lean`, `SigmaDiagonal.lean`);
+  correspondence note
+  `experimental/notes/audits/lean_asymptotic_spine_note.md`.
+- **Status:** FORMALIZED (sorry-free, `lake build` PASSING) / AUDIT (the note).
+- **What is being added:** A machine-checked elementary spine of
+  `experimental/asymptotic_rs_mca.tex`: (L1) first-match disjointization
+  `lem:first-match` — leaves partition the covered slopes and the count is at most
+  the printed budget sum; (L2) `lem:q-sp` second-moment bound; (L3) `lem:moment-max`
+  discrete squeeze; (L4) the sigma block-diagonalization the paper elides and the
+  r2 audit (§A3) says a formalizer must supply; (L5) the `prop:no-high-energy`
+  inequality composition with Balog-Szemeredi-Gowers and quasicube growth entering
+  as explicit hypotheses (not axioms). No `sorry`, no `native_decide`, no custom
+  logical assumption; `#print axioms` shows only Lean's standard foundations.
+- **How it is useful:** Directly citable machine-checked backing for the
+  asymptotic RS-MCA paper's elementary spine, and in particular a formal version
+  of the σ-diagonal gap that the in-paper proof skips. Cannot live inside the
+  Mathlib-pinned `grande_finale` package (unbuildable here), so it is a
+  self-contained stdlib-only sibling that mirrors that package's label-citation
+  conventions; the note gives the full decl-to-tex map.
+- **What to do next:** PI re-check the σ-diagonal `level` recursion and the L5
+  hypothesis signatures against the tex; leave the entropy/Stirling analysis
+  (`thm:frontier`), the imported closed-ledger package, and the two r2 `OPEN GAP`s
+  (`lem:addback`, pole-construction collision loss) out of scope pending reals.
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
