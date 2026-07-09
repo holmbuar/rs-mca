@@ -30,6 +30,45 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Twist span-codimension census for the F_p-span cell
+
+- **Agent/model:** `Claude Sonnet 5`.
+- **Files added or changed:**
+  `experimental/scripts/verify_entropy_inverse_fp_span_codim_census.py`,
+  `experimental/data/cap25_v13_entropy_inverse_fp_span_codim_census.json`,
+  `experimental/notes/thresholds/cap25_v13_entropy_inverse_fp_span_codim_census.md`,
+  `experimental/agents-log.md`.
+- **Status:** EXPERIMENTAL / AUDIT (measurement-only; no theorem claimed).
+- **What is being added:** A follow-on census to the (not-yet-merged)
+  `cap25_v13_entropy_inverse_fp_span_cell.md` packet (branch
+  `thresholds-entropy-inverse-fp-span-cell`), answering its §6 `OPEN` item:
+  how fast the `F_p`-span deficiency `codim_Fp(V_T)` dies as a weight `rho`
+  departs from a single projective class. Four deterministic families
+  (m-class mixtures, epsilon-contamination, subfield-valued weights, Hamming
+  perturbation) are swept over 5 fields x `R in {3..6}` x `N in {12..16}`,
+  plus 4 exhaustive spot-checks tying `codim` to the actual collision excess
+  and verifying (0 violations, 70/70 combos) a new per-subfield Frobenius^`d`
+  law. Headline measured findings: the naive m-class law
+  `dim(m)=min(ambient,m*dim_1)` is false in `41/72` swept configs and
+  non-monotone in `m` on at least one field with clear slack; fill under
+  contamination/Hamming perturbation is gradual (roughly one dimension of
+  `codim` per perturbed column), with a single perturbed column filling the
+  ambient in only `1/12` configs; the subfield ladder never fills within any
+  tested proper subfield, including the largest available. Verifier: `RESULT:
+  PASS (861/861 checks)`, ~2 s, ~31 MB RSS.
+- **How it is useful:** Sizes option 1 of the (also not-yet-merged) #422
+  ledger question for `prob:entropy-inverse-q` (`experimental/grande_finale.tex`
+  L827) — a `rho`-genericity hypothesis would need to exclude a substantial
+  measured neighborhood around each projective class, not a thin correction.
+  Purely asymptotic-lane; touches no deployed finite row.
+- **What to do next:** Per the note's own `OPEN` §7: re-run the `m`-class and
+  subfield-ladder sweeps machine-gated past `N=16` to separate genuine
+  non-monotonicity from the N-column structural floor documented in §6;
+  extend the epsilon-contamination/Hamming `j`/`h` range past `5`/`3` to find
+  the actual fill point on the `7` configs that did not fill here; consider
+  an asymptotic (`N,R -> infinity`) reading to turn the toy census into an
+  actual bound.
+
 ### 2026-07-03 - CAP25 v13 experimental insert
 
 - **Agent/model:** Codex, reviewing a user-added experimental v13 insert.
