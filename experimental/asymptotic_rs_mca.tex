@@ -280,11 +280,18 @@ We recall the identity-prefix pole construction in the form needed here.  Let \(
         g_\alpha(x)=\frac{-1}{x-\alpha},
         \qquad x\in D,
 \]
-has the property that \(f_\alpha+\zeta g_\alpha\) is code-explained on \(S\) exactly when \(\ell_S(\alpha)=U_z(\alpha)-\zeta\).  The word \(g_\alpha\) is not explained by a degree-\(<k\) polynomial on \(k+1\) positions, so the corresponding slopes are MCA-bad.  Except for the usual collision loss in evaluating \(\ell_S(\alpha)\), which is subexponential in the standard pole-reservoir regime, this gives
+has the property that \(f_\alpha+\zeta g_\alpha\) is code-explained on \(S\) exactly when \(\ell_S(\alpha)=U_z(\alpha)-\zeta\).  The word \(g_\alpha\) is not explained by a degree-\(<k\) polynomial on \(k+1\) positions, so the corresponding slopes are MCA-bad.  Counting \emph{distinct} bad slopes straight from this pole map would need the support-product fibers \(S\mapsto\ell_S(\alpha)\) to be subexponential; that collision loss ``in the standard pole-reservoir regime'' is asserted but proved in no source, and we do not rely on it.  We take the lower side instead from the collision-free identity-prefix floor \cite[Lemma ``identity-scale prefix floor'' (\texttt{lem:capff1-identity-prefix-floor})]{Cho26CapV13}, applied at dimension \(K=k+1\) and agreement \(m=k+1+w\): it produces one \(\B\)-valued received word \(U\) whose list in \(\RS_\F(D,k+1)\) has size \(L\ge\lceil\binom nm|\B|^{-w}\rceil\), the count being collision-free because the codeword map \(M\mapsto c_M=U-\Lambda_M|_D\) is injective by the locator identity, with no pole evaluated.  The deep-point list-to-CA conversion \cite[Theorem ``deep-point list-to-CA conversion'' (\texttt{thm:A}), taken at \(\eta=\tfrac12\)]{Cho26CapV13} turns this list into a base-code error bound---its \emph{own} pole collisions are \emph{proved} to be controlled by averaging over the reservoir \(\Omega=\F\setminus D\) \textup{(at most \(k\binom L2\) collisions across the \(|\F|-n\) poles)}, not asserted---and support-wise monotonicity \(\eps_{\rm ca}\le\eps_{\rm mca}\) gives
 \[
-        B_C^{\rm MCA}(m)\ge \exp(-o(n))\binom nm|\B|^{-w}.
+        \eps_{\rm mca}\bigl(C,1-m/n\bigr)
+        \;\ge\;
+        \min\!\Bigl(\frac{L-1}{2\,q_{\rm line}},\;\frac1{2k}\Bigl(1-\frac n{q_{\rm line}}\Bigr)\Bigr),
+        \qquad q_{\rm line}=|\F| .
 \]
-This is the lower construction used in \cite{Cho26CapV13,Cho26Grande}.
+Hence \(\eps_{\rm mca}(C,1-m/n)>\eps_n\) as soon as \(\binom nm|\B|^{-w}>2\,q_{\rm line}\eps_n\) and \(\eps_n<\tfrac1{2k}(1-n/q_{\rm line})\); under the fixed challenge normalization of \cref{thm:frontier} the budget \(2\,q_{\rm line}\eps_n\) is subexponential, so the first trigger reduces to \(\binom nm|\B|^{-w}=\exp(\Omega(n))\), i.e.\ to \(g<g^*(\rho,\beta)\) by a fixed amount.  This is the lower construction, with the collision loss now proved rather than assumed.  The direct pole bound
+\[
+        B_C^{\rm MCA}(m)\ge \exp(-o(n))\binom nm|\B|^{-w}
+\]
+of \cite{Cho26CapV13,Cho26Grande} is retained only as an \textup{OPEN} alternative: it presupposes the unproved support-collision control above, and it over-counts once \(\binom nm|\B|^{-w}>q_{\rm line}\), where it would exceed the slope field.
 
 \begin{proof}[Proof of \cref{thm:frontier}]
 Take \(a_n=(\rho+g)n+o(n)\).  Stirling gives

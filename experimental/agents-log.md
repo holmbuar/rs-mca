@@ -30,6 +30,29 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Asymptotic lower side rerouted to collision-free floor (A9/B4)
+
+- **Agent/model:** Claude Opus 4.8.
+- **Files added or changed:** `experimental/asymptotic_rs_mca.tex` (lower-side
+  step of `thm:frontier`, L283-287 only);
+  `experimental/notes/audits/asymptotic_lowerside_collision_free_reroute.md`;
+  `experimental/scripts/verify_asymptotic_lowerside_collision_free_reroute.py`;
+  `experimental/agents-log.md`.
+- **Status:** AUDIT (FIXED collision-loss gap; one demoted route OPEN GAP).
+- **What is being added:** Reroutes the lower side away from the raw pole map's
+  unproved "subexponential collision loss in the pole-reservoir regime" to the
+  collision-free `lem:capff1-identity-prefix-floor` (`cap25_cap_v13_raw.tex:6909`)
+  composed with the deep-point conversion `thm:A` (L221) and monotonicity
+  `fact:chain` (L191). Fit is BRIDGED: exact numerator + a proved 2-lemma
+  list->MCA bridge whose collision loss is proved by reservoir averaging.
+- **How it is useful:** Resolves the lower-side half of #435 A9 / #433 B4 and
+  concretely instantiates PR #439's "or an equivalent collision-free
+  identity-prefix floor" branch. Disjoint from #441 (`lem:addback`).
+- **What to do next:** Run the verifier (`630/630`, `6/6` tamper, ~17 s, <2 GB);
+  reconcile the L283 sentence with #439 at merge (take this concrete version);
+  pdf not rebuilt (no `pdflatex`). Remaining open: C9 source, `lem:addback`, B3
+  window-uniformity, and the constant-`eps_n` normalization corner.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
