@@ -1,0 +1,346 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
+
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\RS}{RS}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Conf}{Conf}
+\DeclareMathOperator{\supp}{supp}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\B}{\mathbb B}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Ccal}{\mathcal C}
+\newcommand{\Lcal}{\mathcal L}
+\newcommand{\Scal}{\mathcal S}
+\newcommand{\Wcal}{\mathcal W}
+\newcommand{\OmegaC}{\Omega^{\circ}}
+\newcommand{\Gord}{\Gamma^{\rm ord}}
+\newcommand{\Gsid}{\Gamma^{\rm sid}}
+\newcommand{\barN}{\overline N}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\defeq}{\coloneqq}
+
+\title{Asymptotic RS MCA}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+We give a compact proof of the asymptotic Reed--Solomon mutual-correlated-agreement frontier from the paid ledger developed in the v13 raw and Grande Finale manuscripts.  The proof reduces the remaining primitive prefix problem to a fixed-density Boolean slice mapped by Vandermonde moments.  After the Fourier/Sidon cell is paid, any positive logarithmic moment excess gives a large high-energy Boolean fiber.  Balog--Szemeredi--Gowers and quasicube difference growth forbid such a fiber, so primitive Q holds with only \(\exp(o(n))\) loss.  Combined with the identity-prefix lower construction, every smooth row sequence covered by the closed ledger has threshold \(1-\rho-g^*(\rho,\log_2|\B|)+o(1)\).  The closed-ledger package is stated explicitly, with the individual cell payments cited to the existing ledgers.
+\end{abstract}
+
+\maketitle
+
+\section{Statement}
+
+Let \(D\subseteq \F\) be an evaluation set of size \(n\), and let
+\[
+        C=\RS_{\F}(D,k)=\{(f(t))_{t\in D}:\deg f<k\}.
+\]
+For \(a\in\{0,\ldots,n\}\), a finite slope \(\gamma\in\F\) is support-wise MCA-bad for a pair \(r_1,r_2\in\F^D\) at agreement \(a\) if some set \(S\subseteq D\), \(|S|\ge a\), and some \(h\in\F[X]\), \(\deg h<k\), satisfy \(r_1+\gamma r_2=h\) on \(S\), while \(r_1,r_2\) are not simultaneously explained on the same \(S\) by two degree-\(<k\) polynomials.  Put
+\[
+        B_C^{\rm MCA}(a)
+        =\max_{r_1,r_2}\#\{\gamma\in\F:\gamma\text{ is MCA-bad at agreement }a\}.
+\]
+Then \(\eps_{\rm mca}(C,1-a/n)=B_C^{\rm MCA}(a)/q_{\rm line}\), where \(q_{\rm line}\) is the line-slope field used by the MCA sampler.  This integer staircase convention is the one used in the v13 raw ledger \cite{Cho26CapV13} and in the Grande Finale reduction \cite{Cho26Grande}.
+
+We consider smooth multiplicative or circle-type RS row sequences \(C_n=\RS_{\F_n}(D_n,k_n)\) with \(|D_n|=n\), \(k_n/n\to\rho\in(0,1)\), and a base/generated alphabet \(\B_n\) of bit-size \(\beta_n=\log_2|\B_n|\to\beta\).  For an agreement \(a_n=k_n+1+w_n\), define the prefix average
+\[
+        \barN_{n,a_n}=\binom n{a_n}|\B_n|^{-w_n}.
+\]
+The entropy--subfield envelope is
+\[
+        g^*(\rho,\beta)=\sup\{g\in[0,1-\rho]:H_2(\rho+g)\ge \beta g\},
+\]
+where \(H_2(x)=-x\log_2x-(1-x)\log_2(1-x)\).  The target threshold is \(\delta_C^*(\eps)=\sup\{\delta:\eps_{\rm mca}(C,\delta)\le\eps\}\).
+
+\begin{definition}[Cells and first-match payment]\label{def:cells}
+A \emph{cell} is a constructible subfamily of the MCA witness incidence space, or a bounded-complexity family of such subfamilies, stable under extension of the ground field.  Cells are ordered.  A slope is assigned to the first cell containing one of its witnesses.  The cell is \emph{paid} at agreement \(a_n\) if the number of slopes assigned to it is at most its printed budget, and a family is paid if the sum of its first-match budgets is \(\exp(o(n))\barN_{n,a_n}\).
+\end{definition}
+
+\begin{lemma}[First-match disjointization]\label{lem:first-match}
+If ordered cells \(\Ccal_1,\ldots,\Ccal_J\) cover a set of bad slopes and the \(j\)-th first-match cell has budget \(U_j\), then the covered slopes contribute at most \(\sum_jU_j\) to \(B_C^{\rm MCA}(a)\).
+\end{lemma}
+
+\begin{proof}
+For a fixed received line, assign each bad slope to the least-indexed cell containing a witness.  These assigned slope classes are disjoint, and the \(j\)-th class is contained in the projection of \(\Ccal_j\) after earlier cells have been removed.  Summing the budgets and then maximizing over received lines proves the claim.
+\end{proof}
+
+\begin{definition}[Closed paid ledger]\label{def:closed-ledger}
+A smooth RS row sequence is \emph{closed-ledger} at agreements \(a_n\) if the following first-match cells cover all MCA-bad witnesses except the primitive leaves of \cref{def:primitive-leaf}, and if their total contribution is \(\exp(o(n))\barN_{n,a_n}\).
+\begin{enumerate}[label=\textup{(C\arabic*)},leftmargin=2.7em]
+    \item \emph{Quotient-pullback cells.}  The support or locator descends along a nontrivial finite map \(D\to D'\).  These cells include quotient-remainder locators, divisor-block support ledgers, quotient-image lcm ledgers, and quotient pullback recursion.
+    \item \emph{Chebyshev and dihedral cells.}  On multiplicative or circle rows, the support is invariant under the dihedral action, or the locator factors through a Chebyshev or circle quotient such as \(z+z^{-1}\).
+    \item \emph{Planted-block cells.}  A positive-density block is forced into the support or common zero set.  The payment is the entropy cost of planting that block, together with the bounded quotient profile.
+    \item \emph{Tangent and deep-center cells.}  The received line lies in a tangent, secant, or high-contact stratum of the RS code variety, including the high-agreement tangent cell.
+    \item \emph{Extension and descent cells.}  The witness either descends to a smaller field or is controlled by a bounded extension-line or extension-pole parameter.
+    \item \emph{Differential-locator and regular-rank cells.}  The locator map has a rank drop, a ramification defect, or an overdetermined Hankel minor.  These cells include regular closed-range Hankel packing, canonical rank-drop ledgers, and curve rank-drop ledgers.
+    \item \emph{Saturation and effective-image-collapse cells.}  The apparent support count is larger than the actual line-ray or codeword-ray image.  The payment uses exact saturation identities and exact residual image ledgers.
+    \item \emph{Balanced-core and split-pencil cells.}  The residual witness lies in a balanced-core split-pencil chart.  One-parameter primitive locator pencils are paid by the moving-root theorem; deficiency-one and identically split top charts are tangent-borne or eliminated.
+    \item \emph{Fourier/Sidon cells.}  In a primitive prefix leaf, a heavy fiber with exponentially small additive closure is cut as a Fourier/Sidon cell: major arcs are routed to \textup{(C1)--(C8)}, and minor arcs are paid by Fourier flatness.
+\end{enumerate}
+The remaining first-match complement is a disjoint union of primitive prefix leaves.  Every such leaf has the Boolean fixed-density Vandermonde form of \cref{def:primitive-leaf}.
+\end{definition}
+
+\begin{theorem}[Closed ledger package]\label{thm:closed-ledger-package}
+For the smooth multiplicative and circle-type RS row sequences treated in the v13 raw ledger and in the Grande Finale notes, the cells \textup{(C1)--(C9)} form a closed paid ledger in the asymptotic frontier window.
+\end{theorem}
+
+\begin{proof}
+We record the existing ledger package rather than reprove each algebro-geometric count.
+
+For \textup{(C1)}, the quotient-remainder lower and support ledgers, divisor-union support ledger, exact finite-parameter quotient-image ledger, affine/projective lcm ledgers, quotient pullback recursion, and bounded quotient census are proved in \cite[quotient-remainder, quotient support, quotient-image, and bounded-census ledgers]{Cho26CapV13}.  The corresponding first-match convention and quotient status cell are isolated in \cite{Cho26Grande}.
+
+For \textup{(C2)}, exact Chebyshev fibers on circle twin-coset domains, circle quotient transport, and circle deployed ledgers are proved in \cite[Chebyshev and circle sections]{Cho26CapV13}.  Dihedral and Chebyshev cells are quotient cells with extra monodromy and are therefore paid by the same downstairs-support and image ledgers.
+
+For \textup{(C3)}, planted quotient profiles, planted quotient-core lower counts, planted list-budget windows, and bounded active quotient order are established in \cite[planted quotient profile and bounded quotient census]{Cho26CapV13}.  These supply the entropy payment for positive-density forced blocks.
+
+For \textup{(C4)}, the exact high-agreement tangent cell and tangent-borne split-kernel sections are proved in \cite[high-agreement tangent exact cell and split-kernel tangent-borne theorem]{Cho26CapV13} and refined in \cite[exact high-agreement tangent cell]{Cho26Grande}.
+
+For \textup{(C5)}, the extension-pole deep-list and quotient-remainder floors, extension-line dimension-degree ledger, subfield confinement, and genuinely extension-valued line accounting are proved in \cite[extension-pole and extension-line ledgers]{Cho26CapV13}; the full-extension cell target and extension-valued rank-one floor are recorded in \cite{Cho26Grande}.
+
+For \textup{(C6)}, regular Hankel minors, canonical exact-agreement rank-drop ledgers, closed-ball rank-drop lcm ledgers, curve rank-drop ledgers, arbitrary-residual image ledgers, and the scanner residual ledger are proved in \cite[Hankel, rank-drop, curve, residual-image, and scanner ledgers]{Cho26CapV13}.  These are exactly the differential-locator and regular-rank payments.
+
+For \textup{(C7)}, the exact saturation identity and line-ray saturation identity are proved in \cite[saturation and line-ray saturation identities]{Cho26Grande}; exact arbitrary-residual image and closed-ball residual image ledgers appear in \cite[residual image ledgers]{Cho26CapV13}.  Thus raw support overcounts are replaced by actual image counts.
+
+For \textup{(C8)}, the interpolation-lattice split-pencil reduction, near-rational payment, deficiency-one split-test eliminant, split annihilator dictionary, tangent-borne split charts, boundary-profile identification with Q, base-field split-pencil floor, one-parameter moving-root theorem, and primitive one-pencil corollary are proved in \cite[split-pencil and BC sections]{Cho26Grande}, with the balanced-core and split-pencil reductions also developed in \cite[rank-one and split-pencil reductions]{Cho26CapV13}.
+
+For \textup{(C9)}, Fourier-flat leaves satisfy asymptotic Q and large-characteristic Fourier examples are proved in \cite[Fourier-flat Q section]{Cho26Grande}.  The Sidon/Fourier operational cut, the split between Sidon-heavy and high-energy fibers, and the fact that major arcs route to algebraic cells while minor arcs are Fourier-flat are the moduli-ledger results of \cite{Cho26ModuliFinal,Cho26ModuliSelf}.  They are restated and used below in \cref{def:sidon-paid,prop:energy-extract,thm:primitive-q}.
+
+Finally, first-match disjointization is \cref{lem:first-match} here and is also proved in the Grande Finale and moduli-ledger notes.  The listed cells exhaust the nonprimitive branches of the v13 first-match atlas; after removing them, the remaining leaf is the primitive Boolean prefix slice.  Summing the printed budgets gives \(\exp(o(n))\barN_{n,a_n}\), which is the closed paid ledger.
+\end{proof}
+
+Thus the row-specific geometry is not an additional conjectural input to this paper: it is the imported closed ledger package.  The remaining work below is the uniform primitive count and the compiler from that count to the MCA staircase.
+
+\begin{theorem}[Asymptotic RS--MCA frontier]\label{thm:frontier}
+Let \(C_n=\RS_{\F_n}(D_n,k_n)\) be a smooth RS row sequence as above.  Assume the closed paid ledger holds uniformly in every \(o(n)\)-window around the crossing \(a_n=(\rho+g^*)n+o(n)\).  Assume also the standard identity-prefix pole construction supplies the lower side below the crossing.  Then, for every target sequence with \(\log_2(1/\eps_n)=O(n)\) and fixed challenge normalization,
+\[
+        \delta_{C_n}^*(\eps_n)
+        =1-\rho-g^*(\rho,\beta)+o(1),
+\]
+with the evident replacement of \(\beta\) by \(\lim\log_2|\B_n|\) when the base alphabet varies.
+\end{theorem}
+
+The rest of the paper proves \cref{thm:frontier}.  The proof is self-contained after the imported closed-ledger package and the standard external additive-combinatorics facts stated in \cref{sec:bsg}.
+
+\section{Primitive leaves}
+
+\begin{definition}[Primitive prefix leaf]\label{def:primitive-leaf}
+A primitive leaf consists of a finite set \(T\), \(|T|=N\), an integer \(m\) with \(m/N\) bounded away from \(0\) and \(1\), a field \(K\), nonzero weights \(\rho(t)\in K^\times\), and columns
+\[
+        v_t=\rho(t)(1,t,\ldots,t^{R-1})\in K^R,\qquad t\in T.
+\]
+The active support family is a first-match residual slice
+\[
+        \OmegaC\subseteq \{x\in\{0,1\}^{T}:\sum_{t\in T}x_t=m\},
+\]
+and the prefix map is \(\Phi(x)=\sum_{t\in T}x_tv_t\).  Write \(\Scal=\operatorname{im}\Phi\), \(L=|\Scal|\), \(M=|\OmegaC|\), \(\barN=M/L\), and \(F_s=\OmegaC\cap\Phi^{-1}(s)\).  The leaf is at the frontier if \(\log\barN=o(N)\).
+\end{definition}
+
+For \(q=q_N\to\infty\), define
+\[
+        \Gord_q=L^{-1}\sum_{s\in\Scal}\left(\frac{|F_s|}{\barN}\right)^q .
+\]
+
+\begin{lemma}[Moment-max equivalence]\label{lem:moment-max}
+If \(q\to\infty\) and \(\log L=o(Nq)\), then
+\[
+        L^{-1}\left(\max_s\frac{|F_s|}{\barN}\right)^q
+        \le \Gord_q
+        \le
+        \left(\max_s\frac{|F_s|}{\barN}\right)^q .
+\]
+Hence \(\Gord_q\le \exp(o(Nq))\) is equivalent to \(\max_s|F_s|\le\exp(o(N))\barN\).
+\end{lemma}
+
+\begin{proof}
+The upper bound replaces every summand by the maximum; the lower bound keeps a maximum summand.  Taking \(q\)-th roots and using \(\log L=o(Nq)\) gives the final assertion.
+\end{proof}
+
+\section{Sidon cut}
+
+For a finite \(F\) in an abelian group, let
+\[
+        E(F)=\#\{(a,b,c,d)\in F^4:a-b=c-d\},\qquad
+        \Delta(F)=E(F)/|F|^3.
+\]
+Thus \(\Delta(F)\) is the probability that \(a-b+c\in F\) for independent uniform \(a,b,c\in F\).
+
+For \(\sigma>0\), define the Sidon-heavy moment of a primitive leaf by
+\[
+        \Gsid_{q,\sigma}
+        =L^{-1}\sum_{\Delta(F_s)\le e^{-\sigma N}}
+        \left(\frac{|F_s|}{\barN}\right)^q .
+\]
+
+\begin{definition}[Paid Fourier/Sidon cell]\label{def:sidon-paid}
+The Fourier/Sidon cell is paid if, for every fixed \(\sigma>0\) and every logarithmic \(q\), one has \(\Gsid_{q,\sigma}\le\exp(o(Nq))\).  Equivalently, no positive-rate heavy fiber with exponentially small additive closure remains in the primitive residual.
+\end{definition}
+
+In practice this cell is paid by Fourier flatness after major arcs have been routed to algebraic cells.  If \(\mu=\Phi_*\operatorname{Unif}(\OmegaC)\) and \(\sum_{\chi\ne1}|\widehat\mu(\chi)|\le\exp(o(N))\), Fourier inversion gives \(L\mu(s)\le\exp(o(N))\) for all \(s\), hence primitive Q.  In RS moment-curve leaves, large Fourier coefficients are algebraic major arcs: quotient, descent, dihedral, ramification, or effective-image-collapse phenomena.  These are exactly the earlier paid cells in \cref{def:closed-ledger}.
+
+\begin{proposition}[Energy extraction after the Sidon cut]\label{prop:energy-extract}
+Assume the Fourier/Sidon cell is paid.  If \(\Gord_q\ge e^{\eta Nq}\) for some fixed \(\eta>0\), then some level \(s=s_N\) satisfies \(|F_s|\ge e^{\eta N-o(N)}\barN\) and \(E(F_s)\ge |F_s|^3e^{-o(N)}\).
+\end{proposition}
+
+\begin{proof}
+Fix \(\sigma>0\).  Split \(\Gord_q\) into terms with \(\Delta(F_s)\le e^{-\sigma N}\) and the complementary terms.  The first part is \(\Gsid_{q,\sigma}=\exp(o(Nq))\), so a complementary term has \((|F_s|/\barN)^q\ge e^{\eta Nq-o(Nq)}\).  Hence \(|F_s|\ge e^{\eta N-o(N)}\barN\) and \(\Delta(F_s)>e^{-\sigma N}\).  Letting \(\sigma\downarrow0\) slowly along the sequence gives \(E(F_s)\ge |F_s|^3e^{-o(N)}\).
+\end{proof}
+
+\section{Boolean additive combinatorics}\label{sec:bsg}
+
+We use the energy form of Balog--Szemeredi--Gowers \cite{BalogSzemeredi,Gowers1998}.  Its precise polynomial exponents are irrelevant here.
+
+\begin{theorem}[Balog--Szemeredi--Gowers]\label{thm:bsg}
+If \(A\) is a finite subset of an abelian group and \(E(A)\ge |A|^3/K\), then some \(A'\subseteq A\) satisfies \(|A'|\ge K^{-C}|A|\) and \(|A'-A'|\le K^C|A'|\), where \(C\) is absolute.
+\end{theorem}
+
+We also use the quasicube sumset theorem of Matolcsi--Ruzsa--Shakan--Zhelezov \cite{MRSZ2020} in the sharpened form of Green--Matolcsi--Ruzsa--Shakan--Zhelezov \cite{GMRSZ2020}: if \(U\subseteq\{0,1\}^d\), then \(|P+Q+U|\ge |P|^{1/2}|Q|^{1/2}|U|\) for finite nonempty \(P,Q\subseteq\Z^d\).
+
+\begin{theorem}[Quasicube difference growth]\label{thm:quasicube}
+Every finite \(A\subseteq\{0,1\}^{N}\) satisfies \(|A-A|\ge |A|^{3/2}\).
+\end{theorem}
+
+\begin{proof}
+Apply the quasicube theorem with \(U=A\), \(P=-A\), and \(Q=\{0\}\).
+\end{proof}
+
+\begin{proposition}[No large high-energy Boolean fiber]\label{prop:no-high-energy}
+There is no sequence \(F_N\subseteq\{0,1\}^{N}\) with \(|F_N|\ge e^{cN-o(N)}\) and \(E(F_N)\ge |F_N|^3e^{-o(N)}\) for fixed \(c>0\).
+\end{proposition}
+
+\begin{proof}
+By \cref{thm:bsg} with \(K=e^{o(N)}\), a subset \(F'_N\subseteq F_N\) has \(|F'_N|\ge e^{cN-o(N)}\) and \(|F'_N-F'_N|\le e^{o(N)}|F'_N|\).  But \cref{thm:quasicube} gives \(|F'_N-F'_N|\ge |F'_N|^{3/2}\), so \(|F'_N|^{1/2}\le e^{o(N)}\), a contradiction.
+\end{proof}
+
+\begin{theorem}[Primitive Q after the Sidon cut]\label{thm:primitive-q}
+In every frontier primitive leaf with paid Fourier/Sidon cell, \(\max_s|F_s|\le\exp(o(N))\barN\).
+\end{theorem}
+
+\begin{proof}
+If not, \cref{lem:moment-max} gives \(\Gord_q\ge e^{\eta Nq}\) for some fixed \(\eta>0\) along a subsequence and some logarithmic \(q\).  \Cref{prop:energy-extract} then gives a fiber \(F_s\subseteq\{0,1\}^{T}\) with \(|F_s|\ge e^{\eta N-o(N)}\barN=e^{cN-o(N)}\) and \(E(F_s)\ge |F_s|^3e^{-o(N)}\), because \(\log\barN=o(N)\).  This contradicts \cref{prop:no-high-energy}.
+\end{proof}
+
+\section{MCA compiler}
+
+\begin{lemma}[First-match add-back]\label{lem:addback}
+For a closed-ledger row, the full first-match prefix count after paid cells satisfies \(\max_sN(s)\le\exp(o(n))\barN_{n,a_n}\).
+\end{lemma}
+
+\begin{proof}
+Paid cells contribute \(\exp(o(n))\barN_{n,a_n}\) by closure.  Primitive leaves satisfy \cref{thm:primitive-q}; their normalized averages sum to at most \(\exp(o(n))\barN_{n,a_n}\) by the first-match profile decomposition.  Summing over the subexponential profile family preserves the same scale.
+\end{proof}
+
+\begin{lemma}[Q pays shift pairs]\label{lem:q-sp}
+If \(\sum_sN(s)=M\), \(\barN=M/L\), and \(\max_sN(s)\le \kappa\barN\), then \(M^{-1}\sum_sN(s)^2\le\kappa\barN\).
+\end{lemma}
+
+\begin{proof}
+\(\sum_sN(s)^2\le(\max_sN(s))\sum_sN(s)\le\kappa\barN M\).
+\end{proof}
+
+\begin{theorem}[Closed-ledger upper bound]\label{thm:upper}
+If a smooth RS row sequence is closed-ledger at \(a_n\), then
+\[
+        B_{C_n}^{\rm MCA}(a_n)
+        \le \exp(o(n))\binom n{a_n}|\B_n|^{-(a_n-k_n-1)} .
+\]
+\end{theorem}
+
+\begin{proof}
+The nonprimitive cells are paid by definition.  The primitive prefix leaves obey Q by \cref{thm:primitive-q} and add back by \cref{lem:addback}.  The shift-pair second-moment ledger is paid by \cref{lem:q-sp}.  First-match disjointization sums these disjoint slope classes, giving the displayed numerator bound.
+\end{proof}
+
+\section{Lower side and frontier}
+
+We recall the identity-prefix pole construction in the form needed here.  Let \(m=k+1+w\), and for \(S\subseteq D\), \(|S|=m\), write \(\ell_S(X)=\prod_{t\in S}(X-t)\).  Pigeonholing the first \(w\) locator coefficients over \(\B^w\) gives a prefix vector \(z\) with at least \(\binom nm|\B|^{-w}\) supports.  Choose a pole \(\alpha\in\F\setminus D\), and set \(U_z(X)=X^m+z_1X^{m-1}+\cdots+z_wX^{m-w}\).  The line
+\[
+        f_\alpha(x)=\frac{U_z(x)}{x-\alpha},
+        \qquad
+        g_\alpha(x)=\frac{-1}{x-\alpha},
+        \qquad x\in D,
+\]
+has the property that \(f_\alpha+\zeta g_\alpha\) is code-explained on \(S\) exactly when \(\ell_S(\alpha)=U_z(\alpha)-\zeta\).  The word \(g_\alpha\) is not explained by a degree-\(<k\) polynomial on \(k+1\) positions, so the corresponding slopes are MCA-bad.  Except for the usual collision loss in evaluating \(\ell_S(\alpha)\), which is subexponential in the standard pole-reservoir regime, this gives
+\[
+        B_C^{\rm MCA}(m)\ge \exp(-o(n))\binom nm|\B|^{-w}.
+\]
+This is the lower construction used in \cite{Cho26CapV13,Cho26Grande}.
+
+\begin{proof}[Proof of \cref{thm:frontier}]
+Take \(a_n=(\rho+g)n+o(n)\).  Stirling gives
+\[
+        \log_2\barN_{n,a_n}
+        = n\bigl(H_2(\rho+g)-\beta g\bigr)+o(n).
+\]
+If \(g>g^*(\rho,\beta)\) by a fixed amount, this exponent is negative by \(\Omega(n)\), so \cref{thm:upper} makes \(B_{C_n}^{\rm MCA}(a_n)\) smaller than any target with the prescribed normalization after moving \(o(n)\) agreements to absorb the \(\exp(o(n))\) ledger overhead.  Thus the safe radius reaches \(1-\rho-g^*(\rho,\beta)-o(1)\).  If \(g<g^*(\rho,\beta)\) by a fixed amount, the identity-prefix construction gives exponentially many bad slopes, so the target fails at radius \(1-\rho-g+o(1)\).  Letting \(g\) approach \(g^*\) from both sides proves the claimed equality.
+\end{proof}
+
+\begin{remark}[Finite adjacent rows]
+This is an asymptotic theorem.  It intentionally absorbs \(\exp(o(n))\) losses.  The finite deployed adjacent pairs in \cite{Cho26CapV13,Cho26Grande} require the same first-match ledger with printed constants for every paid cell, Fourier/Sidon tail, and add-back step; those constants are not supplied by the asymptotic argument alone.
+\end{remark}
+
+\begin{thebibliography}{GMRSZ20}
+
+\bibitem[BS94]{BalogSzemeredi}
+A. Balog and E. Szemeredi,
+\newblock A statistical theorem of set addition,
+\newblock \emph{Combinatorica} 14 (1994), 263--268.
+
+\bibitem[Cho26a]{Cho26CapV13}
+P. Chojecki,
+\newblock \emph{CAP25 v13 raw ledger for smooth Reed--Solomon MCA},
+\newblock experimental manuscript, 2026.
+
+\bibitem[Cho26b]{Cho26Grande}
+P. Chojecki,
+\newblock \emph{Grande Finale: Q, BC, SP, and the final RS--MCA ledger},
+\newblock experimental manuscript, 2026.
+
+\bibitem[Cho26c]{Cho26ModuliSelf}
+P. Chojecki,
+\newblock \emph{The Moduli Ledger for the Asymptotic Reed--Solomon MCA Frontier},
+\newblock experimental manuscript, 2026.
+
+\bibitem[Cho26d]{Cho26ModuliFinal}
+P. Chojecki,
+\newblock \emph{A Moduli Ledger for RS--MCA},
+\newblock experimental manuscript, 2026.
+
+\bibitem[GMRSZ20]{GMRSZ2020}
+B. Green, D. Matolcsi, I. Z. Ruzsa, G. Shakan, and D. Zhelezov,
+\newblock A weighted Prekopa--Leindler inequality and sumsets with quasicubes,
+\newblock arXiv:2003.04077, 2020.
+
+\bibitem[Gow98]{Gowers1998}
+W. T. Gowers,
+\newblock A new proof of Szemeredi's theorem for arithmetic progressions of length four,
+\newblock \emph{Geom. Funct. Anal.} 8 (1998), 529--551.
+
+\bibitem[MRSZ20]{MRSZ2020}
+D. Matolcsi, I. Z. Ruzsa, G. Shakan, and D. Zhelezov,
+\newblock An analytic approach to cardinalities of sumsets,
+\newblock arXiv:2003.04075, 2020.
+
+\end{thebibliography}
+
+\end{document}

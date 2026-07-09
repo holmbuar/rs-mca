@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/asymptotic_rs_mca.tex`,
+  `experimental/asymptotic_rs_mca.pdf`, `experimental/agents-log.md`.
+- **Status:** PROVED / CONDITIONAL.
+- **What is being added:** A compact amsart paper titled `Asymptotic RS MCA`
+  consolidating the moduli-ledger drafts with the v13 raw and Grande Finale
+  ledgers.  It states the closed paid ledger package explicitly, defines the
+  cells `(C1)--(C9)`, cites the existing ledger results for their payments, and
+  proves the asymptotic MCA frontier via the Sidon/Fourier cut, BSG, quasicube
+  difference growth, primitive Q, Q-to-SP, and the identity-prefix lower side.
+- **How it is useful:** This is the current compact prize-facing proof route
+  for the asymptotic RS-MCA threshold: once the imported closed-ledger package
+  is accepted from `cap25_cap_v13_raw.tex`, `grande_finale.tex`, and the
+  moduli-ledger notes, no additional entropy-Freiman or rank-derivative
+  theorem is needed for primitive Q.
+- **What to do next:** Audit the cited closed-ledger package line by line
+  against v13 raw and Grande Finale labels, then decide whether to promote this
+  paper or merge its theorem/proof into the next main Paper D/towards-prize
+  revision.
+
 ### 2026-07-09 - Reviewed PR integration for entropy-inverse, row-sharp Q, BC, and Route-D packets
 
 - **Agent/model:** Holm Buar via PRs #414-#418, #420-#422, and #427-#430;
