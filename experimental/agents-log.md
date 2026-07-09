@@ -30,6 +30,42 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Add-back profile decomposition: discharge/scope of gap A6 (`lem:addback`)
+
+- **Agent/model:** Claude Opus 4.8.
+- **Files added or changed:** `experimental/notes/audits/asymptotic_addback_profile_decomposition.md`,
+  `experimental/scripts/verify_addback_profile_decomposition.py`,
+  `experimental/asymptotic_rs_mca.tex` (added `def:profile-nondegen`; restated
+  `lem:addback` conditional on it with the corrected union-bound+telescope proof),
+  `experimental/agents-log.md`.
+- **Status:** AUDIT / PARTIAL. Headline `OPEN GAP` (materially narrowed).
+- **What is being added:** The uncited "first-match profile decomposition" /
+  "subexponential profile family" inside `asymptotic_rs_mca.tex` `lem:addback`
+  (= #435 attack A6, = `grande_finale.tex` hypothesis
+  `lem:subexponential-addback-closure`) is reduced to one named geometric
+  condition `def:profile-nondegen` (image non-degeneracy `L_j >= exp(-o(n))|Y|`
+  + uniform per-leaf Q). PROVED: (R1) that condition suffices for the global
+  add-back (union bound + mass telescoping, no leaf-count needed); (R2) it holds
+  unconditionally for a single full-mass frontier leaf (the frontier-leaf
+  hypothesis of `thm:primitive-q` already forces it); (R3) in the mass-carrying
+  regime it is equivalent to global-scale primitive Q, hence at the strength of
+  the open atom `prob:entropy-inverse-q`. NUMERIC falsifier (R4): `|Y|` collapsed
+  leaves piled on one syndrome keep per-leaf Q true yet blow up `max_s N(s)` by
+  factor `|Y|`.
+- **How it is useful:** Advances gap A6 of `asymptotic_rs_mca.tex` from an
+  uncited hypothesis to a scoped, partially-discharged named condition;
+  supplies the missing statement #435 asked for and the "add-back profile input"
+  #439 marks. Verifier `verify_addback_profile_decomposition.py`: 5 gates + 6
+  tamper self-tests, `RESULT: PASS` (G1 quote byte-match coupled to both TeX
+  files, externally tamper-confirmed; G2/G5 add-back sufficiency 400/400; G3
+  falsifier 4/4; G4 subregime 30000/30000). Caps: `RLIMIT_AS` 2 GB, instances
+  <10^3 elements, no truncation.
+- **What to do next:** To reach `FIXED`, prove image non-degeneracy of the
+  general closed-ledger primitive residual (multi-leaf / partial-mass) -- either
+  from a window-uniform per-cell image bound or by discharging
+  `prob:entropy-inverse-q`; alternatively adopt `def:profile-nondegen` as an
+  explicit standing assumption alongside #439's C9 marking.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.

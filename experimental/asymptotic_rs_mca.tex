@@ -243,12 +243,22 @@ If not, \cref{lem:moment-max} gives \(\Gord_q\ge e^{\eta Nq}\) for some fixed \(
 
 \section{MCA compiler}
 
+Here \(N(s)\) is the global first-match prefix count: the number of residual supports at agreement \(a_n\) whose prefix syndrome equals \(s\), living in the syndrome space \(Y\) with \(|Y|=|\B_n|^{w_n}\).  The primitive residual is covered by first-match leaves \(\OmegaC_j\) in the sense of \cref{def:primitive-leaf}, with masses \(M_j=|\OmegaC_j|\), images \(L_j=|\Phi(\OmegaC_j)|\le|Y|\), and per-leaf counts \(N_j(s)\), so that \(N(s)=\sum_jN_j(s)\) on the primitive part.
+
+\begin{definition}[Profile non-degeneracy]\label{def:profile-nondegen}
+The closed-ledger primitive residual at \(a_n\) is \emph{profile non-degenerate} if the covering leaves \(\OmegaC_j\) partition the residual supports, map into \(Y\), have image \(L_j\ge\exp(-o(n))|Y|\) (\emph{image non-degeneracy}), and satisfy \cref{thm:primitive-q} with a rate uniform in \(j\).
+\end{definition}
+
 \begin{lemma}[First-match add-back]\label{lem:addback}
-For a closed-ledger row, the full first-match prefix count after paid cells satisfies \(\max_sN(s)\le\exp(o(n))\barN_{n,a_n}\).
+For a closed-ledger row whose primitive residual is profile non-degenerate (\cref{def:profile-nondegen}), the full first-match prefix count after paid cells satisfies \(\max_sN(s)\le\exp(o(n))\barN_{n,a_n}\).
 \end{lemma}
 
 \begin{proof}
-Paid cells contribute \(\exp(o(n))\barN_{n,a_n}\) by closure.  Primitive leaves satisfy \cref{thm:primitive-q}; their normalized averages sum to at most \(\exp(o(n))\barN_{n,a_n}\) by the first-match profile decomposition.  Summing over the subexponential profile family preserves the same scale.
+Paid cells contribute \(\exp(o(n))\barN_{n,a_n}\) by closure.  For the primitive part, the union bound over leaves and \cref{thm:primitive-q} give
+\[
+        \max_s\sum_jN_j(s)\le\sum_j\max_sN_j(s)\le\exp(o(n))\sum_j\frac{M_j}{L_j},
+\]
+uniformly in \(j\) by \cref{def:profile-nondegen}.  Image non-degeneracy replaces each \(M_j/L_j\) by \(\exp(o(n))M_j/|Y|\), and the mass partition \(\sum_jM_j\le\binom n{a_n}\) telescopes the sum to \(\exp(o(n))\binom n{a_n}/|Y|=\exp(o(n))\barN_{n,a_n}\); no separate leaf-count bound is needed.  Profile non-degeneracy is exactly the imported hypothesis of \cite[subexponential add-back lemma]{Cho26Grande}, and it holds unconditionally when the primitive residual is a single full-mass frontier leaf, where the frontier-leaf and frontier-row normalizations force \(L\ge\exp(-o(n))|Y|\); the general multi-leaf case remains an assumption at the strength of the primitive inverse theorem \cite[entropic inverse problem]{Cho26Grande}.
 \end{proof}
 
 \begin{lemma}[Q pays shift pairs]\label{lem:q-sp}
