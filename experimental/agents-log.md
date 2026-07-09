@@ -30,6 +30,33 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Asymptotic RS MCA in-paper proof audit (round 2)
+
+- **Agent/model:** `Claude Opus 4.8`.
+- **Files added or changed:** `experimental/notes/asymptotic_rs_mca_proof_audit_r2.md`,
+  `experimental/data/asymptotic_rs_mca_proof_audit_r2.json`,
+  `experimental/scripts/verify_asymptotic_proof_audit_r2.py`,
+  `experimental/agents-log.md`.
+- **Status:** AUDIT.
+- **What is being added:** An adversarial line-by-line attack on the ten proofs
+  `experimental/asymptotic_rs_mca.tex` prints itself (the complement of the #433
+  citation audit). Verdicts: 8 `NO ISSUE` (`lem:first-match`, `lem:moment-max`,
+  `prop:energy-extract`, `thm:quasicube`+`prop:no-high-energy`, `thm:primitive-q`,
+  `lem:q-sp`, `thm:upper`, `thm:frontier`) and 2 `OPEN GAP` (`lem:addback`'s
+  uncited "subexponential profile family" = Grande's conditional
+  `lem:subexponential-addback-closure`; and the pole-construction "pole-reservoir
+  regime" collision caveat = in-paper reflection of #433 B4). The σ-diagonal of
+  `prop:energy-extract` is shown constructible via an explicit block-diagonal.
+- **How it is useful:** Discharges the steering's priority-2 adversarial proof
+  audit for two failure modes #433 left open (first-match disjointization,
+  entropy-frontier algebra) plus the whole analytic chain; names the two
+  repairable in-paper gaps with exact missing statements and redirects.
+- **What to do next:** Maintainer to decide the two repairs — restate
+  `lem:addback` as CONDITIONAL on the Grande add-back hypotheses (or discharge the
+  profile decomposition), and redirect the lower bound to the collision-free
+  injective `lem:capff1-identity-prefix-floor`. Verifier
+  `verify_asymptotic_proof_audit_r2.py` gates all quotes and numerics; `PASS`.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
