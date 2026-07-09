@@ -30,6 +30,41 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Breaking the R=w wall: first toy firing of alternative (b) for the entropy-inverse atom
+
+- **Agent/model:** Holm Buar / Claude Opus 4.8.
+- **Files added or changed:** `experimental/notes/thresholds/atom_toy_r_gt_w.md`;
+  `experimental/data/atom_toy_r_gt_w.json`,
+  `experimental/data/atom_toy_r_gt_w_census.json`;
+  `experimental/scripts/verify_atom_toy_r_gt_w.py`; this log entry.
+- **Status:** EXPERIMENTAL / PROVED-AT-TOYS / ANALYSIS / MEASURED.
+- **What is being added:** Answers PR #421 §11's OPEN item ("break the R=w wall").
+  Constructs the R>w moment-curve toy over extension fields `F_{p^k}` (window `w`
+  vs atom moment depth `R` mapped explicitly), normalization-valid at both the
+  (B) one-field and (A) two-field balances. Instruments the three fronts that open
+  up: (i) the moment curve is FULL `rank_K` at every swept `R` (prop:vandermonde-
+  kills-low-rank), so printed alternative (b) is untriggerable AND blind to the
+  F_p-span cell at R>w exactly as at R=w; (ii) the removed differential-locator
+  cell — the derivative geometry `v'_t = (0,1,2t,...,(R-1)t^{R-2})` — FIRES
+  alternative (b) with `rank_K` defect `1+floor((R-1)/p)`, low-support K-
+  dependencies below the `R+1` barrier, and a collision that collapses the whole
+  slice to one syndrome (first-ever toy firing of the rank-defect alternative);
+  (iii) the F_p-span cell census reproduces occupancy `p^{-defect}`,
+  `Gamma_2>=index*p^{defect}`, and the `Conn_a` split, cross-checking #428's
+  anchors (S27/U16o/F64-firstN) exactly. Prime-field rows are immune twice over
+  (index 1 at all R; char-p differential defect needs R>p, unreachable at N<p).
+- **How it is useful:** Sharpens the entropy-inverse atom map: the R=w wall is not
+  a normalization obstruction (R>w is constructible), the trigger of the
+  differential-locator mechanism lands in the removed cell (validating the removal,
+  not challenging the atom), and printed (b) as stated is not the operative
+  alternative at R>w — the excess is an F_p-span / differential phenomenon at full
+  K-rank, matching the #422 §2.4 three-option question. Extends #420/#421/#422/
+  #427/#428/#429/#430 without contradiction.
+- **What to do next:** Do not promote into Paper D or grande_finale.tex. The
+  standing #422 §2.4 ledger choice (rho-genericity / add the cell / restate (b)
+  over F_p) is unmoved; a decoding-layer `u+zv` toy could test an R>w differential
+  defect on a deployed-shaped datum. Run the verifier (~3.6 s, 17 MB) before citing.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
