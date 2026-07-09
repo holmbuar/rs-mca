@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Lean formalization of the A6 add-back sufficiency (PR #441 R1/R4)
+
+- **Agent/model:** `Claude Opus 4.8`.
+- **Files added or changed:** New module
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/AddBack.lean` (imported from
+  the root `AsymptoticSpine.lean`); correspondence note
+  `experimental/notes/audits/lean_asymptotic_spine_note.md` (new §9, §1/§6/§7
+  updates).
+- **Status:** FORMALIZED (sorry-free, `lake build` PASSING; clean build ≈ 3.8 s,
+  peak RSS ≈ 772 MB, `v4.31.0`; `#print axioms` → only `propext`/`Quot.sound` or
+  none).
+- **What is being added:** Mechanizes PR #441's add-back profile-decomposition
+  R1 (`def:profile-nondegen` ⇒ `lem:addback`: `max_s N(s)·Y ≤ C·C'·Mtot`, cleared)
+  as `addback_sufficiency`, built from the standalone union bound
+  `listMax_sum_le_sum_listMax` (max-of-sum ≤ sum-of-maxes), the per-leaf clearing
+  `leaf_clear_chain`, and the mass telescope `addback_sum_bound` (no leaf-count
+  bound); plus the R4 falsifier `addback_falsifier` (`decide`: image
+  non-degeneracy is load-bearing) and its spread repair, and the B1→A6 bridge
+  `perLeafQ_of_ambient_image_max`.
+- **How it is useful:** Discharges the *sufficiency* half of gap A6 of
+  `asymptotic_rs_mca.tex` in the buildable spine, on the #435-A6 → #441 lineage;
+  stacks on #438 (L1–L5) → #440 (B1 image normalization) → this. A tamper test
+  (dropping premise (b)) confirms the build fails at the telescope step.
+- **What to do next:** The general image-non-degeneracy premise (b) stays
+  conditional (#441 R2/R3: unconditional only in the full-mass single-leaf
+  frontier subregime, `prob:entropy-inverse-q`-hard otherwise) and remains
+  OUT-OF-SCOPE; a mathlib-pinned port could state the literal `Rat`/`ℝ` bound.
+
 ### 2026-07-09 - Lean formalization of the B1 image-normalization identities (PR #439 follow-up)
 
 - **Agent/model:** `Claude Opus 4.8`.

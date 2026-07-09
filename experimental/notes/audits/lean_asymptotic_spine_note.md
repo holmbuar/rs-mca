@@ -1,4 +1,4 @@
-# Asymptotic-spine Lean ↔ `asymptotic_rs_mca.tex` correspondence note — L1–L5 + B1 image-normalization identities, all sorry-free, `lake build` PASSING
+# Asymptotic-spine Lean ↔ `asymptotic_rs_mca.tex` correspondence note — L1–L5 + B1 image-normalization identities + A6 add-back sufficiency, all sorry-free, `lake build` PASSING
 
 Status: `FORMALIZATION` (a new stdlib-only Lean package `experimental/lean/asymptotic_spine/`
 mechanizing the elementary spine of `experimental/asymptotic_rs_mca.tex`) /
@@ -70,6 +70,7 @@ by the positive scaling `N̄^{-q}` (L3) / dividing by `M` (L2), which is why no
 | `AsymptoticSpine/NoHighEnergy.lean` | **L5** `prop:no-high-energy` (+ `thm:bsg`, `thm:quasicube`) | `no_high_energy_bound`, `no_high_energy_contradiction` | FORMALIZED core + HYPOTHESIS-PARAM inputs |
 | `AsymptoticSpine/SigmaDiagonal.lean` | **L4** σ-diagonal (r2 §A3, `prop:energy-extract`) | `sigma_block_diagonal` | FORMALIZED |
 | `AsymptoticSpine/Normalization.lean` | **B1** `lem:ambient-image-max`, `lem:moment-normalization`, `ass:image-normalized-sidon-input` (PR #439) | `ambient_image_max`, `moment_normalization_identity`, `moment_normalization_ratio`, `momImg_le_momAmb`, `momAmb_le_momImg_bridge`, `imageSidon_of_ambient` | FORMALIZED (cardinality form, see §8) + HYPOTHESIS-PARAM (C9 input) |
+| `AsymptoticSpine/AddBack.lean` | **A6** `def:profile-nondegen`, `lem:addback` (R1/R4, PR #441) | `listMax_sum_le_sum_listMax`, `globalMax_le_sum_leafMax`, `leaf_clear_chain`, `addback_sum_bound`, `ProfileNonDegen`, `addback_sufficiency`, `addback_falsifier`, `perLeafQ_of_ambient_image_max` | FORMALIZED (cleared form, see §9) |
 | `AsymptoticSpine/Util.lean` | infrastructure | `listSum`, `length_flatten`, `listSum_le_of_zip` | (support) |
 
 All five of L1–L5 shipped sorry-free, plus the B1 image-normalization identities
@@ -221,7 +222,10 @@ reals).  Explicitly out of scope, kept in the tex:
 - `def:sidon-paid` (L196–200): Fourier inversion `Lμ(s) ≤ exp(o(N))`.
 - the `o(n)` / `o(Nq)` / `q`-th-root passages throughout §2–§5.
 - `lem:addback` (L246–252): the subexponential-profile decomposition — r2 §A6
-  `OPEN GAP` (imported from Grande as if discharged); not formalized.
+  `OPEN GAP`.  **Now scoped and its sufficiency mechanized** in `AddBack.lean` (§9,
+  PR #441): the sufficiency direction R1 (`def:profile-nondegen` ⇒ bound) is
+  `FORMALIZED`; the general image-non-degeneracy premise itself stays conditional
+  (`prob:entropy-inverse-q`-hard, R3) and OUT-OF-SCOPE.
 - the identity-prefix pole construction's collision loss (L283–287) — r2 §A9
   `OPEN GAP`; the sound floor is the collision-free injective construction in
   `cap25_cap_v13_raw.tex`, not formalized here.
@@ -231,10 +235,11 @@ reals).  Explicitly out of scope, kept in the tex:
 - Build (from `experimental/lean/asymptotic_spine/`, `LEAN_NUM_THREADS=1`):
 
   ```
-  Build completed successfully (8 jobs).
+  Build completed successfully (10 jobs).
   ```
 
-  Clean build ≈ 2.7 s wall, peak RSS ≈ 792 MB (5 modules, all `✔`).
+  Clean build ≈ 3.8 s wall, peak RSS ≈ 772 MB (6 modules, all `✔`; `v4.31.0`,
+  `LEAN_NUM_THREADS=1`).  The A6 `AddBack.lean` adds ≈ 0.4 s.
 
 - **Environment note (flag).**  The mandated `ulimit -v 2097152` (2 GB virtual)
   is incompatible with the installed `v4.31.0` toolchain: `lake`/`lean` reserve a
@@ -336,5 +341,94 @@ through the safe transfer (`momImg_le_momAmb`); the reverse needs the explicit `
 bridge (`momAmb_le_momImg_bridge`), which is why C9 is stated directly at image
 scale.  `#print axioms` on all §8 decls: only `propext`/`Quot.sound` (several depend
 on none); `normalization_example` depends on no axioms.  OUT-OF-SCOPE, unchanged from
-§6: the C9 source theorem, `lem:addback` profile decomposition, B3 window
-uniformity, and the lower-side collision loss (`rem:current-audit-status` in #439).
+§6: the C9 source theorem, B3 window uniformity, and the lower-side collision loss
+(`rem:current-audit-status` in #439).  The `lem:addback` profile decomposition is now
+scoped and its sufficiency mechanized — see §9.
+
+## 9. A6 add-back sufficiency (`AddBack.lean`) — PR #441 R1/R4 `FORMALIZED`
+
+**Provenance / lineage.**  This module **stacks on #438 → #440 → this**: the L1–L5
+spine (#438, §2–§5), the B1 image-normalization identities (#440 = the open PR this
+worktree is based on, §8), and now the A6 add-back.  It mechanizes the R1/R4 results
+of **PR #441** (`thresholds-addback-decomposition`; note
+`experimental/notes/audits/asymptotic_addback_profile_decomposition.md`), which scoped
+gap **A6** — the uncited "profile decomposition" of `lem:addback` — with the named
+condition `def:profile-nondegen` (the **#435-A6 → #441** attack lineage; #435 =
+`thresholds-asymptotic-proof-audit-r2`, whose attack A6 is this gap).  It reuses
+`Util.listSum` and composes with `Normalization.ambient_image_max` (§8); no new
+framework.
+
+**Source of statements (flag: open PR).**  The tex labels below live in **PR #441's**
+`experimental/asymptotic_rs_mca.tex` (`def:profile-nondegen`, `lem:addback`, restated
+conditional on it, L246–262) and its note's Claim R1/R4.  Statements were compared
+directly against `git show thresholds-addback-decomposition:…`; `mapping_confidence`
+is `exact_label_match` **against #441's tree**.
+
+### 9a. Decl ↔ #441 label / claim map
+
+| Lean decl | #441 anchor | `mapping_confidence` | status | note |
+|---|---|---|---|---|
+| `listMax`, `le_listMax_of_mem`, `listMax_le` | (support) | `curated_alias` | FORMALIZED | computed `max_s`, with `listMax [] = 0` pinning the union-bound base case |
+| `listSum_map_le` | (support) | `curated_alias` | FORMALIZED | termwise `listSum` monotonicity over `map` |
+| `listMax_sum_le_sum_listMax` | R1 proof, line `max_s∑_jN_j(s)≤∑_j max_sN_j(s)` | `exact_label_match` | FORMALIZED | **the union bound** (max-of-sum ≤ sum-of-maxes), general over `List (Nat→Nat)` |
+| `globalMax_le_sum_leafMax` | R1 proof (same line, leaf form) | `exact_label_match` | FORMALIZED | family instance of the union bound |
+| `leaf_clear_chain` | R1 proof, `N_j(s)·Y ≤ N_j(s)·L_j·C' ≤ C·M_j·C'` | `exact_label_match` | FORMALIZED | per-leaf clearing from (a)+(b) |
+| `addback_sum_bound` | R1 proof, mass telescope (`∑_jM_j`; no leaf-count bound) | `exact_label_match` | FORMALIZED | the telescope over masses |
+| `ProfileNonDegen` | `def:profile-nondegen` (a)+(b)+(c) | `exact_label_match` | FORMALIZED | cleared bundle: per-leaf Q, image non-degeneracy, mass partition |
+| `addback_sufficiency` | `lem:addback` / R1 | `exact_label_match` | FORMALIZED | `ProfileNonDegen ⇒ max_sN(s)·Y ≤ C·C'·Mtot` |
+| `addback_falsifier` | R4 (falsifier) | `exact_label_match` | FORMALIZED | `decide`: (a) holds, (b) fails, add-back violated by `Y=3` |
+| `addback_falsifier_repair` | R4 (spread repair) | `exact_label_match` | FORMALIZED | `decide`: spreading restores the bound |
+| `perLeafQ_of_ambient_image_max` | composition B1→A6 | `curated_alias` | FORMALIZED | `ambient_image_max` (§8) output = add-back input (a) |
+| `addback_example`, `addback_example_via_theorem` | (sanity) | — | FORMALIZED | `decide` + end-to-end application of `addback_sufficiency` |
+
+### 9b. The R1 statement, cleared (exact shape vs #441)
+
+Writing the global syndrome space `𝒴` with `Y = |𝒴|`, leaves `Ω_j` with mass `M_j`,
+image `L_j ≤ Y`, per-leaf counts `N_j(s)`, and `N(s) = ∑_j N_j(s)`:
+
+| #441 (rational) | Lean (`Nat`, cleared) | clearing |
+|---|---|---|
+| (a) `max_sN_j(s) ≤ C·M_j/L_j` | `leafMax S lf * lf.img ≤ C * lf.mass` | `× L_j` |
+| (b) `L_j ≥ exp(-o(n))|𝒴|` i.e. `L_j ≥ Y/C'` | `Y ≤ lf.img * C'` | `× C'` |
+| (c) `∑_j M_j ≤ Mtot` | `listSum (fam.map Leaf.mass) ≤ Mtot` | — |
+| `max_sN(s) ≤ C·C'·Mtot/Y` | `globalMax S fam * Y ≤ C * C' * Mtot` | `× Y` |
+
+The proof chain is exactly #441's: union bound (`globalMax_le_sum_leafMax`),
+per-leaf clear (`leaf_clear_chain`), mass telescope (`addback_sum_bound`) — and, as
+#441 stresses, **no separate leaf-count bound**, the mass partition alone telescopes.
+
+### 9c. The two modeling divergences to flag (neither a weakening)
+
+1. **Cleared-`Nat` form** (same as §8b): the `exp(o(n))` rates are the `Nat`
+   placeholders `C`, `C'`, `|𝒴|` is the `Nat` `Y`, and the rational bound is the
+   cleared integer inequality.  Since `L_j, C, C', Y > 0` in the honest model, the
+   clearing is a reversible equivalence — divergence of form only.
+2. **Per-syndrome counts as a function `Nat → Nat`, syndrome axis as `List Nat`
+   `S`, and `Y = |𝒴|` an abstract `Nat` decoupled from `S.length`.**  #441 indexes
+   `N_j(s)` over `𝒴`; the function model carries the same data and the same
+   `max_s`/`∑_j`, and correctly pins the empty-family / empty-axis boundary
+   (`listMax [] = 0`) that the union bound's base case needs — cleaner here than a
+   `List Nat` (which the spine uses for fiber counts in `Moment.lean`), and permitted
+   by the task ("`List Nat` **or** a function over a finite index").  Keeping `Y`
+   abstract makes R1 hold for **any** `Y` meeting (b) (the honest instance is
+   `Y = S.length`); this generalizes, it does not weaken.  No statement is weakened
+   relative to #441's printed R1.
+
+### 9d. R4 falsifier and the B1 composition
+
+`addback_falsifier` is #441's R4 witness (`Y` collapsed leaves piled on one
+syndrome), shrunk to `Y = 3`, `barN = 1` for kernel `decide`: per-leaf Q (a) holds,
+image non-degeneracy (b) fails, and `max_sN(s)·Y = 9 > 3 = C·C'·Mtot` — a blow-up of
+`Y`, so **(b) is load-bearing** (confirmed by the tamper test: dropping (b) from
+`ProfileNonDegen` fails the `addback_sufficiency` build at the telescope step).
+`addback_falsifier_repair` spreads the images and restores the bound, isolating
+pile-up as the failure.  `perLeafQ_of_ambient_image_max` records the pipeline
+composition: identifying `mxImg := leafMax S lf`, `L := lf.img`, `M := lf.mass`, the
+§8 `ambient_image_max` output is exactly add-back's per-leaf Q input (a).
+
+`#print axioms` on all §9 decls: only `propext`/`Quot.sound` (the `decide` and
+`ambient_image_max`-composed ones depend on none) — no `sorryAx`, no
+`Classical.choice`, no custom axiom.  **OUT-OF-SCOPE, unchanged (R2/R3 of #441):**
+image non-degeneracy (b) is *unconditional* only in the full-mass single-leaf
+frontier subregime (R2, log-arithmetic over reals) and is `prob:entropy-inverse-q`-hard
+in general (R3); the sufficiency direction R1 is what is mechanized here.
