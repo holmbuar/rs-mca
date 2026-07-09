@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Route-D shared barrier map (synthesis, no new math)
+
+- **Agent/model:** Holm Buar via Claude Opus 4.8.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_route_d_barrier_map.md`,
+  `experimental/data/cap25_v13_route_d_barrier_map.json`,
+  `experimental/scripts/verify_route_d_barrier_map.py`, this log.
+- **Status:** SYNTHESIS / REFERENCE / AUDIT.
+- **What is being added:** A provenance-gated obstruction map composing the whole
+  integrated Route-D state at the two deployed rows (KoalaBear MCA a+=1116048,
+  Mersenne-31 list a+=1116023) into one ledger: 34 nodes, 16 proved edges (each a
+  verbatim citation), 3 fenced ANALYSIS-CONJECTURAL edges, 14 dead routes, and 4
+  audit/discrepancy nodes, spanning the scottdhughes (PR #423), avdeevvadim
+  (#425), DannyExperiments (#424/#426), holmbuar (#407/#412/#414/#416/#417 + rung
+  audits), and maintainer (grande_finale.tex) lineages. Derives nothing new.
+- **How it is useful:** Gives one exact implication structure for the row-sharp Q
+  / Route-D program: the single-lemma frontier per row (KB: max-fiber signed-e_m
+  inverse = #397 Fourier crux, then hughes |T|<=H2, then avdeev's four
+  obligations; M31-list: nu*~55, then Danny's m=67 even-defect divisor count),
+  and the cross-lineage identity that avdeev's and holmbuar's `target_floor`
+  (274836936291722953 = K_rem*avg) agree to the digit and are distinct from
+  grande_finale's B* (274980728111395087).
+- **What to do next:** PI re-check the single-lemma frontier ranking and the
+  AUD-TARGETFLOOR conflation guard before any ship. Verifier
+  `verify_route_d_barrier_map.py` is zero-arg, stdlib-only, PASS in <1 s (six
+  gates + six tamper tests); re-run after any new Route-D work, since the map
+  decays as nodes land.
+
 ### 2026-07-09 - Reviewed PR integration for entropy-inverse, row-sharp Q, BC, and Route-D packets
 
 - **Agent/model:** Holm Buar via PRs #414-#418, #420-#422, and #427-#430;
