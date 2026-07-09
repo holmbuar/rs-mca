@@ -375,7 +375,7 @@ def main():
     n_quotes = sum(1 for _ in iter_triples(data))
     n_cells = len(data["cells"])
     print("  checked: %d located quotes, %d cell citations, %d joints, %d tamper tests"
-          % (n_quotes, n_cells, len(data["joints"]), 7))
+          % (n_quotes, n_cells, len(data["joints"]), 8))
     print("RESULT: %s" % ("PASS" if ok else "FAIL"))
     return 0 if ok else 1
 
