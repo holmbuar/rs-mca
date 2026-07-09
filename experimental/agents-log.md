@@ -30,6 +30,51 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Asymptotic RS MCA proof-object instantiation examples
+
+- **Agent/model:** Claude Sonnet 5.
+- **Files added or changed:** `experimental/notes/thresholds/asymptotic_proof_object_examples.md`,
+  `experimental/data/asymptotic_proof_object_examples.json`,
+  `experimental/scripts/verify_asymptotic_proof_examples.py`,
+  `experimental/agents-log.md`.
+- **Status:** EXPERIMENTAL / AUDIT.
+- **What is being added:** Five exact toy instantiations of
+  `experimental/asymptotic_rs_mca.tex`'s proof objects, per the steering's
+  (`agents.md` @ `eb42b82`) priority-3 / work-target `C0` instruction: (E1)
+  primitive Boolean prefix fibers (`def:primitive-leaf`) at four leaves
+  (`K` in `{F16,F27,F49}`, `N=16,m=8,R in {3,4}`, `rho` in `{ones,twist}`),
+  including an independent rediscovery of the integrated fp-span-cell note's
+  char-2 Frobenius coordinate-collapse law in a new (unsigned, fixed-`m`)
+  slice; (E2) the moment-max squeeze (`lem:moment-max`) exhibited exactly
+  via big-integer arithmetic on one leaf; (E3) the Fourier/Sidon cut
+  (section 3): exact additive energy/`Delta` classification on the largest
+  census fibers plus a small exact synthetic reference family (singleton,
+  pair, product-cubes) that pins the high-`Delta` corner, and an exact
+  check of `thm:quasicube` on 28 instances; (E4) the entropy envelope
+  `g*(rho,beta)` by exact bisection over a `9x5` grid, plus one finite row
+  family exhibiting the theorem's sign-flip crossing and its `+o(1)`
+  finite-size gap shrinking with `n`; (E5) a worked `(C1)`
+  quotient-pullback-cell mechanism example (squaring on a multiplicative
+  subgroup of `F_97^*`) built on the paper's own identity-prefix pole
+  construction, labeled exposition of the mechanism only, not a payment
+  verification. Also records, per PR #433's finding, that "bad-line moduli
+  strata" is not instantiable in-tree (the cited moduli manuscripts, and
+  the steering's own expected path `experimental/rs_mca_moduli_ledger_final.tex`,
+  are absent).
+- **How it is useful:** Directly answers the steering's `C0` priority with
+  auditable, verifier-gated small examples of the asymptotic proof's
+  objects (not a proof step and not a finite-row certificate); the
+  `verify_asymptotic_proof_examples.py` script recomputes every table from
+  scratch (`RESULT: PASS (548/548 checks)`, ~13 s) with seven independent
+  tamper self-tests, so later agents can extend or re-check the examples
+  without re-deriving the machinery.
+- **What to do next:** None of this feeds `thm:frontier` or any deployed
+  row; a maintainer/reviewer could extend E3's synthetic family or E1's
+  leaf grid, or reuse `census_members`/the E5 pole-construction helpers for
+  further audit packets. See PR #433 (closed-ledger citation audit) and PR
+  #434 (M31 signed-`e_m` inverse, Chebyshev domain) for the concurrent,
+  non-overlapping work this packet was written alongside.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
