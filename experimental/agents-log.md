@@ -30,6 +30,44 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - F_p-span cell: sufficient connectivity band (closes the #428 OPEN item)
+
+- **Agent/model:** `Claude Opus 4.8`.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_entropy_inverse_fp_span_connectivity.md`;
+  `experimental/scripts/verify_entropy_inverse_fp_span_connectivity.py`;
+  `experimental/data/cap25_v13_entropy_inverse_fp_span_connectivity.json`.
+- **Status:** PROVED / DERIVED / MEASURED / EXPERIMENTAL.
+- **What is being added:** A closed-form **sufficient band** for the connectivity
+  hypothesis `Conn_a` that PR #428 verified only by census and left `OPEN`. The
+  kernel code `C = ker Phi` has dual `C^perp` = the `F_p`-row space of `Phi`
+  (`|C^perp| = p^{dim V_T}`, small) and `d(C) >= R+1` (Vandermonde). **(PROVED)**
+  the MacWilliams count `N_a(x_0+C)*|C^perp| = sum_{u in C^perp} chi(-<u,x_0>)
+  K_a(wt u)` (`K_a` the `p`-ary Krawtchouk), exact-tested against direct
+  enumeration (`Z` for `p=2`, `Z[omega]` for `p=3`). **(PROVED)** the head-aware
+  sufficient band `Conn_a` holds when `mu > sum_{u notin H} |K_a(wt u)|`, with
+  `mu = 2C(N,a)`, `H = {0, all-ones}` unsigned `p=2` / `mu = C(N,a)2^a`, `H={0}`
+  signed `p=3` (the all-ones head word carries a deterministic `+main` on relevant
+  cosets and must be pulled out — without it the band is vacuous). The band is an
+  exact subset of #428's measured band, **sharp** (`=[R,N-R]`) on odd-`R`
+  large-kernel unsigned toys, and covers **four** #428 ship configs
+  (`F64-firstN`, `F32-1HP`, `F32-2HP`, `F64-2HP`), whose occupancies `1/2, 1/2,
+  1/4, 1/4` are therefore **now theorems** (#428 Theorem B unconditional there).
+  **(DERIVED)** #428's one anomalous `F16@R4:N12` `a=6` interior hole: identity
+  gives the exact cancellation `2*C(12,6) + err = 1848 - 1848 = 0`, so `N_6 = 0`.
+  Scope `p in {2,3}` (where signed `{-1,0,1} = F_3`).
+- **How it is useful:** Discharges the sole `OPEN` item of #428 in the sufficient
+  direction, promotes four measured occupancies to hypothesis-free, and converts
+  #428's measured hole to a derived exact zero. Scoped strictly to the asymptotic
+  `F_p`-span cell. Lineage `#414 -> #416 -> #417 -> #420 -> #421 -> #422 -> #428
+  -> ` here.
+- **What to do next:** Run
+  `experimental/scripts/verify_entropy_inverse_fp_span_connectivity.py`
+  (`RESULT: PASS (308/308 checks)`, ~8 s). Open: a proved closed-form interval
+  (needs a Krawtchouk magnitude bound); a signed / defect-`0` config with `M`
+  large enough for the band to bite; `m >= 3` occupancies; the head-aware `L2`
+  (Chebyshev) band. Nonclaims unchanged from #422/#428 (no `prob:entropy-inverse-q`
+  resolution, no row-sharp Q, no deployed finite safe row; asymptotic-lane only).
 ### 2026-07-08 - Grande Finale Lean package normalization
 
 - **Agent/model:** Maintainer-added Lean files integrated by Codex.
