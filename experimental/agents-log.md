@@ -30,6 +30,42 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Lean formalization of the B1 image-normalization identities (PR #439 follow-up)
+
+- **Agent/model:** `Claude Opus 4.8`.
+- **Files added or changed:** New module
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/Normalization.lean`
+  (imported from the root `AsymptoticSpine.lean`); correspondence note
+  `experimental/notes/audits/lean_asymptotic_spine_note.md` (new §8).
+- **Status:** FORMALIZED (sorry-free, `lake build` PASSING; clean build ≈ 3.2 s,
+  toolchain `leanprover/lean4:v4.31.0`).
+- **What is being added:** Stdlib-only Lean theorems for the two B1
+  normalization identities and the two direction statements introduced by
+  collaborator PR #439 (avdeevvadim) in `experimental/asymptotic_rs_mca.tex`:
+  (i) the max-fiber transfer `lem:ambient-image-max` (`ambient_image_max`);
+  (ii) the moment-normalization identity `lem:moment-normalization`
+  (`moment_normalization_identity` closed forms + `moment_normalization_ratio`,
+  giving the exact `(A/L)^{q-1}` factor); the safe direction ambient⇒image
+  (`momImg_le_momAmb`) and the unsafe reverse needing an `A/L` bridge
+  (`momAmb_le_momImg_bridge`); and the C9 input `ass:image-normalized-sidon-input`
+  packaged as a hypothesis predicate (`ImageNormalizedSidonPaid`) whose only safe
+  consumption from an ambient estimate is `imageSidon_of_ambient`. Reuses
+  `Moment.listSumPow`. The identity is over `Nat` (cleared cardinality form, since
+  core has no `Rat`/algebra API) — flagged in §8b as a form divergence, not a
+  content weakening. No `sorry`/`native_decide`/custom axiom; `#print axioms`
+  shows only `propext`/`Quot.sound`.
+- **How it is useful:** Machine-checked backing for the B1 repair — flagged in the
+  round audit (#436), repaired at TeX scale by #439, mechanized here (the
+  #436 → #439 collaborator lineage). It certifies that ambient moment/Fourier
+  estimates may enter the image-normalized C9 interface only through the printed
+  safe transfers, and that the reverse needs an explicit `A/L` bridge — the exact
+  discipline #439 installs.
+- **What to do next:** When PR #439 merges its tex labels into the base, re-check
+  the decl↔label map in §8a against the merged `\label{}`s. Independent C9
+  moduli-source, `lem:addback` profile decomposition, B3 window-uniformity, and
+  lower-side collision-loss remain OUT-OF-SCOPE (need the missing source theorems
+  / reals).
+
 ### 2026-07-09 - Stdlib-only Lean spine for the asymptotic RS-MCA proof (L1-L5)
 
 - **Agent/model:** `Claude Opus 4.8`.

@@ -1,4 +1,4 @@
-# Asymptotic-spine Lean ↔ `asymptotic_rs_mca.tex` correspondence note — L1–L5 all sorry-free, `lake build` PASSING
+# Asymptotic-spine Lean ↔ `asymptotic_rs_mca.tex` correspondence note — L1–L5 + B1 image-normalization identities, all sorry-free, `lake build` PASSING
 
 Status: `FORMALIZATION` (a new stdlib-only Lean package `experimental/lean/asymptotic_spine/`
 mechanizing the elementary spine of `experimental/asymptotic_rs_mca.tex`) /
@@ -69,11 +69,13 @@ by the positive scaling `N̄^{-q}` (L3) / dividing by `M` (L2), which is why no
 | `AsymptoticSpine/Moment.lean` | **L2** `lem:q-sp` ; **L3** `lem:moment-max` | `qsp_sumSq_le` ; `moment_max_squeeze` (+ halves) | FORMALIZED |
 | `AsymptoticSpine/NoHighEnergy.lean` | **L5** `prop:no-high-energy` (+ `thm:bsg`, `thm:quasicube`) | `no_high_energy_bound`, `no_high_energy_contradiction` | FORMALIZED core + HYPOTHESIS-PARAM inputs |
 | `AsymptoticSpine/SigmaDiagonal.lean` | **L4** σ-diagonal (r2 §A3, `prop:energy-extract`) | `sigma_block_diagonal` | FORMALIZED |
+| `AsymptoticSpine/Normalization.lean` | **B1** `lem:ambient-image-max`, `lem:moment-normalization`, `ass:image-normalized-sidon-input` (PR #439) | `ambient_image_max`, `moment_normalization_identity`, `moment_normalization_ratio`, `momImg_le_momAmb`, `momAmb_le_momImg_bridge`, `imageSidon_of_ambient` | FORMALIZED (cardinality form, see §8) + HYPOTHESIS-PARAM (C9 input) |
 | `AsymptoticSpine/Util.lean` | infrastructure | `listSum`, `length_flatten`, `listSum_le_of_zip` | (support) |
 
-All five of L1–L5 shipped sorry-free.  `Main.lean`-style entrypoint: none (a
-library package).  No declaration uses `sorry`, `admit`, `native_decide`, or a
-custom `axiom`.
+All five of L1–L5 shipped sorry-free, plus the B1 image-normalization identities
+of §8 (stacked on PR #438, formalizing the follow-up invited by PR #439).
+`Main.lean`-style entrypoint: none (a library package).  No declaration uses
+`sorry`, `admit`, `native_decide`, or a custom `axiom`.
 
 ## 2. `lem:first-match` (L1) — the centerpiece `FORMALIZED`
 
@@ -247,3 +249,92 @@ reals).  Explicitly out of scope, kept in the tex:
   user-declared logical assumption in any file.
 - Token gate on the `.lean` sources: `grep -rn 'sorry\|axiom'` → 0 hits;
   `grep -rn 'native_decide'` → 0 hits.
+
+## 8. B1 image-normalization identities (`Normalization.lean`) — PR #439 follow-up `FORMALIZED`
+
+**Provenance / lineage.**  This module **stacks on PR #438** (the L1–L5 spine above)
+and formalizes the follow-up that **PR #439** (avdeevvadim, collaborator) explicitly
+invited: *"Lean formalization of the two normalization identities is a natural
+follow-up, but this PR is TeX/audit/verifier only."*  The B1 normalization mismatch
+was flagged in the round audit (**#436**), repaired at TeX scale by **#439**, and is
+mechanized here — the **#436 → #439 → (this)** collaborator lineage.  It reuses
+`AsymptoticSpine.Moment.listSumPow` (the discrete moment numerator `∑_s x_s^q`); no
+new framework is introduced.
+
+**Source of statements (flag: open PR).**  The tex labels below live in **PR #439's**
+`experimental/asymptotic_rs_mca.tex` (open, not yet merged into the base
+`lean-asymptotic-rs-mca-spine`/#438 branch this work is stacked on).  Statements were
+compared directly against `gh pr diff 439`, not against the base tex.  When #439
+merges, these labels enter the base unchanged; until then `mapping_confidence` is
+`exact_label_match` **against #439's diff**.
+
+### 8a. Decl ↔ #439 tex-label map
+
+| Lean decl | #439 tex label | `mapping_confidence` | status | note |
+|---|---|---|---|---|
+| `image_max_le_ambient_max` | `lem:ambient-image-max` (proof step) | `exact_label_match` (vs #439 diff) | FORMALIZED | image fibers ⊆ ambient fibers ⇒ image max ≤ ambient max |
+| `ambient_image_max_transfer`, `ambient_image_max` | `lem:ambient-image-max` | `exact_label_match` (vs #439 diff) | FORMALIZED | `max_amb ≤ e^{o(N)}M/A` ⇒ `max_img ≤ e^{o(N)}M/L`, cleared |
+| `listSumPow_map_mul` | `lem:moment-normalization` (pull-out) | `curated_alias` | FORMALIZED | `∑(c·x)^q = c^q∑x^q` — the `N̄`-normalization mechanism |
+| `listSumPow_replicate_zero`, `ambient_sum_reduces` | `lem:moment-normalization` (`y∉𝒮` vanish) | `curated_alias` | FORMALIZED | ambient average reduces to image average over `𝒮` |
+| `moment_normalization_identity` | `lem:moment-normalization` (identity) | `exact_label_match` (vs #439 diff) | FORMALIZED | the two closed forms `∑(x·L)^q=L^q P`, `∑(x·A)^q=A^q P` |
+| `moment_normalization_ratio` | `lem:moment-normalization` (`(A/L)^{q-1}`) | `exact_label_match` (vs #439 diff) | FORMALIZED (cleared) | `L^{q-1}·momAmbN = A^{q-1}·momImgN` |
+| `momImg_le_momAmb`, `image_upper_of_ambient_upper` | `lem:moment-normalization` (safe dir.) | `exact_label_match` (vs #439 diff) | FORMALIZED | ambient moment upper bound ⇒ image moment upper bound |
+| `momAmb_le_momImg_bridge` | `lem:moment-normalization` (reverse dir.) | `exact_label_match` (vs #439 diff) | FORMALIZED | image ⇒ ambient **only** with an `A/L` bridge `D ≥ (A/L)^{q-1}` |
+| `ImageNormalizedSidonPaid`, `AmbientSidonPaid`, `imageSidon_of_ambient` | `ass:image-normalized-sidon-input` | `exact_label_match` (vs #439 diff) | HYPOTHESIS-PARAM | C9 input packaged as a predicate; ambient⇒image is the only safe consumption |
+| `normalization_example` | (sanity) | — | FORMALIZED | `decide`: `momImgN=10`, `momAmbN=15`, closed forms `20=2²·5`, `45=3²·5`, `2·15=3·10` |
+
+### 8b. The one modeling divergence to flag — cardinality form, not a `Rat` equation
+
+**Flagged (cf. the `sp_from_q` flag in #418): the identity is mechanized as a
+denominator-cleared `Nat` cardinality identity, not as a literal `Rat` equation.**
+Lean *core* at this pin (`v4.31.0`, no mathlib) has **no algebraic hierarchy** —
+`Monoid`/`Ring`/`Field`, `mul_pow`, `Nat.cast_pow`, `div_pow`, `ring` are all
+mathlib-only, and stdlib `Rat` exposes only bare `Rat.mul_comm`/`Rat.mul_assoc`
+facts (the same wall `SigmaDiagonal.lean` hits, keeping `Rat` to `1/lvl` with `rfl`).
+The task sanctioned this: *"as an exact identity over `Rat` **or** as a cardinality
+identity."*  Chosen: the cardinality identity, per this package's standing "clear the
+positive normalization" convention (§0).
+
+**This is a divergence of form, not a weakening of content.**  Writing `Γ_img(q) =
+L^{q-1}P/M^q`, `Γ_amb(q) = A^{q-1}P/M^q` (`P = ∑_s|F_s|^q = listSumPow q f`), the
+cleared numerators used in Lean are
+
+    momImgN q L f = L^{q-1}·P = M^q·Γ_img(q),
+    momAmbN q A f = A^{q-1}·P = M^q·Γ_amb(q),
+
+and `momImgN_scaled` / `momAmbN_scaled` certify these are the honest tex summations
+divided by the averaging weights (`L·momImgN = ∑_s(|F_s|·L)^q`, `A·momAmbN =
+∑_{y∈G}(|Ω∘∩Φ⁻¹(y)|·A)^q`).  Because `L, A, M > 0`, multiplying/dividing by
+`L, A, M^q` is an **exact reversible equivalence**, so:
+
+| tex (`Rat`) | Lean (`Nat`, cleared) | clearing factor |
+|---|---|---|
+| `Γ_amb(q) = (A/L)^{q-1} Γ_img(q)` | `L^{q-1}·momAmbN = A^{q-1}·momImgN` (`moment_normalization_ratio`) | `× L^{q-1}M^q` |
+| `Γ_img(q) = L^{q-1}P/M^q` | `∑_s(|F_s|·L)^q = L^q·P` (`moment_normalization_identity`.1) | `× L·M^q` |
+| `Γ_amb(q) = A^{q-1}P/M^q` | `∑_y(·)^q = A^q·P` (`moment_normalization_identity`.2) | `× A·M^q` |
+| `Γ_img ≤ Γ_amb` (safe) | `momImgN ≤ momAmbN` (`momImg_le_momAmb`) | `× M^q` |
+| `max_img ≤ e^{o(N)}N̄` | `mxImg·L ≤ C·M` (`ambient_image_max`) | `× L`, `C = e^{o(N)}` |
+
+The sole thing **not** delivered: no `Rat` object `Γ_img`/`Γ_amb` is constructed, so
+the literal `= (A/L)^{q-1}·(…)` `Rat` equation is not a Lean term — only its exact
+`Nat` clearing is.  A future mathlib-pinned port (e.g. inside `grande_finale`) could
+state the literal `Rat`/`ℝ` version; here that is OUT-OF-SCOPE for the same reason
+the entropy analysis is (needs the missing algebra API).  Nothing is weakened:
+the `Nat` statements are equivalent to the `Rat` ones, not implied by them.
+
+### 8c. `exp(o(·))` placeholders and the C9 hypothesis (same discipline as L5)
+
+As in `NoHighEnergy.lean` (`K^C = e^{o(N)}`), the reals bookkeeping enters as `Nat`
+placeholders: `C` in `ambient_image_max` is `exp(o(N))`; `Budget` in
+`ImageNormalizedSidonPaid` is the cleared subexponential ceiling `M^q·exp(o(Nq))`.
+`ass:image-normalized-sidon-input` is **not proved** — it is the missing C9
+moduli/Fourier–Sidon source theorem, packaged as the predicate
+`ImageNormalizedSidonPaid` exactly as BSG/quasicube are packaged as hypotheses.
+`imageSidon_of_ambient` formalizes #439's operative safety claim: an ambient
+Fourier/Sidon estimate can be consumed as the image-normalized C9 input **only**
+through the safe transfer (`momImg_le_momAmb`); the reverse needs the explicit `A/L`
+bridge (`momAmb_le_momImg_bridge`), which is why C9 is stated directly at image
+scale.  `#print axioms` on all §8 decls: only `propext`/`Quot.sound` (several depend
+on none); `normalization_example` depends on no axioms.  OUT-OF-SCOPE, unchanged from
+§6: the C9 source theorem, `lem:addback` profile decomposition, B3 window
+uniformity, and the lower-side collision loss (`rem:current-audit-status` in #439).
