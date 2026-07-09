@@ -66,7 +66,7 @@ Keep entries concise and link to the relevant files.
   `#414 -> #416 -> #417 -> #420 -> #421 -> #422 -> ` here.
 - **What to do next:** Run
   `experimental/scripts/verify_entropy_inverse_fp_span_surjection.py`
-  (`RESULT: PASS (252/252 checks)`, ~13 s). Open: a closed-form connectivity
+  (`RESULT: PASS (253/253 checks)`, ~13 s). Open: a closed-form connectivity
   threshold; a signed non-spanning witness large enough for `Conn` to hold;
   `m >= 3` and affine-trace-hyperplane pinning. Nonclaims unchanged from #422
   (no `prob:entropy-inverse-q` resolution, no row-sharp Q, no deployed finite

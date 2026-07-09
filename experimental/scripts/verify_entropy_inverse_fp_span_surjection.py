@@ -606,6 +606,7 @@ def main():
     geq("prov.atom_line", prov["atom_line"], 827)
     geq("prov.escape_line", prov["escape_clause_line"], 828)
     geq("prov.removal_line", prov["removal_list_line"], 839)
+    geq("prov.alt_a_line", prov["alt_a_line"], 862)
     geq("prov.alt_b_line", prov["alt_b_line"], 863)
     geq("prov.vandermonde_line", prov["vandermonde_line"], 876)
 
@@ -712,10 +713,9 @@ def main():
     # ===================================================================== #
     tampers = 0
     dS = got["S27@R4"]; dF = got["F64-firstN@R3"]; dM = got["F32-2HP@R3"]
-    # T1: a FAKED move-span dim breaks occupancy = p^{dimD - w0} ---------------- #
-    if F27.p ** (dS["dimD"] - 1) != F27.p ** dS["dimD"] // F27.p:  # sanity of exp
-        pass
-    if (dF["p"] ** (dF["dimD"]) != dF["p"] ** (dF["dimD"] - 1)):   # faked dimD-1
+    # T1: a FAKED (too-small) move-span dim is caught -- the censused n_occ      #
+    # would exceed the faked |D| = p^{dimD-1}, violating containment n_occ <= |D| #
+    if dF["n_occ"] > dF["p"] ** (dF["dimD"] - 1):   # faked dimD-1 breaks containment
         tampers += 1
     # T2: a FAKED coset size |W_c| (off by a factor p) breaks the index gate ---- #
     if dF["Wc"] != dF["Wc"] * dF["p"] and dF["index"] * dF["Wc"] == dF["q"] ** dF["R"]:

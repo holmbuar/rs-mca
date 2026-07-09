@@ -18,7 +18,7 @@ connectivity band, toy-exact) / `OPEN` (§4 a closed form for the connectivity
 threshold; §8 next measures).
 
 **Verifier:** `experimental/scripts/verify_entropy_inverse_fp_span_surjection.py`
-(zero-arg, stdlib-only, self-contained — no lane imports; `RESULT: PASS (252/252
+(zero-arg, stdlib-only, self-contained — no lane imports; `RESULT: PASS (253/253
 checks)`, exit 0; ~13 s and ~14 MB peak RSS **on the authoring box** — timing and
 RSS are environment-specific and deliberately not gated; best-effort `RLIMIT_AS`
 guard, default 2 GB, tune or disable via `FP_SURJ_AS_CAP_GB`, never fatal;
@@ -47,7 +47,9 @@ PR #422 explicitly left `OPEN`** (#422 §2.3 / §6: "the general surjection
 ask — *a separately proved theorem promoting `image = W_c` from `MEASURED` to a
 characterization* — by proving the exact image is a **coset of the move-subspace
 `D`**, deriving the occupancy `p^{-defect}` and the classification
-`image = W_c <=> defect = 0`, and identifying the `F64-firstN` "half" as a
+`image = W_c <=> defect = 0` (both under the measured `Conn_a`, which was
+verified exhaustively at every shipped config), and identifying the
+`F64-firstN` "half" as a
 **non-spanning-`T` structure statement** (its `defect = 1` pinned functional
 located explicitly as `ell(s) = Tr(s_1)`). It is **not** a proof or refutation of
 `prob:entropy-inverse-q`, **not** a row-sharp / deployed-finite claim of any kind,
@@ -77,15 +79,18 @@ projective weights `rho(T) subset c F_p^times` the map `Phi(x) = sum_t x_t v_t`
 `x in {-1,0,1}^T` signed / `{0,1}^T` unsigned with exactly `a` active) has its
 image inside the subgroup
 
-> `W_c = { s in K^R : s_0 in c F_p, s_{pj} = c^{1-p} s_j^p whenever pj < R }`,
+> `W_c = { s in K^R : s_0 in c F_p, s_{pj} = c^{1-p} s_j^p whenever pj < R }`
+> (head **free** here, as in #422's signed reading; §1 pins the head for the
+> unsigned `p = 2` slices and reserves `W_c^flat` for the head-free space),
 
 because the two coordinate laws (`s_0 in c F_p`; the Frobenius law
 `s_{pj} = c^{1-p} s_j^p`) hold on every column and are `F_p`-linear. #422 then
 **measured** the exact image `= W_c` at two configs and `=` half of `W_c` at a
 third, and left the general value `OPEN`. **This note closes it.** All quotes and
 line refs (L827 atom, L828 escape, L839 removal, L862/863 alternatives (a)/(b),
-L876 `prop:vandermonde-kills-low-rank`) are as in #422 and are gated present in
-the tex by the verifier's provenance block.
+L876 `prop:vandermonde-kills-low-rank`) are as in #422 and are present in the
+tex at those lines (verified in main `b99b2c4`); the verifier's provenance
+block gates the line numbers as committed constants.
 
 ---
 
@@ -343,7 +348,7 @@ a census count.
 
 ## 7. Guards and verification `AUDIT`
 
-The verifier PASSES **252/252** checks (~13 s, ~14 MB peak RSS **on the authoring
+The verifier PASSES **253/253** checks (~13 s, ~14 MB peak RSS **on the authoring
 box** — both environment-specific, neither gated), recomputing from scratch and
 gating against the committed JSON. Reproducibility knobs: `FP_SURJ_AS_CAP_GB`
 (best-effort `RLIMIT_AS`, default 2 GB, never fatal), `FP_SURJ_DATA_DIR` (data
