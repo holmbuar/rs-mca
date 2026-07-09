@@ -30,6 +30,48 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - F_p-span cell residual controls (three cheap measurements from PR #422 §6)
+
+- **Agent/model:** Claude Sonnet 5.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_entropy_inverse_span_residual_controls.md`;
+  `experimental/scripts/verify_entropy_inverse_span_residual_controls.py`;
+  `experimental/data/cap25_v13_entropy_inverse_span_residual_controls.json`;
+  `experimental/agents-log.md`.
+- **Status:** MEASURED / CONVENTION / PROVED-AT-TOYS / AUDIT.
+- **What is being added:** Three cheap measurements queued by PR #422's §6
+  `OPEN` list (`cap25_v13_entropy_inverse_fp_span_cell.md`, fetched
+  read-only from branch `thresholds-entropy-inverse-fp-span-cell`, not yet
+  merged). (M1) Thin-alphabet-residual replication at `q=121` (`p=11,k=2`)
+  and `q=125` (`p=5,k=3`): #422's own generating script for this bullet is
+  confirmed absent from every branch (full-history `git grep`), so this
+  packet reconstructs the concept from #422's own exact `exc_cond`
+  primitive instead of guessing the unrecoverable original protocol; the
+  reconstructed sweep finds a bounded (`2x`-`16x`, not exponential)
+  residual at both new primes, in the same `R-1<p` corner already visible
+  at `p=7` — present across all five characteristics tested, but not a
+  universal `~1.44` constant. (M2) A full-alphabet `p=7` negative control
+  (`T=` all of `F_7^x`, `K=F_7` a prime field): the `F_p`-span cell is
+  confirmed definitionally absent by an exact index-formula identity
+  (`index=1`, `dim_span_Fp=K_rank`), reinforcing #422 §7's own nonclaim
+  without extending it. (M3) A two-field-reading instantiation of #422 §3's
+  repair (A): the `(A)`-reading offset (base field `B`, `|B|=p`) and the
+  `(B)`-reading offset (`|K|=q`) are shown to straddle zero at genuinely
+  different `R` (`~3-4` vs. `~12-13`, matching the `k`-factor), and the
+  span-cell index inflation is confirmed to survive exactly at the
+  `(A)`-balance point. Verifier: `RESULT: PASS (250/250 checks)`, ~31 s,
+  ~21 MB RSS.
+- **How it is useful:** Closes three of #422's five `OPEN` follow-ups
+  (`codim_Fp` vs. twist entropy is PR #427's job; the `p in {2,3}`
+  equal-fibers surjection is PR #428's proof task) with exact, gated
+  toy measurements, and is explicit throughout about where reconstruction
+  (M1) stands in for an unrecoverable original protocol.
+- **What to do next:** A `p in {13,17,19,...}` sweep at matched `(N,R)`
+  would help settle whether M1's residual magnitude tracks `p`, `q`, or is
+  finite-`N` noise (three points is not enough to fit a trend). No finite
+  claim, row-sharp `Q`, or theorem is made anywhere in this packet;
+  asymptotic lane only.
+
 ### 2026-07-08 - Grande Finale Lean package normalization
 
 - **Agent/model:** Maintainer-added Lean files integrated by Codex.
