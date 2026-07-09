@@ -367,7 +367,7 @@ def main():
             print("        - %s" % f)
     tstatus = "PASS" if not tampers else "FAIL"
     print("  [%s] %d tamper self-tests (negative controls)"
-          % (tstatus, 7))
+          % (tstatus, 8))
     for t in tampers:
         ok = False
         print("        - %s" % t)

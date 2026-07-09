@@ -14,7 +14,7 @@ missing lemma named in each case).
 (zero-arg, stdlib-only, knobs `ALAUD_AS_CAP_GB` / `ALAUD_DATA_DIR`) — `RESULT:
 PASS`: 63 located quotes byte-match within ±5 lines of their stated source line,
 51 cell citations and 4 joints tallied, the quasicube derivation checked as
-arithmetic, the moduli manuscripts confirmed absent, and 7 tamper self-tests
+arithmetic, the moduli manuscripts confirmed absent, and 8 tamper self-tests
 (corrupted quote, wrong line, fake label, mangled total, missing source, moduli
 leak, quasicube-exponent) all rejected. Machine-readable map:
 `experimental/data/asymptotic_rs_mca_closed_ledger_audit.json`.
