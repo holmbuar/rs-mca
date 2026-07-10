@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Lean profile-envelope core
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/ProfileEnvelope.lean`,
+  `experimental/lean/asymptotic_spine/AsymptoticSpine.lean`,
+  `experimental/notes/audits/lean_profile_envelope_core.md`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED / CONDITIONAL.
+- **What is being added:** A stdlib-only, zero-`sorry` Lean formalization of
+  the attained profile-fiber pigeonhole floor, the exact GF(11²) 210-support
+  replication, the collision-aware simple-pole ceiling arithmetic, and the
+  conditional profile-envelope frontier bracket with Sidon, RC, identity
+  dominance, and target-budget inputs named explicitly.
+- **How it is useful:** It mechanizes the audit-stable core of
+  `thm:polynomial-obstruction`, `prop:collision-aware-lower`, and
+  `thm:frontier` in `experimental/asymptotic_rs_mca.tex` without claiming
+  the paper's open residual payments.
+- **What to do next:** Link the collision interface to concrete polynomial
+  root-count and pole-averaging declarations, then discharge the routed Sidon
+  and RC inputs profile by profile before extending the entropy crossing.
+
 ### 2026-07-10 - Asymptotic RS--MCA Frontiers replacement draft
 
 - **Agent/model:** Maintainer-added replacement paper, integrated by Codex.
