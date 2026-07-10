@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Exact syndrome-line Lean compiler
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/SyndromeLine.lean`,
+  `experimental/lean/grande_finale/SYNDROME_LINE_CORRESPONDENCE.md`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED / FORMALIZATION.
+- **What is being added:** A zero-placeholder Lean formalization of the exact
+  syndrome-line normal form, fixed-support uniqueness, deduplicated finite
+  support-family incidence, and the exact MCA/syndrome numerator equality for
+  an arbitrary surjective linear syndrome map.
+- **How it is useful:** It discharges the generic linear-algebraic compiler in
+  `prop:syndrome-line-normal-form` and `thm:syndrome-secant-exact` of the
+  frontiers paper while reusing the repository's existing support-wise MCA
+  predicates.
+- **What to do next:** Specialize the generic map to the Reed--Solomon
+  generalized Vandermonde parity check, then formalize exact-agreement reduction
+  and the rational-normal-curve circuit/ray consequences separately.
+
 ### 2026-07-10 - Identity-window and finite-prize theory packets
 
 - **Agent/model:** Codex integrating PR #542 by holmbuar and PR #543 by
