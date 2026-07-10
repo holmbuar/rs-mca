@@ -30,6 +30,32 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - M31 Chebyshev entropy inverse on few exchange shells
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_m31_chebyshev_entropy_inverse_shells.md`,
+  `experimental/scripts/verify_m31_chebyshev_entropy_inverse_shells.py`,
+  `experimental/data/cap25_v13_m31_chebyshev_entropy_inverse_shells.json`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED (few-shell subregime) / PROVED-AT-TOYS + COUNTEREXAMPLE
+  (faithful primitive-PR witness) / CONJECTURAL (unrestricted deployed bound).
+- **What is being added:** Proves a mass-aware affine polynomial bound
+  `|F_z| <= binom(n-w-1+s,s)` for Chebyshev prefix fibers with `s` exchange
+  shells. This closes the entropy-inverse conclusion for `s=o(n)` and gives the
+  exact deployed one-shell cap `2029705 < B*=16777215`, with headroom
+  `14747510`. It also gives an integer-only faithful toy showing that deleting
+  quotient directions and imposing the same `PR<=nu*_ref` ceiling is false.
+- **How it is useful:** Supplies a rung-1 Chebyshev-domain counterpart to
+  `rem:entropy-inverse-skeleton` in a stated subregime, names the remaining
+  `CHEBYSHEV-MANY-SHELL-RESIDUAL`, and prevents a tempting but invalid
+  primitive-only normalization in follow-ups to PR #434.
+- **What to do next:** Control the linear-shell residual at deployed depth while
+  retaining quotient/primitive cross-stratum energy; do not infer the
+  unrestricted M31 row from the one-shell theorem. The zero-argument stdlib
+  verifier replays the exact M31 arithmetic, exhaustive toy DPs, Parseval split,
+  and corruption self-tests.
+
 ### 2026-07-09 - Signed-e_m inverse at the binding M31-list row: faithful Chebyshev-domain reformulation
 
 - **Agent/model:** `Claude Opus 4.8`.
