@@ -30,6 +30,49 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Route-D shared barrier map v2 (supersedes v1)
+
+- **Agent/model:** Claude (Opus 4.8), research-synthesis agent.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_route_d_barrier_map_v2.md`,
+  `experimental/data/cap25_v13_route_d_barrier_map_v2.json`,
+  `experimental/scripts/verify_route_d_barrier_map_v2.py`,
+  `experimental/agents-log.md`.
+- **Status:** SYNTHESIS / REFERENCE / AUDIT (no new mathematics).
+- **What is being added:** A refreshed provenance-gated barrier map at tip
+  `2b1a7e2` that supersedes v1 (`cap25_v13_route_d_barrier_map.*`, base
+  `84b393e`). It composes the day's ~25 landed packets and the two asymptotic
+  papers into one obstruction map: **59 nodes / 28 proved edges / 4 speculative
+  edges / 20 dead routes**. New material integrated with tree-anchored, verifier-
+  checked citations: the hughes wall `|T| <= H2` with its `star3` sub-wall
+  reduced to a point-count `P_main = 0.5515*H2` where every absolute-value second
+  moment is proved dead (signed cancellation is the sole live route); the M31
+  two-shell chain (few-shell one-shell cap `2029705 < B*`, the 3,254,885-pair
+  integral-ratio lattice, the degree-two LP); the KB mixed twist-orbit
+  `sqrt(index)` coset-split ceiling and the disjoint-PTE `D_d` law; the
+  C9/split-pencil corner with the maintainer promotion gate; the two conditional
+  papers; and a Lean machine-checked-cores section. The verifier gates
+  file-existence, byte-exact quotes, numeric-constant tokens, the edge DAG, count
+  agreement, and the proved/speculative fence, plus six tamper self-tests
+  (`RESULT: PASS`, < 1 s).
+- **How it is useful:** Gives every contributor one current, exhaustively sourced
+  view of the shared Route-D / finite-Q barrier and its single-lemma frontier
+  (top target: the M31-list signed-`e_m` inverse `nu*_ref ~ 55`, the prize wall's
+  binding instance), so lanes do not re-walk proved-dead routes or re-attribute
+  each other's packets.
+- **What to do next:** Two honest corrections in this map need field awareness:
+  (1) the M31 degree-two LP is a **partial** cut (187 of 3,254,885 pairs), **not**
+  a saturation and not over Johnson harmonics -- the two-shell wall stays OPEN;
+  per open PR #509 the modular F_p-nullity lever is now a precise null, leaving
+  SDP/realizability as the last lever; (2) `hyp:ray-compiler` and the
+  `(RC)/(MA)/(FI)/(PF)` tags belong to `rs_mca_entropy_frontiers.tex`, not to
+  `asymptotic_rs_mca.tex` (which uses `def:ray-compiler`). Live routes have moved
+  (all cited by PR number only, post-tip): the `star3` signed route is IN-FLIGHT
+  (DannyExperiments #504); scottdhughes runs an active entropy-inverse reduction
+  program (#498/#501/#505); and LegaSage #508 is a Q-R1-cell `U_paid` ledger,
+  distinct from this program-wide obstruction map. Refresh this map when the next
+  packet wave lands; re-run the v2 verifier before citing any status.
+
 ### 2026-07-10 - RS--MCA Entropy Frontiers submission draft
 
 - **Agent/model:** Maintainer-added paper, read and logged by Codex.
