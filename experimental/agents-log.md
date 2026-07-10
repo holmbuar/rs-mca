@@ -2730,3 +2730,32 @@ Keep entries concise and link to the relevant files.
 - **What to do next:** Run verifiers and audits on the integrated material,
   review mathematical notes before promotion, and close the original PRs as
   manually integrated once the integration commit is pushed.
+
+### 2026-07-10 - Balanced-core kappa growth: residual charts force kappa=k
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/balanced_core_kappa_growth.md` and
+  `experimental/scripts/verify_kappa_growth.py`
+  (`RESULT: PASS (95 checks)`, ~1.6 s, stdlib-only exact prime-field arithmetic).
+- **Status:** REFUTED / COUNTEREXAMPLE / WALL / AUDIT.
+- **What is being added:** An attack on residual (1) of PR #528
+  (`thresholds-ray-compiler-balanced-core`) --- the kappa-growth question for the
+  balanced core. Extracts the exact identity
+  `kappa = |U|-R = k - |common agreement core|` (matching the paper's own
+  L892--893 wording), shows the moving-coefficient projective dimension `d_proj`
+  and the secant kernel `kappa` are independent, and proves that residual charts
+  (common factors removed => empty common core) force `kappa = k = Theta(n)`,
+  making PR #528's per-chart bound `C(R+kappa,kappa+1)` superpolynomial and
+  vacuous. An exact census (n=12..18) shows the mass concentrates at maximal
+  `kappa=k` (fraction 0.26 -> 1.00), and an explicit Prouhet--Thue--Morse family
+  scales `kappa=k` to n=128.
+- **How it is useful:** Resolves PR #528's flagged residual (1) negatively for
+  the per-chart route: the kappa-growth question is not a per-chart question; its
+  content lives entirely in condition (A2) atlas decomposition (or (A4)
+  Sidon/Fourier). Narrows the open half of `rem:balanced-core-exhaustion`
+  (L4762). No `.tex`/`.pdf` edited; proposed ledger entries L-KG-1, L-KG-2 recorded
+  in the note.
+- **What to do next:** PI to re-derive the `kappa=k-|C|` identity and its L892--893
+  match; decide whether (A4) provably covers the `kappa=Theta(n)` large-family
+  charts; if promoting, restate the residual open statement as (A2)/(A4) only.
