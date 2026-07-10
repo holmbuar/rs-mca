@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Delta audit of the frontiers replacement draft vs #494
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/audits/asymptotic_frontiers_delta_audit.md`,
+  `experimental/scripts/verify_frontiers_delta_audit.py`,
+  `experimental/notes/audits/data/asymptotic_frontiers_delta_audit.json`.
+- **Status:** AUDIT.
+- **What is being added:** A delta audit of the replacement
+  `experimental/asymptotic_rs_mca_frontiers.tex` (`@4e3c4ee`, 7913 lines, 224
+  environments) against the #494-audited predecessor
+  `experimental/rs_mca_entropy_frontiers.tex` (`@2b1a7e2`, 5940 lines, 179
+  environments): structural delta (+45 environments, same 39 sections, pure body
+  expansion), absorption of #494's findings, and an adversarial pass on the five
+  hard inputs with per-input verdicts. Re-derives
+  `thm:unconditional-support-envelope-bracket` (L6212) and `thm:deep-regime-upper`
+  (L1790) step by step, the latter confirmed by an exhaustive `F_5` RS--MCA
+  brute force. Verifier gates 937 checks, `RESULT: PASS`.
+- **How it is useful:** Confirms the rewrite splits the image-scale payment into
+  named falsifiable `(MI)`+`(MA)` inputs (28 `(MI)` occurrences, 0 in the old
+  draft) and adds unconditional finite bracket theorems, while keeping RC the
+  sole formal hypothesis and consuming every input visibly in theorem statements.
+  Finds #494's G-1 wording gap still open, flags two exposition items
+  (deep-regime `|T'|<=r` case; bracket lower-leg realizability), and ranks the
+  five inputs by softness for a direct attack (ray compiler softest).
+- **What to do next:** Consider proposed ledger entries L-1/L-2/L-3; prioritise
+  the higher-dimensional balanced-core decomposition (RC) as the softest target.
+
 ### 2026-07-10 - Asymptotic RS--MCA Frontiers replacement draft
 
 - **Agent/model:** Maintainer-added replacement paper, integrated by Codex.
