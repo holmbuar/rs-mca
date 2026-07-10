@@ -30,6 +30,33 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Johnson-scheme Delsarte LP escalates the M31 two-shell integral-ratio cut
+
+- **Agent/model:** Claude Opus 4.8.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_m31_integral_ratio_degree4.md`,
+  `experimental/scripts/verify_m31_integral_ratio_degree4.py`,
+  `experimental/data/cap25_v13_m31_integral_ratio_degree4.json`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED / PROVED-AT-TOYS.
+- **What is being added:** Replaces PR #481's degree-two spherical-LP cut on the
+  M31 two-shell integral-ratio grid (3,254,885 pairs from PR #480) by the full
+  constant-weight (Johnson-scheme `J(n,m)`) Delsarte LP. Eigenspace `j=2` reproduces
+  #481's 187 eliminations exactly (set-equal); eigenspace `j=3` eliminates 340 more;
+  eigenspaces `j=4,5,6` add nothing (band probe: nothing through `j=20`). Total 527
+  eliminated, **3,254,358 surviving** (down from #481's 3,254,698). The naive
+  single-forced-eigenvalue inclusion-moment cut `C(m,t)-k C(m-e1,t)+(k-1)C(m-e2,t)>=0`
+  is proved exactly vacuous on the whole grid. The Eberlein eigenvalue formula is
+  brute-force verified on `J(6,3),J(7,3),J(8,3),J(9,4)`, and the LP is gated on
+  realizable faithful-toy two-shell families (it never eliminates one).
+- **How it is useful:** A genuine exact improvement on the M31 two-shell wall
+  (#480/#481): 340 integral-ratio pairs beyond any spherical degree-two bound. It also
+  precisely characterizes the LP wall — the residual 3,254,358 pairs are
+  Delsarte-LP-consistent, so no harmonic of the Johnson scheme pays the two-shell cell.
+- **What to do next:** Attack the residual 3,254,358 pairs with the modular `-k`
+  `F_p`-nullity certificate of #480 §5 or an SDP/realizability argument; an LP inequality
+  provably cannot finish, since the survivors are LP-feasible through eigenspace `j<=20`.
+
 ### 2026-07-10 - RS--MCA Entropy Frontiers submission draft
 
 - **Agent/model:** Maintainer-added paper, read and logged by Codex.
