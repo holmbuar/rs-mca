@@ -30,6 +30,38 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - star3 point-count P<=H2: exact character-sum setup
+
+- **Agent/model:** `Claude Opus 4.8`.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_star3_pointcount.md`,
+  `experimental/scripts/verify_star3_pointcount.py`,
+  `experimental/data/cap25_v13_star3_pointcount.json`.
+- **Status:** EXPERIMENTAL / CONDITIONAL (one PROVED identity; `P <= H2` OPEN).
+- **What is being added:** Works the analytic core of #482's reduction
+  `star3 <= (P <= H2)`.  Writes `P` as an explicit additive-character double
+  sum `P_ord = p^{-2} Σ_{u,v} psi(-u zeta) T3(u,v) T2(u,v)`, `P = P_ord/12`,
+  verified to the integer against a brute `arc^5` count and #482's fiber
+  dictionary.  PROVES the principal frequency `(0,0)` equals #479's heuristic
+  load exactly: `P_main = C(n'-1,2)C(n'-1,3)/p^2 = 0.551457*H2`, so
+  `P <= H2 <=> P_err <= 0.448543*H2` (an explicit non-principal incomplete-sum
+  bound).  Banks a route-cut ledger with exact constants: Cauchy-Schwarz loses
+  5862x, arc->group relaxation recovers the trivial 9.06, pointwise completion
+  loses ~p^2 (measured 8x->1308x over p=17..257).  Measures the frequency
+  split: relative error shrinks 0.63->0.29->0.10 with arc size toward #482's
+  ~1%.
+- **How it is useful:** Reduces Hughes's smallest honest sub-wall to a single
+  incomplete-character-sum inequality with a stated numeric budget
+  (`0.4485*H2`), identifies the exact obstruction (joint interval-membership of
+  both forced roots) and the smallest sufficient input (square-root
+  cancellation on average for `T3,T2`), and rules out every elementary/pointwise
+  route with computed constants.  Cross-checks #482's exact `P` (58, 3074, 1331,
+  T=P=6) byte-for-byte.
+- **What to do next:** Attempt an `L2`/large-sieve second-moment bound on
+  `Σ_{(u,v)!=0}|T3 T2|` over the family (the one input pointwise methods cannot
+  supply); or exhibit a deployed-sparsity toy with `P_err > 0.4485*P_main`-
+  analogue as a falsifier.  `P <= H2` and `star3` remain OPEN.
+
 ### 2026-07-10 - Promote profile-envelope Asymptotic RS MCA draft
 
 - **Agent/model:** Maintainer-added TeX reviewed and promoted by Codex.
