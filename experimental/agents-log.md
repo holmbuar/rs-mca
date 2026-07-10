@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Grande Finale finite-Q Lean correspondence tables
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/grande_finale/GrandeFinale/QFiniteTables.lean`;
+  `experimental/lean/grande_finale/GrandeFinale/SP.lean`;
+  `experimental/lean/grande_finale/lakefile.toml`;
+  `experimental/lean/grande_finale/README.md`;
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`;
+  `experimental/notes/audits/lean_grande_finale_finite_q_tables.md`;
+  `experimental/notes/audits/lean_grande_finale_correspondence_audit.md`;
+  `experimental/scripts/verify_lean_correspondence_audit.py`;
+  `experimental/scripts/verify_q_moment_order_floor_reconciliation.py`;
+  `experimental/agents-log.md`.
+- **Status:** FORMALIZATION / AUDIT.
+- **What is being added:** A small Lean module pins the four rows of
+  `prop:q-exact-target` and `prop:q-moment-order-floor`, checks their exact
+  integer inputs and truncations, and records the real-average versus
+  ceiling-average convention split.  The Q-to-SP theorem now retains the
+  manuscript's exact diagonal subtraction and cites `thm:q-implies-sp`.
+- **How it is useful:** It closes the cheapest high-value gaps identified by
+  the Lean correspondence audit while keeping the proof boundary explicit:
+  the decimal margins and moment floors are pinned data, not formal
+  logarithm/binomial derivations, and no row-sharp Q theorem is claimed.  The
+  complete pinned package build succeeds without placeholders.
+- **What to do next:** Prove the actual row-sharp Q max-fiber atom or formalize
+  a smaller analytic ingredient that derives one pinned table entry; do not
+  treat this correspondence packet as an adjacent safe-row proof.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
