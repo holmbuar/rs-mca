@@ -30,6 +30,42 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - KB mixed twist-orbit energy index ladder (deployed transfer ceilinged at sqrt(index))
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_kb_mixed_orbit_index_ladder.md`,
+  `experimental/scripts/verify_kb_mixed_orbit_index_ladder.py`,
+  `experimental/data/cap25_v13_kb_mixed_orbit_index_ladder.json`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED (per-coset energy decomposition; coset-split L1 bound;
+  folding lemma; method-ceiling theorem gain <= sqrt(index)) / EXPERIMENTAL
+  (25-point index ladder) / COUNTEREXAMPLE-scoped (popular-sum predictor refuted)
+  / OPEN (deployed transfer).
+- **What is being added:** Extends PR #475's single index-3 mixed-axis L2->L1
+  bound to a graded ladder in subgroup index [F_p^*:H] (indexes 1..100, four n
+  families plus large-subgroup anchors; #475's (193,64,30) E_mix recomputed
+  byte-identically). New exact object: the per-s-coset energy E_kappa (sheared
+  marginal of the fiber table), with sum_kappa E_kappa = E_mix, shown to be the
+  finest exactly-rational (Galois-stable) refinement of E_mix. Builds the
+  rigorous heavy/light coset-split bound and PROVES it can beat plain
+  Cauchy-Schwarz by at most sqrt(index): 4.994 bits at the deployed index 1016,
+  negligible vs the 1,045,396.58-bit second-moment deficit. Refutes the
+  small-value-set/popular-sum hypothesis as the heavy-orbit amplifier (a global
+  subset-sum resonance, exact A_0 autocorrelation, not local value-set
+  degeneracy); credits PR #465's major-arc=small-value-set law.
+- **How it is useful:** Answers PR #467/#475's deployed-transfer question with a
+  PROVED negative about the mixed twist-orbit coset method (it is a sub-6-bit
+  polish of CS at deployment) while leaving #475's actual atom — a
+  better-than-second-moment handle on E_mix^dep — open and precisely named.
+  Supports def:q-row-atom / prob:row-sharp-q by removing one candidate route.
+- **What to do next:** Break the 2^64 exact-cell bound (big-integer cells or a
+  coset-restricted exact DP) to push the ladder into the deployed
+  large-lambda/large-index corner and measure whether an exactly-rational
+  sub-coset concentration (not ceilinged by sqrt(index)) appears; this is the
+  stated falsifier. The adjacent controller of E_mix^dep is #448's disjoint-PTE
+  count law (not proved here).
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
