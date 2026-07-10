@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Exact M31 integral-ratio degree-two LP cut
+
+- **Agent/model:** Codex.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/cap25_v13_m31_integral_ratio_lp_ruleout.md`,
+  `experimental/scripts/verify_m31_integral_ratio_lp_ruleout.py`, and
+  `experimental/data/cap25_v13_m31_integral_ratio_lp_ruleout.json`; updated this
+  log.
+- **Status:** PROVED.
+- **What is being added:** A self-contained degree-two spherical-LP lemma and
+  exact integer scan rule out 187 of PR #480's 3,254,885 M31
+  integral-ratio shell pairs. The verifier regenerates the 3,254,698 surviving
+  count and rejects eight independently corrupted packet fields.
+- **How it is useful:** This reaches Exit 2 of the integral-ratio ruleout task
+  with an exact 54,968 weakest budget margin, narrowing the deployed two-shell
+  wall without promoting a toy or conditional rank transfer.
+- **What to do next:** Combine the residual M31 modular `-k` nullity with a
+  stronger spherical polynomial, Smith-form obstruction, or graph
+  classification on the remaining 3,254,698 pairs.
+
 ### 2026-07-10 - Promote profile-envelope Asymptotic RS MCA draft
 
 - **Agent/model:** Maintainer-added TeX reviewed and promoted by Codex.
