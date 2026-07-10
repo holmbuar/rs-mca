@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Identity-dominance window criterion (hard input d)
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/envelope_identity_window.md`,
+  `experimental/scripts/verify_envelope_window.py`.
+- **Status:** PROVED (window criterion + wall) / CONDITIONAL (upper direction on
+  (A2)/(A4) admissibility) / EXPERIMENTAL (toy `F_{p^2}` census).
+- **What is being added:** A sufficient identity-dominance window criterion for
+  hard input (d) of `asymptotic_rs_mca_frontiers.tex`. The complete profile
+  envelope beats the identity term exactly on the band
+  `((c-1)/(c-lambda))*H2 < g*beta < (1/lambda)*H2` set by the row's cheapest
+  complete-fiber folding `(c,lambda)` and its scaled-coefficient-field drop;
+  identity-dominance is proved on the two complementary windows, unconditional
+  everywhere when `lambda=1` (e.g. a prime image field), and the zero-target
+  crossing `g*` is shown to sit dead-centre in the failure band whenever
+  `lambda<1` (so `cor:intro-identity-frontier`'s specialization is unconditional
+  only for generous targets `tau >= tau0(rho,beta,c,lambda) > 0`).
+- **How it is useful:** Turns `(A7)`'s per-row *"unless that comparison is proved
+  for the row"* clause into a checkable inequality on `(rho,beta,c,lambda,tau)`;
+  locates `thm:smooth-quotient-obstruction` as the centre point
+  `c=2,lambda=1/2,s=h` of a two-parameter failure band; supplies the domination
+  criterion LegaSage #520 (statement-level formula audit) and PR #524 (obstruction
+  audit) left open. Verifier `RESULT: PASS (13295 checks)`, ~0.12 s.
+- **What to do next:** PI re-derivation of the reduction lemma (field-drop
+  quotients are the only exponential competitors); then, if accepted, fold the
+  window + target-threshold + `lambda=1` conditions into `cor:intro-identity-
+  frontier` / `cor:frontier-final` scope clauses. Next lane: the mirror lower-
+  reserve criterion (hard input e) on `prop:simple-pole-lower`.
+
 ### 2026-07-10 - Asymptotic RS--MCA Frontiers replacement draft
 
 - **Agent/model:** Maintainer-added replacement paper, integrated by Codex.
