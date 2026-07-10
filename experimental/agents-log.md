@@ -30,6 +30,38 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - (FI) full-image certificate on primitive leaves: two-gap decomposition
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/fi_full_image_primitive.md`,
+  `experimental/scripts/verify_fi_certificate.py`.
+- **Status:** PROVED (Gap-1 criterion; shallow-prefix automatic-FI) + AUDIT
+  (C7 collapse-routing is an assumed enumerative input) + WALL (deep-prefix
+  Gap-2). No COUNTEREXAMPLE.
+- **What is being added:** Characterizes when the full-image certificate
+  `(FI) L>=e^{-o(n)}A` (`eq:full-image-certificate`, L4844) holds on primitive
+  prefix leaves of `asymptotic_rs_mca_frontiers.tex`. Extracts the exact
+  statement, the 14-site consumer list, and the C7 / `(L4)` routing status
+  (assumed, not proved). Decomposes (FI) along the tower `L<=A_eff<=A`: Gap-1
+  (image fills effective span) is PROVED equivalent to effective-scale Q via the
+  paper's own `def:effective-fourier-payment` (`L>=A_eff/kappa`), hence
+  discharged by `(A4)`; shallow prefixes (`(a-k-1)log|B|=o(n)`) get (FI) free
+  because `A/L<=A=e^{o(n)}`; the only content is deep-prefix span collapse
+  `A_eff<<A` (char-2 Frobenius `p_2=p_1^2`, exact `r2=1/2` over F_8, resolved by
+  `(A5)` elementary coords). Census over the #534/#536 configs: no uncaught
+  collapsing leaf (`r_all in [0.949,1.000]`).
+- **How it is useful:** Shows (FI) is a cleanly gated hypothesis but that its
+  failure-side routing is the same unproved-input class as `(A2)` atlas
+  exhaustiveness (#524); localizes the sole binding obligation to deep-prefix
+  Gap-2, which reduces to the ambient `(MI)/(MA)` input (scottdhughes program).
+  Proposes ledger entries L-FI-1..4 for `asymptotic_rs_mca.md`.
+- **What to do next:** Formalize the Gap-1 `(EFP) => L>=A_eff/kappa` corollary;
+  decide the deep-prefix Gap-2 routing either by proving the earlier-profile
+  re-route (existence + mass absorption + budget) or by consuming the ambient
+  `(MI)/(MA)` theorem. Verifier: `RESULT: PASS (31 checks)`, ~0.8s under
+  `ulimit -v 2097152`.
+
 ### 2026-07-10 - Asymptotic RS--MCA Frontiers replacement draft
 
 - **Agent/model:** Maintainer-added replacement paper, integrated by Codex.
