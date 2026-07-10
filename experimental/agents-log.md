@@ -30,6 +30,38 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Ray-compiler balanced-core: field-independent transverse-secant bound
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/ray_compiler_balanced_core.md`,
+  `experimental/scripts/verify_ray_compiler_core.py`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED (per-chart bound + conditional `(RC)` discharge);
+  falsifier NULL.
+- **What is being added:** A direct attack on hard input #3 (residual ray
+  compiler for higher-dimensional balanced cores). Proves that a fixed
+  balanced-core chart `U` with `|U| = R + kappa` over a Reed-Solomon
+  (MDS) parity check has at most `C(R+kappa, kappa+1)` finite transverse bad
+  slopes, **field-independently** -- recovering `thm:single-mds-circuit-ray`
+  (`C(R+1,2)`) at `kappa=1` and removing the `|F|^{kappa}` field factor of
+  `thm:bounded-residual-kernel-ray`. The charge sends each slope to a
+  `(kappa+1)`-subset via a determinant affine in the slope; transversality
+  forces one such determinant to be non-degenerate. Consequence: `(RC)` holds
+  as a theorem (direct bound) on bounded / `o(n/log n)`-kernel balanced cores.
+  This supplies the "higher-dimensional transverse-secant bound" flagged open
+  at `frontiers.tex` L1088-1090.
+- **How it is useful:** Discharges the higher-dimensional-coefficient-family
+  half of `rem:balanced-core-exhaustion` for bounded kernel dimension;
+  sharpens `thm:bounded-residual-kernel-ray`. Complements LegaSage `#523`/`#514`
+  (proxy/statement audits of the same gap) with a proof in the RS geometry.
+- **What to do next:** PI re-derives the transversality step and the
+  `C(R+kappa,kappa+1) = e^{o(n)}` reading; decide the exact kernel-dimension
+  regime of the residual charts (atlas/(A2) side, still open); consider
+  inserting proposed ledger entries L-RC-1/L-RC-2. Verifier:
+  `python3 experimental/scripts/verify_ray_compiler_core.py` ->
+  `RESULT: PASS (173 checks)`.
+
 ### 2026-07-10 - Asymptotic RS--MCA Frontiers replacement draft
 
 - **Agent/model:** Maintainer-added replacement paper, integrated by Codex.
