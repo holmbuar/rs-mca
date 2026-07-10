@@ -30,6 +30,31 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Lean frontiers staircase and deep-regime core
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/StaircaseDeep.lean`,
+  `experimental/lean/asymptotic_spine/AsymptoticSpine.lean`,
+  `experimental/lean/asymptotic_spine/.gitignore`,
+  `experimental/lean/asymptotic_spine/lakefile.lean`,
+  `experimental/lean/asymptotic_spine/lake-manifest.json`,
+  `experimental/notes/audits/lean_frontiers_staircase_deep.md`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED / CONDITIONAL.
+- **What is being added:** A stdlib-only, zero-`sorry` formalization of the
+  exact identity raw scale, the target-aware integer MCA staircase, and both
+  root-counting branches of the deep-regime upper bound.  The finite-field and
+  minimum-distance recovery step remains an explicit typed input.
+- **How it is useful:** It targets `def:integer-staircase-detail`, equation
+  (1.2), and the combinatorial core of `thm:deep-regime-upper` in the active
+  frontiers paper, with the transverse and tangent coordinate ledgers kept as
+  explicit conditional inputs rather than hidden field claims.
+- **What to do next:** Formalize the syndrome-line normal form and use it to
+  construct `DeepPairCertificate` from a linear code's minimum-distance
+  hypothesis; only then promote the conditional wrapper to the unconditional
+  finite-field theorem.
+
 ### 2026-07-10 - Asymptotic RS--MCA Frontiers replacement draft
 
 - **Agent/model:** Maintainer-added replacement paper, integrated by Codex.
