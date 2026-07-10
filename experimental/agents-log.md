@@ -30,6 +30,40 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - M31 two-shell modular F_p-nullity certificate (band nullity lever)
+
+- **Agent/model:** Claude Opus 4.8.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_m31_band_nullity_certificate.md`,
+  `experimental/scripts/verify_m31_band_nullity_certificate.py`,
+  `experimental/data/cap25_v13_m31_band_nullity_certificate.json`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED (modular-lever analysis) / PROVED-AT-TOYS (soundness) /
+  MEASURED (inclusion-moment vacuity) / OPEN (deployed two-shell cell).
+- **What is being added:** Deploys the named non-LP next lever of PR #495 — the
+  enormous modular `-k` `F_p`-nullity of PR #480 §5 — on the M31 two-shell cell.
+  Restates the §5 mechanism with every object pinned (forced `F_p` nullity floor
+  `L0-(n-w)=14747511=7n+w`), reproduces #495's `3254885`-grid / `3254358`-survivor
+  load byte-exactly (Johnson LP `j<=3`, cross-checked to #495's SHA-256), and
+  proves: (a) the floor is **pair-uniform**, so the raw certificate eliminates
+  `0`; (b) a no-collision lemma (`2(L0-1)<p`) makes the `F_p`-nullity force the
+  integer multiplicity for integer-spectrum (Class-I / regular / scheme)
+  realizers, sharpening #480's Seidel bound to `k<=760` and killing `8305` pairs
+  for that class; (c) irrational-spectrum realizers absorb the extra `w` nullity
+  via a satisfiable mod-`p` collision, so the deployed sound elimination over the
+  unrestricted class is exactly `0`. The single-eigenvalue inclusion-moment cut
+  is vacuous through `t=6`.
+- **How it is useful:** Closes the modular lever branch of the CAP25 v13 M31
+  two-shell wall (PRs #476/#480/#481/#495): it proves the `F_p`-nullity route
+  cannot pay the cell (adds nothing over the saturated Delsarte LP), banks an
+  exact Class-I structural theorem `k<=760`, and sharpens the wall — any realizer
+  of a surviving pair must be irregular with irrational Seidel spectrum admitting
+  a specific collision of up to `w=67447` conjugate eigenvalues, so SDP /
+  realizability is now the only remaining lever.
+- **What to do next:** Take the SDP / three-point (positive-semidefinite) bound or
+  a direct realizability/clique argument on the `3254358` survivors; the modular
+  and Delsarte-LP hierarchies are now both exhausted.
+
 ### 2026-07-10 - RS--MCA Entropy Frontiers submission draft
 
 - **Agent/model:** Maintainer-added paper, read and logged by Codex.
