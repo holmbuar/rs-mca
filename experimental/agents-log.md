@@ -30,6 +30,43 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Hughes Route-D star3 sub-wall: restatement, incidence reduction, model validation
+
+- **Agent/model:** Claude Opus 4.8.
+- **Files added or changed:** `experimental/notes/thresholds/cap25_v13_hughes_wall_star3.md`,
+  `experimental/scripts/verify_hughes_wall_star3.py`,
+  `experimental/data/cap25_v13_hughes_wall_star3.json`,
+  `experimental/agents-log.md`.
+- **Status:** EXACT / PROVED (reduction) / MEASURED / AUDIT — sub-wall stays OPEN.
+- **What is being added:** A deep-dive on the smallest honest sub-wall `star3`
+  named by PR #479 (`|T(n',3)| <= H2` at the KB row, trivial deficit exactly
+  9.0612). (1) Restates `star3` with every object explicit and reproduces the
+  9.0612 factor and target fraction 0.110361 exactly. (2) Proves two exact
+  characterizations (fiber >= 2; equal first-two power sums) and an incidence
+  reduction `|T(n',3)| <= P` with a high `(s,q)` forcing the terminal pair, so
+  `star3` follows from the single point-count `P <= H2` (heuristic ~0.535*H2).
+  (3) Re-verifies >= 8 deployed members of `T(n',3)` from #479's witness index
+  pairs by locator expansion. (4) Exact KB-shape toy ladder: the birthday model
+  `1-exp(-lambda)`, `lambda=C(t-1,3)/p^2`, tracks the true sociable fraction to a
+  few percent across sparsity and size (tighter than #479's "within 2x"); the
+  target-fraction crossing is bracketed at ~1.92x deployed arc size, so the
+  deployed row sits at 0.52 of the crossing (fractional slack ~1.87x); every
+  deployed-like (q~1016) row is ~1e-4, far below target. Over-target fractions
+  occur only for dense/oversized arcs, never at deployed sparsity — no red flag.
+  Antipodal partner subfamily measured to be a ~1.5e-3 sliver.
+- **How it is useful:** Continues the #468/#479 engagement with Hughes's Route-D
+  program. Sharpens `star3`'s open core to a clean analytic target (`P <= H2`),
+  and calibrates whether the sub-wall is even true: model-supported with ~1.9x
+  slack, quantified crossing scale, no counterexample. Steering: the sub-wall is
+  a genuine scale-sensitive knife-edge (false for KB-shape arcs ~2x larger or
+  denser), so any proof must be sharp to better than 1.9x and use `n < n*`.
+- **What to do next:** Attack `P <= H2` (the incidence point-count) — the
+  interval-arc character sums lose the ~1.9x slack by the current completion; a
+  sharper incomplete-sum / large-sieve input over the density-0.5625 arc
+  interval is the missing step. Falsifier: a deployed-sparsity (q~1016)
+  KB-shape arc at `n <= 2^21` with sociable fraction > 0.110361 (predicted to
+  need `n > ~4e6`); none found in the scanned range.
+
 ### 2026-07-10 - Promote profile-envelope Asymptotic RS MCA draft
 
 - **Agent/model:** Maintainer-added TeX reviewed and promoted by Codex.
