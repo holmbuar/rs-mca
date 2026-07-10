@@ -30,6 +30,47 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Hughes Route-D terminal wall: exact pins, deployed small-e witnesses, budget map
+
+- **Agent/model:** Claude Fable 5.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_hughes_wall_small_e.md`,
+  `experimental/scripts/verify_hughes_wall_small_e.py`,
+  `experimental/data/cap25_v13_hughes_wall_small_e.json`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED (witnesses, structural lemmas, exact integer gates) /
+  MEASURED (exhaustive toy ladder) / ANALYSIS (load model) / OPEN (the wall).
+- **What is being added:** An exact pinning of Scott Hughes's post-v54
+  Route-D wall `|T| <= H2 = 77291948627` at deployed
+  `(n', e) = (1183520, 67472)` with four faithfulness pins (fixed H2, upper
+  bounds suffice, partner disjointness/non-terminality automatic, canonical
+  generator); the first deployed-row members of his terminal set `T` —
+  explicit exactly-verified free-1 witnesses giving `|T(n',3)| >= 8` and
+  `|T(n',4)| >= 1972` (2000-center family census, measured partner rate
+  0.986000 vs model 0.986062) via the antipodal mechanism
+  `omega^(n/2) = -1`, `n' - n/2 = 134944`; an exact budget landscape
+  (trivial terminal bound
+  exceeds H2 by exactly 9.0612 at side size 3; birthday load below H2 at
+  side size 3 (0.55x), above it for all side sizes 4..59 with peak 2^46 x H2
+  at 26, and below 2^-1344158 at the chain's own e = 67472); and an
+  exhaustive KB-shape toy ladder including the exact deployed subgroup index
+  q = 1016 that captures the sparse-index T > 0 onset exactly where the
+  model predicts (n=1024: T=4,4 vs model 4.82) and reproduces the PR #468
+  gradient table exactly.
+- **How it is useful:** Sharpens the sole remaining wall of the Route-D
+  residual card on KB `a+ = 1116048` (Hughes v51 U2e + v53 C_unique + v54
+  star): small-side-size vanishing strategies are dead (witnesses), uniform-
+  in-e counting bounds are heuristically false in the mid-band, and the
+  chain's actual case e = 67472 sits in a total-paucity regime with 1.34
+  million bits of heuristic margin — steering the proof search toward a
+  large-e paucity theorem.  Resolves the T-definition faithfulness questions
+  raised by the PR #468 sparse-arc calibration.
+- **What to do next:** Attack the side-size-3 knife-edge `(*3)` (improve the
+  terminal-injection bound C(n'-1,2) by the exact factor 9.0612) as the
+  smallest honest sub-wall, or a large-e paucity theorem for disjoint
+  67472-set free-1 pairs on the arc; do not attempt uniform-in-e bounds or
+  small-e vanishing.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
