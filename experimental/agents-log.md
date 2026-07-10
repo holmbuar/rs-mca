@@ -30,6 +30,38 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Attack atlas exhaustiveness: prefix-fibre discharge + payment wall
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:** `experimental/notes/thresholds/atlas_missing_witness.md`,
+  `experimental/scripts/verify_atlas_witness.py`.
+- **Status:** PROVED (unconditional exhaustiveness discharge, wider than
+  `binom(D,a)`) + WALL (residual is a payment gap) + AUDIT; toy falsifier NULL.
+- **What is being added:** Attacks hard input 1 (witness-exhaustive first-match
+  atlas, `(A2)`; delta-audit #524 OPEN GAP).  Extracts the exact exhaustiveness
+  statement and the C1--C9 cell list with tex labels; proves the depth-`w`
+  prefix-fibre family `Phi_w^{-1}(z)` is an UNCONDITIONALLY witness-exhaustive
+  first-match atlas (a total map's fibre partition), `L<=p^w` profiles, paid at
+  effective-image scale when `(a-k-1)log|B|=o(n)` --- strictly wider than the
+  one-cell `binom(D,a)` discharge and NOT subject to the `lem:profile-atlas`
+  planted/higher-dim exclusion guard.  Executable falsifier enumerates every
+  `a`-subset at 9 configs `(13,9)..(29,18)`, routes through the constructible
+  algebraic cells, finds 0 missing witnesses and 0 large-high-energy fibres
+  (largest fibres are Sidon-side, `Delta*f ~ 2-3`).  Verifier `RESULT: PASS
+  (61 checks)`, ~3.3 s.
+- **How it is useful:** Discharges the exhaustiveness half of hard input 1
+  ("exhaustiveness decouples from payment": coverage is free, the binding input
+  is payment).  Reframes the maintainer's "missing witness" failure mode as a
+  MIS-PAID primitive fibre (positive-rate Sidon-heavy obstruction with failing
+  Sidon payment = input 4/5), not a set-cover gap.  Two ledger entries proposed
+  in the note (narrow `(A2)` to its payment half; record the payment-gap wall).
+- **What to do next:** PI re-derivation of the prefix-fibre Lemma (does it truly
+  narrow `(A2)` to payment, or does some consumer need the finer atlas exhaustive
+  for a non-payment reason?).  Recommended next lane: the `(FI)` full-image
+  certificate on primitive leaves (when `L>=e^{-o(n)}A_eff`), since the discharge
+  pays at effective-image scale.  Scope vs LegaSage #519/#526 (formalism audits),
+  #533 (Lean partition); reuses #534/#535 census primitives.
+
 ### 2026-07-10 - Asymptotic RS--MCA Frontiers replacement draft
 
 - **Agent/model:** Maintainer-added replacement paper, integrated by Codex.
