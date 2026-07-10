@@ -2790,3 +2790,28 @@ Keep entries concise and link to the relevant files.
 - **What to do next:** Run verifiers and audits on the integrated material,
   review mathematical notes before promotion, and close the original PRs as
   manually integrated once the integration commit is pushed.
+### 2026-07-10 - Simple-pole lower-reserve realizability (frontiers input 5 / #524 L-3)
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/simple_pole_realizability.md`,
+  `experimental/scripts/verify_pole_realizability.py`.
+- **Status:** EXPERIMENTAL / AUDIT. Verdict: PROVED (realizability on the SB2
+  window) + corrected two-regime bracket; resolves #524 ledger entry L-3.
+- **What is being added:** Settles hard input 5 (lower reserve / unsafe-side).
+  Proves `prop:simple-pole-lower`'s witness `P(a)` is a realizable floor
+  `P<=B^MCA<=U` exactly where SB2 of `thm:unconditional-support-envelope-bracket`
+  invokes it. Min-distance rigidity forces the true dim-`(k+1)` list `<=1` for
+  `a>(n+k)/2`, and `a_deep=ceil((2n+k)/3)>(n+k)/2` (since `n>k`), so `L(a)=1`
+  and `P(a)=1` throughout the deep regime -- the pole floor collapses and cannot
+  overshoot. The honest lower leg is `max{P(a),E(a)}`, `E=min{|Gamma|,n-a+1}`:
+  exact on the deep window (`cor:exact-deep-numerator`), with `P` a realizable
+  strengthening on the shallow window `a<=(n+k)/2`. Overshoot zone is EMPTY.
+- **How it is useful:** Turns #524's `AUDIT` caveat into a theorem-level
+  statement + the definitive L-3 ledger entry (regime hypotheses H1/H2 to print
+  next to SB2, deep/shallow split). Verifier gates every number: 18 checks,
+  ~53 s, stdlib only (deep+shallow exhaustive RS-MCA brute force, 711k-tuple
+  realizability/zone census).
+- **What to do next:** PI spot-check the two-regime wording before promotion;
+  the general-linear-code equality beyond RS toy scale is not claimed.
+
