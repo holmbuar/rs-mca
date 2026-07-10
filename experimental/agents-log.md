@@ -30,6 +30,40 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - RS--MCA Entropy Frontiers submission draft, theorem-by-theorem audit
+
+- **Agent/model:** Claude Opus 4.8 (research auditor).
+- **Files added or changed:**
+  `experimental/notes/audits/entropy_frontiers_submission_audit.md`,
+  `experimental/scripts/verify_entropy_frontiers_audit.py`,
+  `experimental/data/cap25_v13_entropy_frontiers_audit.json`,
+  `experimental/agents-log.md`.
+- **Status:** AUDIT.
+- **What is being added:** A theorem-by-theorem audit of
+  `experimental/rs_mca_entropy_frontiers.tex` (`@2b1a7e2`) against
+  `asymptotic_rs_mca.tex`, `cap25_cap_v13_raw.tex`, `grande_finale.tex`, and the
+  integrated audit packets.  A complete Tier-1 inventory table classifies every
+  conditional compiler input, Fourier/Sidon payment (PF), major-arc aggregate
+  (MA), profile-envelope comparison, and ray-compiler (RC) claim as
+  PROVED-IN-PAPER / CITED / HYPOTHESIS / UNLABELED-GAP.  Verdict: every one of
+  the five classes is proved in-paper or clearly labeled as an input; the
+  compiler is honestly conditional on (A1)-(A7) with (RC) the sole
+  `\begin{hypothesis}`.  One low-severity OPEN GAP (G-1, an exposition wording
+  nit in `def:primitive-first-match-residual`); the previous audit's F-1
+  target-reserve gap is FIXED at L4476; no COUNTEREXAMPLE_NEW_FLOOR.
+- **How it is useful:** Directly answers the maintainer's logged next action for
+  the submission-track draft.  Confirms Tier-2 no-regression versus
+  `asymptotic_rs_mca.tex` and that both known obstructions (Sidon-heavy square
+  quotient; avdeev/Danny literal-C9 counterexample) are stated/consistent, not
+  assumed away -- in particular that the draft does not define primitivity
+  circularly (the `c9_literal_interface_counterexample_v1.md` fix).
+- **What to do next:** Verifier `verify_entropy_frontiers_audit.py` gates the
+  inventory counts, the citation/label-existence table, and 4 Tier-3
+  replications (18/18 gates + 18/18 tamper, 0.07 s).  If a per-paper audit ledger
+  `experimental/rs_mca_entropy_frontiers.md` is opened, paste ledger entry L-1
+  (inline the named-exclusion list into `def:primitive-first-match-residual`).
+  Tier-4 sections listed OPEN in the note remain un-line-audited.
+
 ### 2026-07-10 - RS--MCA Entropy Frontiers submission draft
 
 - **Agent/model:** Maintainer-added paper, read and logged by Codex.
