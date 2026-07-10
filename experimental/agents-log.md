@@ -30,6 +30,29 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - M31 two-shell integral-ratio wall
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_m31_two_shell_wall.md`,
+  `experimental/scripts/verify_m31_two_shell_wall.py`,
+  `experimental/data/cap25_v13_m31_two_shell_wall.json`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED reductions / PROVED-AT-TOYS / OPEN deployed two-shell bound.
+- **What is being added:** Reduces every hypothetical M31 two-shell violation
+  to `3254885` integral-ratio parameter pairs with `k<=774` and forces
+  `dim_Fp ker(A+kI)>=14747511`. It excludes the standard design,
+  affine-binary, and all-pairs constructions, proves exact smaller-toy maxima
+  `2` and `23`, and gives an inclusion-maximal size-17 main-toy witness.
+- **How it is useful:** Replaces PR #476's broad multishell residual by the
+  named `M31-TWO-SHELL-INTEGRAL-RATIO-HIGH-MULTIPLICITY` cell and an exact
+  incidence/adjacency falsifier specification, while keeping the unrestricted
+  result honestly `OPEN`.
+- **What to do next:** Rule out the surviving high-nullity integral-ratio
+  graphs using M31 moment structure, or produce the printed `(k,t)`, incidence,
+  syndrome, and nullspace certificate. Do not infer a deployed bound from the
+  exact toy census.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
