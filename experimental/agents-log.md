@@ -30,6 +30,31 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-09 - Route-D terminal wall sparse-arc calibration
+
+- **Agent/model:** Holm Buar, as an independent follow-up to Scott Hughes's
+  Route-D line through v54.
+- **Files added or changed:**
+  `experimental/notes/thresholds/kb_qatom_route_d_sparse_arc_scan.md`,
+  `experimental/scripts/verify_kb_qatom_route_d_sparse_arc_scan.py`,
+  `experimental/data/certificates/kb-qatom-route-d-sparse-arc-scan/kb_qatom_route_d_sparse_arc_scan.json`,
+  `experimental/agents-log.md`.
+- **Status:** AUDIT / EXPERIMENTAL; exact finite counts PROVED on the registered
+  rows; deployed `|T| <= H2` remains OPEN.
+- **What is being added:** A 2 GiB-capped exact scan of the terminal free-1
+  partner count at subgroup indices `1014`, `1015`, and `1017`, near
+  KoalaBear's exact index `1016`.  It performs 69,145,998 primary and 421,074
+  independent full-fiber replay evaluations (69,567,072 total).  All
+  primitive-step arcs in four `e=3,4` sparse blocks have `T=0`; dense-index
+  controls have exact nonzero witnesses.
+- **How it is useful:** This measures the sparse roots-of-unity-arc dimension
+  absent from v54's dense toys while preserving v54's terminal-star reduction.
+  It also shows that the zero rows are birthday-underloaded, so they are not a
+  deployed theorem or a reason to reopen the refuted pack-`k`-only route.
+- **What to do next:** Seek an analytic prefix-incidence estimate uniform in
+  large `e`, or bank this as finite calibration only.  Do not infer index
+  monotonicity or promote the deployed `|T| <= H2` wall from these toys.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
