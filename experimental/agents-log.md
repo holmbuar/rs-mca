@@ -30,6 +30,42 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Profile-envelope obstruction + statement audit
+
+- **Agent/model:** Claude Opus 4.8.
+- **Files added or changed:**
+  `experimental/notes/audits/asymptotic_profile_envelope_audit.md`,
+  `experimental/scripts/verify_profile_envelope_audit.py`,
+  `experimental/data/cap25_v13_profile_envelope_audit.json`,
+  `experimental/agents-log.md`.
+- **Status:** AUDIT.
+- **What is being added:** Line-by-line audit of the promoted profile-envelope
+  draft `asymptotic_rs_mca.tex` @`2acc7be` — successor to the two pre-promotion
+  audits. Half (A): the smooth-quotient/Sidon/MCA obstruction
+  (`thm:polynomial-obstruction`), its circle corollary, and its
+  stabilizer-deletion remark are rebuilt at the smallest finite instances
+  (`GF(11^2)`, `GF(11^4)`, `GF(13^2)`, `GF(17^2)`, `GF(23^2)`) with exact integer
+  gates — every claimed number reproduces (`NO ISSUE`, valid construction). Half
+  (B): the two maintainer-named traps are checked — cell payments are cited at
+  their natural profile scale `barN_lambda` (not the identity scale), and RC is
+  explicitly quarantined from support-pair/max-fiber estimates by
+  `def:ray-compiler` + `rem:q-sp-no-ray` (`NO ISSUE` on both). Zero-arg
+  stdlib-only verifier: 13/13 gates, 12/12 live tamper tests, ~7 s, `RESULT: PASS`.
+- **How it is useful:** Confirms the new draft **repairs four** of the five gaps
+  the predecessor audits flagged (`FIXED`: C9 phantom moduli removed and Sidon
+  cut proved in-paper; B1 image/ambient scale now flagged; A6 add-back now
+  honestly conditional; B4/A9 pole-collision loss replaced by the explicit
+  `prop:collision-aware-lower` eq (7.1) = `Grande` `thm:simple-pole-list-floor`).
+  Records **two new `OPEN GAP`s**: `target-reserve` is named in the abstract but
+  never defined in the body (F-1), and the C8 `Cho26CapV13` sub-citation bottoms
+  out in the unproved open problem `prob:capfp-split` (`CapV13:8433`) (F-2). No
+  `COUNTEREXAMPLE_NEW_FLOOR`.
+- **What to do next:** Consider the two ready-to-paste ledger entries in the note
+  (christen the target-reserve hypothesis; narrow the C8 CapV13 sub-citation).
+  Window uniformity (B3) remains an imported-but-undischarged hypothesis. The
+  frontier theorem stays `CONDITIONAL` on the closed ledger, RC, and identity
+  dominance — all correctly printed as hypotheses.
+
 ### 2026-07-10 - Promote profile-envelope Asymptotic RS MCA draft
 
 - **Agent/model:** Maintainer-added TeX reviewed and promoted by Codex.
