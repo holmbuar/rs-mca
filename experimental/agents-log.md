@@ -2790,3 +2790,30 @@ Keep entries concise and link to the relevant files.
 - **What to do next:** Run verifiers and audits on the integrated material,
   review mathematical notes before promotion, and close the original PRs as
   manually integrated once the integration commit is pushed.
+### 2026-07-10 - Gap-2 span-collapse routing lemma: collapse is Frobenius closure
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/gap2_collapse_routing.md`,
+  `experimental/scripts/verify_gap2_routing.py`.
+- **Status:** PROVED (classification + vacuity on admissible leaves) / PARTIAL
+  (budget) / AUDIT (routing discharge) -- no COUNTEREXAMPLE.
+- **What is being added:** A classification of the universal `F_p`-linear
+  relations among power-sum prefix coordinates on a full slice at char `p`:
+  `dim_Fp V_g = |Z_p(q-1,{1..w})|` (Frobenius closure), so every deep-prefix
+  Gap-2 span collapse (`A_eff << A`, `fi_full_image_primitive.md` #539) is a
+  Frobenius-invariance = field-descent cell C5, an earlier first-match profile;
+  and collapse holds iff `w >= p`, making the re-route vacuous on every
+  admissible power-sum leaf (`R_N < char`, L940). Verifier recomputes the span
+  dimension against the closure over `F_4,F_8,F_9,F_16,F_25,F_27` (`w<=4`),
+  `RESULT: PASS (120 checks)`.
+- **How it is useful:** Discharges the C7 "projection degree remains an
+  enumerative input" caveat (L2451) for the span-collapse sub-case of the
+  `asymptotic_rs_mca_frontiers.tex` (FI)/Gap-2 obligation (L1115 item 4),
+  reducing it to cell C5's catalogued field-descent payment; reuses and credits
+  PR #451's cyclotomic-defect `Z_p(N,I)` and its Lean-backed closure step.
+- **What to do next:** PI re-derivation of the Delsarte coset-dimension step and
+  the `w<p` no-collapse corollary; decide whether L-G2-1..L-G2-4 land in the
+  paper; the general (non-cyclic) C5 field-descent slope count remains C5's
+  standing obligation.
+
