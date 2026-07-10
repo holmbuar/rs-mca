@@ -30,6 +30,41 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - (A4) coverage of high-kappa balanced cores is kappa-independent
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/a4_covers_high_kappa.md`,
+  `experimental/scripts/verify_a4_coverage.py`, this log.
+- **Status:** PROVED (coverage, shallow-prefix) / AUDIT (routing) / EXPERIMENTAL
+  (census).  Answers the wall named by PR #534.
+- **What is being added:** A coverage/routing result for the wall of PR #534
+  (`balanced_core_kappa_growth.md`): whether the `(A4)` prefix-flatness/Sidon
+  payment reaches the residual balanced-core charts that carry `kappa=k=Theta(n)`.
+  Finding: the `(A4)` payment axes (effective prefix span `A_eff=|V_g|`, fiber
+  additive energy `Delta_s`, and the `(MI)`/`(MA)` character sums) are all
+  INDEPENDENT of the kernel dimension `kappa`; the syndrome fiber IS the
+  balanced-core chart, its largest fiber is the `kappa=k` chart, and
+  `thm:small-effective-dual-closure` + `lem:residual-monotonicity` pay every
+  shallow-prefix (`(a-k-1)\log|B|=o(n)`) chart through both `(A4)` and `(A6)`
+  regardless of `kappa` (UNCONDITIONAL).  The PTM family (#534) is shallow-prefix
+  hence PAID; NO counterexample.  Deep-prefix charts reduce to `(MI)`/`(MA)` on
+  the ambient slice (hughes crux, out of scope) -- still a character-sum
+  condition, never a `kappa` condition.  Census (exact, #534's four configs):
+  the high-`kappa` fibers are LOW-energy/Sidon-like (`Delta_s -> 0`), so they
+  need the `(A4)` Sidon cell, which closure supplies.
+- **How it is useful:** Resolves PR #534's named wall as a ROUTING gap, not a
+  coverage gap, in `experimental/asymptotic_rs_mca_frontiers.tex`.  Proposes
+  ledger entries L-A4-1 (route `(A6)`'s direct-bound alternative through closure
+  `(SE2)` + residual monotonicity, `kappa`-independently) and L-A4-2
+  (disambiguate the effective-Fourier payment constant `kappa` from the
+  transverse-secant kernel dimension `kappa`).  Complements LegaSage #531's
+  `OPEN GAP` isolation of the residual Sidon payment statement.
+- **What to do next:** PI re-derive the fiber=chart identity, the closure-to-(A6)
+  bridge `(SE2)`, and the `A_eff/Delta_s/character-sum` `kappa`-independence;
+  confirm the deep-prefix reduction hides no `kappa` term; then decide the two
+  ledger edits.  Deep-prefix `(PF)`/`(MA)` remains the scottdhughes crux.
+
 ### 2026-07-10 - Asymptotic RS--MCA Frontiers replacement draft
 
 - **Agent/model:** Maintainer-added replacement paper, integrated by Codex.
