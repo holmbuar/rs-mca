@@ -90,6 +90,32 @@ Keep entries concise and link to the relevant files.
   image-scale MI+MA or direct Sidon payment, residual ray compiler, complete
   profile-envelope comparison, and lower reserve / unsafe-side comparison.
 
+### 2026-07-10 - Lean effective-prefix closure and A6 ray route
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/EffectiveClosure.lean`,
+  `experimental/lean/asymptotic_spine/AsymptoticSpine.lean`,
+  `experimental/notes/audits/lean_frontiers_effective_closure.md`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED / CONDITIONAL.
+- **What is being added:** A stdlib-only, zero-`sorry` formalization of the
+  affine/Newton-reindexed full syndrome-fiber/prefix-class identity, exact
+  residual monotonicity, the `(SE2)` support injection, and its finite direct
+  `(RC)` route into condition `(A6)`, including construction of the integrated
+  profile compiler `rayCompiler` field.  The coordinate dictionary and RS
+  noncommon-support assignment remain explicit typed certificate inputs.
+- **How it is useful:** It mechanizes the shallow-prefix routing around
+  `lem:effective-span-fourier`, `thm:small-effective-dual-closure`,
+  `hyp:ray-compiler`, and condition `(A6)` in the active frontiers paper while
+  preventing a full-prefix class from being conflated with an arbitrary routed
+  balanced-core residual.  The composed theorem is consumed by the merged
+  `ProfileEnvelope.ProfileCompilerInputs` API.
+- **What to do next:** Instantiate the bridge with the finite-field Newton chart
+  and the syndrome-line noncommon-support theorem, then apply the integrated
+  constructor to concrete profile rows.  Deep-prefix MI/MA cancellation remains
+  separate.
+
 ### 2026-07-10 - Asymptotic RS--MCA Frontiers replacement draft
 
 - **Agent/model:** Maintainer-added replacement paper, integrated by Codex.
