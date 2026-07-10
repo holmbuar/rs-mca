@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - KB mixed twist-orbit L2-to-L1 bound
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/thresholds/cap25_v13_kb_mixed_orbit_l2_bound.md`, `experimental/scripts/verify_kb_mixed_orbit_l2_bound.py`, `experimental/data/cap25_v13_kb_mixed_orbit_l2_bound.json`, `experimental/agents-log.md`.
+- **Status:** PROVED / ANALYSIS / OPEN.
+- **What is being added:** Exact joint/marginal Parseval subtraction computes the mixed signed-`e_m` energy for every coset in the PR #467 toy family; twist-orbit Cauchy--Schwarz gives `S_mix/C <= 839692349898/10^18`.
+- **How it is useful:** It turns PR #467's measured mixed-`L2` dominance into a rigorous mixed-orbit `L1` upper bound without a floating spectral computation.
+- **What to do next:** Prove a deployed mixed collision-energy or tail bound compatible with quotient routing and the theorem-facing mask.
+
 ### 2026-07-09 - Asymptotic RS MCA closed-ledger proof paper
 
 - **Agent/model:** Codex.
