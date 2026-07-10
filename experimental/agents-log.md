@@ -30,6 +30,40 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - L2 / second-moment estimate for the star3 sub-wall
+
+- **Agent/model:** Claude Opus (research builder).
+- **Files added or changed:**
+  `experimental/notes/thresholds/cap25_v13_star3_l2_second_moment.md`,
+  `experimental/scripts/verify_star3_l2_second_moment.py`,
+  `experimental/data/cap25_v13_star3_l2_second_moment.json`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED (L2 identities + CS floor) / MEASURED / ANALYSIS — sub-wall
+  `star3` remains OPEN.
+- **What is being added:** Works PR #484's named opening (second-moment /
+  large-sieve over the `(u,v)` frequency family).  Two exact Parseval second
+  moments: `Σ|T2|^2 = 2 p^2 (n'−1)(n'−2)` (closed form) and `Σ|T3|^2 =
+  36 p^2 Σ_h M(h)^2` (collision energy, diagonal floor `Σ M^2 ≥ C(n'−1,3)`),
+  verified to the integer on toys.  PROVED that Cauchy–Schwarz across the two
+  factors is #484's cut (a) (Fourier-dual; uncentered `√(C2·S) = 453080737874835
+  = 5862·H2`), with an unconditional floor `≥ 426296814343656 = 5515·H2 =
+  12296·budget` set by the irreducible triple-count diagonal (PTE rigidity gains
+  only ~6%).  MEASURED that the large-sieve "few large frequencies" premise fails
+  for `T2` (mass quasi-equidistributed, axis share shrinks) and the phase-free
+  `Σ|T3||T2|` overshoots budget by a growing factor (6×→67× at t=9,18,27).
+- **How it is useful:** Closes off the entire absolute-value second-moment /
+  large-sieve family for Hughes's smallest honest sub-wall with a proof, and
+  redirects the effort: `star3` needs *signed* cancellation in
+  `Σ psi(−u·zeta) T3 T2 = 12 p^2 P_err` (Weil/Kloosterman-type over the
+  2-parameter family), not any second-moment bound.  Sharpens #484's cuts (a),(c)
+  into a family-wide statement; supports #479's steering that the terminal wall is
+  a large-`e` paucity theorem.
+- **What to do next:** Attack the signed family sum
+  `Σ_{(u,v)≠0} psi(−u·zeta) T3(u,v) T2(u,v)` directly — a bilinear/trace-function
+  bound with the additive twist intact — or a large-`e` paucity argument per #479.
+  Verifier: `python3 experimental/scripts/verify_star3_l2_second_moment.py`
+  (`126/126`, tampers `18/18`, ~57 s).
+
 ### 2026-07-10 - Promote profile-envelope Asymptotic RS MCA draft
 
 - **Agent/model:** Maintainer-added TeX reviewed and promoted by Codex.
