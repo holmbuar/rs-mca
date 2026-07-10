@@ -30,6 +30,51 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Lean formalization of the lower-side reroute (#442) + window uniformity (#443)
+
+- **Agent/model:** `Claude Opus 4.8`.
+- **Files added or changed:** New modules
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/Averaging.lean` (shared
+  pigeonhole/Markov core), `…/Reroute.lean` (R, #442), `…/Window.lean` (W, #443),
+  imported from the root `AsymptoticSpine.lean`; correspondence note
+  `experimental/notes/lean/asymptotic_spine_reroute_window.md` (new).
+- **Status:** FORMALIZED (sorry-free, `lake build` PASSING; clean build ≈ 6 s,
+  `v4.31.0`, 13 jobs; `#print axioms` on every top statement → only
+  `propext`/`Quot.sound`/`Classical.choice`, several `decide` certs with none;
+  stdlib-only, no Mathlib).
+- **What is being added:** Mechanizes the proved cores of the two audit-corner
+  repairs of `asymptotic_rs_mca.tex`. **(R)** the collision-free lower-side reroute
+  (#442): the identity-prefix floor as an abstract pigeonhole `total ≤ P·maxFibre`
+  (`pigeonhole_floor`/`identity_prefix_floor`, `lem:capff1-identity-prefix-floor`),
+  its collision-freeness (`nodup_map_of_injective` — injective `M↦c_M` keeps the
+  `binom(n,m)` codewords distinct, the raw pole map does not:
+  `collision_contrast`), the `thm:A` reservoir-averaging distinct-slope floor
+  (`reservoir_distinct_slope_floor` — bounded collision mass ⇒ a pole realizing
+  `>L−B` distinct CA-bad slopes, the **proved replacement** for the asserted
+  subexponential pole-collision loss at `asymptotic_rs_mca.tex:283`), and their
+  composition `reroute_bridge`. **(W)** window uniformity (#443): Lemma W
+  (`reference_window_bound` — `barN` log-variation `≤(C_c+β)ψ=o(n)` via a discrete
+  Lipschitz telescope over `Int` log-magnitudes), Lemma B (`budget_window_pointwise`
+  — bounded-complexity budgets have `o(n)` log-variation), the discharge principle
+  (`discharge_principle` — single-agreement closure + Lemma B + Lemma W ⇒ window
+  uniformity `(U2)`), and the `(LC-unif) ⇔ (U0..U3)` decomposition
+  (`lc_unif_combine`).  Both modules share `Averaging.lean` (same
+  "total-over-bounded-buckets" engine).
+- **How it is useful:** Puts the #442 lower-side reroute and the #443 window slide —
+  steering priority 1 (Lean) — into the buildable spine, on the #438→#440→#441
+  lineage. The reroute core is the proved lower side of `thm:frontier`; the window
+  core removes B3 as an independent load-bearing gap (demotes it to a corollary of
+  single-agreement closure). Three tamper checks verified by trying: two in-tree
+  `decide` falsifiers (`reservoir_saturated_falsifier`: subcriticality load-bearing;
+  `spike_falsifier`: bounded step-rate load-bearing) and one live "drop `hsub` →
+  `omega` fails → build nonzero".
+- **What to do next:** External algebra stays HYPOTHESIS-PARAM (injectivity of
+  `M↦c_M`; the `≤k`-roots `good≥L−coll`; the Stirling/MVT rate bounds `C_c,β`) — a
+  Mathlib-pinned port could derive them. Two OPEN extensions listed in the note §4:
+  activation-straddle first-match conservation (compose with `FirstMatch.lean`), and
+  the sharp reservoir fraction `L(q−n)/(q−n+kL)`. The C9 routing and
+  `prob:entropy-inverse-q` atom remain the pre-existing open gaps (untouched).
+
 ### 2026-07-09 - Lean formalization of the A6 add-back sufficiency (PR #441 R1/R4)
 
 - **Agent/model:** `Claude Opus 4.8`.

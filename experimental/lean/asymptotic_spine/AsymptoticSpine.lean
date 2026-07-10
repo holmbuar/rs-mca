@@ -5,3 +5,6 @@ import AsymptoticSpine.Normalization
 import AsymptoticSpine.AddBack
 import AsymptoticSpine.NoHighEnergy
 import AsymptoticSpine.SigmaDiagonal
+import AsymptoticSpine.Averaging
+import AsymptoticSpine.Reroute
+import AsymptoticSpine.Window
