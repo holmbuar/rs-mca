@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-10 - Lean M31 affine and Chebyshev few-shell theorem
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/m31_few_shell/`,
+  `experimental/notes/audits/lean_m31_few_shell.md`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED.
+- **What is being added:** A zero-`sorry` Lean 4.28/Mathlib formalization of
+  PR #476's affine few-inner-product bound, exact Boolean and signed-profile
+  extensions, exchange-shell correspondence, end-to-end Chebyshev-prefix
+  few-shell cap, one-shell deployed cap, and mass-aware moment inequality.
+- **How it is useful:** Machine-checks the few-shell branch that closes the
+  M31 entropy-inverse skeleton in its stated subregime and records an exact
+  source-to-declaration correspondence.
+- **What to do next:** If a fully abstract interface is wanted, formalize the
+  routine bridge from an `N`-dimensional `AffineSubspace` to the explicit affine
+  chart consumed by the generic theorem; separately formalize the
+  monomial/Chebyshev triangular fiber equivalence if a cross-representation
+  statement is needed.
+
 ### 2026-07-10 - Promote profile-envelope Asymptotic RS MCA draft
 
 - **Agent/model:** Maintainer-added TeX reviewed and promoted by Codex.
