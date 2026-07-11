@@ -30,6 +30,45 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Case-B equidistribution on the fixed-e slice (theorem)
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/caseb_fixed_e_slice.md`,
+  `experimental/scripts/verify_caseb_fixed_e_slice.py`.
+- **Status:** PROVED (fixed-e theorem, given the cited affine-line Weil bound
+  which is proved outright for norm-characters and verified for all characters)
+  / COMPUTED (the e- and m-degradation of the constant) / MEASURED (census
+  cross-check + provable-vs-measured gap).
+- **What is being added:** Upgrades the MEASURED census invariance of #652
+  (`caseb_equidistribution.md`) to a theorem on the fixed extension degree
+  slice. For fixed `e`, `m>e`, base `B=D=F_q`, ambient `F=F_{q^e}`, and the
+  depth-`w=0` fiber (all `m`-subsets), the slope map
+  `S|->prod_{x in S}(alpha-x)` covers a positive constant fraction
+  `c_e=1/(2+K(e,m))` of `F` once `|G|>=|F|`, with
+  `K(e,m)=m! sum_{t=e+1}^m (e-1)^{2t}/((t!)^2(m-t)!)` explicit. Proof =
+  exact second-moment reduction `delta>=|G|^2/E` + exact collision
+  decomposition + #652's injective-on-close `W(t)=0` (`t<=e`) + the affine-
+  B-line character sum `S(chi)=sum_x chi(alpha-x)` bounded by Weil
+  `|S(chi)|<=(e-1)sqrt q` (proved for norm-characters via
+  `N(alpha-x)=(-1)^e mu(x)`). Computes the constant's degradation:
+  super-exponential in `e` (below `2^-128` at `e=23`, minimal fiber),
+  stretched-exponential `exp(-2(e-1)sqrt m)` in `m`; pins the bounded-dim wall
+  at the moment constant `deg(mu)^{2m}=e^{2m}` (non-uniform once `e` or `m`
+  grows). The high-dimensional irreducibility obstruction of #652 Rung A2 is
+  sidestepped -- the phase is a one-parameter line sum.
+- **How it is useful:** Discharges #652's OPEN link on the fixed-e slice and
+  quantifies exactly why the growing-`e=Theta(n/log q)` law stays open (the
+  constant's loss of uniformity, not a failure of pointwise Weil). Supports the
+  span-face closure (#650/#645): `(FI-field')` is load-bearing at every fixed
+  `e` (Case B realizes `delta=Theta(|F|)`), asymptotically confirming #647's
+  `|F|^{1/2}` refutation beyond the `m=3` witness.
+- **What to do next:** Attempt the typical-character (`L4`/averaged) bound on
+  `sum_chi|S(chi)|^{2t}` that would close the provable-vs-measured gap and
+  extend toward growing `e`; extend the theorem to `w>=1` fibers (sliced line
+  sum); reconcile the pole-class dependence of exact `delta` at composite `e`
+  with #652's cited integers.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
