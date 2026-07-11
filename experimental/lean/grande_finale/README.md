@@ -8,6 +8,10 @@ The package root is `GrandeFinale`, with additional modules under
 
 - `GrandeFinale.lean` formalizes the core staircase, first-match, moment, and
   finite certificate kernels.
+- `GrandeFinale/ChallengeIntersection.lean` formalizes exact finite
+  translate--challenge intersection averaging, received-line shear invariance,
+  the challenge-restricted MCA numerator, and the outer ceiling compiler used
+  in the proper-challenge lower bound.
 - `GrandeFinale/QFourierTao.lean` formalizes the log-moment-to-Q reduction.
 - `GrandeFinale/QEntropyInverse.lean` formalizes the deterministic atoms around
   the entropic inverse route.
@@ -23,8 +27,14 @@ The package root is `GrandeFinale`, with additional modules under
   `GrandeFinale/Frontier.lean` formalize theorem-level reductions around the
   BC, SP, and frontier ledgers.
 
-The theorem-by-theorem scope of the syndrome module is recorded in
+The theorem-by-theorem scopes of the challenge-intersection and syndrome-line
+modules are recorded in `CHALLENGE_INTERSECTION_CORRESPONDENCE.md` and
 `SYNDROME_LINE_CORRESPONDENCE.md`.
+
+The challenge-intersection module proves the outer finite-group and linear-code
+reparameterization steps behind equation (13.3) of the frontiers paper. It does
+not prove the Reed--Solomon prefix-list input or the inner collision-aware
+simple-pole conversion.
 
 The central open mathematical target remains Q: the primitive entropic inverse
 theorem / row-sharp prefix-fiber bound needed by `grande_finale.tex`.  The
@@ -34,7 +44,9 @@ are pinned audited data, not Lean derivations of `Real.log` or the huge
 binomial coefficients.  These Lean files do not prove the full adjacent safe
 rows or the full asymptotic closure by themselves.
 
-Do not run `lake build` casually in this repository.  Build this package only
+Do not run `lake build` casually in this repository. Build this package only
 with the pinned Lean/Mathlib versions and the matching precompiled Mathlib
-cache.  The full default target, including the package root and all child
-modules, was checked successfully under that exact-pin setup on 2026-07-09.
+cache. Direct compilation of `GrandeFinale/ChallengeIntersection.lean` was
+green under that setup on 2026-07-11. The full pinned `lake build`, including
+the new module, also completed successfully: 8036 jobs, with the new module
+built in 18 seconds.

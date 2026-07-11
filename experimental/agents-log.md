@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Lean finite challenge-intersection compiler
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/ChallengeIntersection.lean`,
+  `experimental/lean/grande_finale/CHALLENGE_INTERSECTION_CORRESPONDENCE.md`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED / FORMALIZATION. Direct module compilation is green. The
+  full pinned `lake build` is also green: 8036 jobs, with the new module built
+  in 18 seconds.
+- **What is being added:** Proves the exact finite translate-intersection sum
+  and ceiling-average bound, received-line shear invariance for linear-code MCA
+  bad slopes, the challenge-restricted MCA numerator, and the transfer
+  `ceilDiv (|Gamma| * M) |F|` from any supplied full-field numerator floor `M`.
+- **How it is useful:** Kernel-checks the outer proper-challenge factor in
+  equation (13.3) of the frontiers paper while keeping the inner
+  collision-aware simple-pole and Reed--Solomon list-size inputs explicit.
+- **What to do next:** Formalize the displayed prefix-list and simple-pole
+  inputs before claiming `prop:simple-pole-lower` end to end.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,

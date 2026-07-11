@@ -8,6 +8,10 @@ This package is a partial Lean formalization of
 - `GrandeFinale.lean`: core self-contained kernels for integer budgets,
   first-match ledgers, CA/MCA bad-slope monotonicity, moment inequalities, and
   finite packet arithmetic checks.
+- `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
+  translate-intersection averaging, linear-code received-line shear invariance,
+  challenge-restricted MCA numerators, and the ceiling-density transfer from a
+  supplied full-field bad-slope floor.
 - `GrandeFinale/QFourierTao.lean`: log-moment-to-Q reductions, including the
   finite bit-certificate inequality.
 - `GrandeFinale/QEntropyInverse.lean`: deterministic atoms around the entropic
@@ -59,9 +63,17 @@ linear-code compiler behind `prop:syndrome-line-normal-form` and
 parity-check construction, rational-normal-curve interpretation, and reduction
 from threshold witnesses to exact-cardinality supports remain separate.
 
+The challenge-intersection module is also independent of Q. It kernel-checks
+the proper-challenge outer averaging factor in equation (13.3): a finite
+full-field bad-slope floor `M` yields
+`ceilDiv (|Gamma| * M) |F|` challenge slopes after a received-line shear. The
+Reed--Solomon prefix-list construction and the inner collision-aware
+simple-pole theorem that supply `M` are not formalized there.
+
 ## Build Note
 
-Do not run `lake build` casually in this repository.  Build only with the
-pinned Lean/Mathlib versions and matching precompiled Mathlib cache.  On
-2026-07-09 the full default target completed successfully in that exact-pin
-environment, including `GrandeFinale.lean` and every `GrandeFinale/*` module.
+Do not run `lake build` casually in this repository. Build only with the
+pinned Lean/Mathlib versions and matching precompiled Mathlib cache. Direct
+compilation of `GrandeFinale/ChallengeIntersection.lean` was green in that
+environment on 2026-07-11. The full pinned `lake build` also completed
+successfully: 8036 jobs, with the new module built in 18 seconds.
