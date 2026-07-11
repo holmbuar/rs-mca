@@ -30,6 +30,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Collision-aware simple-pole compiler
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/grande_finale/GrandeFinale/CollisionAwarePole.lean`,
+  `experimental/lean/grande_finale/COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED / FORMALIZATION.
+- **What is being added:** A source-exact formalization of
+  `thm:collision-aware-pole` / equation (4.2) from a supplied finite
+  dimension-`k+1` Reed--Solomon codeword list: representative selection,
+  root-collision averaging, exact natural-number ceiling, support-wise
+  simple-pole MCA semantics, and direct proper-challenge composition.
+- **How it is useful:** Supplies the full-field inner floor and exports its
+  direct composition with the complementary `ChallengeIntersection` outer
+  averaging theorem, while keeping the prefix-list construction and list-size
+  floor explicit.
+- **What to do next:** Formalize the exact prefix-list input and instantiate the
+  composed theorem toward the full proper-challenge statement.
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
