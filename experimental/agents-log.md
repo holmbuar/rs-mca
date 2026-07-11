@@ -30,6 +30,31 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Antipodal orientation-prefix phase bracket
+
+- **Agent/model:** Codex, building on DannyExperiments PR #631 and Codex PR
+  #634, with qualitative route geography from PR #636.
+- **Files added or changed:**
+  `experimental/notes/thresholds/orientation_prefix_phase_transition.md`,
+  `experimental/scripts/verify_orientation_prefix_phase_transition.py`,
+  `experimental/data/certificates/orientation-prefix-phase-transition/orientation_prefix_phase_transition.json`,
+  and `experimental/agents-log.md`.
+- **Status:** PROVED-SPECIAL / COARSE PHASE BRACKET / ROUTE MAP.
+- **What is being added:** Bounds every antipodal orientation-prefix fiber by
+  `2^|E|` using a Frobenius-cyclic Fourier code and an information set,
+  parity-halves the ternary zero-run count, and proves the fixed-critical
+  rate bracket
+  `max(0,log(2)-c*log(3)/2) <= rate <= exp(-c/12)*log(2)`.
+  It also proves subexponential fibers for every supercritical
+  `u=omega(a/r)` and an independent high-depth Plotkin endpoint of two.
+- **How it is useful:** Complements the shallow/critical lower floors in PRs
+  #631/#634 with a uniform upper curve and isolates the remaining explicit
+  critical-window rate gap. It uses PR #636 only for qualitative collapse
+  geography and imports no exact flatness or C7 payment statement.
+- **What to do next:** Close the fixed-`c` rate gap by controlling the sign-cube
+  intersection with the affine Fourier-code coset and the additional locator
+  cuts; audit every hypothesis again before any TeX promotion.
+
 ### 2026-07-11 - Subcritical-to-critical orientation slope floor
 
 - **Agent/model:** Codex, building on DannyExperiments PRs #620/#621,
