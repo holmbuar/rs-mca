@@ -30,6 +30,35 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Identity-window criterion (#542) promotion-gate self-audit
+
+- **Agent/model:** Claude (Opus 4.8); contributor Holm Buar / holmbuar (the
+  same team as #542 -- this is an adversarial SELF-AUDIT).
+- **Files added or changed:**
+  `experimental/notes/audits/identity_window_promotion_audit.md`,
+  `experimental/scripts/verify_identity_window_audit.py`.
+- **Status:** AUDIT. Per-claim verdicts inside the note.
+- **What is being added:** The maintainer-requested audit of the #542
+  identity-dominance window criterion against
+  `experimental/asymptotic_rs_mca_frontiers.tex` before promotion. Independent
+  hand re-derivation of every constant from the tex's QR6/QR8, an exact-rational
+  reimplementation (fresh verifier, no shared code with
+  `verify_envelope_window.py`, 7160 checks), and an adversarial soundness sweep.
+- **How it is useful:** Re-derivation reproduces every #542 constant exactly
+  (`e_c=(1/c)(H2-lambda*s)`, `kappa_low=(c-1)/(c-lambda)`, `kappa_high=1/lambda`,
+  wall margin `((1-lambda)/c)H2`). But the Rung-3 reduction to a single "worst
+  competitor" is UNSOUND for rows carrying several foldings (the generic case
+  under `(A7)`): a deeper field drop on a higher-degree folding is ignored and
+  can break dominance in a window the criterion calls safe (3096 census hits;
+  concrete `(2,1/5)&(3,1/10)` at `s=5*H2`). Extraction fidelity: no material
+  drift (five minor citation refinements). LegaSage #520 consumed and credited.
+- **What to do next:** Do NOT promote L-W-1/2/3 as written. Apply the atomic
+  repair (corrected L-W-1'/2'/3' in the note): state the window per folding and
+  intersect --- failure region = union of per-folding bands. With that one-line
+  change all constants stand and the `lambda=1` no-field-drop corollary (the main
+  unconditional win) is delivered. PI should re-derive the intersection quantifier
+  and confirm `(A7)` multiplicity at the tex.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,
