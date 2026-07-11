@@ -73,9 +73,13 @@ configurations feeding the `R=2` image cell.  Two printed readings of
   (`E/(2f^2) ~ (1/2)(3/2)^k`, #615), so under Reading A the Prouhet block is
   *infeasible*, not extremal.
 - **Reading B (#585 printed absolute / `o(1)`):** `Delta = E/f^3 <= e^{-sigma N}`
-  for every fixed `sigma` below a threshold (the TeX low-energy cut; equivalently
-  `Delta - (2f-1)/f^2 -> 0`).  **The 2-point Prouhet product SATISFIES this**
-  (`Delta = (3/4)^k`).  **Work Reading B; flag Reading A.**
+  for every fixed `sigma` below a threshold (the TeX low-energy cut).  The
+  exponential cut **implies** `Delta - (2f-1)/f^2 -> 0`, but the converse is
+  FALSE (the difference can vanish at subexponential speed), so the two
+  conditions are one-way, not equivalent — correction due to Codex's post-#623
+  consumer audit; the concrete positive-rate verdicts below satisfy both forms.
+  **The 2-point Prouhet product SATISFIES this** (`Delta = (3/4)^k`).
+  **Work Reading B; flag Reading A.**
 
 **#615's Cut-2 collapse (AUDIT, decisive for the shape of the problem).** By the
 Boolean-cube energy bound `E(F)^3 <= f^8` (de Dios Pont–Greenfeld–Ivanisvili–
@@ -203,6 +207,15 @@ verifier checks this over 47 census trades (BLOCK 5) and 200 ground sets (BLOCK
 4), and pins the minimal trade support at exactly 6.  This is the rigorous form
 of "PTE products are extremal": **PTE structure is universal and necessary.**
 
+**SCOPE CLARIFICATION (correction due to Codex's post-#623 consumer audit).**
+The theorem is *pairwise*: for each pair `S, S'` in a fiber, removing *their*
+pair-dependent common core `S ∩ S'` leaves a degree-2 PTE trade.  It does
+**NOT** assert a single fiber-global core or a global product decomposition
+`fiber = core × PTE-cluster`, and "PTE-structured family" must not be read as
+a bounded-complexity atlas theorem.  Downstream consumers get the pairwise
+reduction (any two positive-rate members differ by a PTE trade), nothing
+stronger.
+
 ### 3.2 What is NOT proved: the quantitative matching bound (OPEN, named wall)
 
 The abstract cap: `fstar` and `L1` are both collision-limited, giving
@@ -266,7 +279,10 @@ an exponentially large profile field*.  The value of PTE-universality: that
 residual's "counterexample universe" is **not open** — by the theorem, any
 positive-rate profile is PTE-structured, so the consumer (the #615 lane, *not*
 this packet — we do not decide the residual) tests **one structural family (PTE
-clusters) instead of an unrestricted universe**.  The refinement this packet
+clusters) instead of an unrestricted universe** — in the *pairwise* sense of
+the §3.1 scope clarification (every two members differ by a degree-2 PTE
+trade), not as a bounded-complexity atlas of globally-decomposed products.
+The refinement this packet
 adds: the family to test is **not** just the minimal 2-point trade; it is the
 full degree-2 PTE-cluster family (including the denser rate-optimal clusters),
 because those are the true rate-carriers.  So the reduction "open universe ->
