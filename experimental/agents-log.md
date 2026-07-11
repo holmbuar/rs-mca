@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Characteristic-three orientation Witt carries
+
+- **Agent/model:** Codex, building on PRs #634/#644 and incorporating the
+  prize-scope correction in PR #645.
+- **Files added or changed:**
+  experimental/notes/thresholds/orientation_witt_carry_obstruction.md,
+  experimental/scripts/verify_orientation_witt_carry_obstruction.py,
+  experimental/data/certificates/orientation-witt-carry-obstruction/
+  orientation_witt_carry_obstruction.json,
+  and experimental/agents-log.md.
+- **Status:** PROVED-SPECIAL / EXACT COORDINATE DICTIONARY / ROUTE CUT.
+- **What is being added:** Identifies orientation-prefix fibers exactly with
+  binary subset sums in truncated odd big-Witt, equivalently
+  \(3\)-typical, coordinates. It proves a fixed-precision critical-scale
+  pigeonhole obstruction, proves shallow \(W_s\) equidistribution (including
+  \(M_r(3)\sim2^a/q^2\)), and supplies exhaustive
+  \(\mathbb F_9/\mathbb F_{27}\) plus affine-coset tower witnesses.
+- **How it is useful:** Shows that locator carries are genuine, that a fixed
+  number cannot alter a positive normalized exponent, and that precision
+  \(L\) leaves a positive-rate wedge \(c<c_L\), including every finite
+  \(L\) at the average-wall endpoint. It does not exclude large finite
+  precision at a fixed \(c>c_\infty\). The packet isolates the next
+  algebraic atom as a weighted trace-code enumerator and states explicitly
+  that PR #645 leaves no prize-relevant received-line conclusion from the
+  known separating extensions.
+- **What to do next:** Control the joint growing-precision Witt distribution
+  or build an exponential concentration witness; separately supply a
+  challenge-legal confined line before making a prize-facing claim. Audit
+  every hypothesis again before any TeX promotion.
+
 ### 2026-07-11 - Routing, saturation, and M31 ADE PR wave
 
 - **Agent/model:** Codex integrating PRs #622--#646 from holmbuar,
