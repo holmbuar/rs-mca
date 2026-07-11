@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Frame image-completion: J2 decided (magnitude route vs phase supplement)
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:**
+  `experimental/notes/thresholds/frame_image_completion.md`,
+  `experimental/scripts/verify_frame_image_completion.py`.
+- **Status:** PROVED (R1 circularity; R2 impossibility witness) / MEASURED
+  (census numbers).
+- **What is being added:** Settles the J2 interface gap our audit #608 exposed
+  in avdeev's character-frame certificate (#558). R1: the magnitude pigeonhole
+  `L >= |A|/||K_A||` is CIRCULAR --- (CF2) supplies image-normalized
+  `|A|>=e^{-o}L`, the target needs span-normalized `|A|>=e^{-o}A_eff`, deficit
+  `A_eff/L`; robust, since (CF3) also blocks the span-normalized escape. R2:
+  avdeev's OWN block-parabola family satisfies (CF1)+(CF2) EXACTLY (`K_{A_k}=I`,
+  `|A_k|=p^k=L`, `kappa_frame=1`) yet `L/A_eff=p^{-k}=e^{-Theta(N)}`, so the
+  frame provably cannot deliver the image half. The frame multiplier and #539's
+  Gap-1 multiplier differ by exactly `A_eff/L`.
+- **How it is useful:** Decides #558's promotion for `asymptotic_rs_mca_frontiers.tex`
+  --- PARTIAL replacement (max-fiber/EF5 at image normalization only) + named
+  supplement (the image half `L>=e^{-o}A_eff` must come from (A4)'s
+  span-normalized (EFP)/(MI)+(MA) on `V_g`, i.e. (FI)/A4's `L_N` clause, or a
+  phase-sensitive input like #564's (LS)). Sharpens the audit's J2 `OPEN GAP`
+  to a theorem: the image half is undeliverable by any magnitude/operator-norm
+  frame hypothesis. Credits avdeev #558 (frame + block-parabola), #608 (J2),
+  #539 (Gap-1 corollary).
+- **What to do next:** PI re-derives (1) R1's reversing inequality, (2) CF2's
+  exactness on the parabola, (3) the `kappa*/kappa_frame=A_eff/L` identity +
+  CF3 robustness. Then, if adopting, add the G1/J2 gate to the frame's ledger
+  entry. Verifier: `RESULT: PASS (66/66)`, ~0.48 s under `ulimit -v 2097152`.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,
