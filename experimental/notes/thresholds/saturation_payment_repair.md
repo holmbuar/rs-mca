@@ -39,9 +39,12 @@ vertex-cover compiler `|Z_a(r) ∩ Γ| ≤ min(|Γ|, τ_φ)`) is **DannyExperime
 extreme (an exponential fiber collapsing to one base-field-pole slope) is
 **DannyExperiments #621** (`aperiodic_one_ray_saturation.md`). The block-parabola
 family and `(CF*)` character-frame identities are **avdeevvadim #558**. The
-stress-test witness is the **Codex team orientation-saturation packet** (in
-flight — branch `thresholds-full-agreement-orientation-saturation`, not yet a
-numbered PR; `full_agreement_orientation_saturation.md`).
+stress-test witness is the **Codex team orientation-saturation packet** (now
+**PR #634**, branch `thresholds-full-agreement-orientation-saturation`;
+`full_agreement_orientation_saturation.md`). The supply audit separating what
+#634 *proves* from what Rung 4's exact stress computation *models* (see the
+supply box in Rung 4) is due to the **Codex team's 2026-07-11 consumer-
+hypothesis finding** — adopted in this amendment.
 
 ---
 
@@ -80,11 +83,17 @@ the **realized boundary image size** `L_lambda` unless the slope map compresses.
   `rho` is **multiplicative** (`Q_img`, `G_1` tensor, #625 T3) and `rho_block =
   |Z_block|^2 / mass_block <= 1` whenever `(t+1)^2 <= r^t` (the heavy atom
   dominates the square of the tail-slope count). Product `rho -> 0`. **PROVED.**
-- **The orientation floor** (Codex packet): `rho = q^{w/2} = e^{Theta(n)}`. **NOT
-  absorbed.** But it is **not a saturation cell** — it is **unsaturated**
-  (`Q_img = 1`) — it is a half-dimensional-boundary **collapse** cell whose
-  separating-pole slope map is a bijection. **NEW OBSTRUCTION, on the collapse
-  side, routed by `(FI)`; not a counterexample to the saturation payment.**
+- **The orientation floor** (Codex packet, PR #634): `rho = q^{w/2} =
+  e^{Theta(n)}` *at the modeled exact instantiation* (exact at the `F_9` toy;
+  in general #634 supplies the same conclusion as bounds — one proved heavy
+  prefix carries `J_z ≥ ceil(2^a/q^{⌈w/2⌉}) = e^{Theta(n)}` orientations, so
+  the collapse ratio is exponential with the same rate). **NOT absorbed.** But
+  nothing in it is saturation-shaped — it is **unsaturated at the verified
+  model** (`Q_img = 1` at `F_9`; no general `Q_img` lower bound is supplied
+  either way) — a half-dimensional-boundary **collapse** cell whose
+  separating-pole slope map is a bijection on the proved heavy fiber. **NEW
+  OBSTRUCTION, on the collapse side, routed by `(FI)`; not a counterexample to
+  the saturation payment.**
 
 **Net verdict.** The mass-weighted compiler **discharges the saturation half of
 `prop:saturation-payment` on the heavy-atom product class** (the actual
@@ -245,10 +254,10 @@ geometric class and the orientation obstruction, recorded honestly.
 
 ---
 
-## Rung 4 — STRESS TEST: the orientation floor (PROVED-negative)
+## Rung 4 — STRESS TEST: the orientation floor (floor PROVED; exact stress equalities MODELED, exact at `F_9`)
 
 The Codex orientation-saturation packet
-(`full_agreement_orientation_saturation.md`, in flight) constructs, over
+(`full_agreement_orientation_saturation.md`, now **PR #634**) constructs, over
 `q = 3^r`, antipodal supports `O_r = {S : |S ∩ {x,−x}| = 1 for every fold fiber}`
 with `|O_r| = 2^a`, `a = (q−1)/2`, prefix depth `w = 2⌊a/2r⌋`, an **exact-slope
 prefix fiber floor**
@@ -257,15 +266,41 @@ prefix fiber floor**
    J_z >= ceil(2^a / q^{w/2}),   (log J_z)/n >= log(2)/2 − log(3)/4 = (1/4)log(4/3) > 0.
 ```
 
-**Absorb-or-obstruct computation (BLOCK 5, exact `r = 2..7`).** Reproduced floors
+**Supply box (what #634 proves vs what this section models — correction due to
+the Codex team's consumer-hypothesis audit, 2026-07-11).** PR #634 PROVES
+exactly three things: (i) the prefix-image bound `|Phi_u(O_r)| ≤ q^{⌈u/2⌉}`
+(an upper bound, not an exact image size); (ii) the existence of **one** heavy
+prefix `z` with `J_z ≥ ceil(2^a/q^{⌈u/2⌉})` retained orientations; (iii) a
+`z`-dependent extension/pole separating the **complete** fiber of `z` into
+exactly `J_z` distinct exact-agreement slopes. It does **NOT** prove: exact
+image size `q^{w/2}`, uniform prefix fibers, `Q_img = 1`, `G_1 = q^{w/2}`
+exactly, or a single positive-depth line carrying all `2^a` orientations. The
+display below uses those equalities as a **modeled instantiation**; they are
+verified **exactly at the finite `F_9` toy** (BLOCK 5) and remain open in
+general. Everything the verdict needs survives at the level of the PROVED
+bounds: one prefix point carrying `J_z = e^{Theta(n)}` orientations IS an
+effective-image-collapse event (`G_1 ≥ J_z` on that fiber, same rate
+`(1/4)log(4/3)`), so the #627 collapse trigger fires from (i)+(ii) alone; and
+since #634 supplies no saturation-side (`Q_img`) lower bound anywhere, the
+packet gives no evidence of a saturation obstruction in general — the
+`Q_img = 1` equality below is the `F_9`-verified model, not a general theorem.
+
+**Absorb-or-obstruct computation (BLOCK 5, exact `r = 2..7`; MODELED
+instantiation per the supply box — exact at `F_9`).** Reproduced floors
 `J ∈ {2, 12, 316, 62 712 512, …}` for `r ∈ {2,3,4,5}` (byte-match to the packet).
-The cell's realized boundary image is **half-dimensional** `L_bnd = q^{w/2}`, its
-prefix fibers are **uniform** (each `≈ J_z`), and at a **separating pole** the
-slope map `S ↦ γ_S` is a **bijection** (packet eq (8)), so
+In the modeled cell the realized boundary image is **half-dimensional**
+`L_bnd = q^{w/2}` (in general: `≤ q^{⌈w/2⌉}`, #634 (i)), its prefix fibers are
+**uniform** (each `≈ J_z`; in general: one heavy fiber of size `≥ J_z` is
+supplied, #634 (ii)), and at a **separating pole** the slope map `S ↦ γ_S` is a
+**bijection** (packet eq (8); in general: proved on the complete heavy fiber,
+#634 (iii)), so
 
 ```
-   |Z(C)| = 2^a  (bijective),   Nbar_bnd = |O_r|/L_bnd = 2^a/q^{w/2},
-   rho(C) = |Z(C)|/Nbar_bnd = q^{w/2}  =  the collapse ratio G_1  =  e^{Theta(n)}.
+   MODELED:  |Z(C)| = 2^a  (bijective),  Nbar_bnd = |O_r|/L_bnd = 2^a/q^{w/2},
+             rho(C) = |Z(C)|/Nbar_bnd = q^{w/2}  =  the collapse ratio G_1  =  e^{Theta(n)}.
+   PROVED:   the heavy-fiber sub-cell C_z has |Z(C_z)| = J_z >= ceil(2^a/q^{⌈w/2⌉})
+             slopes over ONE boundary point  =>  G_1 >= J_z = e^{Theta(n)}
+             (same rate (1/4)log(4/3); collapse trigger fires, #627 T-DET).
 ```
 
 The consumer gap has **positive rate for every `r`** (verifier: `rate_gap > 0.2`,
@@ -273,24 +308,31 @@ The consumer gap has **positive rate for every `r`** (verifier: `rate_gap > 0.2`
 (within `0.01` at `r = 7`); the floor itself has rate `log(4/3)/4 = 0.0719`.
 **The mass-weighted compiler does NOT absorb it.**
 
-**But the diagnosis is precise and it is NOT a saturation counterexample.** The
-orientation cell is **UNSATURATED**: its prefix fibers are uniform, so `Q_img =
-L·Mx = max/avg = 1` (verifier BLOCK 5, from the packet's finite `F_9` model:
-`16` supports, prefix image `8`, **every** fiber size `2 = max = avg`). It is a
-half-dimensional-boundary **collapse** cell (`G_1 = q^{w/2}`). The mass that
-inflates `Nbar_bnd` sits in the **prefix** map, but the **separating pole
-re-expands** it into distinct slopes — there is **no explanation-map heavy atom**
-for the mass-weighting to grip (`nu = 1` for every state, `|R(C)| = |Z(C)| =
-|C|`, no compression). This is exactly the packet's own **"ROUTE CUT"** verdict:
-the cell is caught by `(FI)`/first-match routing before the envelope sum, not
-paid by the envelope.
+**But the diagnosis is precise and it is NOT a saturation counterexample.** At
+the verified model the orientation cell is **UNSATURATED**: its prefix fibers
+are uniform, so `Q_img = L·Mx = max/avg = 1` (verifier BLOCK 5, from the
+packet's finite `F_9` model: `16` supports, prefix image `8`, **every** fiber
+size `2 = max = avg`). In general #634 proves no fiber-uniformity and no
+`Q_img` value — but it also supplies **no saturation-side lower bound of any
+kind**, while its proved data (one heavy fiber over a provably small image) is
+collapse-shaped by definition: it is a half-dimensional-boundary **collapse**
+cell (`G_1 = q^{w/2}` modeled; `G_1 ≥ J_z` proved). The mass that inflates
+`Nbar_bnd` sits in the **prefix** map, but the **separating pole re-expands**
+it into distinct slopes — on the proved heavy fiber there is **no
+explanation-map heavy atom** for the mass-weighting to grip (`nu = 1` for every
+state, `|R(C_z)| = |Z(C_z)| = |C_z|`, no compression — this uses only #634
+(iii)). This is exactly the packet's own **"ROUTE CUT"** verdict: the cell is
+caught by `(FI)`/first-match routing before the envelope sum, not paid by the
+envelope.
 
 > **Verdict: the orientation floor is a genuine new positive-rate exact-slope
-> obstruction, but it is localized to the COLLAPSE side (`Q_img = 1`,
-> `G_1 = q^{w/2}` exponential), NOT the saturation payment. It is absorbed by
-> ROUTING (its correct home, #627), not by the saturation envelope term. It does
-> not refute the repaired saturation criterion; it confirms the
-> collapse/saturation split (#625) and that the collapse half needs `(FI)`.**
+> obstruction, but it is localized to the COLLAPSE side (`G_1 ≥ J_z`
+> exponential PROVED from #634's image bound + heavy fiber; `Q_img = 1` at the
+> `F_9`-verified model, with no general saturation-side bound supplied either
+> way), NOT the saturation payment. It is absorbed by ROUTING (its correct
+> home, #627), not by the saturation envelope term. It does not refute the
+> repaired saturation criterion; it confirms the collapse/saturation split
+> (#625) and that the collapse half needs `(FI)`.**
 
 **Residual risk (honest).** A cell that were *both* saturated (few heavy boundary
 atoms) *and* separating-pole re-expanded would break the payment — but a boundary
@@ -345,8 +387,8 @@ always paid. The whole-arc rate constants are reproduced: collapse typical rate
 | pure heavy atom self-pays (`rho ≤ 1`; fiber size = its `Nbar`) | one atom, `L=1` | **PROVED** (BLOCK 2) |
 | heavy-atom **geometric-tail** product paid (`rho_block=(t+1)^2/mass≤1`) | tensor, geometric tail | **PROVED** (BLOCK 3) |
 | #625 type-S **uniform-tail** witness: `Q_img=A^{3/4}`; paid iff `M≥A^2` | reproduce + borderline | **MEASURED/AUDIT** (BLOCK 4) |
-| orientation floor `J=ceil(2^a/q^{w/2})`, rate `log(4/3)/4`; `rho=q^{w/2}` | Codex packet reproduce | **PROVED** (BLOCK 5) |
-| orientation cell is **unsaturated** (`Q_img=1`), a **collapse** cell (`G_1=q^{w/2}`) | finite `F_9` uniform fibers | **PROVED-negative** (BLOCK 5) |
+| orientation floor `J=ceil(2^a/q^{w/2})`, rate `log(4/3)/4` (PROVED, #634); `rho=q^{w/2}` | Codex packet reproduce; `rho` exact at modeled instantiation, `G_1≥J_z` proved | **PROVED floor / MODELED equalities** (BLOCK 5) |
+| orientation cell is **unsaturated** (`Q_img=1`), a **collapse** cell (`G_1=q^{w/2}`) | finite `F_9` uniform fibers (model); general: `G_1≥J_z` proved, no `Q_img` bound supplied | **PROVED-negative at model / collapse-trigger PROVED in general** (BLOCK 5) |
 | **orientation floor = NEW OBSTRUCTION, collapse-side, routed — not a saturation counterexample** | localized diagnosis | **WALL (collapse) / not (saturation)** |
 | split = per-block `rho` competition; unpaid iff collapse fraction `> f*≈0.278` | binomial tail (cf #626) | **PROVED** (BLOCK 6) |
 | collapse half payable only by `(FI)`/first-match routing | routing = spectrum | **OPEN** (#627) |
@@ -364,10 +406,13 @@ carries every `(S_E)`-violator (#625 T3), `rho` is multiplicative and a heavy
 slope-atom with a geometric tail gives `rho_block = |Z_block|^2/mass ≤ 1`; the
 heavy atom self-pays and the tail is a geometric series — PROVED. The
 Codex-team orientation floor (`J ≥ ceil(2^a/q^{w/2})`, rate `log(4/3)/4`, over
-`q = 3^r`) is NOT absorbed, but it is an **unsaturated** (`Q_img = 1`) collapse
-cell (`G_1 = q^{w/2}`) whose separating-pole slope map re-expands a
-half-dimensional boundary image — a collapse obstruction routed by `(FI)`, not a
-saturation counterexample. Print the saturation payment as: replace `RC1`'s
+`q = 3^r`, PR #634) is NOT absorbed, but it is a collapse-side obstruction: #634
+proves one heavy prefix fiber (`≥ J` orientations) over a provably small image
+(`≤ q^{⌈w/2⌉}`), so `G_1 ≥ J` is exponential and the #627 collapse trigger
+fires; the sharper equalities (`Q_img = 1` unsaturated, `G_1 = q^{w/2}` exact,
+uniform fibers) hold at the verified `F_9` model and are open in general, while
+no saturation-side lower bound is supplied either way — a collapse obstruction
+routed by `(FI)`, not a saturation counterexample. Print the saturation payment as: replace `RC1`'s
 uniform `H` by the mass-weighted `RC_occ`; the saturation cell is then paid on
 the heavy-atom product class by the dominant atom, and the residual collapse
 family (positive-fraction, binomial-tail) is `(FI)`-routed (routing = spectrum,
@@ -383,9 +428,11 @@ the collapse half.*
    size is its `Nbar`). On the product class `rho = ∏ rho_i` (#625 T3); a heavy
    slope-atom with geometric tail has `rho_block = (t+1)^2/mass ≤ 1` iff
    `(t+1)^2 ≤ r^t`. One line each.
-3. **The obstruction (Rung 4).** The orientation floor has `rho = q^{w/2}`
-   because it is a *collapse* cell (`Q_img = 1`, half-dimensional boundary image,
-   bijective separating-pole slopes), not a saturation cell. It is routed by
+3. **The obstruction (Rung 4).** The orientation floor is a *collapse* cell:
+   PROVED via `G_1 ≥ J_z` on #634's heavy fiber (one boundary point, `J_z`
+   slopes); the exact form `rho = q^{w/2}` with `Q_img = 1` (uniform fibers,
+   bijective separating-pole slopes on all of `O_r`) is the modeled
+   instantiation, exact at `F_9` — see the Rung-4 supply box. It is routed by
    `(FI)`, not paid by the envelope; the split is `Q_img` (saturation, paid) vs
    `G_1` (collapse, routed), and the unpaid leaves are the same binomial tail.
 
