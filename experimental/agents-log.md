@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Mass-weighted saturation-payment compiler
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:**
+  `experimental/notes/thresholds/saturation_payment_repair.md`,
+  `experimental/scripts/verify_saturation_payment.py`.
+- **Status:** PROVED (saturation half) / COUNTEREXAMPLE (orientation floor,
+  collapse-side) / AUDIT (consumer) / OPEN (collapse routing).
+- **What is being added:** Repairs the saturation half of `prop:saturation-
+  payment` (tex L4726-4739). The printed clause routes through `RC1`, which needs
+  a uniform lower occupancy `H` and is defeated by the heavy-atom light tail
+  (`H=1`, #626). The repair uses the exact mass-weighted identity already in
+  `lem:exact-occupancy-compiler` (`RC_occ`, L5673-5698): `|Z(C)| <= |R(C)| =
+  sum_w 1/nu`, and the single consumer invariant `rho = |Z|*L/|Omega^0| <=
+  e^{o(n)}` derived backward from A2 (L905-907). Proves the payment on the
+  heavy-atom geometric-tail product class (`rho` multiplicative via #625 T3, the
+  dominant atom self-pays, tail bounded by a geometric series). Stress-tests the
+  Codex-team orientation-saturation floor: NOT absorbed (`rho = q^{w/2}`), but it
+  is an UNSATURATED (`Q_img=1`) collapse cell, so a collapse-side obstruction
+  routed by `(FI)`, not a saturation counterexample.
+- **How it is useful:** Discharges the saturation input of the C7 span-face
+  budget on the actual `(S_E)`-violator class (#625/#626/#627), leaving the
+  single open residual as the collapse-side routing = spectrum conjecture. The
+  per-block `rho` competition (unpaid iff collapse fraction `> f* ~ 0.278`)
+  matches #626's binomial tail.
+- **What to do next:** PI re-derives the three steps in the note's ledger; if
+  accepted, replace `RC1`'s uniform `H` in `prop:saturation-payment` by the
+  mass-weighted `RC_occ` text supplied. Verifier: `ulimit -v 2097152; python3
+  experimental/scripts/verify_saturation_payment.py` -> `PASS (28/28)`.
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
