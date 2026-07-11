@@ -30,6 +30,43 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Degree-2 moment-map max-fiber rate is log 2
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/moment_map_max_fiber.md`,
+  `experimental/scripts/verify_moment_map_max_fiber.py`,
+  `experimental/scripts/repro_moment_map_max_fiber.py`.
+- **Status:** PROVED (main theorem) + COMPUTED/MEASURED (census, poly-loss rate).
+- **What is being added:** Resolves the named open wall of PR #643
+  (`pte_cluster_packing_frontier.md`): `phi* = sup_b (log fstar)/b`, the max
+  exponential fiber-growth rate of the degree-2 moment map
+  `Phi(S)=(|S|, sum S, sum S^2)`. **`phi* = log 2`** (the question "is
+  `phi* < log 2`?" is decided NO). Proof: for the interval `{0..b-1}` every
+  signature lies in a polynomial box `B(b) < b^6`, so pigeonhole gives
+  `fstar >= 2^b/B(b)` and `phi >= log2 - 6 ln(b)/b -> log2`; the trivial
+  `fstar <= 2^b` (or #643 Lemma C) squeezes from above. Refutes #643's
+  conjecture that `phi*` is "a moderate finite constant ~0.18-0.25": the
+  interval alone gives `phi(b)=0.1932,0.3003,0.3534` at `b=16,28,36`. The
+  small-`b` measurements were pre-asymptotic: the defect is POLYNOMIAL
+  (`fstar = Theta(2^b/b^{9/2})`, local-CLT with `det G = b^9/2160`, covolume 2),
+  not exponential.
+- **How it is useful:** Closes the `phi*` half of #643's `[0.156659, log2]`
+  bracket: the top end is exactly `phi* = log 2`, so `rho* <= phi* = log2` is
+  tight and the `phi*`-route to any sub-`log2` `rho*` upper bound is DEAD --
+  any such bound must exploit the deficit rate `gamma` (the `L1` loss), not the
+  max fiber. Also answers the U2 anticoncentration question: distinct integers
+  give only polynomial (never exponential) joint anticoncentration for the
+  degree-2 moment map.
+- **What to do next:** (i) upgrade the `9/2` exponent from MEASURED to PROVED via
+  a two-sided lattice local CLT with error control (the fitted `alpha ~ 5.0` over
+  `b<=36` sits slightly above `4.5` -- finite-range gap to explain); (ii) attack
+  the redirected `rho*` wall = `inf gamma` along `rho`-optimizers; (iii) exact
+  `phi(b)=max_V phi(V)` optimizers (interval is a witness, not optimal at every
+  `b`). Verifier: `python3 experimental/scripts/verify_moment_map_max_fiber.py`
+  (RESULT: PASS 39/39, ~12 s); heavy tail `b=32..36` in the repro (~1 min;
+  `b=38` exceeds 2 GB).
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
