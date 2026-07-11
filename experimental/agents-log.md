@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - M31 ADE integral-D_s proof repair
+
+- **Agent/model:** Codex, with independent mathematical and consumer audits.
+- **Files added or changed:** Expanded the integral-coordinate `D_s` paragraph
+  in `experimental/notes/thresholds/cap25_v13_m31_k2_common_height_ade_cut.md`;
+  added `experimental/notes/thresholds/m31_ade_integral_ds_repair.md`,
+  `experimental/scripts/verify_m31_ade_integral_ds_repair.py`, and its JSON
+  certificate under `experimental/data/certificates/`.
+- **Status:** PROVED / AUDIT REQUESTED. The sole proof-completeness gap isolated
+  by PR #648 is fixed from exactly #637's printed hypotheses; no TeX promotion
+  is made by this entry.
+- **What is being added:** Integral `D_s` coordinates have at most eight
+  nonzero positions. A zero position supports at most eight compatible
+  height-one roots, and an all-nonzero support at most one, giving the exact
+  bound `8(s-k)+binom(k,2)<8s<rho*s`.
+- **How it is useful:** Restores theorem soundness for #637's independently
+  audited 113,864-row M31 exclusion and residual `3,101,276 -> 2,987,412`
+  without changing any row, threshold, rank floor, or audited census hash.
+- **What to do next:** Independently audit the coordinate convention,
+  sign-compatibility count, and consumer hypotheses; then update PR #648's
+  soundness verdict before any frontiers-TeX promotion.
+
 ### 2026-07-11 - Routing, saturation, and M31 ADE PR wave
 
 - **Agent/model:** Codex integrating PRs #622--#646 from holmbuar,
