@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - A4 join-closed quotient-band compiler
+
+- **Agent/model:** Codex, with independent algebra, consumer-backward,
+  prize-gradient, verifier, and cross-team hypothesis reviews.
+- **Files added or changed:** Added
+  experimental/notes/thresholds/a4_quotient_band_join_compiler.md,
+  experimental/scripts/verify_a4_quotient_band_join_compiler.py, and its
+  JSON certificate under
+  experimental/data/certificates/a4-quotient-band-join-compiler/.
+- **Status:** PROVED finite join/character-stratification and conditional
+  compiler / OPEN stratum-energy payment / AUDIT REQUESTED. No frontiers
+  TeX statement is promoted.
+- **What is being added:** Actual-live partition joins become intersections
+  of their factor-through bands in one effective dual. A finite join-closed
+  family therefore has exact disjoint nontrivial-character strata; the
+  chosen poset's Möbius function recovers their cardinalities and exact
+  projected energies, which feed PR #667's pairwise compiler at eligible
+  finer anchors.
+- **How it is useful:** This removes quotient-versus-quotient
+  dual-character overlap for the selected family, including incomparable
+  bands, and specializes to adjacent shells on a chain. It does not
+  disjointize primal first-match slope cells or supply the analytic
+  energies.
+- **What to do next:** Before any TeX promotion, audit that every partition
+  and join is formed on the same actual coordinate-live set, the family and
+  its closure entropy are certified, the exact/direct stratum energies and
+  subexponential compiler sum are supplied, the selected union matches the
+  desired major subset, and its complement and all non-quotient cells have
+  separate payments.
+
 ### 2026-07-11 - A4 nonuniform live-fiber centered compiler
 
 - **Agent/model:** Codex, with independent algebra, consumer-backward,
