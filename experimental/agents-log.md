@@ -30,6 +30,44 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Span-face arc synthesis and hypothesis-matching
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/span_face_synthesis.md`,
+  `experimental/scripts/verify_span_face_synthesis.py`, and this log.
+- **Status:** AUDIT / PROVED-by-citation (synthesis; no new mathematics).
+- **What is being added:** The hypothesis-matching the 5c9aab7 log entry called
+  for -- "treating the remaining saturation/collapse/profile statements as
+  input-specific until their hypotheses are matched against
+  `asymptotic_rs_mca_frontiers.tex`" -- carried out for the **span-face arc**
+  (`#622 -> #625 -> #626 -> #627 -> #635 -> #636 -> #642 -> #645`, plus `#638`
+  and the on-branch `#647`). It composes the arc into one precise closure
+  theorem (S1), a per-statement hypothesis-matching table with every tex anchor
+  quoted verbatim and re-checked at 5c9aab7 (S2), the final print list
+  superseding `#635`'s four items with `(FI-field')` as an `(A0)` clause (S3),
+  the open corners (S4), and a self-consistency sweep making the three
+  supersessions explicit -- `#626` count reading -> `#635`, `#635` T-PAY-RES ->
+  `#642`/`#645`, and the `#636`/`#644` proved-vs-modeled orientation supply box
+  (S5). The load-bearing composition point -- that `#635`'s routed-profile
+  `Z^circ = empty` and `#642`'s collapse-cell full slope set are the two ends of
+  one routing arrow (tex L877-881), not a contradiction -- is pinned; no open
+  math gap in the composition.
+- **How it is useful:** Reduces the span-face residue to a **single printed
+  input** `(FI-field') : log|F_n| = o(n)`, placed in `def:admissible-sequence`,
+  proved sufficient (subfield confinement, `#642`) and necessary on the
+  prize-relevant class (`#645` (RED) + `#647`'s refutation of the free
+  `|F|^{1/2}` route). On the prize's poly-field smooth/circle rows the span face
+  closes unconditionally. The saturation half (`#636`) is flagged as adjacent
+  (image face), not load-bearing for the span face.
+- **What to do next:** `verify_span_face_synthesis.py` re-checks every tex anchor
+  (+/- 3 lines), the PR-to-note mappings, each arc note's stated PASS count, and
+  the S2 no-DISCHARGED-cites-OPEN invariant (`RESULT: PASS (169/169)`, ~0.03 s).
+  The synthesis is packaging only; the maintainer decision is whether to print
+  `(FI-field')` and the C7 ledger rewrite. Open corners for the field/quantifier
+  experts: Case-B exponential equidistribution (`#647`), the proper-challenge-
+  subset intersection (`#645`), and the Codex critical-window `(CW)` (`#644`).
+
 ### 2026-07-11 - Routing, saturation, and M31 ADE PR wave
 
 - **Agent/model:** Codex integrating PRs #622--#646 from holmbuar,
