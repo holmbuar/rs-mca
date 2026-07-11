@@ -30,6 +30,43 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Non-cyclic C5 field-descent slope count
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:** `experimental/notes/thresholds/noncyclic_c5_slope_count.md`,
+  `experimental/scripts/verify_noncyclic_c5_count.py`, `experimental/agents-log.md`.
+- **Status:** PROVED (fibre-count half) / MEASURED (census) / OPEN (residual
+  defect-magnitude wall).
+- **What is being added:** Attacks the one named wall of PR #545
+  (`gap2_collapse_routing.md`): the C5 extension/field-descent cell's "direct
+  field-sensitive slope count" (`asymptotic_rs_mca_frontiers.tex` L2422-2427) in
+  the **non-cyclic** case. Proves **Theorem A**: for any finite abelian slope
+  group `G` with `p \nmid |G|` (cyclic or non-cyclic) and profile `I \subseteq
+  \hat G`, the per-slope fibre bound is `|Omega \cap Phi^{-1}(y)| <=
+  p^{d_p(G,I)}`, `d_p(G,I)=|G|-|Z_p(G,I)|`, via a semisimple group-algebra
+  (Maschke + Fourier) count that replaces Danny #451's cyclic-only
+  principal-ideal/degree bookkeeping (which fails since `F_p[G]` is not a PID for
+  `r>=2`). The Frobenius-closure step is the field-agnostic Lean primitive
+  `sum_smul_pow`. Also: closed-form orbit size `\ell(\chi)=\mathrm{lcm}_i
+  \mathrm{ord}_{n_i/\gcd}(p)`; the defect functional is **non-multiplicative**
+  over the product; census of exact fibres vs `p^{d_p}` (94-check verifier, all
+  pass, tight for `p=2`); and a measured **new floor** (Frobenius-trivial
+  `p\equiv 1\bmod\exp G` gives `d_p=|G|-|I|` maximal, payment vacuous).
+- **How it is useful:** Closes #545's stated residual (L-G2-4) **at the count
+  level** --- the C5 field-sensitive slope count is uniformly `p^{d_p(G,I)}`
+  across cyclic and non-cyclic descent profiles, so the Gap-2 re-route inherits
+  one C5 payment law (Danny #451's cyclic Theorem 1 is the `r=1` case). Re-pins
+  the true remaining obligation to a **non-cyclic Theorem-2** (defect magnitude
+  `o(|G|)` on Frobenius-active deployed profiles: circle/twin-coset, QM31/M31).
+  Confirms `p \nmid |G|` is load-bearing (a measured fibre exceeds `p^{d_p}` when
+  `p \mid |G|`).
+- **What to do next:** Prove/refute the non-cyclic Theorem-2 defect bound for the
+  circle/twin-coset and QM31 tower profiles (large-Frobenius-order per factor,
+  density-`\kappa` profile), or show the `(A5)` window (L935-941) admits only
+  Frobenius-active descent leaves. Re-derive: (i) Theorem A step 4 (the
+  `\dim_{F_p} V_Z = |G|-|Z|` semisimple count), (ii) the non-multiplicativity
+  witness, (iii) the trivial-Frobenius `d_p=|G|-|I|` floor.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,
