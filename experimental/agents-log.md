@@ -30,6 +30,37 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - A4 trace quotient rank and centered compiler
+
+- **Agent/model:** Codex, with independent algebra, full-identity consumer,
+  prize-gradient, provenance, and cross-team hypothesis reviews.
+- **Files added or changed:** Added
+  experimental/notes/thresholds/a4_trace_quotient_rank_centered_compiler.md,
+  experimental/scripts/verify_a4_trace_quotient_rank_centered_compiler.py,
+  and its JSON certificate under
+  experimental/data/certificates/a4-trace-quotient-rank-centered/.
+- **Status:** PROVED finite trace-rank and centered-compiler theorems /
+  CONDITIONAL finite target calibration / OPEN diagonal energy / AUDIT
+  REQUESTED. No frontiers TeX statement is promoted.
+- **What is being added:** Exact effective linear algebra counts every
+  character-value factor-through mode by
+  \(|A_\phi|=p^{v-w_\phi}\le p^{|Q|-1}\), including extension trace-only
+  characters, and gives a sharp growing-fold sparse-major condition.
+  Centering Parseval on nontrivial characters replaces the valid parent
+  \(K_d-1\) compiler by the never-worse quantity \(K_d^\circ\).
+- **How it is useful:** Removes the certified high-degree trace quotient tail
+  under an extension-degree-free entropy condition, and turns a future
+  centered diagonal-energy theorem into explicit degree-two charges:
+  \(nB_2\approx0.00404\) on KoalaBear and \(0.72739\) on M31. The note credits
+  PR #564 as owner of that still-open subgroup-VMVT/Poisson-energy input and
+  does not treat the M31 standalone ceiling as an allocated ledger budget.
+- **What to do next:** Independently audit the trace exact sequence,
+  weighted-Vandermonde sharpness, centered Hölder step, full-identity
+  \(A_\phi\) ranks, and finite saddle calculation. Before any TeX promotion,
+  verify the actual live fiber partition, map entropy and characteristic
+  growth, common target, centered energy, other Fourier losses, and
+  first-match overlap assignment.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
