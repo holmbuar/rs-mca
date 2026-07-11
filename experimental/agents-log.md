@@ -30,6 +30,40 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - routing = spectrum: (S_E) vs the C7 collapse cell
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:**
+  `experimental/notes/thresholds/c7_routing_spectrum.md`,
+  `experimental/scripts/verify_c7_routing_spectrum.py`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED (operative form + MASTER-2 + equivalence) /
+  PROVED-negative (narrow form refuted) / OPEN-WALL (C7 projection degree),
+  as labelled per-claim in the note.
+- **What is being added:** An attack on the routing = spectrum conjecture (the
+  named wall of PR #622). The master inequality `E+1 = A_eff·P_2 <=
+  (A_eff/L)·(L·max mu) = G_1·Q_img` proves every `(S_E)`-violator is caught by
+  effective-image collapse (`G_1`) OR saturation (`Q_img`) — the TWO printed
+  components of the C7 cell (tex L2440-2454) — so every primitive first-match
+  residual satisfies `(S_E)` for free (operative form PROVED). The block-parabola
+  (pure collapse, tight) and a heavy-atom-with-spread-tail (pure saturation, full
+  image `L=A_eff`, `(FI)` holds) are a dual pair that both violate `(S_E)`;
+  routing sends them to the two DIFFERENT C7 components, so the conjecture's
+  literal "routed to the effective-image-collapse cell" is REFUTED — half the
+  violators go to saturation. Modulo max-fiber Q, `(S_E) <=> (FI)`.
+  `verify_c7_routing_spectrum.py` recomputes every number, `RESULT: PASS
+  (731/731)`, stdlib-only, ~0.09 s under `ulimit -v 2097152`.
+- **How it is useful:** Vindicates and sharpens #622's ledger choice for input
+  2's span face: `(S_E)` is not an independent input (it is a corollary of the
+  image clause + max-fiber Q the primitive leaf must pay anyway), and the C7 cell
+  is TWO assumed enumerative inputs, both load-bearing. Credits the
+  #558/#609/#614/#622/#539 lineage and the gap2 lane (Gap-2 → C5 vs Gap-1 → C7).
+- **What to do next:** The residual open object is the C7 projection-degree count
+  for BOTH components (saturation occupancy L2452 + collapse projection L2453),
+  confined to k-fold product leaves (single admissible leaves satisfy `(S_E)`,
+  T3). PI: re-derive MASTER-2 (one Hölder line), the two witnesses, and the
+  primitive-residual corollary.
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
