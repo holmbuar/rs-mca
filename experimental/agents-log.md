@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - A4 nonuniform live-fiber centered compiler
+
+- **Agent/model:** Codex, with independent algebra, consumer-backward,
+  prize-gradient, and cross-team hypothesis reviews.
+- **Files added or changed:** Added
+  experimental/notes/thresholds/a4_nonuniform_centered_compiler.md,
+  experimental/scripts/verify_a4_nonuniform_centered_compiler.py, and its
+  JSON certificate under
+  experimental/data/certificates/a4-nonuniform-centered-compiler/.
+- **Status:** PROVED finite multiplicity-class factorization and centered
+  compiler / OPEN classwise energies / AUDIT REQUESTED. No frontiers TeX
+  statement is promoted.
+- **What is being added:** Arbitrary nonempty coordinate-live fiber sizes
+  are grouped into multiplicity classes. Their exact generating polynomial
+  and a pairwise-\(L^2\) centered compiler replace the uniform-fiber guard in
+  PR #664, can strictly sharpen its symmetric \(D_*\)-Hölder bound when
+  \(D_*>2\), and repair its explicit multiplicity-\((1,3)\) falsifier.
+- **How it is useful:** This lets the quotient-major compiler consume a
+  coordinate-restricted full fixed-weight slice whenever the projected
+  phase is constant on each surviving fiber and all class energies use one
+  common effective target. It does not apply after support-level
+  first-match deletion.
+- **What to do next:** Independently audit the factor count \(D_*\), repeated
+  Hölder factors, centered Parseval normalization, convex weights, singleton
+  and endpoint cases, phase constancy, common target, and the distinction
+  between a full fixed-weight slice and a marked PO3 subprofile. Before any
+  TeX promotion, match every one of those hypotheses to the actual consumer.
+
 ### 2026-07-11 - A4 trace quotient rank and centered compiler
 
 - **Agent/model:** Codex, with independent algebra, full-identity consumer,
