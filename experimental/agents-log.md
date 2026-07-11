@@ -30,6 +30,40 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - (FI-field) reduces to the ambient-field hypothesis
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/fi_field_discharge.md`,
+  `experimental/scripts/verify_fi_field_discharge.py`.
+- **Status:** PROVED (reduction + poly-field discharge) / AUDIT (admissibility
+  insufficiency, verbatim) / COMPUTED (no prize-relevant Theta(n)-field witness).
+- **What is being added:** Decides the single open link #642 named -- whether
+  ledger-admissibility (A1)-(A7) or the reserve imply (FI-field). Verdict
+  PARTIAL: dividing subfield confinement (thm:subfield-confinement-full, tex
+  L1930-34) by the full-field denominator gives `e_MCA(r) = delta(r)/|F| <=
+  |F_r|/|F|`, so any prize-relevant line (`e_MCA(r) > eps`) has `log|F_r| >=
+  log|F| - log(1/eps)`; hence (FI-field) on prize-relevant lines is EQUIVALENT
+  to the ambient-field hypothesis `(FI-field') : log|F_n| = o(n)`. That
+  hypothesis is not among (A1)-(A7) (none bound `|F_n|`), is the "field
+  hypothesis" the scope remark L836-40 already names, and holds for the prize's
+  poly-size domains -- where the span face closes unconditionally. Every
+  Theta(n)-field witness (countertheorem eq (4.5)/(6.7); Codex #634;
+  DannyExperiments #631) pays the `binom(N,2)` separation gate, so
+  `|F|/|F_r| = e^{Theta(n)}` and `e_MCA = e^{-Theta(n)} << eps`: admissible but
+  not prize-relevant. Verifier `RESULT: PASS (59/59)`, ~0.43 s.
+- **How it is useful:** Closes #642's residual for `asymptotic_rs_mca_frontiers.
+  tex`. Replaces #642's per-line (FI-field) certificate with the strictly weaker
+  row-level field condition `(FI-field') : log|F_n| = o(n)`, to be printed in
+  `def:admissible-sequence` (not the L2450 C7 paragraph). Consumes #642/#635/
+  #636/#627/#625/#622, Codex #634/#624, DannyExperiments #631/#621; cites the
+  paper's own countertheorem as the necessity witness.
+- **What to do next:** PI re-derive (RED) and the quantifier trace (received pair
+  free over `F`, denominator `|F|` fixed by the protocol); decide whether to
+  print `(FI-field')` as an `(A0)` field clause; the only residual is the
+  proper-challenge-subset case (L1047-49, challenge-intersection) and the
+  COMPUTED-not-PROVED emptiness of the linear-field `delta ~ |F|` corner.
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
