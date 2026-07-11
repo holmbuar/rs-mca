@@ -1,3 +1,5 @@
+import AsymptoticSpine.BooleanFiber
+
 namespace AsymptoticSpine
 
 /-!
@@ -28,20 +30,13 @@ combining the BSG size/difference bounds with the (squared) quasicube bound forc
 and hence, whenever the energy regime makes `K^{3C} < |A|` (the tex's
 `|A| ≥ e^{cN-o(N)}` beating the subexponential `K^{3C} = e^{o(N)}`), a
 contradiction.  Cardinalities are modelled directly as `Nat`; the Boolean-cube
-membership needed to invoke quasicube is carried by the abstract predicate
-`BoolFiber` (below), so the quasicube hypothesis reads exactly as
-"every Boolean-cube fiber obeys the squared quasicube bound".
+membership needed to invoke quasicube is carried by the concrete semantic
+predicate `BoolFiber` from `BooleanFiber.lean`, so the quasicube hypothesis
+reads exactly as "every realized Boolean-cube fiber obeys the squared
+quasicube bound".
 
 Kernel-checked, stdlib-only, no mathlib.
 -/
-
-/-- `BoolFiber s d` abstracts "there is a set `A ⊆ {0,1}^N` with `|A| = s` and
-`|A - A| = d`".  It is the interface through which the quasicube theorem is
-applied; keeping it abstract means the difference-set cardinality `d` is a genuine
-parameter, and the quasicube input is a hypothesis about *every* such fiber. -/
-structure BoolFiber (s d : Nat) : Prop where
-  /-- Marker that `(s, d)` arises as `(|A|, |A-A|)` for some `A ⊆ {0,1}^N`. -/
-  intro ::
 
 /-- **(L5) `prop:no-high-energy`, exact-inequality skeleton.**  Given
 

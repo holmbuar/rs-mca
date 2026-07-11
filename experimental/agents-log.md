@@ -30,6 +30,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Concrete primitive Boolean Lean semantics
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/asymptotic_spine/AsymptoticSpine/BooleanFiber.lean`,
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/PrimitiveBoolean.lean`,
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/NoHighEnergy.lean`, the
+  package root, and
+  `experimental/notes/audits/lean_frontiers_primitive_boolean.md`.
+- **Status:** PROVED / CONDITIONAL FORMALIZATION.
+- **What is being added:** Replaces the abstract Boolean-fiber marker with an
+  actual duplicate-free fixed-weight `Vector Bool` family, exact integer
+  difference and closure energy, residual prefix fibers, and an exact low/high
+  finite-moment split.  The high branch composes with the existing conditional
+  BSG/quasicube arithmetic.
+- **How it is useful:** Supplies the concrete semantic adapter beneath the
+  primitive Boolean branch without asserting the remaining additive-
+  combinatorics or asymptotic inputs.
+- **What to do next:** Instantiate or prove the BSG/quasicube producer and the
+  low-energy/Sidon payment separately; keep max-fiber, C9, character-frame, and
+  atlas claims outside this packet.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,
