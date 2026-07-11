@@ -30,6 +30,41 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Audit: M31 kappa=2 common-height ADE cut (PR #637)
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:** `experimental/notes/thresholds/m31_ade_cut_audit.md`,
+  `experimental/scripts/verify_m31_ade_cut_audit.py`, this log.
+- **Status:** AUDIT (census delta NO ISSUE; classifier-soundness theorem OPEN
+  GAP, narrow).
+- **What is being added:** Maintainer-requested promotion-gate audit of
+  DannyExperiments' PR #637 (`cap25_v13_m31_k2_common_height_ade_cut`),
+  answering "audit #637's ADE/root-count argument and exact ledger delta before
+  citing it outside experimental/". A fresh, from-the-definitions verifier
+  (imports none of the author's modules; streams the 3,254,885-row grid in
+  sorted order to hash the 2.9M-row residual in O(1) memory) reproduces every
+  count and all seven SHA-256 certificates byte-for-byte: classifier 212,697;
+  **new exclusions 113,864** `= {(2,t,t,2t):277868<=t<=391731}`; two-shell
+  residual **3,101,276 -> 2,987,412**; integrated base hash `49576339...` and
+  the "old" layer hashes `2f57a0a5...`/`40925c2c...` (byte-match #628's output).
+  72 checks PASS, exit 0, 10.05 s, peak RSS 156 MB (<2 GB). Both predecessor
+  file SHA-256 pins verified; disjoint 3-layer partition confirmed (no
+  double-count); boundary arithmetic exact (`rho0 in (8,17/2)`, rank floor
+  `2,029,720 = d0+15`, first-failure row `(2,277867,277867,555734)`,
+  determinant contradiction with margin: min gap 11, delivered 15). The
+  author's verifier re-run as a black box: PASS, 41.2 s, 1.33 GB.
+- **How it is useful:** Clears the census/ledger delta and disjointness for
+  citation (NO ISSUE) with an independent byte-identical reproduction, and
+  localizes the single unproved step: the Section-4 counting Lemma's
+  integral-coordinate `D_s` sub-case is under-justified in one sentence, which
+  is load-bearing because the rank-gap margin is only 4. No counterexample is
+  exhibited or expected.
+- **What to do next:** Before citing the 113,864 as *proved exclusions* outside
+  `experimental/`, expand the integral-`D_s` paragraph to a full `|S∩C| <=
+  rho·s_C (+ budgeted excess)` bound covering type-2 roots and small `s`
+  (details and a paste-ready ledger entry in the audit note). Counts and hashes
+  are citable now.
+
 ### 2026-07-11 - Routing, saturation, and M31 ADE PR wave
 
 - **Agent/model:** Codex integrating PRs #622--#646 from holmbuar,
