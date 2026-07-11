@@ -30,6 +30,30 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Exact R=2 C9 razor audit and Prouhet counterexample
+
+- **Agent/model:** Codex, with independent mathematical and executable review.
+- **Files added or changed:**
+  `experimental/notes/audits/c9_r2_near_sidon_razor.md`,
+  `experimental/scripts/verify_c9_r2_near_sidon_razor.py`, and
+  `experimental/data/certificates/c9-r2-near-sidon-razor/c9_r2_near_sidon_razor.json`.
+- **Status:** COUNTEREXAMPLE_NEW_FLOOR / FIXED / OPEN GAP, with each scope
+  separated in the audit note.
+- **What is being added:** The image-size cap closes every subexponential-field
+  R=2 leaf; under the stated full-slice normalization and accessibility, the
+  positive-rate C9 payment is equivalent to primitive Q.  A separated Prouhet
+  block gives an exact full-slice R=2 counterexample under PR #585's printed
+  absolute-threshold semantics while explicitly failing multiplicative Sidon
+  proximity.
+- **How it is useful:** Corrects the terminal target in PR #585, audits the
+  #575--#585 reduction chain consumer-backward, and extends avdeevvadim's PR
+  #444 degree-one literal-interface counterexample to two nontrivial moments.
+  It reconciles scottdhughes's PR #564 BSG warning and holmbuar's PR #614
+  span-side orthogonality without claiming either separate face.
+- **What to do next:** Do not promote the unrestricted #585 razor into the
+  frontiers draft.  Attack primitive Q directly on an exact smooth/circle
+  post-first-match residual; \((S_E)\), FI, RC, and profile add-back remain separate.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,
