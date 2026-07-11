@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - A4 weighted quotient-major compiler
+
+- **Agent/model:** Codex, with independent algebra, consumer-hypothesis, and
+  repository-prior-art audits plus cross-team scope review.
+- **Files added or changed:** Added
+  experimental/notes/thresholds/a4_quotient_major_compiler.md,
+  experimental/scripts/verify_a4_quotient_major_compiler.py, and its JSON
+  certificate under experimental/data/certificates/.
+- **Status:** PROVED finite theorems / CONDITIONAL A4 consumer bridge / AUDIT
+  REQUESTED. No frontiers TeX statement is promoted.
+- **What is being added:** A weighted-GRS/Singleton theorem bounds globally
+  degree-\(d\) quotient-factor algebraic phases by
+  \(|\mathbb B|^{\lceil k/d\rceil}\), with a tight counterexample to the
+  naive floor. Separately, an exact all-\(d\) effective-target
+  Hölder/Parseval compiler bounds the quotient-major constant by the explicit
+  convex collision-energy quantity \(K_d-1\).
+- **How it is useful:** Pays growing-degree algebraic quotient-major tails
+  under an exact entropy condition and reduces every complete uniform
+  fixed-degree fold to named intermediate-weight energies. The audit separates
+  prime-field algebraic phases from extension-field trace-only characters and
+  keeps generic active-set saturation, FI/Q, endpoint tails, and overlap
+  assignment explicit.
+- **What to do next:** Independently audit the MDS descent, common-target
+  normalization, all-\(d\) Hölder step, and consumer table. Before any TeX
+  promotion, verify that the chosen live active set has complete fibers and
+  that every required intermediate energy or algebraic-major lift containment
+  is actually supplied.
+
 ### 2026-07-11 - Routing, saturation, and M31 ADE PR wave
 
 - **Agent/model:** Codex integrating PRs #622--#646 from holmbuar,
