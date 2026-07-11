@@ -96,4 +96,35 @@ theorem no_high_energy_contradiction
   have hb := no_high_energy_bound quasicube f K C bsg
   omega
 
+/-! ## Direct sharp Boolean-energy alternative -/
+
+/-- Exact natural-number composition for the direct Boolean-energy route.
+
+The published sharp theorem for finite subsets of the integer Boolean cube is
+
+    E(F) ≤ |F|^(log₂ 6).
+
+Its weaker rational-power consequence `E(F)^3 ≤ |F|^8` avoids real powers in
+this stdlib-only package.  If `F` is high-energy at parameter `K`, cubing
+`|F|^3 < K E(F)` and cancelling `|F|^8` gives `|F| < K^3`.
+
+The sharp energy inequality remains an explicit external input; this theorem
+kernel-checks only the exact finite arithmetic that consumes it. -/
+theorem count_lt_cube_of_energy_cubed_le_count_eighth
+    (count energy K : Nat)
+    (hsharp : energy ^ 3 ≤ count ^ 8)
+    (hhigh : count ^ 3 < K * energy) :
+    count < K ^ 3 := by
+  have hcubed : (count ^ 3) ^ 3 < (K * energy) ^ 3 :=
+    Nat.pow_lt_pow_left hhigh (by omega)
+  have hproduct : count ^ 9 < K ^ 3 * energy ^ 3 := by
+    simpa [← Nat.pow_mul, Nat.mul_pow] using hcubed
+  have hsharp' : K ^ 3 * energy ^ 3 ≤ K ^ 3 * count ^ 8 :=
+    Nat.mul_le_mul_left (K ^ 3) hsharp
+  have hcancel : count ^ 8 * count < count ^ 8 * K ^ 3 := by
+    have hchain := Nat.lt_of_lt_of_le hproduct hsharp'
+    simpa [Nat.pow_succ, Nat.mul_comm, Nat.mul_left_comm,
+      Nat.mul_assoc] using hchain
+  exact Nat.lt_of_mul_lt_mul_left hcancel
+
 end AsymptoticSpine

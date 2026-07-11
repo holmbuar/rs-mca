@@ -15,12 +15,14 @@ Boolean branch of `experimental/asymptotic_rs_mca_frontiers.tex`.
   a semantic `BoolFiber` with an exact difference-set cardinality.
 * `BooleanFiberStat` derives its size and additive energy from that family; the
   low/high energy filters partition every finite moment exactly.
-* The high-energy part composes with the existing conditional BSG/quasicube
-  arithmetic in `NoHighEnergy.lean`.
+* The high-energy part composes either with the direct Boolean-energy theorem
+  or with the older conditional BSG/quasicube arithmetic in
+  `NoHighEnergy.lean`.
 
-The BSG extraction, the quasicube theorem, and payment of the low-energy moment
-remain explicit hypotheses.  No asymptotic estimate, character-frame theorem,
-or profile-atlas exhaustiveness statement is asserted here.
+The direct sharp energy theorem, the alternative BSG/quasicube inputs, and
+payment of the low-energy moment remain explicit hypotheses.  No asymptotic
+estimate, character-frame theorem, or profile-atlas exhaustiveness statement
+is asserted here.
 -/
 
 /-! ## A full slice, routed residual, and prefix fibers -/
@@ -275,6 +277,49 @@ theorem exists_large_highEnergyFiber_of_moment_excess
       paid + stats.length * H ^ q := Nat.add_le_add_right hlow _
   omega
 
+/-! ## Conditional direct Boolean-energy composition -/
+
+/-- One semantic Boolean fiber is strictly smaller than `K^3` once supplied
+with the integer-power consequence `E(F)^3 ≤ |F|^8` of the sharp
+Boolean-cube energy theorem. -/
+theorem booleanFiberStat_count_lt_cube_of_sharpEnergy
+    (stat : BooleanFiberStat) (K : Nat)
+    (hsharp : stat.energy ^ 3 ≤ stat.count ^ 8)
+    (henergy : highEnergy K stat = true) :
+    stat.count < K ^ 3 :=
+  count_lt_cube_of_energy_cubed_le_count_eighth
+    stat.count stat.energy K hsharp
+    ((highEnergy_eq_true_iff K stat).mp henergy)
+
+/-- Direct finite high-energy compiler.  Every high-energy fiber is bounded by
+the largest natural number strictly below `K^3`; the low-energy contribution
+remains separate. -/
+theorem primitiveBooleanMomentUpper_of_sharpEnergy
+    (q K : Nat) (stats : List BooleanFiberStat)
+    (hsharp : ∀ stat ∈ stats,
+      stat.energy ^ 3 ≤ stat.count ^ 8) :
+    ordinaryFiberMoment q stats ≤
+      lowEnergyFiberMoment q K stats +
+        stats.length * (K ^ 3 - 1) ^ q := by
+  apply ordinaryFiberMoment_le_low_add_uniform_high
+  intro stat hstat henergy
+  have hlt := booleanFiberStat_count_lt_cube_of_sharpEnergy
+    stat K (hsharp stat hstat) henergy
+  omega
+
+/-- Same direct compiler after an independently supplied low-energy/Sidon
+payment. -/
+theorem primitiveBooleanMomentUpper_of_sharpEnergyPayment
+    (q K paid : Nat) (stats : List BooleanFiberStat)
+    (hsharp : ∀ stat ∈ stats,
+      stat.energy ^ 3 ≤ stat.count ^ 8)
+    (hlow : lowEnergyFiberMoment q K stats ≤ paid) :
+    ordinaryFiberMoment q stats ≤
+      paid + stats.length * (K ^ 3 - 1) ^ q := by
+  have hsplit := primitiveBooleanMomentUpper_of_sharpEnergy
+    q K stats hsharp
+  exact Nat.le_trans hsplit (Nat.add_le_add_right hlow _)
+
 /-! ## Conditional BSG/quasicube composition -/
 
 /-- Applying the exact `NoHighEnergy` arithmetic to one semantic Boolean-fiber
@@ -321,6 +366,8 @@ theorem primitiveBooleanMomentUpper_of_lowEnergyPayment
 #print axioms residualFiberFamily_isBoolFiber
 #print axioms ordinaryFiberMoment_eq_low_add_high
 #print axioms exists_large_highEnergyFiber_of_moment_excess
+#print axioms count_lt_cube_of_energy_cubed_le_count_eighth
+#print axioms primitiveBooleanMomentUpper_of_sharpEnergyPayment
 #print axioms primitiveBooleanMomentUpper_of_lowEnergyPayment
 
 end AsymptoticSpine

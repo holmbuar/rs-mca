@@ -38,18 +38,22 @@ Keep entries concise and link to the relevant files.
   `experimental/lean/asymptotic_spine/AsymptoticSpine/NoHighEnergy.lean`, the
   package root, and
   `experimental/notes/audits/lean_frontiers_primitive_boolean.md`.
-- **Status:** PROVED / CONDITIONAL FORMALIZATION.
+- **Status:** PROVED / CONDITIONAL FORMALIZATION / CROSS-PR HYPOTHESIS AUDIT.
 - **What is being added:** Replaces the abstract Boolean-fiber marker with an
   actual duplicate-free fixed-weight `Vector Bool` family, exact integer
   difference and closure energy, residual prefix fibers, and an exact low/high
-  finite-moment split.  The high branch composes with the existing conditional
-  BSG/quasicube arithmetic.
+  finite-moment split.  The high branch now has a direct compiler from the
+  integer consequence `E^3<=|F|^8` of the sharp Boolean-energy theorem; the
+  older conditional BSG/quasicube arithmetic remains available.  The audit
+  records promotion verdicts for PRs #558 and #592 and incorporates PR #608's
+  independent large-image and active-scale interface findings.
 - **How it is useful:** Supplies the concrete semantic adapter beneath the
   primitive Boolean branch without asserting the remaining additive-
   combinatorics or asymptotic inputs.
-- **What to do next:** Instantiate or prove the BSG/quasicube producer and the
-  low-energy/Sidon payment separately; keep max-fiber, C9, character-frame, and
-  atlas claims outside this packet.
+- **What to do next:** Obtain independent review of this packet.  Do not promote
+  #592's unsourced constant table; route high energy through the sharp direct
+  theorem.  Focus research on #558's source-specific `(CF2)`/`(CF5)`
+  packing or an equivalent low-energy signed-cancellation payment.
 
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
