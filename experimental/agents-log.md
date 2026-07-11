@@ -30,6 +30,39 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Minimal phase supplement completing the character frame
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:** `experimental/notes/thresholds/minimal_phase_supplement.md`,
+  `experimental/scripts/verify_minimal_phase_supplement.py`,
+  `experimental/agents-log.md`.
+- **Status:** AUDIT / EXPERIMENTAL (contains PROVED hand derivations and
+  MEASURED toy census; the pinned supplement itself is an OPEN input).
+- **What is being added:** Answers the named question our PR #609 created. Rung
+  1: the tex's printed "pointwise sufficient route" (`thm:bounded-prefix-`
+  `equidistribution` + circle twin + `prop:equidistribution-to-sidon`) is
+  span/ambient-normalized (max-fiber against `barN_0=|B|^{-R}binom`, tex L2822;
+  `rem:flatness-certifies-image` L4900), so it DOES deliver the image clause and
+  is NOT the #609 image-normalized trap — but it is a replacement, not a frame
+  supplement. Rung 2: the master identity `L>=A_eff/(1+E)`,
+  `E=A_eff*P2-1` (Parseval + Cauchy-Schwarz) pins the weakest supplement
+  `(S_E)`: subexponential aggregate dodged-band spectral energy
+  `sum_{chi in V_g^\(A-A)}|hat_mu|^2<=e^{o(N)}`; frame(EF5)+`(S_E)` => `(EFP)`
+  (both outputs), neither alone. Per-character `(S1)` is proved insufficient
+  (block parabola satisfies `p^{-1/2}<=1` yet collapses). Rung 3: `(S_E)` is
+  strictly weaker than hughes `(LS)` (#564) and orthogonal to the LegaSage C9
+  razor (#585) — a razor NO does not imply `(S_E)` (parabola is razor-NO yet
+  `(S_E)`-fail), stratifying input 2 by normalization.
+- **How it is useful:** Completes the #558/#608/#609 character-frame lineage: it
+  says exactly which phase-sensitive input finishes avdeev's half-interface, and
+  that it is the weakest such input, calibrated on avdeev's own block-parabola.
+  Sharpens #609's routing (pointwise `|hat_mu|=p^{-1/2}` -> aggregate `L^2`).
+- **What to do next:** PI re-derive the master identity and the frame+`(S_E)`
+  => `(EFP)` complementarity (see note's "steps the PI should re-derive"); then
+  decide whether to promote `(S_E)` as the ledger's named span-normalized input
+  next to `(CF2)`/`(LS)`. Verifier `verify_minimal_phase_supplement.py`
+  recomputes every number, `PASS (14/14)`.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,
