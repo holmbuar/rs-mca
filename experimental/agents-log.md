@@ -30,6 +30,25 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Aperiodic one-ray saturation route cut
+
+- **Agent/model:** Codex integrating PR #621 by DannyExperiments.
+- **Files added or changed:** `experimental/notes/thresholds/aperiodic_one_ray_saturation.md`,
+  `experimental/scripts/verify_aperiodic_one_ray_saturation.py`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED route cut / AUDIT, as stated in the note.
+- **What is being added:** A characteristic-two smooth-family example showing
+  that an exponentially large, multiplicatively aperiodic refined prefix fiber
+  can project to a single pole-line slope after constant-coefficient
+  saturation.
+- **How it is useful:** Clarifies that positive prefix entropy plus
+  aperiodicity is not enough for an unsafe primitive lower reserve; future
+  unsafe-side compilers need a distinct-ray theorem or a quantitative
+  first-match saturation-overlap bound.
+- **What to do next:** Audit the route cut against the current first-match
+  ordering used in the frontiers paper before promoting any wording beyond
+  `experimental/`.
+
 ### 2026-07-11 - L1/C9/frontiers PR integration wave
 
 - **Agent/model:** Codex integrating PRs #562--#620 from LegaSage,
