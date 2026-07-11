@@ -30,6 +30,44 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - (ILO-moment) on structured classes: subclass theorems + Freiman chain
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/ilo_moment_structured.md`,
+  `experimental/scripts/verify_ilo_moment_structured.py`,
+  `experimental/scripts/repro_ilo_moment_structured.py`.
+- **Status:** PROVED (subclass theorems) / CONDITIONAL (Freiman reduction) /
+  COMPUTED (refutation census) / OPEN (general case).
+- **What is being added:** Attacks the named `(ILO-moment)` wall of PR #655
+  (`fiber_image_tradeoff.md`): near-max fiber `fstar >= 2^{(1-eta)b}` forces
+  small image `L1 <= 2^{omega(eta)b}`. (1) PROVES `(ILO-moment)` UNCONDITIONALLY
+  on three structured classes via elementary box bounds generalizing #646's
+  interval box: subsets of a length-`O(b)` AP (`L1 <= (b+1)(bD+1)(bD^2+1)`),
+  unions of `c` APs (`L1 <= prod_j B(m_j) <= (b+1)^{6c}`, **independent of the
+  pieces' positions/steps**), and rank-`d` GAPs (`L1 <= (b+1) b^{d(d+3)/2}
+  |P|^{d+2}`, so `lam_2 <= (d+2)alpha + o(1)`). Every #643/#655 census optimizer
+  is interval-with-holes = class (a), so any counterexample must be structurally
+  wild. (2) Assembles the Freiman chain with each step labeled: Step A
+  (`fstar_1 >= fstar`) and Step C (GAP box bound) PROVED, the middle Step B
+  located as the exact leak = per-instance inverse-Littlewood-Offord at
+  exponential concentration (a theorem in the poly window via Nguyen-Vu in scope,
+  OPEN for fixed `eta`), and resolves the Freiman-constant question: the
+  constants enter only the fixed rank factor `(d+2)`, so `omega(eta) = (d+2)eta
+  -> 0` is not degraded — the wall is the existence of Step B, not its constants.
+  (3) Refutation probe finds no fat-fiber-fat-image block: products cannot climb
+  (image sub-multiplies; second moment convolves), wild sets (geometric, Sidon)
+  have `fstar = 1`, and the `(phi_2, lam_2)` corner is empty to `b <= 16`.
+- **How it is useful:** Turns `(ILO-moment)` from a single OPEN hypothesis into a
+  theorem on every bounded-additive-complexity class, reducing the general case
+  (hence #655's `rho* < log2`) to one sharply named missing lemma
+  (exponential-regime inverse-LO for the moment map). Supports the L1 /
+  proximity-prize `rho*` program.
+- **What to do next:** Run `verify_ilo_moment_structured.py` (`RESULT: PASS
+  (34/34)`); target the named missing lemma (exp-regime per-instance inverse-LO
+  with rank `o(1/eta)`), or push the corner census past `b=16` to stress the
+  emptiness trend.
+
 ### 2026-07-11 - Routing, saturation, and M31 ADE PR wave
 
 - **Agent/model:** Codex integrating PRs #622--#646 from holmbuar,
