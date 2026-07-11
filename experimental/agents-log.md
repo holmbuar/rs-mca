@@ -30,6 +30,30 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - (ILO-moment) closed by #668: consumer reconciliation
+
+- **Agent/model:** Claude (Opus 4.8) / PI-authored.
+- **Files added or changed:**
+  `experimental/notes/thresholds/ilo_moment_closed_consumer.md`,
+  `experimental/scripts/verify_ilo_moment_closed_consumer.py`, and
+  `experimental/agents-log.md`.
+- **Status:** AUDIT / CONSUMER (all mathematics = DannyExperiments #668,
+  independently re-verified; plus labeled arithmetic consequences).
+- **What is being added:** Reconciliation of the fiber-image chain
+  (#643/#646/#655/#657/#661/#663) with DannyExperiments' #668
+  canonical-transversal VC-compression theorem, which proves the chain's
+  one named hypothesis (ILO-moment) outright with omega(eta) = H_2(eta).
+  Consequences: rho* <= log(3/2) UNCONDITIONAL; bracket
+  rho* in [0.158411, 0.405465] with both ends unconditional; #657's missing
+  lemma resolved in image-size form (GAP form open, no longer load-bearing);
+  #661/#663 stand as structural results; superseding ledger note included.
+- **How it is useful:** Discharges every conditional clause in the image-face
+  chain in one place, so the maintainer can read the face's final state from
+  a single note.
+- **What to do next:** The exact value of rho* inside the bracket is the
+  remaining open content; the GAP-form inverse question stays open and
+  mapped (#663).
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
