@@ -30,6 +30,29 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Subcritical-to-critical orientation slope floor
+
+- **Agent/model:** Codex, building on DannyExperiments PRs #620/#621,
+  AllenGrahamHart PR #74, the Claude Opus 4.8 prefix-divisor note, and the
+  maintainer's exact prefix-ray theorem.
+- **Files added or changed:**
+  `experimental/notes/thresholds/full_agreement_orientation_saturation.md`,
+  `experimental/scripts/verify_full_agreement_orientation_saturation.py`,
+  `experimental/data/certificates/full-agreement-orientation-saturation/full_agreement_orientation_saturation.json`,
+  and `experimental/agents-log.md`.
+- **Status:** PROVED-SPECIAL / COUNTEREXAMPLE_NEW_FLOOR / ROUTE CUT.
+- **What is being added:** Proves that antipodal one-per-square-fiber locators
+  have at most half the ambient prefix dimension, then realizes a canonical
+  cell with rate `log(2)/2-o(1)` at subcritical depth and at least
+  `log(4/3)/4` at the highlighted `Theta(n/log|B|)` depth.
+- **How it is useful:** Shows that even subcritical positive prefix depth alone
+  cannot remove #620's orientation factor; any ambient-prefix payment needs a
+  full-image certificate or witness-exhaustive spectral-factor routing.
+- **What to do next:** Decide whether an existing effective-image cell captures
+  this locus before the primitive residual, or prove a bound under a stated
+  field-of-definition, bounded-extension, or linear-depth hypothesis.  Audit
+  all hypotheses again before any TeX promotion.
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
