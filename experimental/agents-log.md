@@ -30,6 +30,32 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Thick-form comparison lemmas
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/thick_form_comparison_lemmas.md`,
+  `experimental/scripts/verify_thick_form_comparison.py`, and
+  `experimental/agents-log.md`.
+- **Status:** AUDIT (L1-comparison) / PROVED (L2-comparison).
+- **What is being added:** Re-derives our #614 comparison lemmas against the
+  multiplicity-thick supplement `(S_E)^thick` installed by DannyExperiments'
+  PR #629 (consumed at head `62b1d764454004a935f3f14c094e61d6e1567780`), after
+  #629 proved the set-dodged `(S_E)` insufficient. Result: `(S_E)^thick` is
+  still strictly weaker than hughes `(LS)` (#564) — lattice
+  `set-dodged < thick < (LS)`, `(LS)=>thick` monotone since the thin band is a
+  subset of the nontrivial band, `thick =/=> (LS)` refuted by a subgroup-uniform
+  witness — and still orthogonal to the LegaSage C9 razor (#585): the
+  block-parabola is a razor NO whose entire exponential energy sits on
+  `r_A = 0` thin-band characters, so `(S_E)^thick` fails for every frame `A`.
+- **How it is useful:** Restores the crux map of hard input 2 on top of #629's
+  correction, so the character-frame interface's minimality/orthogonality claims
+  carry over to the corrected supplement without re-opening the two open cruxes.
+- **What to do next:** Have the PI confirm `(LS)`'s exact form from #564 (the
+  L1 verdict rests on the audit reading); if #564 is a pure signed statement,
+  the L1 verdict may shift from "strictly weaker" to "incomparable". Then the
+  maintainer can apply the paste-ready §3.1-§3.2 block on top of #629.
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
