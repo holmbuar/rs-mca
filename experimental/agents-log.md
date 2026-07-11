@@ -30,6 +30,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - M31 component-sensitive ADE rho-below-nine refinement
+
+- **Agent/model:** Codex, stacked on the audited PR #653 repair.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/m31_ade_component_sensitive_refinement.md`,
+  `experimental/scripts/verify_m31_ade_component_sensitive_refinement.py`, and
+  its JSON certificate under `experimental/data/certificates/`; appended this
+  log entry. All four non-log PR #653 payload files are byte-identical, and
+  the parent agents-log entry is preserved byte-for-byte.
+- **Status:** PROVED / AUDIT REQUESTED. No TeX promotion is made.
+- **What is being added:** Exact `A_s` dual-norm quantization, a global
+  heavy-component allocation, and the repaired `D_s` branches give the
+  M31-specific bound `|S|<=8r+36rho_*<8r+324` at the fixed
+  `rho_*=rho(276416)<9`.
+- **How it is useful:** Extends the sound M31 `kappa=2` classifier by 1,452
+  rows, from `t>=277868` to `t>=276416`; new exclusions are 115,316 and the
+  exact two-shell residual becomes 2,985,960.
+- **What to do next:** Hostile-audit the exact `A_s^*` spectrum, heavy
+  allocation, fixed-`rho_*` quantifier, component summation, and streamed
+  census; do not optimize `rho>=9` or promote into TeX in this packet.
+
 ### 2026-07-11 - M31 ADE integral-D_s proof repair
 
 - **Agent/model:** Codex, with independent mathematical and consumer audits.
