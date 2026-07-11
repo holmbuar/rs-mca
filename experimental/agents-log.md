@@ -45,15 +45,20 @@ Keep entries concise and link to the relevant files.
   finite-moment split.  The high branch now has a direct compiler from the
   integer consequence `E^3<=|F|^8` of the sharp Boolean-energy theorem; the
   older conditional BSG/quasicube arithmetic remains available.  The audit
-  records promotion verdicts for PRs #558 and #592 and incorporates PR #608's
-  independent large-image and active-scale interface findings.
+  records promotion verdicts for PRs #558 and #592, incorporates PR #608's
+  independent large-image and active-scale interface findings, and credits
+  PR #609's impossibility deduction using PR #558's exact block-parabola family:
+  `(CF1)+(CF2)` alone do not supply the large-image half of `(EFP)`.
 - **How it is useful:** Supplies the concrete semantic adapter beneath the
   primitive Boolean branch without asserting the remaining additive-
   combinatorics or asymptotic inputs.
 - **What to do next:** Obtain independent review of this packet.  Do not promote
   #592's unsourced constant table; route high energy through the sharp direct
-  theorem.  Focus research on #558's source-specific `(CF2)`/`(CF5)`
-  packing or an equivalent low-energy signed-cancellation payment.
+  theorem.  Treat #558 as a partial max-fiber interface and separately supply
+  the image half: give a span-normalized `(EF4)/(EFP)` input for #539's Gap-1
+  corollary to convert; assume `(FI)` proper; or prove a phase-sensitive Gap-1
+  estimate.  Focus research on source-specific `(CF2)`/`(CF5)` packing or an
+  equivalent low-energy signed-cancellation payment.
 
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 

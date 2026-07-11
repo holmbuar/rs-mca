@@ -26,14 +26,16 @@ The finite frame theorem `(CF1)` is sound and uses the same full-slice image
 normalization as `def:primitive-q` and `thm:primitive-q`.  It is a
 conditional certificate, not an unrestricted proof of primitive Q.  The
 large-image and scale-junction rows below incorporate the independent
-cross-check in [PR #608](https://github.com/przchojecki/rs-mca/pull/608).
+cross-check in [PR #608](https://github.com/przchojecki/rs-mca/pull/608) and
+the follow-up impossibility result in
+[PR #609](https://github.com/przchojecki/rs-mca/pull/609).
 
 | Claim or hypothesis | Verdict | Audit |
 | --- | --- | --- |
 | `(CF1)` frame inequality | `NO ISSUE` | The Gram matrix is `T T*`, and the normalized indicator of a nonempty fiber gives `|A||F_z|/M <= ||K_A||_op`; an empty fiber is trivial. |
 | Full-slice versus residual normalization | `NO ISSUE` | #558 uses `L=|Phi(Omega)|`, `barN=M/L`, and residual inclusion.  The TeX consumer uses the full image of `Omega_N^0`, its full-slice average, and `O_N^circ subset Omega_N^0`. |
 | Effective affine target | `NO ISSUE` | Characters are evaluated after translation by the affine base point and on the effective difference span, as in `(EF2)`--`(EF4)`. |
-| Whole-`(EFP)` substitution: large-image output | `OPEN GAP` | `(EFP)` also supplies `L >= exp(-o(N))A_eff`; the frame supplies only the max-fiber half.  A consumer replacing all of `(EFP)/(MI)+(MA)` must source this from `(FI)`/`(A4)` or prove it separately. |
+| Whole-`(EFP)` substitution: large-image output | `COUNTEREXAMPLE_NEW_FLOOR` | `(EFP)` also supplies `L >= exp(-o(N))A_eff`, but the frame supplies only the max-fiber half.  PR #609 proves that `(CF1)+(CF2)` alone do not imply the image half: PR #558's exact block-parabola witness has `M=L=p^k`, `A_eff=p^(2k)`, and `K_A=I`, so both frame hypotheses hold while `L/A_eff=p^(-k)`.  A consumer replacing all of `(EFP)/(MI)+(MA)` must separately supply a span-normalized `(EF4)/(EFP)` input, with #539's Gap-1 corollary converting it; assume `(FI)` proper; or prove a phase-sensitive Gap-1 estimate. |
 | Asymptotic scale pin | `OPEN GAP` | #558 writes `exp(o(N))` without identifying `N` with the TeX leaf's active-coordinate scale `|T|`.  Promotion needs that explicit pin. |
 | Nonempty source slice and row index in `(CF6)` | `FIXED` | A promotion-ready statement must say `Omega != empty` and write `max_{gamma in A}`.  The fixed-density consumer supplies nonemptiness, but #558 leaves it implicit. |
 | Source-specific `(CF2)` | `OPEN GAP` | Neither #558 nor the TeX constructs `A_lambda` with `|A_lambda| >= exp(-o(N))L_lambda` and `||K_A||_op <= exp(o(N))` uniformly on semantic many-shell profiles. |
@@ -41,7 +43,7 @@ cross-check in [PR #608](https://github.com/przchojecki/rs-mca/pull/608).
 | Major-difference packing `(CF5)` | `OPEN GAP` | Its cardinality bound is explicitly not proved for semantic profiles. |
 | `(CF6)` plus Gershgorin | `NO ISSUE` | With diagonal entries one, the off-diagonal row-sum bound gives the required operator norm. |
 | Effective `(MI)` implies `(CF6)` as printed | `COUNTEREXAMPLE_NEW_FLOOR` | The bridge silently needs `{1} union M_eff subset Mfrak` and `Mfrak=Mfrak^{-1}`, equivalently `A^{-1}A - {1} subset m_eff`.  Without containment, `(MI)` need not control any Gram difference. |
-| Block-parabola example | `NO ISSUE` | It proves an interface separation only; #558 explicitly does not claim semantic residuality. |
+| Block-parabola example | `NO ISSUE` | It is the exact witness deciding the magnitude-only large-image question: `(CF1)+(CF2)` hold with constant one while `L/A_eff` is exponentially small.  It proves an abstract interface separation only; #558 explicitly does not claim semantic residuality. |
 
 The missing `(MI)` containment is material.  Let `G=F_2^d` and
 
@@ -112,8 +114,11 @@ does not edit the active TeX.
 - Do not promote #592's three-row table.
 - Cite #558 only as a conditional max-fiber frame certificate after the
   major-containment, nonempty/index, and scale-pin repairs.  It does not replace
-  the large-image half of `(EFP)`; `(CF2)`, `(CF5)`, semantic packing, and
-  the separately sourced large-image fact remain open.
+  the large-image half of `(EFP)`: PR #609 proves that half is unavailable from
+  the #558 magnitude frame as stated.  Every consumer must separately supply a
+  span-normalized `(EF4)/(EFP)` input, with #539's Gap-1 corollary converting
+  it; assume `(FI)` proper; or prove a phase-sensitive Gap-1 estimate.
+  Source-specific `(CF2)`, `(CF5)`, and semantic packing remain open.
 - Route the high-energy Boolean branch through the external sharp theorem.
   This Lean packet certifies only its rational-power consequence
   `E(F)^3<=|F|^8 => |F|<K^3`, not the full `51.049612...`-bit threshold.
