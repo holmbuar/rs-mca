@@ -30,6 +30,39 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Bohr->GAP volume-to-rank wall (exp-ILO Step B)
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/bohr_gap_volume.md`,
+  `experimental/scripts/verify_bohr_gap_volume.py`.
+- **Status:** PROVED / REFUTED / MEASURED / OPEN (mixed; the target estimate
+  stays OPEN, three shortcut routes proved dead).
+- **What is being added:** Attacks the single estimate localized by #661
+  (`exp_ilo_fourier.md`): converting the volume `vol(T_kappa) >= 2^{-eta b}/2`
+  of quadratic resonances into a containing GAP (the last open half of the
+  corrected Step B, #657). Proves (i) `T_kappa` forces a near-full quadratic
+  Weyl sum on a `2^{-eta b}`-area set, but the moment-curve additive energy is
+  structure-blind (`INT|S|^4 = 2b^2-b` for every block), so the
+  large-sieve/moment route is vacuous at constant `eta` (only the corridor);
+  (ii) Weyl's inequality is unavailable for an arbitrary set, so the major-arc
+  route is circular; (iii) the det-G dichotomy closes only its easy horn
+  (`det G <= 2^{2 eta b}` => small diameter => #657 Thm 1), and a branch
+  decomposition quantifies the volume `!=` rank gap (multiplicity needs
+  `log2 det G >= 2 eta b + O(log b)`); (iv) the two-frequency elimination is
+  linear over R but fails mod 1; (v) rational resonance is the one horn that
+  closes (`v` in `<= 2^omega(q)` residue classes).
+- **How it is useful:** Sharpens the `(ILO-moment)` / `rho* < log2` wall (Paper
+  D fiber-image program): brackets Step B by proving three natural bridges
+  impossible and localizing the residual to large-`det G` (spread) blocks, so
+  the only remaining content is Diophantine control of the resonance
+  denominator (= per-instance exponential inverse-LO). Complements #661
+  (spectral shortcuts impossible) and #657 (downstream Freiman constants safe).
+- **What to do next:** Attack the surviving Diophantine/commensurability bridge
+  (why should the dominant resonance be near-rational of bounded `q`?), or
+  probe a growing-order `INT|S|^6` (PTE-trade) moment argument; verifier
+  `verify_bohr_gap_volume.py` is `RESULT: PASS (56/56)`, ~2 s.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
