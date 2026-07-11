@@ -13,3 +13,4 @@ import AsymptoticSpine.ProfileEnvelope
 import AsymptoticSpine.StaircaseDeep
 import AsymptoticSpine.EffectiveClosure
 import AsymptoticSpine.PrimitiveBoolean
+import AsymptoticSpine.BooleanDifferenceGrowth

@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Boolean difference growth in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/BooleanDifferenceGrowthNat.lean`,
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/BooleanDifferenceGrowth.lean`,
+  the package root, and
+  `experimental/notes/audits/lean_frontiers_boolean_difference_growth.md`.
+- **Status:** PROVED / CONDITIONAL FORMALIZATION.
+- **What is being added:** Proves `|A-B|^2 >= |A|^2|B|` for concrete
+  duplicate-free Boolean families by coordinate-fiber induction, derives
+  `|F-F|^2 >= |F|^3`, and discharges the quasicube input in the retained BSG
+  high-energy arithmetic and primitive moment compiler.  The separate direct
+  sharp-energy compiler in PR #605 is unaffected.
+- **How it is useful:** Closes one named input of the retained BSG route while
+  leaving BSG extraction and the low-energy/Sidon payment visible.  It neither
+  proves nor strengthens the separate sharp-energy input.
+- **What to do next:** Use this theorem when instantiating the retained BSG
+  alternative; keep the direct sharp-energy and low-energy inputs explicit.
+
 ### 2026-07-11 - Concrete primitive Boolean Lean semantics
 
 - **Agent/model:** Codex.
