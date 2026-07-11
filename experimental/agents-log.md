@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Exp-ILO Step B via Fourier / eigenvalue methods
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:** `experimental/notes/thresholds/exp_ilo_fourier.md`,
+  `experimental/scripts/verify_exp_ilo_fourier.py`.
+- **Status:** PROVED / REFUTED / MEASURED / OPEN, as labeled per claim in the note.
+- **What is being added:** A characteristic-function (Esseen/Halasz) and
+  eigenvalue (det-G) attack on the exp-regime inverse-Littlewood-Offord "Step B"
+  wall of #657/#655. PROVED unconditional: the affine-invariant Fourier atom
+  bound `fstar <= 2^b INT prod|cos pi psi_i|`, its sublevel-volume corollary, and
+  quadratic-Bohr trapping of all but `eps*b` elements (Theorems A/B/C). REFUTED:
+  the hoped fiber upper bound `fstar <= C 2^b/sqrt(det G)` (affine-invariance
+  mismatch + the `fstar>=1` floor); det G governs the fiber FLOOR, not the
+  ceiling (exact Cauchy-Binet, L2 collision identity, kernel-slice reformulation
+  banked). Also states and verifies the corrected Step-B exception scale
+  `O(eta b)` (per the Codex read-only audit), superseding #657's printed `o(b)`
+  clause, and checks the surviving reduction `omega=O((d+1)eta)->0`.
+- **How it is useful:** Localizes the (ILO-moment) wall to one classical step
+  (quadratic Bohr set -> GAP) by a route disjoint from #657's Freiman chain, and
+  proves the whole spectral/spread-based family cannot supply the missing fiber
+  ceiling -- so Step B provably requires additive structure. Supports the
+  `rho* < log2` program (#655 R5) and the fiber-image cap.
+- **What to do next:** Attack (Bohr->GAP) at exponential concentration -- feed
+  the `2^{-eta b}` volume of resonances (Lemma 2) through a Halasz/large-sieve
+  argument; or pin the det-G floor constant rigorously (currently CLT-cited).
+  Verifier: `python3 experimental/scripts/verify_exp_ilo_fourier.py`
+  (`PASS (52/52)`, 4.3 s).
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
