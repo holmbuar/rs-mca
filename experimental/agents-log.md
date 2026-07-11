@@ -30,6 +30,37 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - PTE-cluster packing frontier
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:** `experimental/notes/thresholds/pte_cluster_packing_frontier.md`,
+  `experimental/scripts/verify_pte_cluster_packing.py`,
+  `experimental/scripts/repro_pte_cluster_census.py`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED (affine invariance; trade-deficit `c>=2^{b-2r}`;
+  `fstar<=2^{b-3}` cap; `rho*<=phi*` reduction; symmetric-block tensor
+  achievability) / COMPUTED (census, champion) / MEASURED (`phi(b)` trend) /
+  OPEN (value of `phi*`) / AUDIT (Codex F_17 negative).
+- **What is being added:** Consumes our PR #623's named wall (the `(fstar,L1)`
+  PTE-cluster packing frontier). Formalizes the extremal problem
+  `max (fstar*L1)^{1/b}`; proves the objective is affine-invariant; proves the
+  packing rate reduces to the max-fiber rate `phi* = sup(log fstar)/b`
+  (`rho <= phi`); improves the finite-`b` cap to `(1-3/b)log2` (still `->log2`);
+  and improves the champion `0.1317 -> 0.156659` via a symmetric `b=14`
+  interval-with-holes block (proved infinite family by tensoring, validated by
+  exact finite-`k`).
+- **How it is useful:** Advances #623's OPEN quantitative matching bound: it
+  identifies the single clean quantity to bound (`phi*`, the degree-2 moment-map
+  max-fiber rate), refutes #623's "plateau ~0.14 / not climbing" numerics (the
+  frontier climbs, `phi(b)` monotone through `b=16`), and corrects the
+  "complement-of-2 optimal" structural read (optimizers are wider symmetric
+  clusters whose hole-count grows with `b`).
+- **What to do next:** Attempt a sub-`log2` bound on `phi*` (the wall) via an
+  arithmetic anticoncentration bound on `#{w-subsets with fixed (e1,e2)}`
+  beating the trivial `fstar<=2 fstar(b-1)`; push the symmetric census past
+  `b=16` (memory-walled near `b=20` for near-interval blocks); re-derive the
+  three PI-flagged steps (Lemma B counting, Prop E local-CLT, `phi(b)` trend).
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
