@@ -30,6 +30,37 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - C7 collapse cell image-scale degree = received-line field of definition
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/c7_collapse_image_degree.md`,
+  `experimental/scripts/verify_c7_collapse_image_degree.py`.
+- **Status:** PROVED (dichotomy) / COUNTEREXAMPLE (forcing witness, = paper's own
+  promoted countertheorem) / OPEN (one pinned printed input).
+- **What is being added:** Decides the last open cell of input 2's span face —
+  #635's residual `T-PAY-RES`, the C7 effective-image-collapse cell's own image-
+  scale distinct-slope count per received line. It is not a free enumerative
+  constant: by `thm:subfield-confinement-full` (tex L1930-1935) applied to the
+  tower `D ⊆ F_r ⊆ F`, `delta_lambda(r) <= |F_r|`, the received line's field of
+  definition (T-FIELD, PROVED). Hence the collapse cell pays (`e^{o(n)}` per line)
+  on every base-field/bounded-extension line; the bound is tight, forced to
+  `e^{Theta(n)}` at `[F_r:B]=Theta(n/log|B|)` by the paper's own promoted
+  `thm:intro-countertheorem` (Codex #634 `J_z`, DannyExperiments #631
+  `H_phi(lambda)`). The single residual is the pinned printed input `(FI-field)`:
+  the collapse-cell received line is confined to `log|F'_n|=o(n)`.
+- **How it is useful:** Supersedes #635's vague "collapse cell image-scale
+  projection degree is `e^{o(n)}` per line" with the exact field-of-definition
+  mechanism and a sufficient+necessary certificate; extends #635's four-item
+  ledger entry to the final printed form (span face closes on the product/profile
+  class modulo `(FI-field)`). Reconciles #634/#631 (many slopes, one line) with
+  #621 (many supports, one slope) as one construction at two poles (base vs
+  extension field). Verifier `RESULT: PASS (115/115)`, ~0.24 s.
+- **What to do next:** Decide whether ledger-admissibility or the prize proximity-
+  radius reserve already implies `(FI-field)` (closes the face unconditionally);
+  if the Codex supercritical-transition theorem lands, slot it as `[SUPERCRIT]`.
+  Print `(FI-field)` as a named companion to `(FI)` and give the C7 cell a label.
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
