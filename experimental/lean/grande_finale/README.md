@@ -19,12 +19,17 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/SyndromeLine.lean` formalizes the frontiers paper's exact
   syndrome-line normal form, deduplicated transverse secant compiler, and the
   resulting numerator equality for a surjective syndrome map.
+- `GrandeFinale/ProfileEnvelopeWindow.lean` formalizes the exact rational
+  identity-versus-folding exponent window for each actual complete-fiber pair,
+  its finite-family intersection/failure-band union, and the no-field-drop
+  crossing criterion.
 - `GrandeFinale/BC.lean`, `GrandeFinale/SP.lean`, and
   `GrandeFinale/Frontier.lean` formalize theorem-level reductions around the
   BC, SP, and frontier ledgers.
 
-The theorem-by-theorem scope of the syndrome module is recorded in
-`SYNDROME_LINE_CORRESPONDENCE.md`.
+The theorem-by-theorem scopes of the syndrome and profile-window modules are
+recorded in `SYNDROME_LINE_CORRESPONDENCE.md` and
+`PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The central open mathematical target remains Q: the primitive entropic inverse
 theorem / row-sharp prefix-fiber bound needed by `grande_finale.tex`.  The
@@ -37,4 +42,5 @@ rows or the full asymptotic closure by themselves.
 Do not run `lake build` casually in this repository.  Build this package only
 with the pinned Lean/Mathlib versions and the matching precompiled Mathlib
 cache.  The full default target, including the package root and all child
-modules, was checked successfully under that exact-pin setup on 2026-07-09.
+modules, was checked successfully under that exact-pin setup on 2026-07-11
+(8036 jobs).

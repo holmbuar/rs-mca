@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Per-folding profile-envelope windows in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/ProfileEnvelopeWindow.lean`,
+  `experimental/lean/grande_finale/PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`,
+  the package README and formalization summary, and this log.
+- **Status:** PROVED rational exponent algebra / CONDITIONAL correspondence.
+- **What is being added:** Proves the exact closed identity-dominance windows
+  and open failure band for one complete-fiber folding, then proves that a
+  finite row uses the intersection over its actual `(c,lambda)` pairs.  At a
+  positive zero-target crossing the row is exponent-dominated exactly when
+  every carried field ratio is one.
+- **How it is useful:** Formalizes the corrected per-folding repair to the
+  profile-envelope comparison and rules out collapsing degrees and field ratios
+  from different foldings into a fictitious single competitor.
+- **What to do next:** Instantiate the algebra only after QR8 normalization, an
+  exhaustive actual folding family, and the required (A2)/(A4)/(A7) bridge have
+  been supplied; keep the asymptotic envelope conclusion conditional until then.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,

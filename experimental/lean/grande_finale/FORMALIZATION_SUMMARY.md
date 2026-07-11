@@ -24,6 +24,9 @@ This package is a partial Lean formalization of
   support-wise syndrome-line normal form, fixed-support uniqueness,
   deduplicated finite-family incidence, and the exact MCA/syndrome numerator
   equality for a surjective syndrome map.
+- `GrandeFinale/ProfileEnvelopeWindow.lean`: exact rational exponent algebra for
+  the corrected per-folding identity-dominance windows, including finite-family
+  intersection/union and the positive-crossing no-field-drop characterization.
 - `GrandeFinale/BC.lean`: theorem-level reductions around the BC split-pencil
   ledger, including one-parameter moving-root and saturation kernels.
 - `GrandeFinale/SP.lean`: theorem-level reductions around the SP ledger,
@@ -59,9 +62,15 @@ linear-code compiler behind `prop:syndrome-line-normal-form` and
 parity-check construction, rational-normal-curve interpretation, and reduction
 from threshold witnesses to exact-cardinality supports remain separate.
 
+The profile-window module is also independent of Q.  It proves exponent-level
+dominance only after `h`, `s`, and every actual `(c,lambda)` pair are supplied.
+QR6/QR8 normalization, folding-family exhaustiveness, (A2)/(A4)/(A7), and the
+bridge to the full profile envelope remain explicit outside inputs.
+
 ## Build Note
 
 Do not run `lake build` casually in this repository.  Build only with the
 pinned Lean/Mathlib versions and matching precompiled Mathlib cache.  On
-2026-07-09 the full default target completed successfully in that exact-pin
-environment, including `GrandeFinale.lean` and every `GrandeFinale/*` module.
+2026-07-11 the full default target completed successfully in that exact-pin
+environment (8036 jobs), including `GrandeFinale.lean` and every
+`GrandeFinale/*` module.
