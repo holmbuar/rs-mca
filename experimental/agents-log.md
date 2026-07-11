@@ -30,6 +30,35 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Collapse-side envelope payment after routing
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:** `experimental/notes/thresholds/collapse_payment.md`,
+  `experimental/scripts/verify_collapse_payment.py`, this log entry.
+- **Status:** PROVED (accounting well posed after routing; countertheorem
+  dissolved; count->mass reformulation) / OPEN (single collapse-cell image-scale
+  projection degree, = #626 rescoped) / MEASURED (census).
+- **What is being added:** Closes the post-routing accounting on input 2's span
+  face. Proves the profile envelope `E_n(a)` (`eq:profile-envelope`, tex L859-862)
+  charges the **first-match disjoint union** `sup_r sum_i |Z_i^circ| = sup_r
+  |Z_a(r)|` (`lem:first-match-bound`, L1535) -- a mass/union, each slope once. So
+  L869's "subexponentially many profiles" is a count paraphrase of a mass statement;
+  the operative census is per-line + description-entropy `o(n)` (L1447-1450,
+  `lem:profile-multiplicity` L5028-5033). #626's `e^{Omega(N)}` collapse family is
+  exactly the "arbitrary planted subsets" `lem:profile-atlas` (L4781-4783) excludes
+  (Omega(N)-bit description entropy), and after `(FI)`-routing (L877-880) each has
+  `Z_i^circ = empty` -> contributes 0, so the countertheorem (L889-890) does not
+  fire (it was the per-profile overcount `2 N_coll`).
+- **How it is useful:** Input 2 span face (frontiers paper). Consumes
+  #536/#539/#545/#609/#614/#622/#625/#626/#627 and avdeevvadim #558. Supersedes the
+  #626 ledger choice: the collapse budget is one description-entropy-bounded
+  image-scale cell, not an `e^{Omega(N)}` envelope sum.
+- **What to do next:** Discharge T-PAY-RES -- the single C7 collapse cell's
+  image-scale projection degree per line (singleton fibers, so RC1/occupancy gives
+  no compression; needs a direct distinct-slope estimate). Verifier
+  `verify_collapse_payment.py` recomputes every number: `RESULT: PASS (1210/1210)`,
+  ~0.19 s under `ulimit -v 2097152`.
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
