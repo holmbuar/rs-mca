@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Pay the C7 projection-degree budgets on product leaves
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:**
+  `experimental/notes/thresholds/c7_degree_enumeration.md`,
+  `experimental/scripts/verify_c7_degree_enumeration.py`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED (count theorems) / AUDIT (consumer) / PARTIAL (budget
+  verdict) / OPEN (routing exhaustiveness), as labelled per-claim in the note.
+- **What is being added:** Enumeration of the two C7 assumed enumerative inputs
+  (saturation L2451-2452, effective-image collapse L2453-2454) on the
+  product/profile class that carries every `(S_E)`-violator (#622 T3 / #625
+  MASTER-2). By multiplicativity of `G_1 = A_eff/L` and `Q_img = L*Mx`, both
+  counts are the exact binomial tail `sum_{j>=theta k} C(k,j) = e^{Omega(N)}`;
+  this busts the profile envelope's `e^{o(n)}`-profiles hypothesis (tex L869) and
+  realizes "the countertheorem" (tex L889) via the singleton-fiber `Nbar=1` (the
+  #609 escape). Verifier `RESULT: PASS (233/233)`, ~3 s under `ulimit -v 2097152`.
+- **How it is useful:** Pins the exact budget consumer (profile envelope
+  `eq:profile-envelope` L857-862 + `RC1`/`prop:saturation-payment`), proves the
+  printed enumeration budget is NOT payable on the deep product class, proves the
+  tex's entropy-loss lemmas (L2513/L2526) cannot substitute (Gap-1 collapse has
+  full support), and quantifies the still-open routing-exhaustiveness obligation
+  (#622/#625) with an exact `e^{Omega(N)}` lower bound on the profiles the
+  `(FI)`/first-match routing must remove. Supports input 2's span-face closure
+  chain in `asymptotic_rs_mca_frontiers.tex`.
+- **What to do next:** Decide the #622/#625 ledger wording (print the C7
+  projection-degree budget as the `(FI)`/max-fiber-Q routing of the binomial-tail
+  family, i.e. prove routing = spectrum); review the count theorems before
+  promotion; close the source PR as manually integrated once pushed.
+
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
