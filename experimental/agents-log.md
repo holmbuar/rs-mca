@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - PTE extremality on the image-normalized R=2 face
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:**
+  `experimental/notes/thresholds/pte_extremality_image_face.md`,
+  `experimental/scripts/verify_pte_extremality.py`.
+- **Status:** PROVED (structural) / COUNTEREXAMPLE (2-point-optimality refuted)
+  / OPEN (quantitative matching bound) / AUDIT.
+- **What is being added:** Adjudicates the #534/#564/#615 convergence on
+  Prouhet/PTE extremals for the image-normalized (`barN = M/L`) near-Sidon /
+  max-fiber tradeoff at `R=2`.  Proves PTE-universality (every fiber of
+  `(sum t, sum t^2)` is a degree-2 PTE trade = scottdhughes's #564 star-trade
+  lemma on the image face), so every positive-rate configuration is
+  PTE-structured; derives the general product curve
+  `rho = (1/b) log(fstar*L1/2^b)`; and **refutes** the claim that the minimal
+  two-point Prouhet block (#615, `rho = log(63/32)/6 = 0.1129`) is rate-optimal
+  — denser degree-2 PTE clusters (e.g. `{0..13}\{4,9}`, four spaced triples)
+  strictly beat it on both the fiber-rate and near-Sidon energy axes.
+- **How it is useful:** Sharpens #615's OPEN residual — the razor's
+  counterexample universe is not open, it is the degree-2 PTE-cluster family
+  (broader than the single minimal trade) — for the frontiers `primitive Q`
+  lane; and locates the exact wall (a sharp bound on the achievable
+  `(fstar, L1)` frontier, the PTE-cluster packing rate) that a quantitative
+  matching bound needs.
+- **What to do next:** Attack the named packing inequality
+  `F(b,c) = ` max fiber at collision deficit `c`; test Reading A (large
+  Sidon-PTE clusters, `theta -> 2`); PI re-derivation per the note's three
+  steps.  No `.tex`/`.pdf` edited; nothing promoted.
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
