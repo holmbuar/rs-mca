@@ -30,6 +30,32 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - General-divisor covering constant for binary-tower C5
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/c5_covering_constant.md` and
+  `experimental/scripts/verify_c5_covering_constant.py`.
+- **Status:** PROVED.
+- **What is being added:** Closes the one OPEN residual of PR #610 (the
+  general-divisor binary-tower covering constant). Theorem: for every odd `N>1`,
+  every nonzero doubling orbit mod `N` has minimum element `<= (N-1)/2` (one-line
+  smallest-element contraction: a high-half `m` doubles to `2m-N in (0,m)`),
+  hence `d_2(N,{1..R})=1` for all `R>=(N-1)/2` (only the fixed point `0` unmet;
+  `=0` if `0 in I`). No divisor condition — holds for all odd `N`, a fortiori
+  every `N|2^s-1`. `kappa=1/2` is universal and sharp; the extremal `N` are
+  exactly the Mersenne numbers `2^s-1`.
+- **How it is useful:** Makes the C5 payment chain (#545 routing + #607 count +
+  #610 magnitude + this covering) math-unconditional on the whole binary-tower
+  cell at half-prefix depth `R>=N/2`, with explicit payment `2^{d_2}=2`. Recovers
+  #610's necklace (`N=2^s-1`) and primitive-root cases and upgrades its measured
+  composite DECAY census to the proved constant `d_2=1`. Refutes the brief's
+  `2^t+1`-extremal guess.
+- **What to do next:** Verifier `14/14 pass`, ~22 s. Remaining conditionality is
+  only the deployment reading `R>=N/2 <=> rho<=1/2` (audit, per-row `(N,R)` not
+  printed in the tex), now identical to the circle family F1. PI re-derive: the
+  contraction step and the Mersenne-only extremal classification.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,
