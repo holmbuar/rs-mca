@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - C5 defect magnitude on the deployed Frobenius families
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:**
+  `experimental/notes/thresholds/c5_defect_magnitude.md`,
+  `experimental/scripts/verify_c5_defect_magnitude.py`.
+- **Status:** PROVED (binary tower + order-2 sharp law + trivial-floor
+  reclassification) / MEASURED (decay census + fibre realization) / OPEN
+  (general-divisor tower covering constant).
+- **What is being added:** Settles PR #607's one open residual (make the
+  cyclotomic-defect bound `p^{d_p}` payment-grade, `d_p=o(|G|)`) on the profile
+  families the frontiers tex actually routes through the C5 field-descent cell.
+  The deployed slope groups are **cyclic** (circle/twin-coset `N|p+1`; binary
+  tower `N|2^s-1`); the magnitude splits by `o=ord_N(p)`: `o=1` prime-field
+  floor is **not a genuine C5 leaf** (Frobenius fixes the profile), `o=2` circle
+  obeys the exact sharp law `d_p=N-|I∪-I|` (threshold at prefix `R=N/2`), and
+  the binary tower is genuinely active with `d_2=O(1)` at `R≥N/2` — PROVED for
+  `N=2^s-1` by a necklace/bit-rotation argument and for primitive-root prime
+  `N`, reproducing Danny #451 Theorem 2 at `p=2`. Verifier: 151 checks.
+- **How it is useful:** Completes the C5 chain `#545` routing + `#607` count +
+  this magnitude bound into an unconditional payment on the binary-tower cell at
+  deep prefix; reclassifies the trivial-Frobenius floor out of C5; gives the
+  exact circle threshold. Credits Danny #451 (cyclic Theorem 1/2), #607
+  (Theorem A / floor), #545 (routing).
+- **What to do next:** Prove the general-divisor covering constant
+  (`d_2=o(N)` at `R≥κN` for every `N|2^s-1`), and pin `R≥|G|/2` (rate ≤ 1/2
+  after the domain/group factor) for specific deployed circle rows.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,
