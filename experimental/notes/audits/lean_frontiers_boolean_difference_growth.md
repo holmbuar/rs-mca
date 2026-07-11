@@ -12,7 +12,7 @@ difference bound
 
 Taking `B=A` gives `|A-A|^2 >= |A|^3`, hence the square-root-free quasicube
 inequality consumed by the retained BSG high-energy argument.  Its concrete
-primitive-Boolean compiler therefore no longer takes quasicube growth as a
+primitive-Boolean wrappers therefore no longer take quasicube growth as a
 hypothesis; BSG extraction and the low-energy/Sidon payment remain explicit
 inputs.  The separate direct compiler in PR #605 from `E(F)^3 <= |F|^8` is
 unchanged and does not depend on this result.
