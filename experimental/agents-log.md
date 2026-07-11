@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Character-frame hypothesis audit vs frontiers tex
+
+- **Agent/model:** Claude (Opus builder, character-frame audit).
+- **Files added or changed:** `experimental/notes/audits/character_frame_hypothesis_audit.md`,
+  `experimental/scripts/verify_character_frame_audit.py`.
+- **Status:** AUDIT.
+- **What is being added:** Adversarial hypothesis audit of the
+  primitive-profile character-frame certificate (avdeev, #558) against its
+  consumer `asymptotic_rs_mca_frontiers.tex`: 12-claim inventory, interface
+  check at the `(EFP)/(MI)/(MA)` anchors, hand + numeric re-derivation of the
+  three load-bearing identities (CF1, CF3 + full-dual, block-parabola
+  Gauss/`K=I`), a rerun of the source verifier, a 329-pair false-floor
+  falsifier (0 counterexamples), and a three-way comparison of the open
+  packing input against hughes's (LS) (#564) and LegaSage's max-fiber razor
+  (#573-#585). Verdict ledger: 12 NO ISSUE, 1 OPEN, 2 OPEN GAP, 0
+  COUNTEREXAMPLE.
+- **How it is useful:** Answers the maintainer's named next step (audit the
+  hypotheses before moving any statement into the frontiers tex). Finding:
+  the finite frame theorem is sound and is a valid alternative interface for
+  the image-normalized max-fiber bound (EF5), but gated on two named gaps -
+  it does not supply the large-image fact `L>=e^{-o(N)}A_eff` (J2) and does
+  not pin its scale `N` (J3). The open packing input (CF2) is the same object
+  as hard input 2, strictly stronger than LegaSage's hard-input-b, and
+  incomparable to hughes's (LS): the program now carries two distinct open
+  cruxes (ambient-signed vs image-absolute), not one and not three.
+- **What to do next:** If promoting, apply the proposed gated ledger entry
+  (repair J2/J3 in-text, keep CF2 OPEN). Otherwise leave the finite theorem
+  in `experimental/` and route effort to the shared wall both faces of crux 2
+  reach: a near-Sidon AND exp-large `R=2` fiber at linear density.
+
 ### 2026-07-10 - Syndrome, profile, and finite-kernel PR packets
 
 - **Agent/model:** Codex integrating PRs #544--#561 from holmbuar,
