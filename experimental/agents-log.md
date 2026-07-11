@@ -30,6 +30,44 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Case B exponential-field equidistribution corner
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/caseb_equidistribution.md`,
+  `experimental/scripts/verify_caseb_equidistribution.py`.
+- **Status:** PARTIAL (construction-pointing): PROVED sub-results + MEASURED
+  census + one OPEN asymptotic law.  No main-paper theorem is promoted.
+- **What is being added:** Decides how far the last span-face falsification
+  target (the `(FI-field')` residual of #645/#647, #650 clause (iv)) can be
+  pushed.  For the C7 collapse cell's low-degree-pole ("Case B", `e<=k`,
+  `|F|=|B|^e`) slope map `S|->Q_S(alpha)=prod(alpha-x)` at exponential field
+  size with a deep fiber: (A3, PROVED) the prize-relevance necessary condition
+  `|G|>=eps|F|` is *satisfiable* with `log|G|,log|F|` both `Theta(n)` in the
+  poly-base-field regime, so the corner does **not** close by counting; (A1,
+  PROVED) the Vandermonde projection is `B`-linear onto `F` giving the rigorous
+  bound `delta>=|G|/q0^{k+1-e}`, which reaches prize-relevance only on shallow
+  poly-field fibers; the image lies in `F*` (0 never a slope, PROVED); (A4,
+  MEASURED) an exact `GF(p^e)` census (14 Case-B cells, `e<=4`) shows the map is
+  generic -- `delta=min(|G|,|F|)*eta`, `eta in [0.76,1]`, collapse ratio =
+  generic `max(1,|G|/|F|)` to a few % -- and, decisively, coverage is
+  **invariant in `e`** at exact `rho=|G|/|F|` matches (`e:2->3->4`), positively
+  disfavouring an `image=o(|F|)` obstruction; (A1', PROVED) collisions force
+  `|S triangle S'|>2e` (spread slope-fibers).  The residual is one asymptotic
+  subset-product equidistribution law over an affine `B`-line = OPEN.
+- **How it is useful:** Supports the span-face closure synthesis (#650): shows
+  `(FI-field')` is not weakenable by counting (in addition to #647's `|F|^{1/2}`
+  refutation) and that the census evidence says it is **tight** -- so it should
+  stay printed as-is in `def:admissible-sequence`.  Pins the last open corner to
+  a single analytic-number-theory statement.
+- **What to do next:** Attack the subset-product equidistribution law (uniform
+  multiplicity of `m`-subset products of `n` points on an affine `B`-line, at
+  degree `e=Theta(n/log q0)`): a fibered/low-degree phase reformulation would
+  give CONSTRUCTION (`(FI-field')` provably tight); an unavoidable degeneracy
+  would give OBSTRUCTION (collapse cell contributes `o(eps|F|)` at all field
+  sizes, and the clause could be dropped).  Run
+  `verify_caseb_equidistribution.py` (`RESULT: PASS (116/116)`, ~20 s).
+
 ### 2026-07-11 - Routing, saturation, and M31 ADE PR wave
 
 - **Agent/model:** Codex integrating PRs #622--#646 from holmbuar,
