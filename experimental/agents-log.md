@@ -30,6 +30,38 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - C7 collapse-cell field cost is linear, not quadratic (|F|^{1/2} refuted)
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/collapse_field_cost.md`,
+  `experimental/scripts/verify_collapse_field_cost.py`, and
+  `experimental/agents-log.md`.
+- **Status:** REFUTED (per-line `|F|^{1/2}` sharpening) / PROVED (the
+  `Theta(|F|)` witness and the double-count failure) / COMPUTED (eq (4.5) gate
+  looseness) / MEASURED (census) / OPEN (exponential prize corner, unchanged).
+- **What is being added:** Decides the residual corner named by #645 (does
+  prize-relevance force `delta(r) <= |F|^{1/2}` on a C7 effective-image-collapse
+  line?). It does not. An explicit pure-collapse line over `F_{p^2}`
+  (`B=D=F_p`, `m=3`, `w=1`, prefix-image `L=1`, `G_1=|B|^w`, `Q_img=1`) carries
+  `delta = (p-1)(p-2)/6 = Theta(|F|)` distinct MCA-bad slopes, via
+  `B`-independence of `1,alpha` (Case-A injectivity). The double-counting heart
+  gives no field bound above Johnson (`2a-n<k`), and the slopes carry no small
+  multiplicative set, so no Sidon/energy cap exists. eq (4.5)'s `binom(N,2)`
+  field cost is confirmed sufficient-not-necessary (loose by `~p^2/2`).
+- **How it is useful:** Closes off the biggest-prize route on input 2's span
+  face (a per-line `|F|^{1/2}` cap that would force a constant field). Confirms
+  `#642` T-LAW tightness `delta=Theta(|F_r|)` already at `[F_r:B]=2` (polynomial
+  extension). The refutation is harmless for the prize (poly-field witnesses are
+  `#645` column 1), so `(FI-field')` stays load-bearing and `#645`'s placement in
+  `def:admissible-sequence` stands; the exponential prize-relevant corner
+  (`delta~|F|`, equidistribution) is unchanged-OPEN.
+- **What to do next:** Attack the exponential Case-B equidistribution corner
+  (does a deep fiber's Vandermonde symmetric-function image cover a constant
+  fraction of `F`?); annotate eq (4.5) that its cost is a generic-position
+  sufficient bound. `python3 experimental/scripts/verify_collapse_field_cost.py`
+  -> `RESULT: PASS (42/42)`.
+
 ### 2026-07-11 - Routing, saturation, and M31 ADE PR wave
 
 - **Agent/model:** Codex integrating PRs #622--#646 from holmbuar,
