@@ -30,6 +30,50 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - Fiber-image tradeoff: the joint cap rho* < log2
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:** `experimental/notes/thresholds/fiber_image_tradeoff.md`;
+  `experimental/scripts/verify_fiber_image_tradeoff.py` (zero-arg,
+  `RESULT: PASS (36/36)`, ~2.2 s); `experimental/scripts/repro_fiber_image_tradeoff.py`
+  (heavy symmetric census + three-model fit).
+- **Status:** CONDITIONAL (main cap, on the named OPEN `(ILO-moment)`
+  hypothesis) / PROVED (reduction + partials) / COMPUTED (frontier + fit) /
+  MEASURED (mechanism).
+- **What is being added:** Attacks the wall #646 redirected to (its R5): is
+  `sup_V(phi+lambda) < 2 log2`, i.e. `rho* < log2`? Verdict **conditional YES**:
+  `rho* < log2` under the named `(ILO-moment)` hypothesis (inverse-LO-type
+  structure at *exponential* concentration), with the reduction PROVED and the
+  hypothesis labeled OPEN — the published inverse-LO theorems (Tao-Vu /
+  Nguyen-Vu) cover only polynomial concentration, and the first draft's
+  out-of-scope import was **flagged by the Codex team's read-only
+  theorem-import audit** and repaired. Reduces `rho*` to the max-multiplicity
+  vs image-size anticoncentration tradeoff for `b` points on the moment curve
+  `(1,t,t^2)`; proves the deficit-rate identity `rho = phi - gamma`; shows the
+  only simple joint bound `fstar+L1<=2^b+1` cannot cap (permits `fstar=L1=2^{0.9b}`);
+  measures that the deficit is ~99% *propagation* (not the heavy fiber); proves a
+  rate-dependent sphere-packing trade-support bound and that a single trade forces
+  only a vanishing `gamma` (so the cap needs a near-perfect matching); proves the
+  in-hypotheses **poly-window partial** (`phi >= log2 - C log(b)/b` forces
+  `rho -> 0`, Nguyen-Vu as cited), pinning any `rho -> log2` family to the
+  corridor `log b/b << 1 - phi/log2 << 1`; finds a **NEW census champion at
+  b=18** (`V = {2,3,4,6,13..17,19..23,30,32,33,34}`, `fstar=30`, `L1=151275`,
+  `rho = 0.158411`, superseding #643's `0.156659`; verifier re-derives it and
+  cross-checks `fstar=30` by DP-independent enumeration); observes the joint
+  bound `fstar+L1 <= 2^b+1` is EXACTLY tight at `b=6,8`; and fits best-`rho(b)`
+  over `b=10..18` to a sub-`log2` cap (`R ~ 0.20-0.23`), with the forced-climb
+  model fitting 17-19x worse.
+- **How it is useful:** Answers #646's redirected joint-constraint question in
+  conditional form and sharpens #643's bracket to `[0.158411, log2)` conditional
+  on `(ILO-moment)` (unconditionally `[0.158411, log2]` with the poly window
+  excluded). Kills the construction route to `rho=log2` in the poly window;
+  names the exact open corridor.
+- **What to do next:** (1) Prove or refute `(ILO-moment)` in the corridor
+  (per-instance exponential-regime inverse-LO; only counting results exist).
+  (2) The unconditional matching route (trade `C'`-range double-counting on the
+  moment curve). (3) An explicit `eps`. (4) The `k=1` single-form warm-up
+  (Erdos-Moser) as a fully self-contained model of the argument.
+
 ### 2026-07-11 - Routing, saturation, and M31 ADE PR wave
 
 - **Agent/model:** Codex integrating PRs #622--#646 from holmbuar,
