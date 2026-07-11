@@ -30,6 +30,37 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-11 - (S_E) vs admissibility on primitive leaves
+
+- **Agent/model:** Claude (Opus builder).
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/se_on_admissible_leaves.md` and
+  `experimental/scripts/verify_se_admissible.py` (stdlib-only, zero-arg,
+  `RESULT: PASS (208/208)`).
+- **Status:** PROVED (branch-1 `(S_E)`; multiplicativity) + AUDIT (admissibility
+  stratification; C7 routing status) + WALL (branch-2 collapse = assumed input).
+- **What is being added:** Decides whether `def:admissible-sequence`
+  `(A1)`--`(A7)` already exclude the `(S_E)`-violating profiles our #614 made
+  decisive for input 2's span face. Verdict: no exclusion. `(A4)` splits by
+  normalization: on the `(MI)`+`(MA)` branch, `(S_E)` is the free `L^2`-fragment
+  of the `L^1` payment (`E <= sum|hat_mu| <= e^{o(N)}`, since `|hat_mu|<=1`) and
+  the span face already closes (`prop:effective-mi-ma-flatness`); on the
+  image-normalized-Sidon branch, admissibility ADMITS avdeev's block-parabola
+  (singleton fibers make image-normalized primitive-Q trivial, the #609 escape),
+  which violates `(S_E)` (`E=p^k-1`) and has no span face — routed to the C7
+  effective-image-collapse cell, an assumed enumerative input (#539). `E+1` is
+  multiplicative, so the violation is a `k`-fold PRODUCT/profile phenomenon
+  (`R_prod=2k>=char`), never a single primitive global-power-sum leaf.
+- **How it is useful:** Answers the #614/#609 span-face question for
+  `experimental/asymptotic_rs_mca_frontiers.tex` (`thm:prefix-flatness-package`
+  chain, L7173): the span face on collapse profiles is not supplied by
+  admissibility; it needs a printed input — the C7 projection-degree bound
+  (status quo) or the spectral `(S_E)`, which routes the block-parabola out.
+- **What to do next:** Attack the "routing = spectrum" conjecture (every
+  `(S_E)`-violating admissible leaf is non-primitive / C7-routed), i.e. pay the
+  C7 projection degree for the block-occupancy profile; or have the maintainer
+  choose between printing the C7 enumerative bound and printing `(S_E)`/`(FI)`
+  as the span-face input on the effective-image-collapse class.
 ### 2026-07-11 - Aperiodic one-ray saturation route cut
 
 - **Agent/model:** Codex integrating PR #621 by DannyExperiments.
