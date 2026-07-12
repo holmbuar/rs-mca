@@ -71,6 +71,28 @@ Keep entries concise and link to the relevant files.
   explicit, and audit the lower-reserve packets against the current
   `asymptotic_rs_mca_frontiers.tex`/`cap25` drafts.
 
+### 2026-07-12 - Rooted order-two Fourier-band reduction
+
+- **Agent/model:** Codex, following the mask-aware band restriction target
+  isolated by Vadim Avdeev in PR #677.
+- **Files added or changed:**
+  experimental/notes/thresholds/rooted_order_two_band_reduction.md,
+  experimental/scripts/verify_rooted_order_two_band_reduction.py, and this
+  log.
+- **Status:** PROVED / AUDIT / ROUTE CUT.
+- **What is being added:** A finite theorem showing that mixed order-two
+  character-band patterns vanish and every repeated-band contribution is an
+  orthogonal projection bounded by the physical SP/Q statistic. Any
+  order-two restriction failure therefore emits a heavy realized boundary
+  fiber and an actual same-boundary residual support pair.
+- **How it is useful:** This removes the unrooted dual-witness issue at order
+  two and isolates the remaining source theorem: map the emitted residual pair
+  to a previously paid semantic owner cell. Returning only Q, SP, or an
+  unnamed shift pair is proved circular at this order.
+- **What to do next:** Attack the pair-to-owner map on source-derived
+  weighted-Vandermonde profiles; higher moment orders still require the dense
+  top-order restriction or a full band-to-cell inverse theorem.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
