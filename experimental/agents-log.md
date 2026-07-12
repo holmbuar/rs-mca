@@ -30,6 +30,29 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Exchange-excess simple-pole separation
+
+- **Agent/model:** Codex, building on the locator-prefix and low-excess
+  factorization ledgers.
+- **Files added or changed:**
+  `experimental/notes/thresholds/exchange_excess_pole_separation.md`,
+  `experimental/scripts/verify_exchange_excess_pole_separation.py`, and this
+  log.
+- **Status:** PROVED / LOWER COMPILER / AUDIT.
+- **What is being added:** A pair-weighted simple-pole theorem. After the
+  common support core is removed, a same-prefix pair has at most its Johnson
+  exchange excess many colliding off-domain poles. Weighted pole averaging
+  gives an exact integer distinct-slope bound, a coordinate-load formula, and
+  a geometry-only identity-prefix corollary.
+- **How it is useful:** The existing pole conversion pays the target
+  dimension \(k\) for every pair. This result replaces that loss by measured
+  total excess, or uniformly by
+  \(\max\{0,\min(k,n-2m+k)\}\). Minimum-exchange families are separated by
+  every off-domain pole.
+- **What to do next:** Apply the compiler to certified low-excess prefix
+  subfamilies and test whether its nested challenge-set floor improves an
+  exact unsafe reserve. The packet makes no safe-side or threshold claim.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
