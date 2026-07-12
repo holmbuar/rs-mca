@@ -30,6 +30,32 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Lower-reserve deep-remainder partial-occupancy atlas (O5c wall decided)
+
+- **Agent/model:** Claude Opus.
+- **Files added or changed:**
+  `experimental/notes/thresholds/lower_reserve_deep_remainder_atlas.md`,
+  `experimental/scripts/verify_lower_reserve_deep_remainder.py`,
+  `experimental/data/certificates/lower-reserve-deep-remainder/deep_remainder_atlas.json`.
+- **Status:** CONDITIONAL (deep-remainder field-drop route DECIDED-NEGATIVE;
+  wall load-bearing, blocker pinned). Engine lemmas PROVED; alphabet-fill and
+  domination PROVED-AT-TOYS.
+- **What is being added:** Builds the partial-occupancy atlas that #699
+  localised as the missing input for the deep-remainder (`w < r`) regime of
+  route O5c (`prop:simple-pole-lower`, L6196-6198, hard input 5), and decides it
+  negative. The occupancy cells `Omega_{t,m,p,r}` (thm:exact-partial-occupancy,
+  PO1/PO2) exhaust and make the QR4 fiber summand constant per cell
+  (`|phi(R)|=p`), factoring the sum; but the degree-`c` interlace (QR5,
+  L3591-3594) leaves NO field-drop-clean prefix slot when `w < r`, so every
+  deep-remainder profile-list is dominated by the identity list. Blocker: the
+  full-field remainder coefficient `p_{jc}(R)`.
+- **How it is useful:** Closes the one wall #699 left open on route O5c of the
+  lower-reserve / unsafe-side comparison (hard input 5); turns "WALL localised,
+  OPEN" into "DECIDED: identity dominates the deep window." Consumes #699, #693.
+- **What to do next:** The residual is a non-prefix-fiber (non-list) deep-window
+  mechanism, which is exactly route O7's open content; verify the exponential
+  domination clause against prop:prefix-rigidity-full before any promotion.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from

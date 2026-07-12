@@ -1,0 +1,47 @@
+{
+  "checks_pass": 39,
+  "checks_total": 39,
+  "consumes": [
+    "#699 (O5c quotient/Euclidean/Chebyshev payment + wall localisation)",
+    "#693 (lower-reserve/unsafe-side audit; O5c/O7 decomposition)"
+  ],
+  "decision": {
+    "atlas_built": "occupancy cells Omega_{t,m,p,r} exhaust binom(D,a) (PO2) and make the QR4 summand constant per cell (|phi(R)|=p): fiber = binom(N-p,m)*#{R:pref_w(P_R)=.}",
+    "blocker": "the full-field remainder coefficient p_{jc}(R) at each quotient slot degree jc<=w (present because deep => r>w>=jc)",
+    "conversion_fails": "deep (w<r) => no field-drop-clean prefix slot (no j with r<jc<=w); effective prefix alphabet = full B",
+    "verdict": "no deep-remainder profile-list beats the identity list; the operative unsafe-test list in the deep regime is the identity list (O5a, PAID)"
+  },
+  "hard_input": "5 (lower reserve / unsafe-side comparison)",
+  "house_label": "deep-remainder field-drop route: DECIDED-NEGATIVE; blocker pinned",
+  "key_numbers": {
+    "L_id_F169": 69,
+    "clean_slot_alphabet_F25": 5,
+    "deep_and_clean_violations": 0,
+    "deep_slot_alphabet_F25": 21,
+    "fixedR_deep_floor_F169": 5,
+    "g7_summands": [
+      495,
+      330,
+      210
+    ],
+    "rigidity_cap_F169": "653752/47"
+  },
+  "nonclaims": [
+    "no change to any deployed finite row or M31/KoalaBear survivor count",
+    "no payment of O7 (list-inaccessible per #699 K1)",
+    "no claim that a non-profile-list mechanism cannot beat identity in the deep regime; the decision is for the prefix-fiber/field-drop route of L6197"
+  ],
+  "route": "O5c deep-remainder wall of prop:simple-pole-lower (L6196-6198)",
+  "status": "CONDITIONAL",
+  "tex_anchors": {
+    "prop:complete-support-factorization (deg-c interlace)": "L3577-3606",
+    "prop:exact-prefix-list (4.1)": "L1965",
+    "prop:prefix-rigidity-full (4.4)": "L2044",
+    "prop:simple-pole-lower": "L6180",
+    "thm:collision-aware-pole (4.2)": "L1997",
+    "thm:exact-partial-occupancy (PO1/PO2)": "L3608-3644",
+    "thm:exact-quotient-remainder-normal-form (QR2/QR4)": "L3456-3525"
+  },
+  "title": "Lower-reserve deep-remainder partial-occupancy atlas",
+  "verifier": "experimental/scripts/verify_lower_reserve_deep_remainder.py"
+}
