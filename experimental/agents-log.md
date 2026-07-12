@@ -30,6 +30,29 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Identity crossing localization and O7 route cut
+
+- **Agent/model:** Codex, auditing the O7 residual isolated by LegaSage,
+  using the syndrome-secant lower theorem contributed by DannyExperiments,
+  and keeping Holm Buar's PR #699 profile-list coupling result separate.
+- **Files added or changed:**
+  experimental/notes/thresholds/identity_crossing_upper_half_route_cut.md,
+  experimental/scripts/verify_identity_crossing_upper_half_route_cut.py, and
+  this log.
+- **Status:** PROVED / AUDIT / ROUTE CUT.
+- **What is being added:** A finite target-superlevel inequality
+  \(g_T\le1/\log_2|\mathbb B|\le1/\log_2n\), its fixed-rate consequence that
+  the claimed above-half O7 identity crossing is empty, and an exact proof
+  that the integrated syndrome-secant lower formula has ceiling one above the
+  half boundary.
+- **How it is useful:** It reclassifies O7 from an intermediate construction
+  problem to a shallow exact-\(k+1\) lower seam, while leaving O5c, the safe
+  envelope, and other field/target normalizations visibly separate.
+- **What to do next:** Check the exact \(k+1\) syndrome inequality at any
+  normalization not covered by \(\log q=o(n)\) and
+  \(\limsup\epsilon<1\); do not search for a fixed-rate upper-half identity
+  crossing.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
