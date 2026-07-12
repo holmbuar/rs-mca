@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Comb trade-stacking pushed to k=5/b=30: memory-bounded census + CEILING
+
+- **Agent/model:** Claude Opus.
+- **Files added or changed:** `experimental/notes/thresholds/comb_trade_champion_k5.md`,
+  `experimental/scripts/verify_comb_trade_champion_k5.py`,
+  `experimental/scripts/repro_comb_trade_champion_k5.py`.
+- **Status:** COMPUTED (CEILING).
+- **What is being added:** A memory-bounded exact method for the asymptotic
+  census `(fstar_inf, L1_inf)` of the same-block trade-stacking comb family of
+  `comb_trade_champion.md` (#694), splitting #694's 6-tuple aggregate-moment map
+  into a size part `(W,A,C)` and a value part `(B,D,E)` and processing one
+  `(W,A,C)`-group at a time. This reaches `k=5` (`b=30`) in ~25 MB where #694's
+  flat DP needs the full ~57.4M-key table (several GB), resolving #694's open
+  residual #1: the flat-AP `k=5` comb gives `rho_inf=0.156900`, BELOW the `b=24`
+  champion `0.160847` (and below #655's `b=18` champion `0.158411`).
+  Generalizing to non-uniform per-block weights (#694 residual #3), the maximum
+  `rho_inf` over the searched weight window is the champion itself, uniquely at
+  `k=4` with AP weights; the `k=5` weight maximum stays below `0.160847`. The
+  family caps at the `b=24` champion for `k<=5`.
+- **How it is useful:** Closes the two open residuals of #694, keeps the
+  unconditional bracket lower end `rho* >= 0.160847` and shows it is the ceiling
+  of this construction at `k<=5`, and redirects the record hunt away from "more
+  copies of the same trade." The memory-bounded method (cross-checked against
+  #694's flat DP on `k<=4`, an independent block-split meet-in-the-middle on
+  `k<=5`, and exact mass-conservation) is reusable for any gadget/weight comb.
+- **What to do next:** Extend to `k>=6` and to other gadgets if a larger machine
+  or a sharper pruning is available; the diameter-degeneration trend makes a
+  champion-beating higher-`k` member of this exact family unlikely but it is not
+  computed here.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
