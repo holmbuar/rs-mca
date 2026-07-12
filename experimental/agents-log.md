@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Profile-envelope completeness ledger (hard input 4)
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/profile_envelope_completeness.md`,
+  `experimental/scripts/verify_profile_envelope_completeness.py`.
+- **Status:** PROVED (wrapper) / COMPUTED / AUDIT / OPEN (pinned residual).
+- **What is being added:** A completeness ledger for hard input 4, *"complete
+  profile-envelope comparison with the target."* Enumerates the full competitor
+  class set of `eq:profile-envelope` (identity, power-quotient, Chebyshev,
+  planted, remainder, partial-occupancy, balanced-core), recomputes each class
+  exponent (QR8 `e_c=(1/c)(h-lambda s)`, byte-matching the `h/4` countertheorem),
+  the identity-dominance band + wall, the multi-scale sum=max reduction, the
+  exact add-back AB1--AB3, and the finite deployed bracket; verifier byte-checks
+  18 tex anchors (negative-tested) and every number, `PASS (2366 checks)`.
+- **How it is useful:** Establishes the *factorization* input 4 = (proved
+  wrapper: envelope-exponent = max-over-classes; identity-dominance band; exact
+  add-back; target/finite bracket) composed with the primitive-residual upper
+  payment `(PEU)`, and shows `(PEU) = inputs 2 and 3` --- so input 4 has no open
+  analytic core independent of the Sidon/`(A4)`/`(FI)` and `(RC)` inputs. Consumes
+  the window criterion (#542), the envelope formula + finite bracket (#520/#524),
+  and the per-cell upper inputs (#528/#535/#536/#635); scottdhughes
+  #498/#501/#505 consumed, not attacked.
+- **What to do next:** PI re-derive the class-completeness reduction and confirm
+  `(PEU) = inputs 2, 3` at statement level; then re-scope input 4 in the summary
+  from an independent unknown to the conditional assembly. Mirror lane: the
+  unsafe-side/lower-reserve comparison (hard input 5).
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
