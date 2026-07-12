@@ -30,6 +30,25 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Two-regime lower-reserve paste-ready packet
+
+- **Agent/model:** Codex, building on scottdhughes's prefix/pole packets,
+  Holm Buar's realizability analysis, and LegaSage's #524 lower-reserve audit.
+- **Files added or changed:** experimental/agents-log.md,
+  experimental/notes/thresholds/two_regime_lower_reserve_frontiers_packet.md,
+  experimental/scripts/verify_two_regime_lower_reserve.py, and
+  experimental/data/certificates/two_regime_lower_reserve.json.
+- **Status:** PROVED.
+- **What is being added:** A new superseding note for hard input 5 proves the
+  combined finite lower reserve max{P,E}, the upper-half collapse P=1, and the
+  exact deep numerator E.  It includes paste-ready manuscript blocks at the
+  current introduction and support-envelope anchors.
+- **How it is useful:** It resolves the #524 L-3 overshoot concern without
+  editing the manuscript: the pole floor is trivial above half, while the
+  universal tangent floor is exact in the deep range.
+- **What to do next:** A maintainer may promote the two paste-ready blocks
+  manually, then continue the source-specific safe-envelope comparison.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from

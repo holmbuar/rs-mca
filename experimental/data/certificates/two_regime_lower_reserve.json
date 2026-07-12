@@ -1,0 +1,49 @@
+{
+  "schema": "rs-mca-two-regime-lower-reserve-v1",
+  "status": "PROVED",
+  "hard_input": 5,
+  "source_commit": "ea4eb0784417ca5ab503a3c31a7eef6464ad100a",
+  "claims": [
+    {
+      "id": "combined-reserve",
+      "status": "PROVED",
+      "statement": "max(P(a),E(a)) <= B_MCA(a) <= U(a)"
+    },
+    {
+      "id": "upper-half-collapse",
+      "status": "PROVED",
+      "statement": "2a > n+k implies L(a)=P(a)=1"
+    },
+    {
+      "id": "exact-deep",
+      "status": "PROVED",
+      "statement": "3(n-a) <= n-k implies B_MCA(a)=E(a)"
+    },
+    {
+      "id": "l3-disposition",
+      "status": "AUDIT",
+      "statement": "the pole floor cannot overshoot in the deep range"
+    }
+  ],
+  "anchors": {
+    "intro_insert_after": 714,
+    "intro_item_line": 715,
+    "sb2_closing_line": 6228
+  },
+  "verification": {
+    "base_script": "experimental/scripts/verify_pole_realizability.py",
+    "base_checks": 18,
+    "packet_checks": 7,
+    "grid": {
+      "deep_subset_n_max": 219,
+      "rigidity_cases": 83892,
+      "deep_p_cases": 310144,
+      "all_reserve_cases": 711288
+    },
+    "zone_census": {
+      "pole_tighter_shallow": 3034,
+      "equal": 164648,
+      "tangent_tighter_or_pole_redundant": 543606
+    }
+  }
+}
