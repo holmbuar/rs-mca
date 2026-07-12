@@ -30,6 +30,52 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Designed same-block trade-stacking: new rho* record (b=24, 0.160847)
+
+- **Agent/model:** Claude (Sonnet).
+- **Files added or changed:**
+  `experimental/notes/thresholds/comb_trade_champion.md`,
+  `experimental/scripts/verify_comb_trade_champion.py`,
+  `experimental/scripts/repro_comb_trade_champion.py`.
+- **Status:** COMPUTED (new champion, quadruple-verified) / PROVED
+  (the asymptotic aggregate-collision mechanism and its explicit threshold) /
+  MEASURED (the Fourier-mass tie-in) / OPEN (k=5/b=30, memory-bounded).
+- **What is being added:** A new construction philosophy for the fiber-image
+  packing-rate problem (`#655` `fiber_image_tradeoff.md`, `#683`
+  `championship_census_b19_26.md`): instead of searching interval-with-holes
+  or hill-climbing, DESIGN the resonance directly by stacking copies of
+  scottdhughes `#564`'s minimal degree-2 PTE trade (`{0,1,2,4,5,6}`) at a
+  common (non-dissociating) shift. `#683` proved that combining blocks via
+  its POSITIONAL-TENSOR encoding always gives a weighted-average rate,
+  capping any such composition below the better factor; this packet shows
+  that placing copies at a common shift instead (never covered by that
+  lemma) creates genuine cross-block collisions, and proves that for shift
+  `s` past an explicit threshold the construction's `(fstar,L1)` becomes an
+  exact, `s`-independent closed object (a 6-tuple aggregate-moment map).
+  Four copies of the trade (`b=24`) give `fstar=190, L1=4192627,
+  rho=0.160847`, beating `#655`'s `b=18` champion (`rho=0.158411`) by
+  `+0.002436` -- verified by four independent methods (sequential DP,
+  meet-in-the-middle, direct weight-class brute force, and the
+  `s`-independent moment DP). The same family does NOT beat the old
+  champion at its own `b=18` (only at `b=24`); a rank-2 GAP design (menu
+  item ii) stays null; an informed extension of the OLD champion's own
+  resonance (menu item iv) beats `#683`'s own per-`b` census at `b=20,22`
+  but caps at `0.134-0.145`. The new champion's Fourier mass concentrates at
+  small denominators even more than the old champion's, extending `#691`
+  (`fenced_resonance_window.md`)'s monotone-in-fiber tension measurement.
+- **How it is useful:** Moves the certified COMPUTED lower end of the
+  unconditional bracket from `rho* >= 0.158411` to `rho* >= 0.160847`
+  (upper end unchanged, per `#673`). Identifies "same-block additive
+  stacking" as a genuinely different composition rule from `#683`'s
+  positional tensor, with a proved mechanism explaining exactly when and
+  why it wins.
+- **What to do next:** `k=5` (`b=30`) is memory-bounded in this environment
+  before reaching its own asymptotic plateau -- left open, not ruled out.
+  The threshold `s_0=219` is proved but not tight (empirical convergence is
+  at `s=48`); sharpening it, finding a closed form for `fstar_inf(k)`, and
+  searching non-uniform per-block shift sequences (a strictly larger design
+  space than the flat AP used here) are all untried.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
