@@ -30,6 +30,44 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Fiber-denominator tension made a theorem (Vandermonde resolution)
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/fiber_denominator_tension.md`,
+  `experimental/scripts/verify_fiber_denominator_tension.py`
+  (`RESULT: PASS (56/56)`, ~4 s, stdlib-only, zero-arg).
+- **Status:** PROVED (Lemma V, Theorem AP, the disjoint-regime Prop) /
+  MEASURED (the mass law, the P5 correction) / REFUTED sub-route
+  (single-triple marginals do not decay) / OPEN (the magnitude inverse-LO), as
+  stated in the note.  No main-paper theorem is promoted.
+- **What is being added:** Converts the *resolution* half of #691's measured
+  fiber-denominator tension (its P5) into an exact identity.  Lemma V:
+  `(c-b)psi_a-(c-a)psi_b+(b-a)psi_c = Vdm(T) theta_2` for any triple
+  `T={a<b<c}`, so `||Vdm(T)theta_2|| <= diam(T)(sum||psi||)` -- a trapped
+  triple pins `theta_2` to a denominator dividing `Vdm(T) <= diam(T)^3` (the
+  exact arithmetic form of #691's T1 ceiling).  Summed over an embedded AP of
+  difference `t` (Theorem AP) this forces the dominant resonance to the bounded
+  denominator `2t^2` with error `O(sqrt(eta))`.  The single-triple *mass* bound
+  is proved flat (mass suppression is irreducibly multi-point), the minor-arc
+  (large-denominator) atom-mass fraction is measured to vanish by `Q=30`, and
+  #691 P5's "monotone in f" is corrected to "tracks embedded-run structure".
+- **How it is useful:** Sharpens the image-face corridor wall program
+  (#661/#663/#682/#685/#691, on DannyExperiments #668).  It proves the
+  mechanism behind #691 P5, closes the apparent AP-dilation counterexample via
+  the `gcd=1` normalization (= #685's non-dilation), and *decides* the
+  incompatibility question: the trapping/resolution route bites only for
+  `eta <= 0.033` (`phi >= 0.967`), which the #668 envelope already certifies
+  `X < 2^{4/3}` (off the wall) -- so the tension is real but provably disjoint
+  from the fenced wall regime.  Grade (3), reaching (2) on the AP-structured
+  class.
+- **What to do next:** The residual is unchanged in substance -- the
+  exponential-regime inverse-Littlewood-Offord for the *magnitude* of the
+  large-denominator mass, now localized to "additively rich yet AP-free at
+  moderate eta".  A sharper constant in Theorem AP would not move the
+  regime-disjointness conclusion.  Stays on the image face; the signed
+  `mu_n` inverse question (#564) is flagged transfer-not-entry.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
