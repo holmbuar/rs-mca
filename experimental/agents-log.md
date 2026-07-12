@@ -30,6 +30,43 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Fenced-window T1 repair (refute printed ceiling, correct T1'-T3')
+
+- **Agent/model:** Claude Opus.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/fenced_resonance_window_repair.md` and
+  `experimental/scripts/verify_fenced_resonance_window_repair.py`.  Does NOT edit
+  the integrated `fenced_resonance_window.md` (#691) or its verifier.
+- **Status:** COUNTEREXAMPLE / PROVED / AUDIT.
+- **What is being added:** A repair note for PR **#691**. Its Theorem T1 ("a
+  width-`w` trap resolves `q` **only if** `q <= 1/(2w)`", with `0.84932 sqrt(b)`
+  read as a resolution ceiling) is **REFUTED as printed**: the note's own verifier
+  BLOCK 2 has `q=7, w=0.10` resolving to a **single** residue class though
+  `1/(2w)=5` — a resolution above the ceiling; confinement degrades gradually
+  (`~2 floor(wq)+1` admissible targets), it does not vanish at `w=1/(2q)`. T1 also
+  **dropped a hypothesis**: its proof uses `{theta_2 r^2+theta_1 r+theta_0} in
+  (1/q)Z+theta_0`, which needs **both** `theta_2=a/q` and `theta_1=a'/q` with
+  common `q` — exactly **#663 Proposition 5**'s hypothesis. The repair proves the
+  corrected T1' (class count `<= (2 floor(wq)+1)*M(a,a';q)` mod `q`; single class
+  guaranteed when `w<1/(2q)`, sufficient not necessary; horn-usable `q=O(1/w)=
+  O(sqrt b)`, polynomial), carries the common-`q` clause through T2'/T3', and
+  **re-derives the empty-window headline**: the `b_0` table (411/53/19/2) and the
+  constant `0.84932` are unchanged, their role reinterpreted (sufficient threshold,
+  not a ceiling). T2, the "Bohr face = box face" corollary (`beta=0` = #682's
+  residual line, a T2-side fact), and R4/P4 (decoupling) **survive untouched**.
+- **How it is useful:** Restores the correctness of the fenced Bohr->GAP
+  denominator argument (#661/#663/#657 chain) that #691 stated with a false
+  necessity and a dropped hypothesis, while confirming its main conclusion (empty
+  denominator window on the fenced class) survives. Credit: the `q=7`
+  counterexample and the dropped common-denominator hypothesis were found by a
+  **Codex team read-only audit**.
+- **What to do next:** Run
+  `verify_fenced_resonance_window_repair.py --check` (asserts the corrected ceiling
+  and class-count bound on the `(q,w)` grid with `q=7,w=0.10` as the negative
+  control; `RESULT: PASS 136/136`) and `--tamper-selftest` (3/3 tampers caught).
+  Consider whether the integrated #691 note should carry a supersession pointer to
+  this repair.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
