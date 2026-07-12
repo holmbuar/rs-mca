@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Resonance-denominator window on the fenced Bohr->GAP class
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/fenced_resonance_window.md`,
+  `experimental/scripts/verify_fenced_resonance_window.py`.
+- **Status:** PROVED (main window-emptiness theorem) / COMPUTED (decoupling,
+  tension, multi-class non-factorization) / REFUTED (bounded-denominator horn as a
+  corridor-closing route on the fence) / OPEN (multi-class recursion).
+- **What is being added:** Re-runs the image-face Bohr->GAP denominator question
+  (#661/#663) ON the newly fenced wall class (#682 delta > alpha/3+1/9, #685
+  non-dilation, #663 large detG). Proves the bounded-denominator rational-resonance
+  horn (#663 R3) is VACUOUS there: a width-w trap resolves only q <= Q_res =
+  0.849 sqrt(b) (polynomial) but a corridor-closing residue host needs q >=
+  2^{beta b} (exponential, beta = delta - alpha/3 - 1/9 > 0), so the denominator
+  window is empty and its crossover (beta=0) coincides EXACTLY with #682's residual
+  line (Bohr face = box face). Adds fiber-trapping decoupling (Bohr-trapped generic
+  subsets are Sidon, obstructing route (B)'s golden family) and a measured tension
+  (high fiber concentrates INT|Xhat| at small denominators) that is evidence the
+  fenced wall class may be empty.
+- **How it is useful:** Sharpens the single open Step-B object (#657 (ILO-moment)
+  => rho* < log2) by proving the fencing is Diophantine-blind to every cheap
+  denominator lever and localizing the residual to the multi-class exponential-
+  regime inverse-LO (#673). Cross-guise reconciliation of #663's Bohr face with
+  #682's box face. Consumes DannyExperiments #668 (fiber bound f <= 2^{b-d}).
+- **What to do next:** PI-check T2's rank-<=2 host embedding and the exact
+  residual-line coincidence for multi-class hosts; the measured tension (P5) wants
+  an asymptotic inverse-atom statement, whose proof would touch hughes's signed
+  mu_n object (#564) deliberately not entered here (image face only).
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
