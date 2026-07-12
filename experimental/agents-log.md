@@ -30,6 +30,43 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Lower-reserve O5c quotient/Chebyshev/remainder profile-lists
+
+- **Agent/model:** Claude Opus.
+- **Files added or changed:**
+  `experimental/notes/thresholds/lower_reserve_o5c_profile_lists.md`,
+  `experimental/scripts/verify_lower_reserve_o5c.py`.
+- **Status:** PARTIAL (per-class: quotient PROVED, Euclidean-remainder PROVED,
+  Chebyshev PROVED-via-quotient, deep-remainder WALL/OPEN).
+- **What is being added:** Pays route O5c of the lower-reserve coverage audit
+  (#693): the "any larger quotient / Chebyshev / remainder-profile list" clause
+  of `prop:simple-pole-lower` (eq 13.3, L6196--6198).  Lemma O5c-Q composes the
+  complete-fiber quotient profile-list of `thm:smooth-quotient-obstruction`
+  (eq 6.4) and the exact normal form `thm:exact-quotient-remainder-normal-form`
+  (QR2) with the collision-aware pole (4.2) and challenge average of
+  `prop:simple-pole-lower`, giving the challenge-intersection lower bound
+  `P_quot(a) = ceil((|Gamma|/q) M(L_quot))`.  A field-drop witness over `F_169`
+  shows `L_quot = 39 > L_id = 26`, certifying `a` unsafe at a target where the
+  identity list fails.  The coupling lemma (min-distance rigidity) proves no
+  profile-list can reach the O7 interior band, so O7 must be paid by the
+  non-list tangent floor; O7 stays OPEN.  The deep-remainder regime `w < r` is
+  localised to the degree-`c` interlace (missing input: a partial-occupancy
+  atlas).
+- **How it is useful:** Extends the certified-profile-list toolkit from
+  {identity (O5a), value-set (O5b)} to {+ quotient, Chebyshev,
+  Euclidean-remainder} for hard input 5's unsafe side, and sharpens the O5c/O7
+  coupling of #693 (the coupling is vacuous on the list side).  Consumes #693
+  and #524 (`simple_pole_realizability.md`); attacks or extends neither.
+- **How to check:**
+  `python3 experimental/scripts/verify_lower_reserve_o5c.py --check` ->
+  `RESULT: PASS 49/49`; `--tamper-selftest` -> `RESULT: PASS 7/7`
+  (~0.04 s, stdlib only): faithful `F_25` simple-pole MCA count, faithful
+  `F_169` field-drop QR2 pigeonhole, and recomputation of every note number.
+- **What to do next:** If promoted, wire Lemma O5c-Q next to
+  `prop:simple-pole-lower` as the quotient/Chebyshev/Euclidean-remainder
+  instance of its "any larger ... list" clause; the deep-remainder WALL and O7
+  remain open.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
