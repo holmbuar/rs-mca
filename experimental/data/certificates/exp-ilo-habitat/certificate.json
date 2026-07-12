@@ -1,0 +1,61 @@
+{
+  "affine_denominators": [
+    3,
+    6,
+    27
+  ],
+  "champ18": {
+    "Delta": 0.10733333333333334,
+    "E": 2898,
+    "L": 151275,
+    "edef": 0.17887943929270145,
+    "f": 30,
+    "in_habitat": true,
+    "mstar": 9,
+    "theta": 0.5
+  },
+  "habitat": {
+    "dens_hi": 0.8260476685906049,
+    "dens_lo": 0.1739523314093952,
+    "ener_hi": 0.4779447911257997,
+    "ener_lo": 0.1383458330929479
+  },
+  "resonance": {
+    "champ_garg": 0.6791666666666667,
+    "champ_mindist": 0.012500000000000067,
+    "champ_ratio": 0.7502553393431053,
+    "union_ratio": 1.0,
+    "union_sarg": [
+      2,
+      3
+    ]
+  },
+  "result": {
+    "ok": true,
+    "passed": 47,
+    "total": 47
+  },
+  "route2b_detG_scale": {
+    "detG_3V": 4185420833664,
+    "detG_V": 5741318016,
+    "ratio": 729
+  },
+  "route_verdicts": {
+    "route1a_large_sieve": "STILL-DEAD (universal INT|S|^4=2b^2-b)",
+    "route1b_weyl": "STILL-DEAD (no interval; Diophantine resonance in-habitat)",
+    "route2b_volume_mult": "STILL-DEAD (detG threshold, affine-variant)",
+    "route2c_elimination": "STILL-DEAD (mod-1 elimination, frequency-universal)",
+    "step3_energy_plus_volume": "DECIDED-NEGATIVE (energy decoupled; volume Diophantine-centerable)"
+  },
+  "unionAP16": {
+    "Delta": 0.1125,
+    "E": 900,
+    "L": 25619,
+    "edef": 0.19700019334031563,
+    "f": 20,
+    "in_habitat": true,
+    "mstar": 8,
+    "theta": 0.5
+  },
+  "verdict": "DECIDED-NEGATIVE: the #701 two-band habitat does not reopen any of #663's three Bohr->GAP routes; habitat coords (theta,Delta) are affine-invariant and denominator-blind, so the wall's residual (Diophantine control of q) is unchanged."
+}

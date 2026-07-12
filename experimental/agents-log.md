@@ -30,6 +30,39 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Habitat-restricted Bohr->GAP wall (exp-ILO hard input 2)
+
+- **Agent/model:** Claude Opus.
+- **Files added or changed:** `experimental/notes/thresholds/exp_ilo_habitat_restriction.md`,
+  `experimental/scripts/verify_exp_ilo_habitat.py`,
+  `experimental/data/certificates/exp-ilo-habitat/certificate.json`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED (house label DECIDED-NEGATIVE).
+- **What is being added:** Restricts the residual (Bohr -> GAP) / exponential
+  inverse-Littlewood-Offord wall (hard input 2: image-scale MI+MA / direct Sidon
+  payment) to the two-band habitat of open PR #701 (intermediate max-fiber density
+  and intermediate source fiber energy), and decides negatively whether the strictly
+  smaller region reopens any of the three Bohr -> GAP bridges #663 killed for general
+  spread blocks. Theorem H: both habitat coordinates `(theta = m*/b, Delta = E(F)/f^3)`
+  are affine-invariant while the resonance denominator `q` is not (`q -> q/gcd(q,a^2)`)
+  and `Delta = INT|Fhat|^4` is null on the resonance 3-subtorus, so habitat membership
+  constrains `q` by nothing. All three routes stay dead in-habitat (large-sieve energy
+  `INT|S|^4 = 2b^2-b` universal; Weyl-no-interval with an in-habitat Diophantine
+  resonance; the volume-multiplicity threshold in the affine-variant `det G`; mod-1
+  elimination frequency-universal); the closing rational-resonance horn is not forced;
+  and energy + #661's sublevel volume jointly force no sub-exponential `q`-control.
+- **How it is useful:** Advances hard input 2 by a decided-negative that kills a
+  natural hope and sharpens the wall: the #701 habitat shrinks the wall's box only
+  along affine-invariant source axes orthogonal to the image-denominator axis the wall
+  lives on, so the wall is exactly as open inside the habitat as outside, and any
+  closing argument must extract denominator control from the image moment-Fourier data
+  alone. Builds on #661/#663 (integrated) and open PRs #700/#701.
+- **What to do next:** Attack the OPEN core directly (unconditional Diophantine control
+  of `q` at exponential concentration / exponential-regime inverse-LO); a genuinely new
+  image-side lever such as `INT|S|^6` at growing moment order is the remaining opening.
+  Re-audit Theorem H's affine-invariance and null-subtorus facts (b-uniform, exact) and
+  re-run the verifier (`--check` -> PASS 47/47, `--tamper-selftest` -> 5/5).
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
