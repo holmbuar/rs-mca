@@ -9,7 +9,7 @@
     "atlas_built": "occupancy cells Omega_{t,m,p,r} exhaust binom(D,a) (PO2) and make the QR4 summand constant per cell (|phi(R)|=p): fiber = binom(N-p,m)*#{R:pref_w(P_R)=.}",
     "blocker": "the full-field remainder coefficient p_{jc}(R) at each quotient slot degree jc<=w (present because deep => r>w>=jc)",
     "conversion_fails": "deep (w<r) => no field-drop-clean prefix slot (no j with r<jc<=w); effective prefix alphabet = full B",
-    "verdict": "no deep-remainder profile-list beats the identity list; the operative unsafe-test list in the deep regime is the identity list (O5a, PAID)"
+    "verdict": "field-drop route beats nothing (Theorem DR); instance-level no-list clause refuted by the label-factoring route (#714) - deep-remainder reopens"
   },
   "hard_input": "5 (lower reserve / unsafe-side comparison)",
   "house_label": "deep-remainder field-drop route: DECIDED-NEGATIVE; blocker pinned",

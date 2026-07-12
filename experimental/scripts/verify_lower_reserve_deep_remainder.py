@@ -484,8 +484,8 @@ def write_certificate(results):
                                     "(no j with r<jc<=w); effective prefix alphabet = full B",
                 "blocker": "the full-field remainder coefficient p_{jc}(R) at each quotient slot "
                            "degree jc<=w (present because deep => r>w>=jc)",
-                "verdict": "no deep-remainder profile-list beats the identity list; the operative "
-                           "unsafe-test list in the deep regime is the identity list (O5a, PAID)",
+                "verdict": "field-drop route beats nothing (Theorem DR); instance-level no-list "
+                           "clause refuted by the label-factoring route (#714) - deep-remainder reopens",
             },
             "key_numbers": results,
             "verifier": "experimental/scripts/verify_lower_reserve_deep_remainder.py",

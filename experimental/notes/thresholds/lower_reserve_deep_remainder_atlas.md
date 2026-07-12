@@ -9,7 +9,10 @@ interlace identity, and the clean-slot characterization are **PROVED**; the
 full-field alphabet fill and the per-instance domination are **PROVED-AT-TOYS**;
 the exponential no-strengthening verdict is **CONDITIONAL** on
 `prop:prefix-rigidity-full` (L2044) bounding non-field-drop concentration at
-`e^{o(n)}` and on the prefix-fiber / field-drop framework of L6197.
+`e^{o(n)}` and on the prefix-fiber / field-drop framework of L6197; the
+instance-level no-list clause is **REFUTED by #714** (label-factoring route,
+independently verified) — Theorem DR, the atlas, and the field-drop closure
+stand; the "O5c closes as a list problem" corollary is **WITHDRAWN**.
 
 **Verdict.** PR **#699** paid route **O5c** for the quotient, Euclidean-remainder
 (`w >= r`, `r < c`) and Chebyshev profile classes, and localised the ONE
@@ -19,11 +22,17 @@ remaining wall — the deep-remainder regime `w < r` — to a missing
 note **builds that atlas** and **decides it negative**: the atlas exists and
 exhausts, but the per-cell fiber sum **provably cannot** be routed through the
 collision-aware pole with a field drop, because in the deep regime **no depth-`w`
-prefix slot is field-drop-clean**. Consequently **no deep-remainder profile-list
-is larger than the identity list**, and the operative unsafe-test list in the
-deep regime is the identity list itself (route **O5a**, already paid). The wall
-is load-bearing; the object that blocks it is the full-field remainder
-coefficient `p_{jc}(R)` sitting additively in every quotient slot.
+prefix slot is field-drop-clean**. Consequently **the field-drop route
+cannot make any deep-remainder profile-list larger than the identity list**;
+the object that blocks that route is the full-field remainder coefficient
+`p_{jc}(R)` sitting additively in every quotient slot. **Correction (same
+evening):** field-drop is not the only route — DannyExperiments' **#714**
+exhibits a verified reciprocal-locator factorization (fixed remainder labels
+cancel from the image-normalized average) whose pigeonhole beats the identity
+floor inside a strictly deep cell (guaranteed list `6` vs identity floor `1`
+over `F_169`).  The unconditional instance-level form of the old verdict is
+therefore **REFUTED as printed** and the deep-remainder side **reopens as
+payable** — see the Correction section below.
 
 Target: `experimental/asymptotic_rs_mca_frontiers.tex` (read at `ea4eb07`).
 Attacks the deep-remainder residual of route **O5c** of hard input 5, scoped by
@@ -203,7 +212,7 @@ drop is destroyed.
 
 ---
 
-## 4. The decision: no deep-remainder list beats the identity list
+## 4. The decision (CORRECTED by #714, see below): the field-drop route beats nothing
 
 **Theorem DR (deep-remainder domination).** Let `phi : D -> Q` be a `c`-fold
 complete-fiber folding (`def:structured-folding`), `B_phi subsetneq B` a proper
@@ -295,10 +304,38 @@ O7's open content.*
 | I2 | clean slot exists iff `exists j: r < jc <= w`; deep `w < r` => none | **PROVED** | Lemma II; group E (0 violations) |
 | D1 | clean quotient slot alphabet `= |B_phi|`, descends into `F_5`; deep slot full-field | **PROVED-AT-TOYS** | group D (`5` vs `21` over `F_25`) |
 | D2 | fixed-R deep floor `5 << L_id 69` on `F_169`; field-drop-preserving list is small | **PROVED-AT-TOYS** | group F |
-| DR | no deep-remainder profile-list beats `L_id`; blocker `= p_{jc}(R)` | **CONDITIONAL** | Theorem DR; exponential clause rests on (4.4) and the L6197 framework |
+| DR | field-drop route beats nothing (Theorem DR, stands); instance-level no-list clause REFUTED by #714; asymptotic clause OPEN under (4.4)/L6197 | **PARTIALLY REFUTED** | #714 counterexample verified: guaranteed list 6 vs identity floor 1, strict-deep F_169 cell |
 | -- | any non-list deep-window mechanism; O7; any safe-side / prize-threshold claim | **OPEN / NOT CLAIMED** | section 5 |
 
 ---
+
+## Correction (2026-07-12, same evening — #714)
+
+DannyExperiments' **#714** ("Correct the deep-remainder profile image ledger")
+proves, for every nonempty canonical partial-occupancy cell `Omega_{t,m,p,r}`
+with `J_{t,p,r}` fixed remainder labels and `d = min(m, floor(w/c))`, the
+reciprocal-locator factorization `|Phi_w(Omega_{t,m,p,r})| <= J_{t,p,r} *
+|B_phi|^d` — valid at arbitrary remainder degree including the strict-deep
+regime `w < r`, because the fixed remainder labels preserve the descended
+quotient image and cancel from the image-normalized average.  One prefix fiber
+then has size `>= ceil(binom(N-p,m)/|B_phi|^d)`.  Verified instance
+(independent rerun at gate): `(n,a,k,w,c,m,p,r) = (24,12,8,3,2,4,4,4)` over
+`F_169` — realized image `86,320` (analytic bound `102,960 = 7,920 * 13`),
+max fiber `20`, **guaranteed list `6` vs identity floor `1`**.
+
+**What stands:** the partial-occupancy atlas (exhaustion, constant-summand
+factorization, degree-`c` interlace), the clean-slot characterization, and
+**Theorem DR** — the field-drop conversion remains impossible for `w < r`.
+**What is refuted:** this note's printed instance-level verdict ("no
+deep-remainder profile-list is larger than the identity list") and its
+corollary that O5c closes as a list problem.  **What reopens:** the
+deep-remainder side of O5c as a payable route via label factoring; the new
+open question is whether the #714 mechanism scales to `e^{Theta(n)}` families
+or is capped at `e^{o(n)}` by `prop:prefix-rigidity-full` (L2044) — neither
+direction is proved here or in #714 (its own Nonclaims).
+
+Credit: counterexample by **DannyExperiments (#714)**, verified independently
+before this correction.
 
 ## 7. Nonclaims
 
