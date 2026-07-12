@@ -30,6 +30,48 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Curve-restricted product bound via the dissociation dimension
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/curve_restricted_product.md`,
+  `experimental/scripts/verify_curve_restricted_product.py`.
+- **Status:** PROVED (new lemmas + regime bounds) / OPEN (unconditional X < 3).
+- **What is being added:** A curve-restricted refinement of DannyExperiments
+  #668's universal `fL <= 3^b`, specialized to distinct-integer degree-2
+  moment-curve weights `a_i = (1, v_i, v_i^2)`. Writing `X := (fL)^{1/b}` and
+  `d = d(V)` the dissociation dimension, #668's chain is the envelope
+  `fL <= 2^{h(d/b) b}` with `h(alpha) = (1-alpha) + H2(min(alpha,1/2))` peaking at
+  `log2 3` **only** at `d/b = 1/3`. New PROVED content: Lemma 2 (Pajor refinement
+  `L <= N_dis(d) := #{dissociated sets of size <= d} <= SS(d)`, strict); Lemma 2b
+  (signed-span, a Codex team route cut TEAM_BOARD 03:02Z: outside columns are
+  signed `{-1,0,1}`-combinations of a max dissociated set, so `L <= (2m+2)^d`);
+  Lemma 3 (dissociation box bound `2^d <= (d+1)(dD+1)(dD^2+1)`, so `d = O(log bD)`
+  and poly-diameter => `X -> 2`, reproving #655 R6); Theorem A (corridor
+  localization, Codex framing: `d >= 2b/3 => X <= 2^{4/3} = 2.5198`, `d/b <= 0.0845
+  => X <= 2.5198`, so any `X > 2.5198` forces the corridor `d/b in (0.0845, 2/3)`;
+  `d >= b/2 => X <= 2^{2-d/b} <= 2.8284`); Theorem B (corner localization: `X >=
+  3-delta => f,L >= ((3-delta)/2)^b`, `d/b -> 1/3`, both #668 bounds tight,
+  diameter `>= 2^{Omega(b)}`); Lemma 4 (S2 overdetermination `b-d <= #forced x`,
+  each `x` fixing both `x` and `x^2`). Codex's positional-encoding amplification
+  (`f_k=f^k, L_k=L^k`, exponential heights) is reproduced, forcing `X* >=
+  2^{1.228539} = 2.3433` on the curve. The lane's S2 tension is RESOLVED (the
+  consistent-tuple count is exponential for designed blocks, so `d` is not forced
+  linearly large) and closing the corridor (`L <= 2^{d+b/3}`, equivalently
+  `(Curve-N_dis collapse)`) = #673's OPEN exponential-regime inverse-LO.
+- **How it is useful:** Sharpens the upper end of the `rho*`/`X*` bracket program
+  (#623/#643/#655/#673): pins the sole route to `X = 3` at `d/b = 1/3`, gives an
+  unconditional `X <= 2.5198` off the corridor, an amplified lower guard `X* >=
+  2.3433` on the curve, and reduces the remaining gap to the single corridor bound
+  `L <= 2^{d+b/3}` -- so the honest bracket is `X* in [2.3433, 3]`, tightening to
+  `[2.3433, 2.5198]` once the corridor closes.
+- **What to do next:** Prove the corridor bound `L <= 2^{d+b/3}` for `d/b in
+  (0.0845, 2/3)` (Section 8), equivalently `(Curve-N_dis collapse)`: does a fiber
+  of rate `>= log2(3/2)` collapse `N_dis` by a constant exponent? Aim the S2
+  overdetermination inside the corridor (m = b-d >= b/3 outside elements, each
+  trade-witnessed), or extend #673's AP/GAP box bounds to the structurally-wild
+  case.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
