@@ -30,6 +30,41 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Lower reserve / unsafe-side coverage audit (hard input 5)
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/lower_reserve_unsafe_side_coverage_audit.md`,
+  `experimental/scripts/verify_lower_reserve_unsafe_coverage.py`.
+- **Status:** AUDIT.
+- **What is being added:** An adversarial route/coverage map of the maintainer's
+  hard input 5 ("lower reserve / unsafe-side comparison"). It decomposes the
+  printed obligation into 11 discrete routes and classifies each PAID /
+  PAID-ON-INTEGRATION / OPEN: 7 PAID (in-paper deep/tangent theorems +
+  integrated `simple_pole_realizability.md`, `mca_unsafe.md`,
+  `unsafe_at_crossing.md`, `certified_valueset_lower.md`), 3 paid-on-integration
+  (DannyExperiments #669 and #680 for the `a=k+1` shell; latifkasuli #690 as
+  audit-tier corroboration of the deployed rows), and 2 coupled OPEN residuals
+  (general quotient/Chebyshev/remainder profile-list constructions, and the
+  interior identity-dominant crossing `(n+k)/2 < a_- < a_deep` that
+  `cor:intro-identity-frontier` assumes). Determination: VERIFIED-CURRENT, no
+  print change forced.
+- **How it is useful:** Maps hard input 5 of
+  `experimental/asymptotic_rs_mca_frontiers.tex` against integrated coverage and
+  the open PR frontier, states the sharpest remaining open unsafe-side statement,
+  and credits the consumed constructions to their owners. Verifier byte-checks
+  every quoted anchor (negative-tested), recomputes #669 eq (2), #680's
+  same-domain field pair and closed endpoint, #690's target and sensitivity
+  flip, the two-regime realizability arithmetic, and reproduces `B^MCA(3)=2`
+  over `F5` by exhaustive support-wise MCA count. `RESULT: PASS (45 checks)`,
+  ~5 s, stdlib only.
+- **What to do next:** Attack the two OPEN residuals: supply a certified
+  quotient/Chebyshev/remainder profile-list with a challenge-intersection lower
+  bound, or an interior-crossing unsafe `a_-` within `o(n)` of `g_{T,n}` in the
+  intermediate identity-dominant band; either would unconditionalize
+  `cor:intro-identity-frontier` and close #680's "first deeper lower crossing"
+  wall.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
