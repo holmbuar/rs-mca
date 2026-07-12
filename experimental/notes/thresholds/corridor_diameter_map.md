@@ -69,7 +69,7 @@ as **our #663** (`bohr_gap_volume.md`, R2 V1 Horn A); this note's new content is
 only the **composition into the `(alpha, delta)` map**, the explicit constants
 (`0.13928`, the residual line `alpha/3 + 1/9`, the `2^{b/9}` inflation), and the
 cross-guise reconciliation. The `F_13` modular calibration is **Codex team
-calibration, team board 2026-07-12** (a modular-signature datapoint, flagged
+calibration, 2026-07-12** (a modular-signature datapoint, flagged
 below as a *different object* from the distinct-integer class). The minimal
 degree-2 PTE trade support `6` is **scottdhughes #564**. Pajor's lemma is
 classical.
@@ -302,7 +302,7 @@ must, by Corollary 1, to be a candidate near the corridor) -- yet `X_0 = 2.239 <
 2.520`: **large `delta` is necessary, not sufficient, for the wall.** The map
 constrains the geography; it does not manufacture a violator.
 
-**`F_13` modular calibration (Codex team, team board 2026-07-12).**
+**`F_13` modular calibration (Codex team, 2026-07-12).**
 `U = {0,1,2,3,4,5,6,7,10,12}`, full modular quadratic signature over `F_13`, gives
 `(b,f,L,d) = (10,3,737,7)`, `X = (fL)^{1/b} = 2.1600`, `d/b = 0.7`. Reproduced
 exactly (BLOCK 6). **Caveat carried from the seed:** these are signatures **mod

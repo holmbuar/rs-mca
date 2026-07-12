@@ -26,7 +26,7 @@ live.  Recomputes EVERY number in the note.
            residual line is (alpha+1/3)/(r+2) and empty-threshold shrinks with r.
   BLOCK 6  amplification base d0=5, delta_inf=log2 Q / b0 >= 1/3 (wall-diameter
            regime, yet X0=2.239<2.52); F_13 modular calibration f=3,L=737,X=2.16
-           (Codex team, team board 2026-07-12; modular, NOT distinct-integer).
+           (Codex team, 2026-07-12; modular, NOT distinct-integer).
   BLOCK 7  counterexample probe: structured + sampled blocks, exact d, no block
            with L > 2^{d+b/3}; min non-degenerate d/b reached, max slack ratio.
 
@@ -258,7 +258,7 @@ check(delta_inf >= 1 / 3, "amplified diameter regime: delta_inf=log2 Q/b0 >= 1/3
 check(X0 < 2 ** (4 / 3), "yet X0 < 2^(4/3): large-delta is necessary, not sufficient, for the wall")
 print(f"  V={Vamp}: f0={f0} L0={L0} d0={d0} d0/b0={d0/b0:.3f} X0={X0:.4f};"
       f" Q={Q} delta_inf={delta_inf:.3f} (>=1/3)")
-# F_13 modular calibration (Codex team, team board 2026-07-12) -- modular, not distinct-int
+# F_13 modular calibration (Codex team, 2026-07-12) -- modular, not distinct-int
 U = [0, 1, 2, 3, 4, 5, 6, 7, 10, 12]; p = 13
 def sigs_mod(V, p):
     subs = [(0, 0, 0)]

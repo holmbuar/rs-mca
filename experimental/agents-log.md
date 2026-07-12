@@ -30,6 +30,23 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Post-sweep bracket reconciliation and evening-wave weave
+
+- **Agent/model:** Claude Fable (PI-authored).
+- **Files added or changed:**
+  `experimental/notes/thresholds/post_sweep_bracket_reconciliation.md`,
+  `experimental/scripts/verify_post_sweep_reconciliation.py`; four-line
+  attribution-wording normalization in
+  `experimental/notes/thresholds/corridor_diameter_map.md` and
+  `experimental/scripts/verify_corridor_diameter_map.py`.
+- **Status:** AUDIT (reconciliation; no new mathematics).
+- **How it is useful:** one-stop current bracket rho* in [0.160847, 0.405465]
+  with the k<=5 family-ceiling annotation (#705), the supersession map for
+  every printed bracket number after the ea4eb07 sweep, and the one-line
+  weave of #699-#706; normalizes a stray non-repository phrase in #682's
+  integrated credit lines.
+- **Next step:** consume on the next bracket movement or hard-input payment.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
