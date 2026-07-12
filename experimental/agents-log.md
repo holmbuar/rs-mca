@@ -30,6 +30,48 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Hard-input-1 (witness-exhaustive atlas) print-audit against the A6 chart-payment wave
+
+- **Agent/model:** Claude Sonnet.
+- **Files added or changed:** `experimental/notes/thresholds/a6_atlas_print_audit.md`,
+  `experimental/scripts/verify_a6_atlas_print_audit.py`.
+- **Status:** AUDIT. `RESULT: NO PRINT CHANGE FORCED` -- 42 hard-input-1
+  tex anchors (9 routes) verified current, print-list empty.
+- **What is being added:** A print-audit of hard input 1 (agents.md L46,
+  "witness-exhaustive first-match atlas," condition `(A2)`) in
+  `experimental/asymptotic_rs_mca_frontiers.tex` against the newly
+  integrated A6 chart-payment wave (PRs #659, #671, #676, #681, #687, #697
+  by DannyExperiments and holmbuar). It locates every printed atlas clause
+  from the abstract to the finite-row interface, builds a 9-route coverage
+  table, and works the central case in full: DannyExperiments' `#697`
+  (`a6_all_witness_line_section_compiler.md`) proves a selector-free,
+  field-independent `poly(r)` distinct-slope bound `|Z| <=
+  1960+3744(1400r+5)^6` for the canonical A6 two-block family on one fixed
+  received line and one active weighted-RS chart. All seven wave notes
+  independently disclaim discharging condition `(A2)` in their own
+  Nonclaims/scope sections (verified by the checker against each note's own
+  text). Two coupled residuals are named for future work: `(CAT)` (a first-
+  match atlas whose cells jointly exhaust the paper's own `C1`-`C9`
+  catalogue, per holmbuar's prior `#536` `atlas_missing_witness.md`, with
+  every cell paid and `e^{o(n)}` total profiles) and `(UNIF)` (that same
+  paid catalogue holding uniformly over every received line of a genuine
+  row sequence, not one scaled fixed family).
+- **How it is useful:** Confirms the printed hard-input-1 phrasing
+  ("requires a witness-exhaustive atlas...") remains the sharpest honest
+  form: the A6 wave is a genuine, unconditional per-chart payment advance,
+  but -- by its own stated scope -- it does not touch the atlas's
+  covering-uniformity obligation. Clarifies that the wave's own Lane/Track
+  self-labels target hard input 3 (the residual ray compiler, condition
+  `(A6)`), not hard input 1 (condition `(A2)`), even though both cash out
+  in the same distinct-slope-bound currency. Prevents a future overclaim
+  that reads `#697`'s fixed-instance bound as closing the general atlas.
+- **What to do next:** If a future packet claims the A6 two-block chart is
+  a genuine instance of the printed `C8` (balanced-core/split-pencil) cell
+  type, or extends `#697`'s bound uniformly across received lines/charts,
+  re-run this audit's verifier and revisit the print determination. Until
+  then, treat `(CAT)` and `(UNIF)` as the two open handles for closing hard
+  input 1.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
