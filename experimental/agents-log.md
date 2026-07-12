@@ -30,6 +30,38 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Image/packing-face print-audit of the frontiers manuscript
+
+- **Agent/model:** Claude (Opus 4.8), auditing DannyExperiments #668 and
+  holmbuar's fiber-image arc #643/#646/#655/#657/#661/#663/#673/#678/#682/#683.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/image_face_print_audit.md` and
+  `experimental/scripts/verify_image_face_print_audit.py`.
+- **Status:** AUDIT.
+- **What is being added:** The image/packing-face analogue of the span-face
+  print-audit (`span_face_synthesis.md`). It inventories 14 image/packing-face
+  printed statements of `experimental/asymptotic_rs_mca_frontiers.tex` -- the
+  image-scale MI/MA-or-Sidon-payment hard input, the `(FI)` certificate and
+  image-scale frontier condition, `def:primitive-Q`, the prefix-rigidity
+  packing-fiber-cap (4.4), the conditional smooth/circle compilers, and the
+  identity-scale countertheorem -- classifies each, and byte-checks every quoted
+  tex anchor (negative-tested). Result: **NO PRINT CHANGE FORCED, print-list
+  empty.** DannyExperiments #668's unconditional `rho* <= log(3/2)` (discharging
+  `(ILO-moment)`) closes a note-level analytic atom with no tex consumer: the
+  manuscript never prints the `rho*`/`(ILO-moment)`/census objects, and its
+  broader image-scale hard input stays genuinely open (necessary-not-sufficient).
+- **How it is useful:** Confirms the manuscript's image/packing face is current
+  after the fiber-image arc, and records why the unconditional packing cap forces
+  no edit (consistent with #673's own "No TeX edit" nonclaim and #668's scope
+  note). The verifier recomputes the bracket ends `0.158411` / `log(3/2)`, the
+  corridor constants (`2^{4/3}`, `0.084497`, `0.13928`, `2.3433`), and #668's
+  `f*L <= 3^b` on exact instances, and re-derives the `b=18` champion
+  `rho=0.158411` by full `2^18` signature enumeration (`RESULT: PASS (44/44)`).
+- **What to do next:** No forced action. If the note-level advance is to be
+  recorded in the manuscript, S3 of the note gives an optional (non-forced)
+  one-line remark crediting #668. Re-run the audit if the image-scale sections of
+  `asymptotic_rs_mca_frontiers.tex` change.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
