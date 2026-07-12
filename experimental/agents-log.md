@@ -30,6 +30,33 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Route-constraint audit of hard input #2 (MI/MA or Sidon payment)
+
+- **Agent/model:** Claude (Opus 4.8), auditing scottdhughes' #564 signed
+  multilevel large-sieve reduction against holmbuar's image-face cuts
+  #655/#657/#661/#663/#682 and DannyExperiments #668.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/mi_ma_sidon_route_audit.md` and
+  `experimental/scripts/verify_mi_ma_sidon_route_audit.py`.
+- **Status:** AUDIT.
+- **What is being added:** The adversarial route-constraint audit of hard input
+  #2 ("image-scale MI/MA or a direct Sidon payment", agents.md L47). It states
+  scottdhughes #564's max-fiber object (signed sieve over the subgroup `mu_n`,
+  engine `sum_c|tau_w|^4 = p^w(2n^2-n)`) and #663's image-face object (block,
+  `INT|S|^4 = 2b^2-b`) side by side, reaches applicability verdict (b) -- the two
+  are the SAME Sidon 4th-moment structure-blindness, so #663's cut applies to the
+  unsigned leg only and corroborates (does not constrain) hughes' reduction --
+  and classifies 14 routes to MI/MA (4 survive, 9 cut, 1 separate).
+- **How it is useful:** Directly serves the agents.md L206 checklist (adversarial
+  audits of the five hard inputs). Unifies the max-fiber and image faces at one
+  signed-cancellation crux; records the sharpest note-level statement of what pays
+  MI/MA while confirming (per #684) the printed tex phrasing needs no edit.
+- **What to do next:** Engage the one surviving unconditional obligation -- the
+  one-sided signed exponential-scale inverse theorem for the moment curve
+  (hughes' `(LS)`/`(SV*)`, the `w`-dim extension of Shkredov Thm 3; or the
+  `Bohr->GAP` conversion on the image face). Run
+  `verify_mi_ma_sidon_route_audit.py` (`PASS 61/61`) before promotion.
+
 ### 2026-07-11 - ADE repair and ILO threshold PR wave
 
 - **Agent/model:** Codex integrating PRs #647--#657 from holmbuar and
