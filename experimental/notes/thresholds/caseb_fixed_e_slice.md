@@ -295,6 +295,30 @@ Sample constants (`q->infty`):
 
 ## Rung 4 -- W3: the exact degradation, and where the bounded-dimension method stops (COMPUTED)
 
+### AMENDMENT (hybrid lower bound; correction due to the Codex team's post-#665 reconciliation audit)
+
+Integrated #652's route A1 (the B-linear projection bound `delta >= |G|/q^{k+1-e}`)
+already applies verbatim in this packet's setup (`D=B=F_q`, `w=0`, `k=m-1`,
+`e<=k`), giving `delta >= C(q,m)/q^{m-e}`, i.e. coverage `delta/|F| >= C(q,m)/q^m
+-> 1/m!` as `q -> infinity`. The correct fixed-slice statement is therefore the
+HYBRID
+
+```text
+   liminf delta/q^e  >=  max{ 1/m!,  1/(2 + K(e,m)) },
+```
+
+with the moment constant winning at `e in {2,3}` (0.462, 0.079 vs 1/6, 1/24)
+and the linear-projection term winning for every `e >= 4` at minimal `m=e+1`
+(e=4: 1/120 = 8.3e-3 vs 2.0e-3). CONSEQUENCE FOR RUNG 4: the prize-threshold
+crossover of the best proved constant moves from `e = 23` (moment-only, as
+printed below) to **`e = 34`** (`1/(e+1)! < 2^{-128}` first at `e = 34`);
+the degradation is now factorial rather than super-exponential, and the
+qualitative verdict — the growing-e law needs constants that do not degrade
+in `e`, hence stays OPEN — is UNCHANGED. Every `e=23` statement below should
+be read with this amendment. (Verifier BLOCK A9, added with this amendment,
+recomputes the hybrid table and both crossovers.)
+
+
 The theorem holds for **every** fixed `(e,m)`, but `c_e` is **not uniform** in the
 slice depth. We compute the degradation exactly -- this is the packet's steering
 payload for the growing-`e` wall.

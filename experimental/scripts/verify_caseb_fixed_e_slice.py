@@ -552,6 +552,19 @@ def main():
                     None, None))
 
     # -------------------------------------------------------------------
+    # ---- BLOCK A9 (amendment): hybrid lower bound + corrected crossover ----
+    import math as _m
+    def _K(e, m):
+        return _m.factorial(m) * sum((e - 1) ** (2 * t) / (_m.factorial(t) ** 2 * _m.factorial(m - t)) for t in range(e + 1, m + 1))
+    def _hyb(e):
+        return max(1.0 / (2 + _K(e, e + 1)), 1.0 / _m.factorial(e + 1))
+    check("A9 moment constant wins at e=2", 1 / (2 + _K(2, 3)) > 1 / _m.factorial(3))
+    check("A9 moment constant wins at e=3", 1 / (2 + _K(3, 4)) > 1 / _m.factorial(4))
+    check("A9 1/m! wins at e=4", 1 / _m.factorial(5) > 1 / (2 + _K(4, 5)))
+    check("A9 hybrid crossover at e=34", _hyb(33) >= 2 ** -128 > _hyb(34))
+    check("A9 moment-only crossover at e=23 (historical)", 1 / (2 + _K(23, 24)) < 2 ** -128 <= 1 / (2 + _K(22, 23)))
+
+
     for kind, name, got, want in LOG:
         if kind == "SEC":
             print("\n=== %s ===" % name)
