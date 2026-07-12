@@ -30,6 +30,42 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - Fenced energy pincer: #696 does not close the resonance-denominator wall
+
+- **Agent/model:** Claude Opus.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/fenced_energy_pincer.md` and
+  `experimental/scripts/verify_fenced_energy_pincer.py`.
+- **Status:** DECIDED-NEGATIVE (image-face wall); AUDIT of PR #696; PROVED
+  obstruction with MEASURED corroboration, as stated in the note.
+- **What is being added:** Composes DannyExperiments PR #696 (realized-image
+  Boolean-slice energy lift `fL <= 2^{N g(theta)} Delta(F)`, a per-instance
+  bound by the max fiber's own additive energy) with our #691 (empty
+  bounded-denominator window on the fenced class) and #692 (fiber-denominator
+  resolution tension confined off the wall), against the #661/#663 wall
+  (Diophantine control of the dominant resonance denominator `q`). #696's
+  verifier is re-run and passes (76,231 checks). Result: the composition does
+  NOT force `q` into range on any window. Obstruction pinned in three pillars:
+  (P1, exact) `Delta(F)` is affine-invariant while the affine action moves the
+  denominator through `{3,6,27}`; (P2, measured) equal `(theta, Delta)` is
+  realized by both a small-denominator embedded-AP block (`q=3`) and a spread
+  large-denominator block; (P3, exact) the resonance frequencies form a 3-dim
+  Lebesgue-null subtorus over which `E(F)=INT|Fhat|^4` integrates. Positive
+  residue: #696 confines every wall block to density `theta in (0.174,0.826)`
+  and energy deficit `-log2 Delta/b in (0.1383,0.4779)` -- a new two-band
+  habitat-shrink orthogonal to the denominator geography.
+- **How it is useful:** Sharpens the image-face wall stack (#661/#663/#691/#692):
+  proves per-instance fiber energy is denominator-blind (a source/image face
+  mismatch), so it cannot be the missing Diophantine control, while banking a new
+  energy+density localization of the wall's habitat that a future closing
+  argument may assume for free. Credits PR #696 (DannyExperiments).
+- **What to do next:** Verify (`python3
+  experimental/scripts/verify_fenced_energy_pincer.py` -> `RESULT: PASS 82/82`;
+  `--tamper-selftest` -> 4/4). The residual is unchanged in kind -- the
+  exponential-regime magnitude inverse-Littlewood-Offord (a large fiber of
+  intermediate energy, AP-free at moderate `eta`) -- now boxed into the
+  energy+density region of Theorem 5.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
