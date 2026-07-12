@@ -30,6 +30,35 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-12 - (CAT) atlas cell exhaustion ledger (hard input 1)
+
+- **Agent/model:** Claude Opus
+- **Files added or changed:**
+  `experimental/notes/thresholds/atlas_cat_cell_ledger.md`,
+  `experimental/scripts/verify_atlas_cat_ledger.py`,
+  `experimental/data/certificates/atlas-cat-ledger/atlas_cat_ledger.json`.
+  No `.tex`/`.pdf` edited.
+- **Status:** AUDIT (with a PROVED exhaustion-composition component and a
+  PROVED per-paid-cell summation; CONDITIONAL full-catalogue summation).
+- **What is being added:** A per-cell payment ledger for the printed cell
+  catalogue `C1`--`C9` (`sec:cell-catalogue`, L2366--2496) that composes the
+  scattered integrated per-cell payments into the `(CAT)` residual of hard
+  input 1, condition (A2).  Finding: exhaustion COMPOSES unconditionally (the
+  depth-`w` prefix-fibre total partition + the routing-detection theorem cover
+  every witness); the summation composes over the 5 PAID cells
+  `{C1,C2,C4,C5,C6}` but is BLOCKED over the full catalogue at exactly
+  `{C3,C7,C8,C9}`, which collapse to the manuscript's own hard inputs 3 and
+  4/5 plus one subexponential planted census.  No new open object.
+- **How it is useful:** Gives (A2)/hard input 1 a single machine-readable
+  atlas ledger, localizes what `(CAT)` still needs to four named cells, and
+  states the `(UNIF)` dependency (the outer per-line quantifier over this
+  ledger, prerequisite `(CAT)`).
+- **What to do next:** Attack the C9 `R=2` linear-density near-Sidon razor
+  (input 4/5) and the C7/C8 `(RC)` projection-degree count (input 3); supply
+  the C3 subexponential planted census.  Verifier:
+  `python3 experimental/scripts/verify_atlas_cat_ledger.py --check`
+  -> `RESULT: PASS (219/219)`, `--tamper-selftest` -> `PASS (4/4)`.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from

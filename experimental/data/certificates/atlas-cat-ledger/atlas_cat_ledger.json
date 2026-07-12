@@ -1,0 +1,156 @@
+{
+  "artifact": "atlas_cat_cell_ledger",
+  "hard_input": 1,
+  "hard_input_name": "witness-exhaustive first-match atlas, condition (A2)",
+  "residual": "CAT",
+  "base_sha": "ea4eb0784417ca5ab503a3c31a7eef6464ad100a",
+  "tex_source": "experimental/asymptotic_rs_mca_frontiers.tex",
+  "cell_catalogue_anchor": "sec:cell-catalogue L2366-2496",
+  "verifier": "experimental/scripts/verify_atlas_cat_ledger.py",
+  "verifier_result": {"check": "PASS 219/219", "tamper_selftest": "PASS 4/4"},
+  "all_pass": true,
+  "status": "AUDIT with PROVED composition components",
+  "cells": [
+    {
+      "id": "C1", "name": "quotient/periodic", "anchor": "L2374-2377",
+      "condition": "pullbacks along a nontrivial map pi:D->D'; support membership constant on pi-fibers",
+      "verdict": "PAID",
+      "paying_notes": ["a4_quotient_major_compiler.md", "quotient_census_window_compiler.md"],
+      "prs": [465],
+      "regime": "cyclic quotient towers; complete uniform fibers (A1)",
+      "profile_count": "subexponential divisor count (lem:profile-atlas L4778-4779)",
+      "growth_exponent": 0,
+      "blocks_summation": false, "residual_target": null
+    },
+    {
+      "id": "C2", "name": "dihedral/Chebyshev", "anchor": "L2385-2387",
+      "condition": "quotient cells with an additional involution (inversion u->u^{-1}); Dickson/Chebyshev-detected",
+      "verdict": "PAID",
+      "paying_notes": ["20260709_m31_chebyshev_fixed_remainder_floor/cap25_v13_m31_chebyshev_fixed_remainder_floor.md"],
+      "prs": [],
+      "regime": "dyadic Chebyshev towers",
+      "profile_count": "logarithmic (lem:profile-atlas L4780)",
+      "growth_exponent": 0,
+      "blocks_summation": false, "residual_target": null
+    },
+    {
+      "id": "C3", "name": "planted-block", "anchor": "L2399-2407",
+      "condition": "predetermined support positions forced by an algebraically controlled common divisor P",
+      "verdict": "CONDITIONAL",
+      "paying_notes": [],
+      "prs": [],
+      "regime": "needs a proved subexponential census of the common divisor P (L2405-2407)",
+      "profile_count": "lem:profile-atlas EXCLUDES arbitrary planted (L4781-4782); could be exponential",
+      "growth_exponent": null,
+      "blocks_summation": true, "residual_target": "planted-census"
+    },
+    {
+      "id": "C4", "name": "tangent/deep/common-line", "anchor": "L2409-2416",
+      "condition": "rank-defective contact between the received line and the support-restricted evaluation incidence",
+      "verdict": "PAID",
+      "paying_notes": ["agreement_weighted_transverse_secant.md", "f17_32_high_agreement_tangent_table.md"],
+      "prs": [],
+      "regime": "fixed low-excess charts + deep regime (thm:deep-regime-upper); general high-excess via prop:tangent-payment",
+      "profile_count": "deep regime exact; one-minor-per-slope bounded",
+      "growth_exponent": 0,
+      "blocks_summation": false, "residual_target": null
+    },
+    {
+      "id": "C5", "name": "extension/field-descent", "anchor": "L2422-2427",
+      "condition": "data defined over a proper subfield (field descent) or factoring only after field extension",
+      "verdict": "PAID",
+      "paying_notes": ["noncyclic_c5_slope_count.md", "c5_defect_magnitude.md", "c5_covering_constant.md"],
+      "prs": [607, 610],
+      "regime": "deployed Frobenius families; p does not divide |G|",
+      "profile_count": "slope count = cyclotomic defect p^{d_p(G,I)}, d_p = o(|G|) -> e^{o(n)}",
+      "growth_exponent": 0,
+      "blocks_summation": false, "residual_target": null
+    },
+    {
+      "id": "C6", "name": "differential-locator", "anchor": "L2429-2438",
+      "condition": "locus where the Vandermonde/Hasse Jacobian loses its expected rank",
+      "verdict": "PAID",
+      "paying_notes": ["atom_differential_cell_laws.md"],
+      "prs": [446],
+      "regime": "admissible leaves with R < char (A5)",
+      "profile_count": "differential K-rank defect law proved; inert index=1 under R<=p",
+      "growth_exponent": 0,
+      "blocks_summation": false, "residual_target": null
+    },
+    {
+      "id": "C7", "name": "saturation/effective-image-collapse", "anchor": "L2440-2455",
+      "condition": "passing through displayed images with their actual fiber cardinalities; image << ambient codomain",
+      "verdict": "DETECTION-PAID / PAYMENT-OPEN",
+      "paying_notes": ["routing_exhaustiveness.md", "c7_routing_spectrum.md", "c7_degree_enumeration.md"],
+      "prs": [627, 625, 626, 622],
+      "regime": "product leaves; MASTER-2 no-third-mode",
+      "profile_count": "detection exhaustive PROVED; projection degree = binomial tail of e^{Omega(N)} candidate profiles (enumerative input, L2452), OPEN",
+      "growth_exponent": null,
+      "blocks_summation": true, "residual_target": "input-3"
+    },
+    {
+      "id": "C8", "name": "balanced-core/split-pencil", "anchor": "L2456-2474",
+      "condition": "pair of equal-degree monic residual locators with a common depth-w prefix",
+      "verdict": "PAID (proj-dim-1) / CONDITIONAL on (RC) (higher-dim)",
+      "paying_notes": ["bc_moving_root.md", "split_pencil_ray_collapse.md", "ray_compiler_balanced_core.md", "balanced_core_kappa_growth.md"],
+      "prs": [518, 528],
+      "regime": "split pencil (proj dim 1) paid via prop:split-pencil-payment; higher-dim needs proved decomposition or direct ray count (L2473-2474)",
+      "profile_count": "split pencil: moving-root incidence <= n-g; higher-dim: e^{o(n)} only under (RC) = input 3",
+      "growth_exponent": null,
+      "blocks_summation": true, "residual_target": "input-3"
+    },
+    {
+      "id": "C9", "name": "Fourier/Sidon-heavy analytic", "anchor": "L2476-2492",
+      "condition": "primitive prefix fiber that is too large while having exponentially small additive energy",
+      "verdict": "UNPAID",
+      "paying_notes": ["c9_payment_reduction_map.md", "sidon_special_case_proof.md", "prefix_flatness_power_sum_lean.md"],
+      "prs": [575, 577, 579, 581, 582, 536],
+      "regime": "R>=m (Newton-injective) or fixed m: PROVED-SPECIAL; general linear density m=Theta(N): OPEN",
+      "profile_count": "prefix-fibre count L <= p^w (#536); Sidon moment payment Gsid=e^{o(Nq)} (def:sidon-paid-cell L5131) UNPROVED at deployed scale",
+      "growth_exponent": null,
+      "blocks_summation": true, "residual_target": "input-4/5"
+    }
+  ],
+  "tally": {"cells": 9, "paid": 5, "unpaid_or_conditional": 4,
+            "paid_ids": ["C1", "C2", "C4", "C5", "C6"],
+            "residual_ids": ["C3", "C7", "C8", "C9"]},
+  "composition": {
+    "exhaustion": {
+      "verdict": "COMPOSES-PROVED",
+      "basis": "depth-w prefix-fibre total partition (atlas_missing_witness.md #536; w=0 = one-cell binom(D,a) SE2 L3054-3056) + routing detection theorem (routing_exhaustiveness.md #627, c7_routing_spectrum.md #625 MASTER-2 no-third-mode)",
+      "note": "printed C1-C8 alone need not partition (L2368); C9/primitive is the analytic backstop absorbing up to 27.1% of GENERIC witness mass at toy scale (#536 census). #536 moved (A2)'s coverage clause to payment; #627/#625 upgraded routing detection to a theorem."
+    },
+    "summation_over_paid_cells": {
+      "verdict": "COMPOSES-PROVED",
+      "basis": "each of the 5 paid cells has subexponential growth exponent 0; O(1) cell types; max(0,0,0,0,0)=0 -> sum stays e^{o(n)} E_n",
+      "regime": "on the stated per-cell regimes"
+    },
+    "summation_over_full_catalogue": {
+      "verdict": "BLOCKED",
+      "blockers": ["C3", "C7", "C8", "C9"],
+      "basis": "lem:profile-atlas excludes arbitrary planted (C3) and higher-dim pencil (C8); C7 projection-degree not payable by enumeration (#626); C9 Sidon payment unproved at deployed scale (input 4/5)"
+    }
+  },
+  "cat_still_needs": {
+    "C9": "hard input 4/5 -- image-normalized Sidon/(MI)/(MA) moment payment; reduced to the R=2 linear-density near-Sidon razor (c9_payment_reduction_map.md)",
+    "C7_and_C8_higher_dim": "hard input 3, condition (RC) -- ray compiler / projection-degree count",
+    "C3": "a subexponential planted census (the only genuinely CAT-local combinatorial item)",
+    "new_open_object": false,
+    "mirrors": "profile_envelope_completeness.md (input 4 factors into inputs 2 and 3)"
+  },
+  "unif_dependency": {
+    "cat_scope": "one received line (or one scaled canonical A6 family)",
+    "unif_scope": "the SAME paid catalogue holding uniformly in every received line of a genuine asymptotic row sequence (C_n,a_n) as n->infinity",
+    "quantifier_anchors": ["def:admissible-sequence preamble L897-899", "lem:first-match-bound L1527", "def:asymptotic-row L2256"],
+    "relation": "(UNIF) is the outer universal-over-lines quantifier applied to the (CAT) ledger; (CAT) is its prerequisite. A per-line/per-family payment advances (CAT) for one cell without touching (UNIF); a uniformity argument ignoring the C1-C9 split leaves (CAT) open. No (UNIF) construction attempted here."
+  },
+  "claim_boundaries": {
+    "independent_recheck_confirms": true,
+    "is_counterexample": false,
+    "is_full_canonical_statement_not_proxy_or_toy_row": false,
+    "is_not_degenerate_or_tautological_by_construction": true,
+    "is_novel_not_confirming_a_proven_theorem": false,
+    "resolves_or_advances_prob_band": false,
+    "no_tex_or_pdf_edited": true
+  }
+}
