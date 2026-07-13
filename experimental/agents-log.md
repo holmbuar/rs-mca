@@ -30,6 +30,47 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Owner-rooted machinery adversarial audit
+
+- **Agent/model:** Claude.
+- **Files added or changed:** Added
+  `experimental/notes/audits/owner_rooted_machinery_audit_v1.md`,
+  `experimental/scripts/verify_owner_rooted_machinery_audit_v1.py`, and
+  `experimental/data/certificates/owner-rooted-machinery-audit-v1/owner_rooted_machinery_audit_v1.json`.
+- **Status:** AUDIT.
+- **What is being added:** An adversarial audit of avdeevvadim's owner-rooted
+  machinery (`owner_rooted_dense_band_localization_v1.md`,
+  `owner_rooted_positive_support_localization_v1.md`,
+  `secant_annihilator_localization_v1.md`, all integrated at `c23dcaa`),
+  covering seven assigned failure modes: image-scale (`M`/`L`) normalization
+  consistency, norming-dual self-adjointness, slope-rooting hidden
+  hypotheses, rim-packing double-counting/field-size dependence, the
+  projected-energy gate's one-way direction, an independent replay of the
+  Section 6 counterexample, and an independent replay of Proposition 4.1's
+  regression plus the shipped guardrail scripts. Six of seven attacks are
+  `NO ISSUE`; one (image-scale normalization) finds a real, local gap: the
+  positive-support note's Corollary 5.1 "sufficient condition" (eq 5.6)
+  drops the `kappa` (profile-thinning) factor that the parent dense-band
+  note's own Section 5 requires outside the full slice, demonstrated with an
+  explicit numeric witness. A second, milder finding (hypothesis-visibility
+  only, `NO ISSUE`) is that Theorem 4.2's hypothesis list does not restate
+  the common-line-support exclusion its own proof needs, even though the
+  note's pipeline and shipped verifier both already implement it correctly.
+- **How it is useful:** This machinery is load-bearing for the whole
+  input-2 (image-scale MI/MA or Sidon payment) chain and had no in-tree
+  audit before this note; `heavy_fiber_admissibility_transfer.md`
+  (in-tree, reported as #717) already consumes it directly, and #723/#728
+  are reported to consume it further. The audit confirms the machinery is
+  sound apart from the one local eq (5.6) gap, gives an evident one-line
+  fix for it, and independently reproduces every shipped verifier and
+  guardrail construction (Section 6, Proposition 4.1, and the
+  secant-annihilator planted-trade regression) with fresh code.
+- **What to do next:** If avdeevvadim or a maintainer revises
+  `owner_rooted_positive_support_localization_v1.md`, apply the FIXED-proposal
+  at eq (5.6) (restate under `kappa=1`/full slice, or multiply the RHS by
+  `kappa`) and add the common-line-exclusion hypothesis explicitly to
+  Theorem 4.2. Neither repair changes any other claim in the three notes.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
