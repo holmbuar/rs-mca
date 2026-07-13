@@ -17,6 +17,10 @@ This package is a partial Lean formalization of
   simple-pole support semantics, the full-field MCA numerator compiler in
   `thm:collision-aware-pole` / equation (4.2), and its proper-challenge
   composition.
+- `GrandeFinale/IdentityPrefixCollisionFloor.lean`: the exact
+  coefficient-prefix specialization of the collision-aware compiler, with the
+  literal `L_m` and `M(L_m)` ceilings from equation (4.3), plus its
+  proper-challenge transfer.
 - `GrandeFinale/QFourierTao.lean`: log-moment-to-Q reductions, including the
   finite bit-certificate inequality.
 - `GrandeFinale/QEntropyInverse.lean`: deterministic atoms around the entropic
@@ -169,7 +173,10 @@ route. `CollisionAwarePole` proves the exact equation-(4.2) full-field floor
 from a supplied finite dimension-`k+1` Reed--Solomon codeword list, while
 `ChallengeIntersection` transfers a supplied full-field floor to a proper
 challenge set after a received-line shear. The direct composition is exported
-as `collisionAwarePole_challenge_of_codewordList`. The prefix-list construction
+as `collisionAwarePole_challenge_of_codewordList`.
+`IdentityPrefixCollisionFloor` selects an exact-size heavy prefix sublist and
+exports the literal equation-(4.3) specialization and its challenge transfer.
+The prefix-list construction
 and pigeonhole floor are supplied by `ExactPrefixList` and
 `PrefixPigeonhole`, and `ExactListLine` proves the exact same-field fixed-pole
 list--line conversion. `ExactPrefixRay` composes these layers for a supplied

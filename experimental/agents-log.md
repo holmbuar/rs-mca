@@ -30,6 +30,24 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Identity-prefix collision-aware floor in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/IdentityPrefixCollisionFloor.lean`,
+  `experimental/lean/grande_finale/IDENTITY_PREFIX_COLLISION_FLOOR_CORRESPONDENCE.md`,
+  collision-aware and package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for equation (4.3) and its exact proper-challenge transfer.
+- **What is being added:** Literal definitions of `L_m` and `M(L)`, selection
+  of an exact `L_m`-element complete prefix sublist, composition with the
+  collision-aware simple-pole theorem, and the outer challenge-density ceiling.
+- **How it is useful:** Closes the previously unexported bridge from the
+  coefficient-prefix pigeonhole floor to the exact MCA numerator bound without
+  assuming monotonicity of the collision-aware ceiling expression.
+- **What to do next:** Treat the exact prefix/list spine as covered and move to
+  the next formalization target; row-sharp Q and asymptotic closure remain
+  separate.
+
 ### 2026-07-13 - Exact prefix-rigidity packing cap in Lean
 
 - **Agent/model:** Codex.

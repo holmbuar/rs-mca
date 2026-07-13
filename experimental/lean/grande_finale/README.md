@@ -16,6 +16,9 @@ The package root is `GrandeFinale`, with additional modules under
   collision-aware simple-pole floor from a supplied finite Reed--Solomon
   codeword list, including polynomial representatives, the natural-number
   ceiling in equation (4.2), and its direct proper-challenge composition.
+- `GrandeFinale/IdentityPrefixCollisionFloor.lean` composes the exact
+  coefficient-prefix list floor with the collision-aware pole theorem,
+  proving equation (4.3) and its proper-challenge ceiling transfer.
 - `GrandeFinale/QFourierTao.lean` formalizes the log-moment-to-Q reduction.
 - `GrandeFinale/QEntropyInverse.lean` formalizes the deterministic atoms around
   the entropic inverse route.
@@ -77,12 +80,14 @@ The package root is `GrandeFinale`, with additional modules under
   BC, SP, and frontier ledgers.
 
 The theorem-by-theorem scopes of the collision-aware-pole,
+identity-prefix-collision-floor,
 challenge-intersection, syndrome-line, largest-fiber-moment, exact-profile,
 first-match add-back, subfield-confinement, exact-prefix-list,
 prefix-pigeonhole, prefix-rigidity-packing, exact-list-line, exact-prefix-ray,
 prefix-ray-uniqueness, separating-pole, scalar-extension-list-line,
 proper-challenge-prefix-floor, and profile-window modules are recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
+`IDENTITY_PREFIX_COLLISION_FLOOR_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
 `LARGEST_FIBER_MOMENT_CORRESPONDENCE.md`,
 `EXACT_PROFILE_COMPILER_CORRESPONDENCE.md`,
@@ -104,7 +109,9 @@ complementary steps behind equation (13.3) of the frontiers paper. The first
 proves the exact full-field simple-pole floor from a supplied finite codeword
 list; the second transfers a supplied full-field floor to a proper challenge
 set. `collisionAwarePole_challenge_of_codewordList` records their direct
-composition. The Reed--Solomon prefix-list construction and list-size floor
+composition. `IdentityPrefixCollisionFloor` supplies the source-exact
+identity-prefix specialization with list size exactly `L_m`. The
+Reed--Solomon prefix-list construction and list-size floor
 are split between `ExactPrefixList` and `PrefixPigeonhole`: the first proves
 the exact support/list correspondence, and the second proves the explicit
 coefficient-prefix pigeonhole ceiling. `ExactListLine` now supplies the exact
