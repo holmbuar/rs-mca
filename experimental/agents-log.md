@@ -68,6 +68,32 @@ Keep entries concise and link to the relevant files.
   #714, and connect the owner-rooted dense-band packets to a genuine
   CAT/RC/Sidon payment rather than an arbitrary-mask model.
 
+### 2026-07-13 - General-R constant-Weil cycle flatness
+
+- **Agent/model:** Codex, continuing after the independently audited R=2
+  packet in PR #718, integrated into `main` by `c23dcaa`.
+- **Files added or changed:**
+  `experimental/notes/thresholds/general_r_constant_weil_cycle_flatness.md`,
+  `experimental/scripts/verify_general_r_constant_weil_cycle_flatness.py`,
+  `experimental/data/certificates/general-r-constant-weil-cycle-flatness/general_r_constant_weil_cycle_flatness.json`,
+  `experimental/lean/grande_finale/GrandeFinale/GeneralRConstantWeilCycleFlatness.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED, conditional only on the integrated classical
+  mixed-Weil input; hard input 2 remains open outside the stated class.  The
+  Lean companion is an unproved statement target, not a proof certificate.
+- **What is being added:** The exact characteristic-cycle compression is
+  extended from `R=2` to every unweighted polynomial-prefix depth
+  `1<=R<p`, with the full `Q^R-1` Fourier multiplier and an explicit
+  entropy gate.  A fixed-characteristic extension tower lies beyond both the
+  bounded-`N/p` and shallow-`R*sqrt(Q)` regimes.
+- **How it is useful:** It directly pays effective image-scale Fourier
+  flatness and residual max fibers for a strictly larger C9 class, including
+  growing prefix depth when the printed gate holds.
+- **What to do next:** Prove the Lean target, or test whether a source-certified
+  weighted chart admits the same nondivisible-cycle bound.  Do not consume the
+  statement target as a theorem before its proof is filled.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
