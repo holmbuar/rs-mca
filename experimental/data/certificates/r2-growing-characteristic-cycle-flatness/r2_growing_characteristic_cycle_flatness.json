@@ -1,0 +1,103 @@
+{
+  "schema": "rs-mca.r2-growing-characteristic-flatness.v1",
+  "status": "PROVED",
+  "hard_input": 2,
+  "claim": "The bounded N/p hypothesis in the integrated unweighted R=2 multiplicative-coset flatness theorem can be replaced by the explicit entropy-versus-characteristic gate; p tending to infinity and log(Q)=o(N) suffice.",
+  "source": {
+    "file": "experimental/notes/thresholds/r2_constant_weil_cycle_flatness.md",
+    "commit": "6588d8d6c393df81642dafafc82c70f565d009cf",
+    "integrated_by": "7d66bfa9b2f3c3cf557f1a4e898fe6cbc26a4ce3"
+  },
+  "parameters": {
+    "field_size": "Q=|B|",
+    "characteristic": "p=char(B), odd",
+    "slice_size": "M=binom(N,m)",
+    "density": "alpha<=m/N<=1-alpha, 0<alpha<1/2",
+    "weil_constant": "C_W=3*C_0",
+    "weil_parameter": "Lambda=C_W*sqrt(Q)+|P|",
+    "boundary_map": "Phi(S)=(sum(S),sum(t^2 for t in S)) in B^2"
+  },
+  "finite_bound": {
+    "r": "min(m,N-m)",
+    "beta": "(N-Lambda)/p",
+    "level": "floor(r/p)",
+    "base_factor": "binom(Lambda+r-1,r)",
+    "cycle_penalty": "binom((N-Lambda)/p+floor(r/p),floor(r/p))",
+    "relative_error": "epsilon_*=(Q^2-1)*base_factor*cycle_penalty/binom(N,r)",
+    "full_image_predicate": "epsilon_*<1"
+  },
+  "asymptotic_gate": {
+    "entropy_gap": "delta=min_{alpha<=x<=1/2}[h(x)-(x+lambda)h(x/(x+lambda))]",
+    "field_penalty": "2*log(Q)/N",
+    "characteristic_penalty": "3*log(2)/(2*p)",
+    "predicate": "limsup(field_penalty+characteristic_penalty)<delta",
+    "simple_corollary": "p->infinity and log(Q)=o(N)"
+  },
+  "entropy_samples": [
+    {
+      "alpha": 0.05,
+      "lambda": 0.1
+    },
+    {
+      "alpha": 0.1,
+      "lambda": 0.25
+    },
+    {
+      "alpha": 0.2,
+      "lambda": 0.49
+    }
+  ],
+  "strict_family": {
+    "field": "F_(p^4)",
+    "subgroup_order": "d*(p^2+1)",
+    "requirement": "d>2*C_W and p=1 mod d",
+    "old_cycle_hypothesis": "N/p is unbounded",
+    "old_shallow_hypothesis": "2*sqrt(Q)/N tends to 2/d, not zero",
+    "proper_subfield_guard": "N>p^2-1",
+    "arithmetic_rows": [
+      {
+        "d": 5,
+        "p": 11
+      },
+      {
+        "d": 5,
+        "p": 31
+      },
+      {
+        "d": 5,
+        "p": 41
+      },
+      {
+        "d": 7,
+        "p": 29
+      },
+      {
+        "d": 7,
+        "p": 43
+      },
+      {
+        "d": 7,
+        "p": 71
+      },
+      {
+        "d": 8,
+        "p": 17
+      },
+      {
+        "d": 8,
+        "p": 41
+      },
+      {
+        "d": 8,
+        "p": 73
+      }
+    ]
+  },
+  "nonclaims": [
+    "circle twin-cosets",
+    "weighted rational charts",
+    "deployed finite leaves",
+    "power-of-two prize rows",
+    "global closure of hard input 2"
+  ]
+}

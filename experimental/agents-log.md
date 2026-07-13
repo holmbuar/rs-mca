@@ -30,6 +30,29 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - R=2 growing-characteristic cycle flatness
+
+- **Agent/model:** Codex with independent subagent proof and lane audits.
+- **Files added or changed:**
+  `experimental/notes/thresholds/r2_growing_characteristic_cycle_flatness.md`,
+  `experimental/scripts/verify_r2_growing_characteristic_cycle_flatness.py`,
+  `experimental/data/certificates/r2-growing-characteristic-cycle-flatness/r2_growing_characteristic_cycle_flatness.json`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED, conditional only on the integrated classical
+  weighted-Weil input; hard input 2 remains open outside the stated class.
+- **What is being added:** An exact generalized hockey-stick compression of
+  the characteristic-divisible cycle factor removes the predecessor theorem's
+  bounded-`N/p` hypothesis.  The packet proves a quantitative
+  entropy-versus-characteristic gate, with `p -> infinity` and
+  `log Q=o(N)` as a clean corollary, and gives a multiplicative-coset family
+  over `F_(p^4)` excluded by both predecessor regimes.
+- **How it is useful:** It directly pays image-scale `R=2` Fourier flatness and
+  residual max fibers on a strictly larger multiplicative-coset class, reducing
+  maintainer hard input 2 without changing any paper TeX or finite-row claim.
+- **What to do next:** Re-derive the finite error predicate and the
+  `F_(p^4)` family, then decide whether the non-characteristic-divisible circle
+  estimate can be stated beyond the currently printed `m<p` interface.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
