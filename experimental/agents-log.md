@@ -30,6 +30,37 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Section-nonpositive rational-host extraction fails
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/section_nonpositive_extraction_counterexample.md`,
+  `experimental/scripts/verify_section_nonpositive_extraction.py`,
+  `experimental/data/certificates/section-nonpositive-extraction/section_nonpositive_extraction.json`,
+  `experimental/lean/section_nonpositive_extraction/` (core-only Lean 4
+  statement package), `experimental/agents-log.md`.
+- **Status:** COUNTEREXAMPLE / PROVED (decision criterion, generic-failure
+  stratum, explicit family).
+- **What is being added:** Decides the EXTRACTION question that PR #721
+  (DannyExperiments, `canonical_reduced_rational_host_compiler.md`) explicitly
+  disclaims and names as its next wall. Negative verdict: not every J<=0
+  received line admits a reduced rational-host presentation. Gives (i) an exact
+  iff decision criterion reducing the search to the denominator (d,L) alone;
+  (ii) a provable infinite family (r_1 = g|_D with k <= deg g <= n-1-(a-k),
+  any r_0); (iii) three exhaustively-certified witnesses over F_11/F_13/F_17
+  (the F_17 row exercises the new degree-2 denominators); (iv) the exact
+  non-host stratum -- host lines lie in a union of <= sum p^d subspaces of
+  dimension <= a, so the section-nonpositive gate 2a-k<=n-1 forces a
+  1-O((a-k)/p) fraction to have no presentation. Positive controls reconstruct
+  #721 sec.7's own lines and the same engine finds them (genuine iff).
+- **How it is useful:** Completes the reach map of #721's compiler and sharpens
+  hard input 3 / C8: it defines exactly where the rational-host route to (RC)
+  cannot apply. Credits #721/#704 (Danny), cites #713 C8 and #528; verified
+  against manuscript anchors (C8 L2456-2474, hyp:ray-compiler L6033-6051).
+- **What to do next:** Decide whether the balanced-core lines actually realized
+  in the first-match atlas fall inside the thin host stratum H or its
+  complement -- the remaining positive half of (RC) for input 3.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
