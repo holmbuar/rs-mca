@@ -25,6 +25,9 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/ExactProfileCompiler.lean` proves the exact finite incidence,
   residual-moment, natural-floor, and first-match budget implications behind
   (FC1)--(FC2).
+- `GrandeFinale/FirstMatchAddBack.lean` proves ordered first-match
+  disjointization, exact finite profile-union summation, and the weighted
+  profile add-back formulas (AB1)--(AB3).
 - `GrandeFinale/QPrimitiveCollision.lean` formalizes collision-tuple and
   low-support exclusion kernels.
 - `GrandeFinale/QFiniteTables.lean` pins the four finite Q table rows and
@@ -43,11 +46,12 @@ The package root is `GrandeFinale`, with additional modules under
 
 The theorem-by-theorem scopes of the collision-aware-pole,
 challenge-intersection, syndrome-line, largest-fiber-moment, exact-profile,
-and profile-window modules are recorded
+first-match add-back, and profile-window modules are recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
 `LARGEST_FIBER_MOMENT_CORRESPONDENCE.md`,
-`EXACT_PROFILE_COMPILER_CORRESPONDENCE.md`, and
+`EXACT_PROFILE_COMPILER_CORRESPONDENCE.md`,
+`FIRST_MATCH_ADDBACK_CORRESPONDENCE.md`, and
 `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize

@@ -30,6 +30,23 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - First-match and weighted profile add-back in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/FirstMatchAddBack.lean`,
+  `experimental/lean/grande_finale/FIRST_MATCH_ADDBACK_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the exact finite first-match and add-back statements.
+- **What is being added:** Ordered first-match disjointization and exact budget
+  summation, the finite profile-family union multiplier, full-slice overlap
+  counting, and the literal weighted add-back formulas (AB1)--(AB3).
+- **How it is useful:** Separates the exact profile-combination losses from
+  row-specific atlas construction and from later asymptotic bookkeeping.
+- **What to do next:** Instantiate the finite interfaces with certified
+  profile slices and payments for concrete rows, keeping their overlap and
+  image-coverage factors explicit.
+
 ### 2026-07-13 - Exact finite profile compiler in Lean
 
 - **Agent/model:** Codex.

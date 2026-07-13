@@ -28,6 +28,9 @@ This package is a partial Lean formalization of
 - `GrandeFinale/ExactProfileCompiler.lean`: exact finite incidence double
   counting, residual moment payment with the full-slice mean, the literal
   natural floor in (FC1), and available/minimum first-match budgets in (FC2).
+- `GrandeFinale/FirstMatchAddBack.lean`: ordered first-match
+  disjointization, the exact finite family-union multiplier, full-slice
+  overlap counting, and the weighted add-back formulas (AB1)--(AB3).
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -83,6 +86,13 @@ degrees as explicit inputs. It does not assert that those structural inputs
 exist for an unrestricted row. Challenge-set intersection and the adjacent
 unsafe/safe threshold comparison remain delegated to the package's existing
 challenge and threshold results.
+
+The first-match add-back module proves the finite disjoint-union identity
+before summing cell budgets and records the exact overlap loss for full profile
+slices. Its family-size-times-budget theorem is the finite combinatorial core
+of `lem:profile-summation`; the sequence-level `e^{o(n)}` bookkeeping
+remains outside the module. A witness-exhaustive atlas and the individual
+profile payments remain explicit inputs.
 
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and
