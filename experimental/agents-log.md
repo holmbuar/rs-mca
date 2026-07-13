@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Sidon-paired fiber profile: staircase-concentration DECIDED FALSE
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/staircase_concentration_sidon_paired.md`,
+  `experimental/scripts/verify_staircase_concentration_sidon_paired.py`,
+  `experimental/data/certificates/staircase-concentration-sidon-paired/staircase_concentration_sidon_paired.json`,
+  `experimental/lean/staircase_concentration_sidon_paired/`.
+- **Status:** PROVED (exact fiber classification + robust lower bound) +
+  COUNTEREXAMPLE (non-concentration / route-cut).
+- **What is being added:** Decides the CONCENTRATION clause -- the last open
+  clause of avdeevvadim's #716 charge-preserving semantic-or-signed dichotomy on
+  the Sidon-paired depth-1 class, flagged by #732 Theorem B as its residual.
+  Exact fiber-size formula `|Phi^{-1}(sigma)| = C(B-s,(B-s)/2)` (unpaired-count
+  `s`) with `C(B,s) 2^s` syndromes per level (2-superincreasing base; recovers
+  `L=(3^B+1)/2`, `M=C(2B,B)`, central `C(B,B/2)` = #735 Thm 2); a robust lower
+  bound for every distinct-subset-sum `P`; and a proof that the profile is an
+  exponential staircase, so `#{fiber >= e^{eta N} M/L}` and the min piece count
+  are both `e^{Theta(N)}` -- #732's concentration hypothesis is FALSE on its own
+  class (Prop 3.1 obstruction realized by the actual atlas family).
+- **How it is useful:** Cuts the #729/#732/#735 heavy/light-split route to
+  #716's dichotomy on the Sidon-paired class and relocates the residual; the
+  full hypothesis union of the would-be composition is printed. Corrects #732
+  Sec 3/5's "concentrated" prose as a small-`B` crossover artifact.
+- **What to do next:** Decide whether a non-fiber-indexed decomposition (route
+  the moderately-unpaired fibers through the signed clause at `q <= 4.199`)
+  closes the dichotomy on this class; extend the classification to `a != B`.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
