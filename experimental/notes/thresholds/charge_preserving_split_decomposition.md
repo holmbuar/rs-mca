@@ -225,10 +225,20 @@ L = e^{Theta(N)}  : the split is an e^{o(N)}-piece decomposition IFF the positiv
                     profile is staircase-concentrated -- which can FAIL (Prop 3.1).
 ```
 
-The `#717`/`#728` superincreasing family has `L=(3^B+1)/2=e^{Theta(N)}` yet is
-**concentrated** (Sec 5), so it is on the good side; a flat tail is on the bad
-side. Which side an *actual atlas failure packet* lands on is exactly the
-max-fiber / profile-envelope hard input -- open.
+**CORRECTION (2026-07-13, superseding the original print of this paragraph;
+see the staircase classification packet, PR #739).** The original text here
+called the `#717`/`#728` superincreasing family "concentrated (Sec 5)". That
+was a small-`B` (`B<=8`) crossover artifact: #739's exact classification
+(`|fiber| = C(B-s,(B-s)/2)` across `C(B,s)*2^s` syndromes per level `s`)
+proves the family's heavy fibers are exponentially ABUNDANT --
+`#{fiber >= e^{eta N} M/L} = e^{Theta(N)}` for every `eta < ln(3/2)/2` -- and
+Sec 5's own piece count `1 + C(B-2,(B-2)/2)` is already exponential. The
+family is therefore on the BAD side of Theorem B's dichotomy: the
+fiber-indexed split is NOT an `e^{o(N)}`-piece decomposition there. Theorems
+A and B of this note are unaffected (the correction concerns only which side
+this example lands on). Which side an *actual atlas failure packet* lands on
+is exactly the max-fiber / profile-envelope hard input -- open, and #739 shows
+the answer is class-dependent.
 
 ---
 
