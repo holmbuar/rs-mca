@@ -41,6 +41,9 @@ This package is a partial Lean formalization of
   supported-error syndrome images with weighted-column spans, their dimensions,
   codimension-one functional kernels, and injectivity across exact `(R-1)`
   supports.
+- `GrandeFinale/RSExactSupportUpper.lean`: exact reduction from threshold
+  witnesses to exact-cardinality supports and the literal full-field
+  `choose |D| a` support-atlas upper bound for injective Reed--Solomon codes.
 - `GrandeFinale/ProfileEnvelopeWindow.lean`: exact rational exponent algebra for
   the corrected per-folding identity-dominance windows, including finite-family
   intersection/union and the positive-crossing no-field-drop characterization.
@@ -78,9 +81,9 @@ linear-code compiler behind `prop:syndrome-line-normal-form` and
 `thm:syndrome-secant-exact` in the frontiers paper. The RS parity-kernel module
 supplies its weighted Vandermonde parity-check construction and exact kernel
 identification, while the support-hyperplane module supplies the distinct
-`(R-1)`-support kernel family. The exact support upper bound, final separating
-line composition, and reduction from threshold witnesses to exact-cardinality
-supports remain separate.
+`(R-1)`-support kernel family. The exact-support-upper module supplies the
+threshold-to-exact-cardinality reduction and the resulting support-atlas upper
+bound. The final separating-line composition and AD1 equality remain separate.
 
 The collision-aware-pole and challenge-intersection modules are independent
 of Q and formalize complementary parts of the frontiers paper's simple-pole

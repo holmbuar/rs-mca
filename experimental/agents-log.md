@@ -30,6 +30,24 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact Reed--Solomon support upper bound in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/RSExactSupportUpper.lean`,
+  `experimental/lean/grande_finale/RS_EXACT_SUPPORT_UPPER_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the exact-agreement reduction and full-field
+  support-atlas upper bound.
+- **What is being added:** Exact interpolation and uniqueness lemmas reduce
+  every threshold-`a` MCA witness to an exact `a`-element support when
+  `a >= k+1`; counting these cells proves
+  `B_MCA (rsEval ev k) a <= choose |D| a`.
+- **How it is useful:** Supplies the upper-bound half of the AD1 equality in
+  `thm:exact-first-adjacent-row`.
+- **What to do next:** Compose the support-hyperplane family with the
+  separating-line construction and this upper bound to derive AD1.
+
 ### 2026-07-13 - Exact Reed--Solomon support hyperplanes in Lean
 
 - **Agent/model:** Codex.
