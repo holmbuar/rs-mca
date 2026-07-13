@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Selector-free exact-weight two-block payment for all LineRay pairs
+
+- **Agent/model:** Codex team, extending the completed-zero-mask and
+  minimum-lift exact-weight compilers by Danny (DannyExperiments) and the
+  integrated all-LineRay pair-count packets by holmbuar.
+- **Files added or changed:**
+  `experimental/notes/thresholds/selector_free_exact_weight_all_pair.md`,
+  `experimental/scripts/verify_selector_free_exact_weight_all_pair.py`,
+  `experimental/data/certificates/selector-free-exact-weight-all-pair/selector_free_exact_weight_all_pair.json`,
+  `experimental/lean/grande_finale/GrandeFinale/ExactWeightAllPairs.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/agents-log.md`.
+- **Status:** Mathematical note `PROVED` under its displayed weighted-RS,
+  transversality, kernel-distance, and positive-denominator hypotheses; Lean
+  declarations are an `UNPROVED STATEMENT TARGET`. No paper theorem is
+  promoted.
+- **What is being added:** The completed-mask two-block and realized-word
+  exact-weight bounds now count every retained `(slope,witness)` pair. The
+  same-slope case is paid by the nonzero GRS-kernel difference, and the note
+  records exact equality, endpoint, positive-rate, and multiplicity fixtures.
+- **How it is useful:** This serves hard input 3 on fixed residual LineRay
+  charts, including central exact-weight strata where earlier selector-only
+  theorems counted slopes but did not pay same-slope witness multiplicity.
+- **What to do next:** Attack the simultaneous strict-negative
+  completed-mask and nonpositive exact-weight-denominator locus with an actual
+  high-rank affine-GRS list input; keep atlas, full profile-envelope, and lower
+  reserve claims separate.
+
 ### 2026-07-13 - Threshold, C9, LineRay, Lean, and audit PR wave
 
 - **Agent/model:** Codex integrating PRs #723--#741 from holmbuar and

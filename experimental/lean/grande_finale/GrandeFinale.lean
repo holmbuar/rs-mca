@@ -3,6 +3,7 @@ import GrandeFinale.AllLineRayAffineCore
 import GrandeFinale.AntiHostPrefixCompiler
 import GrandeFinale.DeployedC9OddMonomialFourierBudget
 import GrandeFinale.DirectionDistanceAllPairs
+import GrandeFinale.ExactWeightAllPairs
 import GrandeFinale.GeneralRConstantWeilCycleFlatness
 import GrandeFinale.Rank15LocatorDegreeFloor
 
