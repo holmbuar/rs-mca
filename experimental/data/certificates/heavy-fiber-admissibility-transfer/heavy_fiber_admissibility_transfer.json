@@ -1,0 +1,75 @@
+{
+  "note": "experimental/notes/thresholds/heavy_fiber_admissibility_transfer.md",
+  "verifier": "experimental/scripts/verify_heavy_fiber_admissibility_transfer.py",
+  "status": "CONDITIONAL transfer (PROVED core lemmas) + route-scoped COUNTEREXAMPLE",
+  "hard_input": "input 2 (image-scale MI+MA / direct Sidon payment) -- heavy-fiber interface of PR #716",
+  "arithmetic": "exact (Fraction / integer / GF(2^k)); stdlib only",
+  "checks_total": 77,
+  "verdict": "For the unprofiled locator/power-sum prefix chart, a heavy Phi-syndrome-fiber submask of an admissible first-match residual is itself an admissible rooted profile at the original M/L normalization, PROVIDED R<char(B) (elementary chart: any char) and R<=m-2. Hence #716's hereditary hypothesis reduces to plain emission on the atlas's actual moment-curve packets. The reduction is NOT available via the power-sum chart when R>=char(B).",
+  "A_sharpened_gap_lemma": {
+    "claim": "b(s0)-M/|G| = sum_A (P_A b)(s0); heavy fiber pigeonholes one band; band failure lives on the whole residual b, not only the point mask f=W*1_{s0}",
+    "group": "(F_2)^5",
+    "group_order": 32,
+    "q": 4,
+    "n_cols": 8,
+    "M": 70,
+    "L": 32,
+    "K_N": 3,
+    "s0": 15,
+    "W": 3,
+    "mean": "70/32",
+    "excess_W_minus_mean": "13/16",
+    "pigeonholed_band_value": "5/8",
+    "point_mass_identity": "P_A f(s0) = W*delta_A (barrier note Prop 1.1)",
+    "uniform_owner_weight": "c = ||P_A f||_q / W > 0 (barrier note Sec 2)"
+  },
+  "B_newton_fiber_coincidence_census": {
+    "claim": "power-sum syndrome fiber == depth-d locator-prefix fiber when d<char=p; Johnson max|S cap S'| <= a-d-1; clauses (i),(iii),(iv) hereditary",
+    "columns": "moment curve v_t=(t,...,t^d), Phi(S)=(p_1..p_d), Phi_d(S)=(e_1..e_d)",
+    "rows": [
+      {"p": 7,  "d": 2, "a": 4, "supports": 35,   "ps_fibers": 28,   "es_fibers": 28,   "heavy": 2, "maxcap": 1, "john_bound": 1, "coincide": true},
+      {"p": 7,  "d": 3, "a": 5, "supports": 21,   "ps_fibers": 21,   "es_fibers": 21,   "heavy": 0, "maxcap": 0, "john_bound": 1, "coincide": true},
+      {"p": 11, "d": 2, "a": 4, "supports": 330,  "ps_fibers": 110,  "es_fibers": 110,  "heavy": 3, "maxcap": 1, "john_bound": 1, "coincide": true},
+      {"p": 11, "d": 3, "a": 5, "supports": 462,  "ps_fibers": 451,  "es_fibers": 451,  "heavy": 2, "maxcap": 0, "john_bound": 1, "coincide": true},
+      {"p": 13, "d": 2, "a": 4, "supports": 715,  "ps_fibers": 169,  "es_fibers": 169,  "heavy": 7, "maxcap": 1, "john_bound": 1, "coincide": true},
+      {"p": 13, "d": 3, "a": 5, "supports": 1287, "ps_fibers": 1105, "es_fibers": 1105, "heavy": 3, "maxcap": 1, "john_bound": 1, "coincide": true}
+    ]
+  },
+  "C_char_boundary_routecut": {
+    "claim": "when R>=char the power-sum chart fiber is NOT a locator-prefix fiber; power-sum route to admissibility is dead (obstruction: Newton diagonal 2..R hits 0)",
+    "field": "GF(8) = F_2[x]/(x^3+x+1)",
+    "d": 3,
+    "a": 4,
+    "supports": 56,
+    "ps_fibers": 35,
+    "es_fibers": 63,
+    "merged_fibers": 28,
+    "witness": {
+      "S1": [0, 1, 2, 4],
+      "S2": [3, 5, 6, 7],
+      "shared_power_sums": [7, 3, 7],
+      "elem_prefix_S1": [7, 5, 3],
+      "elem_prefix_S2": [7, 6, 1],
+      "e1_agrees": true,
+      "comment": "p_1=e_1 always; e_2,e_3 diverge because 2|char so p_{2j}=p_j^2 collapses"
+    },
+    "manuscript_anchor": "rem:binary-ambient-image (p_{2j}=p_j^2 in char 2); (A5) requires R<char for power-sum coords"
+  },
+  "D_heaviness_witness": {
+    "claim": "superincreasing depth-1 prefix fiber (adjacent dense-band note): exact counts, single depth-1 prefix (constant e_1), WL/M grows like (3/2)^B",
+    "construction": "A_i=5^i, C=2*sum A_i + 1, T={A_i} U {C-A_i}, a=B, Phi=sum",
+    "rows": [
+      {"B": 2, "N": 4,  "a": 2, "M": 6,   "L": 5,   "W": 2,  "s0": 61,     "maxcap": 0, "WL_over_M": "5/3"},
+      {"B": 4, "N": 8,  "a": 4, "M": 70,  "L": 41,  "W": 6,  "s0": 3122,   "maxcap": 2, "WL_over_M": "123/35"},
+      {"B": 6, "N": 12, "a": 6, "M": 924, "L": 365, "W": 20, "s0": 117183, "maxcap": 4, "WL_over_M": "1825/231"}
+    ],
+    "L_formula": "(3^B+1)/2",
+    "W_formula": "C(B,B/2)"
+  },
+  "interfaces": {
+    "credits": "avdeevvadim PR #716 (heavy-fiber interface obligation, primitive_signed_payment_barrier_v1.md / owner_rooted_dense_band_localization_v1.md sec 10)",
+    "cites": ["#713 experimental/notes/thresholds/atlas_cat_cell_ledger.md (C8 balanced-core/common depth-w prefix)",
+              "#708 experimental/notes/thresholds/rooted_order_two_band_reduction.md (rooted same-boundary pair)",
+              "#711 experimental/notes/thresholds/exp_ilo_habitat_restriction.md (image-denominator wall)"]
+  }
+}

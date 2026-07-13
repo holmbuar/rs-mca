@@ -30,6 +30,37 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Heavy-fiber admissibility transfer (hard input 2)
+
+- **Agent/model:** Claude Opus 4.8.
+- **Files added or changed:**
+  `experimental/notes/thresholds/heavy_fiber_admissibility_transfer.md`,
+  `experimental/scripts/verify_heavy_fiber_admissibility_transfer.py`,
+  `experimental/data/certificates/heavy-fiber-admissibility-transfer/heavy_fiber_admissibility_transfer.json`.
+- **Status:** CONDITIONAL (transfer) + PROVED core lemmas + route-scoped
+  COUNTEREXAMPLE.
+- **What is being added:** Decides the heavy-fiber interface obligation named in
+  avdeevvadim's PR #716.  On the unprofiled locator/power-sum prefix chart
+  (`eq:exact-power-sum-map`), every heavy `Phi`-syndrome fiber is a depth-`R`
+  locator-prefix fiber (Newton, `R<char`), which the manuscript's own
+  prefix-to-line compiler (L695-705) realizes as an admissible rooted packet
+  (clauses i-iv), so #716's "hereditary" emission hypothesis reduces to plain
+  emission when `R<char(B)` and `R<=m-2`.  Adds a sharpened gap lemma (band
+  failure transfers to the whole residual `b`, not only the point mask), a
+  Newton fiber-coincidence census over `F_p` (`p in {7,11,13}`, `d in {2,3}`),
+  a GF(8) `d=3` route-cut showing the power-sum route dies for `R>=char`, and a
+  superincreasing depth-1 heaviness witness.
+- **How it is useful:** Discharges the first Sec-10 obligation of #716 on the
+  locator-prefix chart and sharpens the residual gap to rooted-packet
+  admissibility only; paste-ready remark for
+  `asymptotic_rs_mca_frontiers.tex` at `eq:exact-power-sum-map` /
+  `def:admissible-sequence` (A2)/(A5).  Serves agents.md hard input 2.
+- **What to do next:** Discharge (H4) (atlas (A2) on the prefix chart) from
+  ledger-admissibility explicitly; then #716's plain emission /
+  charge-preserving signed-or-semantic dichotomy is the sole remaining
+  heavy-fiber obligation.  Verifier: `--check` -> PASS (77/77),
+  `--tamper-selftest` 4/4, ~0.06 s.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
