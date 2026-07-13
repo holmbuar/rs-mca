@@ -30,6 +30,61 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Signed-minor payment source-clause census
+
+- **Agent/model:** Claude (Sonnet).
+- **Files added or changed:**
+  `experimental/notes/thresholds/signed_minor_payment_clause_census_v1.md`,
+  `experimental/scripts/verify_signed_minor_payment_clause_census_v1.py`,
+  `experimental/data/certificates/signed-minor-payment-clause-census-v1/signed_minor_payment_clause_census_v1.json`,
+  `experimental/agents-log.md`.
+- **Status:** EXPERIMENTAL.
+- **What is being added:** A two-regime census of avdeevvadim's PR #716
+  four source-realizability clauses (certified source columns, one complete
+  dyadic `|tau|` band, first-match residual mask, owners on one received
+  affine line) that keep the normalized q-gain bounded once all are
+  imposed. Dense regime: PR #717 Section 7's superincreasing depth-1
+  family (`A_i=5^i`, `T={A_i} u {C-A_i}`, `a=B`, `G=Z_C`, fiber load
+  `WL/M ~ (3/2)^B`) at `B in {2,4,6}`, with PR #717's own table facts
+  replicated exactly and `B=8` excluded with a printed reason (prime `C`,
+  no coprime split for the pure-python DFT replay). Sparse regime:
+  moment-curve pairs over `F_p` at `L=p^3 in {27,125,343,1331}`
+  (`M/L=O(1/p)`). Six constraint sets each (all-free, all-imposed, each
+  clause ablated alone), computed exactly or via disclosed
+  certified-lower-bound local search; gain-vs-`|G|` exponents fitted per
+  constraint set and regime. Step 0 independently replays PR #716's own
+  `F_3^6` anchor and reproduces its published `1.1182491777` gain exactly.
+- **How it is useful:** Locates which single clause of PR #716's
+  four-clause source-realizability diagnosis
+  (`primitive_signed_payment_barrier_v1.md` section 6) is load-bearing for
+  the signed-minor half of the charge-preserving semantic-or-signed
+  dichotomy, hard input #2 -- and shows the answer is regime-dependent.
+  Dense regime: clause (iii), the first-match mask, is the single
+  load-bearing clause -- its ablation alone restores absolute gain growth
+  (fitted exponent `+0.069`, all other sets `-0.07..-0.10`; `C_iii/B`
+  ratio `1.33 -> 2.17 -> 4.03`), with the winning witness the full unpruned
+  mask (the heavy-fiber multiplicities carry the norm; dedup flattens
+  them). The all-free set A stays flat even there (slope `-0.007`):
+  ablating clause (i) destroys the superincreasing collision structure
+  that creates the fiber load, so guardrail-type growth needs the
+  certified columns present AND the first-match pruning absent, not
+  density in the abstract. Sparse regime: no set grows; the sharpest
+  signal is relative -- clause (ii)'s ablation opens the largest,
+  `L`-monotone gap over baseline (`1.30 -> 1.57`). Clauses (iii)/(iv) are
+  shown non-independent in both regimes (ablating (iv) alone is
+  numerically identical to imposing all four). Also connects to
+  DannyExperiments' PR #719, which pays specific equal-block-occupancy
+  profiles and stops at exactly the balanced mixed-sign residual this
+  census probes.
+- **What to do next:** This is census evidence, not a proof; the next step
+  toward hard input #2 is still the source-specific one-sided signed
+  moment-curve/minor-arc inverse theorem PR #716 section 7 asks for, or a
+  rooted-owner payment of PR #719's mixed-sign residual. Computational
+  follow-ups: an odd-`B` or larger-radix variant of the #717 family whose
+  `C` factors, to push the dense arm past three points; and sharpening the
+  `local_search` cells (`B in {4,6}` free masks, sparse `p in {7,11}`)
+  toward exact maxima.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
