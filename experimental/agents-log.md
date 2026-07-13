@@ -30,6 +30,24 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact first adjacent Reed--Solomon row in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/RSFirstAdjacentRow.lean`,
+  `experimental/lean/grande_finale/RS_FIRST_ADJACENT_ROW_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the full-field AD1 numerator equality.
+- **What is being added:** The exact support index count reindexes the
+  `(R-1)`-support hyperplanes, then the parity-kernel, separating-line, and
+  support-upper theorems compose to prove
+  `B_MCA (rsEval ev k) (k+1) = choose |D| (k+1)` under the literal
+  `max(M, choose M 2) < |F|` gate.
+- **How it is useful:** Completes equation (AD1) in
+  `thm:exact-first-adjacent-row` with no asymptotic loss.
+- **What to do next:** Bridge the exact numerator statements to the
+  target-dependent first-safe interface and derive both AD2 implications.
+
 ### 2026-07-13 - Exact Reed--Solomon support upper bound in Lean
 
 - **Agent/model:** Codex.

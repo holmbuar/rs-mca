@@ -37,6 +37,9 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/RSExactSupportUpper.lean` proves the exact-agreement reduction
   for injective Reed--Solomon codes and the full-field support-atlas bound
   `B_MCA <= choose |D| a` for `a >= k+1`.
+- `GrandeFinale/RSFirstAdjacentRow.lean` composes the parity kernel,
+  exact-support hyperplanes, separating-line compiler, and support upper bound
+  to prove the full-field AD1 numerator equality.
 - `GrandeFinale/ExactAdjacentRow.lean` proves the literal
   `max M (choose M 2) < |F|` hyperplane-avoidance construction and compiles its
   `M` distinct transverse intersections into the exact support-wise MCA
@@ -51,12 +54,13 @@ The package root is `GrandeFinale`, with additional modules under
 
 The theorem-by-theorem scopes of the collision-aware-pole,
 challenge-intersection, syndrome-line, RS parity-kernel, support-hyperplane,
-exact-support-upper, and profile-window modules are recorded
+exact-support-upper, first-adjacent-row, and profile-window modules are recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
 `RS_PARITY_KERNEL_CORRESPONDENCE.md`,
 `RS_SUPPORT_HYPERPLANES_CORRESPONDENCE.md`,
 `RS_EXACT_SUPPORT_UPPER_CORRESPONDENCE.md`,
+`RS_FIRST_ADJACENT_ROW_CORRESPONDENCE.md`,
 `EXACT_ADJACENT_ROW_CORRESPONDENCE.md`, and
 `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
