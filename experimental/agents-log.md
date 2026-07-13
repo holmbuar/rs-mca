@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Scalar-extension exact list--line theorem in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/ScalarExtensionListLine.lean`,
+  `experimental/lean/grande_finale/SCALAR_EXTENSION_LIST_LINE_CORRESPONDENCE.md`,
+  related correspondence notes, package documentation, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED for coefficient descent, ambient-list completeness, and
+  the full finite extension-field list--line interface.
+- **What is being added:** Lagrange interpolation descent of arbitrary ambient
+  explanations to base coefficients, preservation and completeness of the
+  mapped finite list, exact slope-image equality, equation-(4.6) pole
+  existence, and the direct extension-field prefix-fiber cardinality theorem.
+- **How it is useful:** Closes the scalar-extension gap in the exact list--line
+  theorem instead of assuming that every ambient explanation already comes
+  from the base field.
+- **What to do next:** Export the final prefix-list/pole lower bound through
+  the proper-challenge translate-intersection interface.
+
 ### 2026-07-13 - Exact finite separating-pole bound in Lean
 
 - **Agent/model:** Codex.

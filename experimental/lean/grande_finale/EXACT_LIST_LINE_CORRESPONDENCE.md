@@ -47,9 +47,9 @@ ambient-field polynomial agreeing with the base-valued word has base-field
 coefficients is not part of this module; completeness over the ambient field
 is an explicit hypothesis instead.  The exact same-field separating-pole
 bound in equation (4.6) is supplied by `SeparatingPole.lean`; mapping a
-base-field list into an extension and proving ambient-list completeness remain
-separate.  The direct same-field specialization to the locator prefix fiber is
-supplied by `ExactPrefixRay.lean`.
+base-field list into an extension and proving ambient-list completeness are
+supplied by `ScalarExtensionListLine.lean`.  The direct same-field
+specialization to the locator prefix fiber is supplied by `ExactPrefixRay.lean`.
 
 The assumption `k + 1 <= m` is used through the existing
 `CollisionAwarePole.eval_slope_mcaBad` theorem to rule out simultaneous pair

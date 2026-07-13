@@ -46,8 +46,9 @@ polynomial, complete list, pole, and MCA slopes all lie in one finite field.
 It assumes a pole outside `D`; the cardinality theorem additionally assumes
 that the pole separates the complete list.  `SeparatingPole.lean` proves
 existence under the exact same-field equation-(4.6) budget.  The
-base-to-extension coefficient descent needed when the list is constructed
-over a proper subfield remains separate.
+base-to-extension coefficient descent and ambient-list completeness needed
+when the list is constructed over a proper subfield are supplied by
+`ScalarExtensionListLine.lean`.
 
 The module exports the exact support-to-slope image and the exact agreement
 support of the displayed quotient explanation.  The additional uniqueness

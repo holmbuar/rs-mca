@@ -56,6 +56,10 @@ This package is a partial Lean formalization of
 - `GrandeFinale/SeparatingPole.lean`: the exact unordered-pair root product,
   its `k * choose L 2` degree bound, off-domain separating-pole existence, and
   the resulting same-field prefix-fiber bad-slope cardinality realization.
+- `GrandeFinale/ScalarExtensionListLine.lean`: interpolation descent of every
+  ambient degree-bounded explanation to a base-field polynomial, completeness
+  of the mapped base list, and the full extension-field separating-pole image
+  and cardinality theorem.
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -135,11 +139,13 @@ the later separating-pole line bijection remain separate from this module.
 `PrefixPigeonhole` supplies the first two as a separate layer, including the
 literal ceiling rather than a floor-division relaxation, while `ExactListLine`
 supplies the same-field fixed-pole line bijection. `ExactPrefixRay` supplies
-the corresponding direct prefix-fiber specialization. Scalar-extension
-descent remains a separate target; `ExactPrefixRayUniqueness` supplies
+the corresponding direct prefix-fiber specialization.
+`ExactPrefixRayUniqueness` supplies
 arbitrary-explanation witness uniqueness and occupancy one for a supplied
 separating pole, while `SeparatingPole` supplies that pole under the exact
-same-field equation-(4.6) budget.
+same-field equation-(4.6) budget. `ScalarExtensionListLine` supplies
+base-to-extension interpolation descent, ambient-list completeness, and the
+direct extension-field prefix cardinality realization.
 
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and
@@ -160,10 +166,11 @@ list--line conversion. `ExactPrefixRay` composes these layers for a supplied
 same-field pole and proves exact bad-slope/fiber cardinality when it separates
 the list. `ExactPrefixRayUniqueness` proves that every selected slope has a
 unique exact support/explaining-polynomial witness. A scalar-extension
-composition and its ambient-list completeness/descent argument remain absent.
-`SeparatingPole` now supplies the exact existence bound once the list already
-lives in the pole field, but the modules do not yet prove
-`prop:simple-pole-lower` or equation (13.3) end to end.
+composition and its ambient-list completeness/descent argument are now
+supplied by `ScalarExtensionListLine`, while `SeparatingPole` supplies the
+exact existence bound. The remaining proper-challenge composition is not
+exported here, so the modules do not yet prove `prop:simple-pole-lower` or
+equation (13.3) end to end.
 
 The profile-window module is also independent of Q. It proves exponent-level
 dominance only after `h`, `s`, and every actual `(c,lambda)` pair are supplied.

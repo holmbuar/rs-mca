@@ -49,8 +49,8 @@ evaluation domain and every polynomial in the complete list already live in
 the pole field.  The source also applies the bound after embedding a base-field
 received word and list into a larger finite extension.  Coefficient mapping,
 completeness of the mapped list against ambient-field explanations, and the
-Vandermonde descent back to the base field remain a separate formalization
-layer.
+Vandermonde descent back to the base field are supplied by
+`ScalarExtensionListLine.lean`.
 
 ## Verification
 
