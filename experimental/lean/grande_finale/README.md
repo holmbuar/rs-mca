@@ -38,6 +38,9 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/PrefixPigeonhole.lean` defines the explicit locator coefficient
   prefix, identifies it with the cancellation predicate, and proves the
   literal ceiling-form prefix-fiber and polynomial-list lower bounds.
+- `GrandeFinale/PrefixRigidityPacking.lean` constructs exact Johnson spheres
+  and balls, proves the prefix-fiber distance bound, and derives the literal
+  finite packing cap in equation (4.4).
 - `GrandeFinale/ExactListLine.lean` proves the same-field, fixed-pole exact
   bijection between a complete finite polynomial list and the MCA-bad slopes
   of its simple-pole received line, including agreement-set preservation.
@@ -76,9 +79,9 @@ The package root is `GrandeFinale`, with additional modules under
 The theorem-by-theorem scopes of the collision-aware-pole,
 challenge-intersection, syndrome-line, largest-fiber-moment, exact-profile,
 first-match add-back, subfield-confinement, exact-prefix-list,
-prefix-pigeonhole, exact-list-line, exact-prefix-ray, prefix-ray-uniqueness,
-separating-pole, scalar-extension-list-line, proper-challenge-prefix-floor,
-and profile-window modules are recorded
+prefix-pigeonhole, prefix-rigidity-packing, exact-list-line, exact-prefix-ray,
+prefix-ray-uniqueness, separating-pole, scalar-extension-list-line,
+proper-challenge-prefix-floor, and profile-window modules are recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
 `LARGEST_FIBER_MOMENT_CORRESPONDENCE.md`,
@@ -87,6 +90,7 @@ in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `SUBFIELD_CONFINEMENT_CORRESPONDENCE.md`,
 `EXACT_PREFIX_LIST_CORRESPONDENCE.md`,
 `PREFIX_PIGEONHOLE_CORRESPONDENCE.md`,
+`PREFIX_RIGIDITY_PACKING_CORRESPONDENCE.md`,
 `EXACT_LIST_LINE_CORRESPONDENCE.md`,
 `EXACT_PREFIX_RAY_CORRESPONDENCE.md`,
 `EXACT_PREFIX_RAY_UNIQUENESS_CORRESPONDENCE.md`,
@@ -107,6 +111,8 @@ coefficient-prefix pigeonhole ceiling. `ExactListLine` now supplies the exact
 same-field conversion from any complete finite polynomial list to the bad
 slopes of a fixed separating pole, and `ExactPrefixRay` exports its direct
 prefix-fiber specialization and exact support preservation.
+`PrefixRigidityPacking` separately supplies the exact Johnson-distance and
+packing limitation for every coefficient fiber.
 `ExactPrefixRayUniqueness` additionally proves occupancy one for every
 selected prefix support at a separating pole, and `SeparatingPole` supplies
 that pole under the exact same-field equation-(4.6) budget.

@@ -45,10 +45,10 @@ ceiling in the source, rather than a floor-division relaxation.
 The final theorem counts the unique degree-less-than-`K` polynomial
 representatives in the exact list over the finite base field. The evaluation
 domain is a `Finset B`, so `D subset B` is built into the type. The module does
-not itself export the later separating-pole list--line bijection. Its complete
-fiber is composed with the same-field fixed-pole interface in
-`ExactPrefixRay.lean`; scalar-extension pole existence and the final
-challenge-transfer composition remain separate.
+not itself export the later rigidity cap or separating-pole list--line
+bijection. `PrefixRigidityPacking.lean` supplies the exact Johnson packing cap;
+the complete fiber is composed with the fixed-pole, scalar-extension, and
+proper-challenge interfaces in the downstream prefix modules.
 
 ## Verification
 

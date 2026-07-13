@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact prefix-rigidity packing cap in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/PrefixRigidityPacking.lean`,
+  `experimental/lean/grande_finale/PREFIX_RIGIDITY_PACKING_CORRESPONDENCE.md`,
+  prefix and package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the exact finite distance and packing clauses of
+  `prop:prefix-rigidity-full`.
+- **What is being added:** A delete/insert equivalence for Johnson spheres,
+  the exact binomial ball volume, locator-prefix distance `w+1`, pairwise
+  disjoint radius-`floor(w/2)` balls, and both product and natural-division
+  forms of equation (4.4).
+- **How it is useful:** Replaces the previously abstract ball-size and
+  disjointness inputs with the concrete coefficient-fiber packing theorem used
+  to delimit what prefix rigidity alone can prove toward Q.
+- **What to do next:** Formalize another proved finite Q-side kernel or move to
+  the exact-threshold package; keep the asymptotic ball-volume estimate
+  separate until its sequence hypotheses are stated.
+
 ### 2026-07-13 - Prefix proper-challenge floor in Lean
 
 - **Agent/model:** Codex.

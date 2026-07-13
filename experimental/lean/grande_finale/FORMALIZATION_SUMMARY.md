@@ -41,6 +41,9 @@ This package is a partial Lean formalization of
 - `GrandeFinale/PrefixPigeonhole.lean`: the explicit locator coefficient map,
   its equivalence with leading cancellation, and the literal natural-ceiling
   lower bound for both a prefix fiber and its complete polynomial list.
+- `GrandeFinale/PrefixRigidityPacking.lean`: exact Johnson spheres and ball
+  volume, locator-prefix distance at least `w+1`, pairwise ball disjointness,
+  and both multiplication and natural-division forms of equation (4.4).
 - `GrandeFinale/ExactListLine.lean`: the quotient explaining polynomial,
   exact agreement-set preservation, and the same-field bijection between a
   complete finite polynomial list and the MCA-bad slopes of a fixed
@@ -144,6 +147,9 @@ the later separating-pole line bijection remain separate from this module.
 literal ceiling rather than a floor-division relaxation, while `ExactListLine`
 supplies the same-field fixed-pole line bijection. `ExactPrefixRay` supplies
 the corresponding direct prefix-fiber specialization.
+`PrefixRigidityPacking` supplies the independent finite packing limitation in
+`prop:prefix-rigidity-full`; its asymptotic `e^{o(n)}` estimate remains outside
+the finite module.
 `ExactPrefixRayUniqueness` supplies
 arbitrary-explanation witness uniqueness and occupancy one for a supplied
 separating pole, while `SeparatingPole` supplies that pole under the exact
