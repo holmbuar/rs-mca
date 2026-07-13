@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact adjacent-row hyperplane compiler in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/ExactAdjacentRow.lean`,
+  `experimental/lean/grande_finale/EXACT_ADJACENT_ROW_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the stated finite hyperplane-avoidance and generic
+  syndrome/MCA compiler claims.
+- **What is being added:** The literal `max M (choose M 2) < |F|` construction
+  of a line with `M` pairwise-distinct transverse hyperplane intersections,
+  followed by its exact syndrome-secant and support-wise MCA lower-bound
+  compilation.
+- **How it is useful:** Formalizes the finite-avoidance core of the AD1 lower
+  bound in `thm:exact-first-adjacent-row` without replacing unordered collision
+  pairs by a larger ordered-pair estimate.
+- **What to do next:** Construct the weighted Vandermonde parity map for an
+  injective Reed–Solomon evaluation domain, identify its kernel, prove the exact
+  support upper bound, and derive the AD1 equality and both AD2 implications.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from

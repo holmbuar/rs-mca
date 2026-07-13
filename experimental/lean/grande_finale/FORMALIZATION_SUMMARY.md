@@ -33,6 +33,9 @@ This package is a partial Lean formalization of
   support-wise syndrome-line normal form, fixed-support uniqueness,
   deduplicated finite-family incidence, and the exact MCA/syndrome numerator
   equality for a surjective syndrome map.
+- `GrandeFinale/ExactAdjacentRow.lean`: exact finite avoidance of the `M`
+  syndrome hyperplanes and `choose M 2` collision hyperplanes, followed by the
+  generic syndrome-secant and support-wise MCA lower-bound compiler.
 - `GrandeFinale/ProfileEnvelopeWindow.lean`: exact rational exponent algebra for
   the corrected per-folding identity-dominance windows, including finite-family
   intersection/union and the positive-crossing no-field-drop characterization.
@@ -70,6 +73,11 @@ linear-code compiler behind `prop:syndrome-line-normal-form` and
 `thm:syndrome-secant-exact` in the frontiers paper.  The Reed--Solomon
 parity-check construction, rational-normal-curve interpretation, and reduction
 from threshold witnesses to exact-cardinality supports remain separate.
+
+The exact-adjacent-row module proves the field-separation and generic syndrome
+compiler in the lower half of AD1. The weighted Vandermonde parity-check
+specialization to the Reed–Solomon evaluation code, the exact support upper
+bound, and AD2 remain separate.
 
 The collision-aware-pole and challenge-intersection modules are independent
 of Q and formalize complementary parts of the frontiers paper's simple-pole
