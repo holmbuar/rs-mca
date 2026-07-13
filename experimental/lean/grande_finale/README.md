@@ -35,6 +35,9 @@ The package root is `GrandeFinale`, with additional modules under
   locator-prefix supports and degree-bounded listed polynomials, including
   recovery of the unique full agreement support and the no-extra-agreement
   clause.
+- `GrandeFinale/PrefixPigeonhole.lean` defines the explicit locator coefficient
+  prefix, identifies it with the cancellation predicate, and proves the
+  literal ceiling-form prefix-fiber and polynomial-list lower bounds.
 - `GrandeFinale/QPrimitiveCollision.lean` formalizes collision-tuple and
   low-support exclusion kernels.
 - `GrandeFinale/QFiniteTables.lean` pins the four finite Q table rows and
@@ -53,8 +56,8 @@ The package root is `GrandeFinale`, with additional modules under
 
 The theorem-by-theorem scopes of the collision-aware-pole,
 challenge-intersection, syndrome-line, largest-fiber-moment, exact-profile,
-first-match add-back, subfield-confinement, exact-prefix-list, and
-profile-window modules are
+first-match add-back, subfield-confinement, exact-prefix-list,
+prefix-pigeonhole, and profile-window modules are
 recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
@@ -62,7 +65,8 @@ in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `EXACT_PROFILE_COMPILER_CORRESPONDENCE.md`,
 `FIRST_MATCH_ADDBACK_CORRESPONDENCE.md`,
 `SUBFIELD_CONFINEMENT_CORRESPONDENCE.md`,
-`EXACT_PREFIX_LIST_CORRESPONDENCE.md`, and
+`EXACT_PREFIX_LIST_CORRESPONDENCE.md`,
+`PREFIX_PIGEONHOLE_CORRESPONDENCE.md`, and
 `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize
@@ -71,9 +75,10 @@ proves the exact full-field simple-pole floor from a supplied finite codeword
 list; the second transfers a supplied full-field floor to a proper challenge
 set. `collisionAwarePole_challenge_of_codewordList` records their direct
 composition. The Reed--Solomon prefix-list construction and list-size floor
-are now separated more finely: `ExactPrefixList` proves the exact
-support/list correspondence, while the pigeonhole list-size floor remains an
-upstream input to the collision-aware conversion.
+are split between `ExactPrefixList` and `PrefixPigeonhole`: the first proves
+the exact support/list correspondence, and the second proves the explicit
+coefficient-prefix pigeonhole ceiling. Their direct composition with the
+collision-aware pole conversion has not yet been exported.
 
 The profile-window module proves exponent-level dominance only after `h`, `s`,
 and every actual `(c,lambda)` pair are supplied. QR6/QR8 normalization,

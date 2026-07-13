@@ -38,6 +38,9 @@ This package is a partial Lean formalization of
 - `GrandeFinale/ExactPrefixList.lean`: the exact locator-prefix support/list
   correspondence, unique recovery of the full agreement support, and the
   no-extra-agreement clause from `prop:exact-prefix-list`.
+- `GrandeFinale/PrefixPigeonhole.lean`: the explicit locator coefficient map,
+  its equivalence with leading cancellation, and the literal natural-ceiling
+  lower bound for both a prefix fiber and its complete polynomial list.
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -113,7 +116,9 @@ The exact-prefix-list module formalizes the algebraic bijection in equation
 cancellation condition `degree (U - locator S) < K`, and proves that every
 listed polynomial has exactly `m` agreements and a unique support. The
 explicit coefficient-vector map, its pigeonhole fiber-size lower bound, and
-the later separating-pole line bijection remain separate targets.
+the later separating-pole line bijection remain separate targets in this
+module. `PrefixPigeonhole` now supplies the first two as a separate layer,
+including the literal ceiling rather than a floor-division relaxation.
 
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and
@@ -128,9 +133,10 @@ from a supplied finite dimension-`k+1` Reed--Solomon codeword list, while
 `ChallengeIntersection` transfers a supplied full-field floor to a proper
 challenge set after a received-line shear. The direct composition is exported
 as `collisionAwarePole_challenge_of_codewordList`. The prefix-list construction
-is supplied by `ExactPrefixList`; the pigeonhole list-size floor remains an
-explicit upstream input, so the modules do not prove `prop:simple-pole-lower`
-or equation (13.3) end to end.
+and pigeonhole floor are supplied by `ExactPrefixList` and
+`PrefixPigeonhole`; an exported direct composition with the pole conversion
+remains absent, so the modules do not yet prove `prop:simple-pole-lower` or
+equation (13.3) end to end.
 
 The profile-window module is also independent of Q. It proves exponent-level
 dominance only after `h`, `s`, and every actual `(c,lambda)` pair are supplied.

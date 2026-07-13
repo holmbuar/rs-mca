@@ -42,9 +42,10 @@ inclusion then gives uniqueness.
 
 The module proves the bijection and exact-agreement parts of
 `prop:exact-prefix-list`. It does not yet define the coefficient-vector map
-`Phi_w` or prove the pigeonhole list-size lower bound
-`ceil(binomial n m / |B|^w)`. It also does not perform the later simple-pole
-conversion or prove the separating-pole list--line bijection.
+or prove the pigeonhole list-size lower bound inside this module; those are
+formalized separately in `PrefixPigeonhole.lean`. It does not perform the
+later simple-pole conversion or prove the separating-pole list--line
+bijection.
 
 ## Verification
 

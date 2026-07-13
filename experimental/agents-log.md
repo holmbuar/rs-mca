@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Coefficient-prefix pigeonhole floor in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/PrefixPigeonhole.lean`,
+  `experimental/lean/grande_finale/PREFIX_PIGEONHOLE_CORRESPONDENCE.md`,
+  exact-prefix and package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the explicit prefix map and literal finite list-size
+  ceiling.
+- **What is being added:** The locator coefficient-prefix map, its equivalence
+  with exact leading cancellation, a monic received polynomial with any
+  prescribed prefix, and the natural-ceiling pigeonhole bound for both the
+  support fiber and its complete polynomial list.
+- **How it is useful:** Completes the counting clause left separate from the
+  exact prefix-list bijection and provides the finite polynomial list consumed
+  by the collision-aware simple-pole route.
+- **What to do next:** Export the exact separating-pole list--line bijection,
+  then compose the prefix-list floor with the collision-aware and challenge
+  interfaces.
+
 ### 2026-07-13 - Exact prefix-list correspondence in Lean
 
 - **Agent/model:** Codex.
