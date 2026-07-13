@@ -30,6 +30,39 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Positive-rooted split decomposition: the fourth charge condition is free, the residual is cardinality
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/charge_preserving_split_decomposition.md`,
+  `experimental/scripts/verify_charge_preserving_split_decomposition.py`,
+  `experimental/data/certificates/charge-preserving-split-decomposition/charge_preserving_split_decomposition.json`,
+  `experimental/lean/charge_preserving_split_decomposition/`.
+- **Status:** PROVED (fourth condition free; four-condition split; cardinality
+  COUNTEREXAMPLE) + one exact semantic-emission instance.
+- **What is being added:** Decides the DECOMPOSITION step of avdeevvadim's #716
+  charge-preserving dichotomy (Sec 6). The fourth charge condition
+  `||P_{B_i} b_{U_i}||_q >= c_i` is FREE with the original band `B_i = A` for
+  every piece of any partition of a positive-rooted packet (the global norming
+  dual is a feasible test function in the duality definition of `||.||_q`); so
+  the #716-warned "signed-correlation charge bookkeeping" does not obstruct, and
+  no per-piece `K_N` pigeonhole is needed. The genuine residual is the PIECE
+  COUNT: the heavy/light + layer-cake split has `#heavy + Wmax_light` pieces,
+  which a heavy fiber + flat exponential tail forces to `min(L,M/L) = e^{Ω(N)}`,
+  violating #716's "≤ e^{o(N)} packets". Bonus: the #717/#728 superincreasing
+  heavy fiber emits a planted twin-pair template (first exact positive emission),
+  saturating Johnson `a-2`.
+- **How it is useful:** Removes the fourth condition from what #716's dichotomy
+  must separately establish, and relocates the open input from charge
+  bookkeeping to `e^{o(N)}` heavy-fiber cardinality (= the max-fiber
+  concentration question). Confirms #716 Prop 6.1 uses the fourth condition at
+  full strength and now gets it free; prints the corrected, hypothesis-visible
+  decomposition statement. Consumes/credits #716, #717, #728, #729.
+- **What to do next:** Decide max-fiber concentration for actual atlas failure
+  packets (whether the positive profile is staircase-concentrated on
+  exponential-image charts); prove the general heavy-fiber semantic emission
+  (the bonus is one instance, not the theorem).
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
