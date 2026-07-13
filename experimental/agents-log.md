@@ -30,6 +30,25 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact Reed--Solomon parity kernel in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/RSParityKernel.lean`,
+  `experimental/lean/grande_finale/RS_PARITY_KERNEL_CORRESPONDENCE.md`, package
+  documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the weighted Vandermonde parity-map and exact kernel
+  claims.
+- **What is being added:** Nonzero barycentric weights, independence of every
+  at-most-`R` column subfamily, parity-map surjectivity, Lagrange weighted
+  moment vanishing, and `ker H = rsEval ev k` when `k + R = |D|`.
+- **How it is useful:** Supplies the exact Reed--Solomon syndrome map and MDS
+  column facts used by the AD1 construction in
+  `thm:exact-first-adjacent-row`.
+- **What to do next:** Identify each `(R-1)`-support syndrome span with a
+  distinct hyperplane, connect those hyperplanes to the separating-line
+  compiler, and prove the exact support upper bound.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from

@@ -27,6 +27,10 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/SyndromeLine.lean` formalizes the frontiers paper's exact
   syndrome-line normal form, deduplicated transverse secant compiler, and the
   resulting numerator equality for a surjective syndrome map.
+- `GrandeFinale/RSParityKernel.lean` constructs the barycentric weighted
+  Vandermonde parity map, proves its at-most-`R` column independence and
+  surjectivity, and identifies its kernel exactly with the injective
+  Reed--Solomon evaluation code.
 - `GrandeFinale/ProfileEnvelopeWindow.lean` formalizes the exact rational
   identity-versus-folding exponent window for each actual complete-fiber pair,
   its finite-family intersection/failure-band union, and the no-field-drop
@@ -36,10 +40,12 @@ The package root is `GrandeFinale`, with additional modules under
   BC, SP, and frontier ledgers.
 
 The theorem-by-theorem scopes of the collision-aware-pole,
-challenge-intersection, syndrome-line, and profile-window modules are recorded
+challenge-intersection, syndrome-line, RS parity-kernel, and profile-window
+modules are recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
-and `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
+`RS_PARITY_KERNEL_CORRESPONDENCE.md`, and
+`PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize
 complementary steps behind equation (13.3) of the frontiers paper. The first

@@ -33,6 +33,10 @@ This package is a partial Lean formalization of
   support-wise syndrome-line normal form, fixed-support uniqueness,
   deduplicated finite-family incidence, and the exact MCA/syndrome numerator
   equality for a surjective syndrome map.
+- `GrandeFinale/RSParityKernel.lean`: barycentric weighted Vandermonde columns,
+  at-most-`R` column independence, parity-map surjectivity, Lagrange moment
+  annihilation, and exact identification of the parity kernel with the
+  injective Reed--Solomon evaluation code.
 - `GrandeFinale/ProfileEnvelopeWindow.lean`: exact rational exponent algebra for
   the corrected per-folding identity-dominance windows, including finite-family
   intersection/union and the positive-crossing no-field-drop characterization.
@@ -67,9 +71,11 @@ Littlewood-Offord / Balog-Szemeredi-Gowers step remains open.
 
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and
-`thm:syndrome-secant-exact` in the frontiers paper.  The Reed--Solomon
-parity-check construction, rational-normal-curve interpretation, and reduction
-from threshold witnesses to exact-cardinality supports remain separate.
+`thm:syndrome-secant-exact` in the frontiers paper. The RS parity-kernel module
+supplies its weighted Vandermonde parity-check construction and exact kernel
+identification. The distinct `(R-1)`-support hyperplane family,
+rational-normal-curve interpretation, and reduction from threshold witnesses
+to exact-cardinality supports remain separate.
 
 The collision-aware-pole and challenge-intersection modules are independent
 of Q and formalize complementary parts of the frontiers paper's simple-pole
