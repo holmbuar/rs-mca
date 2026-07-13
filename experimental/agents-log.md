@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Prefix proper-challenge floor in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/PrefixChallengeFloor.lean`,
+  `experimental/lean/grande_finale/PREFIX_CHALLENGE_FLOOR_CORRESPONDENCE.md`,
+  scalar-extension and package documentation, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED for the finite scalar-extension prefix floor over every
+  extension-field challenge set.
+- **What is being added:** The exact full-MCA bound for an explicit pole line,
+  its composition with the proper-challenge ceiling compiler for a prescribed
+  coefficient fiber, and the literal nested-ceiling largest-fiber corollary
+  under a uniform equation-(4.6) budget.
+- **How it is useful:** Connects the complete prefix list, extension-field
+  separating pole, and proper-challenge translate-intersection layers without
+  replacing either natural ceiling by a weaker division bound.
+- **What to do next:** Continue with the remaining prefix-rigidity and
+  row-sharp Q formalization targets needed beyond this finite compiler.
+
 ### 2026-07-13 - Scalar-extension exact list--line theorem in Lean
 
 - **Agent/model:** Codex.

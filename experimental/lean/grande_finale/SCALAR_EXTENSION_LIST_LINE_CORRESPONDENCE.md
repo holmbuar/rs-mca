@@ -57,9 +57,10 @@ theorem.  `ExactPrefixList`, `PrefixPigeonhole`, and `ExactPrefixRay` supply
 these inputs for the explicit locator-prefix list in the final specialization.
 
 No finite-dimensionality assumption on `F` over `B` is needed.  Finiteness is
-used only for selecting the pole.  The theorem does not include the later
-proper-challenge translate-intersection transfer or an extension-field
-`ExistsUnique` packaging of arbitrary prefix witnesses.
+used only for selecting the pole.  This module itself does not include the
+later proper-challenge translate-intersection transfer; that downstream
+composition is supplied by `PrefixChallengeFloor.lean`.  An extension-field
+`ExistsUnique` packaging of arbitrary prefix witnesses remains separate.
 
 ## Verification
 

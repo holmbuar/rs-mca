@@ -60,6 +60,10 @@ This package is a partial Lean formalization of
   ambient degree-bounded explanation to a base-field polynomial, completeness
   of the mapped base list, and the full extension-field separating-pole image
   and cardinality theorem.
+- `GrandeFinale/PrefixChallengeFloor.lean`: exact composition of the
+  extension-field prefix-fiber realization with the proper-challenge
+  translate-intersection compiler, including the prescribed-fiber floor and
+  literal nested-ceiling largest-fiber corollary.
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -168,9 +172,13 @@ the list. `ExactPrefixRayUniqueness` proves that every selected slope has a
 unique exact support/explaining-polynomial witness. A scalar-extension
 composition and its ambient-list completeness/descent argument are now
 supplied by `ScalarExtensionListLine`, while `SeparatingPole` supplies the
-exact existence bound. The remaining proper-challenge composition is not
-exported here, so the modules do not yet prove `prop:simple-pole-lower` or
-equation (13.3) end to end.
+exact existence bound. `PrefixChallengeFloor` now exports the finite
+proper-challenge composition, with the coefficient-pigeonhole ceiling nested
+inside the exact challenge-density ceiling under a uniform equation-(4.6)
+field-size budget. This closes that finite compiler spine, but the later
+asymptotic parameter translation, row-sharp Q input, and adjacent threshold
+comparison remain outside it; the module alone is not the full asymptotic
+`prop:simple-pole-lower` conclusion.
 
 The profile-window module is also independent of Q. It proves exponent-level
 dominance only after `h`, `s`, and every actual `(c,lambda)` pair are supplied.

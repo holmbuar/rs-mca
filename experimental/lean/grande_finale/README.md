@@ -54,6 +54,9 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/ScalarExtensionListLine.lean` proves interpolation descent for
   ambient explanations of a base-valued word, completeness of the mapped
   base list, and the full extension-field exact list--line theorem.
+- `GrandeFinale/PrefixChallengeFloor.lean` composes the extension-field exact
+  prefix realization with proper-challenge translate averaging, proving the
+  prescribed-fiber floor and the literal nested-ceiling largest-fiber bound.
 - `GrandeFinale/QPrimitiveCollision.lean` formalizes collision-tuple and
   low-support exclusion kernels.
 - `GrandeFinale/QFiniteTables.lean` pins the four finite Q table rows and
@@ -74,8 +77,8 @@ The theorem-by-theorem scopes of the collision-aware-pole,
 challenge-intersection, syndrome-line, largest-fiber-moment, exact-profile,
 first-match add-back, subfield-confinement, exact-prefix-list,
 prefix-pigeonhole, exact-list-line, exact-prefix-ray, prefix-ray-uniqueness,
-separating-pole, scalar-extension-list-line, and profile-window modules are
-recorded
+separating-pole, scalar-extension-list-line, proper-challenge-prefix-floor,
+and profile-window modules are recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
 `LARGEST_FIBER_MOMENT_CORRESPONDENCE.md`,
@@ -88,7 +91,8 @@ in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `EXACT_PREFIX_RAY_CORRESPONDENCE.md`,
 `EXACT_PREFIX_RAY_UNIQUENESS_CORRESPONDENCE.md`,
 `SEPARATING_POLE_CORRESPONDENCE.md`,
-`SCALAR_EXTENSION_LIST_LINE_CORRESPONDENCE.md`, and
+`SCALAR_EXTENSION_LIST_LINE_CORRESPONDENCE.md`,
+`PREFIX_CHALLENGE_FLOOR_CORRESPONDENCE.md`, and
 `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize
@@ -102,13 +106,15 @@ the exact support/list correspondence, and the second proves the explicit
 coefficient-prefix pigeonhole ceiling. `ExactListLine` now supplies the exact
 same-field conversion from any complete finite polynomial list to the bad
 slopes of a fixed separating pole, and `ExactPrefixRay` exports its direct
-prefix-fiber specialization and exact support preservation. The final
-proper-challenge transfer remains separate.
+prefix-fiber specialization and exact support preservation.
 `ExactPrefixRayUniqueness` additionally proves occupancy one for every
 selected prefix support at a separating pole, and `SeparatingPole` supplies
 that pole under the exact same-field equation-(4.6) budget.
 `ScalarExtensionListLine` supplies coefficient descent, ambient-list
 completeness, and the full finite extension-field list--line interface.
+`PrefixChallengeFloor` composes that exact extension-field realization with
+the proper-challenge compiler and preserves the literal inner and outer
+natural ceilings.
 
 The profile-window module proves exponent-level dominance only after `h`, `s`,
 and every actual `(c,lambda)` pair are supplied. QR6/QR8 normalization,
