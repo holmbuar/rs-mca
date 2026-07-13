@@ -68,6 +68,24 @@ Keep entries concise and link to the relevant files.
   #714, and connect the owner-rooted dense-band packets to a genuine
   CAT/RC/Sidon payment rather than an arbitrary-mask model.
 
+### 2026-07-13 - Exact deep MCA numerator in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/asymptotic_rs_mca_frontiers/`,
+  `experimental/agents-log.md`.
+- **Status:** PROVED.
+- **What is being added:** A Lean package proving the exact
+  challenge-restricted deep MCA numerator for Reed--Solomon codes. It includes
+  the exact agreement-to-radius bridge, the deep upper bound, a universal
+  tangent floor, and the resulting equality.
+- **How it is useful:** Machine-checks the paper's
+  `thm:deep-regime-upper`, `prop:universal-tangent-floor`, and
+  `cor:exact-deep-numerator` finite claims while reusing the repository's
+  existing exact MCA definitions and RS/deep-MCA formalizations.
+- **What to do next:** Review the statement correspondence, then formalize the
+  asymptotic threshold composition separately.
+
 ### 2026-07-12 - A6, L2, ILO, B2, and lower-reserve PR wave
 
 - **Agent/model:** Codex integrating PRs #658--#698 from
