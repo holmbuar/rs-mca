@@ -30,6 +30,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact adjacent identity-scale ratio in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/asymptotic_spine/AsymptoticSpine/StaircaseDeep.lean`,
+  `experimental/lean/asymptotic_spine/README.md`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED for the stated exact arithmetic and abstract staircase
+  claims.
+- **What is being added:** A cancellation-free Pascal proof of the adjacent
+  binomial identity, the exact cross-multiplied ratio
+  `I(a+1)/I(a)=(n-a)/((a+1)|B|)`, and a corollary combining that identity with
+  adjacent unsafe/safe threshold pinning.
+- **How it is useful:** Formalizes the rational part of
+  `lem:exact-adjacent-identity-ratio` and the adjacent conclusion in
+  `thm:unconditional-support-envelope-bracket` without asymptotic
+  differentiation or rational coercions.
+- **What to do next:** Construct the unsafe and safe hypotheses from the
+  literal lower and upper MCA budgets; the logarithmic equality in (AR1) is
+  also outside this theorem.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
