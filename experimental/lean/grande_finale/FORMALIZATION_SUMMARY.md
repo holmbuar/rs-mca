@@ -47,6 +47,8 @@ This package is a partial Lean formalization of
 - `GrandeFinale/RSFirstAdjacentRow.lean`: exact Reed--Solomon composition of
   the parity kernel, support hyperplanes, separating line, and support upper
   bound, proving the full-field AD1 numerator equality.
+- `GrandeFinale/RSFirstAdjacentThreshold.lean`: exact first-safe proposition,
+  its uniqueness, and both literal target-budget implications in AD2.
 - `GrandeFinale/ExactAdjacentRow.lean`: exact finite avoidance of the `M`
   syndrome hyperplanes and `choose M 2` collision hyperplanes, followed by the
   generic syndrome-secant and support-wise MCA lower-bound compiler.
@@ -91,8 +93,9 @@ identification, while the support-hyperplane module supplies the distinct
 threshold-to-exact-cardinality reduction and the resulting support-atlas upper
 bound, and the exact-adjacent-row module supplies the field-separation and
 generic syndrome compiler. The first-adjacent-row module composes these pieces
-to prove AD1 with the literal binomial constant and field-size gate. The two
-AD2 target-threshold implications remain separate.
+to prove AD1 with the literal binomial constant and field-size gate. The
+first-adjacent-threshold module then derives both AD2 implications on the exact
+integer agreement grid.
 
 The collision-aware-pole and challenge-intersection modules are independent
 of Q and formalize complementary parts of the frontiers paper's simple-pole

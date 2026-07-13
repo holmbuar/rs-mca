@@ -30,6 +30,23 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact first adjacent threshold in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/RSFirstAdjacentThreshold.lean`,
+  `experimental/lean/grande_finale/RS_FIRST_ADJACENT_THRESHOLD_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for both target-dependent AD2 implications.
+- **What is being added:** An exact first-safe proposition records safety at
+  the selected grid point and unsafety at every earlier grid point. AD1 and the
+  support upper bound then pin `k+1` when `M <= b`, and pin `k+2` when
+  `choose |D| (R-2) <= b < M`.
+- **How it is useful:** Completes equation (AD2) in
+  `thm:exact-first-adjacent-row` after the exact AD1 numerator equality.
+- **What to do next:** Keep the AD1/AD2 theorem stack synchronized with any
+  source-statement changes and continue with the next ready formalization.
+
 ### 2026-07-13 - Exact first adjacent Reed--Solomon row in Lean
 
 - **Agent/model:** Codex.
