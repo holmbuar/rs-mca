@@ -25,6 +25,9 @@ This package is a partial Lean formalization of
 - `GrandeFinale/LargestFiberMoment.lean`: exact largest-fiber normalized
   `q`-moment sandwich, its finite logarithmic lower bound, and the normalized
   Q-to-SP second-moment transfer.
+- `GrandeFinale/ExactProfileCompiler.lean`: exact finite incidence double
+  counting, residual moment payment with the full-slice mean, the literal
+  natural floor in (FC1), and available/minimum first-match budgets in (FC2).
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -72,6 +75,14 @@ The largest-fiber-moment module supplies the exact finite compiler arithmetic
 in `lem:largest-fiber-log-detail` and `lem:q-to-sp-detail`. Its real-valued
 finite-fiber statements strictly include the manuscript's nonnegative integer
 case; sequence-level asymptotic notation remains outside this finite module.
+
+The exact-profile compiler proves the finite arithmetic implications in
+`thm:exact-finite-profile-compiler`. It treats the witness-exhaustive atlas,
+the exact support-pair identity, and the certified incidence relation and
+degrees as explicit inputs. It does not assert that those structural inputs
+exist for an unrestricted row. Challenge-set intersection and the adjacent
+unsafe/safe threshold comparison remain delegated to the package's existing
+challenge and threshold results.
 
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and

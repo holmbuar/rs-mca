@@ -30,6 +30,25 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact finite profile compiler in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/ExactProfileCompiler.lean`,
+  `experimental/lean/grande_finale/EXACT_PROFILE_COMPILER_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the finite implications behind (FC1)--(FC2).
+- **What is being added:** Exact finite incidence double counting, residual
+  moment payment normalized by the full support-slice mean, the literal
+  natural-number floor in (FC1), and the available/minimum first-match budget
+  compiler in (FC2).
+- **How it is useful:** Turns the profile compiler's finite arithmetic into
+  kernel-checked implications while keeping every structural Reed--Solomon
+  input visible.
+- **What to do next:** Supply witness-exhaustive atlases and certified
+  incidence degrees for concrete rows, then compose these budgets with the
+  existing challenge and adjacent-threshold results.
+
 ### 2026-07-13 - Largest-fiber and Q-to-SP moments in Lean
 
 - **Agent/model:** Codex.

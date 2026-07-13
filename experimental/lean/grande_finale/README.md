@@ -22,6 +22,9 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/LargestFiberMoment.lean` proves the exact normalized
   largest-fiber `q`-moment bounds, their finite logarithmic consequence, and
   the Q-to-SP normalized second-moment transfer.
+- `GrandeFinale/ExactProfileCompiler.lean` proves the exact finite incidence,
+  residual-moment, natural-floor, and first-match budget implications behind
+  (FC1)--(FC2).
 - `GrandeFinale/QPrimitiveCollision.lean` formalizes collision-tuple and
   low-support exclusion kernels.
 - `GrandeFinale/QFiniteTables.lean` pins the four finite Q table rows and
@@ -39,11 +42,12 @@ The package root is `GrandeFinale`, with additional modules under
   BC, SP, and frontier ledgers.
 
 The theorem-by-theorem scopes of the collision-aware-pole,
-challenge-intersection, syndrome-line, largest-fiber-moment, and profile-window
-modules are recorded
+challenge-intersection, syndrome-line, largest-fiber-moment, exact-profile,
+and profile-window modules are recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
-`LARGEST_FIBER_MOMENT_CORRESPONDENCE.md`, and
+`LARGEST_FIBER_MOMENT_CORRESPONDENCE.md`,
+`EXACT_PROFILE_COMPILER_CORRESPONDENCE.md`, and
 `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize
