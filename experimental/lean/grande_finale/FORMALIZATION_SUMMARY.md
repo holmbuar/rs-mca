@@ -49,6 +49,10 @@ This package is a partial Lean formalization of
   explicit complete locator-prefix fiber to the full MCA-bad slope set,
   including direct image equality, separating-pole cardinality, and exact
   retained agreement supports.
+- `GrandeFinale/ExactPrefixRayUniqueness.lean`: reconstruction of the listed
+  polynomial from an arbitrary degree-bounded explanation of its selected
+  line point and uniqueness of the exact support/explaining-polynomial
+  witness.
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -129,8 +133,9 @@ the later separating-pole line bijection remain separate from this module.
 literal ceiling rather than a floor-division relaxation, while `ExactListLine`
 supplies the same-field fixed-pole line bijection. `ExactPrefixRay` supplies
 the corresponding direct prefix-fiber specialization. Scalar-extension
-descent, separating-pole existence, and arbitrary-explanation witness
-uniqueness remain separate targets.
+descent and separating-pole existence remain separate targets;
+`ExactPrefixRayUniqueness` supplies arbitrary-explanation witness uniqueness
+and occupancy one for a supplied separating pole.
 
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and
@@ -149,9 +154,11 @@ and pigeonhole floor are supplied by `ExactPrefixList` and
 `PrefixPigeonhole`, and `ExactListLine` proves the exact same-field fixed-pole
 list--line conversion. `ExactPrefixRay` composes these layers for a supplied
 same-field pole and proves exact bad-slope/fiber cardinality when it separates
-the list. A scalar-extension composition with a proved separating-pole
-existence bound remains absent, so the modules do not yet prove
-`prop:simple-pole-lower` or equation (13.3) end to end.
+the list. `ExactPrefixRayUniqueness` proves that every selected slope has a
+unique exact support/explaining-polynomial witness. A scalar-extension
+composition with a proved separating-pole existence bound remains absent, so
+the modules do not yet prove `prop:simple-pole-lower` or equation (13.3) end
+to end.
 
 The profile-window module is also independent of Q. It proves exponent-level
 dominance only after `h`, `s`, and every actual `(c,lambda)` pair are supplied.

@@ -30,6 +30,24 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact prefix-ray witness uniqueness in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/ExactPrefixRayUniqueness.lean`,
+  `experimental/lean/grande_finale/EXACT_PREFIX_RAY_UNIQUENESS_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for same-field arbitrary-explanation reconstruction and
+  occupancy one at a supplied separating pole.
+- **What is being added:** Reconstruction of the listed polynomial from any
+  degree-bounded explanation on at least `m` positions, proof that its support
+  and quotient explanation are canonical, and an exact unique-witness theorem.
+- **How it is useful:** Completes the support/slope/witness incidence clause of
+  exact prefix-ray realization without assuming the explaining polynomial or
+  support in advance.
+- **What to do next:** Formalize scalar-extension coefficient descent and the
+  finite separating-pole existence bound.
+
 ### 2026-07-13 - Exact locator-prefix ray realization in Lean
 
 - **Agent/model:** Codex.

@@ -49,10 +49,9 @@ such a pole from equation (4.6), nor the base-to-extension coefficient descent
 needed when the list is constructed over a proper subfield.
 
 The module exports the exact support-to-slope image and the exact agreement
-support of the displayed quotient explanation.  It does not package the
-source's full witness-incidence type or its occupancy-one statement for every
-possible explaining codeword.  Those require an additional uniqueness layer
-for arbitrary explanations of the same line point.
+support of the displayed quotient explanation.  The additional uniqueness
+layer for arbitrary explanations, including the occupancy-one statement, is
+supplied by `ExactPrefixRayUniqueness.lean`.
 
 ## Verification
 

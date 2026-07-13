@@ -45,6 +45,9 @@ The package root is `GrandeFinale`, with additional modules under
   locator-prefix fiber, proving direct support-to-slope image equality, exact
   cardinality at a separating pole, and preservation of every full agreement
   support.
+- `GrandeFinale/ExactPrefixRayUniqueness.lean` reconstructs the listed
+  polynomial from any degree-bounded explanation of a selected prefix slope
+  and proves uniqueness of its exact support/explaining-polynomial witness.
 - `GrandeFinale/QPrimitiveCollision.lean` formalizes collision-tuple and
   low-support exclusion kernels.
 - `GrandeFinale/QFiniteTables.lean` pins the four finite Q table rows and
@@ -64,8 +67,8 @@ The package root is `GrandeFinale`, with additional modules under
 The theorem-by-theorem scopes of the collision-aware-pole,
 challenge-intersection, syndrome-line, largest-fiber-moment, exact-profile,
 first-match add-back, subfield-confinement, exact-prefix-list,
-prefix-pigeonhole, exact-list-line, exact-prefix-ray, and profile-window
-modules are
+prefix-pigeonhole, exact-list-line, exact-prefix-ray, prefix-ray-uniqueness,
+and profile-window modules are
 recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
@@ -76,7 +79,8 @@ in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `EXACT_PREFIX_LIST_CORRESPONDENCE.md`,
 `PREFIX_PIGEONHOLE_CORRESPONDENCE.md`,
 `EXACT_LIST_LINE_CORRESPONDENCE.md`,
-`EXACT_PREFIX_RAY_CORRESPONDENCE.md`, and
+`EXACT_PREFIX_RAY_CORRESPONDENCE.md`,
+`EXACT_PREFIX_RAY_UNIQUENESS_CORRESPONDENCE.md`, and
 `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize
@@ -92,7 +96,8 @@ same-field conversion from any complete finite polynomial list to the bad
 slopes of a fixed separating pole, and `ExactPrefixRay` exports its direct
 prefix-fiber specialization and exact support preservation. Scalar-extension
 descent, the separating-pole existence bound, and the final challenge transfer
-remain separate.
+remain separate. `ExactPrefixRayUniqueness` additionally proves occupancy one
+for every selected prefix support at a separating pole.
 
 The profile-window module proves exponent-level dominance only after `h`, `s`,
 and every actual `(c,lambda)` pair are supplied. QR6/QR8 normalization,
