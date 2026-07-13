@@ -30,6 +30,35 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - All-LineRay affine-core set-pair theorem
+
+- **Agent/model:** Codex, extending and independently auditing holmbuar's
+  selected-witness proof from integrated PR #681.
+- **Files added or changed:**
+  `experimental/notes/thresholds/all_lineray_affine_core_set_pair.md`,
+  `experimental/scripts/verify_all_lineray_affine_core.py`,
+  `experimental/data/certificates/all-lineray-affine-core/all_lineray_affine_core.json`,
+  `experimental/lean/grande_finale/GrandeFinale/AllLineRayAffineCore.lean`,
+  and `experimental/lean/grande_finale/GrandeFinale.lean`.
+- **Status:** PROVED for the field-general all-pair theorem, nested
+  slope/fiber corollary, and LineRay specialization; the Lean module is an
+  UNPROVED STATEMENT TARGET.
+- **What is being added:** A selector-free set-pair theorem counting every
+  retained `(slope,codeword)` pair, including same-slope multiplicity:
+  `sum 1/binom(s+wt(e),s) <= 1` and
+  `|P| <= binom(s+w,s) <= binom(N,s)`.  A second nonuniform charge composes
+  one representative per slope with each full same-slope fiber.  The verifier
+  exhausts complete small-field families, realizes same-slope equality, and
+  checks a split family where the nested bound beats the global-rank bound.
+- **How it is useful:** It pays the all-LineRay residual whenever the global
+  affine dimension or actual maximum error weight is sublinear, and also when
+  a selector and every local fiber have sublinear rank even if the global rank
+  is linear.  This strengthens the selector-sensitive theorem and serves the
+  residual-ray compiler route.
+- **What to do next:** Prove a low-rank transversal theorem for the affine
+  slope fibers, with the alternative producing one high-rank same-slope
+  RS/GRS-coset list.  Do not promote the Lean targets as formal proofs.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
