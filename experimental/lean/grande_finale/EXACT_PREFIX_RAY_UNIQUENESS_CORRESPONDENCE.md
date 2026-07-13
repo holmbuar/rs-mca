@@ -46,8 +46,9 @@ canonical one and hence has cardinality exactly `m`.
 This theorem uses the same finite field for the evaluation domain, prefix
 polynomial, pole, and slopes.  It assumes the pole lies outside the domain and
 separates the complete polynomial list.  It does not prove a separating pole
-exists from equation (4.6), and it does not perform coefficient descent from
-an extension field to a proper base field.
+exists itself; `SeparatingPole.lean` supplies the exact same-field
+equation-(4.6) existence theorem.  It does not perform coefficient descent
+from an extension field to a proper base field.
 
 Together with `ExactPrefixRay.coefficientFiber_slope_image_eq_badSlopeSet` and
 `ExactPrefixRay.badSlopeSet_card_eq_coefficientFiber`, this closes the

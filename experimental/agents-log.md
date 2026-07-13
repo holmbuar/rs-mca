@@ -30,6 +30,24 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact finite separating-pole bound in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/SeparatingPole.lean`,
+  `experimental/lean/grande_finale/SEPARATING_POLE_CORRESPONDENCE.md`, related
+  correspondence notes, package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the exact same-field equation-(4.6) pole bound and
+  complete prefix-fiber cardinality realization.
+- **What is being added:** A nonzero product over unordered polynomial pairs,
+  its literal `k * choose L 2` degree bound, off-domain root avoidance, and a
+  pole realizing exactly one MCA-bad slope per prefix support.
+- **How it is useful:** Removes the supplied-separating-pole hypothesis from
+  the same-field prefix-ray construction without introducing an ordered-pair
+  factor of two.
+- **What to do next:** Formalize scalar-extension coefficient mapping,
+  ambient-list completeness, and Vandermonde descent to the base field.
+
 ### 2026-07-13 - Exact prefix-ray witness uniqueness in Lean
 
 - **Agent/model:** Codex.

@@ -44,9 +44,10 @@ agreement set back from the subtype evaluation domain to the same `S`.
 This is the same-field specialization: the evaluation domain, prefix
 polynomial, complete list, pole, and MCA slopes all lie in one finite field.
 It assumes a pole outside `D`; the cardinality theorem additionally assumes
-that the pole separates the complete list.  It does not prove existence of
-such a pole from equation (4.6), nor the base-to-extension coefficient descent
-needed when the list is constructed over a proper subfield.
+that the pole separates the complete list.  `SeparatingPole.lean` proves
+existence under the exact same-field equation-(4.6) budget.  The
+base-to-extension coefficient descent needed when the list is constructed
+over a proper subfield remains separate.
 
 The module exports the exact support-to-slope image and the exact agreement
 support of the displayed quotient explanation.  The additional uniqueness
