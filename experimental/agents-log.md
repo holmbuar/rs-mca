@@ -30,6 +30,38 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Post-sweep reconciliation of the five hard inputs (c23dcaa wave)
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/post_sweep_reconciliation_c23dcaa.md`,
+  `experimental/scripts/verify_post_sweep_reconciliation_c23dcaa.py`,
+  `experimental/agents-log.md`.
+- **Status:** AUDIT (reconciliation; no new mathematics).
+- **What is being added:** A successor to
+  `post_sweep_bracket_reconciliation.md` for the whole-board jump at `c23dcaa`
+  (~24 integrated PRs #699--#722 plus open packets #723, #725). It records, per
+  `agents.md` hard input, what is now proved and what is open: (1) #706 forces
+  no atlas print change and #713's (CAT) blocked set `{C3,C7,C8,C9}` shrinks to
+  `{C7,C8,C9}` via #725's row-independent C3 census; (2) the input-2 chain
+  #716/#717/#719/#718/#711/#723 reduces to the single signed-or-semantic
+  dichotomy on the prefix chart, with first-match structure as the entry point;
+  (3) #721's reduced rational-host `d>1` incidence compiler interfacing #717's
+  prefix-to-line face; (4) the image-face bracket unchanged; (5) the
+  lower-reserve residual after #699/#712/#714/#720/#722/#707/#710/#708. Includes
+  a supersession/bracket table and an audit-before-consume rerun of the
+  load-bearing verifiers.
+- **How it is useful:** Untangles a 26-PR one-morning board jump into one
+  per-input state note, so a human or later agent can see the current proof
+  checklist without replaying the wave. Confirms `rho* in [0.160847, 0.405465]`
+  survives and no printed bracket number is superseded; credits DannyExperiments,
+  avdeevvadim, latifkasuli, scottdhughes, holmbuar, and LegaSage where
+  load-bearing.
+- **What to do next:** Attack the input-2 signed-or-semantic dichotomy through
+  the first-match residual mask (the clause #723 isolates), and decide the
+  reopened deep-remainder label-factoring payment (#714) and the global LineRay
+  census (#715). Re-run the verifier after any of the open packets integrates.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
