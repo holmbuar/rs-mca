@@ -41,6 +41,10 @@ This package is a partial Lean formalization of
 - `GrandeFinale/PrefixPigeonhole.lean`: the explicit locator coefficient map,
   its equivalence with leading cancellation, and the literal natural-ceiling
   lower bound for both a prefix fiber and its complete polynomial list.
+- `GrandeFinale/ExactListLine.lean`: the quotient explaining polynomial,
+  exact agreement-set preservation, and the same-field bijection between a
+  complete finite polynomial list and the MCA-bad slopes of a fixed
+  separating simple-pole line.
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -116,9 +120,11 @@ The exact-prefix-list module formalizes the algebraic bijection in equation
 cancellation condition `degree (U - locator S) < K`, and proves that every
 listed polynomial has exactly `m` agreements and a unique support. The
 explicit coefficient-vector map, its pigeonhole fiber-size lower bound, and
-the later separating-pole line bijection remain separate targets in this
-module. `PrefixPigeonhole` now supplies the first two as a separate layer,
-including the literal ceiling rather than a floor-division relaxation.
+the later separating-pole line bijection remain separate from this module.
+`PrefixPigeonhole` supplies the first two as a separate layer, including the
+literal ceiling rather than a floor-division relaxation, while `ExactListLine`
+supplies the same-field fixed-pole line bijection. Its prefix-specific and
+scalar-extension specializations remain separate targets.
 
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and
@@ -134,9 +140,10 @@ from a supplied finite dimension-`k+1` Reed--Solomon codeword list, while
 challenge set after a received-line shear. The direct composition is exported
 as `collisionAwarePole_challenge_of_codewordList`. The prefix-list construction
 and pigeonhole floor are supplied by `ExactPrefixList` and
-`PrefixPigeonhole`; an exported direct composition with the pole conversion
-remains absent, so the modules do not yet prove `prop:simple-pole-lower` or
-equation (13.3) end to end.
+`PrefixPigeonhole`, and `ExactListLine` proves the exact same-field fixed-pole
+list--line conversion. A direct scalar-extension composition with a proved
+separating-pole existence bound remains absent, so the modules do not yet
+prove `prop:simple-pole-lower` or equation (13.3) end to end.
 
 The profile-window module is also independent of Q. It proves exponent-level
 dominance only after `h`, `s`, and every actual `(c,lambda)` pair are supplied.

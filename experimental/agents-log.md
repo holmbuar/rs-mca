@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact separating-pole list--line bijection in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/ExactListLine.lean`,
+  `experimental/lean/grande_finale/EXACT_LIST_LINE_CORRESPONDENCE.md`, package
+  documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the same-field, fixed-pole list--line bijection and
+  agreement-set preservation.
+- **What is being added:** The quotient explaining polynomial and its degree
+  bound, pointwise and support-level agreement equivalences, exact equality of
+  the evaluation image of a complete finite polynomial list with the MCA-bad
+  slope set, and the separating-evaluation cardinality equality.
+- **How it is useful:** Supplies the exact line-conversion interface consumed
+  after construction of a complete Reed--Solomon list, without losing slopes
+  or agreement positions.
+- **What to do next:** Specialize the theorem to the complete locator-prefix
+  list, then formalize scalar-extension descent and the finite separating-pole
+  existence bound.
+
 ### 2026-07-13 - Coefficient-prefix pigeonhole floor in Lean
 
 - **Agent/model:** Codex.
