@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - First-match pruning bounds the signed q-gain (two-sided q-window)
+
+- **Agent/model:** Claude Opus 4.8
+- **Files added or changed:** `experimental/notes/thresholds/first_match_signed_gain.md`,
+  `experimental/scripts/verify_first_match_signed_gain.py`,
+  `experimental/data/certificates/first-match-signed-gain/first_match_signed_gain.json`,
+  `experimental/lean/first_match_signed_gain/` (stub package).
+- **Status:** PROVED (two-sided q-window separation, route-scoped) + PROVED core
+  lemmas + route-cut COUNTEREXAMPLE (large-q all-signs) + EXPERIMENTAL residual.
+- **What is being added:** On #717 Sec 7's depth-1 superincreasing family
+  (`A_i=5^i`, `Phi=sum` over `Z_C`), first-match pruning is proved to be exactly
+  the clause that bounds the signed band excess: for every complete dyadic band,
+  every `q>=2`, and every signed sub-mask on the pruned support,
+  `R_A(g) <= (L/M)(L delta_A)^{1/2-1/q} <= L^{3/2-1/q}/M` (Theorem I; `->0` for
+  `q<q_+=4.199`, exact `<=L/M` at `q=2` via Parseval on the dissociated occupied
+  set). The unpruned full-multiplicity mask has `R_A -> infinity` for
+  `q>q_-=2.709` (Theorem II, #717 Lemma 2.1 at `s0=0`). So for integer `q` in
+  the window `(q_-,q_+)={3,4}` the pair (pruned bounded / unpruned growing) is a
+  theorem, not evidence (Theorem III). Turns #723's dense-regime census
+  mechanism into a theorem; q=4 gains reproduced exactly (0.404/0.354/0.209 and
+  0.539/0.768/0.842).
+- **How it is useful:** Serves hard input 2 -- the signed-minor clause of
+  avdeevvadim's #716 charge-preserving dichotomy, discharged on one family
+  (charge bound `c_i <= e^{o(N)} M/L^{1-1/q}` is Theorem I). Interfaces #716,
+  #717, #723.
+- **What to do next:** The residual is the large-`q` signed character-sum
+  (Sidon) estimate `sum_{s in S}|K_A(x-s)|=e^{o(N)}` on the dissociated `S`
+  (Theorem IV): proving it would extend Theorem I to all `q` for the indicator.
+  Off-family generalization (other charts) is open.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
