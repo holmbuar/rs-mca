@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact prefix-list correspondence in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/ExactPrefixList.lean`,
+  `experimental/lean/grande_finale/EXACT_PREFIX_LIST_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the exact support/list bijection and exact-agreement
+  statement.
+- **What is being added:** A finite polynomial formulation of locator-prefix
+  supports, their exact correspondence with degree-less-than-`K` listed
+  polynomials, unique recovery of the full agreement support, and the proof
+  that every such polynomial has exactly `m` agreements.
+- **How it is useful:** Supplies the algebraic list-construction layer consumed
+  by the collision-aware simple-pole formalization while keeping the remaining
+  counting and line-conversion inputs explicit.
+- **What to do next:** Formalize the coefficient-prefix pigeonhole floor, then
+  connect the resulting complete list to the separating-pole list--line
+  bijection.
+
 ### 2026-07-13 - Subfield confinement in Lean
 
 - **Agent/model:** Codex.

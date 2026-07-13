@@ -35,6 +35,9 @@ This package is a partial Lean formalization of
   coefficient-vector base-domain RS code with the existing polynomial
   submodule, base-coordinate projection, same-support pair transfer, and MCA
   bad-slope confinement.
+- `GrandeFinale/ExactPrefixList.lean`: the exact locator-prefix support/list
+  correspondence, unique recovery of the full agreement support, and the
+  no-extra-agreement clause from `prop:exact-prefix-list`.
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -105,6 +108,13 @@ extension-field `CollisionAwarePole.rsEval`. No finiteness or
 finite-dimensionality is needed for same-support transfer; finite fields enter
 only in the bad-slope cardinality corollary.
 
+The exact-prefix-list module formalizes the algebraic bijection in equation
+(4.1). It represents a fixed locator prefix by the equivalent leading-term
+cancellation condition `degree (U - locator S) < K`, and proves that every
+listed polynomial has exactly `m` agreements and a unique support. The
+explicit coefficient-vector map, its pigeonhole fiber-size lower bound, and
+the later separating-pole line bijection remain separate targets.
+
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and
 `thm:syndrome-secant-exact` in the frontiers paper.  The Reed--Solomon
@@ -118,8 +128,9 @@ from a supplied finite dimension-`k+1` Reed--Solomon codeword list, while
 `ChallengeIntersection` transfers a supplied full-field floor to a proper
 challenge set after a received-line shear. The direct composition is exported
 as `collisionAwarePole_challenge_of_codewordList`. The prefix-list construction
-and list-size floor remain explicit upstream inputs, so the modules do not
-prove `prop:simple-pole-lower` or equation (13.3) end to end.
+is supplied by `ExactPrefixList`; the pigeonhole list-size floor remains an
+explicit upstream input, so the modules do not prove `prop:simple-pole-lower`
+or equation (13.3) end to end.
 
 The profile-window module is also independent of Q. It proves exponent-level
 dominance only after `h`, `s`, and every actual `(c,lambda)` pair are supplied.
@@ -131,5 +142,5 @@ bridge to the full profile envelope remain explicit outside inputs.
 Do not run `lake build` casually in this repository. Build only with the
 pinned Lean/Mathlib versions and matching precompiled Mathlib cache.
 Contributor audit notes report a full pinned build on 2026-07-11 with 8038
-jobs, including `GrandeFinale.CollisionAwarePole`; this integration did not
-rerun Lake.
+jobs, including `GrandeFinale.CollisionAwarePole`. Targeted module checks are
+reported in the correspondence notes.
