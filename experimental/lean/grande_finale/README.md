@@ -37,6 +37,10 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/RSExactSupportUpper.lean` proves the exact-agreement reduction
   for injective Reed--Solomon codes and the full-field support-atlas bound
   `B_MCA <= choose |D| a` for `a >= k+1`.
+- `GrandeFinale/ExactAdjacentRow.lean` proves the literal
+  `max M (choose M 2) < |F|` hyperplane-avoidance construction and compiles its
+  `M` distinct transverse intersections into the exact support-wise MCA
+  numerator lower bound.
 - `GrandeFinale/ProfileEnvelopeWindow.lean` formalizes the exact rational
   identity-versus-folding exponent window for each actual complete-fiber pair,
   its finite-family intersection/failure-band union, and the no-field-drop
@@ -52,7 +56,8 @@ in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
 `RS_PARITY_KERNEL_CORRESPONDENCE.md`,
 `RS_SUPPORT_HYPERPLANES_CORRESPONDENCE.md`,
-`RS_EXACT_SUPPORT_UPPER_CORRESPONDENCE.md`, and
+`RS_EXACT_SUPPORT_UPPER_CORRESPONDENCE.md`,
+`EXACT_ADJACENT_ROW_CORRESPONDENCE.md`, and
 `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize
