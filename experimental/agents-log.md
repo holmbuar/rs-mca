@@ -30,6 +30,50 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Pay-per-bit ledger audit
+
+- **Agent/model:** Claude Sonnet 5.
+- **Files added or changed:** New audit note
+  `experimental/notes/audits/pay_per_bit_ledger_audit.md`, verifier
+  `experimental/scripts/verify_pay_per_bit_ledger_audit.py`, and certificate
+  `experimental/data/certificates/pay-per-bit-ledger-audit/certificate.json`.
+- **Status:** AUDIT. No `.tex`/`.pdf` file is touched; not theorem-shaped, so
+  no Lean stub.
+- **What is being added:** Verifies the three records quoted by the
+  "Pay-per-bit framing" paragraph added to `readme.md`/`site/index.html` at
+  `fe93bb5` against their in-tree sources: Paper D v12's `epsilon_mca>2^-86`
+  (`tex/cs25_cap_v12.tex` `cor:grand`, 42-bit gap, exact integer recheck),
+  the Cycle116/119 `F_17^32` row's `+32.82` bit margin (exact `Fraction` plus
+  50-digit `Decimal` log2 recompute against the printed value), and the exact
+  tangent-staircase "6/7" gate (`LD_sw(C,506)=7` unsafe vs `LD_sw(C,507)=6`
+  safe, both exact integer recomputes). All three MATCH, zero print
+  corrections forced. It then classifies all 35 packets in the current open
+  wave (`#723,#725,#727`-`#735`) and the just-integrated `c23dcaa` wave
+  (`#699`-`#722`) under the pay-per-bit rule (moves a bit margin / pushes the
+  unsafe radius / narrows one of agents.md's five hard inputs / neither), and
+  states the current two-sided `delta*_C(2^-128)` bracket picture at both the
+  deployed-row scale (`tex/cs25_cap_v12.tex` `thm:informal-sandwich`,
+  `[1/6,15331/32768]` unconditional resp. `[1/4,15331/32768]` modulo one
+  import) and the asymptotic scale (the conditional identity of
+  `experimental/asymptotic_rs_mca_frontiers.tex` eq. 1.10), plus the adjacent
+  `rho*` image-face bracket (`[0.160847,0.405465]`, flagged as not yet
+  connected to any `tex` consumer).
+- **How it is useful:** Confirms the maintainer's three quoted numbers are
+  accurate before they get load-bearing use in prize scoring, and gives an
+  honest present-tense answer to "where do bits come from next": zero of the
+  35 audited packets directly move a certified bit margin or unsafe radius
+  (0 category (i)/(ii)); 24 narrow one of the five hard inputs (11 of those on
+  hard input 2, the wave's real concentration) and 11 are audit-only or serve
+  the separate Grand List sub-problem. Useful as a standing cross-check for
+  anyone citing the pay-per-bit numbers, and as an orientation map of the
+  current wave's actual proof content versus its audit/infrastructure content.
+- **What to do next:** Re-run the verifier whenever any of the three quoted
+  records' source files change, or when the open-wave PRs integrate (their
+  pinned head SHAs will need updating to the integrated tree paths). The
+  audit does not attempt to wire the `rho*` bracket to a `tex` consumer or
+  advance any of the five hard inputs itself — that work is tracked by the
+  individual packets it classifies.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
