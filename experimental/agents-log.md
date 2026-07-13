@@ -30,6 +30,23 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact Reed--Solomon support hyperplanes in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/RSSupportHyperplanes.lean`,
+  `experimental/lean/grande_finale/RS_SUPPORT_HYPERPLANES_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the exact `(R-1)`-support syndrome-hyperplane family.
+- **What is being added:** The supported-error syndrome-span equality,
+  support-span finrank, codimension-one functional realization, distinctness of
+  exact support spans, and an injective family of nonzero functional kernels.
+- **How it is useful:** Supplies the exact hyperplane family consumed by the
+  finite-avoidance lower-bound construction in
+  `thm:exact-first-adjacent-row`.
+- **What to do next:** Prove the exact support upper bound, compose these
+  hyperplanes with the separating-line compiler, and derive AD1 and AD2.
+
 ### 2026-07-13 - Exact Reed--Solomon parity kernel in Lean
 
 - **Agent/model:** Codex.

@@ -31,6 +31,9 @@ The package root is `GrandeFinale`, with additional modules under
   Vandermonde parity map, proves its at-most-`R` column independence and
   surjectivity, and identifies its kernel exactly with the injective
   Reed--Solomon evaluation code.
+- `GrandeFinale/RSSupportHyperplanes.lean` identifies supported-error syndrome
+  images with weighted-column spans and proves that exact `(R-1)` supports
+  give an injective family of nonzero functional kernels.
 - `GrandeFinale/ProfileEnvelopeWindow.lean` formalizes the exact rational
   identity-versus-folding exponent window for each actual complete-fiber pair,
   its finite-family intersection/failure-band union, and the no-field-drop
@@ -40,11 +43,12 @@ The package root is `GrandeFinale`, with additional modules under
   BC, SP, and frontier ledgers.
 
 The theorem-by-theorem scopes of the collision-aware-pole,
-challenge-intersection, syndrome-line, RS parity-kernel, and profile-window
-modules are recorded
+challenge-intersection, syndrome-line, RS parity-kernel, support-hyperplane,
+and profile-window modules are recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
-`RS_PARITY_KERNEL_CORRESPONDENCE.md`, and
+`RS_PARITY_KERNEL_CORRESPONDENCE.md`,
+`RS_SUPPORT_HYPERPLANES_CORRESPONDENCE.md`, and
 `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize

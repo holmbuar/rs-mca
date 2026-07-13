@@ -37,6 +37,10 @@ This package is a partial Lean formalization of
   at-most-`R` column independence, parity-map surjectivity, Lagrange moment
   annihilation, and exact identification of the parity kernel with the
   injective Reed--Solomon evaluation code.
+- `GrandeFinale/RSSupportHyperplanes.lean`: exact identification of
+  supported-error syndrome images with weighted-column spans, their dimensions,
+  codimension-one functional kernels, and injectivity across exact `(R-1)`
+  supports.
 - `GrandeFinale/ProfileEnvelopeWindow.lean`: exact rational exponent algebra for
   the corrected per-folding identity-dominance windows, including finite-family
   intersection/union and the positive-crossing no-field-drop characterization.
@@ -73,9 +77,10 @@ The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and
 `thm:syndrome-secant-exact` in the frontiers paper. The RS parity-kernel module
 supplies its weighted Vandermonde parity-check construction and exact kernel
-identification. The distinct `(R-1)`-support hyperplane family,
-rational-normal-curve interpretation, and reduction from threshold witnesses
-to exact-cardinality supports remain separate.
+identification, while the support-hyperplane module supplies the distinct
+`(R-1)`-support kernel family. The exact support upper bound, final separating
+line composition, and reduction from threshold witnesses to exact-cardinality
+supports remain separate.
 
 The collision-aware-pole and challenge-intersection modules are independent
 of Q and formalize complementary parts of the frontiers paper's simple-pole
