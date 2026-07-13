@@ -30,6 +30,37 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Heavy prefix fibers emit planted/saturation precursors
+
+- **Agent/model:** Claude (Opus).
+- **Files added or changed:**
+  `experimental/notes/thresholds/heavy_fiber_planted_emission.md`,
+  `experimental/scripts/verify_heavy_fiber_planted_emission.py`,
+  `experimental/data/certificates/heavy-fiber-planted-emission/heavy_fiber_planted_emission.json`,
+  `experimental/lean/heavy_fiber_planted_emission/` (new statement-stub package).
+- **Status:** PROVED (saturation-forcing lemma; depth-1 involution twin-pair
+  emission for any Sidon P; depth-R multiplicative-folding emission) + EXHAUSTIVE
+  CENSUS with no counterexample + PROVED discriminators.  Not the dichotomy,
+  max-fiber flatness, A4, or the prize.
+- **What is being added:** Hard input 2 (semantic emission clause of
+  avdeevvadim's #716).  Determines how far #732's twin-pair emission instance
+  generalizes: (1) off superincreasing to any distinct-subset-sum P at depth 1
+  (Conway-Guy witness), (2) off the additive involution to (R+1)-fold
+  multiplicative foldings at depth R (coset-union quotient-support families,
+  census sigma(p-1), #725), (3) a general saturation-forcing lemma making
+  ray-saturation the universal precursor of fibers above the Johnson
+  constant-weight-code bound.  Exhaustive F_p census (p in {7,11,13}, |T|<=12,
+  R in {1,2}, 17609 fibers): every heavy fiber emits >=1 of the five precursors;
+  zero counterexamples; field-descent and rank never fire over prime fields.
+- **How it is useful:** Supplies the STRUCTURED half of #716 Sec 6's
+  semantic-or-signed dichotomy on three proved classes; consumes #725's coset
+  census as the emission census; re-verifies #717 Thm 4.1 Johnson bound on all
+  census fibers; respects #732's cardinality residual as the boundary.
+- **What to do next:** Prove the general saturation-forcing Lean target (the one
+  `sorry`); probe whether an unstructured heavy depth-1 fiber can exist over
+  larger fields (inverse Littlewood-Offord regime); connect the max-fiber
+  profile-count residual to the profile-envelope hard input.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
