@@ -30,6 +30,53 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - C3 planted-divisor census
+
+- **Agent/model:** Claude.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/c3_planted_divisor_census.md`,
+  `experimental/scripts/verify_c3_planted_divisor_census.py`,
+  `experimental/data/certificates/c3-planted-divisor-census/c3_planted_divisor_census.json`,
+  `experimental/lean/first_match_atlas/FirstMatchAtlas/PlantedDivisorCensus.lean`
+  (new module, reached by `import` from the existing package root; one line
+  added to `FirstMatchAtlas.lean`).
+- **Status:** PROVED (Claims 1-5, exact closed forms and an exact negative
+  calibration) / AUDIT (route-scoped C3 verdict and #713 ledger-impact
+  reading) / one Lean statement target left honestly `sorry` (unproved).
+- **What is being added:** The finite planted census PR #713's `(CAT)`
+  exhaustion ledger names as C3's residual. Object censused: planted
+  divisors `P` whose root set is a coset of a subgroup of a multiplicative
+  coset `D=\theta H` (`def:structured-folding`), or a fixed-point set of one
+  of its automorphisms. Exact identity `\Sigma_{c|N} N/c = \sigma(N)`,
+  elementary bound `\sigma(N)\le N(1+\ln N)` (hence `e^{o(N)}`), proved for
+  every `N`; brute-force verified (not sampled) for `N=1..600` (coset
+  partitions, every automorphism-fixed-point set, dihedral/twin-coset
+  orbits) and `N=1..50000` (`\sigma(N)` only). Separately proves the
+  unrestricted "common factor of two arbitrary supports" reading is exactly
+  `\binom{n}{b}` (genuinely exponential), confirming `lem:profile-atlas`'s
+  exclusion of arbitrary planted subsets is a tight dichotomy, not a
+  caution.
+- **How it is useful:** Pays hard input 1's C3 cell
+  (`asymptotic_rs_mca_frontiers.tex` L2399-2407,
+  `def:algebraically-planted` L7584-7595) on the row-independent
+  (automorphism-driven) reading, which is the reading `atlas_missing_witness.md`
+  (#536) already used operationally. Route-scoped verdict: C3 PARTIAL (paid
+  row-independent / blocked-and-proved-why on the fully general reading).
+  Per #713's own Section 3.3 prediction, this removes C3 as an independent
+  `(CAT)` full-catalogue summation blocker for that reading, leaving
+  `{C7,C8,C9}` = hard inputs 3 and 4/5, matching #713's own anticipated
+  collapse. Audited #713's own verifier by extracting and rerunning it
+  out-of-tree against the maintainer's later integration commit `c23dcaa`
+  (`RESULT: PASS (219/219)`) before citing it, since this branch's base
+  predates that integration and was not rebased.
+- **What to do next:** A maintainer may fold this census into
+  `atlas_cat_cell_ledger.md`'s own per-cell table. The Lean proving queue
+  could pick up `sigmaOf_subexponential_STATEMENT_TARGET_UNPROVED` (needs a
+  harmonic-number bound; core Lean only, no mathlib). The open sub-case
+  (row-dependent common-factor / received-line-resultant planted divisors)
+  remains genuinely open for whoever next attacks C7/C8 or a row-specific
+  C3 instance.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
