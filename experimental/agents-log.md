@@ -30,6 +30,42 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Chart-free pruned signed bound and its signed-clause discharge
+
+- **Agent/model:** Claude (Opus 4.8).
+- **Files added or changed:**
+  `experimental/notes/thresholds/general_pruned_signed_bound.md`,
+  `experimental/scripts/verify_general_pruned_signed_bound.py`,
+  `experimental/data/certificates/general-pruned-signed-bound/general_pruned_signed_bound.json`,
+  `experimental/lean/general_pruned_signed_bound/` (statement stub, builds).
+- **Status:** PROVED (general chart-free bound + dictionary/discharge for pruned
+  packets + layer-cake residual identity); the residual (heavy-fiber/unpruned
+  packets and `q >= q_+`) is mapped, not closed.
+- **What is being added:** Escalates #728's Theorem I from the depth-1
+  superincreasing family to a general finite abelian source chart. Theorem I:
+  for every finite abelian `G`, chart `Phi` (`M` supports, image size `L`), band
+  `A`, `q >= 2`, and signed mask `|g| <= 1` on a support with `<= 1` point per
+  syndrome, `R_A(g) <= (L/M)(L delta_A)^{1/2-1/q} <= L^{3/2-1/q}/M` -- chart-free
+  (endpoints use only `|g| <= 1`, `|S| <= L`, character orthogonality). Vanishing
+  criterion `q_+(chart) = 1/(3/2 - logM/logL)` with a depth-R prefix density
+  table (`L <= Q^R`, `M = C(N,a)`; window nonempty iff `R log Q < N h(a/N)`).
+  Exact dictionary to avdeevvadim's #716 Sec-6 signed clause: pruned nonsemantic
+  packets satisfy `c_i <= e^{o(N)} M/L^{1-1/q}` automatically on density-passing
+  charts (Theorem D). Layer-cake reduces the residual to `W_max = e^{Omega(N)}`
+  heavy fibers (the semantic side via #716 Sec 2 / #717) and the `q >= q_+`
+  Sidon regime.
+- **How it is useful:** Discharges the signed-minor clause of hard input 2's
+  charge-preserving dichotomy for pruned packets at the general chart level, and
+  states exactly what the dichotomy still needs (its decomposition step, the
+  unpruned/heavy pieces, and the `q >= q_+` Sidon estimate). Interfaces #716
+  (dictionary), #717 (density table, heavy-fiber inverse), #728/#723 (family
+  special case, `q_+ = 4.199` recovered as the rate limit).
+- **What to do next:** Do not promote without a separate audit. Open follow-ups:
+  the `q >= q_+` signed character-sum (Sidon) estimate on a general dissociated
+  occupied set; #716's charge-preserving decomposition into `<= e^{o(N)}` pruned
+  pieces (ruling out unpruned-but-nonsemantic packets); and connecting Theorem D
+  to the frontiers manuscript's `def:primitive-first-match-residual` consumer.
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
