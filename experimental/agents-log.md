@@ -30,6 +30,51 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - cor:grand 86-bit conditional branch: row-by-row hypothesis audit
+
+- **Agent/model:** Claude (Sonnet 5).
+- **Files added or changed:**
+  `experimental/notes/audits/pay_per_bit_86bit_conditional_rows.md`,
+  `experimental/scripts/verify_pay_per_bit_86bit_conditional_rows.py`,
+  `experimental/data/certificates/pay-per-bit-86bit-conditional-rows/certificate.json`,
+  `experimental/lean/margin_anchors/MarginAnchors.lean` (new
+  `CorGrandQGe2nRows` namespace, `native_decide` only).
+- **Status:** AUDIT (CONDITIONAL record).
+- **What is being added:** Follow-up to PR #736's pay-per-bit ledger audit,
+  which flagged that `cor:grand` (`tex/cs25_cap_v12.tex:3542-3585`) prints a
+  sharper conditional branch -- `epsilon_mca > 2^-42`, 86 bits above the
+  `2^-128` target, versus the unconditional `2^-86`/42 bits -- whenever
+  `q>=2n`. This packet instantiates `cor:grand`'s FULL hypothesis set
+  (`rho` in the challenge set, `N_rho | n`, `q<2^256`, `D` a genuine
+  multiplicative coset, `k<=2^40`, plus `q>=2n`) on the four maintainer-cited
+  deployed anchor rows: KoalaBear sextic (`cor:deployed`), the two
+  Mersenne-31/QM31 circle rows (`cor:circle-deployed`), and the `F_17^32`
+  Cycle116/119 row.
+- **How it is useful:** `q>=2n` holds trivially on all four rows (huge
+  margins, exact integers printed), but that was never the binding
+  constraint. The M31 rows fail an earlier hypothesis (`D` is a Chebyshev/
+  twin-coset domain, not a multiplicative coset -- proved via the separate
+  `thm:phi-cap`, not `thm:main`; the circle-code row additionally can never
+  satisfy `a|k` since `k_c` is always odd). The `F_17^32` row fails
+  `N_rho=1024 | n=512`. Only the KoalaBear row satisfies the full hypothesis
+  set -- and there the sharper branch (generic worst-case `2^-42`, 86 bits)
+  is dominated by `cor:deployed`'s own already-printed, already-unconditional
+  bound (`2^-22`, 106 bits), 20 bits better. Net verdict: the 86-bit
+  conditional record adds no new pay-per-bit value on the deployed envelope
+  as currently listed. `cor:grand` itself is the maintainer's own printed
+  result; no new theorem is claimed here, only its hypotheses checked
+  against rows.
+- **What to do next:** If a future packet wants the 86-bit number to matter,
+  it would need either a row whose domain has `N_rho|n` (or a comparable
+  divisor) AND lacks KoalaBear/M31's small-subfield-inside-a-big-extension
+  structure that already gives a better direct bound -- `F_17^32` is close
+  but not that row (a diagnostic in the note shows its own `N=256` attempt
+  falls ~2 bits short of `thm:main`'s entropy hypothesis, so this is not a
+  one-clause fix), or an analogous `q>=2n` sharpening proved for
+  `thm:phi-cap`/`cor:circle-grand` (not printed anywhere currently,
+  mechanically plausible from the proof pattern, but per this audit would
+  still not move `cor:circle-deployed`'s own better numbers even if added).
+
 ### 2026-07-13 - Lower-reserve, A6, L2, dense-band, and LineRay PR wave
 
 - **Agent/model:** Codex integrating PRs #699--#722 from
