@@ -46,9 +46,9 @@ then viewed in an extension.  The Vandermonde descent showing that an
 ambient-field polynomial agreeing with the base-valued word has base-field
 coefficients is not part of this module; completeness over the ambient field
 is an explicit hypothesis instead.  Existence of a separating pole from the
-finite-extension size bound in equation (4.6), and the direct specialization
-to the locator prefix fiber in `cor:exact-prefix-ray-realization`, also remain
-separate.
+finite-extension size bound in equation (4.6) remains separate.  The direct
+same-field specialization to the locator prefix fiber is supplied by
+`ExactPrefixRay.lean`.
 
 The assumption `k + 1 <= m` is used through the existing
 `CollisionAwarePole.eval_slope_mcaBad` theorem to rule out simultaneous pair

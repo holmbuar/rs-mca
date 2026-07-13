@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Exact locator-prefix ray realization in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/ExactPrefixRay.lean`,
+  `experimental/lean/grande_finale/EXACT_PREFIX_RAY_CORRESPONDENCE.md`, related
+  correspondence notes, package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the same-field support-to-slope image, exact
+  separating-pole cardinality, and agreement-support preservation.
+- **What is being added:** A direct specialization from the complete locator
+  coefficient fiber to the full MCA-bad slope set of the pole line, together
+  with proof that each displayed quotient explanation retains precisely its
+  originating support.
+- **How it is useful:** Closes the same-field composition of the coefficient
+  pigeonhole list, exact prefix-list correspondence, and exact list--line
+  interface without a slope or support multiplicity loss.
+- **What to do next:** Formalize arbitrary-explanation uniqueness, then add
+  scalar-extension coefficient descent and the finite separating-pole
+  existence bound.
+
 ### 2026-07-13 - Exact separating-pole list--line bijection in Lean
 
 - **Agent/model:** Codex.

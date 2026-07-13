@@ -41,6 +41,10 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/ExactListLine.lean` proves the same-field, fixed-pole exact
   bijection between a complete finite polynomial list and the MCA-bad slopes
   of its simple-pole received line, including agreement-set preservation.
+- `GrandeFinale/ExactPrefixRay.lean` specializes that bijection to the complete
+  locator-prefix fiber, proving direct support-to-slope image equality, exact
+  cardinality at a separating pole, and preservation of every full agreement
+  support.
 - `GrandeFinale/QPrimitiveCollision.lean` formalizes collision-tuple and
   low-support exclusion kernels.
 - `GrandeFinale/QFiniteTables.lean` pins the four finite Q table rows and
@@ -60,7 +64,8 @@ The package root is `GrandeFinale`, with additional modules under
 The theorem-by-theorem scopes of the collision-aware-pole,
 challenge-intersection, syndrome-line, largest-fiber-moment, exact-profile,
 first-match add-back, subfield-confinement, exact-prefix-list,
-prefix-pigeonhole, exact-list-line, and profile-window modules are
+prefix-pigeonhole, exact-list-line, exact-prefix-ray, and profile-window
+modules are
 recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
@@ -70,7 +75,8 @@ in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `SUBFIELD_CONFINEMENT_CORRESPONDENCE.md`,
 `EXACT_PREFIX_LIST_CORRESPONDENCE.md`,
 `PREFIX_PIGEONHOLE_CORRESPONDENCE.md`,
-`EXACT_LIST_LINE_CORRESPONDENCE.md`, and
+`EXACT_LIST_LINE_CORRESPONDENCE.md`,
+`EXACT_PREFIX_RAY_CORRESPONDENCE.md`, and
 `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize
@@ -83,9 +89,10 @@ are split between `ExactPrefixList` and `PrefixPigeonhole`: the first proves
 the exact support/list correspondence, and the second proves the explicit
 coefficient-prefix pigeonhole ceiling. `ExactListLine` now supplies the exact
 same-field conversion from any complete finite polynomial list to the bad
-slopes of a fixed separating pole. The prefix-specific composition, scalar
-extension descent, and separating-pole existence bound have not yet been
-exported.
+slopes of a fixed separating pole, and `ExactPrefixRay` exports its direct
+prefix-fiber specialization and exact support preservation. Scalar-extension
+descent, the separating-pole existence bound, and the final challenge transfer
+remain separate.
 
 The profile-window module proves exponent-level dominance only after `h`, `s`,
 and every actual `(c,lambda)` pair are supplied. QR6/QR8 normalization,

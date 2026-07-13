@@ -45,7 +45,8 @@ The module proves the bijection and exact-agreement parts of
 or prove the pigeonhole list-size lower bound inside this module; those are
 formalized separately in `PrefixPigeonhole.lean`. It does not perform the
 later simple-pole conversion or prove the separating-pole list--line
-bijection.
+bijection itself; the same-field fixed-pole composition is formalized in
+`ExactListLine.lean` and `ExactPrefixRay.lean`.
 
 ## Verification
 

@@ -45,8 +45,10 @@ ceiling in the source, rather than a floor-division relaxation.
 The final theorem counts the unique degree-less-than-`K` polynomial
 representatives in the exact list over the finite base field. The evaluation
 domain is a `Finset B`, so `D subset B` is built into the type. The module does
-not yet export the later separating-pole list--line bijection or compose the
-list floor with the collision-aware pole and challenge-transfer theorems.
+not itself export the later separating-pole list--line bijection. Its complete
+fiber is composed with the same-field fixed-pole interface in
+`ExactPrefixRay.lean`; scalar-extension pole existence and the final
+challenge-transfer composition remain separate.
 
 ## Verification
 

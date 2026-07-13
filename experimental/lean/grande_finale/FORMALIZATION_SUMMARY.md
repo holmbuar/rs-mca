@@ -45,6 +45,10 @@ This package is a partial Lean formalization of
   exact agreement-set preservation, and the same-field bijection between a
   complete finite polynomial list and the MCA-bad slopes of a fixed
   separating simple-pole line.
+- `GrandeFinale/ExactPrefixRay.lean`: the same-field specialization from an
+  explicit complete locator-prefix fiber to the full MCA-bad slope set,
+  including direct image equality, separating-pole cardinality, and exact
+  retained agreement supports.
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -123,8 +127,10 @@ explicit coefficient-vector map, its pigeonhole fiber-size lower bound, and
 the later separating-pole line bijection remain separate from this module.
 `PrefixPigeonhole` supplies the first two as a separate layer, including the
 literal ceiling rather than a floor-division relaxation, while `ExactListLine`
-supplies the same-field fixed-pole line bijection. Its prefix-specific and
-scalar-extension specializations remain separate targets.
+supplies the same-field fixed-pole line bijection. `ExactPrefixRay` supplies
+the corresponding direct prefix-fiber specialization. Scalar-extension
+descent, separating-pole existence, and arbitrary-explanation witness
+uniqueness remain separate targets.
 
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and
@@ -141,9 +147,11 @@ challenge set after a received-line shear. The direct composition is exported
 as `collisionAwarePole_challenge_of_codewordList`. The prefix-list construction
 and pigeonhole floor are supplied by `ExactPrefixList` and
 `PrefixPigeonhole`, and `ExactListLine` proves the exact same-field fixed-pole
-list--line conversion. A direct scalar-extension composition with a proved
-separating-pole existence bound remains absent, so the modules do not yet
-prove `prop:simple-pole-lower` or equation (13.3) end to end.
+list--line conversion. `ExactPrefixRay` composes these layers for a supplied
+same-field pole and proves exact bad-slope/fiber cardinality when it separates
+the list. A scalar-extension composition with a proved separating-pole
+existence bound remains absent, so the modules do not yet prove
+`prop:simple-pole-lower` or equation (13.3) end to end.
 
 The profile-window module is also independent of Q. It proves exponent-level
 dominance only after `h`, `s`, and every actual `(c,lambda)` pair are supplied.
