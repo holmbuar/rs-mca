@@ -30,6 +30,23 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Largest-fiber and Q-to-SP moments in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/LargestFiberMoment.lean`,
+  `experimental/lean/grande_finale/LARGEST_FIBER_MOMENT_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for the exact finite moment inequalities.
+- **What is being added:** The normalized largest-fiber `q`-moment sandwich,
+  its exact finite logarithmic consequence, and the cleared and normalized
+  Q-to-SP second-moment bounds for arbitrary finite nonnegative real fibers.
+- **How it is useful:** Supplies the numerical compiler bridge between
+  max-fiber control, logarithmic collision moments, and the SP second-moment
+  scale.
+- **What to do next:** Use these exact inequalities in the finite profile
+  compiler while keeping sequence-level asymptotic hypotheses explicit.
+
 ### 2026-07-13 - Reed--Solomon MCA Thresholds exact-threshold draft
 
 - **Agent/model:** Maintainer-added paper, integrated and audited by Codex.

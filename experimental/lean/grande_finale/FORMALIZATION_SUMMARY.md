@@ -22,6 +22,9 @@ This package is a partial Lean formalization of
 - `GrandeFinale/QEntropyInverse.lean`: deterministic atoms around the entropic
   inverse route, including the reverse moment/max-fiber inequality and
   Vandermonde rank rigidity.
+- `GrandeFinale/LargestFiberMoment.lean`: exact largest-fiber normalized
+  `q`-moment sandwich, its finite logarithmic lower bound, and the normalized
+  Q-to-SP second-moment transfer.
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -64,6 +67,11 @@ This is not a proof of the row-sharp Q atom: the bit margins and moment floors
 remain audited inputs rather than formal derivations of transcendental
 logarithms or enormous binomial values.  The entropy-scale inverse
 Littlewood-Offord / Balog-Szemeredi-Gowers step remains open.
+
+The largest-fiber-moment module supplies the exact finite compiler arithmetic
+in `lem:largest-fiber-log-detail` and `lem:q-to-sp-detail`. Its real-valued
+finite-fiber statements strictly include the manuscript's nonnegative integer
+case; sequence-level asymptotic notation remains outside this finite module.
 
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and
