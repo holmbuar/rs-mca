@@ -444,13 +444,20 @@ that each of the seven A6-wave notes' own text contains its cited atlas
 disclaimer and that `#697`'s own text contains its "hard input 3" self-label;
 (BLOCK D) the route/classification counts in the Summary table.
 
-## Post-baseline addendum (PR #704)
+## Post-baseline addendum (PR #704; updated at its globalized head)
 
 PR #704 (DannyExperiments, opened after this audit's `ea4eb07` baseline)
 extends the #697 compiler along the transverse all-parameter line-section
-frontier -- same canonical two-block family, same ONE fixed received line and
-ONE active weighted-RS chart.  Its own Nonclaims re-disclaim "a
-witness-exhaustive atlas or a bound across different received lines, active
-charts, or realized profiles".  The coverage rows, the residual handles
-`(CAT)`/`(UNIF)`, and the determination above are therefore unaffected as of
-#704's head; the cross-line/chart/profile quantifier gap is unchanged.
+frontier.  At its ORIGINAL head it stayed on one fixed received line and one
+active chart, and its Nonclaims re-disclaimed the atlas.  Its GLOBALIZED head
+(three later commits, "globalize the section-positive one-cell atlas") goes
+materially further: on the strict section-positive locus `J = a^2 - n(k-1) >
+0` the exact-witness incidence collapses to ONE compact algebraic profile
+cell with a uniform `|Z_a(r)| < 10000 n^27` bound — catalogue exhaustivity
+AND line-uniformity ON THAT LOCUS.  If integrated, this pays the `(CAT)` and
+`(UNIF)` residuals restricted to `J > 0`; the residual handles then live on
+the complementary locus `J <= 0` (which #704 explicitly does not touch) plus
+the summation cells of the catalogue ledger.  The determination above is a
+statement about the INTEGRATED corpus at `ea4eb07` and is unchanged; the
+residual handles `(CAT)`/`(UNIF)` remain open as stated there, now with the
+sharper post-#704 form: open exactly on `J <= 0` once #704 integrates.
