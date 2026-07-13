@@ -31,6 +31,10 @@ This package is a partial Lean formalization of
 - `GrandeFinale/FirstMatchAddBack.lean`: ordered first-match
   disjointization, the exact finite family-union multiplier, full-slice
   overlap counting, and the weighted add-back formulas (AB1)--(AB3).
+- `GrandeFinale/SubfieldConfinement.lean`: exact identification of a finite
+  coefficient-vector base-domain RS code with the existing polynomial
+  submodule, base-coordinate projection, same-support pair transfer, and MCA
+  bad-slope confinement.
 - `GrandeFinale/QPrimitiveCollision.lean`: collision-tuple identities,
   trade-formulation kernels, low-support exclusion, and prefix-collision
   rigidity.
@@ -93,6 +97,13 @@ slices. Its family-size-times-budget theorem is the finite combinatorial core
 of `lem:profile-summation`; the sequence-level `e^{o(n)}` bookkeeping
 remains outside the module. A witness-exhaustive atlas and the individual
 profile payments remain explicit inputs.
+
+The subfield-confinement module proves `thm:subfield-confinement-full` for an
+arbitrary field extension modeled by `Algebra B F`. The evaluation domain and
+received line are base-valued, while the code itself is the existing
+extension-field `CollisionAwarePole.rsEval`. No finiteness or
+finite-dimensionality is needed for same-support transfer; finite fields enter
+only in the bad-slope cardinality corollary.
 
 The syndrome-line module is independent of Q.  It proves the generic
 linear-code compiler behind `prop:syndrome-line-normal-form` and

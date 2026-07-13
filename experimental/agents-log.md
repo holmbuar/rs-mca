@@ -30,6 +30,25 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-13 - Subfield confinement in Lean
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/SubfieldConfinement.lean`,
+  `experimental/lean/grande_finale/SUBFIELD_CONFINEMENT_CORRESPONDENCE.md`,
+  package documentation, and `experimental/agents-log.md`.
+- **Status:** PROVED for support-wise transfer and MCA confinement.
+- **What is being added:** An exact finite-coefficient presentation of RS
+  evaluation over a base-field domain, its identification with the existing
+  polynomial submodule, base-linear coordinate projections, same-support pair
+  explanation, and confinement of every MCA-bad slope to the base field.
+- **How it is useful:** Makes extension-field challenges on base-valued
+  received lines reduce to the base-field slope set without changing the
+  support or the RS code interface.
+- **What to do next:** Use the cardinality corollary in finite challenge
+  comparisons and keep genuinely extension-valued received lines as a
+  separate case.
+
 ### 2026-07-13 - First-match and weighted profile add-back in Lean
 
 - **Agent/model:** Codex.

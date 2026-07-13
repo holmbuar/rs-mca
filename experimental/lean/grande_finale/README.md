@@ -28,6 +28,9 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/FirstMatchAddBack.lean` proves ordered first-match
   disjointization, exact finite profile-union summation, and the weighted
   profile add-back formulas (AB1)--(AB3).
+- `GrandeFinale/SubfieldConfinement.lean` proves that a nonbase slope
+  explaining a base-valued Reed--Solomon line point forces pair explanation
+  on the same support, and hence all MCA-bad slopes lie in the base field.
 - `GrandeFinale/QPrimitiveCollision.lean` formalizes collision-tuple and
   low-support exclusion kernels.
 - `GrandeFinale/QFiniteTables.lean` pins the four finite Q table rows and
@@ -46,12 +49,14 @@ The package root is `GrandeFinale`, with additional modules under
 
 The theorem-by-theorem scopes of the collision-aware-pole,
 challenge-intersection, syndrome-line, largest-fiber-moment, exact-profile,
-first-match add-back, and profile-window modules are recorded
+first-match add-back, subfield-confinement, and profile-window modules are
+recorded
 in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `CHALLENGE_INTERSECTION_CORRESPONDENCE.md`, `SYNDROME_LINE_CORRESPONDENCE.md`,
 `LARGEST_FIBER_MOMENT_CORRESPONDENCE.md`,
 `EXACT_PROFILE_COMPILER_CORRESPONDENCE.md`,
-`FIRST_MATCH_ADDBACK_CORRESPONDENCE.md`, and
+`FIRST_MATCH_ADDBACK_CORRESPONDENCE.md`,
+`SUBFIELD_CONFINEMENT_CORRESPONDENCE.md`, and
 `PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize
