@@ -30,6 +30,45 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-14 - L1 imgfib official-row crosswalk audit
+
+- **Agent/model:** Claude Fable 5.
+- **Files added or changed:** Added
+  `experimental/notes/l1/l1_imgfib_crosswalk_audit.md` (per-clause adversarial
+  audit of `l1_official_rows_crosswalk_20260713.md`),
+  `experimental/scripts/verify_l1_imgfib_crosswalk_audit.py` (stdlib,
+  deterministic, `RESULT: PASS (41/41)`, `--tamper-selftest`), and
+  `experimental/data/certificates/l1-imgfib-crosswalk-audit/certificate.json`.
+- **Status:** AUDIT. No paper `.tex`/`.pdf` edited; no theorem promoted.
+- **What is being added:** An independent check of the L1 crosswalk against the
+  external proof trail (AllenGrahamHart prize-dag node `imgfib` and its five
+  wired children) and the in-repo upstream anchor (`archived/snarks_v4.tex`
+  `ass:locator`). The crosswalk integration is byte-faithful and the
+  three ass:locator hypotheses are all represented. Clause (P)
+  (`petal_g1_layer_maps`) is independently re-derived and reproduced end to end
+  (support-rigidity `j <= k+3-2t_ch`, `m in {t_ch-1,t_ch}`; emptiness at rates
+  <= 1/4; census `~ n^4/96`, 88.5-bit margin at `n=2^41`); reruns
+  `cp_verify.py` 62/0, `cpa_checks.py` 37/0, `dyadic verify.py` PASS, `spi`
+  PASS, Modal replay 135/135. Two findings: clause 4's SUBSUMED verdict holds
+  only via hypothesis non-consumption (clause (P) is proved at `sigma=1`), not
+  via its stated "entropy forces `sigma=Omega(n)`" reason, which is refuted at
+  all four rows (`sigma_min = Theta(n/log n)`, ratio to `n/log2 n` < 1
+  everywhere); and clause 6 is an OPEN GAP -- the mixed-petal /
+  diffuse-partial-petal (large-defect) amplification bucket is CONJECTURAL in
+  the L1 program note's own Development Ledger and out of scope in the petal
+  nodes, so the full `#ImgFib_U(k+sigma)` count is not theorem-backed for that
+  bucket (smallest witness: `cpa_checks.py` reports 43 out-of-scope mixed-petal
+  contributors at `(16,8,97)`).
+- **How it is useful:** Answers the prior integration entry's request ("Audit
+  the L1 crosswalk against in-repo proof artifacts before promoting roadmap
+  language") and gates the promotion decision.
+- **What to do next:** HOLD any roadmap language stating L1/ass:locator is
+  discharged at all four rows for all words; a narrower full-petal-only claim is
+  promotable with four caveats (row-scoped not asymptotic; P1 floor-band
+  tripwire; mixed-petal bucket open; corrected clause-4 wording) recorded in the
+  audit note. Closing the mixed-petal amplification bound would lift the third
+  caveat.
+
 ### 2026-07-14 - L1/L2 threshold PR integration wave
 
 - **Agent/model:** Codex integrating PRs #742--#754 from DannyExperiments,

@@ -1,0 +1,105 @@
+{
+  "schema": "rs-mca-l1-imgfib-crosswalk-audit-v1",
+  "status": "AUDIT",
+  "hard_input": "L1",
+  "audits": "experimental/notes/l1/l1_official_rows_crosswalk_20260713.md",
+  "note": "experimental/notes/l1/l1_imgfib_crosswalk_audit.md",
+  "verifier": "experimental/scripts/verify_l1_imgfib_crosswalk_audit.py",
+  "verifier_result": "PASS (41/41)",
+  "upstream_pin": {
+    "assumption": "ass:locator",
+    "file": "archived/snarks_v4.tex",
+    "lines": "368-382",
+    "consequence_lemma": "lem:fiber-list (lines 197-208)",
+    "qprofile_budget": "eq:qprofile-list-budget (lines 359-362)",
+    "open_problem": "op:locator (lines 775-777)"
+  },
+  "external_trail": {
+    "repo": "github.com/AllenGrahamHart/rs-mca-prize-dag",
+    "node": "imgfib",
+    "wired_children": [
+      "petal_growth",
+      "conj_f",
+      "l1_program_frontier",
+      "dyadic_profile_evaluation",
+      "payment_completeness"
+    ],
+    "integration_diff": "byte-identical to critical/nodes/imgfib/notes/l1_upstream_crosswalk_20260713.md"
+  },
+  "promotion_decision": "HOLD-on-blanket / PROMOTE-WITH-CAVEATS-on-narrower",
+  "clauses": [
+    { "id": 1, "their_verdict": "MATCH (ours stronger)", "audit_verdict": "NO_ISSUE" },
+    { "id": 2, "their_verdict": "MATCH at rows", "audit_verdict": "NO_ISSUE" },
+    { "id": 3, "their_verdict": "MATCH", "audit_verdict": "NO_ISSUE" },
+    { "id": 4, "their_verdict": "SUBSUMED", "audit_verdict": "FIXED",
+      "reason": "verdict holds via hypothesis-non-consumption (clause (P) proved at sigma=1); stated justification 'forces sigma=Omega(n), far stronger' is false at the official rows (sigma_min = Theta(n/log n))" },
+    { "id": 5, "their_verdict": "MATCH at rows", "audit_verdict": "NO_ISSUE" },
+    { "id": 6, "their_verdict": "MATCH", "audit_verdict": "OPEN_GAP",
+      "reason": "mixed-petal / diffuse-partial-petal amplification is CONJECTURAL (program note Development Ledger) and out of scope in petal_growth, petal_g1_layer_maps, and the clause-(P) packet" },
+    { "id": 7, "their_verdict": "MATCH at rows", "audit_verdict": "NO_ISSUE" },
+    { "id": 8, "their_verdict": "N/A", "audit_verdict": "NO_ISSUE" },
+    { "id": 9, "their_verdict": "TRANSFERS", "audit_verdict": "NO_ISSUE" }
+  ],
+  "open_gap": {
+    "id": "mixed-petal-amplification",
+    "route_scoped_statement": "no theorem-backed polynomial bound on #ImgFib_U(k+sigma) at the official rows via the imgfib chain for the mixed-petal / diffuse-partial-petal (large-defect) bucket",
+    "conjectural_source": "l1_full_list_quotient_proof_program.md Development Ledger: 'Mixed-petal sunflower amplification: CONJECTURAL'; Theorem B11 residual frontier",
+    "retracted_induction": "petal_excess_induction / petal_mixed_amplification_step, cut 2026-07-05 (petal_growth/RETRACTION_MANIFEST.md)",
+    "smallest_witness": "cpa_checks.py at (16,8,97): 43 mixed-petal floor-band contributors outside clause (P) scope (vs 10 full-petal), 4x per catch #176",
+    "covered_buckets_theorem_backed": [
+      "full-petal top band (clause (P))",
+      "full-petal below-top (Lemmas 13/15/16)",
+      "periodic branch (census gate)",
+      "primitive branch (K4)"
+    ]
+  },
+  "clause4_arithmetic": {
+    "claim_refuted": "clause 3 forces sigma = Omega(n), far stronger than scale",
+    "finding": "sigma_min = Theta(n/log n); sigma_min/(n/log2 n) < 1 at every official row and every admissible q; sigma_min/n -> 0",
+    "max_ratio_over_rows_and_q": 0.975,
+    "max_sigma_over_n": 0.02377,
+    "subsumption_boundary": "entropy => scale iff C <= (1+eps) H(rho) (log2 n)/(log2 q); = 0.058 at rho=1/16, n=2^44, q=2^256",
+    "verdict_survives_via": "hypothesis non-consumption: clause (P) proved at sigma=1, so (H-scale) is dropped, not subsumed-by-entropy"
+  },
+  "clause_P_reproduced": {
+    "lemma_B_rigidity": "j <= J = k+3-2 t_ch and m in {t_ch-1, t_ch}; 0 violations over 491 supports at (16,8)",
+    "emptiness_rates_le_quarter": "J = 2k+3-n < 0; (16,4) J=-5, band empty",
+    "census_binding_row_n_2^41": {
+      "log2_N_max": 157.4150,
+      "log2_budget_121_128_n6": 245.9189,
+      "margin_bits": 88.5038,
+      "N_max_over_n4_div_96": 1.0,
+      "margin_over_n2": 90.75
+    }
+  },
+  "reruns": {
+    "cp_verify.py": "62 PASS / 0 FAIL",
+    "cpa_checks.py": "37 PASS / 0 FAIL",
+    "dyadic_profile_evaluation/verify.py": "ALL PASS",
+    "spi_exceptional_class/notes/verify_writeup.py": "PASS (2500 pencils / 1600 tangent fibres)",
+    "modal_verifier_replay.json": "135 PASS / 0 FAIL, complete:true",
+    "environment": "python3 stdlib only (no numpy/sympy/sage); heavy runs capped ulimit -v 2GB, timeout"
+  },
+  "dyadic_Q_M_reproduced": {
+    "rate_1_4": 99.8063,
+    "rate_1_8": 66.1465,
+    "rate_1_16": 82.9664
+  },
+  "citation_staleness": {
+    "crosswalk_states": "Modal 124/124, 124 scripts / 221 assets",
+    "current_dag_state": "135/135 (manifest refreshed)"
+  },
+  "required_caveats_if_promoted": [
+    "row-scoped, not asymptotic (no single uniform B_L)",
+    "P1 floor-band tripwire (d >= M(t-2), layout-anchored; wide re-resolution re-opens clause (P))",
+    "mixed-petal / diffuse-partial-petal amplification bucket is CONJECTURAL and uncovered by any wired node",
+    "clause-4 wording: (H-scale) dropped (not consumed), not subsumed-by-entropy; strike 'forces sigma=Omega(n)'"
+  ],
+  "nonclaims": [
+    "does not refute imgfib; no COUNTEREXAMPLE_NEW_FLOOR",
+    "does not re-run the full 124/135-script Modal harness",
+    "does not evaluate the asymptotic family form of ass:locator nor op:locator",
+    "does not re-audit conj_f f_primitive_case internals (off the gap path)"
+  ],
+  "source_commit": "6a534c39050a9f75d1e581410c0fd8c1b661fd0a"
+}
