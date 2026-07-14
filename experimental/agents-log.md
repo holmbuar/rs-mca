@@ -30,6 +30,45 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-14 - Non-fiber-indexed decomposition at realized-image scale (hard input 2)
+
+- **Agent/model:** Claude Fable 5.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/nonfiber_decomposition_realized_scale.md`,
+  verifier `experimental/scripts/verify_nonfiber_decomposition_realized_scale.py`
+  (stdlib, deterministic, `RESULT: PASS (90/90)`, `--tamper-selftest` 3/3),
+  certificate
+  `experimental/data/certificates/nonfiber-decomposition-realized-scale/nonfiber_decomposition_realized_scale.json`,
+  and Lean statement stub
+  `experimental/lean/nonfiber_decomposition_realized_scale/` (`lake build`
+  succeeds, `native_decide`, no `sorry`, no mathlib).  No `.tex`/`.pdf` edited.
+- **Status:** PROVED (rungs a, structure, prime degeneracy) + COUNTEREXAMPLE
+  (rung c abundance recurrence), route-scoped.  No stable paper theorem promoted.
+- **What is being added:** A decision of the NON-fiber-indexed route to #716's
+  charge-preserving decomposition on the Sidon-paired class.  (a) #739 kills the
+  concentration clause at BOTH ambient and realized-image (PO5) scale: its
+  threshold `M/L` already uses the realized image `L=(3^B+1)/2` (the smallest
+  admissible denominator, the concentration-favorable scale), and although an
+  exponential effective-image collapse `c/L=(5/3)^B` is present for base `5^i`
+  (the PR #759 phenomenon), the heaviest fiber still outruns the inflated mean.
+  (c) An image-class (`G_lambda`-coset) split is exactly the fiber partition of a
+  coarser quotient chart `q_H o Phi`; #732 Theorem A keeps its charges free;
+  over prime fields at depth 1 it degenerates to {fibers, one piece}; and where
+  nontrivial (modulus `3^B`) it carries ZERO semantic charge for every
+  `#pieces < 3^{B-2}` -- so it hits the #739 abundance identically.
+- **How it is useful:** Cuts the natural coset/image-class family of non-fiber
+  decompositions, narrowing #739's open branch to a genuinely transverse
+  (non-quotient) partition or a direct `prop:partial-occupancy-fourier`
+  (PO4) / #729 signed-clause payment at `q <= q_+ = 4.199`, with fence (N1)
+  respected (no lower reserve inferred from emission).  Consumes and credits
+  avdeevvadim #716, #732/#739/#735/#729/#717/#725, DannyExperiments' #749
+  hypothesis correction, and the paper's `rem` PO5 /
+  `thm:aperiodic-one-ray-saturation`.
+- **What to do next:** Audit the surviving open object `(NFB)` in the note sec 7;
+  the dependency on the profile-envelope comparison packet (PR #759) is marked
+  CONDITIONAL-on-open-PR and used only as motivation.  Run the verifier and Lean
+  build in a dedicated environment.
+
 ### 2026-07-14 - L1/L2 threshold PR integration wave
 
 - **Agent/model:** Codex integrating PRs #742--#754 from DannyExperiments,
