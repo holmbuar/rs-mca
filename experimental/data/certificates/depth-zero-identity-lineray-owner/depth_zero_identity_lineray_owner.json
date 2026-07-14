@@ -1,0 +1,325 @@
+{
+  "arithmetic_grid": {
+    "k_range": [
+      1,
+      32
+    ],
+    "rows": 1024,
+    "t_range": [
+      1,
+      32
+    ]
+  },
+  "base_commit": "c35a6da31ed0905afcbaaefe4eb0f242572ebb35",
+  "central_double_negative": {
+    "even_t_range": [
+      2,
+      40
+    ],
+    "rows": [
+      {
+        "j": 1,
+        "n": 5,
+        "q_denominator": -1,
+        "t": 2,
+        "xi": -1
+      },
+      {
+        "j": 2,
+        "n": 9,
+        "q_denominator": -8,
+        "t": 4,
+        "xi": -24
+      },
+      {
+        "j": 3,
+        "n": 13,
+        "q_denominator": -21,
+        "t": 6,
+        "xi": -93
+      },
+      {
+        "j": 4,
+        "n": 17,
+        "q_denominator": -40,
+        "t": 8,
+        "xi": -232
+      },
+      {
+        "j": 5,
+        "n": 21,
+        "q_denominator": -65,
+        "t": 10,
+        "xi": -465
+      },
+      {
+        "j": 6,
+        "n": 25,
+        "q_denominator": -96,
+        "t": 12,
+        "xi": -816
+      },
+      {
+        "j": 7,
+        "n": 29,
+        "q_denominator": -133,
+        "t": 14,
+        "xi": -1309
+      },
+      {
+        "j": 8,
+        "n": 33,
+        "q_denominator": -176,
+        "t": 16,
+        "xi": -1968
+      },
+      {
+        "j": 9,
+        "n": 37,
+        "q_denominator": -225,
+        "t": 18,
+        "xi": -2817
+      },
+      {
+        "j": 10,
+        "n": 41,
+        "q_denominator": -280,
+        "t": 20,
+        "xi": -3880
+      },
+      {
+        "j": 11,
+        "n": 45,
+        "q_denominator": -341,
+        "t": 22,
+        "xi": -5181
+      },
+      {
+        "j": 12,
+        "n": 49,
+        "q_denominator": -408,
+        "t": 24,
+        "xi": -6744
+      },
+      {
+        "j": 13,
+        "n": 53,
+        "q_denominator": -481,
+        "t": 26,
+        "xi": -8593
+      },
+      {
+        "j": 14,
+        "n": 57,
+        "q_denominator": -560,
+        "t": 28,
+        "xi": -10752
+      },
+      {
+        "j": 15,
+        "n": 61,
+        "q_denominator": -645,
+        "t": 30,
+        "xi": -13245
+      },
+      {
+        "j": 16,
+        "n": 65,
+        "q_denominator": -736,
+        "t": 32,
+        "xi": -16096
+      },
+      {
+        "j": 17,
+        "n": 69,
+        "q_denominator": -833,
+        "t": 34,
+        "xi": -19329
+      },
+      {
+        "j": 18,
+        "n": 73,
+        "q_denominator": -936,
+        "t": 36,
+        "xi": -22968
+      },
+      {
+        "j": 19,
+        "n": 77,
+        "q_denominator": -1045,
+        "t": 38,
+        "xi": -27037
+      },
+      {
+        "j": 20,
+        "n": 81,
+        "q_denominator": -1160,
+        "t": 40,
+        "xi": -31560
+      }
+    ]
+  },
+  "claim_id": "depth-zero-identity-lineray-owner-v1",
+  "finite_prime_fixtures": [
+    {
+      "agreement": 3,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "identity_depth": 0,
+      "identity_scale": 10,
+      "k": 2,
+      "locator_checks": 10,
+      "n": 5,
+      "p": 5,
+      "pair_count": 10,
+      "slack_slope_count": 5,
+      "slope_count": 5,
+      "syndrome_checks": 10,
+      "t": 2
+    },
+    {
+      "agreement": 4,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "identity_depth": 0,
+      "identity_scale": 15,
+      "k": 3,
+      "locator_checks": 15,
+      "n": 6,
+      "p": 7,
+      "pair_count": 15,
+      "slack_slope_count": 7,
+      "slope_count": 7,
+      "syndrome_checks": 15,
+      "t": 2
+    },
+    {
+      "agreement": 4,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "identity_depth": 0,
+      "identity_scale": 35,
+      "k": 3,
+      "locator_checks": 35,
+      "n": 7,
+      "p": 7,
+      "pair_count": 35,
+      "slack_slope_count": 7,
+      "slope_count": 7,
+      "syndrome_checks": 35,
+      "t": 3
+    },
+    {
+      "agreement": 5,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "identity_depth": 0,
+      "identity_scale": 56,
+      "k": 4,
+      "locator_checks": 56,
+      "n": 8,
+      "p": 11,
+      "pair_count": 56,
+      "slack_slope_count": 11,
+      "slope_count": 11,
+      "syndrome_checks": 56,
+      "t": 3
+    },
+    {
+      "agreement": 6,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "identity_depth": 0,
+      "identity_scale": 210,
+      "k": 5,
+      "locator_checks": 210,
+      "n": 10,
+      "p": 11,
+      "pair_count": 210,
+      "slack_slope_count": 11,
+      "slope_count": 11,
+      "syndrome_checks": 210,
+      "t": 4
+    },
+    {
+      "agreement": 7,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "identity_depth": 0,
+      "identity_scale": 792,
+      "k": 6,
+      "locator_checks": 792,
+      "n": 12,
+      "p": 13,
+      "pair_count": 792,
+      "slack_slope_count": 13,
+      "slope_count": 13,
+      "syndrome_checks": 792,
+      "t": 5
+    }
+  ],
+  "hard_input": "3_residual_ray_compiler_depth_zero_identity_boundary",
+  "nonclaims": [
+    "no_positive_depth_payment",
+    "no_atlas_exhaustivity",
+    "no_deployed_row_movement",
+    "lean_target_unproved"
+  ],
+  "payload_sha256": "da84e09ca3921d61a1e749d69e95cd0d3ed361a05ba3ccca06c574b45b0570b9",
+  "schema_version": 1,
+  "status": "PROVED_AUDIT_WITH_UNPROVED_LEAN_TARGET",
+  "totals": {
+    "canonical_pairs": 1118,
+    "fixtures": 6,
+    "locator_checks": 1118,
+    "syndrome_checks": 1118
+  }
+}

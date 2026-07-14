@@ -1,0 +1,433 @@
+{
+  "base_commit": "c35a6da31ed0905afcbaaefe4eb0f242572ebb35",
+  "claim_id": "first-beyond-half-complete-absorption-v1",
+  "exhaustive_grids": [
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 3,
+        "loopless-full-rank": 114
+      },
+      "complete_pair_bound": 3,
+      "domain": [
+        0,
+        1,
+        2
+      ],
+      "fixed_root_lines": 3,
+      "good_pair_incidences": 240,
+      "lines": 117,
+      "maximum_pairs_on_line": 3,
+      "minimum_bound_slack": 0,
+      "mode": "exhaustive",
+      "n": 3,
+      "p": 3,
+      "redundancy": 3,
+      "root_capacity": 243,
+      "same_slope_excess": 0,
+      "t": 2,
+      "transverse_pairs": 193,
+      "transverse_slopes": 193
+    },
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 3,
+        "loopless-full-rank": 772
+      },
+      "complete_pair_bound": 3,
+      "domain": [
+        0,
+        1,
+        2
+      ],
+      "fixed_root_lines": 3,
+      "good_pair_incidences": 1872,
+      "lines": 775,
+      "maximum_pairs_on_line": 3,
+      "minimum_bound_slack": 0,
+      "mode": "exhaustive",
+      "n": 3,
+      "p": 5,
+      "redundancy": 3,
+      "root_capacity": 1875,
+      "same_slope_excess": 0,
+      "t": 2,
+      "transverse_pairs": 1591,
+      "transverse_slopes": 1591
+    },
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 5,
+        "loopless-full-rank": 770
+      },
+      "complete_pair_bound": 10,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 5,
+      "good_pair_incidences": 6220,
+      "lines": 775,
+      "maximum_pairs_on_line": 10,
+      "minimum_bound_slack": 0,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 5,
+      "redundancy": 3,
+      "root_capacity": 6250,
+      "same_slope_excess": 1200,
+      "t": 2,
+      "transverse_pairs": 4631,
+      "transverse_slopes": 3431
+    },
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 5,
+        "loopless-full-rank": 2788
+      },
+      "complete_pair_bound": 10,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 5,
+      "good_pair_incidences": 23980,
+      "lines": 2793,
+      "maximum_pairs_on_line": 10,
+      "minimum_bound_slack": 0,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 7,
+      "redundancy": 3,
+      "root_capacity": 24010,
+      "same_slope_excess": 3780,
+      "t": 2,
+      "transverse_pairs": 19377,
+      "transverse_slopes": 15597
+    },
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 7,
+        "loopless-full-rank": 2786
+      },
+      "complete_pair_bound": 21,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "fixed_root_lines": 7,
+      "good_pair_incidences": 50316,
+      "lines": 2793,
+      "maximum_pairs_on_line": 21,
+      "minimum_bound_slack": 0,
+      "mode": "exhaustive",
+      "n": 7,
+      "p": 7,
+      "redundancy": 3,
+      "root_capacity": 50421,
+      "same_slope_excess": 20580,
+      "t": 2,
+      "transverse_pairs": 39453,
+      "transverse_slopes": 18873
+    },
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 5,
+        "loopless-full-rank": 16088
+      },
+      "complete_pair_bound": 10,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 5,
+      "good_pair_incidences": 146380,
+      "lines": 16093,
+      "maximum_pairs_on_line": 10,
+      "minimum_bound_slack": 0,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 11,
+      "redundancy": 3,
+      "root_capacity": 146410,
+      "same_slope_excess": 16500,
+      "t": 2,
+      "transverse_pairs": 127733,
+      "transverse_slopes": 111233
+    },
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 5,
+        "loopless-full-rank": 30922
+      },
+      "complete_pair_bound": 10,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 5,
+      "good_pair_incidences": 285580,
+      "lines": 30927,
+      "maximum_pairs_on_line": 10,
+      "minimum_bound_slack": 0,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 13,
+      "redundancy": 3,
+      "root_capacity": 285610,
+      "same_slope_excess": 28080,
+      "t": 2,
+      "transverse_pairs": 254463,
+      "transverse_slopes": 226383
+    },
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 5,
+        "loopless-full-rank": 88718
+      },
+      "complete_pair_bound": 10,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 5,
+      "good_pair_incidences": 835180,
+      "lines": 88723,
+      "maximum_pairs_on_line": 10,
+      "minimum_bound_slack": 0,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 17,
+      "redundancy": 3,
+      "root_capacity": 835210,
+      "same_slope_excess": 65280,
+      "t": 2,
+      "transverse_pairs": 764627,
+      "transverse_slopes": 699347
+    }
+  ],
+  "fixed_root_edge_fixture": {
+    "bound": 3,
+    "branch": "formal-fixed-root",
+    "direction": [
+      1,
+      0,
+      0
+    ],
+    "domain": [
+      0,
+      1,
+      2
+    ],
+    "line_base": [
+      0,
+      0,
+      0
+    ],
+    "n": 3,
+    "p": 3,
+    "pairs": 1,
+    "t": 2
+  },
+  "hard_input": "3_first_beyond_half_complete_pair_absorption",
+  "nonclaims": [
+    "no_complete_single_binomial_absorption_claim_for_d_at_least_2",
+    "no_bound_for_R_less_than_2t_minus_1_in_this_packet",
+    "no_atlas_or_deployed_row_movement",
+    "lean_target_unproved"
+  ],
+  "payload_sha256": "cdb6d6a274edb0f0609c2f5b6ec8ae80f4908e6ce16a75aa73b4d2328f11af24",
+  "sampled_weight_three_grids": [
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 1,
+        "generic-rank-deficient": 1,
+        "loopless-full-rank": 7998
+      },
+      "complete_pair_bound": 21,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "fixed_root_lines": 1,
+      "good_pair_incidences": 115009,
+      "lines": 8000,
+      "maximum_pairs_on_line": 8,
+      "minimum_bound_slack": 13,
+      "mode": "deterministic-sample",
+      "n": 7,
+      "p": 7,
+      "redundancy": 5,
+      "root_capacity": 170530,
+      "same_slope_excess": 1654,
+      "t": 3,
+      "transverse_pairs": 32421,
+      "transverse_slopes": 30767
+    },
+    {
+      "branch_histogram": {
+        "loopless-full-rank": 4000
+      },
+      "complete_pair_bound": 10,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 0,
+      "good_pair_incidences": 27505,
+      "lines": 4000,
+      "maximum_pairs_on_line": 4,
+      "minimum_bound_slack": 6,
+      "mode": "deterministic-sample",
+      "n": 5,
+      "p": 11,
+      "redundancy": 5,
+      "root_capacity": 49465,
+      "same_slope_excess": 0,
+      "t": 3,
+      "transverse_pairs": 8613,
+      "transverse_slopes": 8613
+    },
+    {
+      "branch_histogram": {
+        "loopless-full-rank": 4000
+      },
+      "complete_pair_bound": 10,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 0,
+      "good_pair_incidences": 26962,
+      "lines": 4000,
+      "maximum_pairs_on_line": 4,
+      "minimum_bound_slack": 6,
+      "mode": "deterministic-sample",
+      "n": 5,
+      "p": 13,
+      "redundancy": 5,
+      "root_capacity": 49582,
+      "same_slope_excess": 0,
+      "t": 3,
+      "transverse_pairs": 8473,
+      "transverse_slopes": 8473
+    }
+  ],
+  "schema_version": 1,
+  "sharp_fixtures": {
+    "same_slope": {
+      "all_domain_pairs_realized": true,
+      "direction": [
+        0,
+        0,
+        1
+      ],
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "line_base": [
+        0,
+        1,
+        0
+      ],
+      "lower_pairs": 0,
+      "n": 7,
+      "near_perfect_matching_factorization": true,
+      "p": 7,
+      "pairs_per_slope": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "t": 2,
+      "top_pair_bound": 21,
+      "top_pairs": 21,
+      "top_slopes": 7
+    },
+    "unique_slope": {
+      "all_domain_pairs_realized": true,
+      "direction": [
+        5,
+        1,
+        9
+      ],
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "line_base": [
+        1,
+        0,
+        7
+      ],
+      "lower_pairs": 0,
+      "n": 5,
+      "p": 11,
+      "t": 2,
+      "top_pair_bound": 10,
+      "top_pairs": 10,
+      "top_slopes": 10
+    }
+  },
+  "status": "PROVED_AUDIT_WITH_UNPROVED_LEAN_TARGET",
+  "theorem": {
+    "complete_all_pair_bound": "|P|<=binom(N,2)",
+    "fixed_root_branch": "falls_to_weight_at_most_t-1",
+    "loopless_branch": "every retained pair consumes at least t-1 good pair roots",
+    "mca_ca_numerator_bound": "B_MCA,B_CA<=binom(N,2)",
+    "range": "N>=R=2t-1 and t>=2",
+    "rank_deficient_branch": "falls_to_weight_at_most_t-2"
+  },
+  "totals": {
+    "audited_lines": 158996,
+    "fixed_root_lines": 39,
+    "good_pair_incidences": 1519244,
+    "root_capacity": 1619606,
+    "same_slope_excess": 137074,
+    "transverse_pairs": 1261575,
+    "transverse_slopes": 1124501
+  }
+}

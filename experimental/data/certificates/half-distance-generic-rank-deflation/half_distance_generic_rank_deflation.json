@@ -1,0 +1,218 @@
+{
+  "base_commit": "c35a6da31ed0905afcbaaefe4eb0f242572ebb35",
+  "claim_id": "half-distance-generic-rank-deflation-v1",
+  "cyclotomic_strong_fixture": {
+    "N_scale_attained": true,
+    "deflated_degree": 3,
+    "fixed_roots": 0,
+    "generic_rank": 3,
+    "moving_roots": 3,
+    "n": 12,
+    "p": 13,
+    "pairs": 12,
+    "rank_minor_degree": 0,
+    "strong_bound": 15,
+    "t": 3
+  },
+  "exhaustive_strong_grids": [
+    {
+      "affine_lines": 6,
+      "deflation_families": 3,
+      "domain": [
+        0,
+        1
+      ],
+      "fixed_root_families": 0,
+      "generic_rank_histogram": {
+        "0": 1,
+        "1": 5
+      },
+      "lower_weight_parameters": 2,
+      "maximum_deflated_degree": 1,
+      "maximum_excess_over_n": 0,
+      "maximum_full_degree": 1,
+      "maximum_pairs_on_line": 2,
+      "n": 2,
+      "p": 2,
+      "redundancy": 2,
+      "strong_bound": 3,
+      "t": 1,
+      "transverse_pair_incidences": 7
+    },
+    {
+      "affine_lines": 12,
+      "deflation_families": 8,
+      "domain": [
+        0,
+        1,
+        2
+      ],
+      "fixed_root_families": 0,
+      "generic_rank_histogram": {
+        "0": 1,
+        "1": 11
+      },
+      "lower_weight_parameters": 3,
+      "maximum_deflated_degree": 1,
+      "maximum_excess_over_n": 0,
+      "maximum_full_degree": 1,
+      "maximum_pairs_on_line": 3,
+      "n": 3,
+      "p": 3,
+      "redundancy": 2,
+      "strong_bound": 4,
+      "t": 1,
+      "transverse_pair_incidences": 22
+    },
+    {
+      "affine_lines": 19500,
+      "deflation_families": 18180,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_families": 600,
+      "generic_rank_histogram": {
+        "0": 1,
+        "1": 174,
+        "2": 19325
+      },
+      "lower_weight_parameters": 3155,
+      "maximum_deflated_degree": 2,
+      "maximum_excess_over_n": 0,
+      "maximum_full_degree": 2,
+      "maximum_pairs_on_line": 4,
+      "n": 5,
+      "p": 5,
+      "redundancy": 4,
+      "strong_bound": 7,
+      "t": 2,
+      "transverse_pair_incidences": 27256
+    },
+    {
+      "affine_lines": 137200,
+      "deflation_families": 108510,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_families": 1680,
+      "generic_rank_histogram": {
+        "0": 1,
+        "1": 440,
+        "2": 136759
+      },
+      "lower_weight_parameters": 12159,
+      "maximum_deflated_degree": 2,
+      "maximum_excess_over_n": 0,
+      "maximum_full_degree": 2,
+      "maximum_pairs_on_line": 4,
+      "n": 5,
+      "p": 7,
+      "redundancy": 4,
+      "strong_bound": 7,
+      "t": 2,
+      "transverse_pair_incidences": 153490
+    },
+    {
+      "affine_lines": 137200,
+      "deflation_families": 144060,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "fixed_root_families": 2352,
+      "generic_rank_histogram": {
+        "0": 1,
+        "1": 440,
+        "2": 136759
+      },
+      "lower_weight_parameters": 16863,
+      "maximum_deflated_degree": 2,
+      "maximum_excess_over_n": 0,
+      "maximum_full_degree": 2,
+      "maximum_pairs_on_line": 6,
+      "n": 7,
+      "p": 7,
+      "redundancy": 4,
+      "strong_bound": 9,
+      "t": 2,
+      "transverse_pair_incidences": 313510
+    }
+  ],
+  "hard_input": "3_half_distance_generic_rank_deflation",
+  "nonclaims": [
+    "no_bound_beyond_half_distance_R<2t",
+    "no_exact_endpoint_numerator",
+    "no_improvement_over_strict_half_distance_BCHKS",
+    "no_deployed_row_movement",
+    "lean_target_unproved"
+  ],
+  "payload_sha256": "ffb5b88a01fa2ce83df98a453774bd96c89ac2608f7e8c3daf1c9c06a23a8dde",
+  "sampled_weight_three_grids": [
+    {
+      "deflation_families": 7167,
+      "fixed_root_families": 132,
+      "generic_rank_histogram": {
+        "2": 4,
+        "3": 7996
+      },
+      "lower_weight_parameters": 1650,
+      "maximum_pairs_on_line": 5,
+      "n": 7,
+      "p": 7,
+      "redundancy": 6,
+      "sampled_lines": 8000,
+      "strong_bound": 10,
+      "t": 3,
+      "transverse_pair_incidences": 14357
+    },
+    {
+      "deflation_families": 6138,
+      "fixed_root_families": 96,
+      "generic_rank_histogram": {
+        "2": 8,
+        "3": 7992
+      },
+      "lower_weight_parameters": 1590,
+      "maximum_pairs_on_line": 4,
+      "n": 7,
+      "p": 7,
+      "redundancy": 7,
+      "sampled_lines": 8000,
+      "strong_bound": 10,
+      "t": 3,
+      "transverse_pair_incidences": 12890
+    }
+  ],
+  "schema_version": 1,
+  "status": "PROVED_AUDIT_WITH_UNPROVED_LEAN_TARGET",
+  "theorem": {
+    "deflated_degree": "delta<=rho-g",
+    "dimension_range": "N>=R>=2t",
+    "generic_rank": "rho=rank_F(z) leading_t_by_t_Hankel",
+    "line_bound": "|P|<=N+rho<=N+t",
+    "lower_weight_charge": "at_most_rho_roots_of_one_minor",
+    "top_weight_charge": "|P_rho|<=N-g<=N"
+  },
+  "totals": {
+    "deflation_families": 284067,
+    "exhaustive_affine_lines": 293918,
+    "exhaustive_lower_weight_parameters": 32182,
+    "exhaustive_pair_incidences": 494285,
+    "fixed_root_families": 4860,
+    "sampled_lines": 16000,
+    "sampled_pair_incidences": 27247
+  }
+}

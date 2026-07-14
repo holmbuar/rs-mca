@@ -1,0 +1,32 @@
+{
+  "base_commit": "6b30a5355cfe1bf6d748096af31dc22b8fc03911",
+  "cases": [
+    {"all_sum_fibers_equal": true, "complete_binomial_upper": 10, "complete_pair_set_exact": true, "deficiency": 1, "exact_ratio_to_upper": "1/5", "lower_support_checks": 15, "maximum_pairs_per_slope": 1, "n": 5, "p": 5, "pairs": 2, "recurrence_checks": 6, "redundancy": 5, "same_slope_excess": 0, "slopes": 2, "t": 3, "top_support_checks": 10},
+    {"all_sum_fibers_equal": true, "complete_binomial_upper": 21, "complete_pair_set_exact": true, "deficiency": 1, "exact_ratio_to_upper": "5/21", "lower_support_checks": 28, "maximum_pairs_per_slope": 2, "n": 7, "p": 7, "pairs": 5, "recurrence_checks": 15, "redundancy": 5, "same_slope_excess": 1, "slopes": 4, "t": 3, "top_support_checks": 35},
+    {"all_sum_fibers_equal": true, "complete_binomial_upper": 35, "complete_pair_set_exact": true, "deficiency": 2, "exact_ratio_to_upper": "1/7", "lower_support_checks": 63, "maximum_pairs_per_slope": 2, "n": 7, "p": 7, "pairs": 5, "recurrence_checks": 15, "redundancy": 6, "same_slope_excess": 1, "slopes": 4, "t": 4, "top_support_checks": 35},
+    {"all_sum_fibers_equal": true, "complete_binomial_upper": 35, "complete_pair_set_exact": true, "deficiency": 3, "exact_ratio_to_upper": "3/35", "lower_support_checks": 98, "maximum_pairs_per_slope": 1, "n": 7, "p": 7, "pairs": 3, "recurrence_checks": 9, "redundancy": 7, "same_slope_excess": 0, "slopes": 3, "t": 5, "top_support_checks": 21},
+    {"all_sum_fibers_equal": true, "complete_binomial_upper": 55, "complete_pair_set_exact": true, "deficiency": 1, "exact_ratio_to_upper": "3/11", "lower_support_checks": 66, "maximum_pairs_per_slope": 2, "n": 11, "p": 11, "pairs": 15, "recurrence_checks": 45, "redundancy": 5, "same_slope_excess": 5, "slopes": 10, "t": 3, "top_support_checks": 165},
+    {"all_sum_fibers_equal": true, "complete_binomial_upper": 165, "complete_pair_set_exact": true, "deficiency": 2, "exact_ratio_to_upper": "2/11", "lower_support_checks": 231, "maximum_pairs_per_slope": 3, "n": 11, "p": 11, "pairs": 30, "recurrence_checks": 90, "redundancy": 6, "same_slope_excess": 20, "slopes": 10, "t": 4, "top_support_checks": 330},
+    {"all_sum_fibers_equal": true, "complete_binomial_upper": 330, "complete_pair_set_exact": true, "deficiency": 3, "exact_ratio_to_upper": "7/55", "lower_support_checks": 561, "maximum_pairs_per_slope": 5, "n": 11, "p": 11, "pairs": 42, "recurrence_checks": 126, "redundancy": 7, "same_slope_excess": 31, "slopes": 11, "t": 5, "top_support_checks": 462},
+    {"all_sum_fibers_equal": true, "complete_binomial_upper": 462, "complete_pair_set_exact": true, "deficiency": 4, "exact_ratio_to_upper": "1/11", "lower_support_checks": 1023, "maximum_pairs_per_slope": 5, "n": 11, "p": 11, "pairs": 42, "recurrence_checks": 126, "redundancy": 8, "same_slope_excess": 31, "slopes": 11, "t": 6, "top_support_checks": 462},
+    {"all_sum_fibers_equal": true, "complete_binomial_upper": 1716, "complete_pair_set_exact": true, "deficiency": 5, "exact_ratio_to_upper": "1/13", "lower_support_checks": 4095, "maximum_pairs_per_slope": 12, "n": 13, "p": 13, "pairs": 132, "recurrence_checks": 396, "redundancy": 9, "same_slope_excess": 119, "slopes": 13, "t": 7, "top_support_checks": 1716}
+  ],
+  "claim_id": "second-recurrence-zero-sum-family-v1",
+  "nonclaims": [
+    "no_distinct_slope_lower_bound_of_order_q_to_d_plus_1",
+    "no_sharp_constant_for_recurrence_depth_at_least_two",
+    "no_target_or_deployed_row_movement",
+    "lean_target_unproved"
+  ],
+  "payload_sha256": "ee8b2e8b321a5eb3f53691b8d6c9e2867f0c4dff3c3674b599ddd3f9d806a6be",
+  "schema_version": 1,
+  "status": "PROVED_WITH_EXACT_FINITE_REPLAY",
+  "theorem": {
+    "complete_pair_count": "|P|=binom(q,t)/q",
+    "line": "y_z=e_(t-1)+z e_(t+1)",
+    "owner": "zero-sum t-subsets with barycentric amplitudes",
+    "range": "D=F_q, R=t+2, d=t-2>=1, char(F_q) does not divide t",
+    "top_bound_ratio": "(q-t+1)/(qt) -> 1/t=1/(d+2)"
+  },
+  "totals": {"cases": 9, "lower_support_checks": 6180, "pairs": 276, "recurrence_checks": 828, "same_slope_excess": 208, "slopes": 68, "top_support_checks": 3236}
+}

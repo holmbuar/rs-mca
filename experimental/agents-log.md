@@ -30,6 +30,327 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-14 - All-depth sparse-splitting sharpness
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  experimental/notes/thresholds/all_depth_sparse_split_sharpness.md,
+  experimental/lean/grande_finale/GrandeFinale/AllDepthSparseSplitSharpness.lean,
+  experimental/lean/grande_finale/GrandeFinale.lean,
+  experimental/notes/thresholds/third_recurrence_quadratic_completion.md,
+  and experimental/agents-log.md.
+- **Status:** PROVED / LITERATURE-DEPENDENT / AUDIT; the Lean declarations are
+  explicitly UNPROVED STATEMENT TARGETS.
+- **What is being added:** For every fixed deficiency d and recurrence depth
+  r, the full-domain line y_z=e_(t-1)+z e_(t+r-1) is counted by completely
+  split square-free polynomials X^t+a_dX^d+...+a_0.  A Morse slice has
+  geometric monodromy S_t, and finite-field Chebotarev gives
+  |P|=q^(d+1)/t!+O(q^(d+1/2)).
+- **How it is useful:** This proves the sharp top-binomial exponent d+1 is
+  necessary at every fixed recurrence depth, with limiting ratio
+  (d+1)!/(d+r)!.
+- **What to do next:** Seek a distinct-slope large-field realization and
+  quantify uniformity when d or r grows.  No target row or deployed table
+  moves.
+
+### 2026-07-14 - Third-recurrence quadratic-completion family
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  experimental/notes/thresholds/third_recurrence_quadratic_completion.md,
+  experimental/scripts/verify_third_recurrence_quadratic_completion.py,
+  experimental/data/certificates/third-recurrence-quadratic-completion/third_recurrence_quadratic_completion.json,
+  experimental/lean/grande_finale/GrandeFinale/ThirdRecurrenceQuadraticCompletion.lean,
+  and experimental/lean/grande_finale/GrandeFinale.lean.
+- **Status:** PROVED / AUDIT; the Lean declarations are explicitly UNPROVED
+  STATEMENT TARGETS.
+- **What is being added:** At R=t+3 over full finite fields of characteristic
+  other than 2 or 3, the line y_z=e_(t-1)+z e_(t+2) has complete pair set
+  e_1(S)=e_2(S)=0, z=e_3(S).  Splitting off two roots reduces the count to
+  an explicit quadratic, and an elementary character-sum argument proves
+  |P|=q^(d+1)/t!+O_d(q^d).
+- **How it is useful:** The ratio to the sharp top-binomial upper bound tends
+  to 1/((d+3)(d+2)), proving that its polynomial degree remains necessary at
+  recurrence depth three.
+- **What to do next:** The all-depth sparse-splitting packet now resolves the
+  fixed-depth exponent using external monodromy and Chebotarev.  Retain this
+  elementary packet for its sharper error term; it still gives no
+  distinct-slope lower bound or target-row movement.
+
+### 2026-07-14 - Exact second-recurrence zero-sum family
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  experimental/notes/thresholds/second_recurrence_zero_sum_family.md,
+  experimental/scripts/verify_second_recurrence_zero_sum_family.py,
+  experimental/data/certificates/second-recurrence-zero-sum-family/second_recurrence_zero_sum_family.json,
+  experimental/lean/grande_finale/GrandeFinale/SecondRecurrenceZeroSumFamily.lean,
+  and experimental/lean/grande_finale/GrandeFinale.lean.
+- **Status:** PROVED / AUDIT; the Lean declarations are explicitly UNPROVED
+  STATEMENT TARGETS.
+- **What is being added:** Over the full domain F_q, at R=t+2 with
+  characteristic not dividing t, the line y_z=e_(t-1)+z e_(t+1) has complete
+  transverse pair set exactly the zero-sum t-subsets with barycentric
+  amplitudes.  Translation makes the exact count binom(q,t)/q.
+- **How it is useful:** For every fixed deficiency d=t-2, the ratio to the
+  sharp fixed-deficiency upper bound is (q-t+1)/(qt), tending to 1/(d+2).
+  Thus the exponent d+1 is necessary already at recurrence depth two, not
+  only on the depth-one canonical slice.
+- **What to do next:** Seek a large-field version with many distinct slopes,
+  and extend the symmetric-polynomial construction to recurrence depth three.
+  Repeated slopes mean this packet does not establish an interior MCA/CA
+  numerator lower bound.
+
+### 2026-07-14 - Sharp complete fixed-deficiency absorption
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/fixed_deficiency_complete_absorption.md`,
+  `experimental/notes/thresholds/fixed_deficiency_kernel_minor_compiler.md`,
+  `experimental/scripts/verify_fixed_deficiency_complete_absorption.py`,
+  `experimental/data/certificates/fixed-deficiency-complete-absorption/fixed_deficiency_complete_absorption.json`,
+  `experimental/lean/grande_finale/GrandeFinale/FixedDeficiencyCompleteAbsorption.lean`,
+  and `experimental/lean/grande_finale/GrandeFinale.lean`.
+- **Status:** PROVED / AUDIT; the Lean declarations are explicitly UNPROVED
+  STATEMENT TARGETS.
+- **What is being added:** For every `N>=R=2t-d` with `1<=d<t`, the entire
+  transverse pair set, across all weights at most `t`, satisfies the sharp
+  bound `|P|<=binom(N,d+1)`.  Transversality supplies the required support
+  rank in the top locator kernel, a basis-exchange lemma gives each error
+  at least `t-d` chargeable bases, and the same-slope distance gap prevents
+  root reuse.
+- **How it is useful:** This collapses the earlier half-core plus
+  exact-stratum sum to one top-binomial capacity and gives the same bound for
+  the MCA and CA numerators.  In paper notation it yields
+  `B(a)<=binom(n,n+k-2a+1)` on the complete strict-beyond-half window, so every
+  `o(n)`-width window beyond half has a domain-wide subexponential numerator
+  without an atlas.  Canonical Lagrange lines attain equality for every
+  deficiency, and superincreasing prime-field domains make their support sums
+  distinct, so the MCA/CA numerator bound itself is sharp at minimal
+  agreement.  The certificate pins deficiencies one through five and audits
+  mixed-weight lines through deficiency four.
+- **Overlap:** The distinct-slope equality is an explicit specialization of
+  the existing exact first-adjacent theorem / depth-zero identity owner; it is
+  used here as sharpness, not claimed as a new adjacent-row result.
+- **What to do next:** Compare the exact binomial against each target and seek
+  matching unsafe constructions.  At positive linear deficiency the bound can
+  still be exponential, and no deployed row movement is currently certified.
+
+### 2026-07-14 - Complete absorption at the first beyond-half slice
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/first_beyond_half_complete_absorption.md`,
+  `experimental/scripts/verify_first_beyond_half_complete_absorption.py`,
+  `experimental/data/certificates/first-beyond-half-complete-absorption/first_beyond_half_complete_absorption.json`,
+  `experimental/lean/grande_finale/GrandeFinale/FirstBeyondHalfCompleteAbsorption.lean`,
+  and `experimental/lean/grande_finale/GrandeFinale.lean`.
+- **Status:** PROVED / AUDIT; the Lean declarations are explicitly UNPROVED
+  STATEMENT TARGETS.
+- **What is being added:** At `N>=R=2t-1`, every transverse error of
+  weight at most `t` fits inside the single sharp capacity
+  `|P|<=binom(N,2)`.  Generic top-rank drop and a formal fixed domain root
+  reduce to the half-distance compiler; otherwise a loopless rank-two
+  evaluation matroid gives every error at least `t-1` chargeable pair roots,
+  exactly cancelling the determinant degree.
+- **How it is useful:** This removes the additive `N+t-1` lower-weight term
+  from the first beyond-half packet and gives the same sharp quadratic bound
+  for both MCA and CA numerators.  The existing distinct-slope and same-slope
+  fixtures attain equality for the complete pair set.
+- **What to do next:** Determine whether any analogous absorption holds for
+  deficiency at least two.  The current proof uses a special rank-two
+  chargeability argument and makes no such higher-deficiency claim.
+
+### 2026-07-14 - Fixed-deficiency kernel-minor compiler
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/fixed_deficiency_kernel_minor_compiler.md`,
+  `experimental/scripts/verify_fixed_deficiency_kernel_minor_compiler.py`,
+  `experimental/data/certificates/fixed-deficiency-kernel-minor-compiler/fixed_deficiency_kernel_minor_compiler.json`,
+  `experimental/lean/grande_finale/GrandeFinale/FixedDeficiencyKernelMinorCompiler.lean`,
+  and `experimental/lean/grande_finale/GrandeFinale.lean`.
+- **Status:** PROVED / AUDIT; the Lean declarations are explicitly UNPROVED
+  STATEMENT TARGETS.
+- **What is being added:** For every exact weight `s<R` with
+  `kappa=2s-R+1>=2`, the `kappa`-dimensional locator kernel and its
+  evaluation matroid give the sharp complete all-pair bound
+  `|P_s|<=binom(N,kappa)`.  Formal common roots force the stratum empty;
+  otherwise each support supplies at least `R-s` evaluation bases, exactly
+  cancelling the stacked-minor degree.  For `R=2t-d` this yields
+  `|P|<=N+floor(R/2)+sum_s binom(N,2s-R+1)=O_d(N^(d+1))`.
+- **How it is useful:** This extends the hard-input-3 compiler from the first
+  beyond-half slice to every fixed deficiency, counts same-slope witnesses,
+  and removes the row-degree factor from the earlier generic fixed-kernel
+  payment.  Canonical Lagrange lines attain the exact-stratum binomial
+  constant for every deficiency; the verifier pins `d=1,...,5`.
+- **What to do next:** Test whether the half-distance core can be absorbed
+  into the high-stratum minor capacity, and identify which first-match
+  profiles force bounded deficiency.  Growing `d` remains exponential, the
+  complete sum is not claimed exact, and no deployed row moves.
+
+### 2026-07-14 - First beyond-half-distance kernel-pencil compiler
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/first_beyond_half_kernel_pencil.md`,
+  `experimental/scripts/verify_first_beyond_half_kernel_pencil.py`,
+  `experimental/data/certificates/first-beyond-half-kernel-pencil/first_beyond_half_kernel_pencil.json`,
+  `experimental/lean/grande_finale/GrandeFinale/FirstBeyondHalfKernelPencil.lean`,
+  and `experimental/lean/grande_finale/GrandeFinale.lean`.
+- **Status:** PROVED / AUDIT; the Lean declarations are explicitly UNPROVED
+  STATEMENT TARGETS.
+- **What is being added:** At the first underdetermined moment slice
+  `N>=R=2t-1`, the degree-`t` recurrence pencil has a two-dimensional
+  generic kernel.  Formal common domain roots force an empty top stratum;
+  otherwise every transverse top locator supplies at least `t-1` good root
+  pairs, and degree-`t-1` determinant capacity gives the complete all-pair
+  bound `|P_t|<=binom(N,2)`.  Adding generic-rank deflation for lower weights
+  yields `|P|<=binom(N+1,2)+t-1` and the same MCA/CA numerator cap.
+- **How it is useful:** This is a field-independent quadratic hard-input-3
+  payment one full moment beyond the preceding half-distance compiler.  Two
+  fixtures show the top constant is sharp: ten distinct slopes realize all
+  pairs of a five-point domain over `F_11`, while over `F_7` seven slopes
+  carry three errors each and realize all 21 pairs as the near-perfect
+  matching factorization of `K_7`.
+- **What to do next:** Determine whether lower weights can be absorbed into
+  the top pair-determinant capacity, then test `R=2t-2` where the generic
+  locator kernel has dimension three.  This packet claims no exact complete
+  numerator, no published-priority result, and no deployed-row movement.
+
+### 2026-07-14 - Generic-rank deflation for half-distance LineRays
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/half_distance_generic_rank_deflation.md`,
+  `experimental/scripts/verify_half_distance_generic_rank_deflation.py`,
+  `experimental/data/certificates/half-distance-generic-rank-deflation/half_distance_generic_rank_deflation.json`,
+  `experimental/lean/grande_finale/GrandeFinale/HalfDistanceGenericRankDeflation.lean`,
+  and `experimental/lean/grande_finale/GrandeFinale.lean`.
+- **Status:** PROVED / AUDIT; the Lean declarations are explicitly UNPROVED
+  STATEMENT TARGETS.
+- **What is being added:** For arbitrary weighted RS moment columns with
+  `N>=R>=2t`, let `rho` be the generic rank of the leading `t x t`
+  Hankel pencil.  One rank minor pays every lower-weight parameter, while
+  transformed moments annihilate every formal fixed root before compiling
+  the exact-weight-`rho` locator.  This gives the complete transverse
+  all-pair and MCA/CA bound `|P|<=N+rho<=N+t`.
+- **How it is useful:** This compresses the preceding
+  `1+Nt(t+1)/2` half-distance payment to an essentially sharp linear
+  endpoint scale.  The cyclotomic endpoint family attains the top `N`
+  charge; exhaustive and sampled searches found no line exceeding `N`,
+  although that stronger bound is not claimed.
+- **What to do next:** Determine whether the lower-weight rank-drop roots can
+  be absorbed into the top locator curve, or construct a genuine
+  `N+Omega(1)` line.  Separately, test the first underdetermined recurrence
+  window `R=2t-1`.  This packet claims no improvement over BCHKS in its
+  strict range and no deployed-row movement.
+
+### 2026-07-14 - Half-distance Hankel curve LineRay compiler
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/half_distance_hankel_curve_lineray.md`,
+  `experimental/scripts/verify_half_distance_hankel_curve_lineray.py`,
+  `experimental/data/certificates/half-distance-hankel-curve-lineray/half_distance_hankel_curve_lineray.json`,
+  `experimental/lean/grande_finale/GrandeFinale/HalfDistanceHankelCurveLineRay.lean`,
+  and `experimental/lean/grande_finale/GrandeFinale.lean`.
+- **Status:** PROVED / AUDIT; the Lean declarations are explicitly UNPROVED
+  STATEMENT TARGETS.
+- **What is being added:** For arbitrary weighted RS moment columns with
+  `N>=R>=2t`, every exact-weight-`s` transverse syndrome pair lies on a
+  cofactor locator curve of degree at most `s` and `|P_s|<=Ns`.  Actual
+  nonzero amplitudes rule out the Hankel rank-drop locus.  Summing every
+  weight gives the complete field-independent bound
+  `|P|<=1+Nt(t+1)/2` and the same MCA/CA numerator cap.
+- **How it is useful:** This supplies a self-contained hard-input-3 payment
+  at the exact endpoint `R=2t` on every domain.  The previously banked
+  cyclotomic family has `N` endpoint pairs, showing that the strict
+  half-distance `t+1` staircase cannot extend to equality.
+- **What to do next:** Seek a compression of the `Ns` exact-weight charge,
+  then determine which part of the cofactor/rank argument survives when
+  `R<2t` and the moment window becomes underdetermined.  This packet claims
+  no improvement over BCHKS in its strict `2t<R` range and no deployed-row
+  movement.
+
+### 2026-07-14 - Canonical-Lagrange all-pair curve compiler
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/canonical_lagrange_curve_compiler.md`,
+  `experimental/scripts/verify_canonical_lagrange_curve_compiler.py`,
+  `experimental/data/certificates/canonical-lagrange-curve-compiler/canonical_lagrange_curve_compiler.json`,
+  `experimental/lean/grande_finale/GrandeFinale/CanonicalLagrangeCurveCompiler.lean`,
+  and `experimental/lean/grande_finale/GrandeFinale.lean`.
+- **Status:** PROVED / AUDIT; the Lean declarations are explicitly UNPROVED
+  STATEMENT TARGETS.
+- **What is being added:** For every moment-syndrome line with `R>=2t` and
+  canonical first-`t` moments `(0,...,0,1)`, all weight-at-most-`t` pairs
+  form a residual rational locator curve of degree at most its number of
+  moving roots.  After `g` formal common domain roots are removed, the
+  complete pair family satisfies the field-independent bound
+  `|P|=|Z|<=N-g<=N`, without transversality or a selector.
+- **How it is useful:** This closes a concrete positive-depth hard-input-3
+  chart, including the middle strip `2t<=R<3t` not generally owned by the
+  deep or quadratic exact theorem.  The cyclotomic family from the preceding
+  packet attains `N` and proves the universal factor sharp.
+- **What to do next:** Determine whether the first-match atlas forces unpaid
+  primitive witnesses into subexponentially many canonical Lagrange charts,
+  or identify the next normal form when the first `t` syndrome moments move.
+  This packet does not establish that atlas bridge or move a deployed row.
+
+### 2026-07-14 - Positive-depth cyclotomic LineRay curve and sharp RC
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/positive_depth_cyclotomic_lineray_curve.md`,
+  `experimental/scripts/verify_positive_depth_cyclotomic_lineray_curve.py`,
+  `experimental/data/certificates/positive-depth-cyclotomic-lineray-curve/positive_depth_cyclotomic_lineray_curve.json`,
+  `experimental/lean/grande_finale/GrandeFinale/PositiveDepthCyclotomicLineRayCurve.lean`,
+  and `experimental/lean/grande_finale/GrandeFinale.lean`.
+- **Status:** PROVED / COUNTEREXAMPLE / AUDIT; the Lean declarations are
+  explicitly UNPROVED STATEMENT TARGETS.
+- **What is being added:** For `t+1 | q-1`, the complete weight-at-most-`t`
+  syndrome line over `F_q^*` is classified as `q-1` cyclotomic Lagrange
+  pairs.  Their depth-`t-1` complement prefixes are `(gamma,0,...,0)`:
+  every realized fiber is a singleton while the ray/profile ratio is
+  `q-1`.  The degree-`t` rational-normal locator curve pays all rays
+  exactly, and the selector-free weighted-puncture budget is globally sharp.
+- **How it is useful:** This is an actual positive-depth GRS/diagonally
+  equivalent RS realization of the Q-versus-RC separation and a sharp paid
+  instance of hard input 3.  It also exhibits a genuine double-negative
+  exact-weight stratum owned by the existing curve compiler.
+- **What to do next:** Test whether higher-dimensional residuals admit an
+  analogous low-degree locator cover or whether their realized boundary
+  image and puncture-cluster entropy force a genuinely new RC input.  The
+  packet does not prove primitive first-match survival or atlas exhaustivity.
+
+### 2026-07-14 - Depth-zero identity owner for complete LineRay pairs
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/depth_zero_identity_lineray_owner.md`,
+  `experimental/scripts/verify_depth_zero_identity_lineray_owner.py`,
+  `experimental/data/certificates/depth-zero-identity-lineray-owner/depth_zero_identity_lineray_owner.json`,
+  `experimental/lean/grande_finale/GrandeFinale/DepthZeroIdentityLineRayOwner.lean`,
+  and `experimental/lean/grande_finale/GrandeFinale.lean`.
+- **Status:** PROVED / AUDIT; the Lean declarations are explicitly
+  UNPROVED STATEMENT TARGETS.
+- **What is being added:** At agreement `a=k+1`, every retained transverse
+  `(slope,codeword)` pair injects into a noncommon `a`-support.  Hence the
+  complete pair family, including same-slope multiplicity, is bounded by
+  `binom(N,a)`, exactly the depth-zero identity-profile scale.  The canonical
+  `R=t+1` exponential route-cut family attains the bound and its slopes are an
+  affine translate of the slack-one restricted-sum image.
+- **How it is useful:** This pays the depth-zero endpoint of hard input 3 at
+  constant one and reclassifies the integrated exact-weight route cut as sharp
+  profile-owned behavior rather than an unowned chart-only obstruction.
+- **What to do next:** Seek a witness-preserving positive-depth compiler: the
+  support injection pays a prefix cell only when the selected noncommon
+  supports remain inside sufficiently few realized boundary fibers (or have
+  compensating retained-support occupancy).  It does not prove that bridge or
+  atlas exhaustivity.
+
 ### 2026-07-14 - L1/L2 threshold PR integration wave
 
 - **Agent/model:** Codex integrating PRs #742--#754 from DannyExperiments,

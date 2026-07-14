@@ -1,0 +1,570 @@
+{
+  "base_commit": "c35a6da31ed0905afcbaaefe4eb0f242572ebb35",
+  "branch_fixtures": {
+    "fixed_root": {
+      "bound": 20,
+      "branch": "formal-fixed-root",
+      "common_support": [
+        0,
+        1
+      ],
+      "deficiency": 2,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "n": 6,
+      "p": 7,
+      "pairs": 1,
+      "redundancy": 6,
+      "t": 4
+    },
+    "minimal_fixed_edge": {
+      "bound": 4,
+      "branch": "formal-fixed-root",
+      "common_support": [
+        0
+      ],
+      "deficiency": 2,
+      "domain": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "n": 4,
+      "p": 5,
+      "pairs": 1,
+      "redundancy": 4,
+      "t": 3
+    },
+    "rank_drop": {
+      "bound": 20,
+      "branch": "generic-rank-deficient",
+      "common_support": [
+        0
+      ],
+      "deficiency": 2,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "n": 6,
+      "p": 7,
+      "pairs": 1,
+      "redundancy": 6,
+      "t": 4
+    }
+  },
+  "canonical_lagrange_sharp_fixtures": [
+    {
+      "all_top_supports_realized": true,
+      "complete_binomial_bound": 21,
+      "complete_pairs": 21,
+      "deficiency": 1,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "kernel_dimension": 2,
+      "lower_pairs": 0,
+      "maximum_pairs_per_slope": 3,
+      "n": 7,
+      "p": 7,
+      "redundancy": 3,
+      "slopes": 7,
+      "t": 2
+    },
+    {
+      "all_top_supports_realized": true,
+      "complete_binomial_bound": 35,
+      "complete_pairs": 35,
+      "deficiency": 2,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "kernel_dimension": 3,
+      "lower_pairs": 0,
+      "maximum_pairs_per_slope": 5,
+      "n": 7,
+      "p": 7,
+      "redundancy": 4,
+      "slopes": 7,
+      "t": 3
+    },
+    {
+      "all_top_supports_realized": true,
+      "complete_binomial_bound": 35,
+      "complete_pairs": 35,
+      "deficiency": 3,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "kernel_dimension": 4,
+      "lower_pairs": 0,
+      "maximum_pairs_per_slope": 5,
+      "n": 7,
+      "p": 7,
+      "redundancy": 5,
+      "slopes": 7,
+      "t": 4
+    },
+    {
+      "all_top_supports_realized": true,
+      "complete_binomial_bound": 21,
+      "complete_pairs": 21,
+      "deficiency": 4,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "kernel_dimension": 5,
+      "lower_pairs": 0,
+      "maximum_pairs_per_slope": 3,
+      "n": 7,
+      "p": 7,
+      "redundancy": 6,
+      "slopes": 7,
+      "t": 5
+    },
+    {
+      "all_top_supports_realized": true,
+      "complete_binomial_bound": 7,
+      "complete_pairs": 7,
+      "deficiency": 5,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "kernel_dimension": 6,
+      "lower_pairs": 0,
+      "maximum_pairs_per_slope": 1,
+      "n": 7,
+      "p": 7,
+      "redundancy": 7,
+      "slopes": 7,
+      "t": 6
+    }
+  ],
+  "claim_id": "fixed-deficiency-complete-absorption-v1",
+  "grids": [
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 3,
+        "loopless-full-rank": 114
+      },
+      "chargeable_incidences": 240,
+      "complete_binomial_bound": 3,
+      "deficiency": 1,
+      "domain": [
+        0,
+        1,
+        2
+      ],
+      "fixed_root_lines": 3,
+      "kernel_dimension": 2,
+      "lines": 117,
+      "maximum_pairs_on_line": 3,
+      "minimum_bound_slack": 0,
+      "minimum_chargeable_on_loopless_line": 1,
+      "mixed_weight_lines": 24,
+      "mode": "exhaustive",
+      "n": 3,
+      "p": 3,
+      "redundancy": 3,
+      "root_capacity": 240,
+      "row_count": 1,
+      "same_slope_excess": 0,
+      "t": 2,
+      "transverse_pairs": 193,
+      "transverse_slopes": 193,
+      "weight_histogram": {
+        "0": 13,
+        "1": 72,
+        "2": 108
+      }
+    },
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 4,
+        "loopless-full-rank": 19496
+      },
+      "chargeable_incidences": 62496,
+      "complete_binomial_bound": 4,
+      "deficiency": 2,
+      "domain": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "fixed_root_lines": 4,
+      "kernel_dimension": 3,
+      "lines": 19500,
+      "maximum_pairs_on_line": 4,
+      "minimum_bound_slack": 0,
+      "minimum_chargeable_on_loopless_line": 1,
+      "mixed_weight_lines": 9472,
+      "mode": "exhaustive",
+      "n": 4,
+      "p": 5,
+      "redundancy": 4,
+      "root_capacity": 62496,
+      "row_count": 1,
+      "same_slope_excess": 0,
+      "t": 3,
+      "transverse_pairs": 49036,
+      "transverse_slopes": 49036,
+      "weight_histogram": {
+        "0": 156,
+        "1": 2480,
+        "2": 14400,
+        "3": 32000
+      }
+    },
+    {
+      "branch_histogram": {
+        "formal-fixed-root": 5,
+        "loopless-full-rank": 19495
+      },
+      "chargeable_incidences": 156230,
+      "complete_binomial_bound": 10,
+      "deficiency": 2,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 5,
+      "kernel_dimension": 3,
+      "lines": 19500,
+      "maximum_pairs_on_line": 10,
+      "minimum_bound_slack": 0,
+      "minimum_chargeable_on_loopless_line": 1,
+      "mixed_weight_lines": 15620,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 5,
+      "redundancy": 4,
+      "root_capacity": 156230,
+      "row_count": 1,
+      "same_slope_excess": 22800,
+      "t": 3,
+      "transverse_pairs": 107256,
+      "transverse_slopes": 84456,
+      "weight_histogram": {
+        "0": 156,
+        "1": 3100,
+        "2": 24000,
+        "3": 80000
+      }
+    },
+    {
+      "branch_histogram": {
+        "empty": 176,
+        "formal-fixed-root": 1,
+        "loopless-full-rank": 1823
+      },
+      "chargeable_incidences": 14836,
+      "complete_binomial_bound": 10,
+      "deficiency": 1,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 1,
+      "kernel_dimension": 2,
+      "lines": 2000,
+      "maximum_pairs_on_line": 4,
+      "minimum_bound_slack": 6,
+      "minimum_chargeable_on_loopless_line": 3,
+      "mixed_weight_lines": 189,
+      "mode": "sample",
+      "n": 5,
+      "p": 7,
+      "redundancy": 5,
+      "root_capacity": 22402,
+      "row_count": 2,
+      "same_slope_excess": 0,
+      "t": 3,
+      "transverse_pairs": 4502,
+      "transverse_slopes": 4502,
+      "weight_histogram": {
+        "0": 5,
+        "1": 52,
+        "2": 477,
+        "3": 3968
+      }
+    },
+    {
+      "branch_histogram": {
+        "loopless-full-rank": 3000
+      },
+      "chargeable_incidences": 25808,
+      "complete_binomial_bound": 10,
+      "deficiency": 2,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 0,
+      "kernel_dimension": 3,
+      "lines": 3000,
+      "maximum_pairs_on_line": 10,
+      "minimum_bound_slack": 0,
+      "minimum_chargeable_on_loopless_line": 1,
+      "mixed_weight_lines": 1975,
+      "mode": "sample",
+      "n": 5,
+      "p": 7,
+      "redundancy": 4,
+      "root_capacity": 25808,
+      "row_count": 1,
+      "same_slope_excess": 3682,
+      "t": 3,
+      "transverse_pairs": 20517,
+      "transverse_slopes": 16835,
+      "weight_histogram": {
+        "0": 9,
+        "1": 222,
+        "2": 2678,
+        "3": 17608
+      }
+    },
+    {
+      "branch_histogram": {
+        "empty": 140,
+        "loopless-full-rank": 2860
+      },
+      "chargeable_incidences": 36541,
+      "complete_binomial_bound": 20,
+      "deficiency": 2,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "fixed_root_lines": 0,
+      "kernel_dimension": 3,
+      "lines": 3000,
+      "maximum_pairs_on_line": 5,
+      "minimum_bound_slack": 15,
+      "minimum_chargeable_on_loopless_line": 4,
+      "mixed_weight_lines": 556,
+      "mode": "sample",
+      "n": 6,
+      "p": 7,
+      "redundancy": 6,
+      "root_capacity": 64061,
+      "row_count": 2,
+      "same_slope_excess": 0,
+      "t": 4,
+      "transverse_pairs": 7802,
+      "transverse_slopes": 7802,
+      "weight_histogram": {
+        "0": 1,
+        "1": 16,
+        "2": 121,
+        "3": 849,
+        "4": 6815
+      }
+    },
+    {
+      "branch_histogram": {
+        "loopless-full-rank": 4000
+      },
+      "chargeable_incidences": 15914,
+      "complete_binomial_bound": 5,
+      "deficiency": 3,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "fixed_root_lines": 0,
+      "kernel_dimension": 4,
+      "lines": 4000,
+      "maximum_pairs_on_line": 5,
+      "minimum_bound_slack": 0,
+      "minimum_chargeable_on_loopless_line": 1,
+      "mixed_weight_lines": 2163,
+      "mode": "sample",
+      "n": 5,
+      "p": 5,
+      "redundancy": 5,
+      "root_capacity": 15914,
+      "row_count": 1,
+      "same_slope_excess": 0,
+      "t": 4,
+      "transverse_pairs": 12936,
+      "transverse_slopes": 12936,
+      "weight_histogram": {
+        "0": 6,
+        "1": 112,
+        "2": 763,
+        "3": 2902,
+        "4": 9153
+      }
+    },
+    {
+      "branch_histogram": {
+        "empty": 53,
+        "loopless-full-rank": 2447
+      },
+      "chargeable_incidences": 45645,
+      "complete_binomial_bound": 35,
+      "deficiency": 3,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "fixed_root_lines": 0,
+      "kernel_dimension": 4,
+      "lines": 2500,
+      "maximum_pairs_on_line": 6,
+      "minimum_bound_slack": 29,
+      "minimum_chargeable_on_loopless_line": 5,
+      "mixed_weight_lines": 762,
+      "mode": "sample",
+      "n": 7,
+      "p": 7,
+      "redundancy": 7,
+      "root_capacity": 89918,
+      "row_count": 2,
+      "same_slope_excess": 0,
+      "t": 5,
+      "transverse_pairs": 7245,
+      "transverse_slopes": 7245,
+      "weight_histogram": {
+        "1": 1,
+        "2": 17,
+        "3": 147,
+        "4": 975,
+        "5": 6105
+      }
+    },
+    {
+      "branch_histogram": {
+        "loopless-full-rank": 2500
+      },
+      "chargeable_incidences": 44842,
+      "complete_binomial_bound": 21,
+      "deficiency": 4,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "fixed_root_lines": 0,
+      "kernel_dimension": 5,
+      "lines": 2500,
+      "maximum_pairs_on_line": 18,
+      "minimum_bound_slack": 3,
+      "minimum_chargeable_on_loopless_line": 1,
+      "mixed_weight_lines": 2487,
+      "mode": "sample",
+      "n": 7,
+      "p": 7,
+      "redundancy": 6,
+      "root_capacity": 44842,
+      "row_count": 1,
+      "same_slope_excess": 12391,
+      "t": 5,
+      "transverse_pairs": 29362,
+      "transverse_slopes": 16971,
+      "weight_histogram": {
+        "1": 6,
+        "2": 78,
+        "3": 1060,
+        "4": 6329,
+        "5": 21889
+      }
+    }
+  ],
+  "hard_input": "3_fixed_deficiency_complete_pair_absorption",
+  "nonclaims": [
+    "no_uniform_subexponential_bound_when_d_grows_linearly",
+    "no_bound_for_d_greater_than_or_equal_to_t",
+    "no_atlas_or_deployed_row_movement",
+    "lean_target_unproved"
+  ],
+  "payload_sha256": "0ec00ab86ff8ef355626b3e353c55fae6ca0b1ec08c2c88ae92a7fd9e284fbae",
+  "schema_version": 1,
+  "status": "PROVED_AUDIT_WITH_UNPROVED_LEAN_TARGET",
+  "theorem": {
+    "charge": "every retained pair consumes at least r chargeable top-kernel bases",
+    "complete_all_pair_bound": "|P|<=binom(N,d+1)",
+    "mca_ca_numerator_bound": "B_MCA,B_CA<=binom(N,d+1)",
+    "range": "N>=R=2t-d and 1<=d<t",
+    "row_count": "r=t-d",
+    "sharpness": "canonical Lagrange lines attain equality",
+    "top_kernel_dimension": "k=d+1"
+  },
+  "totals": {
+    "audited_lines": 56117,
+    "chargeable_incidences": 402552,
+    "fixed_root_lines": 13,
+    "mixed_weight_lines": 33248,
+    "root_capacity": 481911,
+    "same_slope_excess": 38873,
+    "transverse_pairs": 238849,
+    "transverse_slopes": 199976
+  }
+}
