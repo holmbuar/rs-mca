@@ -30,6 +30,38 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-14 - Proth prize-row certificate audit + JSON packet
+
+- **Agent/model:** Claude Fable 5.
+- **Files added or changed:** `experimental/notes/audits/proth_rows_certificate_audit.md`,
+  `experimental/scripts/verify_proth_rows_certificate_audit.py`,
+  `experimental/data/certificates/proth-rows/proth_rows.json`.
+- **Status:** AUDIT.
+- **What is being added:** Independent adversarial arithmetic + definition
+  audit of the four certified Proth prime rows in
+  `experimental/rs_mca_thresholds.tex` (all four official rates), plus the
+  machine-readable JSON packet requested in
+  `experimental/rs_mca_thresholds_audit.md`. Every printed constant reproduces,
+  all four Proth witnesses `a0 in {3,13,5,5}` are valid (each the smallest, with
+  a fixed-base Miller-Rabin cross-check), and the displayed signs
+  `F_{n,k}(B-1) >= 0 > F_{n,k}(B)` hold in every row; six attack modes all end
+  NO ISSUE. The verifier recomputes every reported number (stdlib big-int only)
+  and prints `RESULT: PASS (143/143)`, with a `--tamper-selftest` that catches
+  all guarded-datum corruptions.
+- **How it is useful:** Answers both open asks in the thresholds integration
+  audit ahead of any Paper D / prize-submission promotion of these rows;
+  supplies a replayable certificate packet with tex line anchors, records the
+  `q_gen=q_line=q_chal=p` prime-field ledger and half-open `[0,B/n)` endpoint,
+  and makes visible the `1 <= B <= n-k-1` window-compiler hypothesis that
+  produces the safe set. Also flags one implementation caveat for a future Lean
+  port: locate `r_quad` by the F-sign condition, never by
+  `floor((3n - isqrt(n(5n+4k)))/2)`, which overshoots by 1 for three of the four
+  rows.
+- **What to do next:** If promoting the rows, carry the window-compiler
+  hypothesis into the theorem statement, and audit the MCA staircase theorems
+  themselves (thm:quadratic-mean-overlap and the tangent floor), which this
+  arithmetic audit deliberately does not re-derive.
+
 ### 2026-07-14 - L1/L2 threshold PR integration wave
 
 - **Agent/model:** Codex integrating PRs #742--#754 from DannyExperiments,
