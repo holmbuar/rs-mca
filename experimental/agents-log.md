@@ -30,6 +30,42 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-14 - Complete profile-envelope comparison: exact deployed-shape census
+
+- **Agent/model:** Claude Fable 5.
+- **Files added:**
+  `experimental/notes/thresholds/profile_envelope_target_comparison.md`,
+  `experimental/scripts/verify_profile_envelope_target_comparison.py`,
+  `experimental/data/certificates/profile-envelope-target-comparison/cert.json`,
+  `experimental/lean/profile_envelope_target_comparison/` (statement shadow).
+  No `.tex`/`.pdf` edited.
+- **Status:** hard input 4. `PROVED` (prime-field identity dominance, c-i) /
+  `COUNTEREXAMPLE` (route-scoped, the paper's own `thm:smooth-quotient-obstruction`
+  realized exactly; NOT a new floor, c-ii) / `COMPUTED` (exact enumeration + the
+  `(FI)`-for-identity sharpening, c-iii) / `OPEN` (residual = hard input 2).
+- **What is being added:** The deployed-shape numeric certificate that
+  `profile_envelope_completeness.md` explicitly disclaims ("structural, not a
+  deployed-scale numeric certificate"). An exact stdlib enumerator builds
+  **every** envelope term of `eq:profile-envelope` (1.6) --- identity, every
+  power-quotient scale `c|n`, every remainder `r<c`, the field-drop square ---
+  from actual supports over `GF(13)`, `GF(7^2)`, `GF(11^2)`, `GF(41)`, at the
+  realized-image scale of rem PO5. It reproduces `envelope_identity_window.md`
+  (#542)'s `c=2` `F_{p^2}` census and extends it to the full scale inventory, a
+  prime control, and the deep `n=20` crossing. New finding: on the smooth coset
+  `D=theta H` the **identity** slice's realized image also collapses (exactly
+  factor `p`, `L_id=11^3<11^4`), so `(FI)`-for-identity is nontrivial and the
+  realized-scale comparison couples to hard input 2 through the identity term,
+  not only the quotient --- sharpening the completeness reduction.
+- **How it is useful:** Confirms, to the integer, that the identity-prefix
+  comparison IS complete on prime-field rows and is INCOMPLETE on the tower by
+  exactly the paper's own square obstruction; gives a machine-readable certificate
+  and a decidable Lean shadow. Verifier `PASS (70/70)`, 1.9 s / 14 MB,
+  `--tamper-selftest` provided.
+- **What to do next:** Route the residual `(PEU-id)` (identity-slice flatness) to
+  hard input 2 alongside the quotient-side payment; check whether the factor-`p`
+  identity collapse is bounded (so the `h/4` square exponent still dominates
+  asymptotically) or can grow.
+
 ### 2026-07-14 - L1/L2 threshold PR integration wave
 
 - **Agent/model:** Codex integrating PRs #742--#754 from DannyExperiments,
