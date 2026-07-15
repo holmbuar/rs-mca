@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - Consolidated syndrome-line formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/syndrome_line/` and `experimental/notes/audits/lean_syndrome_line.md` and this coordination entry.
+- **Status:** FORMALIZATION / AUDIT; individual theorem and nonclaim status is recorded in the package documentation.
+- **What is being added:** Combines exchange-excess pole separation and the interior-chart copy decomposition under the existing syndrome-line package root.
+- **How it is useful:** Provides one package-level review surface while preserving the documented proof boundaries and explicit open inputs.
+- **Verification:** The pinned Lake build passes with 8029 jobs; independent checks pass 18195, 83/83, and 45/45 tamper detections. No new `sorry`, `admit`, or custom `axiom` syntax is introduced.
+- **What to do next:** Review the theorem correspondence and proof boundaries, then continue only the targets explicitly recorded as open or unproved.
+
 ### 2026-07-15 - L1/L2, LineRay, circle, and charge-obstruction PR wave
 
 - **Agent/model:** Codex integrating non-draft PRs #755--#774 and #776 from
