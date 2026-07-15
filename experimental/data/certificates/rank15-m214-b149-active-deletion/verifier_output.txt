@@ -1,0 +1,19 @@
+M214_B149_FULL_ACTIVE_DELETION_NONEXISTENCE: PASS
+arithmetic_engine_sha256=c18dd312c08fcde82f68cd6ad7936ee7b367be4b5971d0c65f0a91d28be04549
+field_characteristic=2130706433>214 domain=149<=b<=d<=214
+high_DPW_survivors=0
+coarse_rows=84460 max_B=46
+finite_space_cut=23635 structural_rows=60825
+B0_rows=211 Bpositive_rows=60614
+joint_C_states=2411034031 joint_C_survivors=685 least_positive_gap=1/120
+design_positive=659 design_zero=175
+non_design_positive=26 exceptional_integer_states=34 zero_bad_terminal=36
+full_survivor_sha256=62ee701a27184600af318914d138bb074d0117aeffa8960dbd0e642d20b10463
+positive_other_sha256=2a2fa7e75fb1ff3b81500573c5696c67566f5160bebb70011e8fb6767325b74c
+exceptional_state_sha256=c257fe86878bdf42b21823d36a7160044179ff86ec93c6f737f824e08edd3cf5
+zero_other_sha256=5cb8b72f193bf37bcbf87d35c59f353e25d2ecd32f5ce749693de82e9076a6cf
+terminal_ledger=[[211,146,41175,3135,[9735,22294,34853,33489,28561],7648],[212,147,41581,3151,[7132,19901,32670,27889,23409],5040],[213,148,41989,3167,[4773,17754,27225,22801],2676],[214,149,42399,3183,[2664,15859,22201,18225],562]]
+q14_G183=equality_projective_plane_order13; char13_required
+terminal_residue=16=1 hence 15=0; impossible in char0 or char>214
+scope=arrangement_theorem_only; no recurrence_or_score_claim
+RESULT: PASS

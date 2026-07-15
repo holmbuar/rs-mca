@@ -1,0 +1,6 @@
+q=24 B=69 raw=12607 W=86..120 cap=75 survivors=0
+q=24 B=68 raw=16027 W=96..132 cap=100 survivors=919
+q=25 B=71 raw=225 W=95..107 cap=104 survivors=215
+q=25 B=70 raw=350 W=106..119 cap=130 survivors=350
+q=25 B=69 raw=559 W=117..132 cap=156 survivors=559
+GLOBAL_COVECTOR_WEIGHTED_EXCESS_MINIMA_AUDIT: PASS

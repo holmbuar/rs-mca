@@ -1,0 +1,12 @@
+RANK16_WEIGHTED_GRID_EXTACTIC_DPW: PASS
+field_p=2130706433 selected=156 cores=0..553
+tail_universe=913633 max_balanced_color_lines=201
+feasible_grid_pairs=[(12, 13), (12, 14), (13, 12), (13, 13), (13, 14), (14, 12), (14, 13), (14, 14)]
+uniform_min=c12,d5104,b62368,R13,E180,color_cap1816,need9729408,total_cap9268864,margin460544
+uniform_min_profile=(13, 13, (180, (69, 'DPW', 207, 32983, 21477, 11506, 1816, None)))
+c553_new=need9813804,total_cap9258327,margin555477,profile(14, 14, (201, (77, 'DPW', 230, 40737, 26517, 14220, 2029, None)))
+c553_old=need9813804,cap9814582,cap_minus_need778
+c554_old=need9813960,cap9813232,cap_minus_need-728
+c554_new_consistency=need9813960,total_cap9256298,margin557662
+tamper_without_extactic=c553_color_cap2766,total_cap12621258,need9813804,closure=false
+scan_sha256=683ac4da362766bf3d763845f7858723422f94e7e9fbceeda434f61dcd269135

@@ -1,0 +1,334 @@
+{
+  "blockA_scale_decision": {
+    "3^i": [
+      {
+        "B": 2,
+        "Glam": 9,
+        "L": 5,
+        "M": 6,
+        "c": 9,
+        "collapse_index_c_over_L": 1.8,
+        "heavy_ambient": 1,
+        "heavy_group": 1,
+        "heavy_realized": 0,
+        "maxfiber": 2,
+        "range": 11
+      },
+      {
+        "B": 4,
+        "Glam": 81,
+        "L": 41,
+        "M": 70,
+        "c": 81,
+        "collapse_index_c_over_L": 1.9756,
+        "heavy_ambient": 41,
+        "heavy_group": 25,
+        "heavy_realized": 1,
+        "maxfiber": 6,
+        "range": 245
+      },
+      {
+        "B": 6,
+        "Glam": 729,
+        "L": 365,
+        "M": 924,
+        "c": 729,
+        "collapse_index_c_over_L": 1.9973,
+        "heavy_ambient": 365,
+        "heavy_group": 61,
+        "heavy_realized": 61,
+        "maxfiber": 20,
+        "range": 3647
+      },
+      {
+        "B": 8,
+        "Glam": 6561,
+        "L": 3281,
+        "M": 12870,
+        "c": 6561,
+        "collapse_index_c_over_L": 1.9997,
+        "heavy_ambient": 3281,
+        "heavy_group": 1233,
+        "heavy_realized": 113,
+        "maxfiber": 70,
+        "range": 45929
+      }
+    ],
+    "5^i": [
+      {
+        "B": 2,
+        "Glam": 13,
+        "L": 5,
+        "M": 6,
+        "c": 13,
+        "collapse_index_c_over_L": 2.6,
+        "heavy_ambient": 5,
+        "heavy_group": 5,
+        "heavy_realized": 0,
+        "maxfiber": 2,
+        "range": 15
+      },
+      {
+        "B": 4,
+        "Glam": 313,
+        "L": 41,
+        "M": 70,
+        "c": 313,
+        "collapse_index_c_over_L": 7.6341,
+        "heavy_ambient": 41,
+        "heavy_group": 41,
+        "heavy_realized": 1,
+        "maxfiber": 6,
+        "range": 941
+      },
+      {
+        "B": 6,
+        "Glam": 7813,
+        "L": 365,
+        "M": 924,
+        "c": 7813,
+        "collapse_index_c_over_L": 21.4055,
+        "heavy_ambient": 365,
+        "heavy_group": 365,
+        "heavy_realized": 61,
+        "maxfiber": 20,
+        "range": 39067
+      },
+      {
+        "B": 8,
+        "Glam": 195313,
+        "L": 3281,
+        "M": 12870,
+        "c": 195313,
+        "collapse_index_c_over_L": 59.5285,
+        "heavy_ambient": 3281,
+        "heavy_group": 3281,
+        "heavy_realized": 113,
+        "maxfiber": 70,
+        "range": 1367193
+      }
+    ],
+    "decision": "BOTH_SCALES_KILLED_realized_is_favorable"
+  },
+  "blockB_structure_charge": {
+    "charge_conditions_coset": {
+      "C1": true,
+      "C2_sum_eq_Omega": true,
+      "C4": true,
+      "min_slack_sq": "6531875436",
+      "ncosets": 4
+    },
+    "coset_is_quotient_fiber": true
+  },
+  "blockC_prime_degeneracy": {
+    "decision": "DEPTH1_PRIME: coset-indexing degenerate (only fibers or one piece)",
+    "p=11": {
+      "divisors": [
+        1,
+        11
+      ],
+      "proper_nontrivial": []
+    },
+    "p=13": {
+      "divisors": [
+        1,
+        13
+      ],
+      "proper_nontrivial": []
+    },
+    "p=7": {
+      "divisors": [
+        1,
+        7
+      ],
+      "proper_nontrivial": []
+    }
+  },
+  "blockD_abundance_recurs": {
+    "crossover_superpoly_B60": "3^58 > 60^12",
+    "decision": "HITS_IDENTICALLY",
+    "depth2_coarsen": [
+      {
+        "a": 3,
+        "emit": 0,
+        "emit_none": 7,
+        "npieces": 7,
+        "p": 7
+      },
+      {
+        "a": 4,
+        "emit": 0,
+        "emit_none": 7,
+        "npieces": 7,
+        "p": 7
+      },
+      {
+        "a": 3,
+        "emit": 0,
+        "emit_none": 11,
+        "npieces": 11,
+        "p": 11
+      },
+      {
+        "a": 4,
+        "emit": 0,
+        "emit_none": 11,
+        "npieces": 11,
+        "p": 11
+      }
+    ],
+    "sidon_B=6": {
+      "L": 365,
+      "M": 924,
+      "first_semantic_modulus": 81,
+      "full_semantic_modulus": 243,
+      "table": [
+        {
+          "j": 0,
+          "modulus": 1,
+          "npieces": 1,
+          "semantic_mass": 0,
+          "semantic_mass_frac": 0.0,
+          "single_level_pieces": 0
+        },
+        {
+          "j": 1,
+          "modulus": 3,
+          "npieces": 3,
+          "semantic_mass": 0,
+          "semantic_mass_frac": 0.0,
+          "single_level_pieces": 0
+        },
+        {
+          "j": 2,
+          "modulus": 9,
+          "npieces": 9,
+          "semantic_mass": 0,
+          "semantic_mass_frac": 0.0,
+          "single_level_pieces": 0
+        },
+        {
+          "j": 3,
+          "modulus": 27,
+          "npieces": 27,
+          "semantic_mass": 0,
+          "semantic_mass_frac": 0.0,
+          "single_level_pieces": 0
+        },
+        {
+          "j": 4,
+          "modulus": 81,
+          "npieces": 81,
+          "semantic_mass": 448,
+          "semantic_mass_frac": 0.4848,
+          "single_level_pieces": 40
+        },
+        {
+          "j": 5,
+          "modulus": 243,
+          "npieces": 243,
+          "semantic_mass": 924,
+          "semantic_mass_frac": 1.0,
+          "single_level_pieces": 243
+        },
+        {
+          "j": 6,
+          "modulus": 729,
+          "npieces": 365,
+          "semantic_mass": 924,
+          "semantic_mass_frac": 1.0,
+          "single_level_pieces": 365
+        }
+      ]
+    },
+    "sidon_B=8": {
+      "L": 3281,
+      "M": 12870,
+      "first_semantic_modulus": 729,
+      "full_semantic_modulus": 2187,
+      "table": [
+        {
+          "j": 0,
+          "modulus": 1,
+          "npieces": 1,
+          "semantic_mass": 0,
+          "semantic_mass_frac": 0.0,
+          "single_level_pieces": 0
+        },
+        {
+          "j": 1,
+          "modulus": 3,
+          "npieces": 3,
+          "semantic_mass": 0,
+          "semantic_mass_frac": 0.0,
+          "single_level_pieces": 0
+        },
+        {
+          "j": 2,
+          "modulus": 9,
+          "npieces": 9,
+          "semantic_mass": 0,
+          "semantic_mass_frac": 0.0,
+          "single_level_pieces": 0
+        },
+        {
+          "j": 3,
+          "modulus": 27,
+          "npieces": 27,
+          "semantic_mass": 0,
+          "semantic_mass_frac": 0.0,
+          "single_level_pieces": 0
+        },
+        {
+          "j": 4,
+          "modulus": 81,
+          "npieces": 81,
+          "semantic_mass": 0,
+          "semantic_mass_frac": 0.0,
+          "single_level_pieces": 0
+        },
+        {
+          "j": 5,
+          "modulus": 243,
+          "npieces": 243,
+          "semantic_mass": 0,
+          "semantic_mass_frac": 0.0,
+          "single_level_pieces": 0
+        },
+        {
+          "j": 6,
+          "modulus": 729,
+          "npieces": 729,
+          "semantic_mass": 6336,
+          "semantic_mass_frac": 0.4923,
+          "single_level_pieces": 364
+        },
+        {
+          "j": 7,
+          "modulus": 2187,
+          "npieces": 2187,
+          "semantic_mass": 12870,
+          "semantic_mass_frac": 1.0,
+          "single_level_pieces": 2187
+        },
+        {
+          "j": 8,
+          "modulus": 6561,
+          "npieces": 3281,
+          "semantic_mass": 12870,
+          "semantic_mass_frac": 1.0,
+          "single_level_pieces": 3281
+        }
+      ]
+    }
+  },
+  "class": "T=P u (c-P), P distinct-subset-sum, |P|=B, a=B, c=2 sum P+1, Phi=subset sum over Z",
+  "lane": "hard input 2 -- non-fiber-indexed route to #716 charge-preserving decomposition",
+  "packet": "nonfiber_decomposition_realized_scale",
+  "result": {
+    "passed": 90,
+    "total": 90
+  },
+  "rung_a_which_scale_kills_739": "BOTH (realized is the favorable scale and is still killed)",
+  "rung_c_verdict": "image-class (G_lambda-coset) indexing HITS the abundance mechanism identically"
+}

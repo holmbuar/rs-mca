@@ -1,0 +1,12 @@
+RANK16_FIXED_PAIR_ACTIVE_PENCIL_GRID_TAIL_CUT: PASS
+tail_universe=913633 cores=0..832
+row_bound_jumps=c0:13,c297:14,c618:15
+second_moment=c0:169,c297:196,c557:156,c558:155,c832:101
+second_moment_uniform_c558_832=155
+direction_pair=c0:169,c297:196,c553:156,c554:155,c557:153,c558:152,c618:148,c832:101
+direction_pair_uniform_c554_832=155
+unpaid_c0_553_max=196
+c553_e156_direction_need_cap_margin=9813804,9814582,778
+c554_e156_direction_need_cap_margin=9813960,9813232,-728
+c557_e156_second_floor_cap_margin=47894465,47896854,2389
+c558_e156_second_floor_cap_margin=47896025,47886348,-9677

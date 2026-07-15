@@ -1,0 +1,191 @@
+{
+  "base_commit": "c35a6da31ed0905afcbaaefe4eb0f242572ebb35",
+  "claim_id": "canonical-lagrange-curve-compiler-v1",
+  "constant_locator_fixture": {
+    "bound": 5,
+    "domain_size": 7,
+    "formal_fixed_roots": 2,
+    "p": 7,
+    "pair_count": 1,
+    "redundancy": 5,
+    "support_checks": 147,
+    "t": 2
+  },
+  "cyclotomic_sharpness_fixtures": [
+    {
+      "bound_attained": true,
+      "domain_size": 6,
+      "fixed_roots": 0,
+      "moving_degree": 2,
+      "moving_incidences": 12,
+      "p": 7,
+      "root_capacity": 12,
+      "selected": 6,
+      "t": 2
+    },
+    {
+      "bound_attained": true,
+      "domain_size": 12,
+      "fixed_roots": 0,
+      "moving_degree": 2,
+      "moving_incidences": 24,
+      "p": 13,
+      "root_capacity": 24,
+      "selected": 12,
+      "t": 2
+    },
+    {
+      "bound_attained": true,
+      "domain_size": 12,
+      "fixed_roots": 0,
+      "moving_degree": 3,
+      "moving_incidences": 36,
+      "p": 13,
+      "root_capacity": 36,
+      "selected": 12,
+      "t": 3
+    },
+    {
+      "bound_attained": true,
+      "domain_size": 16,
+      "fixed_roots": 0,
+      "moving_degree": 3,
+      "moving_incidences": 48,
+      "p": 17,
+      "root_capacity": 48,
+      "selected": 16,
+      "t": 3
+    },
+    {
+      "bound_attained": true,
+      "domain_size": 30,
+      "fixed_roots": 0,
+      "moving_degree": 4,
+      "moving_incidences": 120,
+      "p": 31,
+      "root_capacity": 120,
+      "selected": 30,
+      "t": 4
+    }
+  ],
+  "exhaustive_affine_grids": [
+    {
+      "coordinate_checks": 4,
+      "domain_size": 2,
+      "families": 2,
+      "fixed_root_families": 0,
+      "maximum_fixed_roots": 0,
+      "maximum_selected": 2,
+      "minimum_bound_margin": 0,
+      "p": 2,
+      "parameter_checks": 4,
+      "selected_total": 4,
+      "t": 1
+    },
+    {
+      "coordinate_checks": 18,
+      "domain_size": 3,
+      "families": 6,
+      "fixed_root_families": 0,
+      "maximum_fixed_roots": 0,
+      "maximum_selected": 3,
+      "minimum_bound_margin": 0,
+      "p": 3,
+      "parameter_checks": 18,
+      "selected_total": 18,
+      "t": 1
+    },
+    {
+      "coordinate_checks": 3000,
+      "domain_size": 5,
+      "families": 600,
+      "fixed_root_families": 0,
+      "maximum_fixed_roots": 0,
+      "maximum_selected": 3,
+      "minimum_bound_margin": 2,
+      "p": 5,
+      "parameter_checks": 3000,
+      "selected_total": 1200,
+      "t": 2
+    },
+    {
+      "coordinate_checks": 16464,
+      "domain_size": 7,
+      "families": 2352,
+      "fixed_root_families": 0,
+      "maximum_fixed_roots": 0,
+      "maximum_selected": 6,
+      "minimum_bound_margin": 1,
+      "p": 7,
+      "parameter_checks": 16464,
+      "selected_total": 7056,
+      "t": 2
+    },
+    {
+      "coordinate_checks": 819084,
+      "domain_size": 7,
+      "families": 117306,
+      "fixed_root_families": 2058,
+      "maximum_fixed_roots": 1,
+      "maximum_selected": 4,
+      "minimum_bound_margin": 3,
+      "p": 7,
+      "parameter_checks": 821142,
+      "selected_total": 83790,
+      "t": 3
+    }
+  ],
+  "fixed_root_fixture": {
+    "bound": 6,
+    "constants": [
+      1,
+      0,
+      6
+    ],
+    "coordinate_checks": 6,
+    "directions": [
+      0,
+      1,
+      2
+    ],
+    "domain_size": 7,
+    "fixed_roots": 1,
+    "moving_degree": 2,
+    "moving_incidences": 4,
+    "p": 7,
+    "parameter_checks": 7,
+    "root_capacity": 12,
+    "selected": 2,
+    "t": 3
+  },
+  "hard_input": "3_canonical_lagrange_rational_curve_compiler",
+  "nonclaims": [
+    "no_arbitrary_syndrome_line_bound",
+    "no_first_match_atlas_exhaustivity",
+    "no_primitive_profile_survival",
+    "no_deployed_threshold_movement",
+    "lean_target_unproved"
+  ],
+  "payload_sha256": "624bdba415b3e2a58c596d81be73eff534ac37336ff24afe0b04c1b5d1d96036",
+  "schema_version": 1,
+  "status": "PROVED_AUDIT_WITH_UNPROVED_LEAN_TARGET",
+  "theorem": {
+    "all_pair_bound": "|P|=|Z|<=N-g<=N",
+    "assumptions_not_used": [
+      "transversality",
+      "selector",
+      "field_size"
+    ],
+    "dimension_range": "N>=R>=2t",
+    "residual_curve_degree": "delta<=t-g"
+  },
+  "totals": {
+    "coordinate_checks": 838570,
+    "exhaustive_families": 120266,
+    "fixed_root_families": 2058,
+    "parameter_checks": 840628,
+    "selected_locators": 92068,
+    "sharp_fixtures": 5,
+    "sharp_pairs": 76
+  }
+}

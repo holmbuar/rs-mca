@@ -1,0 +1,31 @@
+DUAL32_TWENTY_COMPLETE_FIBERS_LACUNARY_REDUCTION: PASS
+D_range=65536..67471
+minimum_gap=5551
+maximum_residual_sum=61920
+maximum_large_residuals=11
+minimum_small_residuals=21
+minimum_complete_fibers=20
+maximum_low_degree=61920
+HOSTILE_AUDIT_DUAL32_TWENTY_COMPLETE_FIBERS_LACUNARY_REDUCTION: PASS
+extremizers=F7:42,F11:22,F13:52
+nesting_pairs_checked=3816
+strict_boundary_profile=F7,D4,s2,G2,deltas0/2,count21
+residual_gcd_failures=0
+residual_nesting_failures=0
+RESULT: PASS
+DUAL32_COMPLETE_VALUE_CLASSIFICATION: PASS
+D_range=65536..67471
+minimum_gap=5551
+minimum_32G_minus_Delta=115712
+contact_order_min=131072
+n_gt_2D_margin=1962210
+unique_exponent=65536
+HOSTILE_AUDIT_DUAL32_COMPLETE_VALUE_CLASSIFICATION: PASS
+source_sha256=5264d6d7a067513b7aa6124ac0a4e6915c9dd28a552194c8b8987ea920d3fd13
+minimum_n_minus_2D=1962210
+minimum_D_minus_Delta=5551
+minimum_32G_minus_Delta=115712
+centering=f->f+p1/32,P(Y)->P(Y-p1/32)
+small_census=41/8/4/2:41,41/8/3/3:0,41/10/3/4:0,41/20/3/7:0
+excluded_guardrail=F7:X4+X2,two_values,fails_char_and_contact
+RESULT: PASS

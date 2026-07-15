@@ -1,0 +1,12 @@
+RANK16_U1043459_HAHN_LP_DEGREE32_CUT: PASS
+parameters=N1053693_a72588_h5116_d67472
+all_integer_distances_checked=5117
+degree5_status=exactly_infeasible farkas_support=67472,67582,67595,67690,67700,67709
+optimal_active_distances=67472,67586,67587,67700,67701,72588
+optimal_primal_degrees=1,2,3,4,5,6
+exact_optimal_through_degree=32
+hahn_bound_floor=600370193369924883 target=274854110496187592 excess=325516082873737291
+degree7_through_32_dual_slacks=all_strictly_positive
+minimum_added_degree_slack=degree7,greater_than_4/5
+u1043460_degree5_parametric_extension=false
+nonclaim=degrees_above_32_not_excluded

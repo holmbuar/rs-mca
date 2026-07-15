@@ -1,0 +1,18 @@
+AUDIT5_INDEPENDENT_WEIGHTED_SOURCE_COMPILER: PASS
+theorem_sha256=6f998929209b534d39cb0d31fa6458f5bf63d9326255ec31e7f0f64ae7a5389e
+claimant_driver_sha256=099fab039f0812b9aeb5dce7acdcdc588f43520074ef1ae358a6d6fcfe0e5be2
+generic_source_sha256=8cfcf7475dd153e5e101e0c97467d7d49b0336f902e806ce673dee13f8de533b
+definition_source_sha256=f8cfba142607caccb5eb05ad261919f48697fd8a03b542fd65760075057eda1c
+ancestral_definition_sha256=b1161c3563eea5e7dfb4c6522c8139c419ad5ec0a2e1bec5c63bc1e4df64e686
+independence=no_import_no_eval_no_transform_no_cauchy_prefilter
+source_scope=M213 cells=q24B69,q24B68,q25B71,q25B70,q25B69
+aggregate_dimensions=P355_R474_I816
+residual_reachable_keys=2163789
+q=24 B=69 a=3 profiles=60358 raw=12607 W=86..120 cap=75 survivors=0 rows_sha256=ff6883869b7126bceea37a3cbd8c3485c9760c9309e6608d924b2c7935c2e80f
+q=24 B=68 a=4 profiles=63110 raw=16027 W=96..132 cap=100 survivors=919 rows_sha256=9f9111574caa017e99cad1a7d6064738dd859dcfe778ff9bebf602ef2b0ea16b
+q=25 B=71 a=4 profiles=55566 raw=225 W=95..107 cap=104 survivors=215 rows_sha256=b9073791b5899d8a3c1160dad592b4184519e522ee18d62495e0542140502599
+q=25 B=70 a=5 profiles=57799 raw=350 W=106..119 cap=130 survivors=350 rows_sha256=2de1e48f507995fb5077c5c917f70d9f877e39014bb6464d14def7300b3303b3
+q=25 B=69 a=6 profiles=60358 raw=559 W=117..132 cap=156 survivors=559 rows_sha256=3905a9b69ab4badfc2e22d454faea3509f647900bb5b8789cbc44353d017fbfa
+quantifier_guard=raw_iterations_equal_unique_full_tuples
+identity_guard=W_equals_E_plus_S_equals_U_plus_2S
+conclusion=q24B69_closed_other_four_cells_not_closed

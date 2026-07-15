@@ -1,0 +1,8 @@
+RANK16_U1043460_HAHN_LP_PAYMENT: PASS
+parameters=N1053692_a72587_h5115_d67472
+active_distances=67472,67586,67587,67700,67701
+coefficient_signs=+++++
+hahn_bound_floor=41358983685320209 target=274854110496187592 margin=233495126810867383
+all_integer_distances_checked=5116
+line15_twoflat213_inputs_used=false
+nonclaim=states_below_1043460_not_paid

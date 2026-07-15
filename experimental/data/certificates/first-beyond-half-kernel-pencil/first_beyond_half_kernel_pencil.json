@@ -1,0 +1,525 @@
+{
+  "base_commit": "c35a6da31ed0905afcbaaefe4eb0f242572ebb35",
+  "claim_id": "first-beyond-half-kernel-pencil-v1",
+  "exhaustive_grids": [
+    {
+      "all_pair_bound": 7,
+      "domain": [
+        0,
+        1,
+        2
+      ],
+      "good_pair_incidences": 108,
+      "lines": 117,
+      "lower_deflation_families": 60,
+      "lower_fixed_root_families": 18,
+      "lower_generic_rank_histogram": {
+        "0": 12,
+        "1": 105
+      },
+      "lower_pairs": 85,
+      "maximum_pairs_on_line": 3,
+      "maximum_same_slope_multiplicity": 1,
+      "maximum_slopes_on_line": 3,
+      "maximum_top_pairs_on_line": 3,
+      "mode": "exhaustive",
+      "n": 3,
+      "p": 3,
+      "redundancy": 3,
+      "root_capacity": 156,
+      "same_slope_top_excess": 0,
+      "t": 2,
+      "top_pair_bound": 3,
+      "top_pairs": 108,
+      "top_pencil_families": 68,
+      "top_slopes": 108,
+      "transverse_pairs": 193,
+      "transverse_slopes": 193
+    },
+    {
+      "all_pair_bound": 7,
+      "domain": [
+        0,
+        1,
+        2
+      ],
+      "good_pair_incidences": 1200,
+      "lines": 775,
+      "lower_deflation_families": 312,
+      "lower_fixed_root_families": 60,
+      "lower_generic_rank_histogram": {
+        "0": 30,
+        "1": 745
+      },
+      "lower_pairs": 391,
+      "maximum_pairs_on_line": 3,
+      "maximum_same_slope_multiplicity": 1,
+      "maximum_slopes_on_line": 3,
+      "maximum_top_pairs_on_line": 3,
+      "mode": "exhaustive",
+      "n": 3,
+      "p": 5,
+      "redundancy": 3,
+      "root_capacity": 1584,
+      "same_slope_top_excess": 0,
+      "t": 2,
+      "top_pair_bound": 3,
+      "top_pairs": 1200,
+      "top_pencil_families": 624,
+      "top_slopes": 1200,
+      "transverse_pairs": 1591,
+      "transverse_slopes": 1591
+    },
+    {
+      "all_pair_bound": 16,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "good_pair_incidences": 4000,
+      "lines": 775,
+      "lower_deflation_families": 440,
+      "lower_fixed_root_families": 100,
+      "lower_generic_rank_histogram": {
+        "0": 30,
+        "1": 745
+      },
+      "lower_pairs": 631,
+      "maximum_pairs_on_line": 10,
+      "maximum_same_slope_multiplicity": 2,
+      "maximum_slopes_on_line": 5,
+      "maximum_top_pairs_on_line": 10,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 5,
+      "redundancy": 3,
+      "root_capacity": 6000,
+      "same_slope_top_excess": 1200,
+      "t": 2,
+      "top_pair_bound": 10,
+      "top_pairs": 4000,
+      "top_pencil_families": 744,
+      "top_slopes": 2800,
+      "transverse_pairs": 4631,
+      "transverse_slopes": 3431
+    },
+    {
+      "all_pair_bound": 16,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "good_pair_incidences": 17640,
+      "lines": 2793,
+      "lower_deflation_families": 1320,
+      "lower_fixed_root_families": 210,
+      "lower_generic_rank_histogram": {
+        "0": 56,
+        "1": 2737
+      },
+      "lower_pairs": 1737,
+      "maximum_pairs_on_line": 10,
+      "maximum_same_slope_multiplicity": 2,
+      "maximum_slopes_on_line": 7,
+      "maximum_top_pairs_on_line": 10,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 7,
+      "redundancy": 3,
+      "root_capacity": 23520,
+      "same_slope_top_excess": 3780,
+      "t": 2,
+      "top_pair_bound": 10,
+      "top_pairs": 17640,
+      "top_pencil_families": 2736,
+      "top_slopes": 13860,
+      "transverse_pairs": 19377,
+      "transverse_slopes": 15597
+    },
+    {
+      "all_pair_bound": 29,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "good_pair_incidences": 37044,
+      "lines": 2793,
+      "lower_deflation_families": 1596,
+      "lower_fixed_root_families": 294,
+      "lower_generic_rank_histogram": {
+        "0": 56,
+        "1": 2737
+      },
+      "lower_pairs": 2409,
+      "maximum_pairs_on_line": 21,
+      "maximum_same_slope_multiplicity": 3,
+      "maximum_slopes_on_line": 7,
+      "maximum_top_pairs_on_line": 21,
+      "mode": "exhaustive",
+      "n": 7,
+      "p": 7,
+      "redundancy": 3,
+      "root_capacity": 49392,
+      "same_slope_top_excess": 20580,
+      "t": 2,
+      "top_pair_bound": 21,
+      "top_pairs": 37044,
+      "top_pencil_families": 2736,
+      "top_slopes": 16464,
+      "transverse_pairs": 39453,
+      "transverse_slopes": 18873
+    },
+    {
+      "all_pair_bound": 16,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "good_pair_incidences": 121000,
+      "lines": 16093,
+      "lower_deflation_families": 5600,
+      "lower_fixed_root_families": 550,
+      "lower_generic_rank_histogram": {
+        "0": 132,
+        "1": 15961
+      },
+      "lower_pairs": 6733,
+      "maximum_pairs_on_line": 10,
+      "maximum_same_slope_multiplicity": 2,
+      "maximum_slopes_on_line": 10,
+      "maximum_top_pairs_on_line": 10,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 11,
+      "redundancy": 3,
+      "root_capacity": 145200,
+      "same_slope_top_excess": 16500,
+      "t": 2,
+      "top_pair_bound": 10,
+      "top_pairs": 121000,
+      "top_pencil_families": 15960,
+      "top_slopes": 104500,
+      "transverse_pairs": 127733,
+      "transverse_slopes": 111233
+    },
+    {
+      "all_pair_bound": 16,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "good_pair_incidences": 243360,
+      "lines": 30927,
+      "lower_deflation_families": 9480,
+      "lower_fixed_root_families": 780,
+      "lower_generic_rank_histogram": {
+        "0": 182,
+        "1": 30745
+      },
+      "lower_pairs": 11103,
+      "maximum_pairs_on_line": 10,
+      "maximum_same_slope_multiplicity": 2,
+      "maximum_slopes_on_line": 10,
+      "maximum_top_pairs_on_line": 10,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 13,
+      "redundancy": 3,
+      "root_capacity": 283920,
+      "same_slope_top_excess": 28080,
+      "t": 2,
+      "top_pair_bound": 10,
+      "top_pairs": 243360,
+      "top_pencil_families": 30744,
+      "top_slopes": 215280,
+      "transverse_pairs": 254463,
+      "transverse_slopes": 226383
+    },
+    {
+      "all_pair_bound": 16,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "good_pair_incidences": 739840,
+      "lines": 88723,
+      "lower_deflation_families": 21920,
+      "lower_fixed_root_families": 1360,
+      "lower_generic_rank_histogram": {
+        "0": 306,
+        "1": 88417
+      },
+      "lower_pairs": 24787,
+      "maximum_pairs_on_line": 10,
+      "maximum_same_slope_multiplicity": 2,
+      "maximum_slopes_on_line": 10,
+      "maximum_top_pairs_on_line": 10,
+      "mode": "exhaustive",
+      "n": 5,
+      "p": 17,
+      "redundancy": 3,
+      "root_capacity": 832320,
+      "same_slope_top_excess": 65280,
+      "t": 2,
+      "top_pair_bound": 10,
+      "top_pairs": 739840,
+      "top_pencil_families": 88416,
+      "top_slopes": 674560,
+      "transverse_pairs": 764627,
+      "transverse_slopes": 699347
+    }
+  ],
+  "fixed_kernel_fixture": {
+    "common_support": [
+      0,
+      1
+    ],
+    "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "fixed_kernel_roots": [
+      0,
+      1
+    ],
+    "generic_pivot_degree": 2,
+    "n": 7,
+    "p": 7,
+    "t": 3,
+    "transverse_top_pairs": 0
+  },
+  "hard_input": "3_first_beyond_half_distance_R_equals_2t_minus_1",
+  "nonclaims": [
+    "no_bound_for_R_less_than_2t_minus_1",
+    "no_claim_that_the_complete_bound_is_exact",
+    "no_atlas_or_deployed_row_movement",
+    "no_priority_claim_over_existing_half_distance_literature",
+    "lean_target_unproved"
+  ],
+  "payload_sha256": "ec79d80273dff8b9cb34b93dd0447da2f838dd7f5245db2318088c212d401bf1",
+  "same_slope_sharp_fixture": {
+    "all_domain_pairs_realized": true,
+    "direction": [
+      0,
+      0,
+      1
+    ],
+    "domain": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "line_base": [
+      0,
+      1,
+      0
+    ],
+    "lower_pairs": 0,
+    "n": 7,
+    "near_perfect_matching_factorization": true,
+    "p": 7,
+    "pairs_per_slope": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "t": 2,
+    "top_pair_bound": 21,
+    "top_pairs": 21,
+    "top_slopes": 7
+  },
+  "sampled_weight_three_grids": [
+    {
+      "all_pair_bound": 30,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "good_pair_incidences": 90477,
+      "lines": 8000,
+      "lower_deflation_families": 1861,
+      "lower_fixed_root_families": 14,
+      "lower_generic_rank_histogram": {
+        "0": 1,
+        "1": 24,
+        "2": 7975
+      },
+      "lower_pairs": 2261,
+      "maximum_pairs_on_line": 8,
+      "maximum_same_slope_multiplicity": 2,
+      "maximum_slopes_on_line": 7,
+      "maximum_top_pairs_on_line": 8,
+      "mode": "deterministic-sample",
+      "n": 7,
+      "p": 7,
+      "redundancy": 5,
+      "root_capacity": 166857,
+      "same_slope_top_excess": 1601,
+      "t": 3,
+      "top_pair_bound": 21,
+      "top_pairs": 30159,
+      "top_pencil_families": 7825,
+      "top_slopes": 28558,
+      "transverse_pairs": 32420,
+      "transverse_slopes": 30819
+    },
+    {
+      "all_pair_bound": 17,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "good_pair_incidences": 57981,
+      "lines": 10000,
+      "lower_deflation_families": 1194,
+      "lower_fixed_root_families": 0,
+      "lower_generic_rank_histogram": {
+        "1": 11,
+        "2": 9989
+      },
+      "lower_pairs": 2135,
+      "maximum_pairs_on_line": 4,
+      "maximum_same_slope_multiplicity": 1,
+      "maximum_slopes_on_line": 4,
+      "maximum_top_pairs_on_line": 4,
+      "mode": "deterministic-sample",
+      "n": 5,
+      "p": 11,
+      "redundancy": 5,
+      "root_capacity": 100778,
+      "same_slope_top_excess": 0,
+      "t": 3,
+      "top_pair_bound": 10,
+      "top_pairs": 19327,
+      "top_pencil_families": 7508,
+      "top_slopes": 19327,
+      "transverse_pairs": 21462,
+      "transverse_slopes": 21462
+    },
+    {
+      "all_pair_bound": 17,
+      "domain": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "good_pair_incidences": 57633,
+      "lines": 10000,
+      "lower_deflation_families": 1074,
+      "lower_fixed_root_families": 0,
+      "lower_generic_rank_histogram": {
+        "1": 6,
+        "2": 9994
+      },
+      "lower_pairs": 1998,
+      "maximum_pairs_on_line": 4,
+      "maximum_same_slope_multiplicity": 1,
+      "maximum_slopes_on_line": 4,
+      "maximum_top_pairs_on_line": 4,
+      "mode": "deterministic-sample",
+      "n": 5,
+      "p": 13,
+      "redundancy": 5,
+      "root_capacity": 100594,
+      "same_slope_top_excess": 0,
+      "t": 3,
+      "top_pair_bound": 10,
+      "top_pairs": 19211,
+      "top_pencil_families": 7294,
+      "top_slopes": 19211,
+      "transverse_pairs": 21209,
+      "transverse_slopes": 21209
+    }
+  ],
+  "schema_version": 1,
+  "sharp_top_fixture": {
+    "all_domain_pairs_realized": true,
+    "direction": [
+      5,
+      1,
+      9
+    ],
+    "domain": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "line_base": [
+      1,
+      0,
+      7
+    ],
+    "lower_pairs": 0,
+    "n": 5,
+    "p": 11,
+    "t": 2,
+    "top_pair_bound": 10,
+    "top_pairs": 10,
+    "top_slopes": 10
+  },
+  "status": "PROVED_AUDIT_WITH_UNPROVED_LEAN_TARGET",
+  "theorem": {
+    "complete_all_pair_bound": "|P|<=binom(N,2)+N+rho<=binom(N+1,2)+t-1",
+    "dimension_range": "N>=R=2t-1",
+    "lower_all_pair_bound": "|P_<t|<=N+rho<=N+t-1",
+    "mca_ca_numerator_bound": "same_as_complete_all_pair_bound",
+    "top_all_pair_bound": "|P_t|<=binom(N,2)"
+  },
+  "totals": {
+    "audited_lines": 170996,
+    "good_pair_incidences": 1370283,
+    "lower_deflation_families": 44857,
+    "lower_pairs": 54270,
+    "root_capacity": 1710321,
+    "same_slope_top_excess": 137021,
+    "top_pairs": 1232889,
+    "top_pencil_families": 164655,
+    "transverse_pairs": 1287159,
+    "transverse_slopes": 1150138
+  }
+}

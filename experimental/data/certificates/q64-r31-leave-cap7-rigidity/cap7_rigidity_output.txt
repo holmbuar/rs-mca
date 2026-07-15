@@ -1,0 +1,8 @@
+RTAIL_FIXED27_SUPPORT_CAP7_SEVEN_TAIL_RIGIDITY: PASS
+fixed_core=27 complement=101 tail_size=20 pair_intersection_cap=2
+eight_tail_union_lower=104 conclusion=at_most_7
+seven_tail_identity=union_98_plus_delta_plus_D delta_plus_D_at_most_3
+seven_tail_pairs=size2_at_least_18 anchor_minweight_differences=6
+value_identity=delta_distance_excess_plus_equal_value_collisions
+overlap_profiles=11 max_multiplicity=4
+status=necessary_rigidity_cap6_still_open

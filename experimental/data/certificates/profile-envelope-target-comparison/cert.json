@@ -1,0 +1,87 @@
+{
+  "artifact": "profile-envelope-target-comparison",
+  "lane": "hard input 4 (complete profile-envelope comparison with the target)",
+  "base_commit": "c35a6da",
+  "verifier": "experimental/scripts/verify_profile_envelope_target_comparison.py",
+  "verifier_result": "PASS (71/71)",
+  "note": "experimental/notes/thresholds/profile_envelope_target_comparison.md",
+  "no_tex_or_pdf_edited": true,
+  "normalization": "realized image L_lambda = |Phi_w(Omega_lambda)| (PO5); NOT ambient |B|^w",
+  "object": {
+    "envelope": "E_n(a) = 1 + (n-a+1) + sup_line sum_lambda (1 + barN_lambda)",
+    "barN": "barN_lambda = |Omega_lambda| / L_lambda",
+    "passes_identity_dominant_iff": "barN_lambda(a) <= barN_id(a) for every realized profile lambda (ID)",
+    "boundary_map": "Phi_w(S) = depth-w locator prefix of Q_S, w = a-k-1"
+  },
+  "rows": {
+    "prime_GF13_n12": {
+      "field": "GF(13)", "n": 12, "a": 6, "k": 3, "w": 2, "domain": "F_13^x",
+      "identity": {"size": 924, "L_id": 169, "barN_id": "924/169"},
+      "square_c2r0": {"size": 20, "L_sq": 13, "barN_sq": "20/13"},
+      "formal_identity_budget": "924/169",
+      "FI_identity_holds": true, "L_id_eq_Bpow_w": "169 = 13^2",
+      "field_drop": false, "square_field_values": 12,
+      "verdict": "identity dominates all scales",
+      "cross_mult_domination": "924*13 = 12012 >= 3380 = 20*169"
+    },
+    "tower_GF49_n12": {
+      "field": "GF(7^2)", "n": 12, "a": 6, "k": 3, "w": 2, "domain": "theta*H, |H|=12",
+      "identity": {"size": 924, "L_id": 319, "barN_id": "924/319"},
+      "square_c2r0": {"size": 20, "L_sq": 7, "barN_sq": "20/7"},
+      "formal_identity_budget": "924/2401",
+      "FI_identity_holds": false, "L_id_lt_Bpow_w": "319 < 49^2 = 2401",
+      "field_drop": true, "B_phi": "F_7", "lambda_2": "1/2", "square_field_values": 6,
+      "verdict": "square beats formal identity budget (paper's thm:smooth-quotient-obstruction)",
+      "cross_mult_obstruction": "20*2401 = 48020 > 6468 = 924*7"
+    },
+    "tower_GF121_n20": {
+      "field": "GF(11^2)", "n": 20, "a": 10, "k": 7, "w": 2, "domain": "theta*H, |H|=20",
+      "identity": {"size": 184756, "L_id": 1331, "barN_id_realized": "184756/1331"},
+      "square_c2r0": {"size": 252, "L_sq": 11, "barN_sq": "252/11"},
+      "formal_identity_budget": "184756/14641",
+      "FI_identity_holds": false, "L_id_collapse": "1331 = 11^3 = 11^4 / 11 (factor p)",
+      "field_drop": true, "B_phi": "F_11", "lambda_2": "1/2",
+      "verdict": "square beats formal identity budget; identity image ALSO collapses (input-2 coupling)",
+      "cross_mult_obstruction": "252*14641 = 3689532 > 2032316 = 184756*11",
+      "target_strict_move": {"E_identity": 26, "E_complete": 50, "B_star": 26,
+        "identity_says": "safe", "complete_says": "unsafe"}
+    },
+    "prime_GF41_n20": {
+      "field": "GF(41)", "n": 20, "a": 10, "k": 7, "w": 2, "domain": "order-20 subgroup of F_41^x",
+      "identity": {"size": 184756, "L_id": 1681, "barN_id": "184756/1681"},
+      "square_c2r0": {"size": 252, "L_sq": 41, "barN_sq": "252/41"},
+      "formal_identity_budget": "184756/1681",
+      "FI_identity_holds": true, "L_id_eq_Bpow_w": "1681 = 41^2",
+      "field_drop": false,
+      "verdict": "identity dominates (deep saturated, no drop, FI holds)"
+    },
+    "generic_20subset_GF121": {
+      "note": "control: a generic (non-coset) 20-subset does NOT collapse",
+      "distinct_depth2_prefixes_first_60000_supports": 7342,
+      "ambient_codomain": 14641,
+      "verdict": "identity image collapse is specific to the smooth coset D=theta*H"
+    }
+  },
+  "census_542_reproduced": [
+    {"p": 5, "n": 8, "a": 4, "Omega_sq": 6, "L_sq": 5, "max_bucket": 2, "QR6": 2},
+    {"p": 7, "n": 12, "a": 4, "Omega_sq": 15, "L_sq": 7, "max_bucket": 3, "QR6": 3},
+    {"p": 11, "n": 20, "a": 4, "Omega_sq": 45, "L_sq": 11, "max_bucket": 5, "QR6": 5}
+  ],
+  "decision": {
+    "c_i_prime_no_drop": "PROVED: prime base field => lambda_c=1 all scales, (FI) holds => identity dominates whole envelope; SB1/(1.9) is the complete comparison",
+    "c_ii_tower_obstruction": "COUNTEREXAMPLE (route-scoped): c=2 field-drop square beats formal identity budget; = paper's own thm:smooth-quotient-obstruction; NOT a new floor",
+    "c_iii_reduction_sharpened": "PROVED reduction: input 4 = proved wrapper o (identity+quotient (FI) = input 2) + (RC); NEW: identity (FI) itself fails on smooth coset, coupling to input 2 through the identity term"
+  },
+  "residual_open": "(PEU-id) identity-slice (FI) L_id >= e^{-o(n)}|B|^w uniformly = hard input 2 applied to the identity term",
+  "fences_respected": [
+    "no emission-based lower reserve (thm:aperiodic-one-ray-saturation)",
+    "realized-image normalization L_lambda (PO5), never ambient",
+    "no route killed by prop:pairwise-overlap-limit / drc:prop-recurrence-nonadditive / prop:no-growing-prime-density re-attempted"
+  ],
+  "caps": {
+    "full_identity_enumeration_max_n": 20,
+    "largest_enumerated_binomial": "C(20,10) = 184756",
+    "cpu_seconds": 1.9,
+    "max_rss_kb": 14208
+  }
+}

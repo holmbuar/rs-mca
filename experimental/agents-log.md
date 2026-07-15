@@ -30,6 +30,38 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - L1/L2, LineRay, circle, and charge-obstruction PR wave
+
+- **Agent/model:** Codex integrating non-draft PRs #755--#774 and #776 from
+  DannyExperiments, holmbuar, Manuel E. Rey-Alvarez Zafiria, Latif Kasuli,
+  and Scott Hughes.  Draft PR #775 was intentionally not integrated.
+- **Files added or changed:** Added L1, L2, M1, X1, threshold, and audit notes
+  under `experimental/notes/`; certificate data and frozen verifier transcripts
+  under `experimental/data/certificates/`; verifier scripts under
+  `experimental/scripts/` and selected certificate subdirectories; and Lean
+  statement/formalization material under `experimental/lean/`.  Shared
+  `experimental/lean/grande_finale/GrandeFinale.lean` imports were combined
+  manually. Contributor `experimental/agents-log.md` edits were not imported.
+- **Status:** PROVED / CONDITIONAL / COUNTEREXAMPLE / EXPERIMENTAL / AUDIT,
+  as stated in the individual notes. No stable paper `.tex` or `.pdf` theorem
+  is promoted by this entry.
+- **What is being added:** Exact Hahn/Rank-16 and Rank-15 route cuts, profile
+  envelope and nonfiber-decomposition audits, Proth-row and L1-imgfib audits,
+  circle-code Lean/crosswalk material, L1 two-sector/multisector classifications,
+  primitive shift-pair and prefix-staircase counterexamples, fixed-deficiency
+  LineRay absorption packets, dual32 classification, q64/cap-seven residual
+  notes, and a transverse charge-obstruction packet forcing a sixth alternative.
+- **How it is useful:** The wave sharpens several remaining finite proof
+  obligations while also recording negative results that prevent overclaiming:
+  the blanket L1 imgfib discharge remains blocked by a mixed-petal gap, global
+  prefix/staircase extremality is false, and a transverse packet-scale
+  alternative is needed for the Sidon-paired charge route.
+- **What to do next:** Audit which packets should be summarized into
+  `asymptotic_rs_mca.tex`, `grande_finale.tex`, or `rs_mca_thresholds.tex`;
+  run the frozen verifiers and Lean builds in a dedicated environment; ask the
+  draft #775 author to rebase after #757 and submit a compact non-draft packet
+  if the mixed-petal material is ready.
+
 ### 2026-07-14 - L1/L2 threshold PR integration wave
 
 - **Agent/model:** Codex integrating PRs #742--#754 from DannyExperiments,

@@ -1,0 +1,9 @@
+4229a4859dd3ebec80e646428b8a0a7a1914b7f56638e386a7a7f33b5568080d  ../../../notes/l2/rank16_fixed_pair_active_pencil_grid_tail_cut.md
+09fbf955ee629381a2f4b5f62fcbc0893852668a755c0df79d3daac9cbf9f59f  ../../../notes/l2/rank16_weighted_grid_extactic_dpw_proof.md
+2c92befebb461824707a9d9906bc1ea0218079f967ab2058dfa36d895e6e2813  ../../../scripts/verify_rank16_fixed_pair_active_pencil_grid_tail_cut.rb
+64a586f0b4b2bf2f502adad65ab369653fb569a83134d8a15a7831f7fe035d8b  ../../../scripts/verify_rank16_weighted_grid_extactic_dpw.py
+d4f815be46b699577b5e6c8b91af2edc3dd6bb2a2ce41bca2e51f959500c3610  ../../../scripts/verify_rank16_weighted_grid_extactic_dpw_independent.rb
+7232ca26d81a7c56930da46112914ef75220831a338a779a042b10d3ccf72467  source_output.txt
+c77070bf2e3529a904fdba270a4f2fd636ed3a969e8341efe1662b3fc65c73a8  primary_output.txt
+b385c79b8e12a1f94f67c36d0f55d75998fdfc3166b479721421613c01c48408  independent_output.txt
+76f9e64c48cd334c67cb854633695be1f608ab59d7af69d24b82625162d71aa1  hostile_audit.md

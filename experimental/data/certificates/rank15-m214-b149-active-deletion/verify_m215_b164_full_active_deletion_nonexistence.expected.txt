@@ -1,0 +1,15 @@
+M215_B164_FULL_ACTIVE_DELETION_NONEXISTENCE: PASS
+field_characteristic=2130706433>215 range=164<=b<=d<=215
+high_DPW_survivors=0
+coarse_rows=29595 max_B=35
+finite_space_cut=8541 structural_rows=21054
+B0_rows=121 Bpositive_rows=20933
+joint_C_states=373774811 joint_C_survivors=404
+joint_C_min_positive_gap=1/120 qG={[15, 208]=>74, [15, 209]=>137, [15, 210]=>181, [15, 207]=>8, [16, 214]=>4}
+joint_C_survivor_sha256=d4f0798b89f133791e2e79d90851eb51937cbee4bb816ee5634c64d7f0f67dc6
+positive_design=400 exceptional=4
+B0_design=106 B0_terminal=15
+terminal_squeezes=[[164, 214, (121781/26), 4684], [164, 215, (380765/78), 4882], [165, 214, (59708/13), 4593], [165, 215, (186835/39), 4791], [166, 214, (117051/26), 4502], [166, 215, (366575/78), 4700], [167, 214, (4411/1), 4411], [167, 215, (179740/39), 4609], [168, 215, (352385/78), 4518], [169, 215, (172645/39), 4427], [170, 215, (26015/6), 4336], [171, 215, (165550/39), 4245], [172, 215, (324005/78), 4154], [173, 215, (158455/39), 4063], [174, 215, (309815/78), 3972]]
+terminal_ledgers=[[215, 42811, 3199, [4717, 15384, 17689, 14161], 2988], [214, 42399, 3183, [7074, 17525, 22201, 18225], 5350]]
+terminal_residue_contradiction=16=1 impossible in char0 or char>215
+RESULT: PASS
