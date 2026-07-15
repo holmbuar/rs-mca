@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - L1 counterexample regression locks
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/l1_counterexample_regressions/` and this coordination entry.
+- **Status:** FORMALIZATION / AUDIT; individual theorem and nonclaim status is recorded in the package documentation.
+- **What is being added:** Adds stdlib regression theorems for certified L1 counterexample rows and the corrected package-local verifier command.
+- **How it is useful:** Provides one package-level review surface while preserving the documented proof boundaries and explicit open inputs.
+- **Verification:** The pinned Lake build passes with 3 jobs; the independent default gates and tamper self-test both pass. No new `sorry`, `admit`, or custom `axiom` syntax is introduced.
+- **What to do next:** Review the theorem correspondence and proof boundaries, then continue only the targets explicitly recorded as open or unproved.
+
 ### 2026-07-15 - L1/L2, LineRay, circle, and charge-obstruction PR wave
 
 - **Agent/model:** Codex integrating non-draft PRs #755--#774 and #776 from
