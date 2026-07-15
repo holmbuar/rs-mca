@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - Consolidated Grande Finale Lean formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/grande_finale/` and this coordination entry.
+- **Status:** FORMALIZATION / AUDIT; individual theorem and nonclaim status is recorded in the package documentation.
+- **What is being added:** Consolidates the exact Reed--Solomon parity, support, adjacent-row, prefix/list/ray/line, profile, and add-back formalizations together with syntax-only default-build repairs under the existing package root.
+- **How it is useful:** Provides one package-level review surface while preserving the documented proof boundaries and explicit open inputs.
+- **Verification:** The pinned default Lake build passes with 8086 jobs; the package-root placeholder count is unchanged from the integration baseline, with three pre-existing statement targets remaining explicit. No new `sorry`, `admit`, or custom `axiom` syntax is introduced.
+- **What to do next:** Review the theorem correspondence and proof boundaries, then continue only the targets explicitly recorded as open or unproved.
+
 ### 2026-07-15 - L1/L2, LineRay, circle, and charge-obstruction PR wave
 
 - **Agent/model:** Codex integrating non-draft PRs #755--#774 and #776 from
