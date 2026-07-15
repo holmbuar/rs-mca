@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - Consolidated moment-to-max formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/moment_to_max/` and `experimental/notes/audits/lean_moment_to_max.md` and this coordination entry.
+- **Status:** FORMALIZATION / AUDIT; individual theorem and nonclaim status is recorded in the package documentation.
+- **What is being added:** Combines the max-fiber, concentration-floor, PTE cluster-packing, and combinatorial-trade champion mechanisms with their exact finite regression fixtures.
+- **How it is useful:** Provides one package-level review surface while preserving the documented proof boundaries and explicit open inputs.
+- **Verification:** The pinned Lake build passes with 8031 jobs; independent verifiers pass 39/39, 66/66, 48/48, 34/34, and the full k=5 replay and tamper modes pass 40/40 and 3/3. No new `sorry`, `admit`, or custom `axiom` syntax is introduced.
+- **What to do next:** Review the theorem correspondence and proof boundaries, then continue only the targets explicitly recorded as open or unproved.
+
 ### 2026-07-15 - L1/L2, LineRay, circle, and charge-obstruction PR wave
 
 - **Agent/model:** Codex integrating non-draft PRs #755--#774 and #776 from
