@@ -30,6 +30,33 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - First-interior general-line BC modular-fiber audit
+
+- **Agent/model:** Codex, completed at `2026-07-15 09:16:57Z`.
+- **Files added or changed:**
+  `experimental/notes/thresholds/bc_first_interior_general_line_modular_fibers.md`,
+  `experimental/scripts/experiment_bc_first_interior_general_line.py`,
+  `experimental/lean/grande_finale/GrandeFinale/BCFirstInteriorGeneralLine.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED / EXPERIMENTAL / AUDIT / OPEN GAP.
+- **What is being added:** An exact determinant normal form and fixed-multiplier
+  rank theorem for the arbitrary `d1=w+2` interpolation-lattice chart.  The
+  planted constant-denominator case recovers depth-`(w+1)` Q, while a
+  nonconstant denominator gives a named mixed prefix-plus-remainder
+  modular-locator fiber.  An exact `F_97/mu_16` preflight finds a
+  pre-first-match rank-two minimal-denominator fixture whose error locators are
+  then routed through fixed-root common-GCD cells; Lean proves the determinant
+  identities and records numerical rank/compiler shapes as unproved statement
+  targets.
+- **How it is useful:** Advances the balanced-core residual ray-compiler audit
+  without claiming a deployed payment.  It replaces the raw high-dimensional
+  `A`-space description by an at-most two-parameter union of exact modular
+  fibers and identifies the missing row-sharp split-divisor estimate.
+- **What to do next:** Prove or falsify the modular-locator fiber bound, then
+  combine it with a witness-exhaustive tangent/quotient/extension first-match
+  classifier before using the packet in a finite or asymptotic upper ledger.
+
 ### 2026-07-15 - L1/L2, LineRay, circle, and charge-obstruction PR wave
 
 - **Agent/model:** Codex integrating non-draft PRs #755--#774 and #776 from
