@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - First-interior BC mixed subset-product and two-cell certificate
+
+- **Agent/model:** Codex, completed at `2026-07-15 10:35:30Z`.
+- **Files added or changed:**
+  `experimental/notes/thresholds/bc_first_interior_general_line_modular_fibers.md`,
+  `experimental/notes/thresholds/bc_first_interior_modular_subset_product.md`,
+  `experimental/notes/thresholds/bc_first_interior_f97_two_cell_certificate.md`,
+  `experimental/scripts/verify_bc_modular_subset_product.py`,
+  `experimental/scripts/verify_bc_first_interior_f97_two_cell_certificate.py`,
+  and `experimental/agents-log.md`.
+- **Status:** PROVED / PROVED-SPECIAL / EXACT EXPERIMENT / AUDIT / OPEN GAP.
+- **What is being added:** On the root-free chart, an exact mixed
+  subset-product reduction and finite-abelian Fourier formula for every fixed
+  nonzero multiplier, together with the sharp exchange lower bound.  A
+  faithful `F_41/mu_20` census realizes one heaviest target in each of ten
+  quotient-algebra cases by a genuine weak-Popov basis, a sharp exact
+  three-element `F_101` fiber disproves the shortcut
+  “average below one implies singleton,” and an exhaustive two-cell
+  certificate closes the pinned `F_97/mu_16` common-GCD routing with exact
+  ordered slope budget three.
+- **How it is useful:** It corrects the prior per-slice dimension-balance
+  shortcut, names the mixed character mass that must be controlled, computes
+  the exact real occupancy bounds and least-integer ceilings, and turns the
+  toy fixture's common-GCD routing from a diagnosis into a witness-exhaustive
+  finite certificate.
+- **What to do next:** Prove a mixed-character or aggregate occupancy bound
+  strong enough for the deployed ledger, then generalize the two-cell slope
+  projection beyond the pinned fixture.  Keep Lean formalization in its
+  separate workstream.
+
 ### 2026-07-15 - First-interior general-line BC modular-fiber audit
 
 - **Agent/model:** Codex, completed at `2026-07-15 09:16:57Z`.

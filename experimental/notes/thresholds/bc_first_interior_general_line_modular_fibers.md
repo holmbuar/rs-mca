@@ -44,6 +44,10 @@ ledger.
 - `EXPERIMENTAL`: the exact `F_97 / mu_16` general-line preflight and its
   rank-two minimal-denominator fixture, which the audit routes through
   slice-local common-`D`-GCD cells before first match.
+- `PROVED-SPECIAL`: the follow-up
+  `bc_first_interior_f97_two_cell_certificate.md` factors those two cells,
+  enumerates both residual planes, and proves the exact three-slope budget for
+  the pinned retained subincidence.
 - `OPEN GAP`: a row-sharp bound for the modular-locator fibers and a
   witness-exhaustive first-match classification of arbitrary lines.
 
@@ -401,32 +405,41 @@ and distinct nonzero `(B,V)` coordinates can also collide to one ray.  Hence
 ```
 
 After the slice-local `gcd(B,W1)!=1` loci have been assigned to the earlier
-common-GCD first-match owner, a sufficient fixed-word row-sharp input over a
-coefficient field of size `s` is
+common-GCD first-match owner, the following remains a logically sufficient
+fixed-word input over a coefficient field of size `s`:
 
 ```text
 |MLFib_B| <= R_B binom(n,m) s^(-rank_monic L_B)          (17)
 ```
 
-uniformly over the remaining nonzero multipliers with `gcd(B,W1)=1`, with
-controlled overhead `R_B`.
+It must hold uniformly over the remaining nonzero multipliers with
+`gcd(B,W1)=1`.  The exact rank exponent does not make `R_B` small.  The
+follow-up packet
+`bc_first_interior_modular_subset_product.md` proves that on a root-free
+chart one sufficient Fourier choice is
 
-- When `d<=w+1`, the leading coefficient of linear `B` is fixed: at most `s`
-  multiplier slices of rank `w+1` sum to the target scale
-  `binom(n,m)s^{-w}`.
-- When `d=w+2`, at most `s^2` linear-multiplier slices of rank `w+2` sum to the
-  same target scale.
+```text
+R_B^Fourier := kappa(W1) (1+A_(W1,h)),                  (17a)
+```
 
-Thus the first-interior fixed-word dimension balance is exact.  What is missing
-is the split-divisor estimate (17), not another coefficient count.  For `d=0`,
-(17) has the ordinary depth-`(w+1)` Q shape; importing the planted packet still
-requires its base-field hypotheses.  For `d>0`, it is a genuinely new modular
-row-sharp input.
+where `A_(W1,h)` is an explicit nontrivial mixed character mass.  Moreover,
+if `binom(n,m)s^(-rank_monic L_B)<1`, every nonempty integer fiber forces any
+admissible `R_B` to be at least the reciprocal of that scale.  This occurs in
+the full-denominator slice of both deployed rows and already forces 26.24 and
+41.26 optimistic bits respectively.
 
-This implication is `CONDITIONAL`: linear rank does not imply that the
-`D`-split locators are equidistributed among the affine fibers.  Moreover,
-(16b)--(17) are fixed-word statements; a line-level slope payment still needs
-the first-match slope projection and a bound uniform along the received line.
+Consequently, naively adding separately rounded estimates over at most `s` or
+`s^2` multiplier slices can leave a dominant slice-count term.  The exact
+rank identities identify the nominal exponent only; they do not prove the
+previously claimed fixed-word dimension balance.  For `d=0`, the character
+object specializes to ordinary Q.  For `d>0`, it is a genuinely mixed
+truncated-locator/quotient-algebra subset-product problem.
+
+A useful finite compiler therefore needs a mixed character theorem, an
+aggregate occupancy bound across multipliers, ray deduplication, or a direct
+slope-image bound.  In every case (16b)--(17) remain fixed-word statements;
+line-level payment still requires the first-match slope projection and
+uniformity along the received line.
 
 ## 5. Deployed dimensions (`AUDIT`)
 
@@ -490,6 +503,13 @@ four retained locators together have trivial gcd, but they are coverable by
 two fixed-root cells.  The fixture is therefore routed by common-GCD before it
 can become a residual witness.
 
+The follow-up verifier enumerates all `9507` points of each residual
+projective plane and, independently, all `6435` and `3432` split-divisor
+candidates.  Each plane contains exactly three claimed split locators, the
+two cells cover all four retained `LineRay`s, and ordered first match assigns
+slope parts `{0,1,2}` and the empty set.  Hence the exact pinned slope budget
+is `3`.
+
 It refutes only the pre-common-GCD simplification that every general
 first-interior line automatically has a rank-one minimal-denominator core.  It
 does not refute `prob:saturated-bc`, which explicitly permits paid
@@ -498,10 +518,13 @@ decompositions or a named residual with its own slope bound.
 ### Honest first-match scope
 
 The preflight exactly removes common size-`m` supports and cyclic-periodic
-support representatives.  It now diagnoses the selected error-locator
-common-GCD transversals and finds that both are routeable.  It does not
-implement a witness-exhaustive tangent classifier, and `q=p` makes
-extension/subfield confinement inapplicable.  Its retained class is therefore
+support representatives.  The separate two-cell certificate is
+witness-exhaustive for this retained four-`LineRay` subincidence: it diagnoses
+the selected error-locator common-GCD transversals and proves their exact
+ordered first-match budget.  Neither script implements a witness-exhaustive
+tangent classifier for arbitrary lines, and `q=p` makes extension/subfield
+confinement inapplicable.  Before that fixture-specific certificate, the
+preflight's retained class is therefore
 
 ```text
 PRE_FIRST_MATCH_CANDIDATE_WITH_COMMON_GCD_ROUTING,
