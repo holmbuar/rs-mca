@@ -30,6 +30,55 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - Transverse/charge obstruction on the Sidon-paired class (hard input 2)
+
+- **Agent/model:** Claude Fable 5.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/transverse_charge_obstruction_sidon_paired.md`,
+  verifier `experimental/scripts/verify_transverse_charge_obstruction.py`
+  (stdlib, deterministic, `RESULT: PASS (281/281)`, `--tamper-selftest` 4/4,
+  `--emit-certificate` regenerates the JSON), certificate
+  `experimental/data/certificates/transverse-charge-obstruction/transverse_charge_obstruction.json`,
+  and Lean statement stub `experimental/lean/transverse_charge_obstruction/`
+  (`lake build` succeeds, `native_decide`, no `sorry`, no mathlib).  No
+  `.tex`/`.pdf` edited.
+- **Status:** PROVED (Prop 1 chart-free; Thms 2-4 on the class, q=2 rooting) +
+  EXPERIMENTAL (resonant-spectrum structure, exact product formula and
+  congruence).  No stable paper theorem promoted.
+- **What is being added:** Both branches of the (NFB) object are decided
+  NEGATIVE on the Sidon-paired class ((NFB) was stated in the companion
+  OPEN PR #760; the note quotes it verbatim and the verifier reproduces the
+  one census it leans on, so this packet is self-contained at main).  (i) Chart-free: pieces of
+  bounded per-syndrome multiplicity ("transverse") can never carry a q=2
+  failure's charge -- compatibility caps their total at `sqrt(KWM)`, which is
+  `e^{-eta N}` below `Omega_+` on every colliding chart; verified as an exact
+  unsatisfiability certificate on explicit round-robin partitions.  (ii) On the
+  class, at the canonical q=2 rooting of ANY failing band, fiber-rooted
+  semantic pieces are capped by `f_max sqrt(delta_A)`, so the five-precursor
+  semantic-or-signed decomposition (#716 Sec 6) cannot reach
+  `sum c_i = Omega_+`: every fiber is heavy enough to fail (`f_max L >= 2M`)
+  and too light to pay (`f_max^2 L < M^2`), all `4 <= B <= 64` exact.
+  (iii) The direct PO4/signed payment fails at EVERY moment order (occupied-
+  support transfer, base-free), including the moderately-unpaired slice.
+  (iv) The surviving structure is explicit: the half-frequency `j* = (c-1)/2`
+  obeys an exact antipodal congruence and resonates at `|hat f(j*)| >= 0.70 M`
+  (finite-verified to `B = 64`), with a digit-sparse resonant spectrum of
+  census 42-58 at `rho = 1/10` (`B = 6, 8`).
+- **How it is useful:** Hard input 2's residual is re-pointed exactly:
+  avdeevvadim #716 Sec 7.1's sixth (packet-scale, non-fiber-rooted)
+  alternative is upgraded from optional to FORCED, with the resonant spectrum
+  as its first mandatory test instance; the only escapes are atlas-exclusion
+  (Codex's atlas-totality lane, interfaced not assumed) and #729's untouched
+  large-q Sidon residual.  Consumes and credits avdeevvadim #716 (whose Sec 7.1
+  anticipated this), #760/#739/#729/#732/#735/#728/#717, DannyExperiments'
+  #749 hypothesis corrections, and the paper's PO3/PO4/PO5 and SAT1 (fence N1
+  respected).
+- **What to do next:** Audit hypothesis (FR) (fiber-rootedness of the five
+  precursors) against any future grammar extension -- its negation is the
+  sixth alternative by design; a q-uniform version of Theorem 2 needs one
+  signed character-sum estimate (`||P_A g||_inf` for non-band-limited norming
+  duals).  Run the verifier and Lean build in a dedicated environment.
+
 ### 2026-07-14 - L1/L2 threshold PR integration wave
 
 - **Agent/model:** Codex integrating PRs #742--#754 from DannyExperiments,
