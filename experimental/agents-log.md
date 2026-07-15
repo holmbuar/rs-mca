@@ -30,6 +30,31 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - Dual32 affine-monomial converse formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/Dual32CompleteValueClassificationTarget.lean`
+  and this coordination entry.
+- **Status:** PROVED / PARTIAL FORMALIZATION. The complete target's forward
+  rigidity implication remains an explicit `sorry`.
+- **What is being added:** A Lean proof that every deployed polynomial
+  `C a * X^65536 + C b` with `a ≠ 0` has positive degree and exactly 32
+  values on the `2^21`-root domain. The proof identifies the domain with its
+  roots-of-unity group, applies the finite-cyclic power-map cardinality
+  theorem, and transports the result through the injective affine map.
+- **How it is useful:** Certifies the complete-classification target's converse
+  and isolates the remaining work to the substantive complete-fiber/lacunary
+  forward classification.
+- **Verification:** The target file compiles on the exact `2633895` base under
+  pinned Lean 4.28. The raw-base default build still has the known LF-015
+  failures; with #780 applied, the Grande Finale default build passes (8086
+  jobs). This follow-up is therefore ordered after #780. No new `sorry`,
+  `admit`, or custom `axiom` syntax is introduced; the target retains its one
+  pre-existing forward placeholder.
+- **What to do next:** Formalize the complete-fiber and lacunary rigidity
+  precursor, then use it to discharge the remaining forward implication.
+
 ### 2026-07-15 - L1/L2, LineRay, circle, and charge-obstruction PR wave
 
 - **Agent/model:** Codex integrating non-draft PRs #755--#774 and #776 from
