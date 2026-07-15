@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - Consolidated asymptotic-spine formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/asymptotic_spine/` and this coordination entry.
+- **Status:** FORMALIZATION / AUDIT; individual theorem and nonclaim status is recorded in the package documentation.
+- **What is being added:** Combines the exact adjacent identity ratio, prefix atlas, high-kappa and full-image windows, C1--C8 aggregation, activation handoff, and interface regression locks.
+- **How it is useful:** Provides one package-level review surface while preserving the documented proof boundaries and explicit open inputs.
+- **Verification:** The stdlib package build passes with 27 jobs; the window audit passes 34/34 with 8/8 tampers and the A4 coverage audit passes 63 checks. No new `sorry`, `admit`, or custom `axiom` syntax is introduced.
+- **What to do next:** Review the theorem correspondence and proof boundaries, then continue only the targets explicitly recorded as open or unproved.
+
 ### 2026-07-15 - L1/L2, LineRay, circle, and charge-obstruction PR wave
 
 - **Agent/model:** Codex integrating non-draft PRs #755--#774 and #776 from
