@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-15 - Balanced-core transverse-secant formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/syndrome_secant/` and this coordination entry.
+- **Status:** FORMALIZATION / AUDIT; individual theorem and nonclaim status is recorded in the package documentation.
+- **What is being added:** Adds the balanced-core transverse-secant theorem and its source-to-Lean audit boundary under the syndrome-secant package root.
+- **How it is useful:** Provides one package-level review surface while preserving the documented proof boundaries and explicit open inputs.
+- **Verification:** The pinned Lake build passes with 8028 jobs and the independent ray-compiler replay passes 173 checks. No new `sorry`, `admit`, or custom `axiom` syntax is introduced.
+- **What to do next:** Review the theorem correspondence and proof boundaries, then continue only the targets explicitly recorded as open or unproved.
+
 ### 2026-07-15 - L1/L2, LineRay, circle, and charge-obstruction PR wave
 
 - **Agent/model:** Codex integrating non-draft PRs #755--#774 and #776 from
