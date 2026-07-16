@@ -26,6 +26,9 @@ This package is a partial Lean formalization of
 - `GrandeFinale/C0PeriodicF28TwoBlockCompiler.lean`: generic two-block
   truncation of periodic locators and recovery of both low coefficient-block
   equations from projective congruence modulo `X^a` when `2B <= a`.
+- `GrandeFinale/C0PeriodicF28ScalarPencil.lean`: explicit scalar solution of
+  the two block equations, direct projective-congruence-to-pencil normal form,
+  and the `30,833` low-block degree cut from two distinct monic members.
 - `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
   translate-intersection averaging, linear-code received-line shear invariance,
   challenge-restricted MCA numerators, and the ceiling-density transfer from a
@@ -158,11 +161,13 @@ at most 63 members when its direction is `X^32,768 U` with `U(0) != 0` and
 replaces the final opaque component
 cap in the first-match theorem.  The separate two-block compiler now proves
 that projective congruence modulo the deployed monomial forces both low
-coefficient-block equations after the same scaling.  Turning those equations
-into the pencil representation and its degree cut, canonical stratum
-classification, quotient-constant classes, fixed-residual Hahn cap, and
-first-match cover remain explicit inputs.  These modules do not treat `f<=27`,
-general monic moduli, or a complete `c=0` parent.
+coefficient-block equations after the same scaling.  The scalar-pencil module
+solves those equations when both quotient constants are nonzero and proves the
+`30,833` degree cut when a normalized family has at least two distinct monic
+members with the deployed upper-block degree bound.  Constructing that family
+from the canonical stratum, quotient-constant classes, the fixed-residual Hahn
+cap, and the first-match cover remain explicit inputs.  These modules do not
+treat `f<=27`, general monic moduli, or a complete `c=0` parent.
 
 The main remaining target is Q:
 

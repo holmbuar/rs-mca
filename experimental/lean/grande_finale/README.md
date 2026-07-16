@@ -27,6 +27,10 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/C0PeriodicF28TwoBlockCompiler.lean` proves that projective
   periodic-locator congruence modulo `X^a`, with `2B <= a`, forces both low
   coefficient-block equations after the same projective scaling.
+- `GrandeFinale/C0PeriodicF28ScalarPencil.lean` solves those block equations
+  as an explicit reference-member pencil when the quotient constants are
+  nonzero, then derives the low-block degree cut from two distinct monic
+  residuals with a common upper-block degree budget.
 - `GrandeFinale/ChallengeIntersection.lean` formalizes exact finite
   translate--challenge intersection averaging, received-line shear invariance,
   the challenge-restricted MCA numerator, and the outer ceiling compiler used

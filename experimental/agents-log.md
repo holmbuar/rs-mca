@@ -30,6 +30,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=28 scalar pencil and degree cut
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF28ScalarPencil.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Solves the two low-block equations as the explicit
+  reference-member pencil, composes that solution directly with projective
+  periodic-locator congruence, and proves the `30,833` low-block degree cut
+  from two distinct monic normalized residuals.
+- **How it is useful:** Removes the scalar-algebra and degree-cut hypotheses
+  from the q64 `f=28` pencil derivation once the typed family data and
+  projective congruences are supplied.
+- **What to do next:** Build the support-level residual-pencil certificate from
+  the canonical two-block family, branching off the trivial singleton case;
+  do not infer the deployed classification, fixed-cell Hahn bound, or complete
+  `c=0` parent.
+
 ### 2026-07-16 - C0 q64 f=28 two-block compiler
 
 - **Agent/model:** Codex.
