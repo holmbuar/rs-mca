@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - Balanced-core factor-aware rank guardrail
+
+- **Agent/model:** Codex, with independent proof, verifier, and scope reviews.
+- **Files added or changed:** `experimental/agents-log.md`,
+  `experimental/notes/audits/balanced_core_factored_rank_audit.md`,
+  `experimental/notes/thresholds/balanced_core_kappa_growth.md`,
+  `experimental/notes/thresholds/a4_covers_high_kappa.md`,
+  `experimental/scripts/verify_balanced_core_factored_rank.py`, and
+  `experimental/data/certificates/balanced-core-factored-rank/balanced_core_factored_rank.json`.
+- **Status:** PROVED / AUDIT / COUNTEREXAMPLE.
+- **What is being added:** A factor-aware rank correction separates the raw RS
+  row from the row shortened by a common agreement core. An exact transverse
+  `F_11` syndrome-line witness refutes retaining the original `k` after
+  shortening: an empty residual core has `kappa=k'=k-|K|`.
+- **How it is useful:** This closes a hard-input-3 audit hazard without
+  disturbing the governing TeX or the valid raw empty-core/PTM experiments.
+  It prevents raw prefix-family counts from being promoted as evidence that
+  every actual balanced-core residual has `kappa=k=Theta(n)`.
+- **What to do next:** Prove or refute `k-|K|=Theta(n)` on positive-rate actual
+  first-match residuals, and certify the projection from raw prefix supports to
+  realized distinct slopes before using the census asymptotically.
+
 ### 2026-07-16 - KoalaBear branch-3 low-excess carrier cut
 
 - **Agent/model:** Codex integrating Scott Hughes PR #849.
