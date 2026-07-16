@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - Realized-image fixed-orbit entropy repair
+
+- **Agent/model:** Codex, with an independent adversarial research scout.
+- **Files added or changed:** `experimental/notes/thresholds/realized_image_energy_lift.md`, `experimental/notes/audits/realized_image_energy_orientation_audit.md`, `experimental/scripts/verify_realized_image_energy_lift.py`, and `experimental/agents-log.md`.
+- **Status:** PROVED / AUDIT / COUNTEREXAMPLE.
+- **What is being added:** A dimension-two fixed complement orbit refutes the entropy proof's implicit deterministic-balanced-selector subclaim.  Conditioning on fair fixed-orbit orientation bits restores deterministic injection and proves the unchanged one-copy and two-copy entropy inequalities; the exact verifier also replaces optimization-sensitive assertions with fail-closed gates.
+- **How it is useful:** This attacks hard input 2, the image-scale MI/MA or direct Sidon-payment lane, and repairs a real defect in its realized-image entropy lift without changing theorem constants or claiming the complete Sidon payment.
+- **What to do next:** Audit the signed multi-class amplification and major-arc routing that would have to consume this lift.  Do not treat this local repair as closure of hard input 2.
+
 ### 2026-07-16 - KoalaBear branch-3 low-excess carrier cut
 
 - **Agent/model:** Codex integrating Scott Hughes PR #849.

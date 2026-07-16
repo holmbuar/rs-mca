@@ -18,7 +18,8 @@ S_m = Phi(Omega_m),
 L = |S_m|,
 ```
 
-where `G` is a finite abelian group.  Fix `s in S_m`, and let
+where `G` is a finite abelian group and `Phi` is a group homomorphism.
+Fix `s in S_m`, and let
 
 ```text
 F subseteq Omega_m intersect Phi^{-1}(s),   f = |F| > 0.
@@ -43,7 +44,7 @@ A(N,m) = [z^(2m)] (1+z+z^2)^N,
 B(N,m) = [z^(3m)] (1+z+z^2+z^3)^N.
 ```
 
-Let `h_2` be binary entropy, set
+Let `h_2` be binary entropy and `H` base-two Shannon entropy.  Set
 
 ```text
 a(p) = 1 + h_2(p)/2,
@@ -51,7 +52,7 @@ q_0(p) = (1-p)^2/2,
 q_1(p) = (1-p^2)/2,
 q_2(p) = p(2-p)/2,
 q_3(p) = p^2/2,
-g(p) = H_2(q_0(p),q_1(p),q_2(p),q_3(p)).
+g(p) = H(q_0(p),q_1(p),q_2(p),q_3(p)).
 ```
 
 For `theta=m/N`, every `F` above satisfies
@@ -114,40 +115,83 @@ f^4 <= |F+F| sum_z r(z)^2 = |F+F| E(F).
 Combining the last two displays gives `f L <= B(N,m) Delta(F)`, which is
 (2).
 
-For the entropy refinements, augment `Phi` by cardinality.  Its Boolean image
-has the complement involution
+For the entropy refinements, put
 
 ```text
-J(u) = Phi_tilde(1)-u.
+Phi_tilde(x) = (|x|,Phi(x)),
+S_tilde = Phi_tilde({0,1}^N),
+L_tilde = |S_tilde|.
 ```
 
-On each orbit choose realized representatives `y` and `1-y`, and choose
-uniformly between the two orientations.  This produces a realized syndrome
-`U` and an independent representative `Y` such that every coordinate of `Y`
-has marginal `1/2`.
-
-Let `X` be uniform on `F`.  The syndrome `U` is determined by `X+Y`, while
-`X` is recovered from `(X+Y,U,Y)`.  Hence
+The weight-`m` image is one slice of `S_tilde`, so `L<=L_tilde`.  It is enough
+to prove the entropy bounds with `L_tilde`.  Complementation induces the
+involution
 
 ```text
-log_2(fL) <= H(X+Y)
-            <= sum_i H(X_i+Y_i)
-            <= N a(theta),
+J(u) = Phi_tilde(1)-u
 ```
 
-where the last step is entropy concavity.  This proves (3).
+on `S_tilde`.  Decompose `S_tilde` into two-cycles and fixed points.  On every
+two-cycle choose a realized representative `y_u` and set
+`y_(J(u))=1-y_u`.  For each fixed point choose a realized `y_u`; then both
+`y_u` and `1-y_u` represent `u`.  Let `O` be independent fair orientation
+bits for the fixed points.  For a fixed orientation `o`, let `tau_o` be the
+resulting deterministic representative selector.  Finally, take `U` uniform
+on `S_tilde`, independent of `O`, and put `Y=tau_O(U)`.
 
-For two independent copies `X_1,X_2`, Renyi monotonicity gives
+For every orientation, `Phi_tilde(Y)=U`.  The two-cycle contributions balance
+coordinatewise because `U` is uniform, and averaging `O` balances every fixed
+point.  Hence every coordinate of `Y` has marginal `1/2`.
+
+Let `X` be uniform on `F`, independent of `(U,O)`, and write
+`s_tilde=(m,s)=Phi_tilde(X)`.  For every fixed orientation `o`, the map
 
 ```text
-H(X_1+X_2) >= log_2(f/Delta(F)).
+(x,u) |-> x+tau_o(u)
 ```
 
-The coordinate law of `X_1+X_2+Y` is the four-vector defining `g(p_i)`.
-The function `g` is symmetric and strictly concave, so the same argument gives
+is injective: `Phi_tilde(x+tau_o(u))=s_tilde+u` recovers `u`, after which
+`tau_o(u)` and `x` are known.  Therefore
 
 ```text
-log_2(fL/Delta(F)) <= N g(theta),
+H(X+Y | O) = log_2(f L_tilde).
+```
+
+Put `p_i=Pr[X_i=1]`.  Since `X` lies in `Omega_m`, one has
+`sum_i p_i=m`.  The coordinate law of `X_i+Y_i` is
+
+```text
+((1-p_i)/2, 1/2, p_i/2),
+```
+
+whose entropy is `a(p_i)`.  Conditioning, subadditivity, and entropy
+concavity now give
+
+```text
+log_2(fL) <= log_2(f L_tilde) = H(X+Y | O)
+            <= H(X+Y) <= sum_i a(p_i) <= N a(theta).
+```
+
+This proves (3).
+
+For two independent copies `X_1,X_2`, put `A=X_1+X_2`.  Monotonicity from
+order-two Renyi entropy to Shannon entropy gives
+
+```text
+H(A) >= H_2^Renyi(A) = log_2(f^4/E(F)) = log_2(f/Delta(F)).
+```
+
+For each fixed orientation, `(a,u)|->a+tau_o(u)` is injective by the same
+augmented-syndrome recovery.  The coordinate law of `A+Y` is the four-vector
+defining `g(p_i)`.  Conditioning, subadditivity, and the symmetry and strict
+concavity of `g` give
+
+```text
+log_2(fL/Delta(F)) <= log_2(f L_tilde/Delta(F))
+                    <= H(A+Y | O)
+                    <= H(A+Y)
+                    <= sum_i g(p_i)
+                    <= N g(theta),
 ```
 
 which is (4).
