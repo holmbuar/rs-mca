@@ -30,6 +30,32 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - Direct-Sidon falsifier realizability correction
+
+- **Agent/model:** Codex, with independent normalization, generator, checker,
+  and scope reviews.
+- **Files added or changed:** `experimental/agents-log.md`,
+  `experimental/scripts/verify_sidon_direct_payment.py`,
+  `experimental/scripts/verify_sidon_direct_payment_check.py`,
+  `experimental/data/certificates/sidon-direct-payment/sidon_direct_payment.json`,
+  and `experimental/notes/audits/sidon_direct_payment.md`.
+- **Status:** FIXED / COUNTEREXAMPLE_NEW_FLOOR / OPEN GAP / AUDIT.
+- **What is being added:** The advertised direct-Sidon falsifier row is retired
+  as unrealizable because it supplied `barN` independently of its fibers and
+  used invalid cutoff data.  The corrected gate derives
+  `M=sum_s f_s`, `L=#{s:f_s>0}`, and `barN=M/L`.  The existing fixed-weight
+  Boolean C9 family supplies the genuine finite failure:
+  `M=152`, `L=121`, `barN=152/121`,
+  `G_sid=937024/6859`, and normalized rate `>0.05`.
+- **How it is useful:** This corrects the direct branch of hard input 2's
+  falsifiability evidence and separates a real counterexample to the literal
+  quantitative primitive-leaf
+  interface from the still-open deployed smooth-residual Sidon payment.
+- **What to do next:** Formalize the C1--C8 residual membership contract and
+  either place the Boolean family inside an intended smooth-domain row or prove
+  a direct Sidon/image-scale payment under those missing hypotheses.  Do not
+  promote the literal-interface counterexample as a deployed-row refutation.
+
 ### 2026-07-16 - KoalaBear branch-3 low-excess carrier cut
 
 - **Agent/model:** Codex integrating Scott Hughes PR #849.
