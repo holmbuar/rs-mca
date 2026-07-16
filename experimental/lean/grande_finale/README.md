@@ -28,8 +28,10 @@ The package root is `GrandeFinale`, with additional modules under
   `b=5,7` subtotal consumed by the first-match theorem.
 - `GrandeFinale/C0PeriodicF29ResidualOwner.lean` proves that projectively
   congruent periodic locators with nonzero quotient constants and residual
-  supports shorter than the period have the same residual support.  Its
-  certificate compiler specializes this to q64 `f=29` and sums a supplied
+  supports shorter than the period have the same residual support.  It first
+  derives that the projective scale is nonzero from the nonzero short left
+  block, so the certificate supplies only an existential projective
+  congruence.  Its compiler specializes this to q64 `f=29` and sums a supplied
   local cap across 64 quotient-constant classes.
 - `GrandeFinale/C0PeriodicF28ResidualPencil.lean` proves the support-level
   base-root packing theorem for a q64 `f=28` residual pencil, giving at most
