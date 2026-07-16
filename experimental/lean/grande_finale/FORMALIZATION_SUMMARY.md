@@ -39,9 +39,9 @@ This package is a partial Lean formalization of
   q64 `f=28` target cap `83,970,774,720`, and its first-match composition.
 - `GrandeFinale/C0PeriodicF28TargetCompiler.lean`: finite-image
   deduplication and representative selection from target-indexed two-block
-  data, canonical reference-scale normalization, derived nonzero
-  nonreference scales, and the same exact residual, target, and first-match
-  bounds.
+  data, choice of scales on nonreference supports from existential projective
+  witnesses, canonical reference-scale normalization, derived nonzero chosen
+  scales, and the same exact residual, target, and first-match bounds.
 - `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
   translate-intersection averaging, linear-code received-line shear invariance,
   challenge-restricted MCA numerators, and the ceiling-density transfer from a
@@ -188,11 +188,12 @@ representative per support, always retaining the designated reference target;
 no duplicate-data coherence is needed.  The canonical-block module now derives
 each locator decomposition, the lower-degree bound, exact upper degree, and
 upper monicity directly from the residual support.  Constructing the
-target-indexed quotient/projective data from the canonical stratum remains
-explicit, but its projective coefficient-zero equation now forces the supplied
-nonreference ray scales to be nonzero; the reference scale is normalized to
-one.  Proving the fixed-residual Hahn cap and the first-match cover remain
-explicit inputs.  These modules do not treat
+target-indexed quotient polynomials and existential projective relations from
+the canonical stratum remains explicit.  The compiler chooses the
+scales for nonreference supports, uses the coefficient-zero equation to prove
+them nonzero, and normalizes the reference scale to one.  The fixed-residual
+Hahn cap and the first-match cover remain explicit inputs.  These modules do
+not treat
 `f<=27`, general monic moduli, or a complete `c=0` parent.
 
 The main remaining target is Q:

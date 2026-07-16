@@ -46,10 +46,12 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/C0PeriodicF28TargetCompiler.lean` accepts those algebraic
   certificates directly on a finite target family.  It deduplicates residual
   supports by finite image, selects representatives while fixing the reference
-  target, derives each block decomposition canonically, normalizes the
-  reference ray scale to one, and proves every nonreference scale is nonzero.
-  It recovers the same exact target and first-match bounds without separate
-  family-selection, block-data, scale-nonzero, or duplicate-coherence fields.
+  target, derives each block decomposition canonically, and chooses
+  ray scales for targets on nonreference supports from existential projective
+  witnesses.  It normalizes the reference scale to one, proves every chosen
+  scale is nonzero, and recovers the exact target and first-match bounds without
+  separate family-selection, block-data, ray-scale-function, scale-nonzero, or
+  duplicate-coherence fields.
 - `GrandeFinale/ChallengeIntersection.lean` formalizes exact finite
   translate--challenge intersection averaging, received-line shear invariance,
   the challenge-restricted MCA numerator, and the outer ceiling compiler used

@@ -30,6 +30,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=28 projective-scale choice
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF28TargetCompiler.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Replaces the target certificate's supplied
+  ray-scale function with an existential projective witness for every
+  target on a nonreference support.  Finite choice selects each needed scale,
+  the reference scale is one, and the coefficient-zero theorem proves chosen
+  scales nonzero.
+- **How it is useful:** Leaves the deployed input responsible only for the
+  existence of each projective relation, not a globally chosen scale function
+  or separate nonzero proofs, while preserving all exact owner and outer bounds.
+- **What to do next:** Construct the remaining quotient polynomials and
+  existential projective relations from the canonical stratum, or prove the
+  fixed-cell Hahn cap; do not infer a complete deployed classification or
+  `c=0` parent.
+
 ### 2026-07-16 - C0 q64 f=28 derived nonzero ray scales
 
 - **Agent/model:** Codex.

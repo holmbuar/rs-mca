@@ -37,7 +37,6 @@ structure TargetTwoBlockCertificate
   residualSupport : α → Finset F
   referenceTarget : α
   quotient : α → F[X]
-  rayScale : α → F
   reference_mem_of_nonempty : target.Nonempty → referenceTarget ∈ target
   ambient_card : ambient.card = 2097152
   ambient_ne_zero : ∀ z ∈ ambient, z ≠ 0
@@ -46,23 +45,51 @@ structure TargetTwoBlockCertificate
   quotient_constant_ne_zero : ∀ x ∈ target, (quotient x).coeff 0 ≠ 0
   projective : ∀ x ∈ target,
     residualSupport x ≠ residualSupport referenceTarget →
-      DeployedProjective
-        (canonicalLowerBlock 32768 (residualSupport x))
-        (canonicalUpperBlock 32768 (residualSupport x)) (quotient x)
-        (canonicalLowerBlock 32768 (residualSupport referenceTarget))
-        (canonicalUpperBlock 32768 (residualSupport referenceTarget))
-        (quotient referenceTarget) (rayScale x)
+      ∃ c : F,
+        DeployedProjective
+          (canonicalLowerBlock 32768 (residualSupport x))
+          (canonicalUpperBlock 32768 (residualSupport x)) (quotient x)
+          (canonicalLowerBlock 32768 (residualSupport referenceTarget))
+          (canonicalUpperBlock 32768 (residualSupport referenceTarget))
+          (quotient referenceTarget) c
 
-/-- The coefficient-zero block equation forces every supplied nonreference
-projective scale to be nonzero. -/
-theorem TargetTwoBlockCertificate.projective_rayScale_ne_zero
+/-- Choose a projective scale exactly on targets whose support differs from the
+reference support; use one as a harmless default elsewhere. -/
+noncomputable def TargetTwoBlockCertificate.projectiveScale
+    {α F : Type*} [DecidableEq α] [Field F] [DecidableEq F]
+    (cert : TargetTwoBlockCertificate α F) (x : α) : F :=
+  if h : x ∈ cert.target ∧
+      cert.residualSupport x ≠ cert.residualSupport cert.referenceTarget then
+    Classical.choose (cert.projective x h.1 h.2)
+  else 1
+
+theorem TargetTwoBlockCertificate.projective_projectiveScale
     {α F : Type*} [DecidableEq α] [Field F] [DecidableEq F]
     (cert : TargetTwoBlockCertificate α F)
     {x : α} (hx : x ∈ cert.target)
     (hne : cert.residualSupport x ≠
       cert.residualSupport cert.referenceTarget) :
-    cert.rayScale x ≠ 0 := by
-  have hprojective := cert.projective x hx hne
+    DeployedProjective
+      (canonicalLowerBlock 32768 (cert.residualSupport x))
+      (canonicalUpperBlock 32768 (cert.residualSupport x)) (cert.quotient x)
+      (canonicalLowerBlock 32768
+        (cert.residualSupport cert.referenceTarget))
+      (canonicalUpperBlock 32768
+        (cert.residualSupport cert.referenceTarget))
+      (cert.quotient cert.referenceTarget) (cert.projectiveScale x) := by
+  rw [TargetTwoBlockCertificate.projectiveScale, dif_pos ⟨hx, hne⟩]
+  exact Classical.choose_spec (cert.projective x hx hne)
+
+/-- The coefficient-zero block equation forces every chosen nonreference
+projective scale to be nonzero. -/
+theorem TargetTwoBlockCertificate.projectiveScale_ne_zero
+    {α F : Type*} [DecidableEq α] [Field F] [DecidableEq F]
+    (cert : TargetTwoBlockCertificate α F)
+    {x : α} (hx : x ∈ cert.target)
+    (hne : cert.residualSupport x ≠
+      cert.residualSupport cert.referenceTarget) :
+    cert.projectiveScale x ≠ 0 := by
+  have hprojective := cert.projective_projectiveScale hx hne
   have href : cert.referenceTarget ∈ cert.target :=
     cert.reference_mem_of_nonempty ⟨x, hx⟩
   have hblocks := blocks_of_projective_coefficients
@@ -74,7 +101,7 @@ theorem TargetTwoBlockCertificate.projective_rayScale_ne_zero
       (cert.residualSupport cert.referenceTarget))
     (canonicalUpperBlock 32768
       (cert.residualSupport cert.referenceTarget))
-    (cert.quotient cert.referenceTarget) (cert.rayScale x)
+    (cert.quotient cert.referenceTarget) (cert.projectiveScale x)
     (supportLocator_deployed_twoBlock (cert.residualSupport x)
       (cert.residual_card x hx)).2.1
     (by
@@ -199,9 +226,10 @@ theorem TargetTwoBlockCertificate.residual_card_of_mem
   simpa only [cert.selectedTarget_support hR] using
     cert.residual_card (cert.selectedTarget R) hx
 
-/-- Finite choice deduplicates the target-indexed residual supports and selects
-their quotient and ray-scale data.  The residual blocks themselves are the
-canonical functions of the support. -/
+/-- Finite choice deduplicates the target-indexed residual supports, selects
+their quotient representatives, and chooses projective scales from those
+representatives' existential witnesses.  The residual blocks themselves are
+the canonical functions of the support. -/
 noncomputable def TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
     {α F : Type*} [DecidableEq α] [Field F] [DecidableEq F]
     (cert : TargetTwoBlockCertificate α F) : TwoBlockFamilyCertificate F where
@@ -213,7 +241,7 @@ noncomputable def TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
   quotient := fun R ↦ cert.quotient (cert.selectedTarget R)
   rayScale := fun R ↦
     if R = cert.residualSupport cert.referenceTarget then 1
-    else cert.rayScale (cert.selectedTarget R)
+    else cert.projectiveScale (cert.selectedTarget R)
   ambient_card := cert.ambient_card
   ambient_ne_zero := cert.ambient_ne_zero
   residual_subset := by
@@ -246,7 +274,7 @@ noncomputable def TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
     by_cases hRref : R = cert.residualSupport cert.referenceTarget
     · simp [hRref]
     · rw [if_neg hRref]
-      apply cert.projective_rayScale_ne_zero (cert.selectedTarget_mem hR)
+      apply cert.projectiveScale_ne_zero (cert.selectedTarget_mem hR)
       rw [cert.selectedTarget_support hR]
       exact hRref
   reference_mem_of_two := by
@@ -261,7 +289,7 @@ noncomputable def TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
         cert.residualSupport cert.referenceTarget := by
       rw [hsupp]
       exact hRref
-    have hproj := cert.projective (cert.selectedTarget R) hx hne
+    have hproj := cert.projective_projectiveScale hx hne
     rw [hsupp] at hproj
     have hrefSelected :
         cert.selectedTarget (cert.residualSupport cert.referenceTarget) =
@@ -333,7 +361,8 @@ theorem c0_periodic_first_match_payment_of_target_certificate
     cert29 cert5 cert7 hthree hambient hcover
 
 #print axioms TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
-#print axioms TargetTwoBlockCertificate.projective_rayScale_ne_zero
+#print axioms TargetTwoBlockCertificate.projective_projectiveScale
+#print axioms TargetTwoBlockCertificate.projectiveScale_ne_zero
 #print axioms TargetTwoBlockCertificate.distinct_residuals_card_le
 #print axioms TargetTwoBlockCertificate.toTwoBlockProjectiveRayCertificate
 #print axioms TargetTwoBlockCertificate.target_card_le
