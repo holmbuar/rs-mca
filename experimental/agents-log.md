@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=28 two-block compiler
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF28TwoBlockCompiler.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Proves that a projective congruence between
+  two-block periodic locators modulo `X^a`, with `2B <= a`, forces both low
+  coefficient-block equations after the same projective scaling, using the
+  quotient's constant and linear coefficients.
+- **How it is useful:** Removes the truncation and coefficient-extraction part
+  of the q64 `f=28` projective-congruence-to-pencil certificate left open by
+  the residual-pencil formalization.
+- **What to do next:** Convert the two block equations into the explicit
+  reference-member pencil and prove the `30,833` degree cut; do not infer a
+  deployed classification, fixed-cell Hahn bound, or complete `c=0` parent.
+
 ### 2026-07-16 - C0 q64 f=28 residual-pencil formalization
 
 - **Agent/model:** Codex.

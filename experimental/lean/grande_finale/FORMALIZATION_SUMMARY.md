@@ -23,6 +23,9 @@ This package is a partial Lean formalization of
   pencil parameter injectivity, common-base root packing, the exact residual
   owner cap 63, and the conditional q64 `f=28` compiler for
   `83,970,774,720`.
+- `GrandeFinale/C0PeriodicF28TwoBlockCompiler.lean`: generic two-block
+  truncation of periodic locators and recovery of both low coefficient-block
+  equations from projective congruence modulo `X^a` when `2B <= a`.
 - `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
   translate-intersection averaging, linear-code received-line shear invariance,
   challenge-restricted MCA numerators, and the ceiling-density transfer from a
@@ -148,15 +151,18 @@ quotient-constant classification, and the fixed-residual local Hahn cap as
 explicit inputs.  It does not construct the literal deployed stratum, prove
 the `f=28` component, or promote a complete `c=0` parent bound.
 
-The periodic `f=28` module proves that a certified pencil of 63,601-point
-residual supports in the deployed 2,097,152-point ambient set has at most 63
-members when its direction is `X^32,768 U` with `U(0) != 0` and
+The periodic `f=28` residual-pencil module proves that a certified pencil of
+63,601-point residual supports in the deployed 2,097,152-point ambient set has
+at most 63 members when its direction is `X^32,768 U` with `U(0) != 0` and
 `deg U <= 30,833`.  It then checks the 63-by-64 local-cell compiler and
 replaces the final opaque component
-cap in the first-match theorem.  The two-block projective-congruence-to-pencil
-construction, canonical stratum classification, quotient-constant classes,
-fixed-residual Hahn cap, and first-match cover remain explicit inputs.  The
-module does not treat `f<=27`, general monic moduli, or a complete `c=0` parent.
+cap in the first-match theorem.  The separate two-block compiler now proves
+that projective congruence modulo the deployed monomial forces both low
+coefficient-block equations after the same scaling.  Turning those equations
+into the pencil representation and its degree cut, canonical stratum
+classification, quotient-constant classes, fixed-residual Hahn cap, and
+first-match cover remain explicit inputs.  These modules do not treat `f<=27`,
+general monic moduli, or a complete `c=0` parent.
 
 The main remaining target is Q:
 
