@@ -30,6 +30,29 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - Rank-one admission payment-interface guardrail
+
+- **Agent/model:** Codex with independent proof, interface, and verifier
+  reviewers.
+- **Files added or changed:** `experimental/agents-log.md`,
+  `experimental/notes/thresholds/rank_one_greedy_adequacy.md`,
+  `experimental/notes/audits/rank_one_admission_interface_audit.md`,
+  `experimental/scripts/verify_rank_one_admission_interface.py`, and
+  `experimental/data/certificates/rank-one-admission-interface/rank_one_admission_interface.json`.
+- **Status:** PROVED / AUDIT.
+- **What is being added:** An exact universal capped-Walsh lemma and audit
+  confirm the local scalar soundness and adequacy of T4/S4 while correcting
+  the overclaim that this accounting alone supplies admission or a semantic
+  profile payment.
+- **How it is useful:** This keeps hard input 2 fail-closed: universal charge
+  bookkeeping cannot be promoted to an actual first-match cell, A4/Sidon
+  payment, distinct-slope bound, or ray compiler without a separate theorem.
+- **What to do next:** Prove a source-to-cell bridge with the same owner,
+  actual first-match projection, and certified profile bound; supply an A4
+  analytic/Sidon payment and, separately, an A6/RC or direct-ray
+  distinct-slope bound plus aggregate census.  Also prove a uniform
+  pattern-schedule bound or avoid charging its encoding complexity.
+
 ### 2026-07-16 - KoalaBear branch-3 low-excess carrier cut
 
 - **Agent/model:** Codex integrating Scott Hughes PR #849.
