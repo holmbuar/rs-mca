@@ -11,8 +11,10 @@
   higher-dimensional balanced cores.
 - **Counted object:** distinct completed `(slope,error)` pairs, equivalently
   distinct `(slope,codeword)` pairs.  No witness selector is applied.
-- **Formal status:** the companion Lean module is an explicitly labelled
-  `UNPROVED STATEMENT TARGET`, not a Lean proof.
+- **Formal status:** the companion Lean modules prove the reusable finite
+  set-system Johnson inequality, the direct fixed-syndrome theorem, and the
+  fixed-slope hosted-pair specialization without `sorry`; the product bound is
+  unconditional and only the quotient is positivity-gated.
 
 The source A6 compiler bounds the projection to distinct slopes.  This note
 supplies the previously missing intermediate-image multiplicity: the number
@@ -476,10 +478,11 @@ python3 -m json.tool experimental/data/certificates/fixed-slope-kernel-johnson-m
 PYTHONPYCACHEPREFIX=/tmp/fixed-slope-kernel-johnson-pycache python3 -m py_compile experimental/scripts/verify_fixed_slope_kernel_johnson_multiplicity.py
 ```
 
-The Lean statement surface is
+The Lean proof surfaces are
 
 ```text
 experimental/lean/grande_finale/GrandeFinale/
+  SetSystemJohnson.lean
   FixedSlopeKernelJohnsonMultiplicity.lean
 ```
 
@@ -487,13 +490,40 @@ with the isolated check
 
 ```bash
 (cd experimental/lean/grande_finale &&
-  lake env lean GrandeFinale/FixedSlopeKernelJohnsonMultiplicity.lean)
+  lake env lean -DwarningAsError=true GrandeFinale/SetSystemJohnson.lean &&
+  lake env lean -DwarningAsError=true \
+    GrandeFinale/FixedSlopeKernelJohnsonMultiplicity.lean)
 ```
 
-The Lean module records the fixed-syndrome hypotheses, kernel-distance
-zero-mask conclusion, positive-denominator division bound, and canonical A6
-arithmetic interface.  It remains an `UNPROVED STATEMENT TARGET`; successful
-typechecking is not a formal proof of Theorem 1.
+`SetSystemJohnson.lean` proves the incidence identities, the multiplicative
+Johnson inequality, and its positive-denominator quotient form for a finite
+constant-block family.  `FixedSlopeKernelJohnsonMultiplicity.lean` proves the
+zero-set cardinality and truncation lemmas, shows that distinct errors in one
+fixed-syndrome family differ by a nonzero kernel word, obtains the `kappa-1`
+common-zero cap, and instantiates the abstract Johnson theorem.  Its direct
+declaration
+
+```text
+fixedSyndromeKernelJohnsonMultiplicity
+```
+
+formalizes Theorem 1: equation (4) is unconditional, while equations (5)--(6)
+form the second, positivity-gated conclusion.  On `J_K>0` the natural-number
+subtractions are literal.  If the signed source denominator is negative, Lean's
+natural denominator truncates to zero and records the corresponding automatic
+product inequality; no quotient cap is claimed there.  The application
+declaration
+
+```text
+fixedSlopeKernelJohnsonMultiplicity
+```
+
+proves the corrected proposition `fixedSlopeKernelJohnsonMultiplicityTarget`.
+This is the hosted-pair line interface used by the A6 composition:
+`BasicPairHypotheses` includes the nonzero line direction and the common
+affine-syndrome equations.  It likewise leaves the product inequality
+unconditional and gates only division.  The modules print the axioms of their
+principal results; the audit contains no `sorryAx`.
 
 ## 9. Nonclaims
 
@@ -518,4 +548,5 @@ This note does not:
 - transfer counts between generated, line, challenge, extension, or list
   fields;
 - change any stable paper TeX or PDF; or
-- claim Lean certification.
+- claim Lean certification for the source interpolation/Noether slope
+  compiler, the global atlas, or any full deployed-row closure.

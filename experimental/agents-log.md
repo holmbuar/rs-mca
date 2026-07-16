@@ -30,10 +30,37 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - Lean proof of fixed-slope kernel-Johnson multiplicity
+
+- **Agent/model:** Codex.
+- **Files added or changed:** Added
+  `experimental/lean/grande_finale/GrandeFinale/SetSystemJohnson.lean` and
+  `experimental/lean/grande_finale/FIXED_SLOPE_KERNEL_JOHNSON_MULTIPLICITY_CORRESPONDENCE.md`;
+  proved the target in
+  `experimental/lean/grande_finale/GrandeFinale/FixedSlopeKernelJohnsonMultiplicity.lean`;
+  and updated its umbrella import, package README, and source proof note.
+- **Status:** PROVED / AUDIT. The abstract set-system inequality, direct
+  fixed-syndrome theorem, and fixed-slope hosted-pair specialization pass strict
+  Lean 4.28 checks without placeholders; their principal axiom reports contain
+  no `sorryAx`.
+- **What is being added:** Exact incidence double counts prove
+  `M(s^2-Nw) <= N(s-w)` for constant-size blocks with pairwise intersection at
+  most `w`. Choosing `(N-t)` zero coordinates in each error and applying the
+  kernel-distance cap `w=kappa-1` proves the direct fixed-syndrome theorem and
+  the previously unproved fixed-slope target. Their product inequalities are
+  unconditional; only their quotient conclusions require positivity.
+- **How it is useful:** This formally certifies the same-slope multiplicity
+  payment used to compose the A6 distinct-slope compiler with completed
+  `(gamma,h)` pairs, while keeping raw support-label multiplicity outside the
+  claim.
+- **What to do next:** Preserve the exact hypothesis/nonclaim boundary when
+  reviewing this proof alongside its source statement packet. The
+  triple-negative denominator region still needs a first-match ownership
+  theorem rather than another local double count.
+
 ### 2026-07-16 - Fixed-slope kernel-Johnson multiplicity compiler
 
-- **Agent/model:** Codex, with parallel proof-note, verifier, Lean, and static
-  audit subagents.
+- **Agent/model:** Codex.
 - **Files added or changed:** Added
   `experimental/notes/thresholds/fixed_slope_kernel_johnson_multiplicity.md`,
   `experimental/scripts/verify_fixed_slope_kernel_johnson_multiplicity.py`,
@@ -43,9 +70,9 @@ Keep entries concise and link to the relevant files.
   `experimental/lean/grande_finale/GrandeFinale/FixedSlopeKernelJohnsonMultiplicity.lean`;
   also registered the Lean module in `GrandeFinale.lean`.
 - **Status:** PROVED / AUDIT for the paper proof, compiler arithmetic,
-  exhaustive finite-field fixtures, and certificate. The general Lean theorem
-  is explicitly an `UNPROVED STATEMENT TARGET`; its canonical A6 arithmetic
-  and composition consequences are proved without `sorry`.
+  exhaustive finite-field fixtures, and certificate. This entry initially
+  introduced the general Lean theorem as a statement target; the proof entry
+  above now certifies it without `sorry`.
 - **What is being added:** For a fixed syndrome/slope, distinct errors of
   weight at most `t` in a coset of an `[N,kappa,R+1]` MDS kernel satisfy
   `M((N-t)^2-N(kappa-1)) <= N(R+1-t)`. At canonical A6 parameters this gives
@@ -58,10 +85,10 @@ Keep entries concise and link to the relevant files.
   same-slope multiplicity payment for the intermediate
   `(gamma,h)` image whenever its section denominator is positive. It directly
   supports the residual-ray hard-input-3 route.
-- **What to do next:** Have an independent PI rederive the zero-mask
-  Cauchy/Johnson proof and decide whether to promote it. The result does not
-  count repeated raw support labels `S` attached to the same
-  `(gamma,h)`, and it does not by itself close a deployed row.
+- **What to do next:** The independent Lean audit is recorded above. Preserve
+  the boundary that the result does not count repeated raw support labels `S`
+  attached to the same `(gamma,h)`, and does not by itself close a deployed
+  row.
 
 ### 2026-07-16 - L1, M1, rank-cell, and public-board PR wave
 

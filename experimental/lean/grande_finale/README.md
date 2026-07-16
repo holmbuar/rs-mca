@@ -94,6 +94,14 @@ The package root is `GrandeFinale`, with additional modules under
   identity-versus-folding exponent window for each actual complete-fiber pair,
   its finite-family intersection/failure-band union, and the no-field-drop
   crossing criterion.
+- `GrandeFinale/SetSystemJohnson.lean` proves a reusable finite constant-block
+  Johnson inequality from exact incidence and second-moment double counts,
+  together with its positive-denominator quotient form.
+- `GrandeFinale/FixedSlopeKernelJohnsonMultiplicity.lean` proves the
+  direct fixed-syndrome theorem and its fixed-slope hosted-pair specialization
+  by choosing exact zero blocks, bounding their intersections with the kernel
+  distance, and instantiating the set-system theorem; it also proves the
+  canonical A6 cap-six arithmetic.
 - `GrandeFinale/BC.lean`, `GrandeFinale/SP.lean`, and
   `GrandeFinale/Frontier.lean` formalize theorem-level reductions around the
   BC, SP, and frontier ledgers.
@@ -127,8 +135,9 @@ in `COLLISION_AWARE_POLE_CORRESPONDENCE.md`,
 `EXACT_PREFIX_RAY_UNIQUENESS_CORRESPONDENCE.md`,
 `SEPARATING_POLE_CORRESPONDENCE.md`,
 `SCALAR_EXTENSION_LIST_LINE_CORRESPONDENCE.md`,
-`PREFIX_CHALLENGE_FLOOR_CORRESPONDENCE.md`, and
-`PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`.
+`PREFIX_CHALLENGE_FLOOR_CORRESPONDENCE.md`,
+`PROFILE_ENVELOPE_WINDOW_CORRESPONDENCE.md`, and
+`FIXED_SLOPE_KERNEL_JOHNSON_MULTIPLICITY_CORRESPONDENCE.md`.
 
 The collision-aware-pole and challenge-intersection modules formalize
 complementary steps behind equation (13.3) of the frontiers paper. The first
@@ -170,8 +179,7 @@ rows or the full asymptotic closure by themselves.
 
 Do not run `lake build` casually in this repository. Build this package only
 with the pinned Lean/Mathlib versions and the matching precompiled Mathlib
-cache. A full pinned default build on 2026-07-14 completed successfully with
-8050 jobs, including `GrandeFinale.CollisionAwarePole` and the newly integrated
-statement-target modules. The compatibility repairs needed for that build
-change syntax and required typeclass/scope declarations only; they do not prove
-the targets that remain explicitly marked unproved.
+cache. A full pinned default build on 2026-07-16 completed successfully with
+8090 jobs, including `GrandeFinale.SetSystemJohnson` and the proved direct
+fixed-syndrome/fixed-slope kernel-Johnson module. Existing unrelated statement
+targets remain explicitly marked unproved.

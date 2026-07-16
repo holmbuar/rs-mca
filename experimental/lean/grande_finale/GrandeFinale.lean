@@ -24,6 +24,7 @@ import GrandeFinale.Rank15LocatorDegreeFloor
 import GrandeFinale.Rank15PlateauSuffixUniformizer
 import GrandeFinale.Rank16LeftKernelForney
 import GrandeFinale.SecondRecurrenceZeroSumFamily
+import GrandeFinale.SetSystemJohnson
 import GrandeFinale.ThirdRecurrenceQuadraticCompletion
 import GrandeFinale.WeightedCyclicGRSHalfFootprint
 
