@@ -31,6 +31,13 @@ The package root is `GrandeFinale`, with additional modules under
   as an explicit reference-member pencil when the quotient constants are
   nonzero, then derives the low-block degree cut from two distinct monic
   residuals with a common upper-block degree budget.
+- `GrandeFinale/C0PeriodicF28DerivedOwner.lean`, in the at-least-two-member
+  branch, compiles a deduplicated family of literal deployed two-block locators
+  and projective congruences into the support-level residual-pencil certificate
+  and derives the degree cut.  It proves the owner cap 63 in all cases, and its
+  outer wrapper
+  recovers the exact target cap `83,970,774,720` from supplied fixed cells and
+  composes it into the PR #819 first-match payment.
 - `GrandeFinale/ChallengeIntersection.lean` formalizes exact finite
   translate--challenge intersection averaging, received-line shear invariance,
   the challenge-restricted MCA numerator, and the outer ceiling compiler used

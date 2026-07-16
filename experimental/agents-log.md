@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=28 derived residual owner
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF28DerivedOwner.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Compiles a supplied deduplicated family of literal
+  deployed two-block locator decompositions and projective congruences into the
+  support-level residual pencil, deriving the degree cut when the family is
+  nontrivial and proving at most 63 residual owners in every case.  A typed
+  outer wrapper then derives `83,970,774,720` from the supplied 64 scalar cells
+  and composes it into the PR #819 first-match payment.
+- **How it is useful:** Removes the pencil-representation and tight `30,833`
+  low-block degree-cut fields from the q64 `f=28` owner once the typed
+  canonical-family data are supplied.
+- **What to do next:** Construct the deduplicated family and representative
+  quotients from the canonical stratum, or formalize the fixed-cell Hahn cap;
+  do not infer a complete deployed classification or `c=0` parent.
+
 ### 2026-07-16 - C0 q64 f=28 scalar pencil and degree cut
 
 - **Agent/model:** Codex.

@@ -29,6 +29,10 @@ This package is a partial Lean formalization of
 - `GrandeFinale/C0PeriodicF28ScalarPencil.lean`: explicit scalar solution of
   the two block equations, direct projective-congruence-to-pencil normal form,
   and the `30,833` low-block degree cut from two distinct monic members.
+- `GrandeFinale/C0PeriodicF28DerivedOwner.lean`: certificate compiler from a
+  deduplicated literal two-block/projective family to the support-level pencil,
+  including the singleton branch, the derived residual-owner cap 63, the exact
+  q64 `f=28` target cap `83,970,774,720`, and its first-match composition.
 - `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
   translate-intersection averaging, linear-code received-line shear invariance,
   challenge-restricted MCA numerators, and the ceiling-density transfer from a
@@ -164,10 +168,16 @@ that projective congruence modulo the deployed monomial forces both low
 coefficient-block equations after the same scaling.  The scalar-pencil module
 solves those equations when both quotient constants are nonzero and proves the
 `30,833` degree cut when a normalized family has at least two distinct monic
-members with the deployed upper-block degree bound.  Constructing that family
-from the canonical stratum, quotient-constant classes, the fixed-residual Hahn
-cap, and the first-match cover remain explicit inputs.  These modules do not
-treat `f<=27`, general monic moduli, or a complete `c=0` parent.
+members with the deployed upper-block degree bound.  In the at-least-two-member
+branch, the derived-owner compiler now constructs the support-level pencil
+certificate from a supplied deduplicated family of literal two-block
+decompositions and projective congruences.  It obtains the owner cap 63 in all
+cases.  Its outer compiler recovers the
+exact q64 `f=28` target cap and PR #819 first-match payment from supplied scalar
+classes and fixed-cell caps.  Constructing the family and its representative
+quotients from the canonical stratum, proving the fixed-residual Hahn cap, and
+the first-match cover remain explicit inputs.  These modules do not treat
+`f<=27`, general monic moduli, or a complete `c=0` parent.
 
 The main remaining target is Q:
 
