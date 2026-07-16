@@ -2,6 +2,7 @@ import Mathlib
 import GrandeFinale.AllDepthSparseSplitSharpness
 import GrandeFinale.AllLineRayAffineCore
 import GrandeFinale.AntiHostPrefixCompiler
+import GrandeFinale.AugmentedBasisPencilDesignInverse
 import GrandeFinale.AxisGdampingCosGap
 import GrandeFinale.BCFirstInteriorGeneralLine
 import GrandeFinale.CanonicalLagrangeCurveCompiler

@@ -30,6 +30,33 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - Augmented-basis pencil and deep-hole design inverse
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/augmented_basis_pencil_design_inverse.md`,
+  `experimental/notes/thresholds/all_pair_paving_basis_multiplicity_compiler.md`,
+  `experimental/scripts/verify_augmented_basis_pencil_design_inverse.py`,
+  `experimental/data/certificates/augmented-basis-pencil-design-inverse/`,
+  and
+  `experimental/lean/grande_finale/GrandeFinale/AugmentedBasisPencilDesignInverse.lean`
+  plus the shared import.
+- **Status:** PROVED / AUDIT.
+- **What is being added:** The deep-hole augmented-basis census is proved
+  automatically maximal; basis deficiency is identified exactly with
+  common-flat complements; and the paving slack is disintegrated over exact
+  `kappa`-core pencils.  Unfloored PB5 equality is a Steiner system.  Exact
+  `F_9/F_3` and `F_25/F_5` affine-line fixtures saturate PB5 at positive depth
+  with full augmented rank and no global common core.
+- **How it is useful:** This corrects the prior `basis-heavy` residual-wall
+  description.  The real inverse target is distributed pencil/design
+  saturation after earlier owners are removed; the packet does not claim a
+  new cap, first-match closure, target crossing, or paper promotion.
+- **What to do next:** Prove an owner-aware inverse for nearly filled
+  deep-hole core pencils or almost-Steiner agreement designs, with explicit
+  quotient/Frobenius/common-support/curve/low-rank emissions or an
+  image-normalized deficit.
+
 ### 2026-07-16 - RS-MCA paving ePrint submission package
 
 - **Agent/model:** Codex logging a human-added ePrint submission candidate by
