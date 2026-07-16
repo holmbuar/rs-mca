@@ -30,6 +30,33 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - Deep-remainder domination theorem retirement
+
+- **Agent/model:** Codex, with independent proof, verifier, and scope reviews.
+- **Files added or changed:** `experimental/agents-log.md`,
+  `experimental/notes/thresholds/lower_reserve_deep_remainder_atlas.md`,
+  `experimental/scripts/verify_lower_reserve_deep_remainder.py`,
+  `experimental/data/certificates/lower-reserve-deep-remainder/deep_remainder_atlas.json`,
+  `experimental/scripts/verify_deep_remainder_partial_occupancy_counterexample.py`,
+  `experimental/notes/thresholds/post_sweep_reconciliation_c23dcaa.md`,
+  `experimental/scripts/verify_post_sweep_reconciliation_c23dcaa.py`,
+  `experimental/notes/thresholds/lower_reserve_o5c_profile_lists.md`, and
+  `experimental/scripts/verify_lower_reserve_o5c.py`.
+- **Status:** PROVED / FIXED / COUNTEREXAMPLE / AUDIT.
+- **What is being added:** The partial-occupancy atlas and no-clean-coordinate
+  route cut are preserved, but the claimed deep-remainder domination theorem
+  is retired. The originating O5c note's conflation of QR4's `r<c` hypothesis
+  with arbitrary-remainder degree-`c` interlace is also corrected. The exact
+  label-factored `F_169` cell proves that coordinatewise full-field variation
+  does not make the joint prefix image Cartesian: guaranteed list `6`
+  exceeds the identity floor `1`.
+- **How it is useful:** This corrects hard input 5's lower-reserve status and
+  prevents the live reconciliation ledger and checked certificate from calling
+  a payable label-factored route dead.
+- **What to do next:** Pay the resulting natural-scale strict-deep cells in the
+  upper profile envelope and connect them to a source-valid distinct-ray
+  compiler; do not promote the finite witness as a deployed threshold change.
+
 ### 2026-07-16 - KoalaBear branch-3 low-excess carrier cut
 
 - **Agent/model:** Codex integrating Scott Hughes PR #849.

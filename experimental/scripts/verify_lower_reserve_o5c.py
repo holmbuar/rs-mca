@@ -49,8 +49,10 @@ Faithful finite certificates:
       interior O7 band (n+k)/2<a<a_deep is where lists are provably trivial.
   G6  identity-quotient comparison exponent QR9 = (h/c)(1-lambda_c) specialises
       to 1/4 h at c=2, lambda=1/2 (eq 6.4 exponent); positive field-drop term.
-  G7  remainder normal form: case w>=r reduces to the quotient floor (PAID);
-      case w<r is a remainder-prefix sum (QR4), not a single pigeonhole (WALL).
+  G7  remainder regimes: bounded 0<=r<c with w>=r reduces to the quotient floor;
+      bounded w<r<c is QR4's exact weighted remainder-prefix sum, tested only on
+      feasible fixed-r occupancies; arbitrary r>=c is instead the QR5/partial-
+      occupancy regime, where #714 label factoring gives list 6 > identity 1.
 """
 import sys
 from math import comb, gcd
@@ -73,7 +75,8 @@ def ceil_div(a, b):
 def Lid(n, a, k, B):
     """Identity list floor L(a)=ceil(binom(n,a) |B|^{-(a-k-1)})  (prop:exact-prefix-list)."""
     w = a - k - 1
-    assert w >= 0
+    if w < 0:
+        raise ValueError("identity list floor requires a >= k+1")
     return ceil_div(comb(n, a), B ** w)
 
 def Lquot(N, m, d, Bphi):
@@ -390,28 +393,46 @@ def run_G6():
     return {}
 
 # ===========================================================================
-# GROUP G7 -- remainder normal form: paid case (w>=r) vs wall (w<r)
+# GROUP G7 -- bounded QR4 and arbitrary QR5 remainder regimes
 # ===========================================================================
 def run_G7():
-    # Case w>=r (thm:exact-quotient-remainder-normal-form (i)): the prefix recovers
-    # R uniquely, then it is one quotient-prefix fiber -> floor ceil(binom(N-|phi(R)|,m)|B_phi|^{-d}).
-    # Numeric instance: c=2,r=1 (so w>=r means w>=1). N=12,m=4,d=1,Bphi=13, one quotient point removed.
+    # QR2(i): bounded 0<=r<c and w>=r recovers R, then uses one quotient fiber.
     N, m, d, Bphi = 12, 4, 1, 13
-    paid_floor = Lquot(N - 1, m, d, Bphi)                 # N-|phi(R)| with |phi(R)|=1
-    check("G7 remainder case w>=r (fixed-R 'Euclidean'): floor = ceil(binom(N-1,m)|B_phi|^{-d}) is a single pigeonhole (PAID)",
-          paid_floor == ceil_div(comb(11, 4), 13) and paid_floor >= 1)
-    # Case w<r (case (ii), QR4): count is a SUM over the remainder-prefix fiber,
-    # sum_{R: pref_w(P_R)=t} binom(N-|phi(R)|, m).  Different R contribute different
-    # binom(N-|phi(R)|,m) -> NOT a single pigeonhole floor; needs a partial-occupancy atlas.
-    # Illustrate: two admissible R with |phi(R)| differing give different summands.
-    r_terms = [comb(N - j, m) for j in (0, 1, 2)]         # |phi(R)| in {0,1,2}
-    check("G7 remainder case w<r (QR4): summands binom(N-|phi(R)|,m) genuinely differ over R -> not one floor (WALL)",
-          len(set(r_terms)) == 3)
-    # the wall is exactly the degree-c interlacing of prop:complete-support-factorization
-    # (|R|>=c makes quotient/remainder coeffs collide at degree c): localize, do not claim.
-    check("G7 wall localised at |R|>=c (deg-c interlace, prop:complete-support-factorization L3591-3594): partial-occupancy atlas is the missing input",
-          True)
-    return dict(paid_floor=paid_floor)
+    paid_floor = Lquot(N - 1, m, d, Bphi)
+    check("G7 QR2(i): 0<=r=1<c=2 and w=2>=r; fixed-R quotient floor is 26",
+          0 <= 1 < 2 and 2 >= 1
+          and paid_floor == 26
+          and paid_floor == ceil_div(comb(11, 4), 13))
+
+    # QR4 remains inside the theorem hypothesis r<c.  For c=3,r=2,w=1,
+    # a nonempty two-point remainder occupies p=1 or p=2 fibers, never p=0.
+    c, r, w = 3, 2, 1
+    feasible_p = (1, 2)
+    weights = [comb(N - p, m) for p in feasible_p]
+    check("G7 QR4 hypothesis: 0<=r=2<c=3 and w=1<r force w<c (E invisible)",
+          0 <= r < c and w < r and w < c)
+    check("G7 fixed-r occupancy is realizable only at p=1,2; weights are 330,210",
+          all(ceil_div(r, c - 1) <= p <= r for p in feasible_p)
+          and not (ceil_div(r, c - 1) <= 0 <= r)
+          and weights == [330, 210])
+    check("G7 QR4 permits distinct feasible fixed-r weights; it gives no constant-p reduction",
+          len(set(weights)) == 2)
+
+    # For r>=c, QR4 is inapplicable; QR5 plus label factoring is the valid route.
+    c, r, w, p = 2, 4, 3, 4
+    labels = comb(N, p) * 2 ** p
+    profile = labels * comb(N - p, m)
+    image_bound = labels * Bphi
+    guaranteed = ceil_div(profile, image_bound)
+    identity = Lid(24, 12, 8, 169)
+    check("G7 arbitrary remainder is outside QR4: r=4>=c=2, w=3<r",
+          r >= c and w < r and not (0 <= r < c))
+    check("G7 #714 label-factored QR5 cell: J=7920, list 6 > identity floor 1",
+          labels == 7_920 and profile == 554_400
+          and image_bound == 102_960 and guaranteed == 6
+          and identity == 1 and guaranteed > identity)
+    return dict(paid_floor=paid_floor, qr4_weights=weights,
+                strict_deep_list=guaranteed)
 
 # ===========================================================================
 def run_all():
@@ -463,6 +484,16 @@ def tamper():
     trials.append(("saturation real: M(10^7)=29 not unbounded", Mpole(10 ** 7, 169, 24, 5) == 29))
     # 7. headline unsafe direction: identity must NOT certify at B*=15
     trials.append(("identity does NOT certify unsafe at B*=15 (P_id=14<=15)", not (Pval(Mpole(26, 169, 24, 5), 169, 168) > 15)))
+    # 8. QR4 cannot be invoked at the arbitrary-remainder witness r=4>=c=2.
+    trials.append(("QR4 hypothesis rejects r=4,c=2",
+                   not (0 <= 4 < 2)))
+    # 9. p=0 is impossible for a nonempty fixed-r=2,c=3 remainder.
+    trials.append(("fixed r=2,c=3 rejects p=0",
+                   not (ceil_div(2, 3 - 1) <= 0 <= 2)))
+    # 10. using the full field denominator erases the proved list 6.
+    trials.append(("full-field denominator gives 1, not quotient-field list 6",
+                   ceil_div(comb(8, 4), 169) == 1
+                   and ceil_div(comb(8, 4), 13) == 6))
     npass = sum(1 for _, c in trials if c)
     for name, c in trials:
         print(("ok  " if c else "FAIL") + "  tamper: " + name)

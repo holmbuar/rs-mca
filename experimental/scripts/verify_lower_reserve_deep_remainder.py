@@ -1,43 +1,51 @@
 #!/usr/bin/env python3
 """Verifier for experimental/notes/thresholds/lower_reserve_deep_remainder_atlas.md.
 
-Attacks the ONE remaining wall of route O5c (lower reserve / unsafe-side, hard
-input 5) left open by PR #699: the deep-remainder regime  w < r  of the "any
-larger identity, quotient, Chebyshev, or remainder-profile list" clause of
-prop:simple-pole-lower (asymptotic_rs_mca_frontiers.tex eq 13.3, L6196-6198).
+Audits route O5c (lower reserve / unsafe-side, hard input 5) after PR #699
+conflated two remainder regimes in the "any larger identity, quotient,
+Chebyshev, or remainder-profile list" clause of prop:simple-pole-lower
+(asymptotic_rs_mca_frontiers.tex eq 13.3, L6196-6198).
 
-PR #699 paid the quotient / Euclidean-remainder (w>=r, r<c) / Chebyshev classes
-and localised the deep case  w < r  (equivalently the remainder degree reaches
-the quotient slots) to a missing "partial-occupancy atlas at the degree-c
-interlace" (prop:complete-support-factorization, L3591-3594; named at L6325-6328).
+QR4 assumes `0<=r<c`; its `w<r` case forces `w<c` and makes the quotient set
+invisible.  Arbitrary remainders `r>=c` instead use QR5 and exhibit degree-`c`
+interlace.  This packet preserves those facts separately and retires the false
+Cartesian-image/domination inference.
 
-This packet BUILDS that atlas and DECIDES it NEGATIVE:
+This packet builds that atlas and records the hard-input-5 correction:
 
   (atlas built)   The canonical occupancy cells Omega_{t,m,p,r} of
                   thm:exact-partial-occupancy (PO1/PO2, L3608-3644) exhaust
-                  binom(D,a) exactly, and inside a single cell |phi(R)|=p is
-                  CONSTANT, so the QR4 fiber sum (L3513-3520)
-                     sum_{R} binom(N-|phi(R)|,m)
-                  factors as  binom(N-p,m) * #{R in cell : pref_w(P_R)=.} .
-                  The varying summand PR #699 flagged (its G7 three values
-                  binom(N-|phi(R)|,m), |phi(R)| in {0,1,2}) is exactly cell
-                  MIXING; within a cell it is one number.  [atlas assembled]
+                  binom(D,a) exactly.  Inside one cell |phi(R)|=p, so each fixed
+                  remainder label admits binom(N-p,m) complete-fiber choices and
+                  |Omega|=J_{t,p,r}*binom(N-p,m).  This is a SUPPORT-COUNT fact.
+                  It is not a fixed-prefix fiber factorization: the QR4 theorem
+                  assumes 0<=r<c, and no QR4 identity is extended to r>=c.
+                  The three #699 values binom(12-p,4) for p in {0,1,2} are
+                  admissible-E counts for different occupancy types.
 
-  (conversion     But the per-cell fiber cannot be routed through the collision-
-   fails, pinned) aware pole with a field drop, because in the deep regime w<r
-                  NO depth-w prefix slot is field-drop-clean:
+  (coordinate     In the deep regime w<r, NO individual depth-w prefix slot is
+   fact, kept)    field-drop-clean:
                     - if w<c (forced when r<c): d=floor(w/c)=0, the prefix
                       reaches no quotient coefficient at all;
                     - if w>=c (forces r>c): every quotient slot degree jc<=w has
                       jc<=w<r=deg P_R, so the FULL-FIELD remainder coefficient
                       p_{jc}(R) sits additively in that slot (QR5 reciprocal
                       identity, L3536-3541), overwriting the small-field v_j(E).
-                  Hence the effective prefix alphabet is the FULL field B in
-                  every occupied slot (no |B_phi| drop), the provable list floor
-                  |profile|/|image| <= L_id, and the field-drop-preserving
-                  fixed-R alternative ceil(binom(N-p,m)|B_phi|^{-d}) < L_id in
-                  the deep window.  No deep-remainder list beats the identity
-                  list.  The load-bearing blocker is the coefficient p_{jc}(R).
+                  This is a coordinatewise statement only.  It does NOT imply
+                  that the joint prefix image is the Cartesian space B^w.
+
+  (old verdict    The previous ``full effective alphabet'' step and Theorem DR
+   retired)       are false.  At fixed remainder label, reciprocal multiplication
+                  is a unit on the truncated prefix ring and preserves the
+                  descended quotient image.  The label count cancels after
+                  image-normalized pigeonholing.
+
+  (#714 strict-   For (n,a,k,w,c,m,p,r)=(24,12,8,3,2,4,4,4), J=7920,
+   deep witness)  |Omega|=554400, and |image|<=J*13=102960, so one fiber has
+                  size at least ceil(70/13)=6, while the identity floor is 1.
+                  Thus no-clean-slot does not imply a full Cartesian image or
+                  identity domination.  The exact companion enumerator obtains
+                  image size 86320 and maximum fiber 20.
 
 Deterministic, python3 stdlib ONLY (no numpy/sympy).  Modes:
   (default)/--check : run every gate; print "RESULT: PASS n/n"; exit 0 iff all pass.
@@ -47,26 +55,38 @@ Writes a JSON certificate to
 
 Gate groups (every number in the note is recomputed here):
   A  occupancy atlas exhaustion PO1/PO2, c=2 (F_25 tower) and c=3 (F_13 cube).
-  B  constant-summand-per-cell: the QR4 factorization binom(N-p,m)*#{R}; #699 G7
-     three summands come from cell mixing (|phi(R)| in {0,1,2}), constant per cell.
+  B  occupancy cell-size arithmetic: |phi(R)|=p gives binom(N-p,m) admissible
+     E choices per label; no fixed-prefix QR4 factorization is claimed for r>=c.
   C  interlace: in the deep prefix the quotient slot moves with BOTH E and R
      (fix-R-vary-E and fix-E-vary-R both nontrivial); in the clean quotient
      profile the slot moves with E only.
   D  field-drop alphabet contrast: clean quotient slot alphabet = |B_phi| and
      descends into F_5 after theta^{-2}; deep interlaced slot alphabet = full
      field.  E-slice / R-slice decomposition of the deep fiber.
-  E  characterization: strengthening <=> exists a clean slot (some j: r<jc<=w)
-     <=> NOT deep (w<r).  Grid: deep&clean = 0 over c<=5, r,w<=11.
-  F  domination numerics (F_169 tower): fixed-R deep floor 5 << L_id 69; the
-     provable-floor <= L_id argument; rigidity 4.4 cross-check (no |B|^{-w} drop).
+  E  clean-coordinate characterization: exists a clean slot iff some j has
+     r<jc<=w.  Grid: deep&clean = 0 over c<=5, r,w<=11; no image-size inference.
+  F  #714 strict-deep contradiction (F_169): no clean slot, yet analytic image
+     <=102960, guaranteed list 6 > identity floor 1; Cartesian-image inference
+     explicitly rejected.  The older fixed-R toy is retained only as a toy.
   G  boundary constants and coupling to #699/#693: Euclidean (w>=r,r<c) has a
-     clean slot (PAID); deep (w<r) has none (WALL -> DECIDED negative).
+     clean slot (PAID); deep (w<r) has none, but that fact does not decide lists.
 """
 import sys, os, json
 from math import comb
 from itertools import combinations
 
 CHECKS = []
+
+
+class VerificationError(RuntimeError):
+    """Raised when a verifier precondition or exact arithmetic gate fails."""
+
+
+def require(cond, message):
+    if not bool(cond):
+        raise VerificationError(message)
+
+
 def check(name, cond):
     cond = bool(cond)
     CHECKS.append((name, cond))
@@ -83,7 +103,7 @@ def ceil_div(a, b):
 def Lid(n, a, k, B):
     """Identity list floor L(a)=ceil(binom(n,a)|B|^{-(a-k-1)})  (prop:exact-prefix-list, 4.1)."""
     w = a - k - 1
-    assert w >= 0
+    require(w >= 0, "identity-list depth must be nonnegative")
     return ceil_div(comb(n, a), B ** w)
 
 def Lquot(N, m, d, Bphi):
@@ -244,33 +264,46 @@ def run_A():
     return dict(N25=N, N13=Nc)
 
 # ===========================================================================
-# GROUP B -- constant-summand-per-cell: the QR4 factorization
+# GROUP B -- occupancy cell size and constant admissible-E count
 # ===========================================================================
 def run_B():
-    # #699 G7: QR4 summand binom(N-|phi(R)|,m) takes THREE values as |phi(R)| in {0,1,2}.
+    # #699's three arithmetic values are admissible complete-fiber counts for
+    # p=0,1,2.  They are not asserted to factor a fixed-prefix fiber at r>=c.
     N, m = 12, 4
-    g7 = [comb(N - j, m) for j in (0, 1, 2)]
-    check("B #699 G7 reproduced: binom(12-j,4) for j in {0,1,2} = [495,330,210], three distinct",
-          g7 == [495, 330, 210] and len(set(g7)) == 3)
-    # ATLAS refinement: those three |phi(R)| values are three DIFFERENT occupancy cells.
-    # Within one cell Omega_{t,m,p,r}, |phi(R)|=p is fixed, so the summand is ONE number.
-    # Verify on F_25: enumerate the deep cell (0,1,2,2); every R has |phi(R)|=p=2.
-    p, s, g, D = build_F25_tower()
-    deepcell = [S for S in combinations(D, 4) if occ_square(S, p, s) == (0, 1, 2, 2)]
+    admissible_counts = [comb(N - partial, m) for partial in (0, 1, 2)]
+    check("B #699 counts reproduced: binom(12-p,4) for p in {0,1,2} "
+          "= [495,330,210], three distinct occupancy types",
+          admissible_counts == [495, 330, 210]
+          and len(set(admissible_counts)) == 3)
+
+    # F_25 cell (0,1,2,2): 24 remainder labels, two admissible complete
+    # fibers per label, hence 48 supports.  This is PO cell-size arithmetic.
+    p, s, g, domain = build_F25_tower()
+    cell = [support for support in combinations(domain, 4)
+            if occ_square(support, p, s) == (0, 1, 2, 2)]
     phiR_sizes = set()
-    for S in deepcell:
-        fib = {}
-        for x in S:
-            y = q2_mul(x, x, p, s); fib[y] = fib.get(y, 0) + 1
-        R = [x for x in S if fib[q2_mul(x, x, p, s)] == 1]
-        phiR_sizes.add(len(set(q2_mul(x, x, p, s) for x in R)))
-    check("B within cell (0,1,2,2): |phi(R)|=p=2 CONSTANT for all 48 supports (summand=binom(N-2,m))",
+    for support in cell:
+        fiber_counts = {}
+        for point in support:
+            image = q2_mul(point, point, p, s)
+            fiber_counts[image] = fiber_counts.get(image, 0) + 1
+        remainder = [point for point in support
+                     if fiber_counts[q2_mul(point, point, p, s)] == 1]
+        phiR_sizes.add(len(set(q2_mul(point, point, p, s)
+                               for point in remainder)))
+
+    remainder_labels = comb(4, 2) * (2 ** 2)
+    admissible_per_label = comb(4 - 2, 1)
+    check("B F_25 cell (0,1,2,2): |phi(R)|=p=2 for every support",
           phiR_sizes == {2})
-    # factorization: fiber count at prefix z = binom(N-p,m) * #{R: pref_w(P_R)=T^{-1}(z)}.
-    # The three G7 summands 495,330,210 are exactly the p=0,1,2 CELLS, not one prefix fiber.
-    check("B QR4 sum is cell-mixing: [495,330,210]=binom(12-p,4) for p in {0,1,2} = 3 cells, "
-          "each cell one constant summand", g7 == [comb(12 - p_, 4) for p_ in (0, 1, 2)])
-    return dict(g7=g7)
+    check("B PO cell size: J=24 labels times binom(N-p,m)=2 admissible E "
+          "choices gives 48 supports",
+          remainder_labels == 24 and admissible_per_label == 2
+          and len(cell) == remainder_labels * admissible_per_label == 48)
+    check("B companion exact census refutes r>=c fixed-prefix factorization: "
+          "max fiber 20 is smaller than binom(8,4)=70",
+          20 < comb(8, 4) and 20 % comb(8, 4) != 0)
+    return {"admissible_E_counts_p012": admissible_counts}
 
 # ===========================================================================
 # GROUP C -- the degree-c interlace (blocker), visible in the deep prefix
@@ -370,12 +403,13 @@ def run_D():
     return dict(qslot=len(qslot), dslot=len(dslot))
 
 # ===========================================================================
-# GROUP E -- the characterization: strengthening <=> clean slot <=> NOT deep
+# GROUP E -- clean-coordinate characterization (not an image-size theorem)
 # ===========================================================================
 def run_E():
-    # strengthening (a structured list can beat identity via a field drop) is possible
-    # iff the depth-w prefix has a field-drop-clean quotient slot, i.e. exists j>=1 with
-    # r < j*c <= w.  Deep (w<r) makes this impossible.
+    # A coordinate is field-drop-clean iff the depth-w prefix reaches a quotient
+    # slot above the remainder degree, i.e. some j has r < j*c <= w.  Deep
+    # (w<r) makes such a coordinate impossible.  This says nothing by itself
+    # about the size of the JOINT prefix image; group F gates that distinction.
     bad = 0; euclid_clean = 0; deep_cases = 0
     for c in range(2, 6):
         for r in range(0, 12):
@@ -393,53 +427,89 @@ def run_E():
           "nonempty family", euclid_clean > 0)
     # spot values printed in the note
     check("E has_clean_slot(2,1,2)=True (r=1<c=2<=w=2: Euclidean drop, PAID)", has_clean_slot(2, 1, 2))
-    check("E has_clean_slot(2,4,2)=False (deep w=2<r=4: no drop, DECIDED negative)",
+    check("E has_clean_slot(2,4,2)=False (deep w=2<r=4: no clean coordinate; list undecided)",
           not has_clean_slot(2, 4, 2))
     check("E has_clean_slot(3,2,1)=False (deep w=1<r=2, and w<c=3: d=0, no slot at all)",
           not has_clean_slot(3, 2, 1))
     return dict(deep_cases=deep_cases, euclid_clean=euclid_clean)
 
 # ===========================================================================
-# GROUP F -- domination numerics on the F_169 field-drop tower
+# GROUP F -- #714 strict-deep contradiction to Cartesian-image domination
 # ===========================================================================
 def run_F():
     n, N, Bphi, B, c = 24, 12, 13, 169, 2
-    # deep instance: m=3, r=4 (r>c=2), a=cm+r=10, choose k=7 so w=a-k-1=2<r=4 (deep), d=floor(2/2)=1.
-    m, r, a, k = 3, 4, 10, 7
-    w = a - k - 1; d = w // c; pcell = r  # c=2 => p=r
-    check("F deep params: a=10,k=7,w=2,d=1; deep since w=2<r=4; r=4>c=2 (interlace visible)",
-          w == 2 and d == 1 and w < r and r > c)
-    # (1) fixed-R field-dropped floor: fixing R restores the drop but keeps only binom(N-p,m) E's.
-    fixedR = Lquot(N - pcell, m, d, Bphi)
-    check("F fixed-R deep floor = ceil(binom(N-p,m)|B_phi|^{-d}) = ceil(binom(8,3)/13) = 5",
-          fixedR == ceil_div(comb(8, 3), 13) == 5)
-    # (2) identity floor
-    lid = Lid(n, a, k, B)
-    check("F identity floor L_id = ceil(binom(24,10)/169^2) = 69", lid == 69 and comb(24, 10) == 1961256)
-    check("F DOMINATION: fixed-R deep floor 5 << L_id 69 (fixing R loses the remainder multiplicity)",
-          fixedR < lid)
-    # (3) provable-floor <= L_id: any deep profile is a SUBFAMILY of binom(n,a), and its depth-w
-    # prefix image is the FULL field |B|^w (no slot drops, group E), so
-    #   floor = ceil(|profile|/|image|) <= ceil(binom(n,a)/|B|^w) = L_id.
-    # Check the inequality shape with |profile| at its max (all of binom(n,a)) and |image|=|B|^w.
-    prof_floor_max = ceil_div(comb(n, a), B ** w)   # = L_id exactly at the extreme
-    check("F provable-floor <= L_id: with image=full |B|^w and |profile|<=binom(n,a), "
-          "the deep floor is at most L_id", prof_floor_max == lid)
-    # (4) rigidity 4.4 cross-check: the ACTUAL max fiber is bounded with NO |B|^{-w} factor.
-    cap = packing_cap(n, a, w)   # binom(24,10)/(1+binom(10,1)binom(14,1)) = 1961256/141
-    check("F rigidity 4.4 cap = binom(24,10)/141 (t=1) has NO |B|^{-w}=169^{-2} factor: "
-          "packing loss is e^{o(n)}, cannot manufacture the field drop",
-          cap == packing_cap(24, 10, 2) and int(cap) == 13909)
-    return dict(fixedR=fixedR, lid=lid, cap=str(cap))
+    p_base, s_base, theta, domain = build_F169_tower()
+    square_fibers = set(q2_mul(x, x, p_base, s_base) for x in domain)
+    check("F F_169 tower: theta has order 168, |D|=24, square fold has N=12",
+          q2_order(theta, p_base, s_base, 168) == 168
+          and len(set(domain)) == n and len(square_fibers) == N)
+
+
+    m, pcell, r, a, k = 4, 4, 4, 12, 8
+    w = a - k - 1
+    d = min(m, w // c)
+    check("F #714 params: (n,a,k,w,c,m,p,r)=(24,12,8,3,2,4,4,4), strictly deep",
+          w == 3 and d == 1 and w < r and pcell == r)
+
+    # For c=2 and p=r, each partial fiber contributes one of two points.
+    labels = comb(N, pcell) * (2 ** pcell)
+    profile = labels * comb(N - pcell, m)
+    image_bound = labels * (Bphi ** d)
+    guaranteed = Lquot(N - pcell, m, d, Bphi)
+    identity = Lid(n, a, k, B)
+    full_cartesian = B ** w
+
+    check("F #714 remainder labels J=binom(12,4)*2^4=7920",
+          labels == 7_920)
+    check("F #714 profile |Omega|=J*binom(8,4)=554400",
+          profile == 554_400)
+    check("F #714 reciprocal fixed-label image bound J*13^1=102960",
+          image_bound == 102_960)
+    check("F #714 guaranteed list ceil(70/13)=6 > identity floor "
+          "ceil(binom(24,12)/169^3)=1",
+          guaranteed == ceil_div(profile, image_bound) == 6
+          and identity == 1 and guaranteed > identity)
+
+    no_clean = not has_clean_slot(c, r, w)
+    check("F #714 has no field-drop-clean coordinate because w=3<r=4",
+          no_clean)
+    check("F CORRECTION: no-clean-coordinate does NOT imply Cartesian image; "
+          "the proved bound 102960 is < 169^3=4826809",
+          no_clean and image_bound < full_cartesian
+          and full_cartesian == 4_826_809)
+
+    # Keep the older fixed-R arithmetic only as a scoped toy.  It cannot bound
+    # the ranging-label image because the label factor cancels in the average.
+    toy_fixed = Lquot(8, 3, 1, 13)
+    toy_identity = Lid(24, 10, 7, 169)
+    check("F retained toy: fixed-R floor 5 < identity floor 69, but this is "
+          "NOT a ranging-remainder domination theorem",
+          toy_fixed == 5 and toy_identity == 69 and toy_fixed < toy_identity)
+    cap = packing_cap(24, 10, 2)
+    check("F retained rigidity arithmetic cap=floor(653752/47)=13909; "
+          "no Cartesian-fill inference is made",
+          str(cap) == "653752/47" and int(cap) == 13909)
+
+    return {
+        "J_strict_deep_F169": labels,
+        "profile_size_strict_deep_F169": profile,
+        "analytic_image_bound_strict_deep_F169": image_bound,
+        "full_cartesian_prefix_space_F169": full_cartesian,
+        "guaranteed_list_strict_deep_F169": guaranteed,
+        "identity_floor_strict_deep_F169": identity,
+        "fixedR_toy_floor_F169": toy_fixed,
+        "fixedR_toy_identity_floor_F169": toy_identity,
+        "rigidity_cap_toy_F169": str(cap),
+    }
 
 # ===========================================================================
 # GROUP G -- boundary constants and coupling to #699 / #693
 # ===========================================================================
 def run_G():
-    # the Euclidean/deep boundary is exactly w vs r; #699 pays w>=r, this note decides w<r.
+    # The Euclidean/deep boundary controls clean coordinates, not joint image size.
     check("G #699 boundary: Euclidean case is w>=r with r<c (clean slot exists) — PAID",
           has_clean_slot(3, 1, 3) and has_clean_slot(2, 1, 2))
-    check("G deep case is w<r (no clean slot) — DECIDED negative here, not merely OPEN",
+    check("G deep case w<r has no clean coordinate; #714 shows the list remains payable",
           not has_clean_slot(2, 3, 2) and not has_clean_slot(3, 4, 3))
     # coupling lemma constants echoed for the O5c/O7 split (#699 section 7): shallow window bound.
     for (n, k) in [(24, 5), (8, 1), (8, 2)]:
@@ -457,72 +527,82 @@ def write_certificate(results):
     lane_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                             "..", "data", "certificates", "lower-reserve-deep-remainder")
     lane_dir = os.path.normpath(lane_dir)
-    try:
-        os.makedirs(lane_dir, exist_ok=True)
-        cert = {
-            "title": "Lower-reserve deep-remainder partial-occupancy atlas",
-            "status": "CONDITIONAL",
-            "house_label": "deep-remainder field-drop route: DECIDED-NEGATIVE; blocker pinned",
-            "hard_input": "5 (lower reserve / unsafe-side comparison)",
-            "route": "O5c deep-remainder wall of prop:simple-pole-lower (L6196-6198)",
-            "consumes": ["#699 (O5c quotient/Euclidean/Chebyshev payment + wall localisation)",
-                         "#693 (lower-reserve/unsafe-side audit; O5c/O7 decomposition)"],
-            "tex_anchors": {
-                "prop:simple-pole-lower": "L6180",
-                "thm:exact-quotient-remainder-normal-form (QR2/QR4)": "L3456-3525",
-                "prop:complete-support-factorization (deg-c interlace)": "L3577-3606",
-                "thm:exact-partial-occupancy (PO1/PO2)": "L3608-3644",
-                "thm:collision-aware-pole (4.2)": "L1997",
-                "prop:exact-prefix-list (4.1)": "L1965",
-                "prop:prefix-rigidity-full (4.4)": "L2044",
-            },
-            "decision": {
-                "atlas_built": "occupancy cells Omega_{t,m,p,r} exhaust binom(D,a) (PO2) and make "
-                               "the QR4 summand constant per cell (|phi(R)|=p): "
-                               "fiber = binom(N-p,m)*#{R:pref_w(P_R)=.}",
-                "conversion_fails": "deep (w<r) => no field-drop-clean prefix slot "
-                                    "(no j with r<jc<=w); effective prefix alphabet = full B",
-                "blocker": "the full-field remainder coefficient p_{jc}(R) at each quotient slot "
-                           "degree jc<=w (present because deep => r>w>=jc)",
-                "verdict": "field-drop route beats nothing (Theorem DR); instance-level no-list "
-                           "clause refuted by the label-factoring route (#714) - deep-remainder reopens",
-            },
-            "key_numbers": results,
-            "verifier": "experimental/scripts/verify_lower_reserve_deep_remainder.py",
-            "checks_total": len(CHECKS),
-            "checks_pass": sum(1 for _, c in CHECKS if c),
-            "nonclaims": [
-                "no change to any deployed finite row or M31/KoalaBear survivor count",
-                "no payment of O7 (list-inaccessible per #699 K1)",
-                "no claim that a non-profile-list mechanism cannot beat identity in the deep regime; "
-                "the decision is for the prefix-fiber/field-drop route of L6197",
-            ],
-        }
-        with open(os.path.join(lane_dir, "deep_remainder_atlas.json"), "w") as f:
-            json.dump(cert, f, indent=2, sort_keys=True)
-        return True
-    except OSError:
-        return False
+    os.makedirs(lane_dir, exist_ok=True)
+    cert = {
+        "title": "Lower-reserve deep-remainder partial-occupancy atlas correction",
+        "status": "COUNTEREXAMPLE / FIXED",
+        "house_label": "no-clean-coordinate retained; Cartesian-image domination retired",
+        "hard_input": "5 (lower reserve / unsafe-side comparison)",
+        "route": "O5c deep-remainder wall of prop:simple-pole-lower (L6196-6198)",
+        "consumes": [
+            "#699 (O5c quotient/Euclidean/Chebyshev payment + wall localisation)",
+            "#693 (lower-reserve/unsafe-side audit; O5c/O7 decomposition)",
+            "#714 (fixed-label reciprocal image theorem and strict-deep counterexample)",
+        ],
+        "tex_anchors": {
+            "prop:simple-pole-lower": "L6180",
+            "arbitrary-remainder reciprocal identity (QR5)": "L3536-3541",
+            "prop:complete-support-factorization (deg-c interlace)": "L3577-3606",
+            "thm:exact-partial-occupancy (PO1/PO2)": "L3608-3644",
+            "thm:collision-aware-pole (4.2)": "L1997",
+            "prop:exact-prefix-list (4.1)": "L1965",
+        },
+        "decision": {
+            "atlas_built": "occupancy cells Omega_{t,m,p,r} exhaust binom(D,a) (PO2); "
+                           "|phi(R)|=p gives binom(N-p,m) admissible E choices per label",
+            "fixed_prefix_scope": "this cell-size identity is not a fixed-prefix factorization; "
+                                  "QR4 assumes r<c, and the r>=c companion census has maximum "
+                                  "fiber 20 < binom(8,4)=70",
+            "no_clean_coordinate": "deep (w<r) implies no j with r<jc<=w; any reached "
+                                   "quotient-coordinate slot is interlaced with remainder data",
+            "invalid_implication": "no clean coordinate does not imply joint prefix image B^w; "
+                                   "coordinatewise full-field variation is not Cartesian fill",
+            "counterexample": "#714 strict-deep F_169 cell has J=7920, |Omega|=554400, "
+                              "|image|<=102960, guaranteed list 6 > identity floor 1",
+            "verdict": "the printed field-drop-route-dead / Theorem-DR-survives conclusion is "
+                       "COUNTEREXAMPLE / FIXED; occupancy and no-clean-coordinate facts survive",
+        },
+        "key_numbers": results,
+        "verifier": "experimental/scripts/verify_lower_reserve_deep_remainder.py",
+        "exact_counterexample_verifier":
+            "experimental/scripts/verify_deep_remainder_partial_occupancy_counterexample.py",
+        "checks_total": len(CHECKS),
+        "checks_pass": sum(1 for _, passed in CHECKS if passed),
+        "nonclaims": [
+            "the correction does not create a clean coordinate in the strict-deep regime",
+            "no payment of O7 or claim of complete asymptotic unsafe-side coverage",
+            "no fixed-prefix QR4 factorization is asserted in the r>=c strict-deep cell",
+            "no change to any deployed finite row or M31/KoalaBear survivor count",
+        ],
+    }
+    cert_path = os.path.join(lane_dir, "deep_remainder_atlas.json")
+    with open(cert_path, "w", encoding="utf-8") as handle:
+        json.dump(cert, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+    return cert_path
 
 def run_all():
     a = run_A()
     b = run_B()
-    c = run_C()
+    run_C()
     d = run_D()
-    e = run_E()
+    run_E()
     f = run_F()
     run_G()
-    # cross-note constants recomputed explicitly
-    check("NOTE binom(8,4)=70, binom(12,4)=495, binom(24,10)=1961256", comb(8, 4) == 70
-          and comb(12, 4) == 495 and comb(24, 10) == 1961256)
-    check("NOTE F_25 tower N=4, F_13 cube N=4, F_169 tower N=12", a["N25"] == 4
-          and a["N13"] == 4)
+    # Cross-note constants recomputed explicitly.
+    check("NOTE binom(8,4)=70, binom(12,4)=495, binom(24,10)=1961256, "
+          "binom(24,12)=2704156",
+          comb(8, 4) == 70 and comb(12, 4) == 495
+          and comb(24, 10) == 1_961_256 and comb(24, 12) == 2_704_156)
+    check("NOTE F_25 tower N=4, F_13 cube N=4, F_169 tower N=12",
+          a["N25"] == 4 and a["N13"] == 4)
     results = {
-        "g7_summands": b["g7"], "deep_slot_alphabet_F25": d["dslot"],
-        "clean_slot_alphabet_F25": d["qslot"], "fixedR_deep_floor_F169": f["fixedR"],
-        "L_id_F169": f["lid"], "rigidity_cap_F169": f["cap"],
+        "admissible_E_counts_p012": b["admissible_E_counts_p012"],
+        "deep_slot_alphabet_F25": d["dslot"],
+        "clean_slot_alphabet_F25": d["qslot"],
         "deep_and_clean_violations": 0,
     }
+    results.update(f)
     return results
 
 def main():
@@ -532,52 +612,75 @@ def main():
     if mode not in ("--check",):
         print("usage: verify_lower_reserve_deep_remainder.py [--check | --tamper-selftest]")
         return 2
-    results = run_all()
-    wrote = write_certificate(results)
-    npass = sum(1 for _, c in CHECKS if c)
-    ntot = len(CHECKS)
-    for name, c in CHECKS:
-        print(("ok  " if c else "FAIL") + "  " + name)
-    print("certificate written:" if wrote else "certificate SKIPPED (read-only fs):",
-          "experimental/data/certificates/lower-reserve-deep-remainder/deep_remainder_atlas.json")
-    print("RESULT: %s %d/%d" % ("PASS" if npass == ntot else "FAIL", npass, ntot))
-    return 0 if npass == ntot else 1
+    try:
+        results = run_all()
+        npass = sum(1 for _, passed in CHECKS if passed)
+        ntot = len(CHECKS)
+        for name, passed in CHECKS:
+            print(("ok  " if passed else "FAIL") + "  " + name)
+        require(npass == ntot, "one or more verification gates failed")
+        cert_path = write_certificate(results)
+        print("certificate written:", os.path.relpath(cert_path, os.path.dirname(
+              os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+        print("RESULT: PASS %d/%d" % (npass, ntot))
+        return 0
+    except (VerificationError, OSError, ValueError) as exc:
+        print("RESULT: FAIL:", exc, file=sys.stderr)
+        return 1
 
 def tamper():
-    """Corrupt each load-bearing quantity; confirm the corresponding gate flips to FAIL."""
+    """Corrupt load-bearing values and confirm each corruption is rejected."""
     trials = []
-    # 1. clean-slot characterization: pretend deep admits a clean slot
-    trials.append(("deep (w=2<r=4) has NO clean slot (claiming True is false)",
-                   not has_clean_slot(2, 4, 2)))
-    # 2. Euclidean r<c<=w DOES have a clean slot (claiming False is false)
-    trials.append(("Euclidean r=1<c=2<=w=2 HAS a clean slot", has_clean_slot(2, 1, 2)))
-    # 3. domination: fixed-R deep floor must be < L_id
-    trials.append(("fixed-R deep floor 5 < L_id 69 (claiming >= is false)",
-                   Lquot(8, 3, 1, 13) == 5 and Lid(24, 10, 7, 169) == 69 and 5 < 69))
-    # 4. field-drop alphabet: clean slot is |B_phi|=5, NOT full field
-    p, s, g, D = build_F25_tower()
-    qcell = [S for S in combinations(D, 4) if occ_square(S, p, s) == (0, 2, 0, 0)]
-    qa = len(set(q2_locator(S, p, s)[2] for S in qcell))
-    trials.append(("clean quotient slot alphabet = 5 (= |B_phi|), not 21", qa == 5))
-    # 5. deep slot alphabet is full-field (21), not dropped (5)
-    dc = [S for S in combinations(D, 4) if occ_square(S, p, s) == (0, 1, 2, 2)]
-    da = len(set(q2_locator(S, p, s)[2] for S in dc))
-    trials.append(("deep interlaced slot alphabet = 21 (full field), not 5", da == 21 and da != qa))
-    # 6. PO2 exhaustion: cells must sum to binom(8,4)=70
+    labels = comb(12, 4) * (2 ** 4)
+    profile = labels * comb(8, 4)
+    image_bound = labels * 13
+    full_cartesian = 169 ** 3
+
+    trials.append(("strict-deep witness has no clean coordinate",
+                   not has_clean_slot(2, 4, 3)))
+    trials.append(("no-clean does not force Cartesian fill: 102960 < 4826809",
+                   image_bound < full_cartesian))
+    trials.append(("15 partial-root masks are rejected; exactly 16 give J=7920",
+                   comb(12, 4) * 15 != 7_920 and labels == 7_920))
+    trials.append(("wrong profile 519750 is rejected; exact profile is 554400",
+                   labels * 65 == 514_800 and profile == 554_400
+                   and profile != 519_750))
+    trials.append(("full-field denominator 169 is rejected; quotient denominator 13 gives 6",
+                   ceil_div(comb(8, 4), 169) == 1
+                   and ceil_div(comb(8, 4), 13) == 6))
+    trials.append(("analytic image bound uses J*13=102960, not J*169=1338480",
+                   image_bound == 102_960
+                   and labels * 169 == 1_338_480))
+    trials.append(("identity floor uses depth w=3 and equals 1",
+                   Lid(24, 12, 8, 169) == 1))
+
+    p, s, g, domain = build_F25_tower()
+    qcell = [support for support in combinations(domain, 4)
+             if occ_square(support, p, s) == (0, 2, 0, 0)]
+    clean_alphabet = len(set(q2_locator(support, p, s)[2]
+                             for support in qcell))
+    deepcell = [support for support in combinations(domain, 4)
+                if occ_square(support, p, s) == (0, 1, 2, 2)]
+    deep_alphabet = len(set(q2_locator(support, p, s)[2]
+                            for support in deepcell))
+    trials.append(("coordinate alphabets remain 5 clean versus 21 interlaced",
+                   clean_alphabet == 5 and deep_alphabet == 21))
+
     cells = {}
-    for S in combinations(D, 4):
-        lam = occ_square(S, p, s); cells[lam] = cells.get(lam, 0) + 1
-    trials.append(("PO2: F_25 a=4 cells sum to 70=binom(8,4) (not 69)", sum(cells.values()) == 70))
-    # 7. constant summand: within a cell |phi(R)|=p, the #699 varying summand is cell mixing
-    trials.append(("#699 G7 [495,330,210] are three DIFFERENT cells (p=0,1,2), not one fiber",
-                   [comb(12 - pp, 4) for pp in (0, 1, 2)] == [495, 330, 210]))
-    # 8. rigidity 4.4 carries no |B|^{-w}: cap 13909 is not L_id-scaled by 169^{-2}
-    trials.append(("rigidity 4.4 cap (13909) >> L_id (69): no |B|^{-w} in the packing bound",
-                   int(packing_cap(24, 10, 2)) == 13909 and 13909 > 69))
-    npass = sum(1 for _, c in trials if c)
-    for name, c in trials:
-        print(("ok  " if c else "FAIL") + "  tamper: " + name)
-    print("RESULT: %s %d/%d" % ("PASS" if npass == len(trials) else "FAIL", npass, len(trials)))
+    for support in combinations(domain, 4):
+        occupancy = occ_square(support, p, s)
+        cells[occupancy] = cells.get(occupancy, 0) + 1
+    trials.append(("PO2 corruption 69 rejected; F_25 a=4 atlas exhausts 70",
+                   sum(cells.values()) == 70))
+    trials.append(("cross-type admissible-E counts remain [495,330,210]",
+                   [comb(12 - partial, 4) for partial in (0, 1, 2)]
+                   == [495, 330, 210]))
+
+    npass = sum(1 for _, passed in trials if passed)
+    for name, passed in trials:
+        print(("ok  " if passed else "FAIL") + "  tamper: " + name)
+    print("RESULT: %s %d/%d" %
+          ("PASS" if npass == len(trials) else "FAIL", npass, len(trials)))
     return 0 if npass == len(trials) else 1
 
 if __name__ == "__main__":
