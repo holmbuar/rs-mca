@@ -6,6 +6,7 @@ import GrandeFinale.AxisGdampingCosGap
 import GrandeFinale.BCFirstInteriorGeneralLine
 import GrandeFinale.C0PeriodicF28CanonicalBlocks
 import GrandeFinale.C0PeriodicF28DerivedOwner
+import GrandeFinale.C0PeriodicF28PairwiseCompiler
 import GrandeFinale.C0PeriodicF28ResidualPencil
 import GrandeFinale.C0PeriodicF28ScalarPencil
 import GrandeFinale.C0PeriodicF28TargetCompiler

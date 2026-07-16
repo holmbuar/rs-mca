@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=28 pairwise reference choice
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF28PairwiseCompiler.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Replaces the designated reference target and its
+  conditional membership proof with pairwise existential projectivity between
+  targets on distinct residual supports.  Finite choice selects a reference
+  in the nonempty branch; the empty branch proves the bounds directly without
+  requiring an inhabitant of the target type.
+- **How it is useful:** Leaves the q64 `f=28` input symmetric in its targets
+  while preserving the exact residual-owner, target, and PR #819 first-match
+  bounds through the existing target compiler.
+- **What to do next:** Construct the remaining quotient polynomials and
+  pairwise projective relations from the canonical stratum, or prove the
+  fixed-cell Hahn cap; do not infer a complete deployed classification or
+  `c=0` parent.
+
 ### 2026-07-16 - C0 q64 f=28 projective-scale choice
 
 - **Agent/model:** Codex.

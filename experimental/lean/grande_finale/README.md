@@ -52,6 +52,12 @@ The package root is `GrandeFinale`, with additional modules under
   scale is nonzero, and recovers the exact target and first-match bounds without
   separate family-selection, block-data, ray-scale-function, scale-nonzero, or
   duplicate-coherence fields.
+- `GrandeFinale/C0PeriodicF28PairwiseCompiler.lean` removes the designated
+  reference target and its conditional membership proof.  It accepts
+  projective witnesses between every pair of targets on distinct residual
+  supports, chooses a reference when the family is nonempty, handles the empty
+  family without assuming the target type is inhabited, and recovers the same
+  exact residual, target, and first-match bounds.
 - `GrandeFinale/ChallengeIntersection.lean` formalizes exact finite
   translate--challenge intersection averaging, received-line shear invariance,
   the challenge-restricted MCA numerator, and the outer ceiling compiler used

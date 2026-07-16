@@ -42,6 +42,11 @@ This package is a partial Lean formalization of
   data, choice of scales on nonreference supports from existential projective
   witnesses, canonical reference-scale normalization, derived nonzero chosen
   scales, and the same exact residual, target, and first-match bounds.
+- `GrandeFinale/C0PeriodicF28PairwiseCompiler.lean`: finite choice of a
+  reference from a nonempty target family with pairwise projectivity on
+  distinct residual supports, plus a separate empty-family branch requiring
+  no inhabitant of the target type; it removes the designated-reference and
+  reference-membership inputs while preserving the exact bounds.
 - `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
   translate-intersection averaging, linear-code received-line shear invariance,
   challenge-restricted MCA numerators, and the ceiling-density transfer from a
