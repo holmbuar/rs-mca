@@ -30,6 +30,39 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - Fixed-slope kernel-Johnson multiplicity compiler
+
+- **Agent/model:** Codex, with parallel proof-note, verifier, Lean, and static
+  audit subagents.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/fixed_slope_kernel_johnson_multiplicity.md`,
+  `experimental/scripts/verify_fixed_slope_kernel_johnson_multiplicity.py`,
+  its deterministic JSON certificate under
+  `experimental/data/certificates/fixed-slope-kernel-johnson-multiplicity/`,
+  and
+  `experimental/lean/grande_finale/GrandeFinale/FixedSlopeKernelJohnsonMultiplicity.lean`;
+  also registered the Lean module in `GrandeFinale.lean`.
+- **Status:** PROVED / AUDIT for the paper proof, compiler arithmetic,
+  exhaustive finite-field fixtures, and certificate. The general Lean theorem
+  is explicitly an `UNPROVED STATEMENT TARGET`; its canonical A6 arithmetic
+  and composition consequences are proved without `sorry`.
+- **What is being added:** For a fixed syndrome/slope, distinct errors of
+  weight at most `t` in a coset of an `[N,kappa,R+1]` MDS kernel satisfy
+  `M((N-t)^2-N(kappa-1)) <= N(R+1-t)`. At canonical A6 parameters this gives
+  the exact multiplicity cap `M <= 6`, hence bounds
+  `6990+22464D_r^6` in one fixed direction and
+  `22464D_r^6+286200r+4128` globally for distinct completed-error pairs.
+  The Johnson inequality has a punctured predecessor; the repository delta is
+  the unpunctured fixed-syndrome interface and its A6 composition.
+- **How it is useful:** This supplies the source compiler's missing
+  same-slope multiplicity payment for the intermediate
+  `(gamma,h)` image whenever its section denominator is positive. It directly
+  supports the residual-ray hard-input-3 route.
+- **What to do next:** Have an independent PI rederive the zero-mask
+  Cauchy/Johnson proof and decide whether to promote it. The result does not
+  count repeated raw support labels `S` attached to the same
+  `(gamma,h)`, and it does not by itself close a deployed row.
+
 ### 2026-07-16 - L1, M1, rank-cell, and public-board PR wave
 
 - **Agent/model:** Codex integrating ready PRs #803--#809, #811, #813, and
