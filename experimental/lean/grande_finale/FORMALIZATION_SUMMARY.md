@@ -8,6 +8,9 @@ This package is a partial Lean formalization of
 - `GrandeFinale.lean`: core self-contained kernels for integer budgets,
   first-match ledgers, CA/MCA bad-slope monotonicity, moment inequalities, and
   finite packet arithmetic checks.
+- `GrandeFinale/C0PeriodicFirstMatchTarget.lean`: exact finite-set proof of
+  Danny's #796 four-cell first-match union cap, with the component caps and
+  cover supplied explicitly and the complete `c=0` parent kept outside scope.
 - `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
   translate-intersection averaging, linear-code received-line shear invariance,
   challenge-restricted MCA numerators, and the ceiling-density transfer from a

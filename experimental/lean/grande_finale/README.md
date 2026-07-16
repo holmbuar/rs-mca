@@ -8,6 +8,9 @@ The package root is `GrandeFinale`, with additional modules under
 
 - `GrandeFinale.lean` formalizes the core staircase, first-match, moment, and
   finite certificate kernels.
+- `GrandeFinale/C0PeriodicFirstMatchTarget.lean` proves the exact four-cell
+  first-match union cap from Danny's #796 packet.  The classified-cell caps
+  and cover are explicit hypotheses; no complete `c=0` parent bound is claimed.
 - `GrandeFinale/ChallengeIntersection.lean` formalizes exact finite
   translate--challenge intersection averaging, received-line shear invariance,
   the challenge-restricted MCA numerator, and the outer ceiling compiler used

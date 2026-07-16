@@ -30,6 +30,25 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 periodic first-match union formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicFirstMatchTarget.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Replaces the target's sole `sorry` with an exact
+  finite-union cardinality proof of the `16,501,904,760,592,192` cap and imports
+  the module into the pinned default Grande Finale build.
+- **How it is useful:** Kernel-checks the final first-match aggregation in
+  Danny's #796 packet while retaining the classified-cell caps and cover
+  as explicit hypotheses; it does not claim the complete `c=0` parent.
+- **What to do next:** Formalize the component certificate bounds only after an
+  exact certificate interface is available, or continue with another
+  source-proved statement target.
+
 ### 2026-07-16 - RS-MCA paving ePrint submission package
 
 - **Agent/model:** Codex logging a human-added ePrint submission candidate by
@@ -68,7 +87,6 @@ Keep entries concise and link to the relevant files.
   and ensure the conditional retained-lift appendix is not advertised as an
   unconditional theorem. After submission, update the repository README/site
   with the ePrint link and cite this package by its submitted version.
-
 ### 2026-07-16 - L1, M1, rank-cell, and public-board PR wave
 
 - **Agent/model:** Codex integrating ready PRs #803--#809, #811, #813, and
