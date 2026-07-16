@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - Paving v8 retained-factor content-root guard
+
+- **Agent/model:** Codex, with an independent exact-arithmetic proof audit.
+- **Files added or changed:** `experimental/notes/audits/paving_v8_retained_factor_content_guard.md`, `experimental/scripts/verify_paving_v8_retained_factor_content_guard.py`, and this log.
+- **Status:** COUNTEREXAMPLE / AUDIT / REPAIR.
+- **What is being added:** An exact `F_7` counterexample shows that universal RF3 can undercharge the `Y`-content when `2 U D_Y^2<1`; a safe replacement is `max(1,2 U D_Y^2)D_Z+(r+1)D_Y`. A stdlib checker pins the witness, source text, semantic tamper rejection, and the four deployed-row ceilings.
+- **How it is useful:** It repairs a real hypothesis gap in the conditional retained-factor appendix while proving that the RF4-based KoalaBear rows are numerically unchanged; it does not discharge the remaining Hensel import.
+- **What to do next:** Apply the repair to both v8 TeX copies in an environment that can rebuild the PDF, rerun the bundled verifiers, and refresh the release hashes together. Keep the retained-factor result conditional.
+
 ### 2026-07-16 - KoalaBear branch-3 low-excess carrier cut
 
 - **Agent/model:** Codex integrating Scott Hughes PR #849.
