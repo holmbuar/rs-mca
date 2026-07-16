@@ -73,6 +73,41 @@ Keep entries concise and link to the relevant files.
   and `experimental/cap25_cap_v13_raw.tex`, run the supplied verifier scripts
   only when a maintainer requests computation, and use the Lean modules as
   formalization targets without running Lake by default.
+### 2026-07-16 - First-wall MDS dimension-lift inverse
+
+- **Agent/model:** Codex team (derivation, independent finite search, owner
+  routing audit, verifier, and Lean 4.28 formalization).
+- **Files added or changed:**
+  `experimental/notes/thresholds/first_wall_mds_extension_inverse.md`,
+  `experimental/scripts/verify_first_wall_mds_extension_inverse.py`,
+  `experimental/data/certificates/first-wall-mds-extension-inverse/first_wall_mds_extension_inverse.json`,
+  `experimental/lean/grande_finale/GrandeFinale/FirstWallMDSExtensionInverse.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/scripts/README.md`, and `experimental/agents-log.md`.
+- **Status:** PROVED / CITED / AUDIT / COUNTEREXAMPLE.  The finite
+  interpolation, collision, MDS dimension-lift, and local-slope equivalences
+  are proved in the note and replayed on exact fixtures.  The odd-order oval
+  classification is cited from Segre; the abstract owner-image algebra is
+  formalized in Lean.  The one-point conic perturbation is an exact
+  near-equality counterexample, not a general stability classification.
+- **What is being added:** For `R>=2`, identifies first-wall pair-count
+  equality with one more MDS dimension lift, while separating it from the
+  automatic weighted charge identity.  In the full-field `kappa=1` odd-order
+  chart, equality is
+  exactly a nondegenerate quadratic graph after dividing by the weighted-code
+  multiplier and normalizing by the direction coordinate; one-point
+  perturbations have exact deficit `q-3`.
+- **How it is useful:** Retains the slope label lost by the vacuous
+  first-wall design projection, records the exact collision/deletion slack
+  split, and crosswalks the quadratic equality family to the exact scales and
+  hypotheses of the depth-zero identity and all-LineRay affine-core payments
+  without claiming first-match catalogue assignment.
+- **What to do next:** Work at positive depth after literal earlier-owner
+  deletion.  A useful theorem must extract global coherence from the local
+  slope maps—controlled affine rank, locator curves, quotient structure,
+  field descent, or a direct image-normalized deficit.  Do not promote a
+  general inverse, even-characteristic classification, or first-match
+  catalogue assignment from this packet.
 
 ### 2026-07-16 - RS-MCA paving ePrint submission package
 

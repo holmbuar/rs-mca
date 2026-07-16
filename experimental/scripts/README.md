@@ -32,6 +32,8 @@ python3 experimental/scripts/verify_asymptotic_packed_flatness_converse_v1.py --
 python3 experimental/scripts/verify_asymptotic_packed_flatness_converse_v1.py --tamper-selftest
 python3 experimental/scripts/verify_selected_owner_cube_mean_boundary_v1.py --check
 python3 experimental/scripts/verify_selected_owner_cube_mean_boundary_v1.py --tamper-selftest
+python3 experimental/scripts/verify_first_wall_mds_extension_inverse.py --check
+python3 experimental/scripts/verify_first_wall_mds_extension_inverse.py --tamper-selftest
 ```
 
 `experiment_rowsharp_q_prefix_atom_routes_v1.py --check` is a fast artifact

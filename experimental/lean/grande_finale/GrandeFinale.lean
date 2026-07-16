@@ -22,6 +22,7 @@ import GrandeFinale.DirectionDistanceAllPairs
 import GrandeFinale.ExactWeightAllPairs
 import GrandeFinale.FirstBeyondHalfCompleteAbsorption
 import GrandeFinale.FirstBeyondHalfKernelPencil
+import GrandeFinale.FirstWallMDSExtensionInverse
 import GrandeFinale.FixedDeficiencyCompleteAbsorption
 import GrandeFinale.FixedDeficiencyKernelMinorCompiler
 import GrandeFinale.FixedSlopeKernelJohnsonMultiplicity
