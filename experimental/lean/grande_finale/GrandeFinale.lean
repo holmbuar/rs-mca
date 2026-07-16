@@ -4,6 +4,7 @@ import GrandeFinale.AllLineRayAffineCore
 import GrandeFinale.AntiHostPrefixCompiler
 import GrandeFinale.AxisGdampingCosGap
 import GrandeFinale.BCFirstInteriorGeneralLine
+import GrandeFinale.C0PeriodicF28ResidualPencil
 import GrandeFinale.C0PeriodicF29ResidualOwner
 import GrandeFinale.C0PeriodicFirstMatchTarget
 import GrandeFinale.C0PeriodicSingletonCertificate

@@ -30,6 +30,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=28 residual-pencil formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF28ResidualPencil.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Proves parameter injectivity and common-base packing
+  for a support-level residual pencil, including the exact owner cap 63, then
+  kernel-checks `63 * 64 * 20,826,085 = 83,970,774,720` through typed local-cell
+  certificates and composes all periodic components into PR #819's union.
+- **How it is useful:** Removes PR #819's final opaque numerical component cap
+  once a typed pencil and local Hahn certificate are supplied.  The deployed
+  two-block construction, canonical classification, scalar classes, local Hahn
+  cap, and first-match cover remain explicit inputs.
+- **What to do next:** Derive the pencil representation and degree cut from the
+  two-block projective locator congruence, or formalize the fixed-cell Hahn
+  census; do not infer a complete `c=0` parent.
+
 ### 2026-07-16 - C0 q64 f=29 residual-owner formalization
 
 - **Agent/model:** Codex.

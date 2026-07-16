@@ -20,6 +20,10 @@ The package root is `GrandeFinale`, with additional modules under
   supports shorter than the period have the same residual support.  Its
   certificate compiler specializes this to q64 `f=29` and sums a supplied
   local cap across 64 quotient-constant classes.
+- `GrandeFinale/C0PeriodicF28ResidualPencil.lean` proves the support-level
+  base-root packing theorem for a q64 `f=28` residual pencil, giving at most
+  63 residual supports, then compiles 64 supplied fixed-residual scalar cells
+  into the exact cap `83,970,774,720`.
 - `GrandeFinale/ChallengeIntersection.lean` formalizes exact finite
   translate--challenge intersection averaging, received-line shear invariance,
   the challenge-restricted MCA numerator, and the outer ceiling compiler used
