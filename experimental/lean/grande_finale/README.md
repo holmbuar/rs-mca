@@ -27,6 +27,11 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/C0PeriodicF28TwoBlockCompiler.lean` proves that projective
   periodic-locator congruence modulo `X^a`, with `2B <= a`, forces both low
   coefficient-block equations after the same projective scaling.
+- `GrandeFinale/C0PeriodicF28CanonicalBlocks.lean` splits every support
+  locator canonically by Euclidean division through `X^B`.  At the deployed
+  boundary it derives the exact decomposition, lower-degree bound, exact upper
+  degree, upper monicity, and uniqueness directly from residual-support
+  cardinality.
 - `GrandeFinale/C0PeriodicF28ScalarPencil.lean` solves those block equations
   as an explicit reference-member pencil when the quotient constants are
   nonzero, then derives the low-block degree cut from two distinct monic
@@ -41,8 +46,9 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/C0PeriodicF28TargetCompiler.lean` accepts those algebraic
   certificates directly on a finite target family.  It deduplicates residual
   supports by finite image, selects representatives while fixing the reference
-  target, and recovers the same exact target and first-match bounds without
-  separate family-selection or duplicate-coherence fields.
+  target, derives each block decomposition canonically, and recovers the same
+  exact target and first-match bounds without separate family-selection,
+  block-data, or duplicate-coherence fields.
 - `GrandeFinale/ChallengeIntersection.lean` formalizes exact finite
   translate--challenge intersection averaging, received-line shear invariance,
   the challenge-restricted MCA numerator, and the outer ceiling compiler used

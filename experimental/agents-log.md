@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=28 canonical residual blocks
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF28CanonicalBlocks.lean`,
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF28TargetCompiler.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Defines the canonical lower and upper blocks of a
+  support locator by Euclidean division through `X^B`, proves exact
+  decomposition, the lower-degree bound, exact upper degree, and upper
+  monicity, and specializes and uniquely characterizes the deployed
+  `32,768 + 30,833` split.
+- **How it is useful:** The target-indexed q64 `f=28` certificate now derives
+  its block functions, decomposition, lower-degree bound, and upper degree from
+  residual-support cardinality rather than accepting five separate inputs.
+- **What to do next:** Construct the target-indexed quotient/projective data
+  from the canonical stratum, or prove the fixed-cell Hahn cap; do not infer a
+  complete deployed classification or `c=0` parent.
+
 ### 2026-07-16 - C0 q64 f=28 target-indexed compiler
 
 - **Agent/model:** Codex.
@@ -47,7 +69,7 @@ Keep entries concise and link to the relevant files.
 - **How it is useful:** Removes separate deduplicated-family and representative
   quotient inputs.  Duplicate targets need no coherence assumption because the
   owner proof uses only one selected witness for each nonreference support.
-- **What to do next:** Construct the per-target block and quotient/projective
+- **What to do next:** Construct the per-target quotient/projective
   certificates from the canonical stratum, or prove the fixed-cell Hahn cap;
   do not infer a complete deployed classification or `c=0` parent.
 

@@ -26,6 +26,10 @@ This package is a partial Lean formalization of
 - `GrandeFinale/C0PeriodicF28TwoBlockCompiler.lean`: generic two-block
   truncation of periodic locators and recovery of both low coefficient-block
   equations from projective congruence modulo `X^a` when `2B <= a`.
+- `GrandeFinale/C0PeriodicF28CanonicalBlocks.lean`: canonical Euclidean
+  division of a support locator by `X^B`, with a lower-degree bound, exact
+  upper degree, upper monicity, the deployed `32,768 + 30,833`
+  specialization, and uniqueness.
 - `GrandeFinale/C0PeriodicF28ScalarPencil.lean`: explicit scalar solution of
   the two block equations, direct projective-congruence-to-pencil normal form,
   and the `30,833` low-block degree cut from two distinct monic members.
@@ -179,8 +183,10 @@ cases.  Its outer compiler recovers the exact q64 `f=28` target cap and PR
 #819 first-match payment from supplied scalar classes and fixed-cell caps.  The
 target-indexed compiler now forms the distinct-support image and selects one
 representative per support, always retaining the designated reference target;
-no duplicate-data coherence is needed.  Constructing the target-indexed
-two-block and quotient/projective data from the canonical stratum, proving the
+no duplicate-data coherence is needed.  The canonical-block module now derives
+each locator decomposition, the lower-degree bound, exact upper degree, and
+upper monicity directly from the residual support.  Constructing the
+target-indexed quotient/projective data from the canonical stratum, proving the
 fixed-residual Hahn cap, and the first-match cover remain explicit inputs.
 These modules do not treat
 `f<=27`, general monic moduli, or a complete `c=0` parent.

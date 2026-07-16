@@ -1,4 +1,5 @@
 import GrandeFinale.C0PeriodicF28DerivedOwner
+import GrandeFinale.C0PeriodicF28CanonicalBlocks
 
 /-!
 # Periodic `q = 64`, `f = 28` target-indexed compiler
@@ -10,9 +11,10 @@ choice selects one target for each distinct residual support, while the
 designated target is always selected on the reference support.  Duplicate
 targets therefore need no coherence hypothesis for the owner bound.
 
-The resulting deduplicated family feeds the existing residual-pencil owner,
-the 64 supplied scalar cells, and the exact PR #819 first-match wrapper.  The
-deployed classification, per-target algebraic certificates, fixed-cell Hahn
+The support locator itself supplies the canonical lower and upper blocks.  The
+resulting deduplicated family feeds the existing residual-pencil owner, the 64
+supplied scalar cells, and the exact PR #819 first-match wrapper.  The deployed
+classification, per-target quotient/projective certificates, fixed-cell Hahn
 cap, and first-match cover remain explicit inputs.  No complete `c = 0`
 parent bound is claimed.
 -/
@@ -22,6 +24,7 @@ open Polynomial
 namespace GrandeFinale.C0PeriodicF28TargetCompiler
 
 open C0PeriodicF28DerivedOwner
+open C0PeriodicF28CanonicalBlocks
 open C0PeriodicF29ResidualOwner
 
 /-- Deployed two-block data indexed by target objects before equal residual
@@ -33,8 +36,6 @@ structure TargetTwoBlockCertificate
   ambient : Finset F
   residualSupport : α → Finset F
   referenceTarget : α
-  lowerBlock : α → F[X]
-  upperBlock : α → F[X]
   quotient : α → F[X]
   rayScale : α → F
   reference_mem_of_nonempty : target.Nonempty → referenceTarget ∈ target
@@ -42,18 +43,15 @@ structure TargetTwoBlockCertificate
   ambient_ne_zero : ∀ z ∈ ambient, z ≠ 0
   residual_subset : ∀ x ∈ target, residualSupport x ⊆ ambient
   residual_card : ∀ x ∈ target, (residualSupport x).card = 63601
-  decomposition : ∀ x ∈ target,
-    supportLocator (residualSupport x) =
-      deployedResidual (lowerBlock x) (upperBlock x)
-  lower_degree_lt : ∀ x ∈ target, (lowerBlock x).natDegree < 32768
-  upper_degree : ∀ x ∈ target, (upperBlock x).natDegree = 30833
   quotient_constant_ne_zero : ∀ x ∈ target, (quotient x).coeff 0 ≠ 0
   rayScale_ne_zero : ∀ x ∈ target, rayScale x ≠ 0
   projective : ∀ x ∈ target,
     residualSupport x ≠ residualSupport referenceTarget →
       DeployedProjective
-        (lowerBlock x) (upperBlock x) (quotient x)
-        (lowerBlock referenceTarget) (upperBlock referenceTarget)
+        (canonicalLowerBlock 32768 (residualSupport x))
+        (canonicalUpperBlock 32768 (residualSupport x)) (quotient x)
+        (canonicalLowerBlock 32768 (residualSupport referenceTarget))
+        (canonicalUpperBlock 32768 (residualSupport referenceTarget))
         (quotient referenceTarget) (rayScale x)
 
 /-- Distinct residual supports realized by the finite target family. -/
@@ -137,16 +135,25 @@ theorem TargetTwoBlockCertificate.reference_mem_of_residual_nonempty
       cert.reference_mem_of_nonempty
         (cert.target_nonempty_of_residual_mem hR), rfl⟩
 
-/-- Finite choice deduplicates the target-indexed residual supports and feeds
-the existing derived owner. -/
+theorem TargetTwoBlockCertificate.residual_card_of_mem
+    {α F : Type*} [DecidableEq α] [Field F] [DecidableEq F]
+    (cert : TargetTwoBlockCertificate α F)
+    {R : Finset F} (hR : R ∈ cert.residuals) : R.card = 63601 := by
+  have hx := cert.selectedTarget_mem hR
+  simpa only [cert.selectedTarget_support hR] using
+    cert.residual_card (cert.selectedTarget R) hx
+
+/-- Finite choice deduplicates the target-indexed residual supports and selects
+their quotient and ray-scale data.  The residual blocks themselves are the
+canonical functions of the support. -/
 noncomputable def TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
     {α F : Type*} [DecidableEq α] [Field F] [DecidableEq F]
     (cert : TargetTwoBlockCertificate α F) : TwoBlockFamilyCertificate F where
   ambient := cert.ambient
   residuals := cert.residuals
   reference := cert.residualSupport cert.referenceTarget
-  lowerBlock := fun R ↦ cert.lowerBlock (cert.selectedTarget R)
-  upperBlock := fun R ↦ cert.upperBlock (cert.selectedTarget R)
+  lowerBlock := canonicalLowerBlock 32768
+  upperBlock := canonicalUpperBlock 32768
   quotient := fun R ↦ cert.quotient (cert.selectedTarget R)
   rayScale := fun R ↦ cert.rayScale (cert.selectedTarget R)
   ambient_card := cert.ambient_card
@@ -158,22 +165,20 @@ noncomputable def TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
       cert.residual_subset (cert.selectedTarget R) hx
   residual_card := by
     intro R hR
-    have hx := cert.selectedTarget_mem hR
-    simpa only [cert.selectedTarget_support hR] using
-      cert.residual_card (cert.selectedTarget R) hx
+    exact cert.residual_card_of_mem hR
   decomposition := by
     intro R hR
-    have hx := cert.selectedTarget_mem hR
-    simpa only [cert.selectedTarget_support hR] using
-      cert.decomposition (cert.selectedTarget R) hx
+    rw [deployedResidual_eq]
+    exact (supportLocator_deployed_twoBlock R
+      (cert.residual_card_of_mem hR)).1
   lower_degree_lt := by
     intro R hR
-    exact cert.lower_degree_lt (cert.selectedTarget R)
-      (cert.selectedTarget_mem hR)
+    exact (supportLocator_deployed_twoBlock R
+      (cert.residual_card_of_mem hR)).2.1
   upper_degree := by
     intro R hR
-    exact cert.upper_degree (cert.selectedTarget R)
-      (cert.selectedTarget_mem hR)
+    exact (supportLocator_deployed_twoBlock R
+      (cert.residual_card_of_mem hR)).2.2.1
   quotient_constant_ne_zero := by
     intro R hR
     exact cert.quotient_constant_ne_zero (cert.selectedTarget R)
@@ -195,7 +200,12 @@ noncomputable def TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
       rw [hsupp]
       exact hRref
     have hproj := cert.projective (cert.selectedTarget R) hx hne
-    simpa [TargetTwoBlockCertificate.selectedTarget] using hproj
+    rw [hsupp] at hproj
+    have hrefSelected :
+        cert.selectedTarget (cert.residualSupport cert.referenceTarget) =
+          cert.referenceTarget := by
+      simp [TargetTwoBlockCertificate.selectedTarget]
+    simpa only [hrefSelected] using hproj
 
 theorem TargetTwoBlockCertificate.distinct_residuals_card_le
     {α F : Type*} [DecidableEq α] [Field F] [DecidableEq F]
