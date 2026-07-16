@@ -30,6 +30,25 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=29 derived projective-scale nonzero
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF29ResidualOwner.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Proves that a projective congruence with a nonzero
+  quotient constant and a nonzero left block of degree below the period cannot
+  have scale zero.  Both generic residual ownership and the deployed q64
+  `f=29` certificate now derive scale nonzeroness from their algebraic data.
+- **How it is useful:** Removes a separate `c ≠ 0` proof from every pairwise
+  projective witness while preserving the exact residual-owner, target, and
+  PR #819 first-match bounds.
+- **What to do next:** Construct the remaining quotient/projective data from
+  the deployed stratum or restrict the local Hahn inputs to realized cells;
+  do not infer a complete deployed classification or `c=0` parent.
+
 ### 2026-07-16 - C0 q64 f=28 pairwise reference choice
 
 - **Agent/model:** Codex.
