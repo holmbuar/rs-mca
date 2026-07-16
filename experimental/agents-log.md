@@ -30,6 +30,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=28 target-indexed compiler
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF28TargetCompiler.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Forms the finite image of target-indexed residual
+  supports, selects one realizing target for each distinct support while
+  fixing the designated reference target, and compiles the selected data into
+  the derived owner.  Direct wrappers recover the exact `83,970,774,720`
+  q64 `f=28` target cap and the PR #819 first-match payment.
+- **How it is useful:** Removes separate deduplicated-family and representative
+  quotient inputs.  Duplicate targets need no coherence assumption because the
+  owner proof uses only one selected witness for each nonreference support.
+- **What to do next:** Construct the per-target block and quotient/projective
+  certificates from the canonical stratum, or prove the fixed-cell Hahn cap;
+  do not infer a complete deployed classification or `c=0` parent.
+
 ### 2026-07-16 - C0 q64 f=28 derived residual owner
 
 - **Agent/model:** Codex.

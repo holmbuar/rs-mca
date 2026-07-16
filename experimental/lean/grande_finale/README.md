@@ -38,6 +38,11 @@ The package root is `GrandeFinale`, with additional modules under
   outer wrapper
   recovers the exact target cap `83,970,774,720` from supplied fixed cells and
   composes it into the PR #819 first-match payment.
+- `GrandeFinale/C0PeriodicF28TargetCompiler.lean` accepts those algebraic
+  certificates directly on a finite target family.  It deduplicates residual
+  supports by finite image, selects representatives while fixing the reference
+  target, and recovers the same exact target and first-match bounds without
+  separate family-selection or duplicate-coherence fields.
 - `GrandeFinale/ChallengeIntersection.lean` formalizes exact finite
   translate--challenge intersection averaging, received-line shear invariance,
   the challenge-restricted MCA numerator, and the outer ceiling compiler used

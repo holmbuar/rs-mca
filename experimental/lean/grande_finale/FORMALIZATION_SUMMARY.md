@@ -33,6 +33,9 @@ This package is a partial Lean formalization of
   deduplicated literal two-block/projective family to the support-level pencil,
   including the singleton branch, the derived residual-owner cap 63, the exact
   q64 `f=28` target cap `83,970,774,720`, and its first-match composition.
+- `GrandeFinale/C0PeriodicF28TargetCompiler.lean`: finite-image
+  deduplication and representative selection from target-indexed two-block
+  data, followed by the same exact residual, target, and first-match bounds.
 - `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
   translate-intersection averaging, linear-code received-line shear invariance,
   challenge-restricted MCA numerators, and the ceiling-density transfer from a
@@ -172,11 +175,14 @@ members with the deployed upper-block degree bound.  In the at-least-two-member
 branch, the derived-owner compiler now constructs the support-level pencil
 certificate from a supplied deduplicated family of literal two-block
 decompositions and projective congruences.  It obtains the owner cap 63 in all
-cases.  Its outer compiler recovers the
-exact q64 `f=28` target cap and PR #819 first-match payment from supplied scalar
-classes and fixed-cell caps.  Constructing the family and its representative
-quotients from the canonical stratum, proving the fixed-residual Hahn cap, and
-the first-match cover remain explicit inputs.  These modules do not treat
+cases.  Its outer compiler recovers the exact q64 `f=28` target cap and PR
+#819 first-match payment from supplied scalar classes and fixed-cell caps.  The
+target-indexed compiler now forms the distinct-support image and selects one
+representative per support, always retaining the designated reference target;
+no duplicate-data coherence is needed.  Constructing the target-indexed
+two-block and quotient/projective data from the canonical stratum, proving the
+fixed-residual Hahn cap, and the first-match cover remain explicit inputs.
+These modules do not treat
 `f<=27`, general monic moduli, or a complete `c=0` parent.
 
 The main remaining target is Q:
