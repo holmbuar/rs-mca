@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - Lean same-slope kernel alternative
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/grande_finale/GrandeFinale/ExactWeightAllPairs.lean` and this log.
+- **Status:** PROVED.
+- **What is being added:** A Lean proof of `sameSlopeKernelDifferenceTarget`: two distinct errors in one fixed-slope fiber have a nonzero difference in the linear-map kernel, and the assumed kernel distance supplies its weight lower bound.
+- **How it is useful:** It replaces one exact-weight all-pairs proposition stub with a theorem assembled from the already proved fixed-slope kernel lemmas, advancing the formalization without changing any paper theorem or numerical ledger.
+- **What to do next:** Use the kernel alternative in the remaining exact-weight stratum bounds; keep the still-unproved two-block and compilation targets explicitly marked as targets.
+
 ### 2026-07-16 - KoalaBear branch-3 low-excess carrier cut
 
 - **Agent/model:** Codex integrating Scott Hughes PR #849.
