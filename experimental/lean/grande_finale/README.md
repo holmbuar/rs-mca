@@ -13,6 +13,14 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/FixedSlopeKernelJohnsonMultiplicity.lean` packages the
   fixed-slope kernel-Johnson multiplicity compiler; it is a theorem-level
   combinatorial cap, not a full threshold theorem.
+- `GrandeFinale/ExactWeightAllPairs.lean` records the selector-free exact-weight
+  two-block surfaces. It proves `sameSlopeKernelDifference`: distinct errors
+  in one slope fiber differ by a nonzero kernel word and inherit the assumed
+  kernel-distance lower bound. This statement matches the same-slope branch in
+  `experimental/notes/thresholds/selector_free_exact_weight_all_pair.md`,
+  section “Common-zero cap for all pairs”; it does not certify that section's
+  different-slope branch. The exact-weight, endpoint, and two-block compiler
+  surfaces remain explicitly unproved targets.
 - `GrandeFinale/Rank16FixedCoreQuotientLineObstruction.lean` records the
   rank-16 fixed-core quotient-line obstruction kernel for the q64 line family.
 - `GrandeFinale/TripleNegativeFirstMatchReduction.lean` formalizes the

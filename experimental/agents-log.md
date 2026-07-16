@@ -33,7 +33,7 @@ Keep entries concise and link to the relevant files.
 ### 2026-07-16 - Lean same-slope kernel alternative
 
 - **Agent/model:** Codex.
-- **Files added or changed:** `experimental/lean/grande_finale/GrandeFinale/ExactWeightAllPairs.lean` and this log.
+- **Files added or changed:** `experimental/lean/grande_finale/GrandeFinale/ExactWeightAllPairs.lean`, `experimental/lean/grande_finale/README.md`, and this log.
 - **Status:** PROVED.
 - **What is being added:** A Lean proof of `sameSlopeKernelDifferenceTarget`: two distinct errors in one fixed-slope fiber have a nonzero difference in the linear-map kernel, and the assumed kernel distance supplies its weight lower bound.
 - **How it is useful:** It replaces one exact-weight all-pairs proposition stub with a theorem assembled from the already proved fixed-slope kernel lemmas, advancing the formalization without changing any paper theorem or numerical ledger.
