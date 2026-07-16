@@ -15,6 +15,10 @@ This package is a partial Lean formalization of
   omitted pair from fixed first and third moments, disjoint powerset-certificate
   packing, the literal q128 singleton caps `34,137` and `12,598,400`, and the
   conditional fixed-singleton compiler for the `b=5,7` subtotal.
+- `GrandeFinale/C0PeriodicF29ResidualOwner.lean`: low-block recovery for
+  periodic locators, support-level residual ownership via locator injectivity,
+  and the conditional 64-class compiler for the literal q64 `f=29` cap
+  `1,619,679,744`.
 - `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
   translate-intersection averaging, linear-code received-line shear invariance,
   challenge-restricted MCA numerators, and the ceiling-density transfer from a
@@ -132,6 +136,13 @@ of the q128 `b=5,7` component used by the C0 first-match target.  Its
 the cover by the 128 quotient-constant fibers as explicit inputs.  It does not
 formalize the frozen Ruby replay, pay `b>=9`, or promote a complete `c=0`
 parent bound.
+
+The periodic `f=29` module proves the algebraic residual-support owner and the
+64-cell union arithmetic.  Its `F29ProjectiveRayCertificate` deliberately
+keeps the deployed locator decomposition, pairwise projective congruences,
+quotient-constant classification, and the fixed-residual local Hahn cap as
+explicit inputs.  It does not construct the literal deployed stratum, prove
+the `f=28` component, or promote a complete `c=0` parent bound.
 
 The main remaining target is Q:
 

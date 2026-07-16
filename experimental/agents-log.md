@@ -30,6 +30,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=29 residual-owner formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF29ResidualOwner.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Proves that projectively congruent periodic
+  locators with nonzero quotient constants own the same short residual support,
+  then kernel-checks `64 * 25,307,496 = 1,619,679,744` through a typed local-cell
+  certificate and composes it with the q128 singleton certificates.
+- **How it is useful:** Refines PR #819's q64 `f=29` component hypothesis into
+  a support-level algebraic owner and exact finite-union compiler.  The deployed
+  factorization, projective congruences, 64-class quotient classification, and
+  local Hahn cap remain explicit certificate inputs.
+- **What to do next:** Formalize the q64 `f=28` residual-pencil owner, or
+  instantiate the remaining local Hahn and deployed-stratum certificates; do
+  not infer a complete `c=0` cover.
+
 ### 2026-07-16 - C0 q128 singleton-certificate formalization
 
 - **Agent/model:** Codex.
