@@ -11,6 +11,10 @@ The package root is `GrandeFinale`, with additional modules under
 - `GrandeFinale/C0PeriodicFirstMatchTarget.lean` proves the exact four-cell
   first-match union cap from Danny's #796 packet.  The classified-cell caps
   and cover are explicit hypotheses; no complete `c=0` parent bound is claimed.
+- `GrandeFinale/C0PeriodicSingletonCertificate.lean` proves the q128
+  two-odd-moment omitted-pair packing bounds for singleton occupancies five and
+  seven, then composes supplied fixed-singleton cell caps into the exact
+  `b=5,7` subtotal consumed by the first-match theorem.
 - `GrandeFinale/ChallengeIntersection.lean` formalizes exact finite
   translate--challenge intersection averaging, received-line shear invariance,
   the challenge-restricted MCA numerator, and the outer ceiling compiler used

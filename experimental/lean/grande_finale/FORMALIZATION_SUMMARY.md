@@ -11,6 +11,10 @@ This package is a partial Lean formalization of
 - `GrandeFinale/C0PeriodicFirstMatchTarget.lean`: exact finite-set proof of
   Danny's #796 four-cell first-match union cap, with the component caps and
   cover supplied explicitly and the complete `c=0` parent kept outside scope.
+- `GrandeFinale/C0PeriodicSingletonCertificate.lean`: exact recovery of an
+  omitted pair from fixed first and third moments, disjoint powerset-certificate
+  packing, the literal q128 singleton caps `34,137` and `12,598,400`, and the
+  conditional fixed-singleton compiler for the `b=5,7` subtotal.
 - `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
   translate-intersection averaging, linear-code received-line shear invariance,
   challenge-restricted MCA numerators, and the ceiling-density transfer from a
@@ -121,6 +125,13 @@ This package is a partial Lean formalization of
 
 The files formalize reusable theorem-level kernels and arithmetic facts from the
 Grande Finale program.  They do not prove the full RS-MCA threshold theorem.
+
+The periodic singleton module discharges the algebraic and finite-packing part
+of the q128 `b=5,7` component used by the C0 first-match target.  Its
+`Q128OccupancyCertificate` deliberately keeps the fixed-singleton Hahn caps and
+the cover by the 128 quotient-constant fibers as explicit inputs.  It does not
+formalize the frozen Ruby replay, pay `b>=9`, or promote a complete `c=0`
+parent bound.
 
 The main remaining target is Q:
 

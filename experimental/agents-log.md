@@ -30,6 +30,27 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q128 singleton-certificate formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicSingletonCertificate.lean`,
+  `experimental/lean/grande_finale/GrandeFinale.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Formalizes omitted-pair recovery from fixed first
+  and cubic moments, the disjoint `(b-2)`-subset packing, and the exact
+  numerical caps `H_5<=34,137`, `H_7<=12,598,400`.  A typed certificate
+  interface then composes supplied local Hahn caps into the q128 `b=5,7`
+  subtotal from #796.
+- **How it is useful:** Refines PR #819's largest opaque component hypothesis
+  into kernel-checked algebra, finite packing, and union arithmetic while
+  retaining the local cell caps and cover as explicit inputs.
+- **What to do next:** Formalize the q64 `f=29` residual owner and `f=28`
+  residual-pencil owner, or provide a separately audited Lean interface for the
+  four local Hahn bounds; do not infer a complete `c=0` cover.
+
 ### 2026-07-16 - C0 periodic first-match union formalization
 
 - **Agent/model:** Codex.

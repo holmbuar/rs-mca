@@ -5,6 +5,7 @@ import GrandeFinale.AntiHostPrefixCompiler
 import GrandeFinale.AxisGdampingCosGap
 import GrandeFinale.BCFirstInteriorGeneralLine
 import GrandeFinale.C0PeriodicFirstMatchTarget
+import GrandeFinale.C0PeriodicSingletonCertificate
 import GrandeFinale.CanonicalLagrangeCurveCompiler
 import GrandeFinale.DeployedC9OddMonomialFourierBudget
 import GrandeFinale.DepthZeroIdentityLineRayOwner
