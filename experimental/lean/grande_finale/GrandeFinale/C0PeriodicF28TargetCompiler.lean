@@ -27,9 +27,9 @@ open C0PeriodicF28DerivedOwner
 open C0PeriodicF28CanonicalBlocks
 open C0PeriodicF29ResidualOwner
 
-/-- Deployed two-block data indexed by target objects before equal residual
-supports are deduplicated.  Requiring the designated reference only when the
-target is nonempty preserves the empty-family branch. -/
+/-- Deployed quotient/projective data indexed by target objects before equal
+residual supports are deduplicated.  Requiring the designated reference only
+when the target is nonempty preserves the empty-family branch. -/
 structure TargetTwoBlockCertificate
     (α F : Type*) [DecidableEq α] [Field F] [DecidableEq F] where
   target : Finset α
@@ -44,7 +44,6 @@ structure TargetTwoBlockCertificate
   residual_subset : ∀ x ∈ target, residualSupport x ⊆ ambient
   residual_card : ∀ x ∈ target, (residualSupport x).card = 63601
   quotient_constant_ne_zero : ∀ x ∈ target, (quotient x).coeff 0 ≠ 0
-  rayScale_ne_zero : ∀ x ∈ target, rayScale x ≠ 0
   projective : ∀ x ∈ target,
     residualSupport x ≠ residualSupport referenceTarget →
       DeployedProjective
@@ -53,6 +52,63 @@ structure TargetTwoBlockCertificate
         (canonicalLowerBlock 32768 (residualSupport referenceTarget))
         (canonicalUpperBlock 32768 (residualSupport referenceTarget))
         (quotient referenceTarget) (rayScale x)
+
+/-- The coefficient-zero block equation forces every supplied nonreference
+projective scale to be nonzero. -/
+theorem TargetTwoBlockCertificate.projective_rayScale_ne_zero
+    {α F : Type*} [DecidableEq α] [Field F] [DecidableEq F]
+    (cert : TargetTwoBlockCertificate α F)
+    {x : α} (hx : x ∈ cert.target)
+    (hne : cert.residualSupport x ≠
+      cert.residualSupport cert.referenceTarget) :
+    cert.rayScale x ≠ 0 := by
+  have hprojective := cert.projective x hx hne
+  have href : cert.referenceTarget ∈ cert.target :=
+    cert.reference_mem_of_nonempty ⟨x, hx⟩
+  have hblocks := blocks_of_projective_coefficients
+    32768 67472 (by norm_num)
+    (canonicalLowerBlock 32768 (cert.residualSupport x))
+    (canonicalUpperBlock 32768 (cert.residualSupport x))
+    (cert.quotient x)
+    (canonicalLowerBlock 32768
+      (cert.residualSupport cert.referenceTarget))
+    (canonicalUpperBlock 32768
+      (cert.residualSupport cert.referenceTarget))
+    (cert.quotient cert.referenceTarget) (cert.rayScale x)
+    (supportLocator_deployed_twoBlock (cert.residualSupport x)
+      (cert.residual_card x hx)).2.1
+    (by
+      rw [(supportLocator_deployed_twoBlock (cert.residualSupport x)
+        (cert.residual_card x hx)).2.2.1]
+      norm_num)
+    (supportLocator_deployed_twoBlock
+      (cert.residualSupport cert.referenceTarget)
+      (cert.residual_card cert.referenceTarget href)).2.1
+    (by
+      rw [(supportLocator_deployed_twoBlock
+        (cert.residualSupport cert.referenceTarget)
+        (cert.residual_card cert.referenceTarget href)).2.2.1]
+      norm_num)
+    (fun d hd => by
+      simpa only [← deployedResidual_eq] using hprojective d hd)
+  have hlower :
+      (canonicalLowerBlock 32768 (cert.residualSupport x)).coeff 0 ≠ 0 := by
+    have hsupp := supportLocator_coeff_zero_ne_zero_of_subset
+      cert.ambient (cert.residualSupport x)
+      (cert.residual_subset x hx) cert.ambient_ne_zero
+    have hcoeff :
+        (supportLocator (cert.residualSupport x)).coeff 0 =
+          (canonicalLowerBlock 32768 (cert.residualSupport x)).coeff 0 := by
+      rw [(supportLocator_deployed_twoBlock (cert.residualSupport x)
+        (cert.residual_card x hx)).1]
+      simp
+    rwa [hcoeff] at hsupp
+  intro hscale
+  have heq := hblocks.1
+  rw [hscale] at heq
+  have hcoeff := congrArg (fun P : F[X] ↦ P.coeff 0) heq
+  simp only [zero_mul, C_0, coeff_C_mul] at hcoeff
+  exact (mul_ne_zero (cert.quotient_constant_ne_zero x hx) hlower) hcoeff
 
 /-- Distinct residual supports realized by the finite target family. -/
 def TargetTwoBlockCertificate.residuals
@@ -155,7 +211,9 @@ noncomputable def TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
   lowerBlock := canonicalLowerBlock 32768
   upperBlock := canonicalUpperBlock 32768
   quotient := fun R ↦ cert.quotient (cert.selectedTarget R)
-  rayScale := fun R ↦ cert.rayScale (cert.selectedTarget R)
+  rayScale := fun R ↦
+    if R = cert.residualSupport cert.referenceTarget then 1
+    else cert.rayScale (cert.selectedTarget R)
   ambient_card := cert.ambient_card
   ambient_ne_zero := cert.ambient_ne_zero
   residual_subset := by
@@ -185,8 +243,12 @@ noncomputable def TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
       (cert.selectedTarget_mem hR)
   rayScale_ne_zero := by
     intro R hR
-    exact cert.rayScale_ne_zero (cert.selectedTarget R)
-      (cert.selectedTarget_mem hR)
+    by_cases hRref : R = cert.residualSupport cert.referenceTarget
+    · simp [hRref]
+    · rw [if_neg hRref]
+      apply cert.projective_rayScale_ne_zero (cert.selectedTarget_mem hR)
+      rw [cert.selectedTarget_support hR]
+      exact hRref
   reference_mem_of_two := by
     intro htwo
     apply cert.reference_mem_of_residual_nonempty
@@ -205,7 +267,7 @@ noncomputable def TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
         cert.selectedTarget (cert.residualSupport cert.referenceTarget) =
           cert.referenceTarget := by
       simp [TargetTwoBlockCertificate.selectedTarget]
-    simpa only [hrefSelected] using hproj
+    simpa only [if_neg hRref, hrefSelected] using hproj
 
 theorem TargetTwoBlockCertificate.distinct_residuals_card_le
     {α F : Type*} [DecidableEq α] [Field F] [DecidableEq F]
@@ -271,6 +333,7 @@ theorem c0_periodic_first_match_payment_of_target_certificate
     cert29 cert5 cert7 hthree hambient hcover
 
 #print axioms TargetTwoBlockCertificate.toTwoBlockFamilyCertificate
+#print axioms TargetTwoBlockCertificate.projective_rayScale_ne_zero
 #print axioms TargetTwoBlockCertificate.distinct_residuals_card_le
 #print axioms TargetTwoBlockCertificate.toTwoBlockProjectiveRayCertificate
 #print axioms TargetTwoBlockCertificate.target_card_le

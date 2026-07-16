@@ -39,7 +39,9 @@ This package is a partial Lean formalization of
   q64 `f=28` target cap `83,970,774,720`, and its first-match composition.
 - `GrandeFinale/C0PeriodicF28TargetCompiler.lean`: finite-image
   deduplication and representative selection from target-indexed two-block
-  data, followed by the same exact residual, target, and first-match bounds.
+  data, canonical reference-scale normalization, derived nonzero
+  nonreference scales, and the same exact residual, target, and first-match
+  bounds.
 - `GrandeFinale/ChallengeIntersection.lean`: exact finite-group
   translate-intersection averaging, linear-code received-line shear invariance,
   challenge-restricted MCA numerators, and the ceiling-density transfer from a
@@ -186,9 +188,11 @@ representative per support, always retaining the designated reference target;
 no duplicate-data coherence is needed.  The canonical-block module now derives
 each locator decomposition, the lower-degree bound, exact upper degree, and
 upper monicity directly from the residual support.  Constructing the
-target-indexed quotient/projective data from the canonical stratum, proving the
-fixed-residual Hahn cap, and the first-match cover remain explicit inputs.
-These modules do not treat
+target-indexed quotient/projective data from the canonical stratum remains
+explicit, but its projective coefficient-zero equation now forces the supplied
+nonreference ray scales to be nonzero; the reference scale is normalized to
+one.  Proving the fixed-residual Hahn cap and the first-match cover remain
+explicit inputs.  These modules do not treat
 `f<=27`, general monic moduli, or a complete `c=0` parent.
 
 The main remaining target is Q:

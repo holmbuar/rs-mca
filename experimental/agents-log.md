@@ -30,6 +30,25 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-16 - C0 q64 f=28 derived nonzero ray scales
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/grande_finale/GrandeFinale/C0PeriodicF28TargetCompiler.lean`,
+  `experimental/lean/grande_finale/README.md`,
+  `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md`, and this log.
+- **Status:** PROVED.
+- **What is being added:** Uses the coefficient-zero projective block equation,
+  the nonzero quotient constant, and the nonzero support-locator constant to
+  prove every nonreference ray scale is nonzero.  The compiled family assigns
+  scale one to the reference support.
+- **How it is useful:** Removes the target certificate's supplied
+  `rayScale_ne_zero` field while preserving the exact residual, target, and
+  first-match bounds.
+- **What to do next:** Construct the remaining target-indexed
+  quotient/projective data from the canonical stratum, or prove the fixed-cell
+  Hahn cap; do not infer a complete deployed classification or `c=0` parent.
+
 ### 2026-07-16 - C0 q64 f=28 canonical residual blocks
 
 - **Agent/model:** Codex.
