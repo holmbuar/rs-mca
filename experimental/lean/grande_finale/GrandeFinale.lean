@@ -24,6 +24,7 @@ import GrandeFinale.Rank15PlateauSuffixUniformizer
 import GrandeFinale.Rank16LeftKernelForney
 import GrandeFinale.SecondRecurrenceZeroSumFamily
 import GrandeFinale.ThirdRecurrenceQuadraticCompletion
+import GrandeFinale.TripleNegativeFirstMatchReduction
 import GrandeFinale.WeightedCyclicGRSHalfFootprint
 
 /-!
