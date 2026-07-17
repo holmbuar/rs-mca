@@ -5,9 +5,10 @@
 `AUDIT / NO MATHEMATICAL ISSUE IN THE GUARDED DOWNSTREAM CLAIMS / GENERIC
 PREFIX-FIBRE WITNESS TOTALITY = PROVED, UNCONDITIONAL / GENERIC
 WITNESS-EXHAUSTIVE TO SLOPE-FIRST-MATCH FIXED-ROW B_MCA IMPLICATION = PROVED,
-HYPOTHESIS-PARAMETRIC / CONCRETE LOCATOR-PREFIX TO SYNDROME-LINE BAD-SLOPE
+HYPOTHESIS-PARAMETRIC / FINITE EXACT-CARDINALITY RS WITNESS CATALOGUE AND
+BAD-SLOPE IMAGE = PROVED / CONCRETE LOCATOR-PREFIX TO SYNDROME-LINE BAD-SLOPE
 UNION = PROVED / TYPED LOCATOR-PREFIX FIXED-ROW OUTER-LINE B_MCA IMPLICATION =
-PROVED / ACTUAL C1--C9 WITNESS CELLS, CONCRETE RS WITNESS ADAPTER, PAYMENT,
+PROVED / ACTUAL C1--C9 WITNESS CELLS, RAW-WITNESS CELL EXHAUSTIVITY, PAYMENT,
 AND ASYMPTOTIC (UNIF) = NOT PROVED.`
 
 The phrase `atlas-totality lane (in progress)` still appears in downstream
@@ -30,8 +31,9 @@ reduction in `GrandeFinale.RSExactSupportUpper`, and the source analyses
 `heavy_fiber_admissibility_transfer.md`, and
 `staircase_concentration_sidon_paired.md`. The typed leaf modules are
 `GrandeFinale.PrefixAtlasBridge` and
-`GrandeFinale.FirstMatchWitnessBridge`. The latter is generic and supplies no
-concrete Reed--Solomon witness adapter. No `.tex` or `.pdf` file is edited.
+`GrandeFinale.FirstMatchWitnessBridge`, together with the concrete
+`GrandeFinale.RSExactCardWitnessBridge`. No `.tex` or `.pdf` file is
+edited.
 
 ---
 
@@ -134,6 +136,28 @@ their first-match slope union is nevertheless the full witness-slope image.
 Thus slope coverage is sufficient for the numerical count but is strictly
 weaker than witness exhaustivity, and residual witness cells are
 projection-exact rather than witness-exhaustive.
+
+The concrete leaf `GrandeFinale.RSExactCardWitnessBridge` now discharges the
+generic bad-slope image hypothesis for injectively evaluated Reed--Solomon
+codes. Its finite witness record stores a slope, a support, and a coefficient
+vector `Fin k -> F`; `Polynomial.degreeLTEquiv` decodes that vector to the
+degree-`< k` explainer. The valid-witness predicate requires support cardinality
+exactly `a`, agreement of the explainer with `u0 + gamma*u1` on that chosen
+support, and pair nonexplanation there.
+
+`rsMcaBadSlopes_eq_exactCardWitnessSlopeImage` proves that the slope image of
+this finite catalogue is exactly the threshold-`a` RS MCA-bad slope set. It
+uses `RSExactSupportUpper.mcaBad_has_exact_support` directly, so it needs no
+parity dimension `R` or equation `k + R = |D|`. Equal slope and support
+determine the explainer once `k <= a`, but slope alone can still occur on
+several supports.
+
+The two concrete outer-line theorems instantiate the generic first-match
+bridge with this catalogue. They retain raw witness-cell exhaustivity,
+first-match slope-cell budgets, and the uniform line-sum bound as hypotheses;
+they construct none of those semantic inputs. Here “exact-cardinality” does
+not assert that the chosen support is the explainer's complete agreement set:
+agreement at additional coordinates is allowed.
 
 The certificate checks the exact diagonal model with `2^b` lines and cells:
 `sup_line sum_z = 1`, while `sum_z sup_line = 2^b`.
@@ -246,12 +270,13 @@ the C3/C7/C8/C9 cellwise profile and bad-slope payment.”
 
 - No actual C1--C9 witness cells, realized profile index, or
   primitive-survival theorem is constructed.
-- `FirstMatchWitnessBridge` contains no concrete RS witness type or adapter;
-  `witnesses`, `slope`, `idx`, `cell`, `hbadImage`, and `hexhaust` remain
-  parameters or hypotheses.
+- `RSExactCardWitnessBridge` constructs the finite RS witness catalogue and
+  proves its exact bad-slope image. It does not construct `idx`, `cell`,
+  `hexhaust`, `hcell`, or `hunif`; those semantic classification/payment
+  inputs remain parameters or hypotheses.
 - First-match residual witness cells need not cover the raw witnesses. Only
   their per-cell slope images are proved exact.
-- Neither bridge constructs a cell-budget function `U`, proves a cell
+- None of the bridges constructs a cell-budget function `U`, proves a cell
   payment, or proves the uniform sum hypothesis `(UNIF)`. No subexponential
   profile census, C7/C8 compiler bound, or C9 Sidon payment is constructed.
 - No deployed smooth/circle row, main asymptotic theorem, or reserve theorem is
@@ -259,20 +284,23 @@ the C3/C7/C8/C9 cellwise profile and bad-slope payment.”
 - No guarded result in the downstream notes is retracted or corrected.
 - No `.tex` or `.pdf` file is changed.
 
-`PrefixAtlasBridge.lean` and `FirstMatchWitnessBridge.lean` are deliberately
-leaf modules. The former reaches the root module through
-`GrandeFinale.SyndromeLine`; the latter imports `GrandeFinale` directly.
-Importing either bridge back into `GrandeFinale.lean` would create an import
-cycle. The focused verification targets are therefore
+`PrefixAtlasBridge.lean`, `FirstMatchWitnessBridge.lean`, and
+`RSExactCardWitnessBridge.lean` are deliberately leaf modules. The first
+reaches the root module through `GrandeFinale.SyndromeLine`; the generic
+witness bridge imports `GrandeFinale` directly; the concrete adapter imports
+that generic bridge. Importing these leaves back into `GrandeFinale.lean`
+would create an import cycle. The focused verification targets are therefore
 
 ```text
 lake build GrandeFinale.PrefixAtlasBridge
 lake build GrandeFinale.FirstMatchWitnessBridge
+lake build GrandeFinale.RSExactCardWitnessBridge
 ```
 
 The companion stdlib verifier
 `experimental/scripts/verify_atlas_payment_interface.py` checks the theorem
-anchors, the fixed-line `hU` and exact linewise `hcell`/`hunif` boundaries,
-the four-cell ledger, the conditional `(H4)` interface, the legacy wording
-census, and the exponential-cell negative control. Its machine-readable output
-is `experimental/data/certificates/atlas-payment-interface/atlas_payment_interface.json`.
+anchors, the exact-cardinality catalogue and bad-slope image, the fixed-line
+`hU` and exact linewise `hcell`/`hunif` boundaries, the four-cell ledger,
+the conditional `(H4)` interface, the legacy wording census, and the
+exponential-cell negative control. Its machine-readable output is
+`experimental/data/certificates/atlas-payment-interface/atlas_payment_interface.json`.

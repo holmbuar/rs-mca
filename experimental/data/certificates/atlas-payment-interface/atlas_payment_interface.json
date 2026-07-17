@@ -1,27 +1,27 @@
 {
   "artifact_bindings": {
     "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md": {
-      "byte_count": 9717,
+      "byte_count": 12567,
       "path": "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md",
-      "sha256": "58a313b948d545ce297f67520a74482e38f1ba2491135330ab2fb0dbc3246f72"
+      "sha256": "c3cc40b6d6e28de26004d8935caf1b50a818ab0dd8cf3d2f30ac26b7d831290a"
     },
     "experimental/notes/audits/atlas_payment_interface_audit.md": {
-      "byte_count": 13739,
+      "byte_count": 15426,
       "path": "experimental/notes/audits/atlas_payment_interface_audit.md",
-      "sha256": "52063c377f22aed28d8531e1c2c39ce6da05bdd66636ee9d1a4bb33ef1219f8a"
+      "sha256": "b0cff8cff91c0481181c4acd8300f20b541edbcd4a3b4141982c1ce4f6a1164b"
     },
     "experimental/scripts/verify_atlas_payment_interface.py": {
-      "byte_count": 48488,
+      "byte_count": 58848,
       "path": "experimental/scripts/verify_atlas_payment_interface.py",
-      "sha256": "c403ef5c6b32f283496d9a3b12d543f15ec66a9f63e2f390e4e0552507714449"
+      "sha256": "7cfbdd31dd32b8bb5437adad199f28e1b83eff0f83429bffeddacceb6762d80d"
     }
   },
   "interface_summary": {
     "not_proved": [
       "construction of the cellwise U(z) budgets",
       "witness exhaustion of slope-level residual cells without additional hypotheses",
-      "construction of the witness catalogue, bad-slope image identity, per-cell budgets, or uniform sum bound",
-      "a concrete Reed-Solomon atlas, prefix classification, or payment from the witness-image bridge",
+      "construction of semantic cell indices/cells, raw-witness exhaustivity, per-cell budgets, or uniform sum bound",
+      "a concrete C1-C9 Reed-Solomon semantic atlas, prefix classification, or payment",
       "asymptotic-row same-catalogue uniformity (UNIF)",
       "C1-C8 primitive-survival/catalogue classification for the intended row",
       "full-catalogue payment at C3/C7/C8/C9",
@@ -38,7 +38,10 @@
       "explicit bad-slope image, witness exhaustion, and cell budgets bound B_MCA by the supremum of line-dependent sums",
       "a uniform bound on those line-dependent sums yields B_MCA <= B",
       "a proper witness subset can have exactly the full witness-family slope image",
-      "slope-level first-match residual cells can fail witness exhaustion despite original-cell and slope-image coverage"
+      "slope-level first-match residual cells can fail witness exhaustion despite original-cell and slope-image coverage",
+      "a finite coefficient-vector exact-cardinality RS witness catalogue is constructed for every received line",
+      "the concrete catalogue's slope image is exactly the threshold-a RS MCA-bad slope set",
+      "raw witness exhaustion plus first-match slope budgets specializes directly to the concrete RS catalogue"
     ]
   },
   "max_sum_quantifier_negative_control": {
@@ -188,7 +191,7 @@
       }
     ]
   },
-  "schema": "atlas-payment-interface/v3",
+  "schema": "atlas-payment-interface/v4",
   "sources": {
     "catalogue_ledger": {
       "blocked_or_conditional_cells": {
@@ -391,6 +394,67 @@
       "sha256": "88a0959285c34b14dc705dc19877c1fb53e33ae647dbf648222b6ab18c3579cf",
       "status": "conditional on atlas-internal H4; H4 is assumed, not re-proved",
       "verified_nonclaim": "the transfer does not pay the image-scale MI/MA or Sidon cell"
+    },
+    "rs_exact_card_witness_bridge": {
+      "axiom_print_lines": [
+        "#print axioms RSExactCardWitness.explanation_degree_lt",
+        "#print axioms explanation_eq_of_valid_of_slope_eq_support_eq",
+        "#print axioms slope_support_projection_injOn_validRSExactCardWitness",
+        "#print axioms rsMcaBadSlopes_eq_exactCardWitnessSlopeImage",
+        "#print axioms B_MCA_rsEval_le_sup_of_exactCardWitnessExhaustive_firstMatchSlopeBudgets",
+        "#print axioms B_MCA_rsEval_le_of_exactCardWitnessExhaustive_firstMatchSlopeBudgets"
+      ],
+      "bad_slope_image_line": 125,
+      "catalogue_line": 62,
+      "declarations": {
+        "B_MCA_rsEval_le_of_exactCardWitnessExhaustive_firstMatchSlopeBudgets": 206,
+        "B_MCA_rsEval_le_sup_of_exactCardWitnessExhaustive_firstMatchSlopeBudgets": 179,
+        "ValidRSExactCardWitness": 52,
+        "explanation_eq_of_valid_of_slope_eq_support_eq": 69,
+        "rsExactCardWitnesses": 62,
+        "rsMcaBadSlopes_eq_exactCardWitnessSlopeImage": 125,
+        "slope_support_projection_injOn_validRSExactCardWitness": 99
+      },
+      "exact_card_boundary_line": 8,
+      "finite_structure_line": 27,
+      "forbidden_syntax_checks": [
+        "any admit token",
+        "any axiom token",
+        "any opaque token",
+        "any sorry token"
+      ],
+      "path": "experimental/lean/grande_finale/GrandeFinale/RSExactCardWitnessBridge.lean",
+      "sha256": "955015ba7aba6976c438933039cfc0be8ffd3b390cba3bb87a4d15410e7b1cfb",
+      "valid_witness_line": 52,
+      "verified_boundary": "same slope and support determine the explainer, but slope alone need not determine the support",
+      "verified_claim": "the finite exact-cardinality RS witness catalogue has exactly the threshold-a bad slopes as its slope image",
+      "verified_nonclaim": "the adapter constructs no semantic cells, raw-witness exhaustion, cell budget, uniform sum, C1-C9 classification, or payment",
+      "witness_adapter_signatures": {
+        "B_MCA_rsEval_le_of_exactCardWitnessExhaustive_firstMatchSlopeBudgets": {
+          "line": 206,
+          "normalized_sha256": "194fba8dc71df8597cb22c6ff037e0e3581239117d97d144ea9db9d3ddba4200"
+        },
+        "B_MCA_rsEval_le_sup_of_exactCardWitnessExhaustive_firstMatchSlopeBudgets": {
+          "line": 179,
+          "normalized_sha256": "e72ac11185131ec9069ca28c298d13fca6b6a0e53934a0597e8760102482e46b"
+        },
+        "RSExactCardWitness.explanation_degree_lt": {
+          "line": 38,
+          "normalized_sha256": "e17a3ed649af6ec031bac10ac15607edc447c8201a82431621551f5c74e6e7e0"
+        },
+        "explanation_eq_of_valid_of_slope_eq_support_eq": {
+          "line": 69,
+          "normalized_sha256": "fd314d0d931feaa045db9efc241d0bc56ba1678ff103821b81008d023b7f391d"
+        },
+        "rsMcaBadSlopes_eq_exactCardWitnessSlopeImage": {
+          "line": 125,
+          "normalized_sha256": "4fa556aeea80459323d962e978d241ae1237511bf0d03868ea39c16c40626f89"
+        },
+        "slope_support_projection_injOn_validRSExactCardWitness": {
+          "line": 99,
+          "normalized_sha256": "6eb95daff068960ab79a30e4cdb5ac6602737461d6242a9ea73ffc7f8022d2c5"
+        }
+      }
     }
   },
   "stale_downstream_wording": {
@@ -505,17 +569,12 @@
       "experimental/notes/thresholds/rank_one_greedy_adequacy.md": {
         "hits": [
           {
-            "context_sha256": "2abecc5ebb7df2f14d3fd2010d75e37155183c492444d37a53256708afd1409d",
-            "line": 60,
-            "term": "atlas totality"
-          },
-          {
             "context_sha256": "b14a78fddc037785f8e5afd67b1cbc2baf321b1bb43615dfa70989e54da0edde",
             "line": 100,
             "term": "atlas-totality"
           }
         ],
-        "sha256": "127eb958a0153d706ba44ab4fbe28d608aa96471cbbb5427fd99063a6675a9a8"
+        "sha256": "64e0a88494e48494e906b2a79b358a6656fe2e70681d5055b5be685f362186ba"
       },
       "experimental/notes/thresholds/resonant_folding_inverse.md": {
         "hits": [
@@ -593,10 +652,10 @@
         "sha256": "e1a4b9c4568cf626c42c42604299ce3785f242dc7d1e731e7f5bc69766ceaec4"
       }
     },
-    "occurrence_count": 28,
+    "occurrence_count": 27,
     "replacement_interface": "generic totality is integrated; the remaining obligation is primitive survival/catalogue classification plus cellwise profile and bad-slope payment",
     "scope": "experimental/notes/thresholds/*.md"
   },
   "verdict": "AUDIT: coverage proved; catalogue/profile/payment interface remains explicit",
-  "verification_check_count": 171
+  "verification_check_count": 201
 }

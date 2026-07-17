@@ -5,7 +5,9 @@ support-family and Reed--Solomon MCA bad-slope unions, typed cellwise-budget
 summation, and the exact fixed-row outer-line lift to the full
 Reed--Solomon `B_MCA` numerator. The companion generic bridge proves the
 hypothesis-parametric witness-exhaustive to slope-first-match implication for
-the fixed-row `B_MCA` numerator.
+the fixed-row `B_MCA` numerator. The concrete witness adapter constructs the
+finite exact-cardinality `(gamma,S,h)` catalogue and proves its slope image is
+exactly the threshold-`a` RS MCA-bad slope set.
 
 Sources:
 
@@ -16,7 +18,10 @@ Sources:
 - `experimental/lean/grande_finale/GrandeFinale/SyndromeLine.lean`, the actual
   support-family MCA/syndrome-line bad-slope set;
 - `experimental/lean/grande_finale/GrandeFinale/RSExactSupportUpper.lean`, the
-  exact-support reduction for injectively evaluated Reed--Solomon codes; and
+  exact-support reduction for injectively evaluated Reed--Solomon codes;
+- `experimental/lean/grande_finale/GrandeFinale/RSExactCardWitnessBridge.lean`,
+  the finite coefficient-vector witness catalogue and its concrete generic-
+  bridge specialization; and
 - `experimental/lean/grande_finale/GrandeFinale/FirstMatchAddBack.lean`, the
   ordered finite-set first-match disjointization used by the generic witness
   bridge.
@@ -49,11 +54,20 @@ Sources:
 | A uniform line-sum bound gives `B_MCA <= B` | `GrandeFinale.FirstMatchWitnessBridge.B_MCA_le_of_witnessExhaustive_firstMatchSlopeBudgets` |
 | Full slope-image coverage need not imply witness exhaustivity | `GrandeFinale.FirstMatchWitnessBridge.slopeImage_cover_not_witnessExhaustive` |
 | Raw witness cells can be exhaustive while their slope-first-match residual cells are not | `GrandeFinale.FirstMatchWitnessBridge.firstMatchResidualWitnessCells_not_witnessExhaustive` |
+| Finite exact-cardinality `(gamma,S,h)` witness representation | `GrandeFinale.RSExactCardWitnessBridge.RSExactCardWitness` |
+| Degree-`<k` explainer decoded from the finite coefficient vector | `GrandeFinale.RSExactCardWitnessBridge.RSExactCardWitness.explanation` |
+| Finite linewise catalogue of all valid exact-cardinality witnesses | `GrandeFinale.RSExactCardWitnessBridge.rsExactCardWitnesses` |
+| Fixed slope and support determine the valid explainer when `k <= a` | `GrandeFinale.RSExactCardWitnessBridge.explanation_eq_of_valid_of_slope_eq_support_eq` |
+| Projection to slope and support is injective on valid witnesses | `GrandeFinale.RSExactCardWitnessBridge.slope_support_projection_injOn_validRSExactCardWitness` |
+| RS MCA-bad slopes equal the concrete catalogue's slope image | `GrandeFinale.RSExactCardWitnessBridge.rsMcaBadSlopes_eq_exactCardWitnessSlopeImage` |
+| Concrete witness-exhaustive slope budgets bound `B_MCA` by the supremum of line sums | `GrandeFinale.RSExactCardWitnessBridge.B_MCA_rsEval_le_sup_of_exactCardWitnessExhaustive_firstMatchSlopeBudgets` |
+| A uniform concrete-catalogue line-sum bound gives `B_MCA <= B` | `GrandeFinale.RSExactCardWitnessBridge.B_MCA_rsEval_le_of_exactCardWitnessExhaustive_firstMatchSlopeBudgets` |
 
 The `FirstMatchWitnessBridge` declarations are generic and logically separate
 from locator-prefix support coverage: first match is applied after slope
-projection. No concrete Reed--Solomon witness incidence, C1--C9 cell family,
-payment, or `(UNIF)` instance is constructed.
+projection. `RSExactCardWitnessBridge` supplies the concrete finite RS
+incidence and bad-slope image, but no C1--C9 cell family, raw-witness
+exhaustivity proof, payment, or `(UNIF)` instance is constructed.
 
 ## Statement comparison
 
@@ -113,6 +127,21 @@ theorem constructs a cell budget or a catalogue classification, and neither
 establishes one paid semantic catalogue uniformly along an asymptotic row;
 that stronger ledger `(UNIF)` obligation remains open.
 
+The concrete witness adapter models the literal `(gamma,S,h)` incidence by
+storing `gamma`, an exact-cardinality support `S`, and the `Fin k -> F`
+coefficient vector of `h`. Its bad-slope image theorem uses
+`mcaBad_has_exact_support` directly:
+
+```text
+badSlopes(rsEval(ev,k),u0,u1,a)
+  = image slope (rsExactCardWitnesses(ev,k,a,u0,u1)).
+```
+
+The concrete outer-line bounds therefore no longer assume that image identity.
+They still assume a raw-witness-exhaustive semantic cell family, first-match
+slope budgets, and, for the fixed bound, a uniform line-sum cap. Exact
+cardinality does not assert that `S` is the complete agreement locus of `h`.
+
 ## Scope boundaries
 
 The module proves support coverage, bad-slope union identities, and their
@@ -121,13 +150,16 @@ subexponential count of realized profiles, any numerical `U(z)`, primitive
 survival after C1--C8, or a Sidon payment. In particular, totality does not
 turn the four residual cells C3/C7/C8/C9 into paid cells.
 
-The companion generic module supplies no concrete Reed--Solomon witness type
-or adapter and no actual C1--C9 witness cells. Its `witnesses`, `slope`, `idx`,
-`cell`, bad-slope image equality, witness-exhaustivity equality, cell budgets,
-and uniform sum are parameters or hypotheses. Its residual witness cells need
-not cover the original witnesses; only their per-cell slope images are exact.
-Consequently it constructs neither a payment nor an asymptotic `(UNIF)`
-instance.
+The generic module alone supplies no concrete Reed--Solomon witness type. Its
+`witnesses`, `slope`, `idx`, `cell`, bad-slope image equality,
+witness-exhaustivity equality, cell budgets, and uniform sum are parameters or
+hypotheses. Its residual witness cells need not cover the original witnesses;
+only their per-cell slope images are exact.
+
+The concrete adapter supplies the finite RS witnesses and discharges the
+bad-slope image equality. It still constructs no C1--C9 `idx` or `cell`, no
+raw-witness exhaustivity proof, no cell budget, and no uniform sum. Consequently
+it constructs neither a payment nor an asymptotic `(UNIF)` instance.
 
 The arbitrary-domain definition accepts a map `point : D -> F`; injectivity
 is not needed for its coverage/union statements because cells are cut out on
@@ -136,6 +168,9 @@ over `A : Finset F`, matching `PrefixPigeonhole.coefficientFiber`. The direct
 RS specialization requires injective evaluation and `k + R = |D|` only to
 invoke the exact-support reduction. Its full-numerator theorem additionally
 requires a uniform bound on the line-dependent budget sum.
+The concrete witness adapter requires only injective evaluation and
+`k + 1 <= a`; it does not require a parity dimension or the cardinality
+equation used by the locator-prefix specialization.
 The parameter `K` remains generic and `a - K` is truncated natural-number
 subtraction. In the intended specialization `K := k + 1`, `hka` ensures
 `K <= a`; for `K > a` the theorem remains true but degenerates to the
@@ -143,12 +178,13 @@ single empty-function key and one global cell.
 
 ## Module placement
 
-Both bridges are leaf modules. `PrefixAtlasBridge` imports
+All three bridges are leaf modules. `PrefixAtlasBridge` imports
 `GrandeFinale.SyndromeLine`, which imports the root module `GrandeFinale`;
-`FirstMatchWitnessBridge` imports `GrandeFinale` directly. Consequently the
-root `GrandeFinale.lean` cannot import either bridge without creating an import
-cycle. Both remain available through their fully qualified module names and
-are checked directly.
+`FirstMatchWitnessBridge` imports `GrandeFinale` directly; and
+`RSExactCardWitnessBridge` imports the generic witness bridge. Consequently
+the root `GrandeFinale.lean` cannot import these leaves without creating an
+import cycle. They remain available through their fully qualified module names
+and are checked directly.
 
 ## Verification
 
@@ -157,8 +193,9 @@ From `experimental/lean/grande_finale`:
 ```text
 lake build GrandeFinale.PrefixAtlasBridge
 lake build GrandeFinale.FirstMatchWitnessBridge
+lake build GrandeFinale.RSExactCardWitnessBridge
 ```
 
 The modules print the axioms of their exported coverage, union, first-match,
-fixed-line budget, and full-numerator theorems. No proof placeholder or added
-axiom is used.
+finite-witness image, fixed-line budget, and full-numerator theorems. No proof
+placeholder or added axiom is used.
