@@ -1,0 +1,4 @@
+fc61a8cbf29abd9ecd4fc9e076576bf2fdea2f276fc4261ba91815f3afe8b571  ../../../scripts/verify_rank16_integer_subcore_owner.py
+9592188c71c1ed1c9420bd99aca75f4f5ac42f484dcff24b423a5a148185ae3c  ../../../notes/l2/rank16_integer_subcore_owner.md
+2779f163c37bb7d70a9291a9203d6bc7fd5773ce8dac769e0c213bd8b24a9f5c  README.md
+c4c2a3f50ca3a6c50c3b9e3f374b8e76b4da706a0f1ed5284a673c37ee70a50a  verify_rank16_integer_subcore_owner.expected.txt

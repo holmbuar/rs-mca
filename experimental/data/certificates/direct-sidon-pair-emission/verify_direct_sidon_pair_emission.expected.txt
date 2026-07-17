@@ -1,0 +1,12 @@
+R28_ROLE09_DIRECT_SIDON_EMISSION: PASS
+authority=origin/main@7f278167e1e51f968896229ae438ea5a76398f90 pr860@fb54c47553d3948f3dc6e64b0a292747459fc482 pr872@37e08b4feb60714a6c9955ae408edf1742f0fc2b
+source_pins=3 statement_pins=6 coefficient_checks=89
+exhaustive=maps:930 residual_families:75744 nonempty_fibres:150000 signed:150000 odd_diagonal:147408
+characteristic_two_guard=PASS overlap:(1, 1, 1, 1)
+literal_R1_rows=(3, 3, 3), (5, 10, 5), (7, 35, 7), (11, 462, 11)
+cutoff_nats=pair:0.405465108108164 repaired_860:0.562335144618808 gain:0.156870036510644
+cutoff_bits=pair:0.584962500721156 repaired_860:0.811278124459133 gain:0.226315623737977
+finite_ledger=PR872:T-3 paid:274854110496187589 target:274854110496187592 new_charge:0
+scope=signed-root all-characteristic; ternary diagonal-pair odd-characteristic
+nonclaims=hard-input-2 OPEN; parent movement 0; official-score movement 0
+RESULT=PASS

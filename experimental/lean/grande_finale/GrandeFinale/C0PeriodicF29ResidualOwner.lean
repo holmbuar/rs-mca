@@ -13,9 +13,11 @@ forces the residual factors to be equal.
 The final certificate compiler specializes to `B = 32,768`, `a = 67,472`,
 and residual degree `30,833`.  It combines the proved residual ownership with
 a supplied fixed-residual cap over 64 quotient-constant cells.  The deployed
-locator decomposition, projective congruences, quotient-constant
+locator decomposition, existential projective congruences, quotient-constant
 classification, local Hahn cap, and projective-ray cover remain explicit
-certificate inputs; no `f ≤ 28` or complete `c = 0` claim is made.
+certificate inputs.  Nonzeroness of each projective scale follows from the
+left short constant block rather than being supplied separately; no `f ≤ 28`
+or complete `c = 0` claim is made.
 -/
 
 open Polynomial
@@ -100,6 +102,29 @@ theorem X_pow_dvd_constantBlocks_sub_of_projective
           rw [hR₁, hP, hR₂]
     _ = X ^ B * (-R₁ + P + C c * R₂) := by ring
 
+/-- A projective congruence with a nonzero short left constant block cannot
+have zero projective scale. -/
+theorem projective_scale_ne_zero_of_short_left_block
+    {F : Type*} [Field F]
+    (B a : ℕ) (hBa : B ≤ a)
+    (A₁ Q₁ A₂ Q₂ : F[X]) (c : F)
+    (hA₁ : A₁ ≠ 0) (hdeg₁ : A₁.natDegree < B)
+    (hq₁ : Q₁.coeff 0 ≠ 0)
+    (hprojective :
+      X ^ a ∣ periodicLocator B A₁ Q₁ - C c * periodicLocator B A₂ Q₂) :
+    c ≠ 0 := by
+  intro hc
+  have hdiv := X_pow_dvd_constantBlocks_sub_of_projective
+    B a hBa A₁ Q₁ A₂ Q₂ c hprojective
+  rw [hc] at hdiv
+  simp only [zero_mul, C_0, zero_mul, sub_zero] at hdiv
+  have hdeg : (C (Q₁.coeff 0) * A₁).natDegree < B := by
+    rw [natDegree_C_mul hq₁]
+    exact hdeg₁
+  have hzero : C (Q₁.coeff 0) * A₁ = 0 :=
+    eq_zero_of_dvd_of_natDegree_lt hdiv (by simpa using hdeg)
+  exact (mul_ne_zero (C_ne_zero.mpr hq₁) hA₁) hzero
+
 /-- A congruence below `X^B` between two nonzero scalar multiples of monic
 degree-`<B` polynomials is an equality of the monic factors. -/
 theorem monic_eq_of_X_pow_dvd_scaled_sub_scaled
@@ -134,10 +159,12 @@ theorem residual_eq_of_projective_periodicLocators
     (A₁ Q₁ A₂ Q₂ : F[X]) (c : F)
     (hA₁ : A₁.Monic) (hA₂ : A₂.Monic)
     (hdeg₁ : A₁.natDegree < B) (hdeg₂ : A₂.natDegree < B)
-    (hq₁ : Q₁.coeff 0 ≠ 0) (hq₂ : Q₂.coeff 0 ≠ 0) (hc : c ≠ 0)
+    (hq₁ : Q₁.coeff 0 ≠ 0) (hq₂ : Q₂.coeff 0 ≠ 0)
     (hprojective :
       X ^ a ∣ periodicLocator B A₁ Q₁ - C c * periodicLocator B A₂ Q₂) :
     A₁ = A₂ := by
+  have hc : c ≠ 0 := projective_scale_ne_zero_of_short_left_block
+    B a hBa A₁ Q₁ A₂ Q₂ c hA₁.ne_zero hdeg₁ hq₁ hprojective
   apply monic_eq_of_X_pow_dvd_scaled_sub_scaled B A₁ A₂
     (Q₁.coeff 0) (c * Q₂.coeff 0) hA₁ hA₂ hdeg₁ hdeg₂ hq₁
     (mul_ne_zero hc hq₂)
@@ -151,7 +178,7 @@ theorem residualSupport_eq_of_projective_periodicLocators
     (B a : ℕ) (hBa : B ≤ a)
     (R₁ R₂ : Finset F) (Q₁ Q₂ : F[X]) (c : F)
     (hcard₁ : R₁.card < B) (hcard₂ : R₂.card < B)
-    (hq₁ : Q₁.coeff 0 ≠ 0) (hq₂ : Q₂.coeff 0 ≠ 0) (hc : c ≠ 0)
+    (hq₁ : Q₁.coeff 0 ≠ 0) (hq₂ : Q₂.coeff 0 ≠ 0)
     (hprojective :
       X ^ a ∣ periodicLocator B (supportLocator R₁) Q₁ -
         C c * periodicLocator B (supportLocator R₂) Q₂) :
@@ -164,7 +191,6 @@ theorem residualSupport_eq_of_projective_periodicLocators
   · rwa [supportLocator_natDegree]
   · exact hq₁
   · exact hq₂
-  · exact hc
   · exact hprojective
 
 /-! ## Deployed `f = 29` certificate compiler -/
@@ -172,7 +198,8 @@ theorem residualSupport_eq_of_projective_periodicLocators
 /-- A certificate interface for the `q = 64`, `f = 29` part of one projective
 residue ray.  The local theorem is supplied separately on every
 residual-support/scalar cell; the projective data prove that all candidates
-have the same residual support. -/
+have the same residual support, with projective-scale nonzeroness derived from
+the locator data. -/
 structure F29ProjectiveRayCertificate
     (α F : Type*) [DecidableEq α] [Field F] [DecidableEq F] where
   target : Finset α
@@ -185,7 +212,7 @@ structure F29ProjectiveRayCertificate
   quotient_constant : ∀ x ∈ target,
     (quotient x).coeff 0 = scalarValue (scalarClass x)
   projective : ∀ x ∈ target, ∀ y ∈ target,
-    ∃ c : F, c ≠ 0 ∧
+    ∃ c : F,
       X ^ 67472 ∣
         periodicLocator 32768 (supportLocator (residualSupport x)) (quotient x) -
           C c * periodicLocator 32768
@@ -200,7 +227,7 @@ theorem F29ProjectiveRayCertificate.residual_eq
     (cert : F29ProjectiveRayCertificate α F)
     {x y : α} (hx : x ∈ cert.target) (hy : y ∈ cert.target) :
     cert.residualSupport x = cert.residualSupport y := by
-  rcases cert.projective x hx y hy with ⟨c, hc, hprojective⟩
+  rcases cert.projective x hx y hy with ⟨c, hprojective⟩
   apply residualSupport_eq_of_projective_periodicLocators
     32768 67472 (by norm_num)
     (cert.residualSupport x) (cert.residualSupport y)
@@ -213,7 +240,6 @@ theorem F29ProjectiveRayCertificate.residual_eq
     exact cert.scalarValue_ne_zero _
   · rw [cert.quotient_constant y hy]
     exact cert.scalarValue_ne_zero _
-  · exact hc
   · exact hprojective
 
 /-- The candidates assigned to one quotient-constant class. -/
@@ -291,6 +317,7 @@ theorem c0_periodic_first_match_payment_of_f29_and_singleton_certificates
     cert29.target_card_le h28
 
 #print axioms X_pow_dvd_periodicLocator_sub_constantBlock
+#print axioms projective_scale_ne_zero_of_short_left_block
 #print axioms residual_eq_of_projective_periodicLocators
 #print axioms residualSupport_eq_of_projective_periodicLocators
 #print axioms F29ProjectiveRayCertificate.residual_eq

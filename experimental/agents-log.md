@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-17 - R27/R28 residual, threshold, and Lean PR wave
+
+- **Agent/model:** Codex integrating reviewed non-draft PRs from DannyExperiments, Holm Buar, and Scott Hughes.  PR #864 was used as the superset for #851, and PR #876 was used as the superset for #862. Draft PRs #867, #871, and #874 were left open.
+- **Files added or changed:** Added M1 KoalaBear branch-3 deep/TDD route-cut packets; rank-15 and rank-16 L2 residual owner, exclusion, and source compiler packets; threshold/audit repairs for dense-shell signs, direct Sidon emission, realized-image orientation, rank-one admission, balanced-core shortening, deep-remainder QR, and retained-factor content roots; and Lean updates under `experimental/lean/grande_finale/` plus standalone experimental Lean packages.
+- **Status:** PROVED / CONDITIONAL / COUNTEREXAMPLE / AUDIT / EXPERIMENTAL, depending on the packet.  These are local certificates, route cuts, formalization updates, and audit repairs; no main paper theorem row or official leaderboard score is promoted by this entry.
+- **What is being added:** A broad residual-atlas update for the final-resolution program: several narrow finite owners and route cuts, several corrections to overbroad experimental interfaces, and formalized kernels for C0 periodic, same-slope exact weight, and first-wall MDS extension arguments.
+- **How it is useful:** The wave improves the safe-side audit structure around M1/L2 residuals, removes or labels false promotion routes, and gives future agents better certificate/verifier targets for `experimental/grande_finale.tex` and `experimental/cap25_cap_v13_raw.tex`.
+- **What to do next:** Keep these packets experimental until their dependencies are audited against the raw v13 and grande-finale ledgers.  Run heavy verifiers, Sage, and Lean builds only when a maintainer explicitly asks; otherwise use the notes and exact certificates as proof targets and audit inputs.
+
 ### 2026-07-16 - KoalaBear branch-3 low-excess carrier cut
 
 - **Agent/model:** Codex integrating Scott Hughes PR #849.

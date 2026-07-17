@@ -1,0 +1,744 @@
+{
+  "base_commit": "7f278167e1e51f968896229ae438ea5a76398f90",
+  "general_fixtures": [
+    {
+      "N": 8,
+      "R": 5,
+      "b0_exponent": 4,
+      "b1_exponent": 3,
+      "distances": {
+        "K": 6,
+        "L": 5,
+        "M": 4,
+        "b0_to_L": 4
+      },
+      "equality_case": true,
+      "equality_conditions": {
+        "M_is_mds": true,
+        "all_extension_restrictions_full_rank": true,
+        "all_local_gamma_maps_injective": true,
+        "all_zero_counts_equal_r": true,
+        "coset_distance_is_first_wall": true,
+        "pair_count_saturates": true
+      },
+      "evaluation_points": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "extension_restrictions": {
+        "checked_count": 56,
+        "checked_size": 5,
+        "dependent_count": 0,
+        "dependent_sets": []
+      },
+      "field_order": 11,
+      "kappa": 3,
+      "local_gamma": {
+        "all_injective": true,
+        "collision_examples": [],
+        "collision_pair_count": 0,
+        "core_count": 56,
+        "fiber_identity_checked": true,
+        "image_size_histogram": {
+          "5": 56
+        },
+        "injective_core_count": 56,
+        "rank_collision_equivalence_checked": true
+      },
+      "name": "mds_extension",
+      "p_full": {
+        "charge": 70,
+        "collision_excess": 0,
+        "owner_fiber_size_histogram": {
+          "1": 70
+        },
+        "owner_ledger_sha256": "14d832a5bcad690498063f37791fbabdb05f36e339a8d1296db21b587694eca3",
+        "pair_count": 70,
+        "pair_deficit": 0,
+        "universe_face_count": 70,
+        "zero_count_histogram": {
+          "4": 70
+        }
+      },
+      "r": 4,
+      "retained_subset_ledger": {
+        "deleted_charge": 35,
+        "identity_holds": true,
+        "left_deficit": 35,
+        "retained_collision_excess": 0,
+        "retained_count": 35,
+        "right_total": 35,
+        "selection": "zero-count-descending,word-lexicographic,even-indices"
+      },
+      "t": 4
+    },
+    {
+      "N": 8,
+      "R": 5,
+      "b0_exponent": 5,
+      "b1_exponent": 3,
+      "distances": {
+        "K": 6,
+        "L": 5,
+        "M": 3,
+        "b0_to_L": 3
+      },
+      "equality_case": false,
+      "equality_conditions": {
+        "M_is_mds": false,
+        "all_extension_restrictions_full_rank": false,
+        "all_local_gamma_maps_injective": false,
+        "all_zero_counts_equal_r": false,
+        "coset_distance_is_first_wall": false,
+        "pair_count_saturates": false
+      },
+      "evaluation_points": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "extension_restrictions": {
+        "checked_count": 56,
+        "checked_size": 5,
+        "dependent_count": 4,
+        "dependent_sets": [
+          [
+            0,
+            1,
+            2,
+            3,
+            5
+          ],
+          [
+            0,
+            4,
+            5,
+            6,
+            7
+          ],
+          [
+            1,
+            3,
+            5,
+            6,
+            7
+          ],
+          [
+            2,
+            3,
+            4,
+            6,
+            7
+          ]
+        ]
+      },
+      "field_order": 11,
+      "kappa": 3,
+      "local_gamma": {
+        "all_injective": false,
+        "collision_examples": [
+          {
+            "core": [
+              0,
+              1,
+              2
+            ],
+            "dependent_restriction": [
+              0,
+              1,
+              2,
+              3,
+              5
+            ],
+            "gamma": 8,
+            "points": [
+              3,
+              5
+            ]
+          },
+          {
+            "core": [
+              0,
+              1,
+              3
+            ],
+            "dependent_restriction": [
+              0,
+              1,
+              2,
+              3,
+              5
+            ],
+            "gamma": 8,
+            "points": [
+              2,
+              5
+            ]
+          },
+          {
+            "core": [
+              0,
+              1,
+              5
+            ],
+            "dependent_restriction": [
+              0,
+              1,
+              2,
+              3,
+              5
+            ],
+            "gamma": 8,
+            "points": [
+              2,
+              3
+            ]
+          },
+          {
+            "core": [
+              0,
+              2,
+              3
+            ],
+            "dependent_restriction": [
+              0,
+              1,
+              2,
+              3,
+              5
+            ],
+            "gamma": 8,
+            "points": [
+              1,
+              5
+            ]
+          },
+          {
+            "core": [
+              0,
+              2,
+              5
+            ],
+            "dependent_restriction": [
+              0,
+              1,
+              2,
+              3,
+              5
+            ],
+            "gamma": 8,
+            "points": [
+              1,
+              3
+            ]
+          },
+          {
+            "core": [
+              0,
+              3,
+              5
+            ],
+            "dependent_restriction": [
+              0,
+              1,
+              2,
+              3,
+              5
+            ],
+            "gamma": 8,
+            "points": [
+              1,
+              2
+            ]
+          },
+          {
+            "core": [
+              0,
+              4,
+              5
+            ],
+            "dependent_restriction": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "gamma": 3,
+            "points": [
+              6,
+              7
+            ]
+          },
+          {
+            "core": [
+              0,
+              4,
+              6
+            ],
+            "dependent_restriction": [
+              0,
+              4,
+              5,
+              6,
+              7
+            ],
+            "gamma": 3,
+            "points": [
+              5,
+              7
+            ]
+          }
+        ],
+        "collision_pair_count": 40,
+        "core_count": 56,
+        "fiber_identity_checked": true,
+        "image_size_histogram": {
+          "3": 4,
+          "4": 32,
+          "5": 20
+        },
+        "injective_core_count": 20,
+        "rank_collision_equivalence_checked": true
+      },
+      "name": "collision_extension",
+      "p_full": {
+        "charge": 70,
+        "collision_excess": 16,
+        "owner_fiber_size_histogram": {
+          "1": 50,
+          "5": 4
+        },
+        "owner_ledger_sha256": "0841c4e63cb0d53bfc1ba8c52d8def4ad7a1f8fdb7d208243e8dc940e9438803",
+        "pair_count": 54,
+        "pair_deficit": 16,
+        "universe_face_count": 70,
+        "zero_count_histogram": {
+          "4": 50,
+          "5": 4
+        }
+      },
+      "r": 4,
+      "retained_subset_ledger": {
+        "deleted_charge": 35,
+        "identity_holds": true,
+        "left_deficit": 43,
+        "retained_collision_excess": 8,
+        "retained_count": 27,
+        "right_total": 43,
+        "selection": "zero-count-descending,word-lexicographic,even-indices"
+      },
+      "t": 4
+    }
+  ],
+  "normalized_graph_arc_exhaustion": [
+    {
+      "arc_count": 100,
+      "arc_equals_nondegenerate_quadratic": true,
+      "arc_function_sha256": "a9f2a485b423d7e1d036490cf868267f7de93c4327bcf474abee14b830f3ccfe",
+      "coefficient_crosswalk_sha256": "0affd7094f45adbdb830eb398cfb0dca7b07747b5fc0b5dcde03940c2e33a5ad",
+      "complete_family_size": 10,
+      "field_order": 5,
+      "fixed_slope_pair_owners": 2,
+      "function_count_checked": 3125,
+      "nondegenerate_quadratic_count": 100
+    },
+    {
+      "arc_count": 294,
+      "arc_equals_nondegenerate_quadratic": true,
+      "arc_function_sha256": "8cfce0a0d41d18b9b7b3c06f0970d14b1d8ea8f83063195e7ef2ae6317257d8b",
+      "coefficient_crosswalk_sha256": "79043cea560cb49c77a1eb64b701aa8287648864bd6c4609296a55bcc39cdc22",
+      "complete_family_size": 21,
+      "field_order": 7,
+      "fixed_slope_pair_owners": 3,
+      "function_count_checked": 823543,
+      "nondegenerate_quadratic_count": 294
+    }
+  ],
+  "one_point_perturbations": [
+    {
+      "T_trisecants": 1,
+      "all_point_pairs": 10,
+      "changed_coordinates_from_x_squared": [
+        0
+      ],
+      "collision_excess": 2,
+      "complete_family_pair_count": 8,
+      "definition": "f(0)=-1; f(x)=x^2 for x!=0",
+      "expected_T": 1,
+      "expected_pair_deficit": 2,
+      "field_order": 5,
+      "function_values": [
+        4,
+        1,
+        4,
+        4,
+        1
+      ],
+      "local_slopes": {
+        "all_injective": false,
+        "collision_pair_count": 3,
+        "core_count": 5,
+        "fiber_identity_checked": true,
+        "image_size_histogram": {
+          "3": 3,
+          "4": 2
+        },
+        "injective_core_count": 2
+      },
+      "nonquadratic": true,
+      "pair_charge": 10,
+      "pair_deficit": 2,
+      "slope_load_histogram": {
+        "1": 2,
+        "2": 3
+      },
+      "trisecants": [
+        {
+          "intercept": 4,
+          "points": [
+            0,
+            2,
+            3
+          ],
+          "slope": 0
+        }
+      ],
+      "zero_count_histogram": {
+        "2": 7,
+        "3": 1
+      }
+    },
+    {
+      "T_trisecants": 2,
+      "all_point_pairs": 21,
+      "changed_coordinates_from_x_squared": [
+        0
+      ],
+      "collision_excess": 4,
+      "complete_family_pair_count": 17,
+      "definition": "f(0)=-1; f(x)=x^2 for x!=0",
+      "expected_T": 2,
+      "expected_pair_deficit": 4,
+      "field_order": 7,
+      "function_values": [
+        6,
+        1,
+        4,
+        2,
+        2,
+        4,
+        1
+      ],
+      "local_slopes": {
+        "all_injective": false,
+        "collision_pair_count": 6,
+        "core_count": 7,
+        "fiber_identity_checked": true,
+        "image_size_histogram": {
+          "4": 1,
+          "5": 4,
+          "6": 2
+        },
+        "injective_core_count": 2
+      },
+      "nonquadratic": true,
+      "pair_charge": 21,
+      "pair_deficit": 4,
+      "slope_load_histogram": {
+        "2": 4,
+        "3": 3
+      },
+      "trisecants": [
+        {
+          "intercept": 6,
+          "points": [
+            0,
+            3,
+            5
+          ],
+          "slope": 1
+        },
+        {
+          "intercept": 6,
+          "points": [
+            0,
+            2,
+            4
+          ],
+          "slope": 6
+        }
+      ],
+      "zero_count_histogram": {
+        "2": 15,
+        "3": 2
+      }
+    },
+    {
+      "T_trisecants": 4,
+      "all_point_pairs": 55,
+      "changed_coordinates_from_x_squared": [
+        0
+      ],
+      "collision_excess": 8,
+      "complete_family_pair_count": 47,
+      "definition": "f(0)=-1; f(x)=x^2 for x!=0",
+      "expected_T": 4,
+      "expected_pair_deficit": 8,
+      "field_order": 11,
+      "function_values": [
+        10,
+        1,
+        4,
+        9,
+        5,
+        3,
+        3,
+        5,
+        9,
+        4,
+        1
+      ],
+      "local_slopes": {
+        "all_injective": false,
+        "collision_pair_count": 12,
+        "core_count": 11,
+        "fiber_identity_checked": true,
+        "image_size_histogram": {
+          "10": 2,
+          "6": 1,
+          "9": 8
+        },
+        "injective_core_count": 2
+      },
+      "nonquadratic": true,
+      "pair_charge": 55,
+      "pair_deficit": 8,
+      "slope_load_histogram": {
+        "4": 8,
+        "5": 3
+      },
+      "trisecants": [
+        {
+          "intercept": 10,
+          "points": [
+            0,
+            5,
+            9
+          ],
+          "slope": 3
+        },
+        {
+          "intercept": 10,
+          "points": [
+            0,
+            7,
+            8
+          ],
+          "slope": 4
+        },
+        {
+          "intercept": 10,
+          "points": [
+            0,
+            3,
+            4
+          ],
+          "slope": 7
+        },
+        {
+          "intercept": 10,
+          "points": [
+            0,
+            2,
+            6
+          ],
+          "slope": 8
+        }
+      ],
+      "zero_count_histogram": {
+        "2": 43,
+        "3": 4
+      }
+    },
+    {
+      "T_trisecants": 5,
+      "all_point_pairs": 78,
+      "changed_coordinates_from_x_squared": [
+        0
+      ],
+      "collision_excess": 10,
+      "complete_family_pair_count": 68,
+      "definition": "f(0)=-1; f(x)=x^2 for x!=0",
+      "expected_T": 5,
+      "expected_pair_deficit": 10,
+      "field_order": 13,
+      "function_values": [
+        12,
+        1,
+        4,
+        9,
+        3,
+        12,
+        10,
+        10,
+        12,
+        3,
+        9,
+        4,
+        1
+      ],
+      "local_slopes": {
+        "all_injective": false,
+        "collision_pair_count": 15,
+        "core_count": 13,
+        "fiber_identity_checked": true,
+        "image_size_histogram": {
+          "11": 10,
+          "12": 2,
+          "7": 1
+        },
+        "injective_core_count": 2
+      },
+      "nonquadratic": true,
+      "pair_charge": 78,
+      "pair_deficit": 10,
+      "slope_load_histogram": {
+        "5": 10,
+        "6": 3
+      },
+      "trisecants": [
+        {
+          "intercept": 12,
+          "points": [
+            0,
+            5,
+            8
+          ],
+          "slope": 0
+        },
+        {
+          "intercept": 12,
+          "points": [
+            0,
+            4,
+            10
+          ],
+          "slope": 1
+        },
+        {
+          "intercept": 12,
+          "points": [
+            0,
+            6,
+            11
+          ],
+          "slope": 4
+        },
+        {
+          "intercept": 12,
+          "points": [
+            0,
+            2,
+            7
+          ],
+          "slope": 9
+        },
+        {
+          "intercept": 12,
+          "points": [
+            0,
+            3,
+            9
+          ],
+          "slope": 12
+        }
+      ],
+      "zero_count_histogram": {
+        "2": 63,
+        "3": 5
+      }
+    }
+  ],
+  "payload_sha256": "65112f380c39047733527493ab9aa233115b0a01a81f72dd7ecfa11b650a2307",
+  "schema": "first_wall_mds_extension_inverse.v1",
+  "scope": {
+    "lean_target_independent": true,
+    "not_claimed": [
+      "general Segre theorem",
+      "weighted-GRS interpolation formalization",
+      "robust stability without exceptional coordinates"
+    ],
+    "proved_by_computation": [
+      "finite F_11 interpolation fixtures and owner ledger",
+      "local Gamma fiber/rank equivalence",
+      "weighted q=5 graph-normalization regression",
+      "q=5,7 normalized graph-arc exhaustion",
+      "q=5,7,11,13 pinned one-point perturbations"
+    ],
+    "python_dependencies": "standard-library-only"
+  },
+  "sources": {
+    "experimental/notes/thresholds/first_wall_mds_extension_inverse.md": "bbbf4eb88a5a0f693e73393aa27084e66bb68ad249377c88a31596f932743427",
+    "experimental/scripts/verify_first_wall_mds_extension_inverse.py": "4286d9d5c6616b03a5c49f9042992efc1d287d735297b0e3faf3e04aa2b4b011"
+  },
+  "status": "verified",
+  "weighted_graph_normalization": {
+    "b0": [
+      0,
+      3,
+      3,
+      4,
+      4
+    ],
+    "b1": [
+      0,
+      2,
+      1,
+      2,
+      4
+    ],
+    "field_order": 5,
+    "multiplier": [
+      1,
+      2,
+      3,
+      4,
+      1
+    ],
+    "normalized_b1": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "normalized_coefficients_ABC": [
+      1,
+      0,
+      0
+    ],
+    "normalized_f": [
+      0,
+      1,
+      4,
+      4,
+      1
+    ],
+    "normalized_graph_is_arc": true,
+    "normalized_pair_count": 10,
+    "raw_formula_refuted": true,
+    "raw_nondegenerate_quadratic_fit_count": 0
+  }
+}

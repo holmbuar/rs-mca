@@ -1,0 +1,11 @@
+RANK15_TWO_FLAT_U1043902_TAMPER_SELFTEST
+TAMPER extend_to_u1043901: REJECTED (boundary remains open)
+TAMPER C1_q15_plus_1: REJECTED (new cut C1 failed)
+TAMPER C2_q15_plus_1: REJECTED (new cut C2 failed)
+TAMPER C3_q15_plus_1: REJECTED (new cut C3 failed)
+TAMPER C4_q15_plus_1: REJECTED (new cut C4 failed)
+TAMPER degree_ceiling_4674: REJECTED (full degree is not excluded)
+TAMPER parser_duplicate_key: REJECTED (duplicate JSON key rejected: schema)
+TAMPER parser_unknown_field: REJECTED (certificate keys changed: ['authority', 'budgets', 'claim', 'gamma', 'new_cuts', 'old_cuts', 'parameters', 'schema', 'unexpected'])
+TAMPER parser_float_integer: REJECTED (parameters.n must be an integer)
+TAMPER_RESULT: PASS

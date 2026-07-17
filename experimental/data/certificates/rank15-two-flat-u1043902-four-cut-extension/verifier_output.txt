@@ -1,0 +1,42 @@
+RANK15_TWO_FLAT_U1043902_FOUR_CUT_EXTENSION
+authority_base=7f278167e1e51f968896229ae438ea5a76398f90;integrated_pr847=168e9ba02
+source_pins=final:3370f0937ecbfd4f43f6f3e9c5d13b547ad980da918afc7765aa8223819ee31c;full:5565ae711d64cc5934d83932ce66de7f5fe23a1f00566807e187fe97d3b1055a
+certificate_sha256=5ee565a1ea7065e0317bf70fe511fccee7c8fc2c97be112d7927e93fb068593b
+parameters=p2130706433,n2097152,K1048576,m1116047,M212
+section_cap=15;maximizers=1045969..1048575;count=2607
+inherited_local_cut=cut_a;cases=16;minimum_slack=0
+inherited_local_cut=cut_b;cases=17;minimum_slack=0
+inherited_local_cut=cut_c;cases=16;minimum_slack=0
+new_local_cut=C1;cases=16;minimum_slack=0;zero_slack_j=11,12,13,14,15
+new_local_cut=C2;cases=16;minimum_slack=0;zero_slack_j=11,12,14,15
+new_local_cut=C3;cases=16;minimum_slack=0;zero_slack_j=12,13,14,15
+new_local_cut=C4;cases=16;minimum_slack=0;zero_slack_j=10,11,12,14,15
+discrete_convex_exchange=PASS;old_resources=4;new_resources=8;occupancies=1..13
+optimizer_cache=270;branches=6597135;successors_rejected=215009
+pr847_reconstruction=u1043916;capacity=15292650;margin=+878;hstar=6;profile=n15=181,n13=27,n12=18
+literal_target=u1043916;capacity=15274014;margin=-17758;hstar=6;profile=n15=163,n14=14,n13=49
+first_closed=u1043902;capacity=15294508;margin=-232;hstar=5;profile=n15=192,n14=2,n12=22,n11=9
+exact_new_wall=u1043901;margin=+1707
+NEW_MARGIN u=1043902 margin=-232
+NEW_MARGIN u=1043903 margin=-2171
+NEW_MARGIN u=1043904 margin=-4110
+NEW_MARGIN u=1043905 margin=-5401
+NEW_MARGIN u=1043906 margin=-6442
+NEW_MARGIN u=1043907 margin=-7483
+NEW_MARGIN u=1043908 margin=-8524
+NEW_MARGIN u=1043909 margin=-9565
+NEW_MARGIN u=1043910 margin=-10606
+NEW_MARGIN u=1043911 margin=-11647
+NEW_MARGIN u=1043912 margin=-12688
+NEW_MARGIN u=1043913 margin=-13729
+NEW_MARGIN u=1043914 margin=-14770
+NEW_MARGIN u=1043915 margin=-16042
+NEW_MARGIN u=1043916 margin=-17758
+combined_theorem=D2[1043902..1043957]<=211;closed_count=56
+incremental_ownership=1043902..1043916;states=15;inherited=1043917..1043957
+degree_le_4673=EXCLUDED;capacity=15294513;margin=-439
+degree_wall_consequence=d=4674,degG=0,r=0
+parent_replay=D2_changed=15;max_drop=5;dimensions3to15_changed=0
+rank15_final=283039300733528044;target=274854110496187592;gap=8185190237340452
+NONCLAIMS=u<=1043901,parent_saving,source_transport,rank16,Grand_List,Grand_MCA,score_movement
+RESULT: PASS

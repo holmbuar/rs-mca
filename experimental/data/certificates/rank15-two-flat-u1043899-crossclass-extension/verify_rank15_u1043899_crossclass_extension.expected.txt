@@ -1,0 +1,42 @@
+RANK15_U1043899_CROSSCLASS_EXTENSION
+parameters=p2130706433,n2097152,K1048576,m1116047,M212
+section_cap=15;maximizers=1045969..1048575;count=2607
+old_local_cut=A;cases=16;minimum_slack=0;zero_j=4,5,6,7,8,9,10,11,12,13,14,15
+old_local_cut=B;cases=17;minimum_slack=0;zero_j=0,1,2,3,4,5,6,7,8,9,10,11,13
+old_local_cut=C;cases=16;minimum_slack=0;zero_j=8,9,10,11,12,13,14,15
+four_local_cut=C1;cases=16;minimum_slack=0;zero_j=11,12,13,14,15
+four_local_cut=C2;cases=16;minimum_slack=0;zero_j=11,12,14,15
+four_local_cut=C3;cases=16;minimum_slack=0;zero_j=12,13,14,15
+four_local_cut=C4;cases=16;minimum_slack=0;zero_j=10,11,12,14,15
+discrete_convex_exchange=PASS;resources=8;occupancies=1..13
+cross_local_cut=PASS;types=139979;minimum_slack=0;unique_tight=1,2,0,0,0,13
+base_full_incidence_max=h1:3271,h2:3271,h3:3271,h4:3271,h5:3271,h6:3270,h7:3270,h8:3269,h9:3269,h10:3268,h11:3267,h12:3266,h13:3265,h14:3254,h15:3253
+EXCLUDED hstar=1;incidence=3271;pairs=22;raw=475222;base_valid=1794;max_global_dual=-391258072517
+EXCLUDED hstar=2;incidence=3271;pairs=22;raw=409938;base_valid=1794;max_global_dual=-391258072517
+EXCLUDED hstar=3;incidence=3271;pairs=22;raw=338424;base_valid=1697;max_global_dual=-404831192365
+EXCLUDED hstar=4;incidence=3271;pairs=21;raw=238869;base_valid=1401;max_global_dual=-433187185481
+EXCLUDED hstar=5;incidence=3270;pairs=376;raw=1173441;base_valid=39146;max_global_dual=-1451438908
+EXCLUDED hstar=5;incidence=3271;pairs=7;raw=83530;base_valid=139;max_global_dual=-452126071483
+EXCLUDED hstar=6;incidence=3270;pairs=289;raw=460065;base_valid=18335;max_global_dual=-115317627970
+EXCLUDED hstar=7;incidence=3270;pairs=43;raw=88417;base_valid=3839;max_global_dual=-292322393595
+EXCLUDED hstar=9;incidence=3269;pairs=79;raw=24479;base_valid=7340;max_global_dual=-70252622671
+EXCLUDED hstar=10;incidence=3268;pairs=282;raw=14559;base_valid=10054;max_global_dual=-69336287784
+EXCLUDED hstar=12;incidence=3266;pairs=274;raw=274;base_valid=274;max_global_dual=-196918848509
+EXCLUDED hstar=13;incidence=3263;pairs=38;raw=19;base_valid=19;max_global_dual=-366887862827
+EXCLUDED hstar=13;incidence=3264;pairs=19;raw=12;base_valid=12;max_global_dual=-559314260159
+EXCLUDED hstar=13;incidence=3265;pairs=7;raw=7;base_valid=7;max_global_dual=-743676930267
+augmented_full_incidence_max=h1:3270,h2:3270,h3:3270,h4:3270,h5:3269,h6:3269,h7:3269,h8:3269,h9:3268,h10:3267,h11:3267,h12:3265,h13:3262,h14:3254,h15:3253
+STATE u=1043901;lambda=4674;N=1053251;decomposition=225*4674+1601;hstar=8;capacity=15292114;target=15294952;margin=-2838
+STATE u=1043900;lambda=4675;N=1053252;decomposition=225*4675+1377;hstar=8;capacity=15293591;target=15295164;margin=-1573
+STATE u=1043899;lambda=4676;N=1053253;decomposition=225*4676+1153;hstar=4;capacity=15295132;target=15295376;margin=-244
+STATE u=1043898;lambda=4677;N=1053254;decomposition=225*4677+929;hstar=4;capacity=15297506;target=15295588;margin=+1918
+TARGET_LAYERS u=1043901;count=3;layers=h4:I3271,h5:I3271,h7:I3270
+TARGET_LAYERS u=1043900;count=5;layers=h3:I3271,h4:I3271,h5:I3271,h6:I3270,h7:I3270
+TARGET_LAYERS u=1043899;count=9;layers=h1:I3271,h2:I3271,h3:I3271,h4:I3271,h5:I3270,h5:I3271,h6:I3270,h7:I3270,h9:I3269
+exact_new_wall=u1043898;profile=n15=187,n14=5,n13=23,n10=6,n9=4,n4=1;full_incidence=3270;margin=+1918
+wall_slacks=pair:62,mod13:6,A:1321,B:4915,C:101,C1:25830,C2:94080,C3:1085,C4:7920,cross:46334353108
+combined_theorem=D2[1043899..1043957]<=211;new_children=1043899..1043901;inherited=1043902..1043957
+parent_replay=D2_changed=3;range=1043899..1043901;max_drop=5;dimensions3to15_changed=0
+rank15_final_old=283039300733528044;rank15_final_new=283039300733528044;target=274854110496187592;gap=8185190237340452
+NONCLAIMS=u<=1043898,source_counterexample,parent_saving,rank16,Grand_List,Grand_MCA,score_movement
+RESULT: PASS

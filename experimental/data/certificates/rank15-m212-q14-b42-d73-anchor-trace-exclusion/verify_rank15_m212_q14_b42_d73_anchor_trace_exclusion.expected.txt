@@ -1,0 +1,7 @@
+RANK15_D73_ANCHOR_TRACE: PASS
+source_open_profile=D73
+spectrum=blocks:210 incidences:405 pairs:351
+anchor=10 selected=8 complement=17 incidence=40 lower_pairs=29 upper_pairs=28
+all_six_secants=11 incidence=55 lower_pairs=63 upper_pairs=55
+conditional_excluded_D=73 next_conditional_D=74
+finite_payment=0 official_score=0/2

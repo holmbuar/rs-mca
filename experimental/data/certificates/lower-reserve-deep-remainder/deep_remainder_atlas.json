@@ -1,47 +1,57 @@
 {
-  "checks_pass": 39,
-  "checks_total": 39,
+  "checks_pass": 44,
+  "checks_total": 44,
   "consumes": [
     "#699 (O5c quotient/Euclidean/Chebyshev payment + wall localisation)",
-    "#693 (lower-reserve/unsafe-side audit; O5c/O7 decomposition)"
+    "#693 (lower-reserve/unsafe-side audit; O5c/O7 decomposition)",
+    "#714 (fixed-label reciprocal image theorem and strict-deep counterexample)"
   ],
   "decision": {
-    "atlas_built": "occupancy cells Omega_{t,m,p,r} exhaust binom(D,a) (PO2) and make the QR4 summand constant per cell (|phi(R)|=p): fiber = binom(N-p,m)*#{R:pref_w(P_R)=.}",
-    "blocker": "the full-field remainder coefficient p_{jc}(R) at each quotient slot degree jc<=w (present because deep => r>w>=jc)",
-    "conversion_fails": "deep (w<r) => no field-drop-clean prefix slot (no j with r<jc<=w); effective prefix alphabet = full B",
-    "verdict": "field-drop route beats nothing (Theorem DR); instance-level no-list clause refuted by the label-factoring route (#714) - deep-remainder reopens"
+    "atlas_built": "occupancy cells Omega_{t,m,p,r} exhaust binom(D,a) (PO2); |phi(R)|=p gives binom(N-p,m) admissible E choices per label",
+    "counterexample": "#714 strict-deep F_169 cell has J=7920, |Omega|=554400, |image|<=102960, guaranteed list 6 > identity floor 1",
+    "fixed_prefix_scope": "this cell-size identity is not a fixed-prefix factorization; QR4 assumes r<c, and the r>=c companion census has maximum fiber 20 < binom(8,4)=70",
+    "invalid_implication": "no clean coordinate does not imply joint prefix image B^w; coordinatewise full-field variation is not Cartesian fill",
+    "no_clean_coordinate": "deep (w<r) implies no j with r<jc<=w; any reached quotient-coordinate slot is interlaced with remainder data",
+    "verdict": "the printed field-drop-route-dead / Theorem-DR-survives conclusion is COUNTEREXAMPLE / FIXED; occupancy and no-clean-coordinate facts survive"
   },
+  "exact_counterexample_verifier": "experimental/scripts/verify_deep_remainder_partial_occupancy_counterexample.py",
   "hard_input": "5 (lower reserve / unsafe-side comparison)",
-  "house_label": "deep-remainder field-drop route: DECIDED-NEGATIVE; blocker pinned",
+  "house_label": "no-clean-coordinate retained; Cartesian-image domination retired",
   "key_numbers": {
-    "L_id_F169": 69,
-    "clean_slot_alphabet_F25": 5,
-    "deep_and_clean_violations": 0,
-    "deep_slot_alphabet_F25": 21,
-    "fixedR_deep_floor_F169": 5,
-    "g7_summands": [
+    "J_strict_deep_F169": 7920,
+    "admissible_E_counts_p012": [
       495,
       330,
       210
     ],
-    "rigidity_cap_F169": "653752/47"
+    "analytic_image_bound_strict_deep_F169": 102960,
+    "clean_slot_alphabet_F25": 5,
+    "deep_and_clean_violations": 0,
+    "deep_slot_alphabet_F25": 21,
+    "fixedR_toy_floor_F169": 5,
+    "fixedR_toy_identity_floor_F169": 69,
+    "full_cartesian_prefix_space_F169": 4826809,
+    "guaranteed_list_strict_deep_F169": 6,
+    "identity_floor_strict_deep_F169": 1,
+    "profile_size_strict_deep_F169": 554400,
+    "rigidity_cap_toy_F169": "653752/47"
   },
   "nonclaims": [
-    "no change to any deployed finite row or M31/KoalaBear survivor count",
-    "no payment of O7 (list-inaccessible per #699 K1)",
-    "no claim that a non-profile-list mechanism cannot beat identity in the deep regime; the decision is for the prefix-fiber/field-drop route of L6197"
+    "the correction does not create a clean coordinate in the strict-deep regime",
+    "no payment of O7 or claim of complete asymptotic unsafe-side coverage",
+    "no fixed-prefix QR4 factorization is asserted in the r>=c strict-deep cell",
+    "no change to any deployed finite row or M31/KoalaBear survivor count"
   ],
   "route": "O5c deep-remainder wall of prop:simple-pole-lower (L6196-6198)",
-  "status": "CONDITIONAL",
+  "status": "COUNTEREXAMPLE / FIXED",
   "tex_anchors": {
+    "arbitrary-remainder reciprocal identity (QR5)": "L3536-3541",
     "prop:complete-support-factorization (deg-c interlace)": "L3577-3606",
     "prop:exact-prefix-list (4.1)": "L1965",
-    "prop:prefix-rigidity-full (4.4)": "L2044",
     "prop:simple-pole-lower": "L6180",
     "thm:collision-aware-pole (4.2)": "L1997",
-    "thm:exact-partial-occupancy (PO1/PO2)": "L3608-3644",
-    "thm:exact-quotient-remainder-normal-form (QR2/QR4)": "L3456-3525"
+    "thm:exact-partial-occupancy (PO1/PO2)": "L3608-3644"
   },
-  "title": "Lower-reserve deep-remainder partial-occupancy atlas",
+  "title": "Lower-reserve deep-remainder partial-occupancy atlas correction",
   "verifier": "experimental/scripts/verify_lower_reserve_deep_remainder.py"
 }

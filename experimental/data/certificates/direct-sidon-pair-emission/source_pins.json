@@ -1,0 +1,26 @@
+{
+  "schema": "r28-role09-signed-root-emission-source-pins-v1",
+  "authority": {
+    "origin_main": "7f278167e1e51f968896229ae438ea5a76398f90",
+    "pr_860_head": "fb54c47553d3948f3dc6e64b0a292747459fc482",
+    "pr_872_head": "37e08b4feb60714a6c9955ae408edf1742f0fc2b",
+    "pr_872_paid_subtotal": 274854110496187589,
+    "rank16_target": 274854110496187592,
+    "rank16_formal_residual": 3,
+    "role_return_name": "r28_role09_clean_final.md",
+    "role_return_sha256": "7afc4c422cfd1bd5f5a66354ae24d5899184b866137f80a65795b24b6c42a86c"
+  },
+  "repository_files": {
+    "agents.md": "8d2d215910d27b80c38f8b67311951bbe3dd43ea32bfeb7e12828510083a157e",
+    "experimental/notes/thresholds/realized_image_energy_lift.md": "1bc6f170a6e97d43dd4aed68ad88e68501913ebdabcd2637662414a69ef43810",
+    "experimental/scripts/verify_realized_image_energy_lift.py": "70d86fe4905a9c67921d356729b4dd9a0ff5000b7c2b160ab5c90526d510e4fe"
+  },
+  "statement_pins": [
+    "SIGNED_ROOT_CLAIM: For every finite abelian syndrome group, sum_s f_s/Delta_s <= A_pm(N,m) by canonical signed-root emission.",
+    "ODD_DIAGONAL_CLAIM: If doubling is injective on S, in particular for a vector-space codomain of odd characteristic, sum_s f_s/Delta_s <= A_2(N,m) by ternary diagonal-pair emission.",
+    "CUTOFF_GAIN_CLAIM: On the literal half-density R=1 family, the exact cutoff improvement is 0.156870036510644 nats = 0.226315623737977 bits.",
+    "FINITE_LEDGER_PIN: Pending PR #872 has paid subtotal 274854110496187589 = T-3; this packet adds no finite charge.",
+    "NONCLAIM_PIN: This packet does not close hard input 2, any recurrence parent, Grand MCA, Grand List, or the official score.",
+    "WOE_SCOPE_PIN: The ternary diagonal-pair WOE is odd-characteristic only; the all-characteristic signed-root WOE analogue is a separate unproved target using A_pm."
+  ]
+}

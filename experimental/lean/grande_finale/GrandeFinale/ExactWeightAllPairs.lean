@@ -1,12 +1,13 @@
-import GrandeFinale.DirectionDistanceAllPairs
+import GrandeFinale.FixedSlopeKernelJohnsonMultiplicity
 
 /-!
 # Selector-free exact-weight two-block bounds
 
-This module contains only **UNPROVED STATEMENT TARGETS**. It records the
-exact-weight refinement of the realized-puncture compiler for the complete
-`(slope,error)` pair set. In particular, it does not choose one witness per
-slope and it does not contain a Lean proof.
+This module records the exact-weight refinement of the realized-puncture
+compiler for the complete `(slope,error)` pair set. It does not choose one
+witness per slope. Most compilation surfaces remain statement targets; the
+same-slope kernel alternative is proved below from the fixed-slope kernel
+lemmas.
 -/
 
 open scoped BigOperators Classical
@@ -17,6 +18,7 @@ namespace GrandeFinale
 namespace ExactWeightAllPairs
 
 open DirectionDistanceAllPairs
+open FixedSlopeKernelJohnsonMultiplicity
 
 set_option autoImplicit false
 
@@ -177,7 +179,7 @@ def exactWeightAllPairTarget (H : (D → F) →ₗ[F] W) (y₀ y₁ : W)
   ExactWeightHypotheses H y₀ y₁ b₀ vMin P t Δ j →
     ExactWeightConclusion P vMin t Δ j
 
-/-- **UNPROVED STATEMENT TARGET (same-slope kernel alternative).** -/
+/-- Proposition surface for the same-slope kernel alternative proved below. -/
 def sameSlopeKernelDifferenceTarget (H : (D → F) →ₗ[F] W)
     (y₀ y₁ : W) (b₀ vMin : D → F) (P : Finset (Pair D F))
     (t : ℕ) : Prop :=
@@ -186,6 +188,23 @@ def sameSlopeKernelDifferenceTarget (H : (D → F) →ₗ[F] W)
     ∀ p ∈ P, ∀ q ∈ P, p ≠ q → p.1 = q.1 →
       H (p.2 - q.2) = 0 ∧ p.2 - q.2 ≠ 0 ∧
         weight vMin ≤ weight (p.2 - q.2)
+
+/-- Distinct errors in one slope fiber differ by a nonzero kernel word, so a
+kernel-distance hypothesis supplies the required weight lower bound. -/
+theorem sameSlopeKernelDifference
+    (H : (D → F) →ₗ[F] W) (y₀ y₁ : W)
+    (b₀ vMin : D → F) (P : Finset (Pair D F)) (t : ℕ) :
+    sameSlopeKernelDifferenceTarget H y₀ y₁ b₀ vMin P t := by
+  intro hlow hkernel p hp q hq hpq hsame
+  have hpFiber : p ∈ fixedSlopeFiber P p.1 := by
+    exact Finset.mem_filter.mpr ⟨hp, rfl⟩
+  have hqFiber : q ∈ fixedSlopeFiber P p.1 := by
+    exact Finset.mem_filter.mpr ⟨hq, hsame.symm⟩
+  have hzero : H (p.2 - q.2) = 0 :=
+    fixedSlope_sub_mem_kernel H y₀ y₁ P p.1 t hlow.1 hpFiber hqFiber
+  have hne : p.2 - q.2 ≠ 0 :=
+    fixedSlope_sub_ne_zero P p.1 hpFiber hqFiber hpq
+  exact ⟨hzero, hne, hkernel (p.2 - q.2) hzero hne⟩
 
 def AllOccupiedExactWeightsPositive (P : Finset (Pair D F))
     (vMin : D → F) (t Δ : ℕ) : Prop :=
@@ -250,6 +269,8 @@ def lineRayAllNonnegativeTwoBlockTarget (H : (D → F) →ₗ[F] W)
     KernelDistanceAtLeast H (t + 1) →
     AllOccupiedTwoBlockNonnegative Q vMin t →
     Q.card = P.card ∧ P.card < 2 * (Fintype.card D) ^ 2
+
+#print axioms sameSlopeKernelDifference
 
 end ExactWeightAllPairs
 end GrandeFinale

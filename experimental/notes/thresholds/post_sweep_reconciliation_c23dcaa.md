@@ -53,11 +53,13 @@ and appear as OPEN weave items.
    survives the wave** (section 6).
 5. **Lower reserve / unsafe side.** `#699` pays O5c for the quotient /
    Euclidean-remainder / Chebyshev classes (deep-remainder `w<r` WALL); `#712`
-   builds the partial-occupancy atlas and kills the deep-remainder field-drop
-   route (Theorem DR); DannyExperiments `#714` refutes `#712`'s instance-level
-   no-list verdict (`F_169` guaranteed list `6` > identity floor `1`), so the
-   deep-remainder side reopens as payable by label-factoring; `#720` walls the
-   Grand List projective-line lift; `#722` gives the rank-15 locator-saturation
+   builds the partial-occupancy atlas and proves that no deep prefix coordinate
+   is field-drop-clean; DannyExperiments `#714` retires `#712`'s domination /
+   field-drop-dead theorem because label factoring preserves a descended
+   quotient image despite coordinatewise full-field variation (`F_169`
+   guaranteed list `6` > identity floor `1`), so the deep-remainder side
+   reopens as payable by label-factoring; `#720` walls the Grand List
+   projective-line lift; `#722` gives the rank-15 locator-saturation
    normal form (eliminates no `M`); `#707`/`#710` localize O7 (upper-half
    secant ceiling; combined reserve `max{P,E}`); `#708` roots the order-two
    band failure in a heavy realized boundary fiber.  Residual = O7 non-list
@@ -248,23 +250,29 @@ a `#709` label; the input-4 factoring reused by `#713` is
   **deep-remainder `w<r`** regime is a localized WALL.  Route **O7** stays OPEN
   (per audit `#693`); the §7 coupling lemma proves **no profile-list reaches
   O7**.
-- **`#712` — the partial-occupancy atlas, field-drop route DECIDED NEGATIVE
-  (Theorem DR).**  `lower_reserve_deep_remainder_atlas.md` builds the missing
-  degree-`c`-interlace partial-occupancy atlas and shows the per-cell fiber sum
-  cannot be routed through the collision-aware pole with a field drop — in the
-  deep regime **no depth-`w` prefix slot is field-drop-clean** (blocker: the
-  full-field remainder coefficient `p_{jc}(R)` sitting additively in every
-  quotient slot).  **Theorem DR (field-drop route dead) stands.**
-- **DannyExperiments `#714` — reopens deep-remainder as payable (COUNTEREXAMPLE
-  to the instance-level verdict).**
+- **`#712` — the partial-occupancy atlas and no-clean-coordinate-slot lemma
+  survive.**  `lower_reserve_deep_remainder_atlas.md` builds the missing
+  arbitrary-remainder atlas.  When `r>=c`, the QR5 prefix is interlaced and in
+  the strict-deep regime **no depth-`w` quotient-coordinate slot is
+  field-drop-clean** (a remainder coefficient `p_{jc}(R)` is visible in each
+  reached quotient slot).  This does not extend QR4's fixed-prefix
+  factorization, whose theorem assumes `r<c`, into the interlaced regime.  The
+  coordinatewise lemma does not determine the joint prefix-image size.
+- **DannyExperiments `#714` — retires the domination / field-drop-dead theorem
+  and reopens deep-remainder as payable (COUNTEREXAMPLE).**
   `deep_remainder_partial_occupancy_counterexample.md` proves the corrected
   arbitrary-remainder prefix-image theorem (exact count `J_{t,p,r} = binom(b,t)
   binom(N,p) [x^r]((1+x)^c - 1 - x^c)^p`) and exhibits a verified
   reciprocal-locator (label-factoring) pigeonhole beating the identity floor
   inside a strictly deep cell (**guaranteed list `6` vs identity floor `1` over
-  `F_169`**).  So field-drop is not the only route: `#712`'s **instance-level
-  no-list verdict is REFUTED as printed**, and its "O5c closes as a list
-  problem" corollary is **WITHDRAWN**; Theorem DR and the atlas survive.
+  `F_169`**).  Coordinatewise full-field remainder variation does not imply
+  that the joint prefix image is the Cartesian space `B^w`: after the
+  remainder label is fixed, its reciprocal locator is a unit, and that
+  fixed-remainder unit preserves the descended quotient image.  Therefore
+  **Theorem DR (deep-remainder domination / field-drop route dead) is
+  RETIRED**, together with its instance-level no-list verdict and "O5c closes
+  as a list problem" corollary.  The occupancy atlas and
+  no-clean-coordinate-slot lemma survive.
 - **`#720` — Grand List projective-line lift wall (PROVED route cut).**
   `projective_line_lift_feasibility_wall.md` proves feasibility of every
   integer scalar nested-MacWilliams profile through `T+1`, the exact `K+2`
@@ -295,10 +303,12 @@ a `#709` label; the input-4 factoring reused by `#713` is
   boundary fiber with actual same-boundary residual support pairs.  The
   semantic pair-to-owner map is what remains.
 
-**Current input-5 residual statement.**  The list route is closed *as a
-field-drop problem* (Theorem DR) but **not** as a list problem (`#714`):
-deep-remainder reopens as payable by label-factoring.  The unsafe side is
-therefore **O7 non-list tangent-floor `E` content** (`#699` coupling lemma +
+**Current input-5 residual statement.**  The deep cell has no individually
+field-drop-clean coordinate (`#712`), but that does not close the field-drop
+problem: label factoring retains the descended quotient image (`#714`).
+Deep-remainder therefore reopens as payable, and the former domination /
+field-drop-dead theorem is retired.  The unsafe side is therefore **O7
+non-list tangent-floor `E` content** (`#699` coupling lemma +
 `#707` upper-half cut + `#710` combined reserve) **plus the reopened
 label-factoring deep-remainder route** (`#714`), with the Grand List
 inequality (`#720`) and the rank-`M` count (`#722`) still open above.
@@ -329,7 +339,7 @@ rho*  in  [0.160847, 0.405465]        (SURVIVES the c23dcaa wave)
 |---|---|
 | `rho* in [0.160847, 0.405465]` (predecessor `post_sweep_bracket_reconciliation.md`) | **survives**; lower end now a `k<=5` family ceiling (`#705`) |
 | `0.160847` = `#694` champion (`comb_trade_champion.md`) | current; hardened to family ceiling by `#705`, **not superseded** |
-| `#712` instance-level "no deep-remainder list / O5c closes as a list problem" (`lower_reserve_deep_remainder_atlas.md`) | **REFUTED / WITHDRAWN** by DannyExperiments `#714`; Theorem DR (field-drop dead) survives |
+| `#712` deep-remainder domination / "field-drop route dead" theorem (`lower_reserve_deep_remainder_atlas.md`) | **RETIRED** by DannyExperiments `#714`: label factoring gives a descended quotient image despite coordinatewise full-field variation; the occupancy atlas and no-clean-coordinate-slot lemma survive; strict-deep `F_169` guaranteed list `6` > identity floor `1` |
 | L-3 lower reserve / proposed-change section of `simple_pole_realizability.md` (`#524`) | **superseded** by `#710`'s combined `max{P,E}` (superseding note; integrated notes left unchanged) |
 | `r2_constant_weil_cycle_flatness.md` (bounded `N/p<=K`) | **superseded** by `#718`'s growing-characteristic flatness (unbounded `N/p`) |
 | `#691` T1 as printed (carried by predecessor's map) | already `#700` T1'; unchanged by this wave |
@@ -349,7 +359,7 @@ branches for the two open ones) while writing this note:
 ```text
 #713  verify_atlas_cat_ledger.py --check                     RESULT: PASS (219/219)
 #717  verify_heavy_fiber_admissibility_transfer.py --check   RESULT: PASS (77/77)
-#699  verify_lower_reserve_o5c.py --check                    RESULT: PASS (49/49)
+#699  verify_lower_reserve_o5c.py --check                    RESULT: PASS (52/52)
 #725  verify_c3_planted_divisor_census.py       (open, ours) RESULT: PASS (82/82)
 #723  verify_signed_minor_payment_clause_census_v1.py (open) RESULT = PASS (470 checks)
 ```

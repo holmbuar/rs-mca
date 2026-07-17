@@ -1,0 +1,4 @@
+430461bf3380258b2120c14da01cc210ee989ade884da4c525e0942d9992ccd0  ../../../scripts/verify_rank16_fixed_core_global_owner_counterexample.py
+a7f5421dc7bdcb83e3669c8c4b2db2082123e5b93881058fee9cfe6756599dd3  ../../../notes/l2/rank16_fixed_core_global_owner_counterexample.md
+b0d4011fbfb49b66ea18a85f9e74f3343a8e528ba9ae98ed5fdc32c08712ddae  README.md
+fb609d7927faca571dc18f1a7c8d340a06fbaffdfb11f8f741acb503152dd3a6  verify_rank16_fixed_core_global_owner_counterexample.expected.txt

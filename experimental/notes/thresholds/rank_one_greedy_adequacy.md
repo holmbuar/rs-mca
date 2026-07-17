@@ -1,10 +1,10 @@
-# The adequacy depth law: one pattern pays in full to depth 3, fails from depth 4, and capped greedy closes every depth
+# The adequacy depth law: one pattern reaches the scalar cap through depth 3, fails from depth 4, and capped greedy reaches every depth's scalar cap
 
 ## Status
 
 ```text
 Status: PROVED (T1, B-independence): per class, the single-pattern
-        payment / omega-cap ratio is a PURE trig function of
+        capacity / omega-cap ratio is a PURE trig function of
         (k, top set, r, sign G(s_low)) -- the common factor
         2^{s_low+1} |G| cancels -- so adequacy questions are finite
         PER DEPTH, independent of B.  Anchored: brute Fourier ratios at
@@ -13,8 +13,8 @@ Status: PROVED (T1, B-independence): per class, the single-pattern
         ALL 3-adic instances at k in {1,2,3} (worst ratio exactly 1;
         equality cases proved analytically, strict cases at margin
         >= 0.0230) -- hence for EVERY B, single-pattern rank-one
-        emission pays every depth <= 3 symmetric hierarchy piece in
-        full.  #820's S5 upgrades from B = 6 computed to an all-B
+        emission reaches the scalar cap for every depth <= 3 symmetric
+        hierarchy piece.  #820's S5 upgrades from B = 6 computed to an all-B
         theorem at these depths.
       + PROVED (T5, structure is essential): for ARBITRARY real angles
         the reduced inequality already FAILS at m = 3 (deterministic
@@ -32,34 +32,34 @@ Status: PROVED (T1, B-independence): per class, the single-pattern
         class 101110, brute Fourier).  #820's open question "best >= cap
         at general B" resolves NEGATIVELY at depth >= 4, positively at
         depth <= 3 -- its k <= 3 scan scope was exactly the true law.
-      + PROVED (T4, the greedy completion, EVERY depth): pay patterns in
+      + PROVED (T4, the greedy completion, EVERY depth): credit patterns in
         decreasing |hcube|, CAPPED at the per-class omega-cap sum h_+
         (the cap is what evades #818 E3, which kills only the UNCAPPED
-        additive schedule).  Sound by #820 S4's cap; FULLY adequate
+        additive schedule).  Sound by #820 S4's cap; reaches the scalar cap
         always because
             sum_eps |h(sigma_eps)| <= 2^m sum_D |hcube_v(D)|
         (triangle inequality applied to h(eps) = sum_D hcube(D)
         chi_D(eps)), and cap <= sum |h|.  One line, general B and k.
         Verified: 0 failures over all 17820 instances k <= 5 plus the
         exhaustive k = 6 sweep; pattern counts pinned at <= 2 (k <= 5),
-        3 (k = 6), 4 (k = 7 worst).  ADEQUACY IS CLOSED at every depth:
-        with #816 (classification), #818 (arithmetic), #820 (soundness),
-        rank-one GREEDY emission is sound and pays every SYMMETRIC
-        hierarchy piece in full, at every B and every depth.  Schedule
-        anatomy: uncapped-additive OVERdraws (#818 E3), single-pattern
-        UNDERdraws from depth 4 (T3) -- capped greedy is the unique
-        surviving schedule shape.
+        3 (k = 6), 4 (k = 7 worst).  LOCAL WALSH ACCOUNTING IS CLOSED at
+        every depth: capped greedy is sound and reaches the scalar cap.
+        The proof is universal, however: it uses no rank-one, base-3,
+        Sidon, or source structure.  It therefore does NOT certify payment
+        to an owned first-match profile cell or a distinct slope.
 LANE: hard input 2 ("image-scale MI + MA, or a direct Sidon payment",
         agents.md L51) -- ninth packet of the arc (forcing -> typing ->
         reduction -> scope -> compression -> classification -> admission
-        arithmetic -> admission soundness -> ADEQUACY CLOSED): nothing
-        mathematical remains open on SYMMETRIC hierarchy-piece emission;
-        the admission decision is grammar acceptance alone.  Input-2
-        residual: that acceptance, single-coset/general-profile
-        analogues (same reduction, not scanned), genuinely non-hierarchy
-        bands, atlas totality (the Codex team's lane), large-q Sidon.  Fence (N1)
-        (thm:aperiodic-one-ray-saturation) respected: nothing here pays
-        or claims lower reserve.
+        arithmetic -> admission soundness -> LOCAL ACCOUNTING CLOSED): a
+        substantive interface remains.  One must map credited patterns to
+        actual same-owner first-match cells, prove an A4 analytic/Sidon
+        payment and, separately, the A6/RC distinct-slope bound, and certify
+        the aggregate census.  Admission is therefore NOT grammar acceptance
+        alone, and hard input 2 remains OPEN.  Other residuals:
+        single-coset/general-profile analogues, genuinely non-hierarchy bands,
+        atlas totality, large-q Sidon.  Fence (N1)
+        (thm:aperiodic-one-ray-saturation) respected: nothing here supplies
+        profile payment or claims lower reserve.
 ```
 
 Label key (agents.md dialect): **PROVED** / **CONDITIONAL** / **CONJECTURAL** /
@@ -116,7 +116,7 @@ Only classes with `s == B (mod 2)` carry weight (`w_s = 0` otherwise) --
 the charged-pair counts below quantify over exactly those.  For a class with top set `{j_1 < ... < j_m}
 subseteq {0..k-1}` and `sG = sign(G(s_low))`, the ABSTRACT INSTANCE is
 the function `eps -> sG cos(sum_i eps_i beta_{j_i})` on `{+-1}^m` with
-its even-pattern payments `2^m prod_i (|sin beta_{j_i}| if i in D else
+its even-pattern capacities `2^m prod_i (|sin beta_{j_i}| if i in D else
 |cos beta_{j_i}|)`.
 
 ---
@@ -124,8 +124,8 @@ its even-pattern payments `2^m prod_i (|sin beta_{j_i}| if i in D else
 ## 1. Theorem T1: adequacy is B-independent
 
 > **Theorem T1.**  On a symmetric depth-k piece, for any class with
-> `G(s_low) != 0`: payments, budget, and omega-cap all carry the common
-> factor `2^{s_low + 1} |G(s_low)|`; the ratios (single-pattern payment /
+> `G(s_low) != 0`: capacities, budget, and omega-cap all carry the common
+> factor `2^{s_low + 1} |G(s_low)|`; the ratios (single-pattern capacity /
 > cap, greedy progress / cap) equal those of the abstract instance
 > `(k, top set, r, sG)`.  `B` enters only through REALIZATION: which
 > `(s_low, sG)` occur (parity and the zero set of `G`).
@@ -146,14 +146,14 @@ exhaustion, once, for all `B`.
 > **Theorem T2 (by exhaustion).**  For every instance at `k in {1,2,3}`:
 > `best >= cap`, with worst ratio exactly 1.  Hence at EVERY `B`,
 > single-pattern rank-one emission (one argmax pattern per class, capped
-> per #820) pays every depth <= 3 symmetric hierarchy piece in full.
+> per #820) reaches the scalar cap for every depth <= 3 symmetric hierarchy piece.
 
 Verified: all instances `k <= 3` (within the 17820 instances scanned at
 `k <= 5`), worst ratios `1.0000/1.0000/1.0000`.  MARGIN STRUCTURE (what
 makes float exhaustion honest): of the 268 charged `k <= 3` instances,
 148 attain EQUALITY and all 148 are single-sign-nonnegative -- where
 equality is PROVED in one line (`h >= 0` gives `|hcube(D)| <=
-sum h / 2^m = hcube(empty)`, so the flat payment is both the maximum and
+sum h / 2^m = hcube(empty)`, so the flat capacity is both the maximum and
 the cap); the remaining 120 strict instances have minimum relative
 margin `0.0230`, more than seven orders above the scan tolerance.
 The classification itself is float-safe: no `h` value is ever near zero
@@ -211,9 +211,9 @@ value exactly -- B-independence as T1 requires, at a second brute point
 
 ---
 
-## 4. Theorem T4: capped greedy pays every depth in full
+## 4. Theorem T4: capped greedy reaches every depth's scalar cap
 
-> **Theorem T4.**  The GREEDY schedule -- pay the class's patterns in
+> **Theorem T4.**  The GREEDY schedule -- credit the class's patterns in
 > decreasing `|hcube_v(D)|`, accumulating until the omega cap
 > `sum_eps h_+` -- is sound (the cap; #820 S4) and reaches the cap on
 > every charged class, at every `B` and every depth:
@@ -221,23 +221,27 @@ value exactly -- B-independence as T1 requires, at a second brute point
 > sum_eps h_+ <= sum_eps |h(sigma_eps)| <= 2^m sum_D |hcube_v(D)| ,
 > ```
 > the second step by the triangle inequality applied to
-> `h(eps) = sum_D hcube(D) chi_D(eps)`.  So the total available payment
+> `h(eps) = sum_D hcube(D) chi_D(eps)`.  So the total coefficient capacity
 > always covers the cap, and greedy stops exactly there.
 
 **Proof.**  The display; greedy exhausts a sum that is at least the
 stop value. `square`
 
 Verified: 0 failures over all instances `k <= 5` AND the exhaustive
-`k = 6` sweep; the realized `B = 6, k = 4` witness is paid in full.
-Pattern economics (pinned): greedy needs at most 2 patterns at
-`k <= 5`, 3 at `k = 6`, 4 at the `k = 7` worst instance -- the schedule
-stays `O(1)`-per-class in practice while the certificate remains the
-`O(B 3^k)` G-table.  With #816 + #818 + #820 + this packet, rank-one
-greedy emission on SYMMETRIC hierarchy pieces is CLASSIFIED,
-ARITHMETIZED, SOUND, and FULLY ADEQUATE: no mathematical obligation on
-symmetric hierarchy-piece emission remains open (single-coset and
-general-profile analogues follow the same reduction but are not
-scanned; Nonclaims).
+`k = 6` sweep; the realized `B = 6, k = 4` witness reaches its scalar cap.
+Pattern economics (finite pins only): greedy needs at most 2 patterns at
+`k <= 5`, 3 at `k = 6`, and 4 at the pinned `k = 7` instance.  These
+computations do not give a uniform all-depth subexponential pattern
+census; a general `m`-cube can expose up to `2^m` Walsh patterns.
+
+With #816 + #818 + #820 + this packet, rank-one greedy emission on
+SYMMETRIC hierarchy pieces is classified, arithmetized, sound, and
+adequate as **local scalar bookkeeping**.  The displayed proof is the
+universal Walsh triangle inequality and uses none of the rank-one or
+base-3 structure.  Consequently it does not establish the governing
+profile-payment interface: an actual same-owner first-match cell, an A4
+analytic payment, the separate A6/RC or direct-ray distinct-slope bound,
+and an aggregate census remain mathematical obligations.
 
 ---
 
@@ -254,7 +258,7 @@ scanned; Nonclaims).
 > `k = 3` (which allow `m <= 3`) satisfy it (T2).
 
 **Proof.**  (a) `m = 1`: `cos` is even, so the two cube values are
-equal, the function is constant, and the flat payment equals the cap
+equal, the function is constant, and the flat capacity equals the cap
 whenever positive.  `m = 2`: over the two distinct values
 `a = cos(b1+b2)`, `b = cos(b1-b2)` with `a + b = 2 cos b1 cos b2` and
 `b - a = 2 sin b1 sin b2`, sign case analysis gives
@@ -271,6 +275,11 @@ adequacy" misreading of T2.
 
 ## Nonclaims
 
+- **NOT a profile-payment theorem**: this packet constructs no actual
+  first-match `Z_i^circ`, no admissible bound `U_i`, no same-owner atlas
+  cell or A4 analytic/Sidon payment, and no separate A6/RC or direct-ray
+  distinct-slope bound.  A scalar cap must not be promoted to any of
+  those semantic interfaces.
 - **T2 and T3 (k <= 6) are proofs by finite exhaustion of B-free
   instance spaces**; the `k = 7` worst is a pinned instance, not an
   exhaustive depth (its exhaustive sweep lives in the scout data, not
@@ -284,8 +293,11 @@ adequacy" misreading of T2.
 - **Symmetric pieces only** (the house band primitive); single-coset
   and general-profile analogues follow from the same reduction but are
   not scanned here.
-- **NOT a proof of admission**: the grammar-acceptance decision remains
-  open; this packet removes its last mathematical input.
+- **NOT a proof of admission**: both a grammar rule and the semantic
+  source-to-cell/profile-payment bridge remain open.  The latter cannot
+  be reduced to a syntactic acceptance decision.
+- **No uniform pattern-count theorem**: the counts through `k = 7` are
+  finite pins, not an all-depth subexponential schedule bound.
 - **Base 3 only**; floats under exact Parseval + Lemma-N guards; fence
   (N1) respected.
 
@@ -293,20 +305,23 @@ adequacy" misreading of T2.
 
 - **#820 (the omega-sound floor)**: its S5 open question is RESOLVED
   (split verdict: theorem at k <= 3, false from k = 4); its corrected
-  rule should be read with the greedy schedule as the adequate form.
+  rule should be read with the greedy schedule as the locally adequate
+  scalar form.
 - **The admission decision (#791 Sec 5, #716 Sec 7.1, #818 Sec 6)**:
-  the rule to accept is now fully specified -- rank-one GREEDY emission
-  with the omega cap -- with soundness and adequacy both closed.
+  rank-one GREEDY emission with the omega cap specifies the local charge
+  rule, but admission still requires a same-owner first-match
+  source-to-cell/profile-payment theorem.
 - **The band-uniform packet (#795)**: its T3 schedule frame gains the
-  final form (greedy-to-cap); its middle-band program on hierarchy
-  families is mathematically complete.
-- `rs_mca_thresholds.tex`: paste-ready remark after the PO4 material --
-  "single-pattern emission pays hierarchy pieces in full exactly up to
+  local scalar form (greedy-to-cap); its semantic middle-band payment is
+  not thereby complete.
+- `rs_mca_thresholds.tex`: any remark after the PO4 material must say --
+  "single-pattern emission reaches the scalar cap exactly up to
   depth 3 (B-independent law; first failure at depth 4, ratio 0.991,
-  realized at B = 6); greedy payment capped at the positive part pays
-  every depth in full by the triangle inequality, with at most a
-  handful of patterns per class" -- visible hypotheses: #749-corrected
-  class, base-3 chart, q=2 rooting.
+  realized at B = 6); greedy credit capped at the positive part reaches
+  every depth's scalar cap by the universal Walsh triangle
+  inequality" -- and must not infer profile payment or an all-depth
+  handful-of-patterns bound.  Visible hypotheses: #749-corrected class,
+  base-3 chart, q=2 rooting.
 
 ## Reproducibility
 

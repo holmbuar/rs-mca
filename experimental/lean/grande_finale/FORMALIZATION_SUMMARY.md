@@ -13,12 +13,18 @@ This package is a partial Lean formalization of
 - `GrandeFinale/FixedSlopeKernelJohnsonMultiplicity.lean`: fixed-slope
   kernel-Johnson multiplicity compiler; theorem-level combinatorial cap, not a
   full threshold theorem.
+- `GrandeFinale/ExactWeightAllPairs.lean`: selector-free exact-weight
+  same-slope kernel alternative; different-slope, endpoint, and two-block
+  compiler surfaces remain unproved targets.
 - `GrandeFinale/Rank16FixedCoreQuotientLineObstruction.lean`: rank-16
   fixed-core quotient-line obstruction kernel for the q64 line family.
 - `GrandeFinale/TripleNegativeFirstMatchReduction.lean`: triple-negative
   first-match reduction to one residual wall.
 - `GrandeFinale/AugmentedBasisPencilDesignInverse.lean`: augmented-basis
   pencil and deep-hole design inverse audit kernel.
+- `GrandeFinale/FirstWallMDSExtensionInverse.lean`: first-wall MDS
+  extension inverse audit, including owner partition, slack ledger, graph-arc
+  normalization, and finite counting kernels.
 - `GrandeFinale/C0PeriodicFirstMatchTarget.lean`: exact finite-set proof of
   Danny's #796 four-cell first-match union cap, with the component caps and
   cover supplied explicitly and the complete `c=0` parent kept outside scope.
@@ -27,9 +33,10 @@ This package is a partial Lean formalization of
   packing, the literal q128 singleton caps `34,137` and `12,598,400`, and the
   conditional fixed-singleton compiler for the `b=5,7` subtotal.
 - `GrandeFinale/C0PeriodicF29ResidualOwner.lean`: low-block recovery for
-  periodic locators, support-level residual ownership via locator injectivity,
-  and the conditional 64-class compiler for the literal q64 `f=29` cap
-  `1,619,679,744`.
+  periodic locators, derivation of nonzero projective scale from the short
+  nonzero left constant block, support-level residual ownership via locator
+  injectivity, and the conditional 64-class compiler for the literal q64
+  `f=29` cap `1,619,679,744`.
 - `GrandeFinale/C0PeriodicF28ResidualPencil.lean`: support-level projective
   pencil parameter injectivity, common-base root packing, the exact residual
   owner cap 63, and the conditional q64 `f=28` compiler for
@@ -178,10 +185,12 @@ parent bound.
 
 The periodic `f=29` module proves the algebraic residual-support owner and the
 64-cell union arithmetic.  Its `F29ProjectiveRayCertificate` deliberately
-keeps the deployed locator decomposition, pairwise projective congruences,
-quotient-constant classification, and the fixed-residual local Hahn cap as
-explicit inputs.  It does not construct the literal deployed stratum, prove
-the `f=28` component, or promote a complete `c=0` parent bound.
+keeps the deployed locator decomposition, existential pairwise projective
+congruences, quotient-constant classification, and the fixed-residual local
+Hahn cap as explicit inputs, but derives projective-scale nonzeroness rather
+than requiring it in every witness.  It does not construct the literal
+deployed stratum, prove the `f=28` component, or promote a complete `c=0`
+parent bound.
 
 The periodic `f=28` residual-pencil module proves that a certified pencil of
 63,601-point residual supports in the deployed 2,097,152-point ambient set has

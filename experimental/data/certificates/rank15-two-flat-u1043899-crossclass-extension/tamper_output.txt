@@ -1,0 +1,14 @@
+R28 Role 07 independent mutation audit
+
+1. DUAL_B changed from 1,000,000,000,009 to 1,000,000,000,010.
+   Result: rejected with `VerificationError: cross-local cut changed`.
+
+2. EXPECTED_AUGMENTED_MAX[4] changed from 3270 to 3271.
+   Result: rejected with `VerificationError: witness incidence changed h=4`.
+
+3. Claimed source interval extended one state to u=1,043,898.
+   Result: rejected because the recurrence delta changed from three states to
+   four states, exposing the exact overclaim.
+
+All mutations were made only in temporary copies. The committed verifier is
+the SHA-pinned worker artifact and was not modified.

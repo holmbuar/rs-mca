@@ -1,0 +1,16 @@
+RANK16_FIXED26_GLOBAL_SPECTRAL_RANK_GAP: PASS
+dependency=PR862@d2b11f1914dea4cb4a7670736cf00d1422c878de;base=7f278167e1e51f968896229ae438ea5a76398f90
+source_pins=PASS,count=6;note_contract=PASS,count=10
+deployed=p2130706433,n2097152,B32768,a67472,r63601,delta3871,window64
+source_quantifiers=fixed_word|fixed_first_match_owner|fixed_g|fixed_nonzero_ray|fixed_26_core
+global64=ASSUMED;actual_valid_edge=>W_unit;squarefree_g_required=false
+primary_layers=PASS;nonzero_maximal_roots>=3871;zero_eigenvalue=PASS
+rank_gap=a>=3871*nu;allowed=3..17|>=65;excluded=18..64,count=47
+split_complement=q_yz*W*L_yz=1+g*A_yz;degL=1968015;degA<=1964144
+resultant=q_yz^67472*Res(g,W)*Res(g,L_yz)=1;toy_nonsquarefree=PASS
+finite_payment=0;parent=0;grand_list=0;grand_mca=0;official_score=0/2
+remaining_global_branches=3..17|>=65
+open_pr_nonclaims=PR872:T-3_not_outside_population<=3;PR873:fixed26/27_not_multiplicity-one_global_owners
+semantic_tamper_selftests=PASS,count=26
+expected_output=PASS
+RESULT=PASS

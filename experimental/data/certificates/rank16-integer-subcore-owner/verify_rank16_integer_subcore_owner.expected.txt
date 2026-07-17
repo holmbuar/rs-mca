@@ -1,0 +1,15 @@
+RANK16_INTEGER_SUBCORE_OWNER: PASS
+replay_861=paid:274847747040605072 residual:6363455582520 profiles:1641
+core25=g:25 cap:11 N:262144 forbidden_r:12 q:4 rem:154292 pair_lower:2190032 pair_upper:2162622 margin:27410
+core26=g:26 cap:5 N:229376 forbidden_r:6 q:2 rem:142682 pair_lower:514740 pair_upper:491505 margin:23235
+core27=g:27 cap:2 N:196608 forbidden_r:3 q:1 rem:104109 pair_lower:104109 pair_upper:98301 margin:5808
+incidence_dual=f27_deficit:925611 per_A_f27:432478 f26_deficit:1542684 per_A_f26:5814732
+IS2_1=profile:(31, 14, 7, 0, 0, 0) f64:27 patterns:6684672 per_A:432478 cap:2890973577216
+IS2_2=profile:(31, 15, 6, 2, 1, 0) f64:27 patterns:7833600 per_A:432478 cap:3387859660800
+IS3_frontier=profile:(31, 15, 6, 3, 1, 0) f64:26 patterns:783360 per_A:5814732 cap:4555028459520
+new_charge=6278833238016 paid_subtotal:274854025873843088 residual:84622344504
+subcell_prefix=A:14553 F:109941 charge:84622344501 total_new_charge:6363455582517 paid_subtotal:274854110496187589 residual:3
+first_unpaid_bucket=profile:(31, 15, 6, 3, 1, 0) f64:26 A_rank:14554 A:(6, 7, 22, 23, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 62) F_rank:109942 F:(0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 19, 20, 24, 26, 28, 29, 30, 58, 59, 60, 61, 63)
+owner_order=D->Q110->M->Q41->X175->J48->IS2->A14553->F109941
+scope=deployed base field; one arbitrary normalized received word
+RESULT=PASS

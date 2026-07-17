@@ -1,0 +1,14 @@
+RANK16_FIXED26_SPECTRAL_RESOLVENT: PASS
+schema=rs-mca.rank16-fixed26-spectral-resolvent.v1
+base=7f278167e1e51f968896229ae438ea5a76398f90
+deployed=p2130706433,n2097152,B32768,a67472,r63601,d28897,floor34704
+source_pins=PASS,count=4
+minimal_resolvent=PASS,mu_divisibility=PASS,collision_collapse=PASS
+krylov=PASS,global64=PASS,fourier_pair_orientation=PASS
+split_star=gcd28897,S-unit_floor34704,resultant_denominator=PASS
+graph=labels38,pairs703,branches{class>=9|class8_edges>=25},triangles>=38,cycles>=120
+ownership=inherited38/703/graph/monomial37;reclaimed=0
+ledger=0,parent=0,score_delta=0,remaining=G64-CAP+rank>=3-star+aggregation
+semantic_tamper_selftests=PASS,count=9
+artifact_checksums=PASS,count=4
+RESULT=PASS

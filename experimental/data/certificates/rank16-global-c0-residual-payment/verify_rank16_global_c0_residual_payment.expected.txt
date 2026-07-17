@@ -1,0 +1,15 @@
+RANK16_GLOBAL_C0_RESIDUAL_PAYMENT: PASS
+baseline_profiles=1682 row_stream_bytes=22590 row_stream_sha256=7dfa0fba111addf8ef4568821e2ce451de094c1ccef5de3468e80bd7e0373cfe
+baseline_csv_bytes=22614 baseline_csv_sha256=83413c33cbea4f7d3cf7d6aeeb8b7a034317b443e80c1617323a94fdd13220e2
+Q41=count:41 cap:165153328111550464 next:(32, 10, 0, 0, 0, 0) next_cap:21719537074307072
+X175=count:175 raw:13253558241240832 joint_M_X:51374825411730344 increment:12796538991542872
+X176_frontier=(31, 13, 6, 2, 1, 0) raw_cap:423894739968000 increment:409277679969103
+J48=count:48 split_f27:38 split_f26:10 cap:294473164820736
+J49_frontier=(30, 15, 5, 2, 1, 0),f64=27 local_cap:5 total_cap:19087738306560
+new_charge=178244340267914072 paid_subtotal=274847747040605072 residual=6363455582520
+truncated_profiles=1641 uniform_cap=3877791336 remainder=144 forced_at_T_plus_1=3877791337
+profile_owner_ledger_bytes=119748 sha256=3ad0d84c9754aad5326db92e04720adcf4179b106297898cd19cf8345e1f90d8
+johnson_cell_ledger_bytes=171046 sha256=385560b765ffb2a41efbc170428c96303b77058b822b81fd2cfd84cf6822546c
+owner_order=D->Q110->M->Q41->X175->J48
+scope=deployed base-field row; one arbitrary normalized received word; no generator/ray multiplication
+RESULT=PASS

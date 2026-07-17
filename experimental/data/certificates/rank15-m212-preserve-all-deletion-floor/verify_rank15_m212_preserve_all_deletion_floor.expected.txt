@@ -1,0 +1,12 @@
+RANK15_M212_PRESERVE_ALL_DELETION_FLOOR: PASS
+field=2130706433 u=1043592..1043916 M=212
+proper_section_cap=15 numerator=1048577 denominator=67472 remainder=36497
+u=1043592..1043627 rich_direction_floor=123 preserve_all_line_floor=168 omitted_by_B42_at_least=118
+u=1043628..1043691 rich_direction_floor=122 preserve_all_line_floor=167 omitted_by_B42_at_least=117
+u=1043692..1043754 rich_direction_floor=121 preserve_all_line_floor=165 omitted_by_B42_at_least=116
+u=1043755..1043815 rich_direction_floor=120 preserve_all_line_floor=164 omitted_by_B42_at_least=115
+u=1043816..1043874 rich_direction_floor=119 preserve_all_line_floor=163 omitted_by_B42_at_least=114
+u=1043875..1043916 rich_direction_floor=118 preserve_all_line_floor=161 omitted_by_B42_at_least=113
+B42 per_line_marked15_cap=2 total_marked15_cap=5
+conclusion=preserve_all_source_deletion_to_B42_impossible
+finite_payment=0 official_score=0/2

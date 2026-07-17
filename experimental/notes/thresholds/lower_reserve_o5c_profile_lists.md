@@ -6,9 +6,10 @@ clause of `prop:simple-pole-lower` (L6196--6198):
 | profile class | label |
 |---|---|
 | **quotient** (complete-fiber; complete-square flagship) | **PROVED** |
-| **remainder**, Euclidean / fixed-`R` (`w >= r`) | **PROVED** (same lemma) |
+| **remainder**, Euclidean / fixed-`R` (`0 <= r < c`, `w >= r`) | **PROVED** (same lemma) |
+| **remainder**, bounded shallow-remainder (`w < r < c`) | **QR4 EXACT / GENERAL PAYMENT OPEN** |
+| **arbitrary remainder** (`r >= c`, QR5 / partial occupancy) | **#714 PROVED CELL / GENERAL NATURAL-SCALE PAYMENT OPEN** |
 | **Chebyshev** (Dickson twin-coset fold) | **PROVED-via-quotient** (instance; domain hypothesis stated) |
-| **remainder**, deep (`w < r`, i.e. `|R| >= c`) | **WALL localised** (`OPEN`) |
 
 **Verdict:** **O5c is PAID for the quotient class** (route O5c of audit **#693**),
 and with it the Euclidean-remainder and Chebyshev instances.  The payment is a
@@ -17,10 +18,14 @@ complete-fiber quotient profile-list of `thm:smooth-quotient-obstruction`
 (eq 6.4/6.8) and the exact normal form `thm:exact-quotient-remainder-normal-form`
 (QR2), routed through the collision-aware pole + challenge average of
 `prop:simple-pole-lower` (4.2 + L6201--6208) **instead of** the separating-pole
-route it currently uses.  The remaining deep-remainder regime is localised to a
-single missing input (a partial-occupancy atlas at the degree-`c` interlace).
-Route **O7** stays `OPEN`, exactly as **#693** marks it; the coupling lemma
-(section 7) proves no profile-list can reach it.
+route it currently uses.  Two remainder regimes remain distinct: QR4 gives an
+exact weighted remainder-prefix sum only under `w < r < c`, while arbitrary
+remainders `r >= c` lie outside that theorem and use the QR5 reciprocal identity
+plus the partial-occupancy atlas.  In the latter regime #714 proves a
+label-factored cell payment and retires the field-drop-route-dead conclusion;
+the general natural-scale payment remains open.  Route **O7** stays `OPEN`,
+exactly as **#693** marks it; the coupling lemma (section 7) proves no
+profile-list can reach it.
 
 Target: `experimental/asymptotic_rs_mca_frontiers.tex` (read at `36de5bf`).
 Attacks route **O5c** of hard input 5, scoped by the coverage audit **#693**
@@ -32,6 +37,10 @@ Attacks route **O5c** of hard input 5, scoped by the coverage audit **#693**
 - **#524** — `simple_pole_realizability.md` (integrated): the two-regime reserve
   `B^MCA >= max{P, E}`, the min-distance rigidity `(star)`, and the
   collision-aware realizability surface (H1)--(H2) reused verbatim below.
+- **#714** — `deep_remainder_partial_occupancy_counterexample.md`: the
+  arbitrary-remainder label-factoring theorem and strict-deep `F_169` cell
+  (`L >= 6 > 1 = L_id`) that retire the route-dead inference without proving a
+  general natural-scale payment.
 Also consumes the in-paper theorems `prop:simple-pole-lower` (L6180),
 `thm:collision-aware-pole` (L1997), `prop:exact-prefix-list` (L1965),
 `thm:exact-quotient-remainder-normal-form` (L3456),
@@ -40,7 +49,8 @@ Also consumes the in-paper theorems `prop:simple-pole-lower` (L6180),
 `prop:complete-support-factorization` (L3577).
 
 **Verifier:** `experimental/scripts/verify_lower_reserve_o5c.py`
--> `RESULT: PASS 49/49` (`--check`), `RESULT: PASS 7/7` (`--tamper-selftest`),
+-> `RESULT: PASS 52/52` (`--check`), `RESULT: PASS 10/10`
+(`--tamper-selftest`), under normal and optimized Python,
 ~0.04 s, python3 stdlib only.  It builds the quotient list and runs the genuine
 simple-pole conversion over `F_25`, the field-drop QR2 pigeonhole over
 `F_169`, and recomputes every number printed below.
@@ -225,33 +235,64 @@ a_deep = 18`.
 
 ---
 
-## 5. Remainder profile: Euclidean case PAID, deep case WALL
+## 5. Remainder profile: bounded QR4 and arbitrary QR5 are distinct
 
-QR2 splits on `w` vs `r` (`thm:exact-quotient-remainder-normal-form`).
+The theorem `thm:exact-quotient-remainder-normal-form` fixes
+`0 <= r < c` before splitting on `w` versus `r`.  Its QR4 branch and the
+arbitrary-remainder factorization must therefore be kept separate.
 
-**Euclidean / fixed-`R` case `w >= r` — PROVED.**  Here the first `r` prefix
-coefficients recover `R` uniquely (QR2 (i), L3546--3552), and the fiber is one
-quotient-prefix fiber; Lemma O5c-Q applies verbatim with the floor
+**Euclidean / fixed-`R` case `0 <= r < c`, `w >= r` — PROVED.**  Here the first
+`r` prefix coefficients recover `R` uniquely (QR2 (i), L3546--3552), and the
+fiber is one quotient-prefix fiber; Lemma O5c-Q applies verbatim with the floor
 `ceil(binom(N - |phi(R)|, m) |B_phi|^{-d})`.  So the remainder profile in its
 Euclidean regime is paid by the same composition. [verifier G7, first check]
 
-**Deep case `w < r` (equivalently `|R| >= c`) — WALL localised, `OPEN`.**  QR2
-(ii) (QR4, L3513--3520) gives the fiber count as a **sum**
+**(a) Bounded shallow-remainder case `w < r < c` — QR4 EXACT; general payment
+OPEN.**  Because `r < c`, the inequality `w < r` forces `w < c`.  Every
+quotient coefficient `v_j(E)` begins at degree at least `c`, so `E` is invisible
+to the first `w` coefficients.  QR4 (L3513--3520) gives the exact prefix-fiber
+size as the weighted remainder-prefix sum
 
 ```text
   #{(E,R) : pref_w(L_{E,R}) = z} = sum_{R : pref_w(P_R) = T^{-1}(z)} binom(N - |phi(R)|, m),
 ```
 
-not a single pigeonhole floor: distinct admissible `R` contribute different
-summands `binom(N - |phi(R)|, m)` (verifier G7 exhibits three distinct values),
-so there is no clean `L_quot` to feed the conversion.  The precise clause of
-L6197 that fails is **"proved for the dimension-`(k+1)` code"**: the list is no
-longer one prefix fiber.  The obstruction is the degree-`c` interlace of
-`prop:complete-support-factorization` (L3591--3594) — once `|R| >= c`, the
-remainder coefficient `p_c(R)` and the quotient coefficient `v_1(E)` collide at
-degree `c`, so the triangular separation is lost.  The missing input is exactly
-a **partial-occupancy atlas** on the remainder-prefix problem (named at
-L3594 and L6325--6328); this note does not supply it.
+which is itself a valid locator-prefix fiber and hence a valid profile-list.
+What QR4 does not supply by itself is a constant-`p` reduction on every
+remainder-prefix fiber: the possible weight depends on `p=|phi(R)|`, and the
+theorem alone does not say which feasible `p` values share a prefix.
+
+The finite G7 guardrail takes `c=3`, `r=2`, `w=1`, `N=12`, and `m=4`.  A
+two-point remainder can occupy exactly `p=1` or `p=2` partial fibers, and both
+values are realizable (`2` points in one three-point fiber, or one point in each
+of two fibers).  Their QR4 weights are respectively
+
+```text
+  binom(12-1,4)=330,        binom(12-2,4)=210.
+```
+
+The value `p=0` is impossible for fixed `r=2`; using `p=0,1,2` as though
+they belonged to one fixed-`r` prefix fiber was invalid.  G7 does not claim
+that the two feasible weights occur in one fiber.  A general natural-scale
+lower bound for QR4's weighted sum, strong enough to compare with the identity
+floor before collision-aware conversion, remains open.
+
+**(b) Arbitrary remainder `r >= c` — QR5 / partial occupancy; #714 pays a cell,
+general payment OPEN.**  QR4 does not apply here.  Only the reciprocal product
+identity QR5 continues automatically, through
+`prop:complete-support-factorization`; at degree `c`, the remainder coefficient
+`p_c(R)` and quotient coefficient `v_1(E)` interlace.  That loss of triangular
+recovery does **not** imply that the joint prefix image is full-field or that the
+field-drop route is dead.
+
+The canonical partial-occupancy atlas separates the remainder label.  For each
+fixed label, multiplication by the reciprocal remainder locator is a unit of
+the truncated prefix ring, so the descended quotient image survives.  #714
+turns this into an exact cell theorem and, on a strict-deep `F_169` cell with
+`(c,r,w)=(2,4,3)`, proves a guaranteed list `6` above identity floor `1`.
+Therefore the earlier route-dead conclusion is **RETIRED**.  #714 does not give
+a uniform natural-scale payment for every arbitrary-remainder cell or close the
+complete profile comparison; that general payment remains open.
 
 ---
 
@@ -327,8 +368,9 @@ but not-proved-exact floor in the band) crosses `B_n^*` within `o(n)` of
 | Q1 | quotient challenge-intersection floor `P_quot(a) = ceil((|Gamma|/q) M(L_quot))` is a valid lower bound; `> B^*` certifies unsafe | **PROVED** | Lemma O5c-Q: QR2 + `thm:collision-aware-pole` + challenge average; G1 faithful `F_25` MCA count |
 | Q2 | quotient list is a genuine *larger* list (`L_quot > L_id`) under a positive-rate field drop | **PROVED** | `prop:identity-quotient-comparison` QR9; G3 faithful `F_169` (`39 > 26`) |
 | Q3 | headline: quotient certifies `a` unsafe at `B^*` where identity fails | **COMPUTED** | G3 (`P_quot=17 > 15 >= 14=P_id`) |
-| R1 | remainder Euclidean case `w >= r` paid by the same lemma | **PROVED** | QR2 (i); G7 single-pigeonhole floor |
-| R2 | remainder deep case `w < r` (`|R| >= c`) is a remainder-prefix sum, not one floor | **WALL / OPEN** | QR4; `prop:complete-support-factorization` degree-`c` interlace (L3591--3594) |
+| R1 | bounded remainder `0 <= r < c`, `w >= r`, paid by the same lemma | **PROVED** | QR2 (i); G7 single-pigeonhole floor |
+| R2 | bounded shallow remainder `w < r < c`: exact weighted remainder-prefix fiber; general natural-scale lower bound open | **EXACT / OPEN PAYMENT** | QR4; G7 feasible fixed-`r` weights `330,210` |
+| R3 | arbitrary remainder `r >= c`: QR4 inapplicable; label factoring preserves descended quotient image | **#714 PROVED CELL / OPEN GENERAL** | QR5 + partial-occupancy atlas; strict-deep `F_169` list `6 > 1` |
 | C1 | Chebyshev class paid as the `phi = T_c` (Dickson) instance | **PROVED (instance)** | section 6; domain hypothesis: twin-coset, complete-fibered at scale `c` |
 | K1 | coupling: no profile-list has size `>= 2` above `(n+k)/2`; O7 is list-inaccessible | **PROVED** | min-distance `(star)`; G5 (0 counterexamples, `n <= 89`) |
 | K2 | collision saturation `M(L) -> floor((q-n)/k)`: exponential lists give bounded challenge floors for fixed `q` | **PROVED** | G4 (`M(10^7)=29=(q-n)/k`) |
@@ -353,8 +395,11 @@ This note does **not** claim:
   positive-rate drop the quotient list is *dominated* by the identity list on the
   exponential scale (`log L_quot ~ (1/c) log L_id`, QR9 with `lambda_c = 1`);
   Lemma O5c-Q is still valid but not a strengthening there.
-- the deep-remainder floor (R2): the partial-occupancy atlas at the degree-`c`
-  interlace is an input, not supplied here.
+- a general natural-scale payment for the bounded QR4 weighted sum (`w < r < c`);
+  QR4 supplies an exact prefix-fiber count, not the needed uniform comparison.
+- a general arbitrary-remainder payment (`r >= c`).  #714 proves the
+  label-factored cell theorem and retires the route-dead conclusion, but it does
+  not close every partial-occupancy cell or the complete profile comparison.
 - any general-linear-code statement beyond the RS rows of `prop:simple-pole-lower`;
   the finite witnesses are RS toy scales (`F_25`, `F_169`).
 
@@ -364,7 +409,9 @@ This note does **not** claim:
 
 ```bash
 python3 experimental/scripts/verify_lower_reserve_o5c.py --check
-# -> RESULT: PASS 49/49            (~0.04 s, stdlib only)
+# -> RESULT: PASS 52/52            (stdlib only)
+python3 -O experimental/scripts/verify_lower_reserve_o5c.py --check
 python3 experimental/scripts/verify_lower_reserve_o5c.py --tamper-selftest
-# -> RESULT: PASS 7/7
+# -> RESULT: PASS 10/10
+python3 -O experimental/scripts/verify_lower_reserve_o5c.py --tamper-selftest
 ```

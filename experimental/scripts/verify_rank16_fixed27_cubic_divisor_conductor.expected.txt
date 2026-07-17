@@ -1,0 +1,12 @@
+R28_ROLE03_CUBIC_DIVISOR_CONDUCTOR: PASS
+field=p=2130706433 B=32768 a=67472 D=96369 d=63601 w=28897
+cubic_complement=30832 v2=4 gap=3871
+irreducible_cubic=EXCLUDED deg_g_mod_3=2
+remainder=quadratic_divided_difference_coefficients
+specialization=first_layer_deficit<=28897 first_layer_degree>=3871
+squarefree_resultant=g^2*M deg_M<=55859 total_deg<=190803=3d
+linear_times_quadratic=S2_range_968_15416
+conductor=some_block<=16 quadratic_alternative<=8
+linear_quadratic_conductor_cases_checked=110196
+finite_payment=0 asymptotic_payment=0 score=0/2
+tamper_selftest=PASS

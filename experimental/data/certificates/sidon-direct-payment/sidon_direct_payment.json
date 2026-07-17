@@ -1,37 +1,74 @@
 {
   "all_pass": true,
-  "base_sha": "4e3c4ee85cb01ef7c4f1e7bbfbc13735cf6c9d15",
-  "beats_trivial_baseline": true,
-  "checker_route": "4-fold a-b=c-d energy + successive-multiply (f/barN)^q",
-  "claim_boundaries": {
-    "beats_or_narrows_trivial_baseline": true,
-    "independent_recheck_confirms": true,
-    "is_counterexample": false,
-    "is_full_canonical_statement_not_proxy_or_toy_row": false,
-    "is_not_degenerate_or_tautological_by_construction": true,
-    "is_novel_not_confirming_a_proven_theorem": false,
-    "resolves_or_advances_prob_band": false
+  "base_sha": "7f278167e1e51f968896229ae438ea5a76398f90",
+  "c9_artifact": {
+    "expected": {
+      "L": 121,
+      "M": 152,
+      "N": 20,
+      "Q": 501,
+      "R": 2,
+      "barN_denominator": 121,
+      "barN_numerator": 152,
+      "heavy_delta_denominator": 1024,
+      "heavy_delta_numerator": 243,
+      "heavy_energy": 7776,
+      "heavy_fiber_size": 32,
+      "m": 10,
+      "q": 3
+    },
+    "match": true,
+    "observed": {
+      "L": 121,
+      "M": 152,
+      "N": 20,
+      "Q": 501,
+      "R": 2,
+      "barN_denominator": 121,
+      "barN_numerator": 152,
+      "heavy_delta_denominator": 1024,
+      "heavy_delta_numerator": 243,
+      "heavy_energy": 7776,
+      "heavy_fiber_size": 32,
+      "m": 10,
+      "q": 3
+    },
+    "path": "experimental/data/c9_literal_interface_counterexample_v1.json",
+    "sha256": "6c01b443c75048e16de2fcb2598f19fc9f5929f3b58ed6275321a36795e412a8"
   },
-  "evidence_type": "CANONICAL_STATEMENT_HIT",
+  "checker_route": "independent tuple-support rebuild; pair-sum energy; exact Fraction normalization and stored-artifact reconciliation",
+  "claim_boundaries": {
+    "closes_deployed_hard_input_b": false,
+    "counterexample_to_intended_smooth_rows": false,
+    "intended_deployed_smooth_residual_open": true,
+    "literal_interface_counterexample": true,
+    "survives_exact_C1_to_C8_predicates": false
+  },
+  "evidence_type": "EXPLICIT_FIXED_WEIGHT_BOOLEAN_SOURCE_MAP",
   "falsifiable": true,
-  "generator_route": "Counter r(d)^2 energy per fiber + (f/barN)**q Sidon-heavy sum",
-  "hard_input": "b",
-  "honest_headline": "Direct Sidon payment (hard b): pins_ok=True; dual energy routes agree on Gsid toys; payment inequality falsifiable at toy threshold. OPEN GAP: paper self-discloses residual Sidon after algebraic removal remains open; shallow MI/MA does not close deployed (b).",
+  "generator_route": "explicit C9 supports and field map; difference-histogram energy; exact Fraction normalization and moment",
+  "hard_input": "image-scale MI + MA, or a direct Sidon payment",
+  "honest_headline": "The previous toy falsifier was unrealizable and is retired. The C9 k=5 fixed-weight Boolean map gives M=152, L=121, barN=152/121, Delta=243/1024 under fixed sigma=log(4/3)/8, and Gsid=937024/6859 with rate>0.05. This is a counterexample only to the literal quantitative interface; the intended deployed smooth direct-Sidon payment remains open.",
   "is_degenerate_by_construction": false,
   "is_tautology_under_preconditions": false,
-  "n_rows": 6,
   "nonclaims": [
-    "Does not prove thm:unconditional-shallow-mi-ma Weil bounds.",
-    "Toy payment threshold is not paper e^{o(Nq)}.",
-    "Does not close hard input (b) at deployed deep residual."
+    "Not a counterexample to C9 for formal smooth-domain rows.",
+    "Not a proof that the family survives exact C1--C8 predicates.",
+    "Not a closure of hard input (b) at the intended deployed residual.",
+    "The finite tau gate is a replay of the witness, not the asymptotic theorem."
   ],
-  "object": "hard input (b): direct Sidon payment path (not image-scale MI/MA)",
+  "normalization": {
+    "derived_internally": true,
+    "external_barN_accepted": false,
+    "rule": "M=sum_s f_s over nonempty fibers; L=#nonempty fibers; barN=M/L"
+  },
+  "object": "hard input (b): direct image-normalized Sidon payment",
   "open_input": {
     "closes_hard_b_at_deployed": false,
-    "detail": "Paper: Sidon payment on residual after quotient/subfield/planted/remainder removal remains genuinely open. thm:unconditional-shallow-mi-ma is shallow odd-prime coset regime only \u2014 does not close deployed deep residual (b).",
+    "detail": "The explicit C9 family attacks the displayed literal quantitative interface only. It is not known to survive the intended C1--C8 first-match residual or to belong to the deployed smooth rows.",
     "id": "OPEN-direct-Sidon-residual-after-algebraic-removal"
   },
-  "payload_sha256": "c2cc7002960478ec72a1eebac4f7661d3ba4f076a2cdb64657a21117061c67ff",
+  "payload_sha256": "f909a8d5f24168de45bcc867cd6bd169d9446c3b13b9e12fdb5259c4a87cdead",
   "pins": {
     "cor:fourier-sidon-paid-smooth-circle": {
       "found": true,
@@ -60,60 +97,86 @@
     }
   },
   "pins_ok": true,
-  "proof_status": "AUDIT dual-route Gsid toys + paper open residual disclosure",
-  "regeneration": "python experimental/scripts/verify_sidon_direct_payment.py --emit-defaults",
-  "rows": [
-    {
-      "chk_Gsid": 0.0,
-      "gen_Gsid": 0.0,
-      "inc_Gsid": 0.0,
-      "kind": "sparse_fibers_sidon_heavy",
-      "pass": true,
-      "routes_agree": true
+  "proof_status": {
+    "intended_deployed_smooth_residual": "OPEN GAP",
+    "literal_quantitative_interface": "COUNTEREXAMPLE_NEW_FLOOR"
+  },
+  "regeneration": "python3 experimental/scripts/verify_sidon_direct_payment.py --emit-defaults",
+  "schema": "sidon-direct-payment-v2",
+  "source_map": {
+    "N": 20,
+    "Q": 501,
+    "R": 2,
+    "checks": {
+      "all_fixed_weight": true,
+      "all_points_distinct_mod_p": true,
+      "all_supports_unique": true,
+      "fiber_size_profile": true,
+      "field_prime_verified": true,
+      "filler_images_avoid_heavy": true,
+      "filler_images_distinct": true,
+      "heavy_same_image": true,
+      "integer_no_wrap": true
     },
-    {
-      "chk_Gsid": 0.0,
-      "gen_Gsid": 0.0,
-      "kind": "dense_high_energy_not_sidon",
-      "pass": true
-    },
-    {
-      "can_fail": true,
-      "fail_instance_Gsid": 8.0,
-      "fail_instance_fails_inequality": true,
-      "kind": "payment_falsifiability",
-      "note": "can_fail = (fail_instance_Gsid > thr_pay); both fail and pass instances computed",
-      "pass": true,
-      "pass_instance_Gsid": 0.25,
-      "pass_instance_holds_inequality": true,
-      "sigma_toy": 0.0,
-      "threshold": 1.0
-    },
-    {
-      "E1": 28,
-      "E2": 28,
-      "kind": "energy_dual_route",
-      "pass": true
-    },
-    {
-      "kind": "open_input_disclosure",
-      "open": {
-        "closes_hard_b_at_deployed": false,
-        "detail": "Paper: Sidon payment on residual after quotient/subfield/planted/remainder removal remains genuinely open. thm:unconditional-shallow-mi-ma is shallow odd-prime coset regime only \u2014 does not close deployed deep residual (b).",
-        "id": "OPEN-direct-Sidon-residual-after-algebraic-removal"
-      },
-      "pass": true
-    },
-    {
-      "found": true,
-      "kind": "paper_self_discloses_open_sidon_residual",
-      "pass": true
-    }
-  ],
-  "schema": "sidon-direct-payment-v1",
-  "status": "EXPERIMENTAL / AUDIT",
+    "domain": "152 explicit distinct fixed-weight Boolean supports",
+    "family": "C9 literal-interface block/trade family, k=5",
+    "field_prime": 505020040141,
+    "integer_total_point_sum": 252510020050,
+    "m": 10,
+    "map": "Phi(x)=(|x|, sum_t x_t*t mod p)"
+  },
+  "status": "COUNTEREXAMPLE_NEW_FLOOR (literal quantitative interface only) / OPEN GAP (intended deployed smooth residual)",
   "tex_path": "experimental/asymptotic_rs_mca_frontiers.tex",
-  "theorem_problem_id": "def:sidon-paid-cell; thm:unconditional-shallow-mi-ma",
-  "verdict": "OPEN GAP",
-  "weave": "Complements filed #522 image-scale MI/MA; this is the direct Sidon branch of (b)."
+  "verdict": "COUNTEREXAMPLE_NEW_FLOOR / OPEN GAP",
+  "witness": {
+    "Gsid": 136.61233415949846,
+    "Gsid_denominator": 6859,
+    "Gsid_numerator": 937024,
+    "L": 121,
+    "M": 152,
+    "barN_denominator": 121,
+    "barN_numerator": 152,
+    "energy_cutoff": 0.48713928962874686,
+    "energy_histogram": {
+      "1": 120,
+      "7776": 1
+    },
+    "finite_gate_fails": true,
+    "low_energy_fibers": [
+      {
+        "contribution_denominator": 6859,
+        "contribution_numerator": 113379904,
+        "delta_denominator": 1024,
+        "delta_numerator": 243,
+        "energy": 7776,
+        "size": 32
+      }
+    ],
+    "n_low_energy_fibers": 1,
+    "q": 3,
+    "rate": 0.0819524539508972,
+    "sigma": 0.035960259056472606,
+    "tau": 0.05
+  },
+  "witness_checks": {
+    "Gsid_exact": true,
+    "L_is_positive_fiber_count": true,
+    "M_is_sum_positive_fibers": true,
+    "all_fixed_weight": true,
+    "all_points_distinct_mod_p": true,
+    "all_supports_unique": true,
+    "barN_is_M_over_L": true,
+    "existing_c9_artifact_matches": true,
+    "fiber_size_profile": true,
+    "field_prime_verified": true,
+    "filler_images_avoid_heavy": true,
+    "filler_images_distinct": true,
+    "fixed_sigma_positive": true,
+    "heavy_energy_exact": true,
+    "heavy_inside_fixed_cut": true,
+    "heavy_same_image": true,
+    "integer_no_wrap": true,
+    "one_low_energy_fiber": true,
+    "positive_rate_gate_fails": true
+  }
 }

@@ -1,0 +1,60 @@
+{
+  "schema": "rs-mca.rank16-fixed26-polynomial-cross-minor-lift.v1",
+  "base": "7f278167e1e51f968896229ae438ea5a76398f90",
+  "dependency_pr_862_head": "d2b11f1914dea4cb4a7670736cf00d1422c878de",
+  "source_pins": {
+    "experimental/notes/l2/rank16_fixed26_divided_difference_source_compiler.md": "e508b1847228475e5a71ab12df15d69d4091e7558a91f53e68261f06c42205ab",
+    "experimental/scripts/verify_rank16_fixed26_divided_difference_source_compiler.py": "2dd8cd4d2df24510a4faa57d4ad70feda1b4505814233547f06dea7293afc744",
+    "experimental/data/certificates/rank16-fixed26-divided-difference-source-compiler/manifest.json": "b8b2791a145af88e7aec2729b3140fe89896fbe0e09236615b0b441fd5c95c55",
+    "experimental/data/certificates/rank16-fixed26-divided-difference-source-compiler/verify_fixed26_compiler.expected.txt": "d2f6c375c092e8f0aca993a006ad07082b52a6556e6b904f35703e911daddd43"
+  },
+  "parameters": {
+    "field_prime": 2130706433,
+    "domain_order": 2097152,
+    "fiber_size_B": 32768,
+    "generator_degree_a": 67472,
+    "residual_degree_r": 63601,
+    "adjacent_gcd_degree_d": 28897,
+    "collision_labels": 8,
+    "dense_edge_floor": 25
+  },
+  "theorem": {
+    "four_cycle_nonzero": true,
+    "four_cycle_quotient_degree": 59730,
+    "minor_quotient_bounds": {
+      "2": 59730,
+      "3": 55859,
+      "4": 51988
+    },
+    "dense_graph_has_K44": true,
+    "dichotomy": "zero_source_normalized_minor_or_N5_at_most_51988"
+  },
+  "scope": {
+    "fixed_received_word_ray_core": true,
+    "source_normalized_U_entries": true,
+    "excludes_seven_star": false,
+    "proves_cap_116": false,
+    "aggregates_over_cores": false,
+    "finite_ledger_payment": false,
+    "parent_closure": false,
+    "grand_list": false,
+    "grand_mca": false,
+    "score_movement": false
+  },
+  "remaining_wall": {
+    "zero_minor": "derive_global_or_rank_two_source_collapse",
+    "root_excess_order_3": 55860,
+    "root_excess_order_4": 51989,
+    "global_owner": "marked_incidence_required_by_pr_873"
+  },
+  "expected_output": {
+    "path": "experimental/data/certificates/rank16-fixed26-polynomial-cross-minor-lift/verify_rank16_fixed26_polynomial_cross_minor_lift.expected.txt",
+    "sha256": "f0ad4d63f84d6cbd4fc433d8c7ccb031d5010d572bd52d7c3b59089e5317f002"
+  },
+  "artifacts": [
+    "experimental/notes/l2/rank16_fixed26_polynomial_cross_minor_lift.md",
+    "experimental/scripts/verify_rank16_fixed26_polynomial_cross_minor_lift.py",
+    "experimental/data/certificates/rank16-fixed26-polynomial-cross-minor-lift/manifest.json",
+    "experimental/data/certificates/rank16-fixed26-polynomial-cross-minor-lift/verify_rank16_fixed26_polynomial_cross_minor_lift.expected.txt"
+  ]
+}

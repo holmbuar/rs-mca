@@ -1,0 +1,75 @@
+{
+  "schema": "rs-mca.r28-role03-cubic-divisor-conductor-source-pins.v1",
+  "base": {
+    "ref": "origin/main",
+    "commit": "7f278167e1e51f968896229ae438ea5a76398f90"
+  },
+  "external_return": {
+    "path_hint": "/Users/danielcabezas/RS_MCA_HOMERUN_9PRO_20260717_R28/returns_raw/pro_chrome/role_03/r28_role03_clean_final.md",
+    "sha256": "5b9932f803d2d03a35adde85efb53b4aa8c0eddff55f7db3bf572a9eff2dc75b"
+  },
+  "packet": {
+    "archive": "RS_MCA_R28_ROLE_03_RANK16_FIXED27_CUBIC.zip",
+    "sha256": "9be965f8fb41a9bc9ba32b11210d9c6437f01b329a4a6cc2b963a86335f7cfed",
+    "source_file_count": 96
+  },
+  "missing_worker_attachments": [
+    {
+      "name": "R28_ROLE03_CUBIC_DIVISOR_CONDUCTOR_REPLAY.py",
+      "claimed_sha256": "ad0ef2f27eb234d19d0c5a7a30fc3745921a48ac99d62201c4a72ce014f55524"
+    },
+    {
+      "name": "R28_ROLE03_CUBIC_DIVISOR_CONDUCTOR_REPLAY.expected.txt",
+      "claimed_sha256": "ee774950f25653a898673062c1416ee8e677f33c323e124f3a7c895e9d03de55"
+    }
+  ],
+  "dependencies": [
+    {
+      "pr": 826,
+      "head": "b6ea362d7aef96bd808fc6799fd45efc4470f476",
+      "status": "integrated_at_base",
+      "files": {
+        "experimental/notes/l2/rank16_fixed_core_quotient_line_obstruction.md": "19325c602ae14082f6ef36db312d815552e0f0eefc0787f3a71fd4254af650f7",
+        "experimental/scripts/verify_rank16_fixed_core_quotient_line_obstruction.py": "0e7e25a2e696941f42d7eaf24c4b441e769592c3ffff040883bb9b076765d7dd",
+        "experimental/scripts/verify_rank16_fixed_core_quotient_line_obstruction.expected.txt": "8dbe50b5911bfcdbc10fcc3ee578398d0d068f43f57b672c4e84eb42b64dc109"
+      }
+    },
+    {
+      "pr": 843,
+      "head": "7a8d2ce071af76ec13aab91eff5f3c7182f0d63c",
+      "status": "integrated_at_base",
+      "packet_note_sha256": "c5b008082efcad270cecf88688d69499543086ed86d1a29f655a07263f362a6d",
+      "files": {
+        "experimental/notes/l2/rank16_fixed27_block_wedge_stratification.md": "b061ede06b138643655cd8c7f9f53e724eb974e9acf924e2e6883f0468cb3c4e",
+        "experimental/scripts/verify_rank16_fixed27_block_wedge_stratification.py": "345488c3063cfa8c3e9027d83350d26bfc0b40e34abd104f151da0c02318607e",
+        "experimental/scripts/verify_rank16_fixed27_block_wedge_stratification.expected.txt": "6ba9396b444b490d9d20f1300b92541d04e06ffa718e4bbf35d2e4d114855670"
+      }
+    },
+    {
+      "pr": 863,
+      "head": "55fa998275db505214347db296bdd8e38a3896e6",
+      "status": "pending_conditional_dependency",
+      "files": {
+        "experimental/notes/l2/rank16_fixed27_residual_specialization_curve.md": "dc82be9d643ea9df85f843988acbc38149881297369096e869a6d19082faa195",
+        "experimental/data/certificates/rank16-fixed27-residual-specialization-curve/README.md": "7c4e5228f44f1a26584515a75a2e8ec14b808406f44d9557d503e6a646ee2c7c",
+        "experimental/data/certificates/rank16-fixed27-residual-specialization-curve/SHA256SUMS.txt": "08c7481d82a8a9e27d1a7c32931fe1e08271c1d9605549e283f14aa54b1e3eb8",
+        "experimental/data/certificates/rank16-fixed27-residual-specialization-curve/verify_rank16_fixed27_residual_specialization_curve.py": "5fa2831e3699bdc1a671f23a231e0a865d82157b4c5131d6836aac65dcfab9b7",
+        "experimental/data/certificates/rank16-fixed27-residual-specialization-curve/verify_rank16_fixed27_residual_specialization_curve.expected.txt": "382da0d934131d8f514b0450f81b9bbee044806ac12f37d8cb2ecc45dfbcb016"
+      }
+    }
+  ],
+  "accepted_claims": [
+    "primitive_cubic_reducibility",
+    "divided_difference_remainder",
+    "nested_divisor_deficit_budget",
+    "conductor_at_most_16_with_quadratic_alternative_at_most_8",
+    "squarefree_resultant_g_squared_M_degree_at_most_55859"
+  ],
+  "nonclaims": {
+    "seven_label_closure": false,
+    "finite_payment": 0,
+    "asymptotic_payment": 0,
+    "parent_payment": 0,
+    "official_score": "0/2"
+  }
+}

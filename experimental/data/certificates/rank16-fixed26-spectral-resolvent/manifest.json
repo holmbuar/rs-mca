@@ -1,0 +1,83 @@
+{
+  "schema": "rs-mca.rank16-fixed26-spectral-resolvent.v1",
+  "base": "7f278167e1e51f968896229ae438ea5a76398f90",
+  "source_pins": {
+    "experimental/notes/l2/rank16_fixed26_divided_difference_source_compiler.md": "e508b1847228475e5a71ab12df15d69d4091e7558a91f53e68261f06c42205ab",
+    "experimental/scripts/verify_rank16_fixed26_divided_difference_source_compiler.py": "2dd8cd4d2df24510a4faa57d4ad70feda1b4505814233547f06dea7293afc744",
+    "experimental/data/certificates/rank16-fixed26-divided-difference-source-compiler/manifest.json": "b8b2791a145af88e7aec2729b3140fe89896fbe0e09236615b0b441fd5c95c55",
+    "experimental/data/certificates/rank16-fixed26-divided-difference-source-compiler/verify_fixed26_compiler.expected.txt": "d2f6c375c092e8f0aca993a006ad07082b52a6556e6b904f35703e911daddd43"
+  },
+  "parameters": {
+    "field_prime": 2130706433,
+    "domain_order": 2097152,
+    "fiber_size_B": 32768,
+    "fiber_label_order": 64,
+    "fixed_core_labels": 26,
+    "remaining_labels": 38,
+    "pair_positions": 703,
+    "generator_degree_a": 67472,
+    "residual_degree_r": 63601,
+    "gcd_degree_d": 28897,
+    "split_s_unit_degree_floor": 34704,
+    "boundary_gap": 3870
+  },
+  "identity_contract": [
+    "mu_g(T)=0",
+    "g(X)|mu_g(X^B)",
+    "mu_g(y)!=0 for y in mu_64",
+    "N(Z)=-xi(mu_g(T)-mu_g(Z))/(T-Z)",
+    "V_y=N(y)/mu_g(y)",
+    "phi_Y(Z)|pi(N(Z))-mu_g(Z)lambda_Y",
+    "I_Y(Z)=U_Y(phi_Y(T)-phi_Y(Z))/(T-Z)",
+    "U_yz=rem_g(U_Y phi_Y(T)/((T-y)(T-z)))",
+    "V_y=W(T^64-1)/(T-y)",
+    "U_yz=rem_g(W(T^64-1)/((T-y)(T-z)))",
+    "deg gcd(R_yz,R_yw)<=28897",
+    "triangle quotient degree>=34704",
+    "Res(g,R_yz)=q_yz^a kappa/(rho_y rho_z)",
+    "four-cycle resultant ratio is an a-th power",
+    "(V_y(0)-V_z(0))/(c_y-c_z) in H"
+  ],
+  "graph_contract": {
+    "putative_edges": 117,
+    "large_class_floor": 9,
+    "dense_class_size": 8,
+    "dense_class_edge_floor": 25,
+    "dense_class_missing_edge_cap": 3,
+    "universal_vertex_floor": 2,
+    "triangle_floor": 38,
+    "four_cycle_floor": 120
+  },
+  "ownership": {
+    "inherited_fixed26_interpolants": 38,
+    "inherited_fixed26_pairs": 703,
+    "inherited_monomial_cap": 37,
+    "reclaims_inherited_claims": false,
+    "consumes_global_ledger": false
+  },
+  "scope": {
+    "local_cap_116": false,
+    "exclude_117_edges": false,
+    "all_core_cap": false,
+    "global_ledger_payment": false,
+    "parent_closure": false,
+    "grand_list": false,
+    "grand_mca": false,
+    "score_movement": false
+  },
+  "remaining_walls": {
+    "global_local_cell": "G64-CAP",
+    "non_global": "rank-at-least-3 seven-star",
+    "aggregation": "generators/rays/cores/source-cells"
+  },
+  "expected_output": {
+    "path": "experimental/data/certificates/rank16-fixed26-spectral-resolvent/verify_rank16_fixed26_spectral_resolvent.expected.txt",
+    "sha256": "2f0707de1d5981043581b523c0cd0c666a228c36cd1d06ae75cdeeae41a11eea"
+  },
+  "artifacts": [
+    "experimental/notes/l2/rank16_fixed26_spectral_resolvent.md",
+    "experimental/scripts/verify_rank16_fixed26_spectral_resolvent.py",
+    "experimental/data/certificates/rank16-fixed26-spectral-resolvent/manifest.json",
+    "experimental/data/certificates/rank16-fixed26-spectral-resolvent/verify_rank16_fixed26_spectral_resolvent.expected.txt"
+  ]
+}

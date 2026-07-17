@@ -1,0 +1,15 @@
+RANK16_FIXED26_POLYNOMIAL_CROSS_MINOR_LIFT: PASS
+schema=rs-mca.rank16-fixed26-polynomial-cross-minor-lift.v1
+base=7f278167e1e51f968896229ae438ea5a76398f90
+dependency_pr_862_head=d2b11f1914dea4cb4a7670736cf00d1422c878de
+source_pins=PASS,count=4
+four_cycle_gap=5807
+minor_quotient_bounds=2:59730,3:55859,4:51988
+dense_graphs_checked=3683
+first_24_edge_counterexample_missing=((0, 1), (0, 2), (0, 3), (0, 4))
+set_partitions_checked=4140
+large_block_partition_splits_checked=24150
+semantic_tamper_selftests=PASS,count=6
+artifact_checksums=PASS,count=4
+finite_ledger_delta=0 official_score=0/2
+RESULT=PASS

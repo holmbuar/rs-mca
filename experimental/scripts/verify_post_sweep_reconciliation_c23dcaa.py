@@ -5,7 +5,7 @@ This is an AUDIT/reconciliation packet, not new mathematics. The verifier:
 
   1. recomputes the two load-bearing image-face bracket constants from their
      raw (f_inf, L1_inf, b) data via rho = (ln f + ln L)/b - ln 2, and the
-     upper end ln(3/2), and asserts every ordering printed in the note's
+     upper end ln(3/2), and checks every ordering printed in the note's
      bracket table (section 6);
   2. anchor-checks each recomputed number against BOTH this note and its
      integrated source file (comb_trade_champion_k5.md for the bracket lower
@@ -13,8 +13,8 @@ This is an AUDIT/reconciliation packet, not new mathematics. The verifier:
      audit.md for the upper end);
   3. checks that every note, verifier, and certificate cited by the note
      exists at its cited path on the tree;
-  4. asserts the section-1/2/5 residual-set contents and the section-7
-     audit-before-consume pass counts appear verbatim in the note;
+  4. checks the section-1/2/5 residual-set contents, the corrected #712/#714
+     disposition, and the section-7 audit-before-consume pass counts;
   5. --tamper-selftest mutates each class of check and confirms it is caught.
 
 Stdlib only, deterministic, no files written. Runs in well under 60s.
@@ -108,7 +108,7 @@ CITED_CERTS = [
 ]
 
 # ---------------------------------------------------------------------------
-# Strings the note must contain verbatim (residual sets + audit pass counts).
+# Strings the note must contain or reject verbatim.
 # ---------------------------------------------------------------------------
 NOTE_REQUIRED_STRINGS = [
     "{C3 planted census, C7 projection degree, C8 higher-dim core, C9 Sidon payment}",
@@ -116,14 +116,26 @@ NOTE_REQUIRED_STRINGS = [
     "{C7, C8, C9}",
     "signed-or-semantic dichotomy",
     "first-match structure",
-    "Theorem DR (field-drop route dead) stands",
+    "partial-occupancy atlas and no-clean-coordinate-slot lemma",
+    "Coordinatewise full-field remainder variation does not imply",
+    "fixed-remainder unit preserves the descended quotient image",
+    "field-drop-dead theorem is retired",
     "guaranteed list `6` vs identity floor `1`",
     "PASS (219/219)",
     "PASS (77/77)",
-    "PASS (49/49)",
+    "PASS (52/52)",
     "PASS (82/82)",
     "PASS (470 checks)",
     "rho*  in  [0.160847, 0.405465]",
+]
+
+NOTE_FORBIDDEN_STRINGS = [
+    "Theorem DR (field-drop route dead) stands",
+    "Theorem DR and the atlas survive",
+    "Theorem DR (field-drop dead) survives",
+    "field-drop-dead theorem stands",
+    "field-drop route DECIDED NEGATIVE",
+    "kills the deep-remainder field-drop",
 ]
 
 
@@ -200,6 +212,8 @@ def file_existence_checks(ck):
 def note_string_checks(ck, note_text):
     for s in NOTE_REQUIRED_STRINGS:
         ck.check(s in note_text, "note contains: " + s[:52])
+    for s in NOTE_FORBIDDEN_STRINGS:
+        ck.check(s not in note_text, "note rejects stale claim: " + s[:52])
 
 
 def structure_checks(ck, note_text):
@@ -279,6 +293,16 @@ def cmd_tamper():
     #    (simulated by removing a required note string that gates the section)
     mutations.append(("note missing dichotomy gap statement",
                       dict(note_text=note_text.replace("signed-or-semantic dichotomy", "resolved"))))
+    # 9. restore the stale #712 theorem disposition
+    mutations.append(("stale Theorem DR disposition",
+                      dict(note_text=note_text.replace(
+                          "field-drop-dead theorem is retired",
+                          "field-drop-dead theorem stands"))))
+    # 10. erase the #714 label-factoring mechanism
+    mutations.append(("note missing descended quotient mechanism",
+                      dict(note_text=note_text.replace(
+                          "fixed-remainder unit preserves the descended quotient image",
+                          "fixed-remainder unit has full-field image"))))
 
     caught = 0
     for name, kw in mutations:

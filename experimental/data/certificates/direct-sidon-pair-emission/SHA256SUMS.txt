@@ -1,0 +1,5 @@
+732dc6c893b306d4845342d3ec7cd13aef521575509fe90bd747d205d8b89ca3  ../../../scripts/verify_direct_sidon_pair_emission.py
+ba0bcf40feec25441e8a6ea29c0c4847dccc1f9e498351e73182cc54ed62546d  ../../../notes/thresholds/direct_sidon_pair_emission.md
+42c79393ad740b57dd6683d509190cadb6548062ecca12baa7cd1a10d1191c89  README.md
+25d4e3960d1f0d1ef9c2dcc5f90889cd56b61d8a22d730c726af2826924dcd91  source_pins.json
+8c558544fb77c8432f3b84894507cd8f82e2a0f481db6768117705c3b6accd2c  verify_direct_sidon_pair_emission.expected.txt

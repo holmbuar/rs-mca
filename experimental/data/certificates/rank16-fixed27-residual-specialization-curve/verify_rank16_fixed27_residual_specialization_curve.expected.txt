@@ -1,0 +1,11 @@
+RANK16_FIXED27_RESIDUAL_SPECIALIZATION_CURVE: PASS
+source_pins=4 field=p=2130706433 H_order=2097152 B=32768 q64=64
+degrees=a=67472 D=96369 d=63601 w=28897 e=3,4
+curve=cubic_degY<=2_span<=3 quartic_degY<=3_span<=4
+normalization=nonzero_scalar_specialization
+dependence=cubic_4_all_nonzero quartic_5_all_nonzero
+base_cap=28897 pairwise_gcd_cap=28897 union_floors=150361,109873
+quadratic_block=deg_r=1936 labels<=2 kappa_wall<=1
+toy_curve_checks=e3,e4 quotient_vandermonde=PASS
+ledger_payment=0 recurrence_payment=0 score=0/2
+tamper_selftest=PASS
