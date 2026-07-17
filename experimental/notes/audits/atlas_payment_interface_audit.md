@@ -10,7 +10,8 @@ BAD-SLOPE IMAGE = PROVED / LOCATOR-PREFIX CELLS ON THE CONCRETE WITNESS
 CATALOGUE, RAW-WITNESS EXHAUSTIVITY, AND PARITY-CHECK SUPPORT-CELL SLOPE ALIGNMENT = PROVED /
 CONCRETE LOCATOR-PREFIX TO SYNDROME-LINE BAD-SLOPE
 UNION = PROVED / TYPED LOCATOR-PREFIX FIXED-ROW OUTER-LINE B_MCA IMPLICATION =
-PROVED / ACTUAL C1--C9 SEMANTIC WITNESS CLASSIFICATION, PAYMENT, AND
+PROVED / POST-SLOPE-FIRST-MATCH RETAINED-SUPPORT OCCUPANCY (RC1)
+ADAPTER = PROVED, LOWER OCCUPANCY AND UNIF EXPLICIT / ACTUAL C1--C9 SEMANTIC WITNESS CLASSIFICATION, PAYMENT, AND
 ASYMPTOTIC (UNIF) = NOT PROVED.`
 
 The phrase `atlas-totality lane (in progress)` still appears in downstream
@@ -34,8 +35,9 @@ reduction in `GrandeFinale.RSExactSupportUpper`, and the source analyses
 `staircase_concentration_sidon_paired.md`. The typed leaf modules are
 `GrandeFinale.PrefixAtlasBridge` and
 `GrandeFinale.FirstMatchWitnessBridge`, together with the concrete
-`GrandeFinale.RSExactCardWitnessBridge` and
-`GrandeFinale.RSExactCardPrefixWitnessBridge`. No `.tex` or `.pdf` file
+`GrandeFinale.RSExactCardWitnessBridge`,
+`GrandeFinale.RSExactCardPrefixWitnessBridge`, and
+`GrandeFinale.RSExactCardOccupancyBridge`. No `.tex` or `.pdf` file
 is edited.
 
 ---
@@ -171,6 +173,27 @@ support-level cell. The specialized `B_MCA` theorems no longer assume
 and, for a fixed bound, `hunif`. The arbitrary prefix-key well-order is used
 only for first-match attribution and has no compatibility with field operations.
 
+The occupancy leaf `GrandeFinale.RSExactCardOccupancyBridge` formalizes the
+exact two-stage projection `(gamma,S,h) -> (gamma,h) -> gamma`.
+`explanationState = (slope, coeffs)` represents the retained
+`(gamma,h)` explanation state.
+
+`card_eq_sum_retainedSupportOccupancy` splits a finite literal witness cell
+exactly over its realized explanation-state fibres, while
+`supportImage_retainedSupportFiber_card` shows that each occupancy literally
+counts retained selected supports.
+
+`slopeImage_card_le_card_div_of_retainedSupportOccupancy` gives the exact
+finite RC1 quotient `|slope(C)| <= floor(|C| / H)` only under
+`H > 0` and a universal lower occupancy hypothesis on every realized state.
+The first-match and prefix specializations apply this bound to the retained
+`prefixResidualWitnessCell`; the supremum-form `B_MCA` wrapper still takes
+the lower occupancies as inputs, and the fixed wrapper additionally assumes the
+uniform quotient-sum bound `hunif`.
+
+No semantic C7 profile-scale, classifier, boundary-image theorem, profile
+payment, or C1--C9 routing theorem follows from this conditional adapter.
+
 These locator-prefix witness cells are not a C1--C9 semantic classification.
 Here “exact-cardinality” still does not assert that the chosen support is the
 explainer's complete agreement set: agreement at additional coordinates is
@@ -207,13 +230,15 @@ five paid regimes from the full-catalogue residual. The exact residual is:
 | Cell | Remaining obligation | Current anchor |
 | --- | --- | --- |
 | C3 planted | Prove a subexponential census of allowed planted divisors/profiles. | `atlas_cat_cell_ledger.md` L161--164 |
-| C7 saturation | Bound the projection degree without enumerating the exponential candidate-profile tail. | L165--169 |
+| C7 saturation | Prove semantic profile collapse/classification and a positive retained-support occupancy `H` at the intended profile scale, or an equivalent direct final-slope estimate. | L165--169 |
 | C8 higher-dimensional balanced core | Prove the higher-dimensional ray-compiler condition `(RC)` or an equivalent direct decomposition/payment. | L170--176 |
 | C9 Fourier/Sidon | Prove the deployed-scale image-normalized Sidon payment. | L177--186 |
 
-Equivalently, the unresolved interface is **C3 planted census + C7 projection
-degree + C8 higher-dimensional `(RC)` + C9 Sidon payment**. Generic prefix
-coverage removes none of these four obligations.
+Equivalently, the unresolved interface is **C3 planted census + C7 semantic
+classification/profile collapse and positive intended-profile occupancy (or a
+direct final-slope estimate) + C8 higher-dimensional `(RC)` + C9 Sidon
+payment**. Generic prefix coverage and the conditional RC1 adapter remove none
+of these four semantic obligations.
 
 ---
 
@@ -294,23 +319,28 @@ the C3/C7/C8/C9 cellwise profile and bad-slope payment.”
 - `RSExactCardPrefixWitnessBridge` constructs `idx`, `cell`, and `hexhaust`
   only for the structural locator-prefix partition. It constructs no C1--C9
   classifier, `hcell` payment, or `hunif` bound.
+- `RSExactCardOccupancyBridge` turns supplied positive lower retained-support
+  occupancies into exact post-first-match quotient cell bounds. It constructs
+  neither the lower bound, a semantic C7 classifier/profile payment, a
+  boundary-image theorem, nor `hunif`.
 - First-match residual witness cells need not cover the raw witnesses. Only
   their per-cell slope images are proved exact.
-- None of the bridges constructs a cell-budget function `U`, proves a cell
-  payment, or proves the uniform sum hypothesis `(UNIF)`. No subexponential
-  profile census, C7/C8 compiler bound, or C9 Sidon payment is constructed.
+- No bridge proves a semantic cell payment or the uniform sum hypothesis
+  `(UNIF)`. No subexponential profile census, intended-profile C7 occupancy,
+  C8 compiler bound, or C9 Sidon payment is constructed.
 - No deployed smooth/circle row, main asymptotic theorem, or reserve theorem is
   closed.
 - No guarded result in the downstream notes is retracted or corrected.
 - No `.tex` or `.pdf` file is changed.
 
 `PrefixAtlasBridge.lean`, `FirstMatchWitnessBridge.lean`,
-`RSExactCardWitnessBridge.lean`, and `RSExactCardPrefixWitnessBridge.lean` are
-deliberately leaf modules. The first
+`RSExactCardWitnessBridge.lean`, `RSExactCardPrefixWitnessBridge.lean`, and
+`RSExactCardOccupancyBridge.lean` are deliberately leaf modules. The first
 reaches the root module through `GrandeFinale.SyndromeLine`; the generic
 witness bridge imports `GrandeFinale` directly; the concrete adapter imports
-that generic bridge; and the prefix-witness composition imports the concrete
-adapter and support-prefix leaf. Importing these leaves back into
+that generic bridge; the prefix-witness composition imports the concrete
+adapter and support-prefix leaf; and the occupancy leaf imports that prefix
+composition plus `FirstWallMDSExtensionInverse`. Importing these leaves back into
 `GrandeFinale.lean` would create an import cycle. The focused verification
 targets are therefore
 
@@ -319,13 +349,16 @@ lake build GrandeFinale.PrefixAtlasBridge
 lake build GrandeFinale.FirstMatchWitnessBridge
 lake build GrandeFinale.RSExactCardWitnessBridge
 lake build GrandeFinale.RSExactCardPrefixWitnessBridge
+lake build GrandeFinale.RSExactCardOccupancyBridge
 ```
 
 The companion stdlib verifier
 `experimental/scripts/verify_atlas_payment_interface.py` checks the theorem
 anchors, the exact-cardinality catalogue and bad-slope image, raw prefix-cell
-witness exhaustivity and support-cell alignment, the fixed-line `hU` and exact
-linewise `hcell`/`hunif` boundaries, the four-cell ledger, the conditional
-`(H4)` interface, the legacy wording census, and the exponential-cell negative
+witness exhaustivity and support-cell alignment, the exact explanation-state
+fibre sum, the universal lower-occupancy `hocc` boundary, the RC1 quotient,
+and the fixed `hunif` boundary. It also checks the fixed-line `hU` and exact
+linewise `hcell` boundary, the four-cell ledger, the conditional `(H4)`
+interface, the legacy wording census, and the exponential-cell negative
 control. Its machine-readable output is
 `experimental/data/certificates/atlas-payment-interface/atlas_payment_interface.json`.

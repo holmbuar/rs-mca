@@ -34,6 +34,10 @@ RS_EXACT_CARD_PREFIX_WITNESS_BRIDGE = (
     "experimental/lean/grande_finale/GrandeFinale/"
     "RSExactCardPrefixWitnessBridge.lean"
 )
+RS_EXACT_CARD_OCCUPANCY_BRIDGE = (
+    "experimental/lean/grande_finale/GrandeFinale/"
+    "RSExactCardOccupancyBridge.lean"
+)
 ATLAS_LEDGER = "experimental/notes/thresholds/atlas_cat_cell_ledger.md"
 HEAVY_FIBER = "experimental/notes/thresholds/heavy_fiber_admissibility_transfer.md"
 VERIFIER_SCRIPT = "experimental/scripts/verify_atlas_payment_interface.py"
@@ -1078,6 +1082,152 @@ def audit_rs_exact_card_prefix_witness_bridge(
     }
 
 
+def audit_rs_exact_card_occupancy_bridge(
+    text: str, audit: Audit
+) -> dict[str, object]:
+    flat = normalized(text)
+    lean_code = lean_code_without_comments(text)
+    declarations = declaration_lines(text)
+    required = [
+        "explanationState",
+        "explanationStateImage",
+        "retainedSupportFiber",
+        "retainedSupportOccupancy",
+        "card_eq_sum_retainedSupportOccupancy",
+        "support_injOn_retainedSupportFiber",
+        "supportImage_retainedSupportFiber_card",
+        "slopeImage_card_le_card_div_of_retainedSupportOccupancy",
+        "firstMatchSlopeCell_card_le_residual_card_div_of_retainedSupportOccupancy",
+        "prefixResidualWitnessCell",
+        "prefixFirstMatchSlopeCell_card_le_residual_card_div_of_occupancy",
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixRetainedSupportOccupancy",
+        "B_MCA_rsEval_le_of_exactCardPrefixRetainedSupportOccupancy",
+    ]
+    for name in required:
+        audit.require(
+            name in declarations,
+            f"RSExactCardOccupancyBridge declaration {name}",
+        )
+
+    audit.require(
+        "def explanationState (w : RSExactCardWitness D F k) : "
+        "F × (Fin k -> F) := (w.slope, w.coeffs)" in flat,
+        "RSExactCardOccupancyBridge explanation-state projection",
+    )
+    audit.require(
+        "C.filter fun w => explanationState w = rho" in flat,
+        "RSExactCardOccupancyBridge retained-support fiber",
+    )
+    audit.require(
+        "C.card = ∑ rho ∈ explanationStateImage C, "
+        "retainedSupportOccupancy C rho" in flat,
+        "RSExactCardOccupancyBridge exact occupancy sum",
+    )
+    audit.require(
+        "(C.image RSExactCardWitness.slope).card ≤ C.card / H" in flat,
+        "RSExactCardOccupancyBridge RC1 quotient conclusion",
+    )
+    audit.require(
+        "(hocc : ∀ rho ∈ explanationStateImage C, "
+        "H ≤ retainedSupportOccupancy C rho)" in flat,
+        "RSExactCardOccupancyBridge universal lower occupancy",
+    )
+    audit.require(
+        "(hunif : ∀ p, ∑ z, "
+        "(prefixResidualWitnessCell ev k a K p z).card / H p z ≤ B)" in flat,
+        "RSExactCardOccupancyBridge uniform quotient sum",
+    )
+
+    exported = [
+        "card_eq_sum_retainedSupportOccupancy",
+        "supportImage_retainedSupportFiber_card",
+        "slopeImage_card_le_card_div_of_retainedSupportOccupancy",
+        "firstMatchSlopeCell_card_le_residual_card_div_of_retainedSupportOccupancy",
+        "prefixFirstMatchSlopeCell_card_le_residual_card_div_of_occupancy",
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixRetainedSupportOccupancy",
+        "B_MCA_rsEval_le_of_exactCardPrefixRetainedSupportOccupancy",
+    ]
+    signatures: dict[str, object] = {}
+    for name in exported:
+        actual, theorem_line = theorem_signature(text, name)
+        signatures[name] = {
+            "line": theorem_line,
+            "normalized_sha256": digest(actual),
+        }
+        audit.require(
+            re.search(
+                rf"^#print axioms {re.escape(name)}[ \t]*$",
+                lean_code,
+                re.MULTILINE,
+            )
+            is not None,
+            f"RSExactCardOccupancyBridge #print axioms {name}",
+        )
+
+    forbidden_syntax = {
+        "any sorry token": re.compile(r"\bsorry\b"),
+        "any admit token": re.compile(r"\badmit\b"),
+        "any axiom token": re.compile(r"\baxiom\b"),
+        "any opaque token": re.compile(r"\bopaque\b"),
+    }
+    for label, pattern in forbidden_syntax.items():
+        audit.require(
+            pattern.search(lean_code) is None,
+            f"RSExactCardOccupancyBridge rejects {label}",
+        )
+
+    scope_boundary = (
+        "This is a projection-fiber interface, not a semantic C7 classifier "
+        "or payment: the positive lower occupancy bound and the uniform "
+        "line-sum bound remain explicit hypotheses. No profile-scale, "
+        "boundary-image, or C1--C9 routing claim is made."
+    )
+    audit.require(
+        scope_boundary in flat,
+        "RSExactCardOccupancyBridge C7/payment boundary",
+    )
+    audit.require(
+        "No semantic C7 classification or lower occupancy bound is "
+        "constructed here." in flat,
+        "RSExactCardOccupancyBridge lower-occupancy nonclaim",
+    )
+    audit.require(
+        "import GrandeFinale.RSExactCardPrefixWitnessBridge" in text
+        and "import GrandeFinale.FirstWallMDSExtensionInverse" in text,
+        "RSExactCardOccupancyBridge composition imports",
+    )
+
+    return {
+        "path": RS_EXACT_CARD_OCCUPANCY_BRIDGE,
+        "sha256": digest(text),
+        "declarations": {name: declarations[name] for name in required},
+        "occupancy_signatures": signatures,
+        "forbidden_syntax_checks": sorted(forbidden_syntax),
+        "axiom_print_lines": [f"#print axioms {name}" for name in exported],
+        "exact_occupancy_sum_line": declarations[
+            "card_eq_sum_retainedSupportOccupancy"
+        ],
+        "rc1_line": declarations[
+            "slopeImage_card_le_card_div_of_retainedSupportOccupancy"
+        ],
+        "fixed_row_wrapper_line": declarations[
+            "B_MCA_rsEval_le_of_exactCardPrefixRetainedSupportOccupancy"
+        ],
+        "verified_claim": (
+            "realized explanation-state fibers partition each literal witness "
+            "cell exactly, and a positive retained-support lower occupancy "
+            "gives the exact floor(|C|/H) slope-image bound"
+        ),
+        "verified_boundary": (
+            "the RC1 quotient is applied only after slope-level first match; "
+            "the lower occupancy and uniform line-sum remain hypotheses"
+        ),
+        "verified_nonclaim": (
+            "the adapter is not a semantic C7 classifier, profile payment, "
+            "boundary-image theorem, or C1-C9 routing certificate"
+        ),
+    }
+
 def blocker_paragraph(section: str, cell: str) -> tuple[str, int]:
     pattern = re.compile(
         rf"^- \*\*{re.escape(cell)} \(([^)]*)\)\.\*\*(.*?)(?=^- \*\*C[0-9]+ \(|\Z)",
@@ -1324,6 +1474,9 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
     exact_card_prefix_witness_text = read_source(
         RS_EXACT_CARD_PREFIX_WITNESS_BRIDGE, source_overrides
     )
+    exact_card_occupancy_text = read_source(
+        RS_EXACT_CARD_OCCUPANCY_BRIDGE, source_overrides
+    )
     ledger_text = read_source(ATLAS_LEDGER, source_overrides)
     heavy_text = read_source(HEAVY_FIBER, source_overrides)
     artifact_bindings: dict[str, object] = {}
@@ -1355,6 +1508,9 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
             exact_card_prefix_witness_text, audit
         )
     )
+    exact_card_occupancy_bridge = audit_rs_exact_card_occupancy_bridge(
+        exact_card_occupancy_text, audit
+    )
     ledger = audit_ledger(ledger_text, audit)
     heavy = audit_heavy_fiber(heavy_text, audit)
     stale = audit_stale_wording(source_overrides, audit)
@@ -1362,7 +1518,7 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
     quantifier_control = max_sum_quantifier_negative_control(audit)
 
     certificate: dict[str, object] = {
-        "schema": "atlas-payment-interface/v5",
+        "schema": "atlas-payment-interface/v6",
         "verdict": "AUDIT: coverage proved; catalogue/profile/payment interface remains explicit",
         "artifact_bindings": artifact_bindings,
         "sources": {
@@ -1371,6 +1527,7 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
             "first_match_witness_bridge": witness_bridge,
             "rs_exact_card_witness_bridge": exact_card_witness_bridge,
             "rs_exact_card_prefix_witness_bridge": exact_card_prefix_witness_bridge,
+            "rs_exact_card_occupancy_bridge": exact_card_occupancy_bridge,
             "catalogue_ledger": ledger,
             "heavy_fiber_transfer": heavy,
         },
@@ -1396,6 +1553,9 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
                 "locator-prefix witness cells exactly exhaust every concrete linewise catalogue",
                 "under injective evaluation and the parity-dimension equation, each prefix-witness slope image equals its support-prefix bad-slope cell",
                 "locator-prefix first-match budgets specialize to B_MCA without a raw-exhaustivity hypothesis",
+                "literal witness cells split exactly over realized explanation-state fibers",
+                "positive retained-support occupancy bounds each post-first-match slope cell by floor(|residual|/H)",
+                "the resulting line-dependent RC1 quotient budgets specialize to the full B_MCA numerator",
             ],
             "not_proved": [
                 "construction of the cellwise U(z) budgets",
@@ -1405,6 +1565,7 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
                 "asymptotic-row same-catalogue uniformity (UNIF)",
                 "C1-C8 primitive-survival/catalogue classification for the intended row",
                 "full-catalogue payment at C3/C7/C8/C9",
+                "a lower retained-support occupancy bound for any intended semantic C7 profile",
                 "deployed-scale image-normalized Sidon payment",
             ],
         },
@@ -1598,6 +1759,28 @@ def run_tamper_selftest(baseline: dict[str, object]) -> int:
                 "        RSExactCardWitness.slope ⊆\n",
             ),
         ),
+        (
+            "weaken universal retained-support occupancy",
+            RS_EXACT_CARD_OCCUPANCY_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "    (hocc : ∀ rho ∈ explanationStateImage C,\n"
+                "      H ≤ retainedSupportOccupancy C rho) :",
+                "    (hocc : ∃ rho ∈ explanationStateImage C,\n"
+                "      H ≤ retainedSupportOccupancy C rho) :",
+            ),
+        ),
+        (
+            "weaken uniform RC1 quotient sum",
+            RS_EXACT_CARD_OCCUPANCY_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "    (hunif : ∀ p,\n"
+                "      ∑ z, (prefixResidualWitnessCell ev k a K p z).card / H p z ≤ B) :",
+                "    (hunif : ∃ p,\n"
+                "      ∑ z, (prefixResidualWitnessCell ev k a K p z).card / H p z ≤ B) :",
+            ),
+        ),
     ]
 
     stale_files = baseline["stale_downstream_wording"]["files"]  # type: ignore[index]
@@ -1675,7 +1858,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--tamper-selftest",
         action="store_true",
-        help="verify the certificate and detect eighteen in-memory mutations",
+        help="verify the certificate and detect twenty in-memory mutations",
     )
     return parser.parse_args()
 

@@ -1,19 +1,19 @@
 {
   "artifact_bindings": {
     "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md": {
-      "byte_count": 15107,
+      "byte_count": 18094,
       "path": "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md",
-      "sha256": "2286d20c48eaf2a050bf87daba085b755eb0b21734f90202c264a1bafa9868b7"
+      "sha256": "fdfe88d11ef555402caadd7c1e6a9ce44b9ffe139734c04b42fbbb59c47c1432"
     },
     "experimental/notes/audits/atlas_payment_interface_audit.md": {
-      "byte_count": 16892,
+      "byte_count": 18936,
       "path": "experimental/notes/audits/atlas_payment_interface_audit.md",
-      "sha256": "d357f1538a3fbe7cd308870097c43f913c7628e378e4c75881eb03b2171b010b"
+      "sha256": "6f4e86aab3066c984197b85a311a1fb2a6f1ab81e19937369e90641183a974cc"
     },
     "experimental/scripts/verify_atlas_payment_interface.py": {
-      "byte_count": 68535,
+      "byte_count": 76150,
       "path": "experimental/scripts/verify_atlas_payment_interface.py",
-      "sha256": "f7b433fdbcffc889d6aa67c26ef09fff6d96625e9aa9a47c0d0f8ee98a1275f9"
+      "sha256": "12aa6f3de02745f0745a0f59f3e6571982bcfa27a000f009435f6b9bef771576"
     }
   },
   "interface_summary": {
@@ -25,6 +25,7 @@
       "asymptotic-row same-catalogue uniformity (UNIF)",
       "C1-C8 primitive-survival/catalogue classification for the intended row",
       "full-catalogue payment at C3/C7/C8/C9",
+      "a lower retained-support occupancy bound for any intended semantic C7 profile",
       "deployed-scale image-normalized Sidon payment"
     ],
     "proved": [
@@ -44,7 +45,10 @@
       "raw witness exhaustion plus first-match slope budgets specializes directly to the concrete RS catalogue",
       "locator-prefix witness cells exactly exhaust every concrete linewise catalogue",
       "under injective evaluation and the parity-dimension equation, each prefix-witness slope image equals its support-prefix bad-slope cell",
-      "locator-prefix first-match budgets specialize to B_MCA without a raw-exhaustivity hypothesis"
+      "locator-prefix first-match budgets specialize to B_MCA without a raw-exhaustivity hypothesis",
+      "literal witness cells split exactly over realized explanation-state fibers",
+      "positive retained-support occupancy bounds each post-first-match slope cell by floor(|residual|/H)",
+      "the resulting line-dependent RC1 quotient budgets specialize to the full B_MCA numerator"
     ]
   },
   "max_sum_quantifier_negative_control": {
@@ -194,7 +198,7 @@
       }
     ]
   },
-  "schema": "atlas-payment-interface/v5",
+  "schema": "atlas-payment-interface/v6",
   "sources": {
     "catalogue_ledger": {
       "blocked_or_conditional_cells": {
@@ -397,6 +401,76 @@
       "sha256": "88a0959285c34b14dc705dc19877c1fb53e33ae647dbf648222b6ab18c3579cf",
       "status": "conditional on atlas-internal H4; H4 is assumed, not re-proved",
       "verified_nonclaim": "the transfer does not pay the image-scale MI/MA or Sidon cell"
+    },
+    "rs_exact_card_occupancy_bridge": {
+      "axiom_print_lines": [
+        "#print axioms card_eq_sum_retainedSupportOccupancy",
+        "#print axioms supportImage_retainedSupportFiber_card",
+        "#print axioms slopeImage_card_le_card_div_of_retainedSupportOccupancy",
+        "#print axioms firstMatchSlopeCell_card_le_residual_card_div_of_retainedSupportOccupancy",
+        "#print axioms prefixFirstMatchSlopeCell_card_le_residual_card_div_of_occupancy",
+        "#print axioms B_MCA_rsEval_le_sup_of_exactCardPrefixRetainedSupportOccupancy",
+        "#print axioms B_MCA_rsEval_le_of_exactCardPrefixRetainedSupportOccupancy"
+      ],
+      "declarations": {
+        "B_MCA_rsEval_le_of_exactCardPrefixRetainedSupportOccupancy": 221,
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixRetainedSupportOccupancy": 200,
+        "card_eq_sum_retainedSupportOccupancy": 60,
+        "explanationState": 39,
+        "explanationStateImage": 44,
+        "firstMatchSlopeCell_card_le_residual_card_div_of_retainedSupportOccupancy": 141,
+        "prefixFirstMatchSlopeCell_card_le_residual_card_div_of_occupancy": 182,
+        "prefixResidualWitnessCell": 171,
+        "retainedSupportFiber": 49,
+        "retainedSupportOccupancy": 54,
+        "slopeImage_card_le_card_div_of_retainedSupportOccupancy": 108,
+        "supportImage_retainedSupportFiber_card": 95,
+        "support_injOn_retainedSupportFiber": 71
+      },
+      "exact_occupancy_sum_line": 60,
+      "fixed_row_wrapper_line": 221,
+      "forbidden_syntax_checks": [
+        "any admit token",
+        "any axiom token",
+        "any opaque token",
+        "any sorry token"
+      ],
+      "occupancy_signatures": {
+        "B_MCA_rsEval_le_of_exactCardPrefixRetainedSupportOccupancy": {
+          "line": 221,
+          "normalized_sha256": "8c86ed4719174cbcde6ec7f679edd279cdca0d1318a3a81f42068ccb1b7580bd"
+        },
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixRetainedSupportOccupancy": {
+          "line": 200,
+          "normalized_sha256": "fce2b1037226053af3b41fc19fba86d3b9b7926f735d84f98ad80aed6ed1cfc7"
+        },
+        "card_eq_sum_retainedSupportOccupancy": {
+          "line": 60,
+          "normalized_sha256": "e3c7f8c9f1581511175279fb0db5d846de068d15a3ed0af91665a2bf73b99938"
+        },
+        "firstMatchSlopeCell_card_le_residual_card_div_of_retainedSupportOccupancy": {
+          "line": 141,
+          "normalized_sha256": "90d6e9fd147937daba66a0ed1ef779fc4bfed71c59d2f8bb1e14454088bacde5"
+        },
+        "prefixFirstMatchSlopeCell_card_le_residual_card_div_of_occupancy": {
+          "line": 182,
+          "normalized_sha256": "ead00cd6db85ebb821dfb1f7cd728219a84127ad373b7a935d5722eac9f08771"
+        },
+        "slopeImage_card_le_card_div_of_retainedSupportOccupancy": {
+          "line": 108,
+          "normalized_sha256": "11a95acddaf806fe17881a02bc071a1169c959727169282310017032c8d5f404"
+        },
+        "supportImage_retainedSupportFiber_card": {
+          "line": 95,
+          "normalized_sha256": "4fd68387111908a20a26b734f1b232654ec6c85242f698bc11ee706f26461791"
+        }
+      },
+      "path": "experimental/lean/grande_finale/GrandeFinale/RSExactCardOccupancyBridge.lean",
+      "rc1_line": 108,
+      "sha256": "fd824064e24178dee5622aac74550b71e58d079b8fa527effc52e000654bd95c",
+      "verified_boundary": "the RC1 quotient is applied only after slope-level first match; the lower occupancy and uniform line-sum remain hypotheses",
+      "verified_claim": "realized explanation-state fibers partition each literal witness cell exactly, and a positive retained-support lower occupancy gives the exact floor(|C|/H) slope-image bound",
+      "verified_nonclaim": "the adapter is not a semantic C7 classifier, profile payment, boundary-image theorem, or C1-C9 routing certificate"
     },
     "rs_exact_card_prefix_witness_bridge": {
       "axiom_print_lines": [
@@ -712,5 +786,5 @@
     "scope": "experimental/notes/thresholds/*.md"
   },
   "verdict": "AUDIT: coverage proved; catalogue/profile/payment interface remains explicit",
-  "verification_check_count": 230
+  "verification_check_count": 263
 }

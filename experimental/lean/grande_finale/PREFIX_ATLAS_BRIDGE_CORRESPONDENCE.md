@@ -12,6 +12,10 @@ then partitions that raw catalogue exactly and, under injective evaluation and
 the parity-dimension equation, aligns each cell's slope image with the
 corresponding support-prefix bad-slope cell.
 
+The occupancy adapter then proves the exact retained-support fibre sum and a
+conditional post-slope-first-match RC1 quotient/`B_MCA` lift. It supplies no
+semantic C7 classifier, lower occupancy theorem, profile payment, or `(UNIF)`.
+
 Sources:
 
 - `experimental/lean/asymptotic_spine/AsymptoticSpine/PrefixAtlas.lean`, the
@@ -27,7 +31,10 @@ Sources:
   bridge specialization;
 - `experimental/lean/grande_finale/GrandeFinale/RSExactCardPrefixWitnessBridge.lean`,
   the raw-witness locator-prefix partition and exact support-cell slope
-  alignment; and
+  alignment;
+- `experimental/lean/grande_finale/GrandeFinale/RSExactCardOccupancyBridge.lean`,
+  the exact explanation-state fibre sum and conditional post-first-match RC1
+  quotient/`B_MCA` adapter; and
 - `experimental/lean/grande_finale/GrandeFinale/FirstMatchAddBack.lean`, the
   ordered finite-set first-match disjointization used by the generic witness
   bridge.
@@ -76,13 +83,26 @@ Sources:
 | Prefix-witness first-match budgets bound `B_MCA` without a raw-exhaustivity hypothesis | `GrandeFinale.RSExactCardPrefixWitnessBridge.B_MCA_rsEval_le_sup_of_exactCardPrefixWitness_firstMatchSlopeBudgets` |
 | Existing support-prefix budgets feed the same witness adapter | `GrandeFinale.RSExactCardPrefixWitnessBridge.B_MCA_rsEval_le_sup_of_exactCardPrefixBadSlopeBudgets` |
 | A uniform prefix-witness line-sum bound gives `B_MCA <= B` | `GrandeFinale.RSExactCardPrefixWitnessBridge.B_MCA_rsEval_le_of_exactCardPrefixWitness_firstMatchSlopeBudgets` |
+| Retained explanation state `(gamma,h)` of a literal witness | `GrandeFinale.RSExactCardOccupancyBridge.explanationState` |
+| Realized explanation states and their retained-support occupancies | `GrandeFinale.RSExactCardOccupancyBridge.explanationStateImage`, `GrandeFinale.RSExactCardOccupancyBridge.retainedSupportOccupancy` |
+| Literal witness cells split exactly over realized explanation-state fibres | `GrandeFinale.RSExactCardOccupancyBridge.card_eq_sum_retainedSupportOccupancy` |
+| Fibre occupancy literally counts retained selected supports | `GrandeFinale.RSExactCardOccupancyBridge.supportImage_retainedSupportFiber_card` |
+| Positive lower occupancy gives `|slope(C)| <= floor(|C| / H)` | `GrandeFinale.RSExactCardOccupancyBridge.slopeImage_card_le_card_div_of_retainedSupportOccupancy` |
+| The RC1 quotient applies after slope-level first match | `GrandeFinale.RSExactCardOccupancyBridge.firstMatchSlopeCell_card_le_residual_card_div_of_retainedSupportOccupancy` |
+| Post-first-match residual of one locator-prefix witness cell | `GrandeFinale.RSExactCardOccupancyBridge.prefixResidualWitnessCell` |
+| Locator-prefix residual occupancy conditionally bounds its assigned slope cell | `GrandeFinale.RSExactCardOccupancyBridge.prefixFirstMatchSlopeCell_card_le_residual_card_div_of_occupancy` |
+| Line-dependent RC1 quotients bound `B_MCA` by the supremum of line sums | `GrandeFinale.RSExactCardOccupancyBridge.B_MCA_rsEval_le_sup_of_exactCardPrefixRetainedSupportOccupancy` |
+| A uniform RC1 quotient-sum bound gives `B_MCA <= B` | `GrandeFinale.RSExactCardOccupancyBridge.B_MCA_rsEval_le_of_exactCardPrefixRetainedSupportOccupancy` |
 
 The `FirstMatchWitnessBridge` declarations are generic and logically separate
 from locator-prefix support coverage: first match is applied after slope
 projection. `RSExactCardWitnessBridge` supplies the concrete finite RS
 incidence and bad-slope image. `RSExactCardPrefixWitnessBridge` supplies a
-raw-witness-exhaustive structural prefix partition, but no C1--C9 semantic
-cell family, payment, or `(UNIF)` instance is constructed.
+raw-witness-exhaustive structural prefix partition.
+`RSExactCardOccupancyBridge` factors retained residual cells through their
+`(gamma,h)` explanation states and proves the conditional RC1 quotient.
+No C1--C9 semantic cell family, lower occupancy theorem, profile payment, or
+`(UNIF)` instance is constructed.
 
 ## Statement comparison
 
@@ -163,9 +183,15 @@ cell(line,z) = { w in rsExactCardWitnesses(line) :
 
 These cells exhaust the raw catalogue exactly. Under injective evaluation and
 the parity-check dimension equation, each cell's slope image equals the
-corresponding `rsPrefixBadSlopeCell`. First-match slope budgets and the uniform
-line-sum cap remain inputs. Exact cardinality does not assert that `S` is the
-complete agreement locus of `h`.
+corresponding `rsPrefixBadSlopeCell`.
+`RSExactCardOccupancyBridge` then factors each post-first-match residual
+through the projection
+`(gamma,S,h) -> (gamma,h) -> gamma`. Its exact fibre sum records all realized
+explanation states, and a supplied universal occupancy lower bound `H > 0`
+gives the exact quotient
+`|assigned slopes| <= floor(|retained residual| / H)`.
+The lower occupancy and uniform quotient-sum cap remain inputs. Exact
+cardinality does not assert that `S` is the complete agreement locus of `h`.
 
 ## Scope boundaries
 
@@ -185,8 +211,12 @@ The concrete adapter supplies the finite RS witnesses and discharges the
 bad-slope image equality. On its own it constructs no `idx`, `cell`, raw
 witness exhaustivity proof, cell budget, or uniform sum. The prefix-witness
 composition constructs a structural locator-prefix `idx`, `cell`, and raw
-exhaustivity theorem, but no C1--C9 semantic classifier, cell budget, or
-uniform sum. Consequently neither module constructs a payment nor an
+exhaustivity theorem.
+The occupancy adapter turns supplied positive lower retained-support
+occupancies into exact post-first-match quotient cell bounds and a conditional
+`B_MCA` bound, but it does not construct `H`/`hocc`, a semantic C7 classifier,
+profile payment, boundary-image theorem, or `hunif`.
+Consequently none of these adapters constructs a semantic payment or an
 asymptotic `(UNIF)` instance.
 
 The arbitrary-domain definition accepts a map `point : D -> F`; injectivity
@@ -206,11 +236,13 @@ single empty-function key and one global cell.
 
 ## Module placement
 
-All four bridges are leaf modules. `PrefixAtlasBridge` imports
+All five bridges are leaf modules. `PrefixAtlasBridge` imports
 `GrandeFinale.SyndromeLine`, which imports the root module `GrandeFinale`;
 `FirstMatchWitnessBridge` imports `GrandeFinale` directly; and
 `RSExactCardWitnessBridge` imports the generic witness bridge; the
-prefix-witness composition imports both concrete leaves. Consequently the root
+prefix-witness composition imports both concrete leaves; and
+`RSExactCardOccupancyBridge` imports that composition plus
+`FirstWallMDSExtensionInverse`. Consequently the root
 `GrandeFinale.lean` cannot import these leaves without creating an import
 cycle. They remain available through their fully qualified module names and
 are checked directly.
@@ -224,8 +256,10 @@ lake build GrandeFinale.PrefixAtlasBridge
 lake build GrandeFinale.FirstMatchWitnessBridge
 lake build GrandeFinale.RSExactCardWitnessBridge
 lake build GrandeFinale.RSExactCardPrefixWitnessBridge
+lake build GrandeFinale.RSExactCardOccupancyBridge
 ```
 
-The modules print the axioms of their exported coverage, union, first-match,
-finite-witness image, fixed-line budget, and full-numerator theorems. No proof
+The five modules print the axioms of their exported coverage, union,
+first-match, finite-witness image, exact occupancy sum, RC1 quotient,
+fixed-line budget, and full-numerator theorems. No proof
 placeholder or added axiom is used.
