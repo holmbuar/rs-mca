@@ -3,10 +3,11 @@
 ## Status
 
 ```text
-Status: labels are exact to the shipped artifacts: every PROVED
-        claim has a complete proof in this note; every certified
-        constant has a named verifier gate; the single conditional
-        (INV-TAIL) is stated with its certified support.
+Status: labels are fail-closed after the INV-TAIL dependency audit.
+        Closed-form algebraic reductions are separated from floating-grid
+        evidence; a named grid gate is COMPUTED support, not by itself a
+        continuum proof.  The tail assumptions are split into their sharp
+        and loose sufficient forms below.
       + PROVED (C1, kernel reduction): for U subseteq {0..B-1} the
         support-class sums of the inverse transform obey
           sum_{sigma in class(U)} h(sigma)
@@ -21,35 +22,33 @@ Status: labels are exact to the shipped artifacts: every PROVED
         gives sin(7pi/18) cos(phi) - sin(pi/18) cos(phi/2) on
         phi in [2pi/9, 4pi/9], strictly decreasing, endpoint value
         exactly sin^2(pi/18) > 0.
-      + THEOREM (C3, master + purity + |K|=1 dichotomy): the MASTER
-        inequality G_j(t_out) >= need(eps) G_j(t_in) holds — base
-        cases j <= 5 proved (j = 1 = the ATOM, closed form; j = 2..5
-        slope-certified grids, gate P9), general step j >= 6 proved
-        from three invariant floors tied by the single scalar (KEY) —
-        and with it cone purity of G at every state and the |K|=1
-        class-sum dichotomy at every depth, via the chain R1-R4.
-        Scope: UNCONDITIONAL for every B <= 49 — the three consumed
-        floors (pair-1 envelope <= 0.85, pair-2 <= 1.61, child-share
-        >= 1.20) are verifier-certified at every level j <= 48
-        (gates P7/P12 under --deep; measured sups 0.790/1.608, share
-        min 1.215) and (KEY) at exactly those caps has margin 0.030
-        (gate P8). For ALL B, conditional on the single named input
-        (INV-TAIL): the same three floors persist for j >= 49.
-        INV-TAIL's support: the envelope part follows from the PROVED
-        all-j loose caps (1.086 pair-1 / 1.663 pair-2 after the L5
-        cancellation a'(t_+) - a'(t_-) = -a'(t/3)) since (KEY) also
-        holds at (1.086, 1.663, 1.20) with margin 0.015 (gate P8) —
-        so the genuinely open part of INV-TAIL is the share floor
-        (and the measured inputs of the loose-cap closure itself);
-        routes in 3.5.
+      + CONDITIONAL THEOREM (C3, master + purity + |K|=1 dichotomy):
+        the MASTER implication and the chain R1-R4 are proved GIVEN
+        the stated envelope and child-share floors.  The j=1 ATOM is
+        closed form.  The j=2..5 bases and the finite floor horizons
+        are COMPUTED floating-grid evidence (gates P7/P9/P12), not
+        interval/continuum certificates.  The --deep replay reaches
+        j<=48 (corresponding to B<=49) with measured correlated-pair
+        sups below 0.85/1.61 and share min 1.215.  For all depths there
+        are two distinct
+        open contracts: (INV-TAIL-SHARP), persistence for j>=49 of
+        the two exact Master-pair secants at <=0.85 and <=1.61, and
+        child-share >=1.20; or the
+        weaker sufficient (INV-TAIL-LOOSE), persistence of pair-1
+        <=1.086, pair-2 <=1.663, and child-share >=1.20.  Gate P8
+        proves only that either supplied constant bundle satisfies
+        (KEY) (margins 0.030 and 0.015); it does not prove either
+        bundle.  In particular, the loose-envelope closure still
+        consumes unproved share/cross-child inputs described in 3.1.
       + PROVED (C3b, the general-K reduction): for K = {k_1<...<k_r}
-        the dichotomy statement E_w[prod_K(a_k-1/2)] > 0 is EQUIVALENT
-        to positivity of every decorated subtree charge
+        the dichotomy statement E_w[prod_K(a_k-1/2)] > 0 is IMPLIED BY
+        positivity of every decorated subtree charge
           T_pi(K) = sum_i c_i b_i(g^pi_{k_1-1}) b_i(G^S(t_pi)) > 0
         (c_0 = 1, c_{i>=1} = 1/2; pi over depth-(k_1-1) prefixes; G^S
         the drift-decorated cascade, S the relative pattern). |K| <= 1:
-        T_pi > 0 PROVED with C3's scope (unconditional B <= 49;
-        INV-TAIL beyond). |K| >= 2: T_pi > 0 verified EXHAUSTIVELY
+        T_pi > 0 follows conditionally from C3's analytic hypotheses;
+        floating grids through B <= 49 are supporting evidence, and
+        INV-TAIL is required beyond. |K| >= 2: T_pi > 0 verified EXHAUSTIVELY
         (every K, every prefix, B in {6, 8}, gate P11;
         no cancellation, min normalized term +9.9e-4) — CONJECTURAL
         in B; proof route = the aggregated joint two-walk cone. Two
@@ -65,10 +64,14 @@ Status: labels are exact to the shipped artifacts: every PROVED
         1.30e-3 (5), 7.84e-3 (6), 2.72e-2 (7), 6.63e-2 (8), 1.21e-1
         (9), 1.86e-1 (10). Purity is asymptotic in B - |U|; the
         emission arithmetic must carry the leak, not a threshold.
-      + PROVED (C6, charge arithmetic): omega(class) = h_+ =
-        Sigma_U + W_U exactly (definitional: Sigma_U the signed class
-        sum, W_U the wrong-sign mass); on right-parity classes, GIVEN
-        the sign law at (B, |U|), this reads |Sigma_U| + W_U.
+      + PROVED (C6, corrected charge arithmetic): let eps_U =
+        (-1)^(B-|U|), Sigma_U be the signed class sum, and W_U the
+        mass with sign opposite eps_U.  Then omega(class)=h_+ equals
+        W_U + Sigma_U on eps_U=+1 classes and equals W_U on eps_U=-1
+        classes.  GIVEN the sign law, this is |Sigma_U|+W_U on
+        right-parity classes and W_U on wrong-parity classes.  The
+        former uniform formula omega=Sigma_U+W_U was false on
+        eps_U=-1 classes (already at B=4, U={0}).
         |Sigma_U| is computable with a certified additive bar by the
         insertion DP below; W_U is the computed leak layer (the
         shipped table pins the per-|U| aggregate; per-class W_U is
@@ -88,11 +91,13 @@ LANE: hard input 2 — thirteenth packet of the arc; the class-charge
 
 Label key (agents.md dialect): **PROVED** / **CONDITIONAL** /
 **CONJECTURAL** / **EXPERIMENTAL** / **AUDIT** / **COUNTEREXAMPLE**;
-COMPUTED marks exact deterministic scans; "certified" always means a
-named gate of the shipped verifier.  Verifier:
+COMPUTED marks deterministic calculations, with exact versus floating
+methods stated at each use; "certified" means only that a named shipped
+gate binds the stated finite artifact, not that a continuum theorem follows.
+Verifier:
 `experimental/scripts/verify_dense_shell_class_charges.py` (stdlib only,
-deterministic; `RESULT: PASS (19/19)` in ~10s; `--deep` certifies the
-j <= 48 envelope/share horizons; `--tamper-selftest` catches `9/9`).
+deterministic; `RESULT: PASS (20/20)` in ~10s; `--deep` records the
+j <= 48 envelope/share horizon; `--tamper-selftest` catches `10/10`).
 Lean skeleton: `experimental/lean/dense_shell_class_charges/`
 (stdlib-only, builds, no sorry: the support-class partition census, the
 T_9(x)-1 factorization whose cubic Vieta is the ATOM's endpoint
@@ -156,8 +161,9 @@ coefficient obeys the offdiagonal-only recursion top_j =
 2 (1/4) top_{j-1} (j >= 2), top_1 = 1. Hence DG top = 0 exactly: the
 envelope is trivial at the top index; the active indices are low.
 
-L2 (strict positivity). G_j(t)_i > 0 on t in [1/6, 1/2] (purity R1 +
-the #858 b_0, b_1 bootstrap; interior floor certified). So
+L2 (strict positivity). G_j(t)_i > 0 on t in [1/6, 1/2] within the
+conditional purity chain (R1 + the #858 b_0, b_1 bootstrap); P4 supplies
+only finite floating-grid support for the interior floor. Given positivity,
 |DG_j(t)_i| <= L G_j(t)_i integrates with no zero-crossing to
     e^{-Lg} <= G_j(t')_i / G_j(t)_i <= e^{Lg},  g = |t' - t|.
 
@@ -173,21 +179,23 @@ when inner; the last term is the source.) Dividing by G_j(t)_i =
 V_{+,i} + V_{-,i} and bounding shares (child-share S) and the source
 (cross-child ratio) closes the family regionally (L4'): the invariant
 set {E_diff, S, B} is closed under one recursion step; iterating the
-closure map from the base cases, GIVEN the share and cross-child-
-ratio inputs at their certified floors, yields the envelope for ALL
-j at the loose caps {1.64, 2.02, 2.77, 3.24, 3.78} (after the L5
+closure map from the base cases, GIVEN the still-open share and
+cross-child-ratio inputs, would yield the envelope for ALL j at the
+loose caps {1.64, 2.02, 2.77, 3.24, 3.78} (after the L5
 cancellation: 1.086 / 1.663 on the two pair supports) on the five
 regions R1..R5 = [1/6,.22], [.22,.30], [.30,.38], [.38,.44],
 [.44,.50].
 
-Sharp constants (what 3.2 consumes; every one a shipped gate): on
-the pair-1 support [1/6, 0.2778] at gaps in [1/18, 1/9]: L <= 0.85
-certified for all j in [2, 48] (gate P7, --deep; measured sup 0.790,
-and <= 0.65 from j = 8 with measured sup 0.621); pair-2 support
-[0.3889, 0.50]: L <= 1.61 (measured sup 1.608). Child-share
+Sharp constants (what 3.2 consumes; every one a shipped floating-grid
+gate): on the exact correlated Master pairs `(s,r)` and `(r2,s2)`
+defined in 3.2, the measured secant caps are 0.85 and 1.61 for all
+j in [2,48] (gate P7, --deep); pair-1 is <=0.65 from j=8.  The former
+broader claim of pair-2 <=1.61 for every pair in [0.3889,0.50] at gaps
+in [1/18,1/9] is false: already j=3, i=0, x=4/9, y=1/2 gives
+1.61013636047.  That broad superset is not consumed by the Master step.
+Child-share
 G_j(t_in) >= 1.20 G_{j-1}(r) entrywise for 6 <= j <= 48 (gate P12,
---deep; measured min 1.215). No monotonicity in j is claimed or
-needed on the unconditional leg.
+--deep; measured min 1.215). No monotonicity in j is claimed.
 
 L5 (trace-derivative cancellation, PROVED). Differentiating the
 three-branch trace a(t_+) + a(t/3) + a(t_-) = 3/2 gives
@@ -195,9 +203,9 @@ three-branch trace a(t_+) + a(t/3) + a(t_-) = 3/2 gives
 so L4's source rewrites as a'_+(G_+ - G_-) - a'(t/3) G_- with
 |G_+ - G_-|_i <= (e^D - 1) min(G_pm)_i envelope-small: the decoupled
 regional closure fixed point drops from 1.95 to 1.086 on the pair-1
-support (1.663 pair-2). The all-j persistence of the three certified
-floors is the named INV-TAIL input (3.5) — the sole conditional of
-the packet.
+support (1.663 pair-2), GIVEN the share and cross-child inputs used by
+that closure. Persistence of either the sharp correlated-pair bundle
+or the loose sufficient bundle is the named INV-TAIL input (3.5).
 
 ### 3.2 The MASTER theorem (base cases + the general step)
 
@@ -216,8 +224,9 @@ inequality of the whole program, in closed form. (Lean shadow: the
 cubic 8x^3 - 6x + 1 = 2T_3 + 1 inside T_9(x) - 1 =
 (x-1)(2x+1)^2(8x^3-6x+1)^2 has Vieta root-sum 0 = this identity.)
 
-Bases (M_2)..(M_5): Lipschitz-certified eps-grids (certified floors
-0.174/0.125/0.0625/0.0312 > 0; verifier P9).
+Bases (M_2)..(M_5): COMPUTED floating eps-grids, adjusted by the largest
+adjacent sampled slope (floors 0.174/0.125/0.0625/0.0312 > 0; verifier
+P9).  No continuum Lipschitz bound is supplied.
 
 General step (j >= 6; uses NO (M_{j-1})). The four grandchildren:
 t_out's children s = 7/36 - eps/9 (inner), s2 = 17/36 + eps/9;
@@ -248,12 +257,12 @@ envelope) and G_j(t_in) >= GAMMA* Y (child-share H-S), so
 by the single scalar inequality
     (KEY)  (e^{-L2* g} - need(eps)) GAMMA* e^{-L1* g}
                 >= sin(4pi/9) sin(pi g),
-instantiated at the gate-certified caps (L1*, L2*, GAMMA*) =
+instantiated at the grid-supported caps (L1*, L2*, GAMMA*) =
 (0.85, 1.61, 1.20): every positive factor decreases and the deficit
 increases in eps, so the LHS-RHS is strictly decreasing with
 endpoint value 0.030 > 0 at eps -> 1/4 (gate P8; the same
-inequality at the PROVED all-j loose caps (1.086, 1.663, 1.20) has
-endpoint margin 0.015, carrying the conditional leg). What remains is Delta_i >= B2 (X2)_i >= 0,
+inequality at the conditional loose caps (1.086, 1.663, 1.20) has
+endpoint margin 0.015). What remains is Delta_i >= B2 (X2)_i >= 0,
 strict at i = 0, 1 (purity floors), and the top entry Delta_top =
 2^{1-j}(1 - need) > 0 (L1's t-free top). So (M_j) holds, strict in
 the low and top entries. QED (step).
@@ -287,8 +296,10 @@ P10/P4; B <= 8):
 
 ### 3.4 General K
 
-The decorated cascade G^S and the PROVED reduction to
-    per-prefix charges T_pi(K) (Status C3b). The single-insertion
+The decorated cascade G^S and the PROVED identity expressing the global
+charge as a positive scalar times `sum_pi T_pi(K)` (Status C3b). Thus
+positivity of every prefix charge is a sufficient strengthening, not an
+equivalent reformulation. The single-insertion
     binding-entry identity (top(A_j(t)) = 2^{-j}(1/2 - a(t/3)), so the
     decorated sibling min-ratio IS the atom curve) is proved and
     honestly single-insertion-scoped: for |S| >= 2 the top ratio is
@@ -302,31 +313,31 @@ The decorated cascade G^S and the PROVED reduction to
 
 - PROVED in closed form: the ATOM (M_1) with margin sin^2(pi/18); all
   exact identities (coupling, D1/B2, gaps, tops, trace-derivative);
-  L0, L1, L4/L4' propagation; the loose-cap all-j envelope; (KEY);
+  L0, L1, L4/L4' propagation identities; (KEY) for supplied constants;
   the general step (M_j), j >= 6, GIVEN the sharp envelope + share
-  constants; the chain R1-R4; the general-K reduction to T_pi.
-- CERTIFIED (deterministic grids with slope slack, named gates —
-  "certified" is exactly this): bases (M_2..M_5) (P9); the envelope
-  caps 0.85 / 1.61 at every level j <= 48 (P7, --deep); the
-  child-share floor 1.20 at 6 <= j <= 48 (P12, --deep). No
-  monotonicity in j is claimed.
-- (INV-TAIL, the single conditional input): "the three certified
-  floors persist for every j >= 49: pair-1 secant <= 0.85 on gaps
-  [1/18, 1/9] over [1/6, 0.2778], pair-2 <= 1.61 on [0.3889, 0.50],
-  child-share >= 1.20." Support: (a) the envelope part follows from
-  the PROVED loose caps (1.086 / 1.663 after L5) together with
-  (KEY) at (1.086, 1.663, 1.20), margin 0.015 (P8) — so the open
-  content of INV-TAIL is the share floor plus the loose-cap
-  closure's own measured inputs (share, cross-child ratio); (b) at
-  the certified horizon the floors hold with room (pair-1 sup 0.621
-  for j in [8, 48], gate cap 0.65). Named routes to discharge it:
+  constants; the chain R1-R4; the global-sum identity for T_pi.
+- COMPUTED (deterministic floating grids, named gates): bases
+  (M_2..M_5) (P9); correlated Master-pair envelope caps 0.85 / 1.61
+  at every level j <= 48 (P7, --deep); the child-share floor 1.20 at
+  6 <= j <= 48 (P12, --deep). These gates have no interval or
+  between-grid error certificate. No monotonicity in j is claimed.
+- (INV-TAIL-SHARP): for every j>=49 the exact Master-pair secants
+  `(s,r)` and `(r2,s2)` are <=0.85 and <=1.61, and child-share is
+  >=1.20. This is open.
+- (INV-TAIL-LOOSE, a weaker sufficient alternative): for every j>=49
+  those secants are <=1.086 and <=1.663, and child-share is >=1.20.
+  P8 shows this bundle implies KEY with margin 0.015; it does not prove
+  the bundle. The L4' route to the loose envelopes itself consumes
+  share and an ungated cross-child-ratio input. At the finite horizon,
+  pair-1 is <=0.65 for j in [8,48]. Named routes to discharge the tail:
   (i) a correlated profile-shape bound tighter than the independent
   ratio bands (bands-only reaches 1.01 — just short); (ii) monotone
   decrease of the envelope constant in j (empirically clean from
   j = 5 on; false at j = 4 -> 5, so any proof starts at j >= 5);
-  (iii) an all-j child-share bound. Any of (i)+(iii) / (ii)+(iii)
-  upgrades the theorem to every B. This is the sole gap between
-  "B <= 49" and "every B".
+  (iii) an all-j child-share bound. Any tail route must be combined with
+  rigorous continuum/error coverage for the finite P7/P9/P12 ranges before
+  the singleton theorem can be promoted to every B. This does not address the
+  separate general-K conjecture.
 - COMPUTED: the exhaustive law B <= 10 (G3); the leak table (G4);
   T_pi census B in {6, 8} (P11); the anchored-case floor (P11) and
   the cone-pure-S classes (labs).
@@ -335,9 +346,12 @@ The decorated cascade G^S and the PROVED reduction to
 
 ## 4. The computed layers (C4, C5) and charge arithmetic (C6)
 
-Law margins and the B = 10 leak table as in Status; the packet's
-emission consequence: omega(class) = h_+ = Sigma_U + W_U always; on
-right-parity classes, within the sign law's scope (C3/C3b), this is
+Law margins and the B = 10 leak table as in Status. With
+`eps_U=(-1)^(B-|U|)`, the exact emission identity is
+
+    omega(class) = W_U + ((1+eps_U)/2) Sigma_U.
+
+On right-parity classes, within the sign law's scope (C3/C3b), this is
 |Sigma_U| + W_U; the two terms
 have different epistemic status (certified evaluable vs computed), and
 consumers must carry them separately. Wrong-parity classes:
@@ -363,12 +377,13 @@ evaluates any subset charge; the D6 ellipse argument gains exactly one
   B = 10 and is only asymptotic in B - |U|.
 - Two false lemmas, explicitly NOT claimed (both numerically refuted):
   cone-purity of the decorated cascade G^S for |S| >= 2, and the
-  decorated Master inequality. The load-bearing general-K statement is
-  the per-prefix charge positivity T_pi(K) > 0 (C3b), nothing stronger.
+  decorated Master inequality. Per-prefix charge positivity T_pi(K)>0
+  is a sufficient general-K target; only positivity of their sum is
+  equivalent to the global dichotomy.
 - The binding-entry = atom identity of 3.4 is claimed for SINGLE
   insertions only.
 - No monotonicity of the envelope constants in j is claimed (it is
-  false at j = 4 -> 5); the unconditional leg never uses it.
+  false at j = 4 -> 5); the computed finite leg never uses it.
 - Of the #842-banked emission program, this packet delivers the class
   budget/charge layer only; the schedule and adequacy ports on
   product profiles remain the named next step.
@@ -381,10 +396,11 @@ evaluates any subset charge; the D6 ellipse argument gains exactly one
   to #858's consumers note: #858 stated that on dense shells
   "omega = h_+ is |h| ... classwide" and that the #820 sign-mixing
   overpay "cannot occur there" — that conflated class sums with
-  pointwise values. The truth (this packet): CLASS-SUM budgets are
-  one-signed (the law), but pointwise h leaks from |U| >= 4 at
-  B = 10, so omega exceeds |Sigma_U| by exactly the leak mass W_U.
-  The #820-style overpay is bounded by the leak layer, not absent.
+  pointwise values. The truth (this packet): within the sign law's
+  scope, class sums have the expected sign, but pointwise h leaks from
+  |U| >= 4 at B=10. On right-parity classes omega=|Sigma_U|+W_U; on
+  wrong-parity classes omega=W_U. The #820-style overpay is bounded by
+  the leak layer, not absent.
 - #842 (transfer certificate): the adjoint function-valued DP is
   upgraded here with insertion factors and certified bars — the
   u-register stays collapsed onto Chebyshev nodes, and each inserted
@@ -393,8 +409,8 @@ evaluates any subset charge; the D6 ellipse argument gains exactly one
   the leak layer for bookkeeping of the class |h|-mass (the M_U
   totals of section 4's identity).
 - #818/#820/#824 (emission arithmetic, omega-soundness, adequacy):
-  consume omega = Sigma_U + W_U per class on dense shells (with
-  |Sigma_U| in the law's scope); the sign-mixing overpay IS the leak
-  layer.
+  consume `omega = W_U + ((1+eps_U)/2) Sigma_U` per class on dense
+  shells (with |Sigma_U| on right-parity classes in the law's scope);
+  the sign-mixing overpay IS the leak layer.
 - #816 C4 (denominator argument): the strict-inequality backbone
   (1/4-avoidance) used throughout the trig atoms.

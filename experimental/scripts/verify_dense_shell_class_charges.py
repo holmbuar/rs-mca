@@ -19,23 +19,29 @@ Claims verified here (computational layer of the packet):
                (exhaustive; margins recorded).
   G4 [LEAK]    B = 10 pointwise leak table: wrong-sign |h|-mass share by
                |U|: 0 for |U| <= 3; pinned values for 4..10 (the leak
-               correction of the charge arithmetic omega = |Sigma_U| + W_U).
+               layer consumed by the parity-aware charge arithmetic).
   G5 [DP]      u-state-collapsed transfer DP (function-valued in u via
                Chebyshev nodes, z-polynomial payload) reproduces the
                subset charge table; certified additive tail bar in the
                #858-D6 constants, insertion levels carrying one extra
                2cosh factor; observed <= certified at the instances.
+  G6 [CHARGE]  for eps_U=(-1)^(B-|U|), signed class sum Sigma_U,
+               eps-wrong-sign mass W_U, and positive mass omega_U,
+                 omega_U = W_U + ((1+eps_U)/2) Sigma_U.
+               The former parity-blind formula Sigma_U+W_U is pinned
+               false already at B=4, U={0}.
 
 Proof-layer gates P1-P12: the ATOM and coupling identity, A-purity, the
 exact-derivative envelope machinery (DG identity, L4 one-step bound, L5
-cancellation, sharp secant caps), the KEY scalar at the certified and the
-proved loose caps, Master base cases + direct check, the child-share
+cancellation, correlated secant scans), the KEY scalar at the supplied sharp
+and conditional loose caps, Master base cases + direct check, the child-share
 floor, the R4 tree identity with the prefix-cone scan, and the general-K
 decorated-charge census with the anchored-case floor.
 
 Flags: default run ~10s; --deep extends the envelope/share horizons to
 j <= 48 (~50s); --tamper-selftest runs all tampers, each must FAIL;
---emit-cert writes the certificate JSON next to the data directory.
+--emit-cert writes the certificate JSON next to the data directory and
+honors --deep when both flags are supplied.
 
 stdlib only, deterministic. RESULT: PASS/FAIL summary.
 """
@@ -228,6 +234,63 @@ def gate_leak(report, B=10):
                    " ".join("%d:%.3g" % (m, table[m]) for m in range(4, B + 1)),
                    ok))
     return ok, table
+
+
+def gate_charge_identity(report, Bs=(4, 6), uniform_tamper=False):
+    """G6: exact parity-dependent class charge identity, evaluated from
+    the inverse transform.  `W` is mass with sign opposite the expected
+    class sign eps_U=(-1)^(B-|U|).  A negative-parity class pins the old
+    parity-blind `omega = Sigma + W` formula as false."""
+    worst = 0.0
+    legacy_gap = 0.0
+    largest_witness = None
+    pinned_witness = None
+    for B in Bs:
+        c = 3 ** B
+        F = [0j] * c
+        for word in dense_words(B):
+            F[word_to_xi(word, B)] = hatf_by_scan(word)
+        H = fft3(F, -1)
+        classes = [dict(sigma=0.0, wrong=0.0, omega=0.0)
+                   for _ in range(1 << B)]
+        for sigma in range(c):
+            h = H[sigma].real / c
+            mask = sum(1 << i for i, d in enumerate(balanced_digits(sigma, B))
+                       if d != 0)
+            eps = 1 if (B - mask.bit_count()) % 2 == 0 else -1
+            classes[mask]["sigma"] += h
+            classes[mask]["omega"] += max(h, 0.0)
+            if eps * h < 0.0:
+                classes[mask]["wrong"] += abs(h)
+        for mask, row in enumerate(classes):
+            eps = 1 if (B - mask.bit_count()) % 2 == 0 else -1
+            corrected = row["wrong"] + (row["sigma"] if eps > 0 else 0.0)
+            rhs = row["sigma"] + row["wrong"] if uniform_tamper else corrected
+            worst = max(worst, abs(row["omega"] - rhs))
+            old_gap = abs(row["omega"] - (row["sigma"] + row["wrong"]))
+            if eps < 0 and old_gap > legacy_gap:
+                legacy_gap = old_gap
+                largest_witness = {"B": B, "mask": mask,
+                                   "sigma": row["sigma"],
+                                   "wrong_mass": row["wrong"],
+                                   "omega": row["omega"],
+                                   "legacy_gap": old_gap}
+            if B == 4 and mask == 1:
+                pinned_witness = {"B": B, "mask": mask,
+                                  "sigma": row["sigma"],
+                                  "wrong_mass": row["wrong"],
+                                  "omega": row["omega"],
+                                  "legacy_gap": old_gap}
+    ok = (worst < 1e-9 and legacy_gap > 1.0
+          and largest_witness is not None and pinned_witness is not None
+          and pinned_witness["legacy_gap"] > 3.0)
+    report.append(("G6 CHARGE parity-dependent omega identity; legacy "
+                   "Sigma+W negative control",
+                   "dev=%.2e pinned_gap=%.6f witness=(B=4,mask=1)"
+                   % (worst, pinned_witness["legacy_gap"]), ok))
+    return ok, {"max_identity_deviation": worst,
+                "legacy_counterexample": pinned_witness,
+                "largest_legacy_counterexample": largest_witness}
 
 # ------------------------------------ G5: transfer DP + certified tail
 
@@ -624,35 +687,122 @@ def secant_env(Glev, j, lo, hi, gmin, gmax, n=110):
                 w = Lv
     return w
 
+
+def master_pair_env(Glev, j, which, n=400):
+    """Envelope secant on the exact pair consumed by the Master step.
+
+    Every coefficient is checked.  In particular, this does not use the
+    former ``GD_FLOOR`` shortcut that silently omitted small top entries.
+    """
+    worst = 0.0
+    checked = 0
+    invalid_coefficients = 0
+    shape_mismatches = 0
+    min_coefficient = float("inf")
+    for eps in grid(0.0, 0.25, n):
+        if which == 1:
+            x = 7.0 / 36.0 - eps / 9.0
+            y = 1.0 / 4.0 + eps / 9.0
+        else:
+            x = 5.0 / 12.0 - eps / 9.0
+            y = 17.0 / 36.0 + eps / 9.0
+        gap = y - x
+        gx = flip(G_at(Glev, j, x)); gy = flip(G_at(Glev, j, y))
+        if len(gx) != j + 1 or len(gy) != j + 1:
+            shape_mismatches += 1
+            continue
+        ratio = 1e9
+        for i in range(j + 1):
+            if not math.isfinite(gx[i]) or not math.isfinite(gy[i]):
+                invalid_coefficients += 1
+                continue
+            if gx[i] <= 0.0 or gy[i] <= 0.0:
+                invalid_coefficients += 1
+                continue
+            min_coefficient = min(min_coefficient, gx[i], gy[i])
+            qxy = gx[i] / gy[i]; qyx = gy[i] / gx[i]
+            if not math.isfinite(qxy) or not math.isfinite(qyx):
+                invalid_coefficients += 1
+                continue
+            checked += 1
+            ratio = min(ratio, qxy, qyx)
+        worst = max(worst, -math.log(max(ratio, 1e-15)) / gap)
+    expected = (j + 1) * (n + 1)
+    return worst, {"checked_coefficients": checked,
+                   "expected_coefficients": expected,
+                   "invalid_coefficients": invalid_coefficients,
+                   "shape_mismatches": shape_mismatches,
+                   "min_coefficient": min_coefficient}
+
 def gate_env(report, Glev, tamper=None, jmax=16):
-    """P7: sharp envelope secant constants on the true (Master-step-
-    consumed) pair supports, gaps in [1/18,1/9]: pair-1 <= 0.85,
-    pair-2 <= 1.608, for 2 <= j <= jmax."""
+    """P7: sharp envelope secants on the two exact correlated pairs
+    consumed by the Master step: pair-1 <= 0.85 and pair-2 <= 1.61 for
+    2 <= j <= jmax.  An exact-recursion witness pins the former broader
+    pair-2 support claim as false and prevents that scope from returning."""
     cap1 = 0.55 if tamper == "env-tightcap" else 0.85
     cap2 = 1.61
-    sups1 = [secant_env(Glev, j, PAIR1[1], PAIR1[2], 1.0 / 18, 1.0 / 9)
-             for j in range(2, jmax + 1)]
+    rows1 = [master_pair_env(Glev, j, 1) for j in range(2, jmax + 1)]
+    rows2 = [master_pair_env(Glev, j, 2) for j in range(2, jmax + 1)]
+    sups1 = [row[0] for row in rows1]
     sup1 = max(sups1)
-    sup2 = max(secant_env(Glev, j, PAIR2[1], PAIR2[2], 1.0 / 18, 1.0 / 9)
-               for j in range(2, jmax + 1))
-    ok = (sup1 <= cap1) and (sup2 <= cap2)
+    sup2 = max(row[0] for row in rows2)
+    coverage = {
+        "pair1_checked_coefficients": sum(row[1]["checked_coefficients"] for row in rows1),
+        "pair2_checked_coefficients": sum(row[1]["checked_coefficients"] for row in rows2),
+        "pair1_expected_coefficients": sum(row[1]["expected_coefficients"] for row in rows1),
+        "pair2_expected_coefficients": sum(row[1]["expected_coefficients"] for row in rows2),
+        "invalid_coefficients": sum(
+            row[1]["invalid_coefficients"] for row in rows1 + rows2),
+        "shape_mismatches": sum(
+            row[1]["shape_mismatches"] for row in rows1 + rows2),
+        "minimum_checked_coefficient": min(
+            row[1]["min_coefficient"] for row in rows1 + rows2),
+    }
+    coverage["nonpositive_or_omitted_coefficients"] = (
+        coverage["pair1_expected_coefficients"]
+        + coverage["pair2_expected_coefficients"]
+        - coverage["pair1_checked_coefficients"]
+        - coverage["pair2_checked_coefficients"])
+    x, y = 4.0 / 9.0, 1.0 / 2.0
+    gx = flip(GD_direct(3, x)[0])[0]
+    gy = flip(GD_direct(3, y)[0])[0]
+    broad_pair2_witness = abs(math.log(gx / gy)) / (y - x)
+    ok = ((sup1 <= cap1) and (sup2 <= cap2)
+          and (coverage["nonpositive_or_omitted_coefficients"] == 0)
+          and (coverage["invalid_coefficients"] == 0)
+          and (coverage["shape_mismatches"] == 0)
+          and (broad_pair2_witness > 1.61))
     extra = ""
     if jmax >= 24:
         # INV-TAIL certified-support horizon: pair-1 sup over j >= 8
         sup1_tail = max(sups1[6:])
         ok = ok and (sup1_tail <= 0.65)
         extra = " tail(j>=8)=%.4f<=0.65" % sup1_tail
-    report.append(("P7 ENV sharp envelope secants, gaps in [1/18,1/9] "
+    else:
+        sup1_tail = None
+    report.append(("P7 ENV correlated Master-pair secants "
                    "(2<=j<=%d): pair-1<=%.2f pair-2<=%.3f; sups"
                    % (jmax, cap1, cap2),
-                   "pair1=%.4f pair2=%.4f%s" % (sup1, sup2, extra), ok))
-    return ok, {"pair1": sup1, "pair2": sup2}
+                   "pair1=%.4f pair2=%.4f%s broad_pair2=%.6f>1.61"
+                   % (sup1, sup2, extra, broad_pair2_witness), ok))
+    return ok, {"pair1_correlated": sup1, "pair2_correlated": sup2,
+                "pair1_tail_j_ge_8": sup1_tail,
+                "broad_pair2_counterexample": broad_pair2_witness,
+                "scope": "exact-correlated-master-pairs",
+                "level_range": [2, jmax],
+                "epsilon_grid_subintervals": 400,
+                "domains": {
+                    "pair1": ["7/36-epsilon/9", "1/4+epsilon/9"],
+                    "pair2": ["5/12-epsilon/9", "17/36+epsilon/9"],
+                    "epsilon": "[0,1/4]",
+                },
+                "coefficient_coverage": coverage}
 
 def gate_key(report, tamper=None):
     """P8: the (KEY) scalar inequality tying envelope+share constants
     together, 4000-pt eps grid, monotone decreasing, endpoint margin."""
-    L1S, L2S = 0.85, 1.61          # the P7-certified envelope caps
-    L1L, L2L = 1.086, 1.663        # the proved all-j loose caps
+    L1S, L2S = 0.85, 1.61          # P7 correlated-pair grid caps
+    L1L, L2L = 1.086, 1.663        # conditional loose sufficient caps
     GAMMA = 1.0 if tamper == "key-noshare" else 1.20
     s49 = math.sin(4 * PI / 9)
 
@@ -673,18 +823,21 @@ def gate_key(report, tamper=None):
         if prevF is not None and Fv > prevF + 1e-12:
             mono = False
         prevF = Fv
-    Fend = F(0.25 - 1e-9)
+    Fend = F(0.25)
     worstL = min(Fgen(eps, L1L, L2L) for eps in eps_grid(4000))
     ok = (worst > 0.0) and mono and (Fend >= 0.030 - 1e-3) and (worstL >= 0.015 - 1e-3)
-    report.append(("P8 KEY scalar inequality at the certified caps "
-                   "(0.85,1.61,1.20) + the proved loose caps (1.086,1.663,1.20)",
+    report.append(("P8 KEY implication at supplied sharp caps "
+                   "(0.85,1.61,1.20) + loose caps (1.086,1.663,1.20)",
                    "minF=%.4f mono=%s Fend=%.4f minF_loose=%.4f"
                    % (worst, mono, Fend, worstL), ok))
-    return ok, Fend
+    return ok, {"sharp_endpoint_margin": Fend,
+                "loose_grid_min_margin": worstL}
 
 def gate_base(report, Glev):
-    """P9: Master base cases. (a) j=2..5 Lipschitz-certified grid floors,
-    2000-pt eps grid. (b) direct Master check Delta>=0
+    """P9: Master base cases. (a) j=2..5 floating-grid floors adjusted by
+    the largest adjacent sampled slope, on a 2000-pt eps grid.  This is
+    computed evidence, not a continuum Lipschitz certificate. (b) direct
+    sampled Master check Delta>=0
     entrywise, j<=16 (trimmed), strict entries 0,1."""
     grid_a = eps_grid(2000); h = 0.25 / 2000
     floors = {}; ok_a = True
@@ -718,7 +871,7 @@ def gate_base(report, Glev):
             if dm < 0.0 or D[0] <= 0.0 or (len(D) > 1 and D[1] <= 0.0):
                 ok_b = False
     ok = ok_a and ok_b
-    report.append(("P9 BASE Lipschitz floors j=2..5 + direct Master j<=16 "
+    report.append(("P9 BASE sampled-slope floors j=2..5 + sampled Master j<=16 "
                    "strict entries 0,1", "floors[" +
                    " ".join("j%d:%.4f" % (j, floors[j]) for j in (2, 3, 4, 5)) +
                    "] worst_delta=%.3e" % worst_delta, ok))
@@ -887,6 +1040,9 @@ def gate_share(report, Glev, jmax):
     sibling parent t_in = 1/4 - eps/3 and its minus-child r = 1/4 + eps/9,
     every level 6 <= j <= jmax; per-level minima printed."""
     floor = float("inf"); arg = None
+    checked = 0; invalid = 0; shape_mismatches = 0
+    min_denominator = float("inf")
+    expected = sum(j for j in range(6, jmax + 1)) * 199
     for j in range(6, jmax + 1):
         for k in range(1, 200):
             eps = 0.25 * k / 200
@@ -894,20 +1050,61 @@ def gate_share(report, Glev, jmax):
             r = 0.25 + eps / 9
             gj = flip(bary_gd(tin, Glev[j]))
             gr = flip(bary_gd(r, Glev[j - 1]))
-            for i in range(len(gr)):
-                if gr[i] > 1e-13:
-                    q = gj[i] / gr[i]
-                    if q < floor:
-                        floor = q; arg = (j, eps, i)
-    ok = floor >= 1.20
+            if len(gj) != j + 1 or len(gr) != j:
+                shape_mismatches += 1
+                continue
+            for i in range(j):
+                if not math.isfinite(gj[i]) or not math.isfinite(gr[i]):
+                    invalid += 1
+                    continue
+                if gj[i] <= 0.0 or gr[i] <= 0.0:
+                    invalid += 1
+                    continue
+                min_denominator = min(min_denominator, gr[i])
+                q = gj[i] / gr[i]
+                if not math.isfinite(q):
+                    invalid += 1
+                    continue
+                checked += 1
+                if q < floor:
+                    floor = q; arg = (j, eps, i)
+    omitted = expected - checked
+    ok = (floor >= 1.20 and invalid == 0 and shape_mismatches == 0
+          and omitted == 0)
     report.append(("P12 SHARE child-share floor G_j(t_in)>=1.20*G_{j-1}(r) "
                    "(6<=j<=%d)" % jmax, "min=%.4f @(j=%d,eps=%.3f,i=%d)"
                    % (floor, arg[0], arg[1], arg[2]), ok))
-    return ok, floor
+    return ok, floor, {"checked_coefficients": checked,
+                       "expected_coefficients": expected,
+                       "invalid_coefficients": invalid,
+                       "shape_mismatches": shape_mismatches,
+                       "nonpositive_or_omitted_coefficients": omitted,
+                       "minimum_denominator": min_denominator,
+                       "level_range": [6, jmax],
+                       "epsilon_samples": 199}
 
 TAMPERS = ["atom-endpoint", "a-parity-flip", "kernel-flip", "law-parity",
            "dp-noins", "key-noshare", "r4-signflip", "env-tightcap",
-           "coupling-off"]
+           "coupling-off", "charge-uniform"]
+
+def parse_cli(argv):
+    """Reject unknown, duplicate, or conflicting modes fail-closed."""
+    known = {"--deep", "--tamper-selftest", "--emit-cert"}
+    unknown = [arg for arg in argv if arg not in known]
+    duplicate = len(argv) != len(set(argv))
+    modes = set(argv)
+    valid = (not modes or modes == {"--deep"}
+             or modes == {"--tamper-selftest"}
+             or modes == {"--emit-cert"}
+             or modes == {"--emit-cert", "--deep"})
+    if unknown or duplicate or not valid:
+        print("usage: %s [--deep] | [--emit-cert [--deep]] | "
+              "[--tamper-selftest]" % os.path.basename(sys.argv[0]),
+              file=sys.stderr)
+        if unknown:
+            print("unknown flags: %s" % " ".join(unknown), file=sys.stderr)
+        raise SystemExit(2)
+    return modes
 
 def run(tamper=None, deep=False):
     report = []
@@ -918,6 +1115,10 @@ def run(tamper=None, deep=False):
     oks.append(ok3)
     ok4, leak = gate_leak(report)
     oks.append(ok4)
+    ok_charge, charge_identity = gate_charge_identity(
+        report, uniform_tamper=(tamper == "charge-uniform")
+    )
+    oks.append(ok_charge)
     oks.append(gate_dp(report, noins_tamper=(tamper == "dp-noins")))
     oks.append(gate_atom(report, tamper=tamper))
     oks.append(gate_A_purity(report, tamper=tamper))
@@ -928,11 +1129,11 @@ def run(tamper=None, deep=False):
     oks.append(gate_l4(report, Glev, Dlev, jmax=12))
     ok7, env_sups = gate_env(report, Glev, tamper=tamper, jmax=jmax_gd)
     oks.append(ok7)
-    ok8, key_margin = gate_key(report, tamper=tamper)
+    ok8, key_margins = gate_key(report, tamper=tamper)
     oks.append(ok8)
     ok9, base_floors = gate_base(report, Glev)
     oks.append(ok9)
-    ok12, share_floor = gate_share(report, Glev, jmax=jmax_gd)
+    ok12, share_floor, share_coverage = gate_share(report, Glev, jmax=jmax_gd)
     oks.append(ok12)
     oks.append(gate_r4(report, tamper=tamper))
     ok11, tpi_min = gate_tpi(report)
@@ -944,15 +1145,21 @@ def run(tamper=None, deep=False):
     n = len(report)
     npass = sum(1 for _, _, ok in report if ok)
     print("RESULT: %s (%d/%d)" % ("PASS" if allok else "FAIL", npass, n))
-    extra = {"share_floor": share_floor,
+    extra = {"charge_identity": charge_identity,
+             "share_floor": share_floor,
+             "share_coverage": share_coverage,
              "envelope_sups": env_sups,
-             "key_endpoint_margin": key_margin,
+             "key_margins": key_margins,
+             "envelope_share_horizon_jmax": jmax_gd,
+             "evidence_method": "floating Chebyshev/grid evidence; no interval continuum certificate",
+             "inv_tail_status": "OPEN",
              "base_case_floors": {str(j): v for j, v in base_floors.items()},
              "tpi_census_min": tpi_min}
     return allok, margins, leak, extra
 
 if __name__ == "__main__":
-    if "--tamper-selftest" in sys.argv:
+    CLI = parse_cli(sys.argv[1:])
+    if "--tamper-selftest" in CLI:
         caught = 0
         for tm in TAMPERS:
             print("--- tamper:", tm)
@@ -960,18 +1167,52 @@ if __name__ == "__main__":
             if not allok:
                 caught += 1
         print("TAMPER SELFTEST: %d/%d caught" % (caught, len(TAMPERS)))
-    elif "--emit-cert" in sys.argv:
-        allok, margins, leak, extra = run()
-        cert = {"claims": "dense-shell class-charge computational core "
+        sys.exit(0 if caught == len(TAMPERS) else 1)
+    elif "--emit-cert" in CLI:
+        deep = "--deep" in CLI
+        allok, margins, leak, extra = run(deep=deep)
+        cert = {"schema": "dense-shell-class-charges/v2",
+                "claims": "dense-shell class-charge finite computational evidence "
                           "+ proof-layer gates",
+                "check_status": "PASS" if allok else "FAIL",
+                "finite_checks_pass": bool(allok),
+                "mathematical_verdict": "OPEN_GAP",
+                "all_depth_proved": False,
+                "deep": deep,
+                "deep_scope": ["P7", "P12"] if deep else [],
+                "envelope_share_horizon_jmax": extra["envelope_share_horizon_jmax"],
+                "gate_horizons": {
+                    "P6_L4": 12,
+                    "P7_envelope": extra["envelope_share_horizon_jmax"],
+                    "P9_direct_master": 16,
+                    "P12_share": extra["envelope_share_horizon_jmax"],
+                },
+                "evidence_method": extra["evidence_method"],
+                "envelope_scope": "exact-correlated-master-pairs",
+                "inv_tail_status": extra["inv_tail_status"],
+                "inv_tail_contracts": {
+                    "sharp_correlated": {
+                        "pair1_cap": 0.85,
+                        "pair2_cap": 1.61,
+                        "share_floor": 1.20,
+                    },
+                    "loose": {
+                        "pair1_cap": 1.086,
+                        "pair2_cap": 1.663,
+                        "share_floor": 1.20,
+                    },
+                    "proved": False,
+                },
+                "general_k_status": "CONJECTURAL",
                 "law_margins": margins,
                 "leak_table_B10": {str(k): v for k, v in leak.items()},
+                "charge_identity": extra["charge_identity"],
                 "envelope_sups": extra["envelope_sups"],
-                "key_endpoint_margin": extra["key_endpoint_margin"],
+                "key_margins": extra["key_margins"],
                 "base_case_floors": extra["base_case_floors"],
                 "tpi_census_min": extra["tpi_census_min"],
                 "share_floor": extra["share_floor"],
-                "pass": bool(allok)}
+                "share_coverage": extra["share_coverage"]}
         root = os.path.join(os.path.dirname(__file__) or ".", "..", "data",
                             "certificates", "dense-shell-class-charges")
         os.makedirs(root, exist_ok=True)
@@ -979,7 +1220,8 @@ if __name__ == "__main__":
         with open(path, "w") as f:
             json.dump(cert, f, indent=1, sort_keys=True)
         print("cert written:", path)
-    elif "--deep" in sys.argv:
-        run(deep=True)
+        sys.exit(0 if allok else 1)
+    elif "--deep" in CLI:
+        sys.exit(0 if run(deep=True)[0] else 1)
     else:
-        run()
+        sys.exit(0 if run()[0] else 1)

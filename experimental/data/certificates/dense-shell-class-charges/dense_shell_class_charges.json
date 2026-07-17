@@ -1,16 +1,99 @@
 {
+ "all_depth_proved": false,
  "base_case_floors": {
   "2": 0.17359839462858062,
   "3": 0.12496268308573565,
   "4": 0.06248134154286782,
   "5": 0.03124067077143391
  },
- "claims": "dense-shell class-charge computational core + proof-layer gates",
- "envelope_sups": {
-  "pair1": 0.7890897387285589,
-  "pair2": 1.6078949860283844
+ "charge_identity": {
+  "largest_legacy_counterexample": {
+   "B": 6,
+   "legacy_gap": 35.471541867013755,
+   "mask": 31,
+   "omega": 0.0,
+   "sigma": -35.471541867013755,
+   "wrong_mass": 0.0
+  },
+  "legacy_counterexample": {
+   "B": 4,
+   "legacy_gap": 3.5991828252070506,
+   "mask": 1,
+   "omega": 0.0,
+   "sigma": -3.5991828252070506,
+   "wrong_mass": 0.0
+  },
+  "max_identity_deviation": 7.105427357601002e-15
  },
- "key_endpoint_margin": 0.030255903753322932,
+ "check_status": "PASS",
+ "claims": "dense-shell class-charge finite computational evidence + proof-layer gates",
+ "deep": true,
+ "deep_scope": [
+  "P7",
+  "P12"
+ ],
+ "envelope_scope": "exact-correlated-master-pairs",
+ "envelope_share_horizon_jmax": 48,
+ "envelope_sups": {
+  "broad_pair2_counterexample": 1.6101363604712005,
+  "coefficient_coverage": {
+   "invalid_coefficients": 0,
+   "minimum_checked_coefficient": 7.105427357601002e-15,
+   "nonpositive_or_omitted_coefficients": 0,
+   "pair1_checked_coefficients": 490022,
+   "pair1_expected_coefficients": 490022,
+   "pair2_checked_coefficients": 490022,
+   "pair2_expected_coefficients": 490022,
+   "shape_mismatches": 0
+  },
+  "domains": {
+   "epsilon": "[0,1/4]",
+   "pair1": [
+    "7/36-epsilon/9",
+    "1/4+epsilon/9"
+   ],
+   "pair2": [
+    "5/12-epsilon/9",
+    "17/36+epsilon/9"
+   ]
+  },
+  "epsilon_grid_subintervals": 400,
+  "level_range": [
+   2,
+   48
+  ],
+  "pair1_correlated": 0.698020828954513,
+  "pair1_tail_j_ge_8": 0.5512115162886969,
+  "pair2_correlated": 1.4980580899193878,
+  "scope": "exact-correlated-master-pairs"
+ },
+ "evidence_method": "floating Chebyshev/grid evidence; no interval continuum certificate",
+ "finite_checks_pass": true,
+ "gate_horizons": {
+  "P12_share": 48,
+  "P6_L4": 12,
+  "P7_envelope": 48,
+  "P9_direct_master": 16
+ },
+ "general_k_status": "CONJECTURAL",
+ "inv_tail_contracts": {
+  "loose": {
+   "pair1_cap": 1.086,
+   "pair2_cap": 1.663,
+   "share_floor": 1.2
+  },
+  "proved": false,
+  "sharp_correlated": {
+   "pair1_cap": 0.85,
+   "pair2_cap": 1.61,
+   "share_floor": 1.2
+  }
+ },
+ "inv_tail_status": "OPEN",
+ "key_margins": {
+  "loose_grid_min_margin": 0.015536290226250027,
+  "sharp_endpoint_margin": 0.030255900730865426
+ },
  "law_margins": {
   "B10": 49.30014867296388,
   "B4": 2.615380614936997,
@@ -30,7 +113,21 @@
   "8": 0.06626607839302975,
   "9": 0.12140273342113418
  },
- "pass": true,
+ "mathematical_verdict": "OPEN_GAP",
+ "schema": "dense-shell-class-charges/v2",
+ "share_coverage": {
+  "checked_coefficients": 231039,
+  "epsilon_samples": 199,
+  "expected_coefficients": 231039,
+  "invalid_coefficients": 0,
+  "level_range": [
+   6,
+   48
+  ],
+  "minimum_denominator": 1.4210854715202004e-14,
+  "nonpositive_or_omitted_coefficients": 0,
+  "shape_mismatches": 0
+ },
  "share_floor": 1.2154438881512928,
  "tpi_census_min": 0.0009948824402161336
 }
