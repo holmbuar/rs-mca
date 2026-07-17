@@ -57,6 +57,15 @@ Keep entries concise and link to the relevant files.
 - **How it is useful:** The wave improves the safe-side audit structure around M1/L2 residuals, removes or labels false promotion routes, and gives future agents better certificate/verifier targets for `experimental/grande_finale.tex` and `experimental/cap25_cap_v13_raw.tex`.
 - **What to do next:** Keep these packets experimental until their dependencies are audited against the raw v13 and grande-finale ledgers.  Run heavy verifiers, Sage, and Lean builds only when a maintainer explicitly asks; otherwise use the notes and exact certificates as proof targets and audit inputs.
 
+### 2026-07-17 - Atlas coverage/payment interface audit and Lean bridge
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/lean/grande_finale/GrandeFinale/PrefixAtlasBridge.lean`, `experimental/lean/grande_finale/.gitignore`, `experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md`, `experimental/notes/audits/atlas_payment_interface_audit.md`, `experimental/scripts/verify_atlas_payment_interface.py`, and `experimental/data/certificates/atlas-payment-interface/atlas_payment_interface.json`.
+- **Status:** AUDIT. Generic prefix-fibre totality, concrete locator-prefix bad-slope unions, the direct RS fixed-line specialization, and the exact fixed-row outer-line `B_MCA` lift are theorem-level; construction of cellwise payment budgets, asymptotic-row uniformity, and full-catalogue payment remain open.
+- **What is being added:** A typed bridge from locator coefficient fibres to the actual RS MCA bad-slope numerator, including line-dependent cell budgets and the outer uniform-sum quantifier, together with an audit separating unconditional coverage from the explicit payment hypotheses. The audit classifies downstream `atlas-totality` wording as legacy/type-ambiguous rather than a mathematical theorem error.
+- **How it is useful:** It replaces a stale hard-input shorthand by the exact residual: C3 planted census, C7 projection degree, C8 higher-dimensional ray compilation, and C9 Sidon payment; the Sidon-paired consumer additionally needs primitive survival after C1--C8 on the deployed row or an earlier classification/payment.
+- **What to do next:** Prove line-dependent cell budgets `U(u0,u1,z)` and a uniform per-line sum bound, or establish the deployed-row C1--C8 classification of the Sidon-paired depth-one packet. Do not infer a profile census or numerical payment from prefix coverage alone.
+
 ### 2026-07-16 - KoalaBear branch-3 low-excess carrier cut
 
 - **Agent/model:** Codex integrating Scott Hughes PR #849.

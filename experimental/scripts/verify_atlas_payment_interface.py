@@ -1,0 +1,1008 @@
+#!/usr/bin/env python3
+"""Verify the prefix-atlas coverage/payment interface audit.
+
+This stdlib-only verifier checks repository text and Lean declaration anchors,
+then records a small exact negative control.  It intentionally does not infer
+payment from coverage: the checked Lean bridge carries its cellwise budgets as
+an explicit hypothesis.
+"""
+
+from __future__ import annotations
+
+import argparse
+import difflib
+import hashlib
+import json
+import re
+import sys
+from pathlib import Path
+from typing import Callable, Mapping
+
+
+ROOT = Path(__file__).resolve().parents[2]
+CERTIFICATE = ROOT / "experimental/data/certificates/atlas-payment-interface/atlas_payment_interface.json"
+
+PREFIX_ATLAS = "experimental/lean/asymptotic_spine/AsymptoticSpine/PrefixAtlas.lean"
+PREFIX_BRIDGE = "experimental/lean/grande_finale/GrandeFinale/PrefixAtlasBridge.lean"
+ATLAS_LEDGER = "experimental/notes/thresholds/atlas_cat_cell_ledger.md"
+HEAVY_FIBER = "experimental/notes/thresholds/heavy_fiber_admissibility_transfer.md"
+VERIFIER_SCRIPT = "experimental/scripts/verify_atlas_payment_interface.py"
+AUDIT_DOCUMENT = "experimental/notes/audits/atlas_payment_interface_audit.md"
+CORRESPONDENCE_DOCUMENT = "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md"
+THRESHOLD_NOTES = ROOT / "experimental/notes/thresholds"
+
+
+class AuditError(RuntimeError):
+    """Raised when a semantic source anchor is absent or inconsistent."""
+
+
+class Audit:
+    def __init__(self) -> None:
+        self.checks: list[str] = []
+
+    def require(self, condition: bool, label: str) -> None:
+        if not condition:
+            raise AuditError(f"failed check: {label}")
+        self.checks.append(label)
+
+
+def normalized(text: str) -> str:
+    return " ".join(text.split())
+
+
+def lean_code_without_comments(text: str) -> str:
+    """Blank Lean comments and strings while preserving line structure."""
+
+    code: list[str] = []
+    block_depth = 0
+    line_comment = False
+    in_string = False
+    escaped = False
+    index = 0
+    while index < len(text):
+        char = text[index]
+        pair = text[index : index + 2]
+
+        if line_comment:
+            if char == "\n":
+                line_comment = False
+                code.append("\n")
+            else:
+                code.append(" ")
+            index += 1
+            continue
+
+        if block_depth:
+            if pair == "/-":
+                block_depth += 1
+                code.extend((" ", " "))
+                index += 2
+            elif pair == "-/":
+                block_depth -= 1
+                code.extend((" ", " "))
+                index += 2
+            else:
+                code.append("\n" if char == "\n" else " ")
+                index += 1
+            continue
+
+        if in_string:
+            code.append("\n" if char == "\n" else " ")
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            index += 1
+            continue
+
+        if pair == "--":
+            line_comment = True
+            code.extend((" ", " "))
+            index += 2
+        elif pair == "/-":
+            block_depth = 1
+            code.extend((" ", " "))
+            index += 2
+        elif char == '"':
+            in_string = True
+            code.append(" ")
+            index += 1
+        else:
+            code.append(char)
+            index += 1
+
+    return "".join(code)
+
+
+def digest(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def line_of(text: str, needle: str) -> int:
+    position = text.find(needle)
+    if position < 0:
+        raise AuditError(f"missing line anchor: {needle!r}")
+    return text.count("\n", 0, position) + 1
+
+
+def read_source(relative: str, overrides: Mapping[str, str]) -> str:
+    if relative in overrides:
+        return overrides[relative]
+    return (ROOT / relative).read_text(encoding="utf-8")
+
+
+def declaration_lines(text: str) -> dict[str, int]:
+    code = lean_code_without_comments(text)
+    declarations: dict[str, int] = {}
+    pattern = re.compile(r"^(?:noncomputable\s+)?(?:def|theorem)\s+([A-Za-z0-9_']+)", re.MULTILINE)
+    for match in pattern.finditer(code):
+        declarations[match.group(1)] = code.count("\n", 0, match.start()) + 1
+    return declarations
+
+
+def theorem_signature(text: str, name: str) -> tuple[str, int]:
+    code = lean_code_without_comments(text)
+    matches = list(
+        re.finditer(
+            rf"^theorem\s+{re.escape(name)}\b",
+            code,
+            re.MULTILINE,
+        )
+    )
+    if len(matches) != 1:
+        raise AuditError(f"expected exactly one theorem declaration for {name}")
+    start = matches[0].start()
+    end = code.find(":= by", start)
+    if end < 0:
+        raise AuditError(f"missing proof boundary for theorem {name}")
+    return (
+        normalized(code[start:end]),
+        code.count("\n", 0, start) + 1,
+    )
+
+
+def audit_prefix_atlas(text: str, audit: Audit) -> dict[str, object]:
+    flat = normalized(text)
+    declarations = declaration_lines(text)
+    required = [
+        "fibreAtlas",
+        "mem_fibreAtlas_flatten_iff",
+        "nodup_fibreAtlas_flatten",
+        "realizedKeys",
+        "realizedKeys_nodup",
+        "totalFibreAtlas",
+        "prefixFibreAtlas_total_of_keys",
+        "totalFibreAtlas_cells_nonempty",
+        "prefixFibreAtlas_total",
+    ]
+    for name in required:
+        audit.require(name in declarations, f"PrefixAtlas declaration {name}")
+
+    separation = (
+        "Coverage and payment remain separate: a total key map partitions every witness, "
+        "while any numerical payment for the resulting cells is an independent input."
+    )
+    profile_boundary = (
+        "Only the profile-count bound is supplied separately; coverage has no atlas assumption."
+    )
+    audit.require(separation in flat, "PrefixAtlas coverage/payment separation")
+    audit.require("No payment theorem is used." in flat, "PrefixAtlas payment nonclaim")
+    audit.require(profile_boundary in flat, "PrefixAtlas supplied profile-count boundary")
+    audit.require(
+        "firstMatchLeaves [] (totalFibreAtlas witnesses key)" in flat,
+        "PrefixAtlas first-match totality conclusion",
+    )
+
+    return {
+        "path": PREFIX_ATLAS,
+        "sha256": digest(text),
+        "declarations": {name: declarations[name] for name in required},
+        "coverage_payment_separation_line": line_of(text, "Coverage and payment remain separate"),
+        "payment_nonclaim_line": line_of(text, "No payment theorem is used."),
+        "verified_claim": "total key fibres give witness-exhaustive first-match coverage",
+        "verified_nonclaim": "coverage supplies neither cell payment nor a payment theorem",
+    }
+
+
+def audit_prefix_bridge(text: str, audit: Audit) -> dict[str, object]:
+    flat = normalized(text)
+    declarations = declaration_lines(text)
+    required = [
+        "supportPrefixKey",
+        "supportPrefixCell",
+        "mem_supportPrefixCell_iff",
+        "supportPrefixCells_cover",
+        "supportPrefixKey_space_card",
+        "coefficientFiber_biUnion_eq_powersetCard",
+        "prefixBadSlopeCell",
+        "badSlopeSetOnPowersetCard_eq_prefixCells_biUnion",
+        "badSlopeSetOnPowersetCard_card_le_sum_prefixCells",
+        "badSlopeSetOnSupportFamily_eq_prefixCells_biUnion",
+        "badSlopeSetOnSupportFamily_card_le_sum_prefixCells",
+        "badSlopeSetOnSupportFamily_card_le_sum_prefixBudgets",
+        "rsPrefixBadSlopeCell",
+        "rsMcaBadSlopes_eq_prefixCells_biUnion",
+        "rsMcaBadSlopes_card_le_sum_prefixCells",
+        "rsMcaBadSlopes_card_le_sum_prefixBudgets",
+        "B_MCA_rsEval_le_of_linewise_prefixBudgets",
+        "B_MCA_rsEval_le_sum_prefixBudgets",
+    ]
+    for name in required:
+        audit.require(name in declarations, f"PrefixAtlasBridge declaration {name}")
+
+    expected_payment_signatures = {
+        "badSlopeSetOnSupportFamily_card_le_sum_prefixBudgets": (
+            "theorem badSlopeSetOnSupportFamily_card_le_sum_prefixBudgets "
+            "(H : (D → F) →ₗ[F] W) (point : D -> F) "
+            "(supports : Finset (Finset D)) (K m : Nat) (u0 u1 : D -> F) "
+            "(U : (Fin (m - K) -> F) -> Nat) "
+            "(hU : ∀ z, (SyndromeLine.badSlopeSetOnSupportFamily H "
+            "(supportPrefixCell point supports K m z) u0 u1).card ≤ U z) : "
+            "(SyndromeLine.badSlopeSetOnSupportFamily H supports u0 u1).card ≤ ∑ z, U z"
+        ),
+        "rsMcaBadSlopes_card_le_sum_prefixBudgets": (
+            "theorem rsMcaBadSlopes_card_le_sum_prefixBudgets "
+            "(ev : D -> F) (hev : Function.Injective ev) "
+            "(k R : Nat) (hsize : k + R = Fintype.card D) "
+            "(a K : Nat) (hka : k + 1 ≤ a) (u0 u1 : D -> F) "
+            "(U : (Fin (a - K) -> F) -> Nat) "
+            "(hU : ∀ z, (rsPrefixBadSlopeCell ev R a K u0 u1 z).card ≤ U z) : "
+            "(Finset.univ.filter (fun gamma : F => GrandeFinale.MCABad "
+            "(CollisionAwarePole.rsEval ev k : Set (D -> F)) u0 u1 a gamma)).card ≤ ∑ z, U z"
+        ),
+        "B_MCA_rsEval_le_of_linewise_prefixBudgets": (
+            "theorem B_MCA_rsEval_le_of_linewise_prefixBudgets "
+            "(ev : D -> F) (hev : Function.Injective ev) "
+            "(k R : Nat) (hsize : k + R = Fintype.card D) "
+            "(a K : Nat) (hka : k + 1 ≤ a) "
+            "(U : (D -> F) -> (D -> F) -> (Fin (a - K) -> F) -> Nat) "
+            "(B : Nat) (hcell : ∀ u0 u1 z, "
+            "(rsPrefixBadSlopeCell ev R a K u0 u1 z).card ≤ U u0 u1 z) "
+            "(hunif : ∀ u0 u1, ∑ z, U u0 u1 z ≤ B) : "
+            "GrandeFinale.B_MCA (CollisionAwarePole.rsEval ev k : Set (D -> F)) a ≤ B"
+        ),
+        "B_MCA_rsEval_le_sum_prefixBudgets": (
+            "theorem B_MCA_rsEval_le_sum_prefixBudgets "
+            "(ev : D -> F) (hev : Function.Injective ev) "
+            "(k R : Nat) (hsize : k + R = Fintype.card D) "
+            "(a K : Nat) (hka : k + 1 ≤ a) "
+            "(U : (Fin (a - K) -> F) -> Nat) "
+            "(hU : ∀ (u0 u1 : D -> F) z, "
+            "(rsPrefixBadSlopeCell ev R a K u0 u1 z).card ≤ U z) : "
+            "GrandeFinale.B_MCA (CollisionAwarePole.rsEval ev k : Set (D -> F)) a ≤ ∑ z, U z"
+        ),
+    }
+    payment_signatures: dict[str, object] = {}
+    for name, expected in expected_payment_signatures.items():
+        actual, theorem_line = theorem_signature(text, name)
+        audit.require(
+            actual == expected,
+            f"PrefixAtlasBridge exact payment signature {name}",
+        )
+        payment_signatures[name] = {
+            "line": theorem_line,
+            "normalized_sha256": digest(actual),
+        }
+
+    lean_code = lean_code_without_comments(text)
+    forbidden_syntax = {
+        "any sorry token": re.compile(
+            r"\bsorry\b", re.MULTILINE
+        ),
+        "any admit token": re.compile(
+            r"\badmit\b", re.MULTILINE
+        ),
+        "same-line proof sorry": re.compile(
+            r":=[ \t]*by[ \t]+sorry(?:[ \t]*(?:--[^\n]*)?)?$", re.MULTILINE
+        ),
+        "same-line proof admit": re.compile(
+            r":=[ \t]*by[ \t]+admit(?:[ \t]*(?:--[^\n]*)?)?$", re.MULTILINE
+        ),
+        "explicit axiom declaration": re.compile(
+            r"^[ \t]*axiom[ \t]+[A-Za-z_]", re.MULTILINE
+        ),
+        "opaque declaration": re.compile(
+            r"^[ \t]*opaque[ \t]+[A-Za-z_]", re.MULTILINE
+        ),
+    }
+    for label, pattern in forbidden_syntax.items():
+        audit.require(
+            pattern.search(lean_code) is None,
+            f"PrefixAtlasBridge rejects {label}",
+        )
+
+    axiom_print_names = list(expected_payment_signatures)
+    for name in axiom_print_names:
+        audit.require(
+            re.search(
+                rf"^#print axioms {re.escape(name)}[ \t]*$",
+                lean_code,
+                re.MULTILINE,
+            )
+            is not None,
+            f"PrefixAtlasBridge #print axioms {name}",
+        )
+
+    fixed_row_comment = (
+        "Exact fixed-row outer-line interface: prefix-cell budgets may depend "
+        "on the received line; only their sum must have a bound uniform over "
+        "lines in this row."
+    )
+    audit.require(
+        fixed_row_comment in flat,
+        "PrefixAtlasBridge frozen fixed-row comment wording",
+    )
+    audit.require(
+        "import GrandeFinale.PrefixPigeonhole" in text
+        and "import GrandeFinale.SyndromeLine" in text,
+        "PrefixAtlasBridge concrete imports",
+    )
+    explicit_budget = (
+        "(hU : ∀ z, (SyndromeLine.badSlopeSetOnSupportFamily H "
+        "(supportPrefixCell point supports K m z) u0 u1).card ≤ U z)"
+    )
+    audit.require(explicit_budget in flat, "PrefixAtlasBridge explicit cellwise budget hypothesis")
+    audit.require(
+        "(SyndromeLine.badSlopeSetOnSupportFamily H supports u0 u1).card ≤ ∑ z, U z" in flat,
+        "PrefixAtlasBridge summed budget conclusion",
+    )
+    audit.require(
+        "The hypotheses are the missing payment input; coverage alone does not construct them." in flat,
+        "PrefixAtlasBridge missing-payment boundary",
+    )
+    audit.require(
+        "Prefix totality does not prove a profile count, a first-match catalogue classification, "
+        "or a numerical payment." in flat,
+        "PrefixAtlasBridge top-level nonclaim",
+    )
+    audit.require(
+        "The source convention is `K := k+1`, giving depth `a-k-1`." in flat,
+        "PrefixAtlasBridge RS source-depth convention",
+    )
+    audit.require(
+        "(hU : ∀ z, (rsPrefixBadSlopeCell ev R a K u0 u1 z).card ≤ U z)" in flat,
+        "PrefixAtlasBridge RS explicit cellwise budget hypothesis",
+    )
+    audit.require(
+        "The theorem does not construct the budgets." in flat,
+        "PrefixAtlasBridge RS budget nonclaim",
+    )
+    linewise_start = text.find("theorem B_MCA_rsEval_le_of_linewise_prefixBudgets")
+    linewise_end = text.find(":= by", linewise_start)
+    audit.require(
+        linewise_start >= 0 and linewise_end > linewise_start,
+        "PrefixAtlasBridge fixed-row outer-line signature bounds",
+    )
+    linewise_signature = normalized(text[linewise_start:linewise_end])
+    linewise_budget_type = (
+        "(U : (D -> F) -> (D -> F) -> (Fin (a - K) -> F) -> Nat)"
+    )
+    linewise_cell = (
+        "(hcell : ∀ u0 u1 z, "
+        "(rsPrefixBadSlopeCell ev R a K u0 u1 z).card ≤ U u0 u1 z)"
+    )
+    linewise_uniform = "(hunif : ∀ u0 u1, ∑ z, U u0 u1 z ≤ B)"
+    linewise_output = (
+        "GrandeFinale.B_MCA (CollisionAwarePole.rsEval ev k : Set (D -> F)) a ≤ B"
+    )
+    audit.require(
+        linewise_budget_type in linewise_signature,
+        "PrefixAtlasBridge linewise budget type",
+    )
+    audit.require(
+        linewise_cell in linewise_signature,
+        "PrefixAtlasBridge linewise cell hypothesis",
+    )
+    audit.require(
+        linewise_uniform in linewise_signature,
+        "PrefixAtlasBridge summed uniformity hypothesis",
+    )
+    audit.require(
+        linewise_output in linewise_signature,
+        "PrefixAtlasBridge fixed-row outer-line conclusion",
+    )
+    audit.require(
+        "(hU :" not in linewise_signature,
+        "PrefixAtlasBridge fixed-row interface has no line-independent cell budget",
+    )
+    line_uniform_budget = (
+        "(hU : ∀ (u0 u1 : D -> F) z, "
+        "(rsPrefixBadSlopeCell ev R a K u0 u1 z).card ≤ U z)"
+    )
+    audit.require(
+        line_uniform_budget in flat,
+        "PrefixAtlasBridge B_MCA line-uniform budget hypothesis",
+    )
+    audit.require(
+        "GrandeFinale.B_MCA (CollisionAwarePole.rsEval ev k : Set (D -> F)) a ≤ ∑ z, U z"
+        in flat,
+        "PrefixAtlasBridge B_MCA summed budget conclusion",
+    )
+
+    return {
+        "path": PREFIX_BRIDGE,
+        "sha256": digest(text),
+        "declarations": {name: declarations[name] for name in required},
+        "payment_interface_signatures": payment_signatures,
+        "forbidden_syntax_checks": sorted(forbidden_syntax),
+        "axiom_print_lines": [
+            f"#print axioms {name}" for name in axiom_print_names
+        ],
+        "fixed_row_comment_line": line_of(
+            text, "Exact fixed-row outer-line interface"
+        ),
+        "fixed_row_comment_sha256": digest(fixed_row_comment),
+        "coverage_theorem_line": declarations["supportPrefixCells_cover"],
+        "bad_slope_union_theorem_line": declarations[
+            "badSlopeSetOnSupportFamily_eq_prefixCells_biUnion"
+        ],
+        "payment_interface_theorem_line": declarations[
+            "badSlopeSetOnSupportFamily_card_le_sum_prefixBudgets"
+        ],
+        "rs_bad_slope_union_theorem_line": declarations[
+            "rsMcaBadSlopes_eq_prefixCells_biUnion"
+        ],
+        "rs_payment_interface_theorem_line": declarations[
+            "rsMcaBadSlopes_card_le_sum_prefixBudgets"
+        ],
+        "b_mca_linewise_payment_interface_theorem_line": declarations[
+            "B_MCA_rsEval_le_of_linewise_prefixBudgets"
+        ],
+        "b_mca_payment_interface_theorem_line": declarations[
+            "B_MCA_rsEval_le_sum_prefixBudgets"
+        ],
+        "payment_input": "for every concrete prefix key z, bad-slope-card(cell z) <= U(z)",
+        "payment_output": "bad-slope-card(full support family) <= sum_z U(z)",
+        "line_uniform_payment_input": (
+            "one U(z) bounds every locator-prefix cell for every received-line pair (u0,u1)"
+        ),
+        "line_uniform_payment_output": "B_MCA(rsEval(ev,k),a) <= sum_z U(z)",
+        "linewise_payment_input": (
+            "hcell bounds each cell by U(u0,u1,z); hunif bounds only each linewise sum by B"
+        ),
+        "linewise_payment_output": "B_MCA(rsEval(ev,k),a) <= B",
+        "linewise_signature_sha256": digest(linewise_signature),
+        "verified_nonclaim": "the bridge constructs no U and proves no catalogue/profile payment",
+    }
+
+
+def blocker_paragraph(section: str, cell: str) -> tuple[str, int]:
+    pattern = re.compile(
+        rf"^- \*\*{re.escape(cell)} \(([^)]*)\)\.\*\*(.*?)(?=^- \*\*C[0-9]+ \(|\Z)",
+        re.MULTILINE | re.DOTALL,
+    )
+    match = pattern.search(section)
+    if match is None:
+        raise AuditError(f"missing Section 3.2 blocker paragraph for {cell}")
+    return normalized(match.group(0)), section.count("\n", 0, match.start()) + 1
+
+
+def audit_ledger(text: str, audit: Audit) -> dict[str, object]:
+    flat = normalized(text)
+    audit.require(
+        "FULL-CATALOGUE SUMMATION BLOCKED AT FOUR NAMED CELLS" in flat,
+        "atlas ledger four-blocker status",
+    )
+    audit.require(
+        "Tally: 5 PAID `{C1, C2, C4, C5, C6}`, 4 UNPAID/CONDITIONAL `{C3, C7, C8, C9}`."
+        in text,
+        "atlas ledger paid/unpaid tally",
+    )
+    section_start = text.find("### 3.2 Summation")
+    section_end = text.find("### 3.3 Composed", section_start)
+    audit.require(section_start >= 0 and section_end > section_start, "atlas ledger Section 3.2 bounds")
+    section = text[section_start:section_end]
+    requirements = {
+        "C3": ["subexponential census", "CONDITIONAL"],
+        "C7": ["projection-degree budget", "OPEN"],
+        "C8": ["CONDITIONAL on (RC)"],
+        "C9": ["UNPAID (general)"],
+    }
+    blockers: dict[str, object] = {}
+    section_base_line = text.count("\n", 0, section_start)
+    for cell, tokens in requirements.items():
+        paragraph, local_line = blocker_paragraph(section, cell)
+        for token in tokens:
+            audit.require(token in paragraph, f"atlas ledger {cell} token {token}")
+        blockers[cell] = {
+            "line": section_base_line + local_line,
+            "paragraph_sha256": digest(paragraph),
+            "required_status_tokens": tokens,
+        }
+
+    audit.require(
+        "Coverage / exhaustion --- COMPOSES (PROVED, unconditional)" in text,
+        "atlas ledger unconditional exhaustion",
+    )
+    audit.require(
+        "Summation --- COMPOSES over the 5 paid cells, BLOCKED over the full catalogue" in text,
+        "atlas ledger payment boundary heading",
+    )
+    return {
+        "path": ATLAS_LEDGER,
+        "sha256": digest(text),
+        "unconditional_exhaustion_line": line_of(
+            text, "Coverage / exhaustion --- COMPOSES (PROVED, unconditional)"
+        ),
+        "payment_boundary_line": line_of(
+            text, "Summation --- COMPOSES over the 5 paid cells"
+        ),
+        "paid_cells": ["C1", "C2", "C4", "C5", "C6"],
+        "blocked_or_conditional_cells": blockers,
+        "verified_boundary": "full-catalogue payment remains blocked exactly at C3/C7/C8/C9",
+    }
+
+
+def audit_heavy_fiber(text: str, audit: Audit) -> dict[str, object]:
+    flat = normalized(text)
+    h4 = (
+        "(H4) the packet is a genuine primitive first-match residual whose atlas (A2) is "
+        "witness-exhaustive on the depth-R prefix chart (so \"earlier cell\" is meaningful)."
+    )
+    nonclaim = (
+        "Hypothesis (H4) is atlas-internal ((A2) for the prefix chart), assumed from "
+        "ledger-admissibility, not re-proved here."
+    )
+    audit.require("CONDITIONAL (the transfer)" in flat, "HeavyFiber conditional status")
+    audit.require(h4 in flat, "HeavyFiber H4 witness-exhaustive hypothesis")
+    audit.require(nonclaim in flat, "HeavyFiber H4 nonclaim")
+    audit.require(
+        "a single depth-1 prefix fiber" in flat,
+        "HeavyFiber depth-one concrete fiber",
+    )
+    audit.require(
+        "**Not** an image-scale MI/MA or Sidon payment." in flat,
+        "HeavyFiber Sidon-payment nonclaim",
+    )
+    return {
+        "path": HEAVY_FIBER,
+        "sha256": digest(text),
+        "h4_line": line_of(text, "(H4) the packet is a genuine primitive first-match residual"),
+        "h4_nonclaim_line": line_of(text, "Hypothesis (H4) is atlas-internal"),
+        "depth_one_fiber_line": line_of(text, "a single depth-1 prefix fiber"),
+        "status": "conditional on atlas-internal H4; H4 is assumed, not re-proved",
+        "verified_nonclaim": "the transfer does not pay the image-scale MI/MA or Sidon cell",
+    }
+
+
+ATLAS_TERM = re.compile(r"atlas(?:-|[ \t\r\n]+)totality", re.IGNORECASE)
+
+
+def stale_hits_in_text(text: str) -> list[dict[str, object]]:
+    hits: list[dict[str, object]] = []
+    for match in ATLAS_TERM.finditer(text):
+        paragraph_start = text.rfind("\n\n", 0, match.start()) + 2
+        paragraph_end = text.find("\n\n", match.end())
+        if paragraph_end < 0:
+            paragraph_end = len(text)
+        paragraph = normalized(text[paragraph_start:paragraph_end])
+        if "codex" not in paragraph.lower():
+            continue
+        hits.append(
+            {
+                "line": text.count("\n", 0, match.start()) + 1,
+                "term": normalized(match.group(0)).lower(),
+                "context_sha256": digest(paragraph),
+            }
+        )
+    return hits
+
+
+def audit_stale_wording(
+    overrides: Mapping[str, str], audit: Audit
+) -> dict[str, object]:
+    files: dict[str, object] = {}
+    occurrence_count = 0
+    for path in sorted(THRESHOLD_NOTES.glob("*.md")):
+        relative = path.relative_to(ROOT).as_posix()
+        text = read_source(relative, overrides)
+        hits = stale_hits_in_text(text)
+        if hits:
+            files[relative] = {"sha256": digest(text), "hits": hits}
+            occurrence_count += len(hits)
+
+    audit.require(len(files) >= 5, "stale atlas-totality wording appears downstream")
+    audit.require(
+        occurrence_count >= len(files),
+        "stale atlas-totality occurrence count covers every listed file",
+    )
+    return {
+        "scope": "experimental/notes/thresholds/*.md",
+        "file_count": len(files),
+        "occurrence_count": occurrence_count,
+        "files": files,
+        "classification": "legacy owner/lane wording; not a new mathematical escape",
+        "replacement_interface": (
+            "generic totality is integrated; the remaining obligation is primitive survival/"
+            "catalogue classification plus cellwise profile and bad-slope payment"
+        ),
+    }
+
+
+def negative_control(audit: Audit) -> dict[str, object]:
+    rows: list[dict[str, object]] = []
+    for bits in range(0, 9):
+        count = 1 << bits
+        items = list(range(count))
+        cells: dict[int, list[int]] = {}
+        for item in items:
+            key = item  # A total identity key: every item realizes its own key.
+            cells.setdefault(key, []).append(item)
+        flattened = [item for key in sorted(cells) for item in cells[key]]
+        singleton = all(len(cell) == 1 for cell in cells.values())
+        audit.require(flattened == items, f"negative control flatten exact at b={bits}")
+        audit.require(len(cells) == count, f"negative control one key per item at b={bits}")
+        audit.require(singleton, f"negative control singleton cells at b={bits}")
+        rows.append(
+            {
+                "bits": bits,
+                "item_count": count,
+                "realized_key_count": len(cells),
+                "all_cells_singletons": singleton,
+                "flatten_exact": flattened == items,
+            }
+        )
+    return {
+        "model": "identity total map i -> i on items [0, 2^b)",
+        "rows": rows,
+        "exact_conclusion": (
+            "totality and exact coverage permit 2^b realized singleton cells; "
+            "coverage alone gives no subexponential profile or slope-payment bound"
+        ),
+    }
+
+
+def max_sum_quantifier_negative_control(audit: Audit) -> dict[str, object]:
+    rows: list[dict[str, int]] = []
+    for bits in range(0, 9):
+        count = 1 << bits
+        lines = range(count)
+        cells = range(count)
+
+        def cell(line: int, key: int) -> int:
+            return int(line == key)
+
+        line_sums = [sum(cell(line, key) for key in cells) for line in lines]
+        cell_sups = [max(cell(line, key) for line in lines) for key in cells]
+        sup_line_sum = max(line_sums)
+        sum_cell_sup = sum(cell_sups)
+
+        audit.require(
+            line_sums == [1] * count,
+            f"max/sum control every line sum is one at b={bits}",
+        )
+        audit.require(
+            cell_sups == [1] * count,
+            f"max/sum control every cell supremum is one at b={bits}",
+        )
+        audit.require(sup_line_sum == 1, f"max/sum control sup-sum at b={bits}")
+        audit.require(
+            sum_cell_sup == count,
+            f"max/sum control sum-sup at b={bits}",
+        )
+        rows.append(
+            {
+                "bits": bits,
+                "line_count": count,
+                "cell_count": count,
+                "sup_line_sum_cells": sup_line_sum,
+                "sum_cells_sup_line": sum_cell_sup,
+                "overpayment_factor": sum_cell_sup // sup_line_sum,
+            }
+        )
+    return {
+        "model": "cell(line,z) = 1 iff z = line on 2^b lines and cells",
+        "rows": rows,
+        "exact_conclusion": (
+            "sup_line sum_z cell(line,z) = 1 while "
+            "sum_z sup_line cell(line,z) = 2^b"
+        ),
+    }
+
+
+def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, object]:
+    source_overrides = overrides or {}
+    audit = Audit()
+    prefix_text = read_source(PREFIX_ATLAS, source_overrides)
+    bridge_text = read_source(PREFIX_BRIDGE, source_overrides)
+    ledger_text = read_source(ATLAS_LEDGER, source_overrides)
+    heavy_text = read_source(HEAVY_FIBER, source_overrides)
+    artifact_bindings: dict[str, object] = {}
+    for relative in (
+        VERIFIER_SCRIPT,
+        AUDIT_DOCUMENT,
+        CORRESPONDENCE_DOCUMENT,
+    ):
+        artifact_text = read_source(relative, source_overrides)
+        audit.require(
+            bool(artifact_text),
+            f"bound artifact is nonempty: {relative}",
+        )
+        artifact_bindings[relative] = {
+            "path": relative,
+            "sha256": digest(artifact_text),
+            "byte_count": len(artifact_text.encode("utf-8")),
+        }
+
+    prefix = audit_prefix_atlas(prefix_text, audit)
+    bridge = audit_prefix_bridge(bridge_text, audit)
+    ledger = audit_ledger(ledger_text, audit)
+    heavy = audit_heavy_fiber(heavy_text, audit)
+    stale = audit_stale_wording(source_overrides, audit)
+    control = negative_control(audit)
+    quantifier_control = max_sum_quantifier_negative_control(audit)
+
+    certificate: dict[str, object] = {
+        "schema": "atlas-payment-interface/v2",
+        "verdict": "AUDIT: coverage proved; catalogue/profile/payment interface remains explicit",
+        "artifact_bindings": artifact_bindings,
+        "sources": {
+            "generic_prefix_atlas": prefix,
+            "concrete_prefix_bridge": bridge,
+            "catalogue_ledger": ledger,
+            "heavy_fiber_transfer": heavy,
+        },
+        "stale_downstream_wording": stale,
+        "negative_control": control,
+        "max_sum_quantifier_negative_control": quantifier_control,
+        "interface_summary": {
+            "proved": [
+                "total prefix keys partition and first-match-cover all supplied witnesses",
+                "concrete locator-prefix cells cover the supplied support family",
+                "support-family bad slopes equal the union of cellwise bad slopes",
+                "explicit cellwise U(z) budgets sum to a full-family budget",
+                "linewise U(u0,u1,z) budgets plus uniform summed bound B imply B_MCA <= B",
+                "stronger line-independent U(z) budgets imply B_MCA <= sum_z U(z)",
+            ],
+            "not_proved": [
+                "construction of the cellwise U(z) budgets",
+                "asymptotic-row same-catalogue uniformity (UNIF)",
+                "C1-C8 primitive-survival/catalogue classification for the intended row",
+                "full-catalogue payment at C3/C7/C8/C9",
+                "deployed-scale image-normalized Sidon payment",
+            ],
+        },
+        "verification_check_count": len(audit.checks),
+    }
+    return certificate
+
+
+def canonical(certificate: object) -> str:
+    return json.dumps(certificate, indent=2, sort_keys=True, ensure_ascii=True) + "\n"
+
+
+def verify_checked_in(actual: dict[str, object]) -> None:
+    if not CERTIFICATE.is_file():
+        raise AuditError(f"missing checked-in certificate: {CERTIFICATE.relative_to(ROOT)}")
+    expected_text = CERTIFICATE.read_text(encoding="utf-8")
+    actual_text = canonical(actual)
+    if expected_text != actual_text:
+        diff = "".join(
+            difflib.unified_diff(
+                expected_text.splitlines(keepends=True),
+                actual_text.splitlines(keepends=True),
+                fromfile="checked-in certificate",
+                tofile="recomputed certificate",
+                n=2,
+            )
+        )
+        raise AuditError("checked-in certificate mismatch:\n" + diff)
+
+
+def replace_once(text: str, old: str, new: str) -> str:
+    if text.count(old) != 1:
+        raise AuditError(f"tamper fixture expected one occurrence of {old!r}")
+    return text.replace(old, new, 1)
+
+
+def regex_replace_once(text: str, pattern: str, replacement: str) -> str:
+    changed, count = re.subn(pattern, replacement, text, count=1, flags=re.IGNORECASE)
+    if count != 1:
+        raise AuditError(f"tamper fixture did not match {pattern!r}")
+    return changed
+
+
+def commented_signature_spoof(text: str) -> str:
+    name = "badSlopeSetOnSupportFamily_card_le_sum_prefixBudgets"
+    signature, _ = theorem_signature(text, name)
+    renamed = replace_once(
+        text,
+        f"theorem {name}",
+        f"theorem {name}_renamed",
+    )
+    return renamed + f"\n\n/-\n{signature} := by\n-/\n"
+
+
+def run_tamper_selftest(baseline: dict[str, object]) -> int:
+    generic_budget_prefix = (
+        "    (U : (Fin (m - K) -> F) -> Nat)\n"
+        "    (hU : ∀ z,"
+    )
+    semantic_mutations: list[tuple[str, str, Callable[[str], str]]] = [
+        (
+            "collapse coverage/payment separation",
+            PREFIX_ATLAS,
+            lambda text: replace_once(
+                text,
+                "Coverage and payment remain separate",
+                "Coverage and payment are identified",
+            ),
+        ),
+        (
+            "remove generic universal cellwise budget",
+            PREFIX_BRIDGE,
+            lambda text: replace_once(
+                text,
+                generic_budget_prefix,
+                generic_budget_prefix.replace("(hU : ∀ z,", "(hU : ∃ z,"),
+            ),
+        ),
+        (
+            "rename the C9 blocker",
+            ATLAS_LEDGER,
+            lambda text: replace_once(text, "- **C9 (Sidon).**", "- **C10 (Sidon).**"),
+        ),
+        (
+            "erase the atlas-internal H4 label",
+            HEAVY_FIBER,
+            lambda text: replace_once(text, "(H4) the packet", "(H5) the packet"),
+        ),
+        (
+            "weaken the stronger line-independent B_MCA budget",
+            PREFIX_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "(hU : ∀ (u0 u1 : D -> F) z,",
+                "(hU : ∃ (u0 u1 : D -> F), ∀ z,",
+            ),
+        ),
+        (
+            "weaken the fixed-row outer-line summed bound",
+            PREFIX_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "(hunif : ∀ u0 u1, ∑ z, U u0 u1 z ≤ B)",
+                "(hunif : ∃ u0 u1, ∑ z, U u0 u1 z ≤ B)",
+            ),
+        ),
+        (
+            "add an extra hgoal binder",
+            PREFIX_BRIDGE,
+            lambda text: replace_once(
+                text,
+                generic_budget_prefix,
+                generic_budget_prefix.replace(
+                    "    (hU : ∀ z,",
+                    "    (hgoal : True)\n    (hU : ∀ z,",
+                ),
+            ),
+        ),
+        (
+            "insert standalone sorry",
+            PREFIX_BRIDGE,
+            lambda text: text + "\n\nsorry\n",
+        ),
+        (
+            "weaken linewise hcell",
+            PREFIX_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "(hcell : ∀ u0 u1 z,",
+                "(hcell : ∃ u0 u1, ∀ z,",
+            ),
+        ),
+        (
+            "replace live theorem with commented exact signature",
+            PREFIX_BRIDGE,
+            commented_signature_spoof,
+        ),
+    ]
+
+    stale_files = baseline["stale_downstream_wording"]["files"]  # type: ignore[index]
+    stale_path = sorted(stale_files)[0]
+    binding_mutations: list[tuple[str, str, Callable[[str], str]]] = [
+        (
+            "resolve one stale atlas-totality phrase",
+            stale_path,
+            lambda text: regex_replace_once(text, r"atlas[-\s]+totality", "atlas payment"),
+        ),
+        (
+            "alter verifier module docstring",
+            VERIFIER_SCRIPT,
+            lambda text: replace_once(
+                text,
+                "This stdlib-only verifier checks "
+                "repository text",
+                "This altered stdlib-only verifier checks repository text",
+            ),
+        ),
+    ]
+
+    baseline_text = canonical(baseline)
+    detected = 0
+    for label, relative, mutate in semantic_mutations:
+        original = read_source(relative, {})
+        try:
+            tampered_text = mutate(original)
+        except AuditError as error:
+            raise AuditError(
+                f"semantic tamper fixture failed to apply: {label}: {error}"
+            ) from error
+        try:
+            build_certificate({relative: tampered_text})
+        except AuditError:
+            detected += 1
+            print(f"TAMPER: DETECTED (AuditError) - {label}")
+            continue
+        raise AuditError(f"semantic tamper did not raise AuditError: {label}")
+
+    for label, relative, mutate in binding_mutations:
+        original = read_source(relative, {})
+        try:
+            tampered_text = mutate(original)
+        except AuditError as error:
+            raise AuditError(
+                f"binding tamper fixture failed to apply: {label}: {error}"
+            ) from error
+        try:
+            mutated = build_certificate({relative: tampered_text})
+        except AuditError as error:
+            raise AuditError(
+                f"binding tamper must use certificate delta, not AuditError: {label}"
+            ) from error
+        if canonical(mutated) == baseline_text:
+            raise AuditError(f"binding tamper escaped certificate delta: {label}")
+        detected += 1
+        print(f"TAMPER: DETECTED (certificate delta) - {label}")
+    return detected
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="verify the checked-in certificate (the default action)",
+    )
+    parser.add_argument(
+        "--emit-certificate",
+        metavar="PATH",
+        type=Path,
+        help="write the recomputed canonical certificate to PATH",
+    )
+    parser.add_argument(
+        "--tamper-selftest",
+        action="store_true",
+        help="verify the certificate and detect twelve in-memory mutations",
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    try:
+        certificate = build_certificate()
+        if args.emit_certificate is not None:
+            output = args.emit_certificate
+            output.parent.mkdir(parents=True, exist_ok=True)
+            output.write_text(canonical(certificate), encoding="utf-8")
+            print(f"WROTE: {output}")
+            print(f"RESULT: PASS ({certificate['verification_check_count']} checks)")
+            return 0
+
+        verify_checked_in(certificate)
+        tamper_count = 0
+        if args.tamper_selftest:
+            tamper_count = run_tamper_selftest(certificate)
+        suffix = f", {tamper_count} tamper mutations detected" if tamper_count else ""
+        print(f"RESULT: PASS ({certificate['verification_check_count']} checks{suffix})")
+        return 0
+    except (AuditError, OSError, json.JSONDecodeError) as error:
+        print(f"RESULT: FAIL - {error}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
