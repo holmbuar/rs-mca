@@ -336,9 +336,9 @@ def evaluate(artifacts):
                 and "dense-shell-inv-tail-dependency-audit" in entry,
                 "new audit entry or bound artifact paths missing")
     rec.require("agents-log-template-status",
-                statuses == ["AUDIT", "COUNTEREXAMPLE", "CONDITIONAL"]
+                statuses == ["AUDIT"]
                 and all(status in ALLOWED_LOG_STATUSES for status in statuses),
-                "new entry must use only template statuses in chosen order")
+                "new entry must choose the single appropriate template status")
     rec.require("agents-log-no-invented-status",
                 "OPEN GAP" not in (match.group(1) if match else ""),
                 "OPEN GAP belongs in audit prose, not agents-log Status")
@@ -422,8 +422,8 @@ def run_tamper_selftest(base):
     text_variant("remove-nonfinite-guards", "class_verifier",
                  "math.isfinite", "finite_guard_removed", replace_all=True)
     text_variant("invent-log-status", "agents_log",
-                 "AUDIT / COUNTEREXAMPLE / CONDITIONAL",
-                 "AUDIT / COUNTEREXAMPLE / OPEN GAP")
+                 "- **Status:** AUDIT.",
+                 "- **Status:** OPEN GAP.")
 
     for name, mutation in (
         ("certificate-promotes-tail",

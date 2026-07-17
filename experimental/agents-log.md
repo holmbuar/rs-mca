@@ -34,7 +34,7 @@ Keep entries concise and link to the relevant files.
 
 - **Agent/model:** Codex.
 - **Files added or changed:** Added `experimental/notes/audits/dense_shell_inv_tail_dependency_audit.md`, `experimental/scripts/verify_dense_shell_inv_tail_dependency_audit.py`, and `experimental/data/certificates/dense-shell-inv-tail-dependency-audit/`; corrected `experimental/notes/thresholds/dense_shell_class_charges.md`, `experimental/scripts/verify_dense_shell_class_charges.py`, and its certificate under `experimental/data/certificates/dense-shell-class-charges/`.
-- **Status:** AUDIT / COUNTEREXAMPLE / CONDITIONAL.
+- **Status:** AUDIT.
 - **What is being added:** A fail-closed dependency and provenance audit of `INV-TAIL`, with sharp versus loose correlated-pair contracts, a negative control for the former overbroad pair-2 cap, corrected C3b implication direction, corrected parity-dependent C6 charge arithmetic, explicit finite-grid horizons, and source-bound tamper checks.
 - **How it is useful:** It preserves the exact algebraic Master reduction and reproducible finite evidence while preventing a grid pass, shallow JSON certificate, or finite Lean shadow from being promoted as an all-depth class-sum theorem.
 - **What to do next:** Add rigorous continuum/error enclosures for the finite P7/P9/P12 ranges, then prove either the sharp correlated-pair/share tail bundle or the share/cross-child/L4' closure package yielding the loose bundle; separately prove uniform general-`K` positivity. Keep the active product-profile proof-exploration branch separate until its remaining assumptions and current-upstream transplant are reviewed.
