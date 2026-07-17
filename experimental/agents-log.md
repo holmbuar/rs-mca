@@ -37,10 +37,7 @@ Keep entries concise and link to the relevant files.
   `experimental/scripts/verify_dense_shell_inv_tail_closure.py`,
   `experimental/data/certificates/dense-shell-inv-tail-closure/dense_shell_inv_tail_closure.json`,
   `experimental/lean/inv_tail_closure/` (stdlib Lean, builds, no sorry).
-- **Status:** PROVED (the reductions: caps <= no-spike; the mediant step
-  mechanism; both mass recursions; census corner-sufficiency; pair-1 loose
-  closure given the gated Dp layer) + COMPUTED (certified grids to j = 60)
-  + CONDITIONAL on the single scalar (PROP-TAIL).
+- **Status:** CONDITIONAL.
 - **What is being added:** the CLT frame for the #880 level vectors
   (polynomial convergence to a degenerate spreading profile, beta = 0.6191;
   drift laws; seven witnessed refutations including two of the lane's own
