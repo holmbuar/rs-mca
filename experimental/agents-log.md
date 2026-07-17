@@ -30,6 +30,7 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
@@ -38,6 +39,16 @@ Keep entries concise and link to the relevant files.
 - **What is being added:** The submitted v9.2 package for `MDS Paving Bounds for Reed--Solomon MCA`, including the 55-page A4 PDF, source-release files, AI-use statement, reproducibility notes, and exact-arithmetic verifier scripts.
 - **How it is useful:** This supersedes the earlier v8 experimental release as the repository copy of the ePrint-submitted paving manuscript. The package records the final submitted source, reproducibility instructions, and the distinction between unconditional arithmetic checks and the conditional retained-lift arithmetic.
 - **What to do next:** When the IACR ePrint identifier is public, update the README/site/citations with the report link. If revising the paper, keep the v9.2 submission package immutable and add a new versioned package rather than editing these submitted files in place.
+
+### 2026-07-17 - C3 same-line common-factor route cut
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/agents-log.md`, `experimental/notes/audits/c3_same_line_common_factor_explosion.md`, `experimental/scripts/verify_c3_same_line_common_factor_explosion.py`, `experimental/data/certificates/c3-same-line-common-factor-explosion/c3_same_line_common_factor_explosion.json`, `experimental/lean/c3_same_line_common_factor_explosion/C3SameLineCommonFactorExplosion.lean`, `experimental/lean/c3_same_line_common_factor_explosion/CORRESPONDENCE.md`, `experimental/lean/c3_same_line_common_factor_explosion/README.md`, `experimental/lean/c3_same_line_common_factor_explosion/lakefile.lean`, and `experimental/lean/c3_same_line_common_factor_explosion/lean-toolchain`.
+- **Status:** COUNTEREXAMPLE
+- **What is being added:** A growing-depth and exact finite construction showing that actual supports on one received line can realize exponentially many positive-density common locator factors with many distinct slopes, plus an abstract nested ceiling-pigeonhole Lean kernel with the full composition retained as an explicit statement target.  The audit supersedes and withdraws the older census note's full-PAID/triangular-shift interpretation: the sigma arithmetic is candidate census only, the triangular shift identifies but does not bound the residual fiber, and full C3 remains open.
+- **How it is useful:** It cuts the false route from same-line common-factor actualness to a subexponential C3 census or identity-scale slope charge, without refuting the repaired planted-payment criterion or claiming full C1/C2 first-match survival.
+- **What to do next:** Prove a canonical bounded-parameter received-line-resultant family with residual-prefix and slope-image budgets, and complete the support-cell/divisibility/scalar-extension Lean composition in the packet-local standalone companion while keeping the pinned Grande Finale tree untouched.  Do not use the superseded full-PAID interpretation or treat the restricted candidate census or statement target as a C3 payment.
+
 
 ### 2026-07-17 - Paving-v8 audit and dense-shell class charges
 
