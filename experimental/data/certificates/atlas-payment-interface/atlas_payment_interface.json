@@ -1,19 +1,19 @@
 {
   "artifact_bindings": {
     "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md": {
-      "byte_count": 18094,
+      "byte_count": 21635,
       "path": "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md",
-      "sha256": "fdfe88d11ef555402caadd7c1e6a9ce44b9ffe139734c04b42fbbb59c47c1432"
+      "sha256": "b32f3e4ea02fe81c4936b54066e88fdc6fc53d8350c418ed5a88bc57b7e07173"
     },
     "experimental/notes/audits/atlas_payment_interface_audit.md": {
-      "byte_count": 18936,
+      "byte_count": 22245,
       "path": "experimental/notes/audits/atlas_payment_interface_audit.md",
-      "sha256": "6f4e86aab3066c984197b85a311a1fb2a6f1ab81e19937369e90641183a974cc"
+      "sha256": "17c88a76da2ee27a959e01aaace695aba280d6ab5bbbdd7baec9713f5a772188"
     },
     "experimental/scripts/verify_atlas_payment_interface.py": {
-      "byte_count": 76150,
+      "byte_count": 90818,
       "path": "experimental/scripts/verify_atlas_payment_interface.py",
-      "sha256": "12aa6f3de02745f0745a0f59f3e6571982bcfa27a000f009435f6b9bef771576"
+      "sha256": "03d2ccdb98ed9d383b149e3d23494f7236ab3a2ea7c04becca1c3e91ab9a64f6"
     }
   },
   "interface_summary": {
@@ -24,9 +24,11 @@
       "a concrete C1-C9 Reed-Solomon semantic atlas, prefix classification, or payment",
       "asymptotic-row same-catalogue uniformity (UNIF)",
       "C1-C8 primitive-survival/catalogue classification for the intended row",
-      "full-catalogue payment at C3/C7/C8/C9",
+      "general or row-level C3 semantic family identification, residual/profile estimate, and distinct-slope payment",
       "a lower retained-support occupancy bound for any intended semantic C7 profile",
-      "deployed-scale image-normalized Sidon payment"
+      "semantic C8 chart assignment and deployed ray-incidence degree bounds",
+      "deployed-scale image-normalized Sidon payment",
+      "the final FC1 hpaid comparison and row-uniform sum for intended C8/C9 profiles"
     ],
     "proved": [
       "total prefix keys partition and first-match-cover all supplied witnesses",
@@ -48,7 +50,11 @@
       "locator-prefix first-match budgets specialize to B_MCA without a raw-exhaustivity hypothesis",
       "literal witness cells split exactly over realized explanation-state fibers",
       "positive retained-support occupancy bounds each post-first-match slope cell by floor(|residual|/H)",
-      "the resulting line-dependent RC1 quotient budgets specialize to the full B_MCA numerator"
+      "the resulting line-dependent RC1 quotient budgets specialize to the full B_MCA numerator",
+      "full-slice boundary image and retained residual fibers remain distinct normalization objects",
+      "retained residual fiber counts and equal-boundary collision pairs satisfy exact first/second-moment identities",
+      "supplied C8 ray-incidence degrees and C9 residual moment data bound the actual first-match slope cell by the literal FC1 floor",
+      "the explicit multiplicative subgroup-coset C3 candidate family has subexponential census sigma(N), with multiplier-fixed loci contained in it"
     ]
   },
   "max_sum_quantifier_negative_control": {
@@ -198,8 +204,18 @@
       }
     ]
   },
-  "schema": "atlas-payment-interface/v6",
+  "schema": "atlas-payment-interface/v7",
   "sources": {
+    "c3_scope": {
+      "census_path": "experimental/notes/thresholds/c3_planted_divisor_census.md",
+      "census_sha256": "8224621e77a6dfe9dcc7a34d01b5090b32065873bb543dd8cb38b69c3327a6c8",
+      "frontiers_path": "experimental/asymptotic_rs_mca_frontiers.tex",
+      "frontiers_sha256": "0e3aa7b1ba79b1065439ae484f4cb989d80cabe18afb68ec63a6b21d1f3370fd",
+      "partial_verdict_line": 254,
+      "planted_payment_line": 2405,
+      "remaining_scope": "row-level semantic family identification, residual/profile scale, description entropy, distinct-slope projection, and unrestricted common-factor/resultant C3 payment remain open",
+      "verified_narrow_result": "the explicit multiplicative subgroup-coset candidate family has census sigma(N) <= N(1+ln N), and multiplier-fixed loci lie in it"
+    },
     "catalogue_ledger": {
       "blocked_or_conditional_cells": {
         "C3": {
@@ -401,6 +417,65 @@
       "sha256": "88a0959285c34b14dc705dc19877c1fb53e33ae647dbf648222b6ab18c3579cf",
       "status": "conditional on atlas-internal H4; H4 is assumed, not re-proved",
       "verified_nonclaim": "the transfer does not pay the image-scale MI/MA or Sidon cell"
+    },
+    "rs_exact_card_boundary_payment_bridge": {
+      "actual_cell_fc1_line": 154,
+      "axiom_print_lines": [
+        "#print axioms ResidualBoundaryProfile.card_eq_sum_fiberCount",
+        "#print axioms ResidualBoundaryProfile.collisionPairs_card_eq_sum_sq_fiberCount",
+        "#print axioms ResidualBoundaryProfile.fullMean_pos",
+        "#print axioms firstMatchSlopeCell_card_le_boundaryRayMomentFloor",
+        "#print axioms firstMatchSlopeCell_card_le_boundaryRayMomentBudget"
+      ],
+      "boundary_payment_signatures": {
+        "card_eq_sum_fiberCount": {
+          "line": 75,
+          "normalized_sha256": "7636fdbc516e4e94ff255ffa8dcc22e274ec6f2c3f63d4e7a0ca5c818ebacab1"
+        },
+        "collisionPairs_card_eq_sum_sq_fiberCount": {
+          "line": 84,
+          "normalized_sha256": "c99daa45112406c3e2ea3662ae8111cbf0b1bccb1bebac41666f0d089c724587"
+        },
+        "firstMatchSlopeCell_card_le_boundaryRayMomentBudget": {
+          "line": 200,
+          "normalized_sha256": "f98a4cd1dca6e8ae0ce4bc11f57fbeaaa2d1b4cdc5c9d5c430a9a397e158495c"
+        },
+        "firstMatchSlopeCell_card_le_boundaryRayMomentFloor": {
+          "line": 154,
+          "normalized_sha256": "15c8a6f132f2528c2bb19ae2c5a0460ce57b3583f7916c901e9efdb49c34a183"
+        },
+        "fullMean_pos": {
+          "line": 112,
+          "normalized_sha256": "51b631d4c80564e25c9e5c94c70d0175ef051337958c67fa8a398738b31f488f"
+        }
+      },
+      "collision_identity_line": 84,
+      "declarations": {
+        "assignedResidualSupports": 130,
+        "boundaryFiber": 54,
+        "card_eq_sum_fiberCount": 75,
+        "collisionPairs": 64,
+        "collisionPairs_card_eq_sum_sq_fiberCount": 84,
+        "fiberCount": 59,
+        "firstMatchBoundaryProfile": 138,
+        "firstMatchSlopeCell_card_le_boundaryRayMomentBudget": 200,
+        "firstMatchSlopeCell_card_le_boundaryRayMomentFloor": 154,
+        "fullMean": 70,
+        "fullMean_pos": 112,
+        "targetImage": 50
+      },
+      "fiber_sum_line": 75,
+      "forbidden_syntax_checks": [
+        "any admit token",
+        "any axiom token",
+        "any opaque token",
+        "any sorry token"
+      ],
+      "path": "experimental/lean/grande_finale/GrandeFinale/RSExactCardBoundaryPaymentBridge.lean",
+      "sha256": "640d1e0df828b898db015ab156e89c042b3bee99c88f1aedf90f55ccf22f05c7",
+      "verified_boundary": "semantic C8 incidence, deployed C9 boundary/moment payment, final hpaid comparison, and row-uniform summation remain explicit inputs",
+      "verified_claim": "full-image normalization and retained residual fibers give exact first/second-moment data, and supplied ray degrees plus a residual moment bound the actual assigned slope cell by the literal FC1 floor",
+      "verified_nonclaim": "the adapter does not classify a C7/C8/C9 cell or prove any hard input"
     },
     "rs_exact_card_occupancy_bridge": {
       "axiom_print_lines": [
@@ -786,5 +861,5 @@
     "scope": "experimental/notes/thresholds/*.md"
   },
   "verdict": "AUDIT: coverage proved; catalogue/profile/payment interface remains explicit",
-  "verification_check_count": 263
+  "verification_check_count": 314
 }

@@ -11,7 +11,9 @@ CATALOGUE, RAW-WITNESS EXHAUSTIVITY, AND PARITY-CHECK SUPPORT-CELL SLOPE ALIGNME
 CONCRETE LOCATOR-PREFIX TO SYNDROME-LINE BAD-SLOPE
 UNION = PROVED / TYPED LOCATOR-PREFIX FIXED-ROW OUTER-LINE B_MCA IMPLICATION =
 PROVED / POST-SLOPE-FIRST-MATCH RETAINED-SUPPORT OCCUPANCY (RC1)
-ADAPTER = PROVED, LOWER OCCUPANCY AND UNIF EXPLICIT / ACTUAL C1--C9 SEMANTIC WITNESS CLASSIFICATION, PAYMENT, AND
+ADAPTER = PROVED, LOWER OCCUPANCY AND UNIF EXPLICIT / ACTUAL FIRST-MATCH
+BOUNDARY-FIBRE AND COLLISION-PAIR IDENTITIES + FC1 RAY/MOMENT LIFT = PROVED,
+C8/C9 GEOMETRY AND PAYMENT EXPLICIT / ACTUAL C1--C9 SEMANTIC WITNESS CLASSIFICATION, PAYMENT, AND
 ASYMPTOTIC (UNIF) = NOT PROVED.`
 
 The phrase `atlas-totality lane (in progress)` still appears in downstream
@@ -31,14 +33,16 @@ in `GrandeFinale.PrefixPigeonhole`, the finite support-family incidence
 compiler in `GrandeFinale.SyndromeLine`, the injective RS exact-support
 reduction in `GrandeFinale.RSExactSupportUpper`, and the source analyses
 `atlas_missing_witness.md`, `atlas_cat_cell_ledger.md`,
+`c3_planted_divisor_census.md`,
 `heavy_fiber_admissibility_transfer.md`, and
 `staircase_concentration_sidon_paired.md`. The typed leaf modules are
 `GrandeFinale.PrefixAtlasBridge` and
 `GrandeFinale.FirstMatchWitnessBridge`, together with the concrete
 `GrandeFinale.RSExactCardWitnessBridge`,
 `GrandeFinale.RSExactCardPrefixWitnessBridge`, and
-`GrandeFinale.RSExactCardOccupancyBridge`. No `.tex` or `.pdf` file
-is edited.
+`GrandeFinale.RSExactCardOccupancyBridge`, followed by
+`GrandeFinale.RSExactCardBoundaryPaymentBridge`. No `.tex` or `.pdf` file is
+edited.
 
 ---
 
@@ -194,6 +198,28 @@ uniform quotient-sum bound `hunif`.
 No semantic C7 profile-scale, classifier, boundary-image theorem, profile
 payment, or C1--C9 routing theorem follows from this conditional adapter.
 
+The boundary-payment leaf
+`GrandeFinale.RSExactCardBoundaryPaymentBridge` continues from that C7
+projection boundary to the C8/C9 finite compiler. Its
+`ResidualBoundaryProfile` keeps the full support slice (which determines the
+boundary image and mean fibre size) distinct from the retained residual
+support slice (whose fibres and equal-boundary pairs enter the numerator).
+`card_eq_sum_fiberCount` and
+`collisionPairs_card_eq_sum_sq_fiberCount` prove the exact first and second
+moment identities. `fullMean_pos` proves that a nonempty full slice has a
+positive full-image normalization.
+
+`firstMatchSlopeCell_card_le_boundaryRayMomentFloor` instantiates
+`ExactProfileCompiler.primitiveCell_slope_card_le_floor` on the actual
+`firstMatchSlopeCell`. The C8 incidence relation and its universal lower/upper
+degrees `H,J`, the C9 boundary map/profile data and largest-fibre witness, and
+the residual-to-full support inclusion remain inputs. A deployed estimate for
+the resulting moment is still needed to discharge `hpaid`.
+`firstMatchSlopeCell_card_le_boundaryRayMomentBudget` adds the final integer
+comparison `hpaid`, so its result is directly usable as an `hcell` premise in
+the existing exact-cardinality `B_MCA` wrappers. This is a structural
+composition theorem, not a proof that any intended row supplies those inputs.
+
 These locator-prefix witness cells are not a C1--C9 semantic classification.
 Here “exact-cardinality” still does not assert that the chosen support is the
 explainer's complete agreement set: agreement at additional coordinates is
@@ -229,16 +255,21 @@ five paid regimes from the full-catalogue residual. The exact residual is:
 
 | Cell | Remaining obligation | Current anchor |
 | --- | --- | --- |
-| C3 planted | Prove a subexponential census of allowed planted divisors/profiles. | `atlas_cat_cell_ledger.md` L161--164 |
+| C3 planted | General semantic payment remains open. `c3_planted_divisor_census.md` proves only the subexponential candidate-family census for explicit multiplicative subgroup-coset and multiplier-fixed loci. That discharges one census factor after a row is proved to use this family; it does not construct the row-level family or prove residual profile scale, description entropy, or distinct-slope projection. Unrestricted common-factor/resultant readings remain open. | `c3_planted_divisor_census.md` Sections 3--10; `atlas_cat_cell_ledger.md` L161--164 |
 | C7 saturation | Prove semantic profile collapse/classification and a positive retained-support occupancy `H` at the intended profile scale, or an equivalent direct final-slope estimate. | L165--169 |
 | C8 higher-dimensional balanced core | Prove the higher-dimensional ray-compiler condition `(RC)` or an equivalent direct decomposition/payment. | L170--176 |
 | C9 Fourier/Sidon | Prove the deployed-scale image-normalized Sidon payment. | L177--186 |
 
-Equivalently, the unresolved interface is **C3 planted census + C7 semantic
-classification/profile collapse and positive intended-profile occupancy (or a
-direct final-slope estimate) + C8 higher-dimensional `(RC)` + C9 Sidon
-payment**. Generic prefix coverage and the conditional RC1 adapter remove none
-of these four semantic obligations.
+Equivalently, the unresolved interface is **general C3 semantic planted
+payment + C7 semantic classification/profile collapse and positive
+intended-profile occupancy (or a direct final-slope estimate) + C8
+higher-dimensional `(RC)` + C9 Sidon payment**. For the explicit
+subgroup-coset/multiplier-fixed C3 family, only the candidate-census factor is
+already proved; calling the whole cell paid would also require the missing
+row-level identification, residual/profile estimate, and slope projection.
+Generic prefix coverage, the conditional RC1 adapter, and the new FC1 bridge
+remove none of those semantic hypotheses. The FC1 bridge instead pins the
+exact conclusion once the C8 incidence and C9 moment inputs are supplied.
 
 ---
 
@@ -304,7 +335,9 @@ typing, not a failed proof.
 
 For future references, replace the legacy shorthand by the exact obligation:
 “primitive survival / C1--C8 classification on the deployed row, together with
-the C3/C7/C8/C9 cellwise profile and bad-slope payment.”
+general C3 semantic payment (with the narrow coset/fixed-locus census factor
+already proved), C7 occupancy or direct projection, C8 ray incidence, and C9
+image-normalized moment payment.”
 
 ---
 
@@ -323,11 +356,17 @@ the C3/C7/C8/C9 cellwise profile and bad-slope payment.”
   occupancies into exact post-first-match quotient cell bounds. It constructs
   neither the lower bound, a semantic C7 classifier/profile payment, a
   boundary-image theorem, nor `hunif`.
+- `RSExactCardBoundaryPaymentBridge` proves the full-image normalization,
+  retained-fibre sum, collision-pair identity, and actual-cell FC1 implication.
+  It does not construct semantic C8 incidence degrees, a deployed C9 moment,
+  the final `hpaid` comparison, or the row-uniform sum.
 - First-match residual witness cells need not cover the raw witnesses. Only
   their per-cell slope images are proved exact.
 - No bridge proves a semantic cell payment or the uniform sum hypothesis
-  `(UNIF)`. No subexponential profile census, intended-profile C7 occupancy,
-  C8 compiler bound, or C9 Sidon payment is constructed.
+  `(UNIF)`. The narrow subgroup-coset/multiplier-fixed C3 candidate census is
+  proved elsewhere, but no general or row-level C3 family/payment,
+  intended-profile C7 occupancy, semantic C8 incidence bound, or deployed C9
+  Sidon payment is constructed here.
 - No deployed smooth/circle row, main asymptotic theorem, or reserve theorem is
   closed.
 - No guarded result in the downstream notes is retracted or corrected.
@@ -335,14 +374,16 @@ the C3/C7/C8/C9 cellwise profile and bad-slope payment.”
 
 `PrefixAtlasBridge.lean`, `FirstMatchWitnessBridge.lean`,
 `RSExactCardWitnessBridge.lean`, `RSExactCardPrefixWitnessBridge.lean`, and
-`RSExactCardOccupancyBridge.lean` are deliberately leaf modules. The first
+`RSExactCardOccupancyBridge.lean`, and
+`RSExactCardBoundaryPaymentBridge.lean` are deliberately leaf modules. The first
 reaches the root module through `GrandeFinale.SyndromeLine`; the generic
 witness bridge imports `GrandeFinale` directly; the concrete adapter imports
 that generic bridge; the prefix-witness composition imports the concrete
 adapter and support-prefix leaf; and the occupancy leaf imports that prefix
-composition plus `FirstWallMDSExtensionInverse`. Importing these leaves back into
-`GrandeFinale.lean` would create an import cycle. The focused verification
-targets are therefore
+composition plus `FirstWallMDSExtensionInverse`. The boundary-payment leaf
+imports the occupancy leaf and `ExactProfileCompiler`. Importing these leaves
+back into `GrandeFinale.lean` would create an import cycle. The focused
+verification targets are therefore
 
 ```text
 lake build GrandeFinale.PrefixAtlasBridge
@@ -350,6 +391,7 @@ lake build GrandeFinale.FirstMatchWitnessBridge
 lake build GrandeFinale.RSExactCardWitnessBridge
 lake build GrandeFinale.RSExactCardPrefixWitnessBridge
 lake build GrandeFinale.RSExactCardOccupancyBridge
+lake build GrandeFinale.RSExactCardBoundaryPaymentBridge
 ```
 
 The companion stdlib verifier
@@ -357,8 +399,10 @@ The companion stdlib verifier
 anchors, the exact-cardinality catalogue and bad-slope image, raw prefix-cell
 witness exhaustivity and support-cell alignment, the exact explanation-state
 fibre sum, the universal lower-occupancy `hocc` boundary, the RC1 quotient,
-and the fixed `hunif` boundary. It also checks the fixed-line `hU` and exact
-linewise `hcell` boundary, the four-cell ledger, the conditional `(H4)`
-interface, the legacy wording census, and the exponential-cell negative
-control. Its machine-readable output is
+the full-vs-residual normalization boundary, the retained boundary-fibre and
+collision-pair identities, the exact C8/C9 FC1 signature, its final `hpaid`
+boundary, and the fixed `hunif` boundary. It also checks the fixed-line `hU`
+and exact linewise `hcell` boundary, the four-cell ledger, the narrow scope of
+the integrated C3 census, the conditional `(H4)` interface, the legacy wording
+census, and the exponential-cell negative control. Its machine-readable output is
 `experimental/data/certificates/atlas-payment-interface/atlas_payment_interface.json`.

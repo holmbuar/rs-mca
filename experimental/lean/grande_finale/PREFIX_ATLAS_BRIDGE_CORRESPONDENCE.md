@@ -15,6 +15,11 @@ corresponding support-prefix bad-slope cell.
 The occupancy adapter then proves the exact retained-support fibre sum and a
 conditional post-slope-first-match RC1 quotient/`B_MCA` lift. It supplies no
 semantic C7 classifier, lower occupancy theorem, profile payment, or `(UNIF)`.
+The boundary-payment adapter keeps the full boundary normalization separate
+from the retained residual, proves the residual fibre and collision-pair
+identities, and instantiates the FC1 ray/moment floor on the actual assigned
+slope cell. It supplies no semantic C8 incidence, deployed C9 moment, final
+payment comparison, or uniform profile sum.
 
 Sources:
 
@@ -34,7 +39,10 @@ Sources:
   alignment;
 - `experimental/lean/grande_finale/GrandeFinale/RSExactCardOccupancyBridge.lean`,
   the exact explanation-state fibre sum and conditional post-first-match RC1
-  quotient/`B_MCA` adapter; and
+  quotient/`B_MCA` adapter;
+- `experimental/lean/grande_finale/GrandeFinale/RSExactCardBoundaryPaymentBridge.lean`,
+  the full/residual boundary normalization, collision-pair identity, and
+  actual-cell FC1 ray/moment adapter; and
 - `experimental/lean/grande_finale/GrandeFinale/FirstMatchAddBack.lean`, the
   ordered finite-set first-match disjointization used by the generic witness
   bridge.
@@ -93,6 +101,13 @@ Sources:
 | Locator-prefix residual occupancy conditionally bounds its assigned slope cell | `GrandeFinale.RSExactCardOccupancyBridge.prefixFirstMatchSlopeCell_card_le_residual_card_div_of_occupancy` |
 | Line-dependent RC1 quotients bound `B_MCA` by the supremum of line sums | `GrandeFinale.RSExactCardOccupancyBridge.B_MCA_rsEval_le_sup_of_exactCardPrefixRetainedSupportOccupancy` |
 | A uniform RC1 quotient-sum bound gives `B_MCA <= B` | `GrandeFinale.RSExactCardOccupancyBridge.B_MCA_rsEval_le_of_exactCardPrefixRetainedSupportOccupancy` |
+| Full boundary image and retained residual support data | `GrandeFinale.RSExactCardBoundaryPaymentBridge.ResidualBoundaryProfile` |
+| Retained boundary-fibre counts sum to the retained support count | `GrandeFinale.RSExactCardBoundaryPaymentBridge.ResidualBoundaryProfile.card_eq_sum_fiberCount` |
+| Equal-boundary ordered pairs equal the residual second moment | `GrandeFinale.RSExactCardBoundaryPaymentBridge.ResidualBoundaryProfile.collisionPairs_card_eq_sum_sq_fiberCount` |
+| A nonempty full slice has positive full-image mean | `GrandeFinale.RSExactCardBoundaryPaymentBridge.ResidualBoundaryProfile.fullMean_pos` |
+| Selected supports of an actual slope-first-match residual | `GrandeFinale.RSExactCardBoundaryPaymentBridge.assignedResidualSupports` |
+| FC1 incidence/moment floor for an actual assigned slope cell | `GrandeFinale.RSExactCardBoundaryPaymentBridge.firstMatchSlopeCell_card_le_boundaryRayMomentFloor` |
+| Final integer comparison makes the FC1 floor an `hcell` budget | `GrandeFinale.RSExactCardBoundaryPaymentBridge.firstMatchSlopeCell_card_le_boundaryRayMomentBudget` |
 
 The `FirstMatchWitnessBridge` declarations are generic and logically separate
 from locator-prefix support coverage: first match is applied after slope
@@ -193,13 +208,41 @@ gives the exact quotient
 The lower occupancy and uniform quotient-sum cap remain inputs. Exact
 cardinality does not assert that `S` is the complete agreement locus of `h`.
 
+`RSExactCardBoundaryPaymentBridge` supplies the parallel C8/C9 structural
+route. For one actual `firstMatchSlopeCell`, its `ResidualBoundaryProfile`
+uses the full support slice to define `targetImage` and `fullMean`, while the
+post-first-match selected-support image defines `fiberCount` and
+`collisionPairs`. The exact identities
+
+```text
+sum_s fiberCount(s) = |residual supports|,
+|collisionPairs| = sum_s fiberCount(s)^2
+```
+
+discharge the support-mass and pair-count premises of
+`ExactProfileCompiler.primitiveCell_slope_card_le_floor`. The remaining
+premises are deliberately semantic: a residual-to-full inclusion, one
+largest residual fibre, a ray incidence with universal degrees `H,J`, and a
+final comparison of the resulting floor to the named cell budget. Thus the
+theorem reaches the same actual assigned slope cell as the C7 occupancy
+adapter without manufacturing a C8 chart or a C9 estimate.
+
 ## Scope boundaries
 
-The module proves support coverage, bad-slope union identities, and their
+The modules prove support coverage, bad-slope union identities, and their
 finite union bounds. It does not prove a semantic C1--C9 classification, a
 subexponential count of realized profiles, any numerical `U(z)`, primitive
 survival after C1--C8, or a Sidon payment. In particular, totality does not
 turn the four residual cells C3/C7/C8/C9 into paid cells.
+
+The integrated C3 census must also be read narrowly. It proves the
+subexponential candidate-family count for explicit multiplicative
+subgroup-coset and multiplier-fixed loci. That is one input to C3 payment only
+after a semantic row is proved to use that family. It does not construct the
+row-level family, residual/profile estimate, description-entropy sum, or
+distinct-slope projection, and it does not pay unrestricted common-factor or
+received-line-resultant C3 cells. General C3 therefore remains an explicit
+semantic blocker alongside C7/C8/C9.
 
 The generic module alone supplies no concrete Reed--Solomon witness type. Its
 `witnesses`, `slope`, `idx`, `cell`, bad-slope image equality,
@@ -216,6 +259,9 @@ The occupancy adapter turns supplied positive lower retained-support
 occupancies into exact post-first-match quotient cell bounds and a conditional
 `B_MCA` bound, but it does not construct `H`/`hocc`, a semantic C7 classifier,
 profile payment, boundary-image theorem, or `hunif`.
+The boundary-payment adapter turns supplied C8 incidence degrees and C9
+boundary data into an exact FC1 floor for the actual slope cell, but it does
+not construct those semantic inputs or prove the final `hpaid`/`hunif` bounds.
 Consequently none of these adapters constructs a semantic payment or an
 asymptotic `(UNIF)` instance.
 
@@ -236,13 +282,14 @@ single empty-function key and one global cell.
 
 ## Module placement
 
-All five bridges are leaf modules. `PrefixAtlasBridge` imports
+All six bridges are leaf modules. `PrefixAtlasBridge` imports
 `GrandeFinale.SyndromeLine`, which imports the root module `GrandeFinale`;
 `FirstMatchWitnessBridge` imports `GrandeFinale` directly; and
 `RSExactCardWitnessBridge` imports the generic witness bridge; the
 prefix-witness composition imports both concrete leaves; and
 `RSExactCardOccupancyBridge` imports that composition plus
-`FirstWallMDSExtensionInverse`. Consequently the root
+`FirstWallMDSExtensionInverse`. `RSExactCardBoundaryPaymentBridge` imports the
+occupancy leaf plus `ExactProfileCompiler`. Consequently the root
 `GrandeFinale.lean` cannot import these leaves without creating an import
 cycle. They remain available through their fully qualified module names and
 are checked directly.
@@ -257,9 +304,11 @@ lake build GrandeFinale.FirstMatchWitnessBridge
 lake build GrandeFinale.RSExactCardWitnessBridge
 lake build GrandeFinale.RSExactCardPrefixWitnessBridge
 lake build GrandeFinale.RSExactCardOccupancyBridge
+lake build GrandeFinale.RSExactCardBoundaryPaymentBridge
 ```
 
-The five modules print the axioms of their exported coverage, union,
+The six modules print the axioms of their exported coverage, union,
 first-match, finite-witness image, exact occupancy sum, RC1 quotient,
-fixed-line budget, and full-numerator theorems. No proof
-placeholder or added axiom is used.
+boundary-fibre sum, collision-pair identity, FC1 actual-cell floor, fixed-line
+budget, and full-numerator theorems. No proof placeholder or added axiom is
+used.

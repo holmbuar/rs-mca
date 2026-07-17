@@ -38,7 +38,13 @@ RS_EXACT_CARD_OCCUPANCY_BRIDGE = (
     "experimental/lean/grande_finale/GrandeFinale/"
     "RSExactCardOccupancyBridge.lean"
 )
+RS_EXACT_CARD_BOUNDARY_PAYMENT_BRIDGE = (
+    "experimental/lean/grande_finale/GrandeFinale/"
+    "RSExactCardBoundaryPaymentBridge.lean"
+)
 ATLAS_LEDGER = "experimental/notes/thresholds/atlas_cat_cell_ledger.md"
+C3_CENSUS = "experimental/notes/thresholds/c3_planted_divisor_census.md"
+FRONTIERS_TEX = "experimental/asymptotic_rs_mca_frontiers.tex"
 HEAVY_FIBER = "experimental/notes/thresholds/heavy_fiber_admissibility_transfer.md"
 VERIFIER_SCRIPT = "experimental/scripts/verify_atlas_payment_interface.py"
 AUDIT_DOCUMENT = "experimental/notes/audits/atlas_payment_interface_audit.md"
@@ -1228,6 +1234,281 @@ def audit_rs_exact_card_occupancy_bridge(
         ),
     }
 
+
+def audit_rs_exact_card_boundary_payment_bridge(
+    text: str, audit: Audit
+) -> dict[str, object]:
+    flat = normalized(text)
+    lean_code = lean_code_without_comments(text)
+    declarations = declaration_lines(text)
+    required = [
+        "targetImage",
+        "boundaryFiber",
+        "fiberCount",
+        "collisionPairs",
+        "fullMean",
+        "card_eq_sum_fiberCount",
+        "collisionPairs_card_eq_sum_sq_fiberCount",
+        "fullMean_pos",
+        "assignedResidualSupports",
+        "firstMatchBoundaryProfile",
+        "firstMatchSlopeCell_card_le_boundaryRayMomentFloor",
+        "firstMatchSlopeCell_card_le_boundaryRayMomentBudget",
+    ]
+    for name in required:
+        audit.require(
+            name in declarations,
+            f"RSExactCardBoundaryPaymentBridge declaration {name}",
+        )
+
+    audit.require(
+        "structure ResidualBoundaryProfile (Support Target : Type*) "
+        "[DecidableEq Support] where" in flat,
+        "RSExactCardBoundaryPaymentBridge profile structure",
+    )
+    audit.require(
+        "residual_subset : residual ⊆ full" in flat,
+        "RSExactCardBoundaryPaymentBridge residual subset guard",
+    )
+    audit.require(
+        "p.full.image p.boundary" in flat,
+        "RSExactCardBoundaryPaymentBridge full target image",
+    )
+    audit.require(
+        "p.residual.filter fun x => p.boundary x = s" in flat,
+        "RSExactCardBoundaryPaymentBridge residual fiber",
+    )
+    audit.require(
+        "(p.residual ×ˢ p.residual).filter fun pair => "
+        "p.boundary pair.1 = p.boundary pair.2" in flat,
+        "RSExactCardBoundaryPaymentBridge residual collision pairs",
+    )
+    audit.require(
+        "(p.full.card : ℝ) / p.targetImage.card" in flat,
+        "RSExactCardBoundaryPaymentBridge full-image mean",
+    )
+    audit.require(
+        "p.residual.card = ∑ s ∈ p.targetImage, p.fiberCount s" in flat,
+        "RSExactCardBoundaryPaymentBridge exact residual fiber sum",
+    )
+    audit.require(
+        "p.collisionPairs.card = ∑ s ∈ p.targetImage, p.fiberCount s ^ 2"
+        in flat,
+        "RSExactCardBoundaryPaymentBridge exact collision identity",
+    )
+    audit.require(
+        "(hres : assignedResidualSupports idx cell i ⊆ fullSupports)" in flat,
+        "RSExactCardBoundaryPaymentBridge actual residual-to-full guard",
+    )
+    audit.require(
+        "(hleft : ∀ gamma ∈ firstMatchSlopeCell idx cell "
+        "RSExactCardWitness.slope i," in flat,
+        "RSExactCardBoundaryPaymentBridge universal slope degree",
+    )
+    audit.require(
+        "(hright : ∀ pair ∈ (firstMatchBoundaryProfile idx cell i "
+        "fullSupports Phi hres).collisionPairs," in flat,
+        "RSExactCardBoundaryPaymentBridge universal pair degree",
+    )
+    audit.require(
+        "(hpaid : ⌊" in flat and "⌋₊ ≤ U)" in flat,
+        "RSExactCardBoundaryPaymentBridge final payment comparison",
+    )
+    audit.require(
+        "(firstMatchSlopeCell idx cell RSExactCardWitness.slope i).card ≤ U"
+        in flat,
+        "RSExactCardBoundaryPaymentBridge paid-cell conclusion",
+    )
+
+    exported = [
+        "card_eq_sum_fiberCount",
+        "collisionPairs_card_eq_sum_sq_fiberCount",
+        "fullMean_pos",
+        "firstMatchSlopeCell_card_le_boundaryRayMomentFloor",
+        "firstMatchSlopeCell_card_le_boundaryRayMomentBudget",
+    ]
+    signatures: dict[str, object] = {}
+    signature_texts: dict[str, str] = {}
+    for name in exported:
+        actual, theorem_line = theorem_signature(text, name)
+        signature_texts[name] = normalized(actual)
+        signatures[name] = {
+            "line": theorem_line,
+            "normalized_sha256": digest(actual),
+        }
+        audit.require(
+            re.search(
+                rf"^#print axioms (?:ResidualBoundaryProfile\.)?"
+                rf"{re.escape(name)}[ \t]*$",
+                lean_code,
+                re.MULTILINE,
+            )
+            is not None,
+            f"RSExactCardBoundaryPaymentBridge #print axioms {name}",
+        )
+
+    for name in [
+        "firstMatchSlopeCell_card_le_boundaryRayMomentFloor",
+        "firstMatchSlopeCell_card_le_boundaryRayMomentBudget",
+    ]:
+        audit.require(
+            "(hleft : ∀ gamma ∈ firstMatchSlopeCell idx cell "
+            "RSExactCardWitness.slope i," in signature_texts[name],
+            f"RSExactCardBoundaryPaymentBridge {name} universal slope degree",
+        )
+        audit.require(
+            "(hright : ∀ pair ∈ (firstMatchBoundaryProfile idx cell i "
+            "fullSupports Phi hres).collisionPairs," in signature_texts[name],
+            f"RSExactCardBoundaryPaymentBridge {name} universal pair degree",
+        )
+
+    forbidden_syntax = {
+        "any sorry token": re.compile(r"\bsorry\b"),
+        "any admit token": re.compile(r"\badmit\b"),
+        "any axiom token": re.compile(r"\baxiom\b"),
+        "any opaque token": re.compile(r"\bopaque\b"),
+    }
+    for label, pattern in forbidden_syntax.items():
+        audit.require(
+            pattern.search(lean_code) is None,
+            f"RSExactCardBoundaryPaymentBridge rejects {label}",
+        )
+
+    audit.require(
+        "import GrandeFinale.RSExactCardOccupancyBridge" in text
+        and "import GrandeFinale.ExactProfileCompiler" in text,
+        "RSExactCardBoundaryPaymentBridge composition imports",
+    )
+    audit.require(
+        "It does not identify a semantic C7/C8/C9 cell." in flat,
+        "RSExactCardBoundaryPaymentBridge semantic-cell nonclaim",
+    )
+    audit.require(
+        "Positive occupancy or incidence-degree bounds, a semantic boundary "
+        "map and its deployed moment payment, semantic first-match survival, "
+        "and the uniform profile sum remain explicit inputs." in flat,
+        "RSExactCardBoundaryPaymentBridge unresolved-input boundary",
+    )
+
+    return {
+        "path": RS_EXACT_CARD_BOUNDARY_PAYMENT_BRIDGE,
+        "sha256": digest(text),
+        "declarations": {name: declarations[name] for name in required},
+        "boundary_payment_signatures": signatures,
+        "forbidden_syntax_checks": sorted(forbidden_syntax),
+        "axiom_print_lines": [
+            f"#print axioms ResidualBoundaryProfile.{name}"
+            if name in {
+                "card_eq_sum_fiberCount",
+                "collisionPairs_card_eq_sum_sq_fiberCount",
+                "fullMean_pos",
+            }
+            else f"#print axioms {name}"
+            for name in exported
+        ],
+        "fiber_sum_line": declarations["card_eq_sum_fiberCount"],
+        "collision_identity_line": declarations[
+            "collisionPairs_card_eq_sum_sq_fiberCount"
+        ],
+        "actual_cell_fc1_line": declarations[
+            "firstMatchSlopeCell_card_le_boundaryRayMomentFloor"
+        ],
+        "verified_claim": (
+            "full-image normalization and retained residual fibers give exact "
+            "first/second-moment data, and supplied ray degrees plus a residual "
+            "moment bound the actual assigned slope cell by the literal FC1 floor"
+        ),
+        "verified_boundary": (
+            "semantic C8 incidence, deployed C9 boundary/moment payment, final "
+            "hpaid comparison, and row-uniform summation remain explicit inputs"
+        ),
+        "verified_nonclaim": (
+            "the adapter does not classify a C7/C8/C9 cell or prove any hard input"
+        ),
+    }
+
+
+def audit_c3_scope(
+    c3_text: str, frontiers_text: str, audit_document: str, audit: Audit
+) -> dict[str, object]:
+    c3_flat = normalized(c3_text)
+    frontiers_flat = normalized(frontiers_text)
+    audit_flat = normalized(audit_document)
+
+    audit.require("**C3: PARTIAL.**" in c3_text, "C3 route-scoped partial verdict")
+    audit.require(
+        "Theorem (exact coset census)" in c3_flat
+        and "|𝒫_coset(N)| := Σ_{c∣N} N/c = Σ_{e∣N} e = σ(N)" in c3_flat,
+        "C3 exact multiplicative-coset census",
+    )
+    audit.require(
+        "σ(N) ≤ N·(1+ln N)" in c3_flat
+        and "|𝒫_coset(N)| = e^{o(N)}" in c3_flat,
+        "C3 narrow census subexponential bound",
+    )
+    audit.require(
+        "Claim 3 — ramification polynomials are already coset-type" in c3_flat
+        and "every multiplier map" in c3_flat,
+        "C3 multiplier-fixed-locus scope",
+    )
+    audit.require(
+        "BLOCKED" in c3_flat
+        and "support locators" in c3_flat
+        and "received-line resultants" in c3_flat,
+        "C3 general row-dependent blocker retained",
+    )
+
+    audit.require(
+        "payment additionally requires a subexponential census of allowed "
+        "\\(P\\), the residual prefix estimate, and its slope projection"
+        in frontiers_flat,
+        "frontiers C3 three-factor payment criterion",
+    )
+    audit.require(
+        "If the total description entropy is \\(o(n)\\), "
+        "\\(\\sum_P\\barN(P)\\le e^{o(n)}\\mathfrak E_n\\), and the "
+        "projection from each chart to distinct slopes has cost "
+        "\\(e^{o(n)}\\barN(P)\\), then the planted family is paid."
+        in frontiers_flat,
+        "frontiers repaired planted-payment hypotheses",
+    )
+
+    audit.require(
+        "proves only the subexponential candidate-family census for explicit "
+        "multiplicative subgroup-coset and multiplier-fixed loci" in audit_flat,
+        "audit narrows C3 to the proved candidate census",
+    )
+    audit.require(
+        "it does not construct the row-level family or prove residual profile "
+        "scale, description entropy, or distinct-slope projection" in audit_flat,
+        "audit preserves remaining C3 payment inputs",
+    )
+    audit.require(
+        "no general or row-level C3 family/payment" in audit_flat,
+        "audit retains general C3 blocker",
+    )
+
+    return {
+        "census_path": C3_CENSUS,
+        "census_sha256": digest(c3_text),
+        "frontiers_path": FRONTIERS_TEX,
+        "frontiers_sha256": digest(frontiers_text),
+        "partial_verdict_line": line_of(c3_text, "**C3: PARTIAL.**"),
+        "planted_payment_line": line_of(
+            frontiers_text,
+            "payment additionally requires a subexponential",
+        ),
+        "verified_narrow_result": (
+            "the explicit multiplicative subgroup-coset candidate family has "
+            "census sigma(N) <= N(1+ln N), and multiplier-fixed loci lie in it"
+        ),
+        "remaining_scope": (
+            "row-level semantic family identification, residual/profile scale, "
+            "description entropy, distinct-slope projection, and unrestricted "
+            "common-factor/resultant C3 payment remain open"
+        ),
+    }
+
 def blocker_paragraph(section: str, cell: str) -> tuple[str, int]:
     pattern = re.compile(
         rf"^- \*\*{re.escape(cell)} \(([^)]*)\)\.\*\*(.*?)(?=^- \*\*C[0-9]+ \(|\Z)",
@@ -1477,8 +1758,14 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
     exact_card_occupancy_text = read_source(
         RS_EXACT_CARD_OCCUPANCY_BRIDGE, source_overrides
     )
+    exact_card_boundary_payment_text = read_source(
+        RS_EXACT_CARD_BOUNDARY_PAYMENT_BRIDGE, source_overrides
+    )
     ledger_text = read_source(ATLAS_LEDGER, source_overrides)
+    c3_text = read_source(C3_CENSUS, source_overrides)
+    frontiers_text = read_source(FRONTIERS_TEX, source_overrides)
     heavy_text = read_source(HEAVY_FIBER, source_overrides)
+    audit_document_text = read_source(AUDIT_DOCUMENT, source_overrides)
     artifact_bindings: dict[str, object] = {}
     for relative in (
         VERIFIER_SCRIPT,
@@ -1511,14 +1798,20 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
     exact_card_occupancy_bridge = audit_rs_exact_card_occupancy_bridge(
         exact_card_occupancy_text, audit
     )
+    exact_card_boundary_payment_bridge = (
+        audit_rs_exact_card_boundary_payment_bridge(
+            exact_card_boundary_payment_text, audit
+        )
+    )
     ledger = audit_ledger(ledger_text, audit)
+    c3_scope = audit_c3_scope(c3_text, frontiers_text, audit_document_text, audit)
     heavy = audit_heavy_fiber(heavy_text, audit)
     stale = audit_stale_wording(source_overrides, audit)
     control = negative_control(audit)
     quantifier_control = max_sum_quantifier_negative_control(audit)
 
     certificate: dict[str, object] = {
-        "schema": "atlas-payment-interface/v6",
+        "schema": "atlas-payment-interface/v7",
         "verdict": "AUDIT: coverage proved; catalogue/profile/payment interface remains explicit",
         "artifact_bindings": artifact_bindings,
         "sources": {
@@ -1528,7 +1821,9 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
             "rs_exact_card_witness_bridge": exact_card_witness_bridge,
             "rs_exact_card_prefix_witness_bridge": exact_card_prefix_witness_bridge,
             "rs_exact_card_occupancy_bridge": exact_card_occupancy_bridge,
+            "rs_exact_card_boundary_payment_bridge": exact_card_boundary_payment_bridge,
             "catalogue_ledger": ledger,
+            "c3_scope": c3_scope,
             "heavy_fiber_transfer": heavy,
         },
         "stale_downstream_wording": stale,
@@ -1556,6 +1851,10 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
                 "literal witness cells split exactly over realized explanation-state fibers",
                 "positive retained-support occupancy bounds each post-first-match slope cell by floor(|residual|/H)",
                 "the resulting line-dependent RC1 quotient budgets specialize to the full B_MCA numerator",
+                "full-slice boundary image and retained residual fibers remain distinct normalization objects",
+                "retained residual fiber counts and equal-boundary collision pairs satisfy exact first/second-moment identities",
+                "supplied C8 ray-incidence degrees and C9 residual moment data bound the actual first-match slope cell by the literal FC1 floor",
+                "the explicit multiplicative subgroup-coset C3 candidate family has subexponential census sigma(N), with multiplier-fixed loci contained in it",
             ],
             "not_proved": [
                 "construction of the cellwise U(z) budgets",
@@ -1564,9 +1863,11 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
                 "a concrete C1-C9 Reed-Solomon semantic atlas, prefix classification, or payment",
                 "asymptotic-row same-catalogue uniformity (UNIF)",
                 "C1-C8 primitive-survival/catalogue classification for the intended row",
-                "full-catalogue payment at C3/C7/C8/C9",
+                "general or row-level C3 semantic family identification, residual/profile estimate, and distinct-slope payment",
                 "a lower retained-support occupancy bound for any intended semantic C7 profile",
+                "semantic C8 chart assignment and deployed ray-incidence degree bounds",
                 "deployed-scale image-normalized Sidon payment",
+                "the final FC1 hpaid comparison and row-uniform sum for intended C8/C9 profiles",
             ],
         },
         "verification_check_count": len(audit.checks),
@@ -1781,6 +2082,62 @@ def run_tamper_selftest(baseline: dict[str, object]) -> int:
                 "      ∑ z, (prefixResidualWitnessCell ev k a K p z).card / H p z ≤ B) :",
             ),
         ),
+        (
+            "reverse boundary residual subset guard",
+            RS_EXACT_CARD_BOUNDARY_PAYMENT_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "  residual_subset : residual ⊆ full",
+                "  residual_subset : full ⊆ residual",
+            ),
+        ),
+        (
+            "normalize boundary mean by residual image",
+            RS_EXACT_CARD_BOUNDARY_PAYMENT_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "  p.full.image p.boundary",
+                "  p.residual.image p.boundary",
+            ),
+        ),
+        (
+            "weaken exact collision identity",
+            RS_EXACT_CARD_BOUNDARY_PAYMENT_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "    p.collisionPairs.card =\n"
+                "      ∑ s ∈ p.targetImage, p.fiberCount s ^ 2 := by",
+                "    p.collisionPairs.card ≤\n"
+                "      ∑ s ∈ p.targetImage, p.fiberCount s ^ 2 := by",
+            ),
+        ),
+        (
+            "existentialize boundary ray lower degree",
+            RS_EXACT_CARD_BOUNDARY_PAYMENT_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "    (H J q : Nat) (hH : 0 < H) (hq : 2 ≤ q)\n"
+                "    (hleft : ∀ gamma ∈\n"
+                "      firstMatchSlopeCell idx cell RSExactCardWitness.slope i,",
+                "    (H J q : Nat) (hH : 0 < H) (hq : 2 ≤ q)\n"
+                "    (hleft : ∃ gamma ∈\n"
+                "      firstMatchSlopeCell idx cell RSExactCardWitness.slope i,",
+            ),
+        ),
+        (
+            "erase final boundary payment premise",
+            RS_EXACT_CARD_BOUNDARY_PAYMENT_BRIDGE,
+            lambda text: replace_once(text, "    (hpaid :\n", "    (hpaid_erased :\n"),
+        ),
+        (
+            "broaden narrow C3 census in the audit",
+            AUDIT_DOCUMENT,
+            lambda text: replace_once(
+                text,
+                "proves only the subexponential candidate-family census for explicit multiplicative subgroup-coset and multiplier-fixed loci",
+                "proves the complete planted-cell payment for all loci",
+            ),
+        ),
     ]
 
     stale_files = baseline["stale_downstream_wording"]["files"]  # type: ignore[index]
@@ -1858,7 +2215,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--tamper-selftest",
         action="store_true",
-        help="verify the certificate and detect twenty in-memory mutations",
+        help="verify the certificate and detect the in-memory mutation suite",
     )
     return parser.parse_args()
 
