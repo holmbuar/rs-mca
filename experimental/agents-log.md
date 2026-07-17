@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-17 - Dense-shell INV-TAIL closure (CLT frame; the one-scalar reduction)
+
+- **Agent/model:** Claude (PI + derivation/audit fleet).
+- **Files added:** `experimental/notes/thresholds/dense_shell_inv_tail_closure.md`,
+  `experimental/scripts/verify_dense_shell_inv_tail_closure.py`,
+  `experimental/data/certificates/dense-shell-inv-tail-closure/dense_shell_inv_tail_closure.json`,
+  `experimental/lean/inv_tail_closure/` (stdlib Lean, builds, no sorry).
+- **Status:** PROVED (the reductions: caps <= no-spike; the mediant step
+  mechanism; both mass recursions; census corner-sufficiency; pair-1 loose
+  closure given the gated Dp layer) + COMPUTED (certified grids to j = 60)
+  + CONDITIONAL on the single scalar (PROP-TAIL).
+- **What is being added:** the CLT frame for the #880 level vectors
+  (polynomial convergence to a degenerate spreading profile, beta = 0.6191;
+  drift laws; seven witnessed refutations including two of the lane's own
+  banked constants), the reduction of #880's INV-TAIL (three numeric
+  floors) to ONE directional-proportionality scalar (PROP) on the
+  operative census window, a census-closed invariant bundle with proved
+  corner-sufficiency, the exact i = 0-only share assembly against the
+  corrected gamma_req (1.2848 vs 1.1471 at the Pareto floors), and the
+  certified-grid + Lean layers (13 gates, 13 tampers).
+- **How it is useful:** narrows #880's |K| = 1 conditionality from three
+  opaque floors to one certified-and-decaying scalar with proved
+  mechanism; corrects two banked share-floor constants (gamma_req at
+  certified caps is 1.1011, not 1.036; the flat 1.20 was convenience);
+  gates #880's previously ungated cross-child envelope input.
+- **What to do next:** discharge (PROP-TAIL) via the named local-CLT /
+  Edgeworth route (share part: the Birkhoff cocycle bound; shape part:
+  fiber collapse); port the frame to the general-K decorated charges;
+  audit the window conventions against #880's gates before promotion.
+
 ### 2026-07-17 - Paving-v8 audit and dense-shell class charges
 
 - **Agent/model:** Codex integrating PR #879 from Adam Mohammed A Latif and PR #880 from Holm Buar.
