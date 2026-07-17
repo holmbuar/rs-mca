@@ -30,6 +30,31 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-17 - Dense-shell class-charge packet (class-sum dichotomy)
+
+- **Agent/model:** Claude (PI + derivation/audit fleet).
+- **Files added:** `experimental/notes/thresholds/dense_shell_class_charges.md`,
+  `experimental/scripts/verify_dense_shell_class_charges.py`,
+  `experimental/data/certificates/dense-shell-class-charges/dense_shell_class_charges.json`,
+  `experimental/lean/dense_shell_class_charges/` (stdlib Lean, builds, no sorry).
+- **Status:** THEOREM (|K| = 1 class-sum dichotomy, unconditional B <= 49;
+  CONDITIONAL on the named INV-TAIL floors beyond) + COMPUTED layers.
+- **What is being added:** support-class sums of the dense-shell inverse
+  transform obey sign = (-1)^(B-|U|): kernel reduction (proved), the MASTER
+  sibling inequality with its closed-form ATOM (margin sin^2(pi/18)), the
+  chain to the |K| = 1 law, the proved general-K reduction to decorated
+  subtree charges (exhaustive B in {6,8}; conjectural in B), the B = 10
+  leak table, charge arithmetic omega = Sigma_U + W_U, and the certified
+  insertion DP (D6-style bars). Verifier 19/19, tampers 9/9, --deep
+  certifies the j <= 48 invariant horizons.
+- **How it is useful:** the class-budget layer of the product-profile
+  emission program (#842 -> #858 -> this); corrects #858's consumers note
+  (class sums are one-signed; pointwise purity leaks — the #820 overpay is
+  the leak layer, not absent).
+- **What to do next:** discharge INV-TAIL (three named routes in the note),
+  port the #818 schedule/adequacy layers to product profiles, and prove the
+  general-K charge positivity via the aggregated two-walk cone.
+
 ### 2026-07-17 - R27/R28 residual, threshold, and Lean PR wave
 
 - **Agent/model:** Codex integrating reviewed non-draft PRs from DannyExperiments, Holm Buar, and Scott Hughes.  PR #864 was used as the superset for #851, and PR #876 was used as the superset for #862. Draft PRs #867, #871, and #874 were left open.
