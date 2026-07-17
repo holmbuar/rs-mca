@@ -3,10 +3,12 @@
 ## Status and verdict
 
 `AUDIT / NO MATHEMATICAL ISSUE IN THE GUARDED DOWNSTREAM CLAIMS / GENERIC
-PREFIX-FIBRE TOTALITY AND FIRST-MATCH COVERAGE = PROVED, UNCONDITIONAL /
-CONCRETE LOCATOR-PREFIX TO SYNDROME-LINE BAD-SLOPE UNION = PROVED /
-TYPED FIXED-ROW OUTER-LINE B_MCA IMPLICATION = PROVED /
-CELLWISE BUDGETS, PROFILE CENSUS, AND FULL CATALOGUE PAYMENT = NOT PROVED.`
+PREFIX-FIBRE WITNESS TOTALITY = PROVED, UNCONDITIONAL / GENERIC
+WITNESS-EXHAUSTIVE TO SLOPE-FIRST-MATCH FIXED-ROW B_MCA IMPLICATION = PROVED,
+HYPOTHESIS-PARAMETRIC / CONCRETE LOCATOR-PREFIX TO SYNDROME-LINE BAD-SLOPE
+UNION = PROVED / TYPED LOCATOR-PREFIX FIXED-ROW OUTER-LINE B_MCA IMPLICATION =
+PROVED / ACTUAL C1--C9 WITNESS CELLS, CONCRETE RS WITNESS ADAPTER, PAYMENT,
+AND ASYMPTOTIC (UNIF) = NOT PROVED.`
 
 The phrase `atlas-totality lane (in progress)` still appears in downstream
 threshold notes, but it no longer names the missing mathematical interface
@@ -26,8 +28,10 @@ compiler in `GrandeFinale.SyndromeLine`, the injective RS exact-support
 reduction in `GrandeFinale.RSExactSupportUpper`, and the source analyses
 `atlas_missing_witness.md`, `atlas_cat_cell_ledger.md`,
 `heavy_fiber_admissibility_transfer.md`, and
-`staircase_concentration_sidon_paired.md`. The new typed bridge is
-`GrandeFinale.PrefixAtlasBridge`. No `.tex` or `.pdf` file is edited.
+`staircase_concentration_sidon_paired.md`. The typed leaf modules are
+`GrandeFinale.PrefixAtlasBridge` and
+`GrandeFinale.FirstMatchWitnessBridge`. The latter is generic and supplies no
+concrete Reed--Solomon witness adapter. No `.tex` or `.pdf` file is edited.
 
 ---
 
@@ -106,6 +110,30 @@ and only a uniform bound `B` on `sum_z U(u0,u1,z)`, then concludes
 the supremum and sum. The stronger line-independent corollary at L242--256 is
 valid, but can overpay exponentially when different lines activate different
 cells.
+
+The companion generic leaf `GrandeFinale.FirstMatchWitnessBridge` separates
+raw witness exhaustivity from slope assignment. `firstMatchSlopeCell` and
+`firstMatchResidualWitnessCell` (L28--38) project each witness cell to slopes
+before ordered first match, then pull the assigned slope set back into the raw
+cell. `firstMatchResidualWitnessCell_image_slope` (L42--61) proves that this
+residual cell has exactly the assigned slope image.
+
+`B_MCA_le_sup_of_witnessExhaustive_firstMatchSlopeBudgets` (L75--108) assumes,
+line by line, that MCA-bad slopes are the image of `witnesses`, that the raw
+cells union to those witnesses, and that the first-match slope cells satisfy
+the budgets `U`. It concludes
+`B_MCA <= sup_line sum_i U(line,i)`. The uniform corollary (L112--132) adds
+`sum_i U(line,i) <= B` and concludes `B_MCA <= B`.
+
+Two exact `Fin 2 -> Fin 1` controls delimit the result. First,
+`slopeImage_cover_not_witnessExhaustive` (L138--144) shows that a proper subset
+of witnesses may have the full slope image. Second,
+`firstMatchResidualWitnessCells_not_witnessExhaustive` (L149--160) has raw
+cells exhausting all witnesses while their residual witness cells do not;
+their first-match slope union is nevertheless the full witness-slope image.
+Thus slope coverage is sufficient for the numerical count but is strictly
+weaker than witness exhaustivity, and residual witness cells are
+projection-exact rather than witness-exhaustive.
 
 The certificate checks the exact diagonal model with `2^b` lines and cells:
 `sup_line sum_z = 1`, while `sum_z sup_line = 2^b`.
@@ -216,21 +244,30 @@ the C3/C7/C8/C9 cellwise profile and bad-slope payment.”
 
 ## 6. Nonclaims and module placement
 
-- No C1--C8 classification or primitive-survival theorem is proved here.
-- No cell-budget function `U`, uniform sum bound `B`, subexponential profile
-  census, C7/C8 compiler bound, or C9 Sidon payment is constructed.
+- No actual C1--C9 witness cells, realized profile index, or
+  primitive-survival theorem is constructed.
+- `FirstMatchWitnessBridge` contains no concrete RS witness type or adapter;
+  `witnesses`, `slope`, `idx`, `cell`, `hbadImage`, and `hexhaust` remain
+  parameters or hypotheses.
+- First-match residual witness cells need not cover the raw witnesses. Only
+  their per-cell slope images are proved exact.
+- Neither bridge constructs a cell-budget function `U`, proves a cell
+  payment, or proves the uniform sum hypothesis `(UNIF)`. No subexponential
+  profile census, C7/C8 compiler bound, or C9 Sidon payment is constructed.
 - No deployed smooth/circle row, main asymptotic theorem, or reserve theorem is
   closed.
 - No guarded result in the downstream notes is retracted or corrected.
 - No `.tex` or `.pdf` file is changed.
 
-`PrefixAtlasBridge.lean` is deliberately a leaf module. It imports
-`GrandeFinale.SyndromeLine`, while `SyndromeLine.lean` L1--2 imports the root
-module `GrandeFinale`. Importing the bridge back into `GrandeFinale.lean`
-would create an import cycle. The focused verification target is therefore
+`PrefixAtlasBridge.lean` and `FirstMatchWitnessBridge.lean` are deliberately
+leaf modules. The former reaches the root module through
+`GrandeFinale.SyndromeLine`; the latter imports `GrandeFinale` directly.
+Importing either bridge back into `GrandeFinale.lean` would create an import
+cycle. The focused verification targets are therefore
 
 ```text
 lake build GrandeFinale.PrefixAtlasBridge
+lake build GrandeFinale.FirstMatchWitnessBridge
 ```
 
 The companion stdlib verifier

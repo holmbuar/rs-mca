@@ -24,6 +24,9 @@ CERTIFICATE = ROOT / "experimental/data/certificates/atlas-payment-interface/atl
 
 PREFIX_ATLAS = "experimental/lean/asymptotic_spine/AsymptoticSpine/PrefixAtlas.lean"
 PREFIX_BRIDGE = "experimental/lean/grande_finale/GrandeFinale/PrefixAtlasBridge.lean"
+FIRST_MATCH_WITNESS_BRIDGE = (
+    "experimental/lean/grande_finale/GrandeFinale/FirstMatchWitnessBridge.lean"
+)
 ATLAS_LEDGER = "experimental/notes/thresholds/atlas_cat_cell_ledger.md"
 HEAVY_FIBER = "experimental/notes/thresholds/heavy_fiber_admissibility_transfer.md"
 VERIFIER_SCRIPT = "experimental/scripts/verify_atlas_payment_interface.py"
@@ -468,6 +471,196 @@ def audit_prefix_bridge(text: str, audit: Audit) -> dict[str, object]:
     }
 
 
+def audit_first_match_witness_bridge(
+    text: str, audit: Audit
+) -> dict[str, object]:
+    flat = normalized(text)
+    lean_code = lean_code_without_comments(text)
+    declarations = declaration_lines(text)
+    required = [
+        "firstMatchSlopeCell",
+        "firstMatchResidualWitnessCell",
+        "firstMatchResidualWitnessCell_image_slope",
+        "B_MCA_le_sup_of_witnessExhaustive_firstMatchSlopeBudgets",
+        "B_MCA_le_of_witnessExhaustive_firstMatchSlopeBudgets",
+        "slopeImage_cover_not_witnessExhaustive",
+        "firstMatchResidualWitnessCells_not_witnessExhaustive",
+    ]
+    for name in required:
+        audit.require(
+            name in declarations,
+            f"FirstMatchWitnessBridge declaration {name}",
+        )
+
+    expected_signatures = {
+        "firstMatchResidualWitnessCell_image_slope": (
+            "theorem firstMatchResidualWitnessCell_image_slope "
+            "(idx : Finset ι) (cell : ι -> Finset ω) "
+            "(slope : ω -> σ) (i : ι) : "
+            "(firstMatchResidualWitnessCell idx cell slope i).image slope = "
+            "firstMatchSlopeCell idx cell slope i"
+        ),
+        "B_MCA_le_sup_of_witnessExhaustive_firstMatchSlopeBudgets": (
+            "theorem B_MCA_le_sup_of_witnessExhaustive_firstMatchSlopeBudgets "
+            "(C : Set (D -> F)) (a : Nat) "
+            "(witnesses : ((D -> F) × (D -> F)) -> Finset ω) "
+            "(slope : ω -> F) "
+            "(idx : ((D -> F) × (D -> F)) -> Finset ι) "
+            "(cell : ((D -> F) × (D -> F)) -> ι -> Finset ω) "
+            "(U : ((D -> F) × (D -> F)) -> ι -> Nat) "
+            "(hbadImage : ∀ p, Finset.univ.filter (fun gamma : F => "
+            "GrandeFinale.MCABad C p.1 p.2 a gamma) = "
+            "(witnesses p).image slope) "
+            "(hexhaust : ∀ p, (idx p).biUnion (cell p) = witnesses p) "
+            "(hcell : ∀ p i, i ∈ idx p -> "
+            "(firstMatchSlopeCell (idx p) (cell p) slope i).card ≤ U p i) : "
+            "GrandeFinale.B_MCA C a ≤ "
+            "Finset.univ.sup (fun p : (D -> F) × (D -> F) => "
+            "∑ i ∈ idx p, U p i)"
+        ),
+        "B_MCA_le_of_witnessExhaustive_firstMatchSlopeBudgets": (
+            "theorem B_MCA_le_of_witnessExhaustive_firstMatchSlopeBudgets "
+            "(C : Set (D -> F)) (a B : Nat) "
+            "(witnesses : ((D -> F) × (D -> F)) -> Finset ω) "
+            "(slope : ω -> F) "
+            "(idx : ((D -> F) × (D -> F)) -> Finset ι) "
+            "(cell : ((D -> F) × (D -> F)) -> ι -> Finset ω) "
+            "(U : ((D -> F) × (D -> F)) -> ι -> Nat) "
+            "(hbadImage : ∀ p, Finset.univ.filter (fun gamma : F => "
+            "GrandeFinale.MCABad C p.1 p.2 a gamma) = "
+            "(witnesses p).image slope) "
+            "(hexhaust : ∀ p, (idx p).biUnion (cell p) = witnesses p) "
+            "(hcell : ∀ p i, i ∈ idx p -> "
+            "(firstMatchSlopeCell (idx p) (cell p) slope i).card ≤ U p i) "
+            "(hunif : ∀ p, ∑ i ∈ idx p, U p i ≤ B) : "
+            "GrandeFinale.B_MCA C a ≤ B"
+        ),
+        "slopeImage_cover_not_witnessExhaustive": (
+            "theorem slopeImage_cover_not_witnessExhaustive : "
+            "let witnesses : Finset (Fin 2) := Finset.univ "
+            "let chosen : Finset (Fin 2) := {0} "
+            "let slope : Fin 2 -> Fin 1 := fun _ => 0 "
+            "chosen ⊆ witnesses ∧ chosen ≠ witnesses ∧ "
+            "chosen.image slope = witnesses.image slope"
+        ),
+        "firstMatchResidualWitnessCells_not_witnessExhaustive": (
+            "theorem firstMatchResidualWitnessCells_not_witnessExhaustive : "
+            "let witnesses : Finset (Fin 2) := Finset.univ "
+            "let idx : Finset (Fin 2) := Finset.univ "
+            "let cell : Fin 2 -> Finset (Fin 2) := fun i => "
+            "if i = 0 then {0} else {1} "
+            "let slope : Fin 2 -> Fin 1 := fun _ => 0 "
+            "idx.biUnion cell = witnesses ∧ "
+            "idx.biUnion "
+            "(firstMatchResidualWitnessCell idx cell slope) ≠ witnesses ∧ "
+            "idx.biUnion (firstMatchSlopeCell idx cell slope) = "
+            "witnesses.image slope"
+        ),
+    }
+    signatures: dict[str, object] = {}
+    for name, expected in expected_signatures.items():
+        actual, theorem_line = theorem_signature(text, name)
+        audit.require(
+            actual == expected,
+            f"FirstMatchWitnessBridge exact signature {name}",
+        )
+        signatures[name] = {
+            "line": theorem_line,
+            "normalized_sha256": digest(actual),
+        }
+
+    forbidden_syntax = {
+        "any sorry token": re.compile(r"\bsorry\b"),
+        "any admit token": re.compile(r"\badmit\b"),
+        "any axiom token": re.compile(r"\baxiom\b"),
+        "any opaque token": re.compile(r"\bopaque\b"),
+    }
+    for label, pattern in forbidden_syntax.items():
+        audit.require(
+            pattern.search(lean_code) is None,
+            f"FirstMatchWitnessBridge rejects {label}",
+        )
+
+    axiom_print_names = list(expected_signatures)
+    for name in axiom_print_names:
+        audit.require(
+            re.search(
+                rf"^#print axioms {re.escape(name)}[ \t]*$",
+                lean_code,
+                re.MULTILINE,
+            )
+            is not None,
+            f"FirstMatchWitnessBridge #print axioms {name}",
+        )
+
+    projection_boundary = (
+        "First match is performed after projecting witnesses to slopes. "
+        "The residual witness cell selects witnesses realizing the slopes "
+        "assigned to a cell; its slope image is exact, but its union need not "
+        "exhaust the original witnesses when distinct witnesses share a slope. "
+        "Every catalogue, projection identity, first-match slope budget, and "
+        "uniform sum below is an explicit hypothesis. No concrete Reed--Solomon "
+        "atlas, prefix classification, or payment is claimed."
+    )
+    residual_boundary = (
+        "These residual cells are not asserted to cover all witnesses."
+    )
+    raw_countermodel_boundary = (
+        "Exact `Fin 2 -> Fin 1` countermodel: a proper subset of the witnesses "
+        "can have exactly the same slope image as the full witness family."
+    )
+    residual_countermodel_boundary = (
+        "Exact `Fin 2 -> Fin 1` countermodel: the original witness cells cover "
+        "all witnesses, but slope-level first match retains only one of two "
+        "distinct witnesses sharing the same slope."
+    )
+    for label, boundary in (
+        ("projection boundary", projection_boundary),
+        ("residual-cell noncoverage", residual_boundary),
+        ("raw slope-image countermodel", raw_countermodel_boundary),
+        ("residual-cell countermodel", residual_countermodel_boundary),
+    ):
+        audit.require(
+            boundary in flat,
+            f"FirstMatchWitnessBridge {label}",
+        )
+
+    return {
+        "path": FIRST_MATCH_WITNESS_BRIDGE,
+        "sha256": digest(text),
+        "declarations": {name: declarations[name] for name in required},
+        "witness_interface_signatures": signatures,
+        "forbidden_syntax_checks": sorted(forbidden_syntax),
+        "axiom_print_lines": [
+            f"#print axioms {name}" for name in axiom_print_names
+        ],
+        "projection_boundary_line": line_of(
+            text, "First match is performed after projecting witnesses to slopes."
+        ),
+        "residual_noncoverage_line": line_of(
+            text, "These residual cells are not asserted to cover all witnesses."
+        ),
+        "raw_countermodel_line": declarations[
+            "slopeImage_cover_not_witnessExhaustive"
+        ],
+        "residual_countermodel_line": declarations[
+            "firstMatchResidualWitnessCells_not_witnessExhaustive"
+        ],
+        "verified_claim": (
+            "witness exhaustion plus exact bad-slope image and cell budgets "
+            "bounds B_MCA; a uniform sum bound gives B_MCA <= B"
+        ),
+        "verified_boundary": (
+            "slope-image coverage does not imply witness coverage, and "
+            "slope-level first match need not preserve witness exhaustion"
+        ),
+        "verified_nonclaim": (
+            "the bridge constructs no catalogue, bad-image identity, budget, "
+            "uniformity certificate, Reed-Solomon classification, or payment"
+        ),
+    }
+
+
 def blocker_paragraph(section: str, cell: str) -> tuple[str, int]:
     pattern = re.compile(
         rf"^- \*\*{re.escape(cell)} \(([^)]*)\)\.\*\*(.*?)(?=^- \*\*C[0-9]+ \(|\Z)",
@@ -707,6 +900,7 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
     audit = Audit()
     prefix_text = read_source(PREFIX_ATLAS, source_overrides)
     bridge_text = read_source(PREFIX_BRIDGE, source_overrides)
+    witness_bridge_text = read_source(FIRST_MATCH_WITNESS_BRIDGE, source_overrides)
     ledger_text = read_source(ATLAS_LEDGER, source_overrides)
     heavy_text = read_source(HEAVY_FIBER, source_overrides)
     artifact_bindings: dict[str, object] = {}
@@ -728,6 +922,7 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
 
     prefix = audit_prefix_atlas(prefix_text, audit)
     bridge = audit_prefix_bridge(bridge_text, audit)
+    witness_bridge = audit_first_match_witness_bridge(witness_bridge_text, audit)
     ledger = audit_ledger(ledger_text, audit)
     heavy = audit_heavy_fiber(heavy_text, audit)
     stale = audit_stale_wording(source_overrides, audit)
@@ -735,12 +930,13 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
     quantifier_control = max_sum_quantifier_negative_control(audit)
 
     certificate: dict[str, object] = {
-        "schema": "atlas-payment-interface/v2",
+        "schema": "atlas-payment-interface/v3",
         "verdict": "AUDIT: coverage proved; catalogue/profile/payment interface remains explicit",
         "artifact_bindings": artifact_bindings,
         "sources": {
             "generic_prefix_atlas": prefix,
             "concrete_prefix_bridge": bridge,
+            "first_match_witness_bridge": witness_bridge,
             "catalogue_ledger": ledger,
             "heavy_fiber_transfer": heavy,
         },
@@ -755,9 +951,17 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
                 "explicit cellwise U(z) budgets sum to a full-family budget",
                 "linewise U(u0,u1,z) budgets plus uniform summed bound B imply B_MCA <= B",
                 "stronger line-independent U(z) budgets imply B_MCA <= sum_z U(z)",
+                "each residual witness cell has exactly its assigned first-match slope image",
+                "explicit bad-slope image, witness exhaustion, and cell budgets bound B_MCA by the supremum of line-dependent sums",
+                "a uniform bound on those line-dependent sums yields B_MCA <= B",
+                "a proper witness subset can have exactly the full witness-family slope image",
+                "slope-level first-match residual cells can fail witness exhaustion despite original-cell and slope-image coverage",
             ],
             "not_proved": [
                 "construction of the cellwise U(z) budgets",
+                "witness exhaustion of slope-level residual cells without additional hypotheses",
+                "construction of the witness catalogue, bad-slope image identity, per-cell budgets, or uniform sum bound",
+                "a concrete Reed-Solomon atlas, prefix classification, or payment from the witness-image bridge",
                 "asymptotic-row same-catalogue uniformity (UNIF)",
                 "C1-C8 primitive-survival/catalogue classification for the intended row",
                 "full-catalogue payment at C3/C7/C8/C9",
@@ -898,6 +1102,24 @@ def run_tamper_selftest(baseline: dict[str, object]) -> int:
             PREFIX_BRIDGE,
             commented_signature_spoof,
         ),
+        (
+            "weaken witness hexhaust",
+            FIRST_MATCH_WITNESS_BRIDGE,
+            lambda text: regex_replace_once(
+                text,
+                r"\(hexhaust : ∀ p,",
+                "(hexhaust : ∃ p,",
+            ),
+        ),
+        (
+            "falsify residual-witness countermodel boundary",
+            FIRST_MATCH_WITNESS_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "(firstMatchResidualWitnessCell idx cell slope) ≠ witnesses ∧",
+                "(firstMatchResidualWitnessCell idx cell slope) = witnesses ∧",
+            ),
+        ),
     ]
 
     stale_files = baseline["stale_downstream_wording"]["files"]  # type: ignore[index]
@@ -975,7 +1197,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--tamper-selftest",
         action="store_true",
-        help="verify the certificate and detect twelve in-memory mutations",
+        help="verify the certificate and detect fourteen in-memory mutations",
     )
     return parser.parse_args()
 

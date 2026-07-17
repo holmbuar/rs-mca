@@ -1,24 +1,27 @@
 {
   "artifact_bindings": {
     "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md": {
-      "byte_count": 7482,
+      "byte_count": 9717,
       "path": "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md",
-      "sha256": "69ce96fa059660e545e412fb73c0993b799aa1f59ff0be4d0c5a3bf8865bf3f4"
+      "sha256": "58a313b948d545ce297f67520a74482e38f1ba2491135330ab2fb0dbc3246f72"
     },
     "experimental/notes/audits/atlas_payment_interface_audit.md": {
-      "byte_count": 11537,
+      "byte_count": 13739,
       "path": "experimental/notes/audits/atlas_payment_interface_audit.md",
-      "sha256": "e8e7f3470a29ab9a69e1f9ce7d9dcb4f803fcd26a36af48ed7f3d79de54bccc1"
+      "sha256": "52063c377f22aed28d8531e1c2c39ce6da05bdd66636ee9d1a4bb33ef1219f8a"
     },
     "experimental/scripts/verify_atlas_payment_interface.py": {
-      "byte_count": 38227,
+      "byte_count": 48488,
       "path": "experimental/scripts/verify_atlas_payment_interface.py",
-      "sha256": "43da7ebe98b58fef9b99be90a5d06f537d763db87a95c134e22e2245c2570569"
+      "sha256": "c403ef5c6b32f283496d9a3b12d543f15ec66a9f63e2f390e4e0552507714449"
     }
   },
   "interface_summary": {
     "not_proved": [
       "construction of the cellwise U(z) budgets",
+      "witness exhaustion of slope-level residual cells without additional hypotheses",
+      "construction of the witness catalogue, bad-slope image identity, per-cell budgets, or uniform sum bound",
+      "a concrete Reed-Solomon atlas, prefix classification, or payment from the witness-image bridge",
       "asymptotic-row same-catalogue uniformity (UNIF)",
       "C1-C8 primitive-survival/catalogue classification for the intended row",
       "full-catalogue payment at C3/C7/C8/C9",
@@ -30,7 +33,12 @@
       "support-family bad slopes equal the union of cellwise bad slopes",
       "explicit cellwise U(z) budgets sum to a full-family budget",
       "linewise U(u0,u1,z) budgets plus uniform summed bound B imply B_MCA <= B",
-      "stronger line-independent U(z) budgets imply B_MCA <= sum_z U(z)"
+      "stronger line-independent U(z) budgets imply B_MCA <= sum_z U(z)",
+      "each residual witness cell has exactly its assigned first-match slope image",
+      "explicit bad-slope image, witness exhaustion, and cell budgets bound B_MCA by the supremum of line-dependent sums",
+      "a uniform bound on those line-dependent sums yields B_MCA <= B",
+      "a proper witness subset can have exactly the full witness-family slope image",
+      "slope-level first-match residual cells can fail witness exhaustion despite original-cell and slope-image coverage"
     ]
   },
   "max_sum_quantifier_negative_control": {
@@ -180,7 +188,7 @@
       }
     ]
   },
-  "schema": "atlas-payment-interface/v2",
+  "schema": "atlas-payment-interface/v3",
   "sources": {
     "catalogue_ledger": {
       "blocked_or_conditional_cells": {
@@ -300,6 +308,61 @@
       "rs_payment_interface_theorem_line": 205,
       "sha256": "89e56ff9d3829791b688f001d6a909cee74ff03ae1a9b77a176dfe2d2ba90889",
       "verified_nonclaim": "the bridge constructs no U and proves no catalogue/profile payment"
+    },
+    "first_match_witness_bridge": {
+      "axiom_print_lines": [
+        "#print axioms firstMatchResidualWitnessCell_image_slope",
+        "#print axioms B_MCA_le_sup_of_witnessExhaustive_firstMatchSlopeBudgets",
+        "#print axioms B_MCA_le_of_witnessExhaustive_firstMatchSlopeBudgets",
+        "#print axioms slopeImage_cover_not_witnessExhaustive",
+        "#print axioms firstMatchResidualWitnessCells_not_witnessExhaustive"
+      ],
+      "declarations": {
+        "B_MCA_le_of_witnessExhaustive_firstMatchSlopeBudgets": 112,
+        "B_MCA_le_sup_of_witnessExhaustive_firstMatchSlopeBudgets": 75,
+        "firstMatchResidualWitnessCell": 35,
+        "firstMatchResidualWitnessCell_image_slope": 42,
+        "firstMatchResidualWitnessCells_not_witnessExhaustive": 149,
+        "firstMatchSlopeCell": 28,
+        "slopeImage_cover_not_witnessExhaustive": 138
+      },
+      "forbidden_syntax_checks": [
+        "any admit token",
+        "any axiom token",
+        "any opaque token",
+        "any sorry token"
+      ],
+      "path": "experimental/lean/grande_finale/GrandeFinale/FirstMatchWitnessBridge.lean",
+      "projection_boundary_line": 7,
+      "raw_countermodel_line": 138,
+      "residual_countermodel_line": 149,
+      "residual_noncoverage_line": 34,
+      "sha256": "b7f793e96143952016cd0528f80abfb2949b5aba8ed041aec4931655a8005d06",
+      "verified_boundary": "slope-image coverage does not imply witness coverage, and slope-level first match need not preserve witness exhaustion",
+      "verified_claim": "witness exhaustion plus exact bad-slope image and cell budgets bounds B_MCA; a uniform sum bound gives B_MCA <= B",
+      "verified_nonclaim": "the bridge constructs no catalogue, bad-image identity, budget, uniformity certificate, Reed-Solomon classification, or payment",
+      "witness_interface_signatures": {
+        "B_MCA_le_of_witnessExhaustive_firstMatchSlopeBudgets": {
+          "line": 112,
+          "normalized_sha256": "b289578e783ca72e74b6d379da581dcaf3522b1aafb233640cf90a27a7ab1fbe"
+        },
+        "B_MCA_le_sup_of_witnessExhaustive_firstMatchSlopeBudgets": {
+          "line": 75,
+          "normalized_sha256": "b188289fff7f8340418d46b5d399a82e1eee69e22eba168232a2829bb2d8e356"
+        },
+        "firstMatchResidualWitnessCell_image_slope": {
+          "line": 42,
+          "normalized_sha256": "063fb6f92f8edd58bb614f15a915bcde895b18d3d6604bc8369559e4f8706099"
+        },
+        "firstMatchResidualWitnessCells_not_witnessExhaustive": {
+          "line": 149,
+          "normalized_sha256": "cbd7cf81b53d8ec7afc0272b835992b8f3899ba8660b25a86877ef7699cde4a8"
+        },
+        "slopeImage_cover_not_witnessExhaustive": {
+          "line": 138,
+          "normalized_sha256": "2941e57808fb5d5e8397d6d9cd0d98df5d70671b6bd90384749e5d2d98e55c7e"
+        }
+      }
     },
     "generic_prefix_atlas": {
       "coverage_payment_separation_line": 11,
@@ -535,5 +598,5 @@
     "scope": "experimental/notes/thresholds/*.md"
   },
   "verdict": "AUDIT: coverage proved; catalogue/profile/payment interface remains explicit",
-  "verification_check_count": 146
+  "verification_check_count": 171
 }

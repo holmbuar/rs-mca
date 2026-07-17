@@ -3,7 +3,9 @@
 Status: **PROVED** for concrete locator-prefix support coverage, exact
 support-family and Reed--Solomon MCA bad-slope unions, typed cellwise-budget
 summation, and the exact fixed-row outer-line lift to the full
-Reed--Solomon `B_MCA` numerator.
+Reed--Solomon `B_MCA` numerator. The companion generic bridge proves the
+hypothesis-parametric witness-exhaustive to slope-first-match implication for
+the fixed-row `B_MCA` numerator.
 
 Sources:
 
@@ -12,9 +14,12 @@ Sources:
 - `experimental/lean/grande_finale/GrandeFinale/PrefixPigeonhole.lean`, the
   finite-field locator coefficient key and its fibres;
 - `experimental/lean/grande_finale/GrandeFinale/SyndromeLine.lean`, the actual
-  support-family MCA/syndrome-line bad-slope set; and
+  support-family MCA/syndrome-line bad-slope set;
 - `experimental/lean/grande_finale/GrandeFinale/RSExactSupportUpper.lean`, the
-  exact-support reduction for injectively evaluated Reed--Solomon codes.
+  exact-support reduction for injectively evaluated Reed--Solomon codes; and
+- `experimental/lean/grande_finale/GrandeFinale/FirstMatchAddBack.lean`, the
+  ordered finite-set first-match disjointization used by the generic witness
+  bridge.
 
 ## Statement map
 
@@ -37,6 +42,18 @@ Sources:
 | Fixed-line cellwise budgets sum to an RS bad-slope budget | `GrandeFinale.PrefixAtlasBridge.rsMcaBadSlopes_card_le_sum_prefixBudgets` |
 | Line-dependent cell budgets with a uniform per-line total bound the full RS numerator | `GrandeFinale.PrefixAtlasBridge.B_MCA_rsEval_le_of_linewise_prefixBudgets` |
 | A single line-independent family `U(z)` also bounds the full RS numerator | `GrandeFinale.PrefixAtlasBridge.B_MCA_rsEval_le_sum_prefixBudgets` |
+| Slope-level first-match part of projected witness cells | `GrandeFinale.FirstMatchWitnessBridge.firstMatchSlopeCell` |
+| Residual witnesses realizing one assigned slope part | `GrandeFinale.FirstMatchWitnessBridge.firstMatchResidualWitnessCell` |
+| A residual witness cell has exactly its assigned slope image | `GrandeFinale.FirstMatchWitnessBridge.firstMatchResidualWitnessCell_image_slope` |
+| Witness-exhaustive slope budgets bound `B_MCA` by the supremum of line sums | `GrandeFinale.FirstMatchWitnessBridge.B_MCA_le_sup_of_witnessExhaustive_firstMatchSlopeBudgets` |
+| A uniform line-sum bound gives `B_MCA <= B` | `GrandeFinale.FirstMatchWitnessBridge.B_MCA_le_of_witnessExhaustive_firstMatchSlopeBudgets` |
+| Full slope-image coverage need not imply witness exhaustivity | `GrandeFinale.FirstMatchWitnessBridge.slopeImage_cover_not_witnessExhaustive` |
+| Raw witness cells can be exhaustive while their slope-first-match residual cells are not | `GrandeFinale.FirstMatchWitnessBridge.firstMatchResidualWitnessCells_not_witnessExhaustive` |
+
+The `FirstMatchWitnessBridge` declarations are generic and logically separate
+from locator-prefix support coverage: first match is applied after slope
+projection. No concrete Reed--Solomon witness incidence, C1--C9 cell family,
+payment, or `(UNIF)` instance is constructed.
 
 ## Statement comparison
 
@@ -104,6 +121,14 @@ subexponential count of realized profiles, any numerical `U(z)`, primitive
 survival after C1--C8, or a Sidon payment. In particular, totality does not
 turn the four residual cells C3/C7/C8/C9 into paid cells.
 
+The companion generic module supplies no concrete Reed--Solomon witness type
+or adapter and no actual C1--C9 witness cells. Its `witnesses`, `slope`, `idx`,
+`cell`, bad-slope image equality, witness-exhaustivity equality, cell budgets,
+and uniform sum are parameters or hypotheses. Its residual witness cells need
+not cover the original witnesses; only their per-cell slope images are exact.
+Consequently it constructs neither a payment nor an asymptotic `(UNIF)`
+instance.
+
 The arbitrary-domain definition accepts a map `point : D -> F`; injectivity
 is not needed for its coverage/union statements because cells are cut out on
 the original support family. The full `m`-subset theorem is stated directly
@@ -118,11 +143,12 @@ single empty-function key and one global cell.
 
 ## Module placement
 
-This is a leaf module. It imports `GrandeFinale.SyndromeLine`, and
-`SyndromeLine.lean` imports the root module `GrandeFinale`. Consequently the
-root `GrandeFinale.lean` cannot import `PrefixAtlasBridge` without creating an
-import cycle. The bridge remains available through its fully qualified module
-name and is checked directly.
+Both bridges are leaf modules. `PrefixAtlasBridge` imports
+`GrandeFinale.SyndromeLine`, which imports the root module `GrandeFinale`;
+`FirstMatchWitnessBridge` imports `GrandeFinale` directly. Consequently the
+root `GrandeFinale.lean` cannot import either bridge without creating an import
+cycle. Both remain available through their fully qualified module names and
+are checked directly.
 
 ## Verification
 
@@ -130,8 +156,9 @@ From `experimental/lean/grande_finale`:
 
 ```text
 lake build GrandeFinale.PrefixAtlasBridge
+lake build GrandeFinale.FirstMatchWitnessBridge
 ```
 
-The module prints the axioms of its exported coverage, union, fixed-line
-budget, and full-numerator theorems. No proof placeholder or added axiom is
-used.
+The modules print the axioms of their exported coverage, union, first-match,
+fixed-line budget, and full-numerator theorems. No proof placeholder or added
+axiom is used.
