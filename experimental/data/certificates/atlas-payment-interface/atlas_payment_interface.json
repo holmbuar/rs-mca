@@ -1,26 +1,26 @@
 {
   "artifact_bindings": {
     "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md": {
-      "byte_count": 12567,
+      "byte_count": 15107,
       "path": "experimental/lean/grande_finale/PREFIX_ATLAS_BRIDGE_CORRESPONDENCE.md",
-      "sha256": "c3cc40b6d6e28de26004d8935caf1b50a818ab0dd8cf3d2f30ac26b7d831290a"
+      "sha256": "2286d20c48eaf2a050bf87daba085b755eb0b21734f90202c264a1bafa9868b7"
     },
     "experimental/notes/audits/atlas_payment_interface_audit.md": {
-      "byte_count": 15426,
+      "byte_count": 16892,
       "path": "experimental/notes/audits/atlas_payment_interface_audit.md",
-      "sha256": "b0cff8cff91c0481181c4acd8300f20b541edbcd4a3b4141982c1ce4f6a1164b"
+      "sha256": "d357f1538a3fbe7cd308870097c43f913c7628e378e4c75881eb03b2171b010b"
     },
     "experimental/scripts/verify_atlas_payment_interface.py": {
-      "byte_count": 58848,
+      "byte_count": 68535,
       "path": "experimental/scripts/verify_atlas_payment_interface.py",
-      "sha256": "7cfbdd31dd32b8bb5437adad199f28e1b83eff0f83429bffeddacceb6762d80d"
+      "sha256": "f7b433fdbcffc889d6aa67c26ef09fff6d96625e9aa9a47c0d0f8ee98a1275f9"
     }
   },
   "interface_summary": {
     "not_proved": [
       "construction of the cellwise U(z) budgets",
       "witness exhaustion of slope-level residual cells without additional hypotheses",
-      "construction of semantic cell indices/cells, raw-witness exhaustivity, per-cell budgets, or uniform sum bound",
+      "construction of C1-C9 semantic cell indices/cells, per-cell budgets, or uniform sum bound",
       "a concrete C1-C9 Reed-Solomon semantic atlas, prefix classification, or payment",
       "asymptotic-row same-catalogue uniformity (UNIF)",
       "C1-C8 primitive-survival/catalogue classification for the intended row",
@@ -41,7 +41,10 @@
       "slope-level first-match residual cells can fail witness exhaustion despite original-cell and slope-image coverage",
       "a finite coefficient-vector exact-cardinality RS witness catalogue is constructed for every received line",
       "the concrete catalogue's slope image is exactly the threshold-a RS MCA-bad slope set",
-      "raw witness exhaustion plus first-match slope budgets specializes directly to the concrete RS catalogue"
+      "raw witness exhaustion plus first-match slope budgets specializes directly to the concrete RS catalogue",
+      "locator-prefix witness cells exactly exhaust every concrete linewise catalogue",
+      "under injective evaluation and the parity-dimension equation, each prefix-witness slope image equals its support-prefix bad-slope cell",
+      "locator-prefix first-match budgets specialize to B_MCA without a raw-exhaustivity hypothesis"
     ]
   },
   "max_sum_quantifier_negative_control": {
@@ -191,7 +194,7 @@
       }
     ]
   },
-  "schema": "atlas-payment-interface/v4",
+  "schema": "atlas-payment-interface/v5",
   "sources": {
     "catalogue_ledger": {
       "blocked_or_conditional_cells": {
@@ -394,6 +397,58 @@
       "sha256": "88a0959285c34b14dc705dc19877c1fb53e33ae647dbf648222b6ab18c3579cf",
       "status": "conditional on atlas-internal H4; H4 is assumed, not re-proved",
       "verified_nonclaim": "the transfer does not pay the image-scale MI/MA or Sidon cell"
+    },
+    "rs_exact_card_prefix_witness_bridge": {
+      "axiom_print_lines": [
+        "#print axioms rsExactCardPrefixWitnessCells_cover",
+        "#print axioms rsExactCardPrefixWitnessCell_image_slope_eq_rsPrefixBadSlopeCell",
+        "#print axioms firstMatchExactCardPrefixWitnessSlopeCell_subset_rsPrefixBadSlopeCell",
+        "#print axioms B_MCA_rsEval_le_sup_of_exactCardPrefixWitness_firstMatchSlopeBudgets",
+        "#print axioms B_MCA_rsEval_le_sup_of_exactCardPrefixBadSlopeBudgets",
+        "#print axioms B_MCA_rsEval_le_of_exactCardPrefixWitness_firstMatchSlopeBudgets"
+      ],
+      "declarations": {
+        "B_MCA_rsEval_le_of_exactCardPrefixWitness_firstMatchSlopeBudgets": 215,
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixBadSlopeBudgets": 195,
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixWitness_firstMatchSlopeBudgets": 172,
+        "firstMatchExactCardPrefixWitnessSlopeCell_subset_rsPrefixBadSlopeCell": 143,
+        "mem_rsExactCardPrefixWitnessCell_iff": 50,
+        "rsExactCardPrefixWitnessCell": 43,
+        "rsExactCardPrefixWitnessCell_image_slope_eq_rsPrefixBadSlopeCell": 72,
+        "rsExactCardPrefixWitnessCells_cover": 61,
+        "rsExactCardWitnessPrefixKey": 37
+      },
+      "forbidden_syntax_checks": [
+        "any admit token",
+        "any axiom token",
+        "any opaque token",
+        "any sorry token"
+      ],
+      "path": "experimental/lean/grande_finale/GrandeFinale/RSExactCardPrefixWitnessBridge.lean",
+      "per_cell_alignment_line": 72,
+      "prefix_witness_signatures": {
+        "B_MCA_rsEval_le_of_exactCardPrefixWitness_firstMatchSlopeBudgets": {
+          "line": 215,
+          "normalized_sha256": "a94bee8809b46cdc67b91c35862b2a353e5b74d03696a665d4ade1423b353293"
+        },
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixBadSlopeBudgets": {
+          "line": 195,
+          "normalized_sha256": "3b6e8ef68068a25ff77b13c20c6e50245740f2e9225c9a26cdd0c4e7ee4e2611"
+        },
+        "rsExactCardPrefixWitnessCell_image_slope_eq_rsPrefixBadSlopeCell": {
+          "line": 72,
+          "normalized_sha256": "adb9200e521cfd7b8559651f449017241ca2d9989637a0094287596b0e1f83b2"
+        },
+        "rsExactCardPrefixWitnessCells_cover": {
+          "line": 61,
+          "normalized_sha256": "3b33cb74880d84a536d4f2232cbafb40602a5c3128397f031644a337d6a6c9b0"
+        }
+      },
+      "raw_witness_cover_line": 61,
+      "sha256": "46f0df69ef802dced50b539db80d84152b1b498c667460d07d542856e2202f2b",
+      "verified_boundary": "raw prefix-witness exhaustivity is discharged, while first-match cell budgets and their uniform line-sum bound remain inputs",
+      "verified_claim": "locator-prefix cells exhaust the concrete exact-cardinality witness catalogue and, under injective evaluation and the parity-dimension equation, align cellwise with support-prefix slopes",
+      "verified_nonclaim": "the structural prefix partition is not a C1-C9 classification and constructs no cell payment or asymptotic UNIF certificate"
     },
     "rs_exact_card_witness_bridge": {
       "axiom_print_lines": [
@@ -657,5 +712,5 @@
     "scope": "experimental/notes/thresholds/*.md"
   },
   "verdict": "AUDIT: coverage proved; catalogue/profile/payment interface remains explicit",
-  "verification_check_count": 201
+  "verification_check_count": 230
 }

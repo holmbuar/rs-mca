@@ -6,10 +6,12 @@
 PREFIX-FIBRE WITNESS TOTALITY = PROVED, UNCONDITIONAL / GENERIC
 WITNESS-EXHAUSTIVE TO SLOPE-FIRST-MATCH FIXED-ROW B_MCA IMPLICATION = PROVED,
 HYPOTHESIS-PARAMETRIC / FINITE EXACT-CARDINALITY RS WITNESS CATALOGUE AND
-BAD-SLOPE IMAGE = PROVED / CONCRETE LOCATOR-PREFIX TO SYNDROME-LINE BAD-SLOPE
+BAD-SLOPE IMAGE = PROVED / LOCATOR-PREFIX CELLS ON THE CONCRETE WITNESS
+CATALOGUE, RAW-WITNESS EXHAUSTIVITY, AND PARITY-CHECK SUPPORT-CELL SLOPE ALIGNMENT = PROVED /
+CONCRETE LOCATOR-PREFIX TO SYNDROME-LINE BAD-SLOPE
 UNION = PROVED / TYPED LOCATOR-PREFIX FIXED-ROW OUTER-LINE B_MCA IMPLICATION =
-PROVED / ACTUAL C1--C9 WITNESS CELLS, RAW-WITNESS CELL EXHAUSTIVITY, PAYMENT,
-AND ASYMPTOTIC (UNIF) = NOT PROVED.`
+PROVED / ACTUAL C1--C9 SEMANTIC WITNESS CLASSIFICATION, PAYMENT, AND
+ASYMPTOTIC (UNIF) = NOT PROVED.`
 
 The phrase `atlas-totality lane (in progress)` still appears in downstream
 threshold notes, but it no longer names the missing mathematical interface
@@ -32,8 +34,9 @@ reduction in `GrandeFinale.RSExactSupportUpper`, and the source analyses
 `staircase_concentration_sidon_paired.md`. The typed leaf modules are
 `GrandeFinale.PrefixAtlasBridge` and
 `GrandeFinale.FirstMatchWitnessBridge`, together with the concrete
-`GrandeFinale.RSExactCardWitnessBridge`. No `.tex` or `.pdf` file is
-edited.
+`GrandeFinale.RSExactCardWitnessBridge` and
+`GrandeFinale.RSExactCardPrefixWitnessBridge`. No `.tex` or `.pdf` file
+is edited.
 
 ---
 
@@ -152,12 +155,26 @@ parity dimension `R` or equation `k + R = |D|`. Equal slope and support
 determine the explainer once `k <= a`, but slope alone can still occur on
 several supports.
 
-The two concrete outer-line theorems instantiate the generic first-match
-bridge with this catalogue. They retain raw witness-cell exhaustivity,
-first-match slope-cell budgets, and the uniform line-sum bound as hypotheses;
-they construct none of those semantic inputs. Here “exact-cardinality” does
-not assert that the chosen support is the explainer's complete agreement set:
-agreement at additional coordinates is allowed.
+The two generic-concrete outer-line theorems instantiate the first-match bridge
+with this catalogue while retaining raw witness-cell exhaustivity, first-match
+slope-cell budgets, and the uniform line-sum bound as hypotheses.
+
+The leaf `GrandeFinale.RSExactCardPrefixWitnessBridge` now supplies raw
+exhaustivity for one honest structural choice: it filters the literal catalogue
+by the locator prefix of each witness's selected support and proves that the
+union over all prefix keys is exactly the raw catalogue. Under injective
+evaluation and the parity-check dimension equation, each witness cell's slope
+image is exactly the existing `rsPrefixBadSlopeCell`; its slope-first-match set
+is therefore a subset of that
+support-level cell. The specialized `B_MCA` theorems no longer assume
+`hbadImage` or raw prefix-cell `hexhaust`, but still assume every `hcell` budget
+and, for a fixed bound, `hunif`. The arbitrary prefix-key well-order is used
+only for first-match attribution and has no compatibility with field operations.
+
+These locator-prefix witness cells are not a C1--C9 semantic classification.
+Here “exact-cardinality” still does not assert that the chosen support is the
+explainer's complete agreement set: agreement at additional coordinates is
+allowed.
 
 The certificate checks the exact diagonal model with `2^b` lines and cells:
 `sup_line sum_z = 1`, while `sum_z sup_line = 2^b`.
@@ -268,12 +285,15 @@ the C3/C7/C8/C9 cellwise profile and bad-slope payment.”
 
 ## 6. Nonclaims and module placement
 
-- No actual C1--C9 witness cells, realized profile index, or
+- No actual C1--C9 semantic witness cells, realized profile index, or
   primitive-survival theorem is constructed.
 - `RSExactCardWitnessBridge` constructs the finite RS witness catalogue and
   proves its exact bad-slope image. It does not construct `idx`, `cell`,
-  `hexhaust`, `hcell`, or `hunif`; those semantic classification/payment
-  inputs remain parameters or hypotheses.
+  `hexhaust`, `hcell`, or `hunif`; those generic inputs remain parameters or
+  hypotheses in that module.
+- `RSExactCardPrefixWitnessBridge` constructs `idx`, `cell`, and `hexhaust`
+  only for the structural locator-prefix partition. It constructs no C1--C9
+  classifier, `hcell` payment, or `hunif` bound.
 - First-match residual witness cells need not cover the raw witnesses. Only
   their per-cell slope images are proved exact.
 - None of the bridges constructs a cell-budget function `U`, proves a cell
@@ -284,23 +304,28 @@ the C3/C7/C8/C9 cellwise profile and bad-slope payment.”
 - No guarded result in the downstream notes is retracted or corrected.
 - No `.tex` or `.pdf` file is changed.
 
-`PrefixAtlasBridge.lean`, `FirstMatchWitnessBridge.lean`, and
-`RSExactCardWitnessBridge.lean` are deliberately leaf modules. The first
+`PrefixAtlasBridge.lean`, `FirstMatchWitnessBridge.lean`,
+`RSExactCardWitnessBridge.lean`, and `RSExactCardPrefixWitnessBridge.lean` are
+deliberately leaf modules. The first
 reaches the root module through `GrandeFinale.SyndromeLine`; the generic
 witness bridge imports `GrandeFinale` directly; the concrete adapter imports
-that generic bridge. Importing these leaves back into `GrandeFinale.lean`
-would create an import cycle. The focused verification targets are therefore
+that generic bridge; and the prefix-witness composition imports the concrete
+adapter and support-prefix leaf. Importing these leaves back into
+`GrandeFinale.lean` would create an import cycle. The focused verification
+targets are therefore
 
 ```text
 lake build GrandeFinale.PrefixAtlasBridge
 lake build GrandeFinale.FirstMatchWitnessBridge
 lake build GrandeFinale.RSExactCardWitnessBridge
+lake build GrandeFinale.RSExactCardPrefixWitnessBridge
 ```
 
 The companion stdlib verifier
 `experimental/scripts/verify_atlas_payment_interface.py` checks the theorem
-anchors, the exact-cardinality catalogue and bad-slope image, the fixed-line
-`hU` and exact linewise `hcell`/`hunif` boundaries, the four-cell ledger,
-the conditional `(H4)` interface, the legacy wording census, and the
-exponential-cell negative control. Its machine-readable output is
+anchors, the exact-cardinality catalogue and bad-slope image, raw prefix-cell
+witness exhaustivity and support-cell alignment, the fixed-line `hU` and exact
+linewise `hcell`/`hunif` boundaries, the four-cell ledger, the conditional
+`(H4)` interface, the legacy wording census, and the exponential-cell negative
+control. Its machine-readable output is
 `experimental/data/certificates/atlas-payment-interface/atlas_payment_interface.json`.

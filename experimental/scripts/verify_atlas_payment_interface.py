@@ -30,6 +30,10 @@ FIRST_MATCH_WITNESS_BRIDGE = (
 RS_EXACT_CARD_WITNESS_BRIDGE = (
     "experimental/lean/grande_finale/GrandeFinale/RSExactCardWitnessBridge.lean"
 )
+RS_EXACT_CARD_PREFIX_WITNESS_BRIDGE = (
+    "experimental/lean/grande_finale/GrandeFinale/"
+    "RSExactCardPrefixWitnessBridge.lean"
+)
 ATLAS_LEDGER = "experimental/notes/thresholds/atlas_cat_cell_ledger.md"
 HEAVY_FIBER = "experimental/notes/thresholds/heavy_fiber_admissibility_transfer.md"
 VERIFIER_SCRIPT = "experimental/scripts/verify_atlas_payment_interface.py"
@@ -880,6 +884,200 @@ def audit_rs_exact_card_witness_bridge(
     }
 
 
+def audit_rs_exact_card_prefix_witness_bridge(
+    text: str, audit: Audit
+) -> dict[str, object]:
+    flat = normalized(text)
+    lean_code = lean_code_without_comments(text)
+    declarations = declaration_lines(text)
+    required = [
+        "rsExactCardWitnessPrefixKey",
+        "rsExactCardPrefixWitnessCell",
+        "mem_rsExactCardPrefixWitnessCell_iff",
+        "rsExactCardPrefixWitnessCells_cover",
+        "rsExactCardPrefixWitnessCell_image_slope_eq_rsPrefixBadSlopeCell",
+        "firstMatchExactCardPrefixWitnessSlopeCell_subset_rsPrefixBadSlopeCell",
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixWitness_firstMatchSlopeBudgets",
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixBadSlopeBudgets",
+        "B_MCA_rsEval_le_of_exactCardPrefixWitness_firstMatchSlopeBudgets",
+    ]
+    for name in required:
+        audit.require(
+            name in declarations,
+            f"RSExactCardPrefixWitnessBridge declaration {name}",
+        )
+
+    key_anchor = (
+        "def rsExactCardWitnessPrefixKey (ev : D -> F) (K a : Nat) "
+        "{k : Nat} (w : RSExactCardWitness D F k) : Fin (a - K) -> F := "
+        "supportPrefixKey ev K a w.support"
+    )
+    cell_anchor = (
+        "(rsExactCardWitnesses ev k a p.1 p.2).filter fun w => "
+        "rsExactCardWitnessPrefixKey ev K a w = z"
+    )
+    audit.require(
+        key_anchor in flat,
+        "RSExactCardPrefixWitnessBridge locator-prefix key",
+    )
+    audit.require(
+        cell_anchor in flat,
+        "RSExactCardPrefixWitnessBridge concrete filtered cell",
+    )
+
+    expected_signatures = {
+        "rsExactCardPrefixWitnessCells_cover": (
+            "theorem rsExactCardPrefixWitnessCells_cover "
+            "(ev : D -> F) (k a K : Nat) "
+            "(p : (D -> F) × (D -> F)) : "
+            "(Finset.univ : Finset (Fin (a - K) -> F)).biUnion "
+            "(rsExactCardPrefixWitnessCell ev k a K p) = "
+            "rsExactCardWitnesses ev k a p.1 p.2"
+        ),
+        "rsExactCardPrefixWitnessCell_image_slope_eq_rsPrefixBadSlopeCell": (
+            "theorem "
+            "rsExactCardPrefixWitnessCell_image_slope_eq_rsPrefixBadSlopeCell "
+            "(ev : D -> F) (hev : Function.Injective ev) "
+            "(k R : Nat) (hsize : k + R = Fintype.card D) "
+            "(a K : Nat) (p : (D -> F) × (D -> F)) "
+            "(z : Fin (a - K) -> F) : "
+            "(rsExactCardPrefixWitnessCell ev k a K p z).image "
+            "RSExactCardWitness.slope = "
+            "rsPrefixBadSlopeCell ev R a K p.1 p.2 z"
+        ),
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixBadSlopeBudgets": (
+            "theorem B_MCA_rsEval_le_sup_of_exactCardPrefixBadSlopeBudgets "
+            "(ev : D -> F) (hev : Function.Injective ev) "
+            "(k R : Nat) (hsize : k + R = Fintype.card D) "
+            "(a K : Nat) (hka : k + 1 ≤ a) "
+            "(U : ((D -> F) × (D -> F)) -> "
+            "(Fin (a - K) -> F) -> Nat) "
+            "(hcell : ∀ p z, "
+            "(rsPrefixBadSlopeCell ev R a K p.1 p.2 z).card ≤ U p z) : "
+            "GrandeFinale.B_MCA "
+            "(GrandeFinale.CollisionAwarePole.rsEval ev k : "
+            "Set (D -> F)) a ≤ "
+            "Finset.univ.sup (fun p : (D -> F) × (D -> F) => "
+            "∑ z, U p z)"
+        ),
+        "B_MCA_rsEval_le_of_exactCardPrefixWitness_firstMatchSlopeBudgets": (
+            "theorem "
+            "B_MCA_rsEval_le_of_exactCardPrefixWitness_firstMatchSlopeBudgets "
+            "(ev : D -> F) (hev : Function.Injective ev) "
+            "(k a K B : Nat) (hka : k + 1 ≤ a) "
+            "(U : ((D -> F) × (D -> F)) -> "
+            "(Fin (a - K) -> F) -> Nat) "
+            "(hcell : ∀ p z, "
+            "(firstMatchSlopeCell "
+            "(Finset.univ : Finset (Fin (a - K) -> F)) "
+            "(rsExactCardPrefixWitnessCell ev k a K p) "
+            "RSExactCardWitness.slope z).card ≤ U p z) "
+            "(hunif : ∀ p, ∑ z, U p z ≤ B) : "
+            "GrandeFinale.B_MCA "
+            "(GrandeFinale.CollisionAwarePole.rsEval ev k : "
+            "Set (D -> F)) a ≤ B"
+        ),
+    }
+    signatures: dict[str, object] = {}
+    for name, expected in expected_signatures.items():
+        actual, theorem_line = theorem_signature(text, name)
+        audit.require(
+            actual == expected,
+            f"RSExactCardPrefixWitnessBridge exact signature {name}",
+        )
+        signatures[name] = {
+            "line": theorem_line,
+            "normalized_sha256": digest(actual),
+        }
+
+    forbidden_syntax = {
+        "any sorry token": re.compile(r"\bsorry\b"),
+        "any admit token": re.compile(r"\badmit\b"),
+        "any axiom token": re.compile(r"\baxiom\b"),
+        "any opaque token": re.compile(r"\bopaque\b"),
+    }
+    for label, pattern in forbidden_syntax.items():
+        audit.require(
+            pattern.search(lean_code) is None,
+            f"RSExactCardPrefixWitnessBridge rejects {label}",
+        )
+
+    exported = [
+        "rsExactCardPrefixWitnessCells_cover",
+        "rsExactCardPrefixWitnessCell_image_slope_eq_rsPrefixBadSlopeCell",
+        "firstMatchExactCardPrefixWitnessSlopeCell_subset_rsPrefixBadSlopeCell",
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixWitness_firstMatchSlopeBudgets",
+        "B_MCA_rsEval_le_sup_of_exactCardPrefixBadSlopeBudgets",
+        "B_MCA_rsEval_le_of_exactCardPrefixWitness_firstMatchSlopeBudgets",
+    ]
+    for name in exported:
+        audit.require(
+            re.search(
+                rf"^#print axioms {re.escape(name)}[ \t]*$",
+                lean_code,
+                re.MULTILINE,
+            )
+            is not None,
+            f"RSExactCardPrefixWitnessBridge #print axioms {name}",
+        )
+
+    coverage_claim = (
+        "The cells exhaust raw witnesses. Under injective evaluation and the "
+        "parity-check dimension hypothesis, their slope images agree with the "
+        "existing support-family locator-prefix cells."
+    )
+    scope_boundary = (
+        "This is a structural locator-prefix partition, not a C1--C9 "
+        "semantic classification: cell payment and the uniform sum bound "
+        "remain explicit hypotheses."
+    )
+    audit.require(
+        coverage_claim in flat,
+        "RSExactCardPrefixWitnessBridge raw-witness coverage claim",
+    )
+    audit.require(
+        scope_boundary in flat,
+        "RSExactCardPrefixWitnessBridge C1-C9/payment boundary",
+    )
+    audit.require(
+        "not an order compatible with the field operations." in flat,
+        "RSExactCardPrefixWitnessBridge arbitrary attribution order boundary",
+    )
+    audit.require(
+        "import GrandeFinale.RSExactCardWitnessBridge" in text
+        and "import GrandeFinale.PrefixAtlasBridge" in text,
+        "RSExactCardPrefixWitnessBridge composition imports",
+    )
+
+    return {
+        "path": RS_EXACT_CARD_PREFIX_WITNESS_BRIDGE,
+        "sha256": digest(text),
+        "declarations": {name: declarations[name] for name in required},
+        "prefix_witness_signatures": signatures,
+        "forbidden_syntax_checks": sorted(forbidden_syntax),
+        "axiom_print_lines": [f"#print axioms {name}" for name in exported],
+        "raw_witness_cover_line": declarations[
+            "rsExactCardPrefixWitnessCells_cover"
+        ],
+        "per_cell_alignment_line": declarations[
+            "rsExactCardPrefixWitnessCell_image_slope_eq_rsPrefixBadSlopeCell"
+        ],
+        "verified_claim": (
+            "locator-prefix cells exhaust the concrete exact-cardinality witness "
+            "catalogue and, under injective evaluation and the parity-dimension "
+            "equation, align cellwise with support-prefix slopes"
+        ),
+        "verified_boundary": (
+            "raw prefix-witness exhaustivity is discharged, while first-match "
+            "cell budgets and their uniform line-sum bound remain inputs"
+        ),
+        "verified_nonclaim": (
+            "the structural prefix partition is not a C1-C9 classification "
+            "and constructs no cell payment or asymptotic UNIF certificate"
+        ),
+    }
+
+
 def blocker_paragraph(section: str, cell: str) -> tuple[str, int]:
     pattern = re.compile(
         rf"^- \*\*{re.escape(cell)} \(([^)]*)\)\.\*\*(.*?)(?=^- \*\*C[0-9]+ \(|\Z)",
@@ -1123,6 +1321,9 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
     exact_card_witness_text = read_source(
         RS_EXACT_CARD_WITNESS_BRIDGE, source_overrides
     )
+    exact_card_prefix_witness_text = read_source(
+        RS_EXACT_CARD_PREFIX_WITNESS_BRIDGE, source_overrides
+    )
     ledger_text = read_source(ATLAS_LEDGER, source_overrides)
     heavy_text = read_source(HEAVY_FIBER, source_overrides)
     artifact_bindings: dict[str, object] = {}
@@ -1149,6 +1350,11 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
         exact_card_witness_text,
         audit,
     )
+    exact_card_prefix_witness_bridge = (
+        audit_rs_exact_card_prefix_witness_bridge(
+            exact_card_prefix_witness_text, audit
+        )
+    )
     ledger = audit_ledger(ledger_text, audit)
     heavy = audit_heavy_fiber(heavy_text, audit)
     stale = audit_stale_wording(source_overrides, audit)
@@ -1156,7 +1362,7 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
     quantifier_control = max_sum_quantifier_negative_control(audit)
 
     certificate: dict[str, object] = {
-        "schema": "atlas-payment-interface/v4",
+        "schema": "atlas-payment-interface/v5",
         "verdict": "AUDIT: coverage proved; catalogue/profile/payment interface remains explicit",
         "artifact_bindings": artifact_bindings,
         "sources": {
@@ -1164,6 +1370,7 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
             "concrete_prefix_bridge": bridge,
             "first_match_witness_bridge": witness_bridge,
             "rs_exact_card_witness_bridge": exact_card_witness_bridge,
+            "rs_exact_card_prefix_witness_bridge": exact_card_prefix_witness_bridge,
             "catalogue_ledger": ledger,
             "heavy_fiber_transfer": heavy,
         },
@@ -1186,11 +1393,14 @@ def build_certificate(overrides: Mapping[str, str] | None = None) -> dict[str, o
                 "a finite coefficient-vector exact-cardinality RS witness catalogue is constructed for every received line",
                 "the concrete catalogue's slope image is exactly the threshold-a RS MCA-bad slope set",
                 "raw witness exhaustion plus first-match slope budgets specializes directly to the concrete RS catalogue",
+                "locator-prefix witness cells exactly exhaust every concrete linewise catalogue",
+                "under injective evaluation and the parity-dimension equation, each prefix-witness slope image equals its support-prefix bad-slope cell",
+                "locator-prefix first-match budgets specialize to B_MCA without a raw-exhaustivity hypothesis",
             ],
             "not_proved": [
                 "construction of the cellwise U(z) budgets",
                 "witness exhaustion of slope-level residual cells without additional hypotheses",
-                "construction of semantic cell indices/cells, raw-witness exhaustivity, per-cell budgets, or uniform sum bound",
+                "construction of C1-C9 semantic cell indices/cells, per-cell budgets, or uniform sum bound",
                 "a concrete C1-C9 Reed-Solomon semantic atlas, prefix classification, or payment",
                 "asymptotic-row same-catalogue uniformity (UNIF)",
                 "C1-C8 primitive-survival/catalogue classification for the intended row",
@@ -1368,6 +1578,26 @@ def run_tamper_selftest(baseline: dict[str, object]) -> int:
                 "(hexhaust : ∃ p,",
             ),
         ),
+        (
+            "weaken raw prefix-witness exhaustivity",
+            RS_EXACT_CARD_PREFIX_WITNESS_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "        (rsExactCardPrefixWitnessCell ev k a K p) =\n"
+                "      rsExactCardWitnesses ev k a p.1 p.2",
+                "        (rsExactCardPrefixWitnessCell ev k a K p) ⊆\n"
+                "      rsExactCardWitnesses ev k a p.1 p.2",
+            ),
+        ),
+        (
+            "weaken prefix-witness per-cell slope alignment",
+            RS_EXACT_CARD_PREFIX_WITNESS_BRIDGE,
+            lambda text: replace_once(
+                text,
+                "        RSExactCardWitness.slope =\n",
+                "        RSExactCardWitness.slope ⊆\n",
+            ),
+        ),
     ]
 
     stale_files = baseline["stale_downstream_wording"]["files"]  # type: ignore[index]
@@ -1445,7 +1675,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--tamper-selftest",
         action="store_true",
-        help="verify the certificate and detect sixteen in-memory mutations",
+        help="verify the certificate and detect eighteen in-memory mutations",
     )
     return parser.parse_args()
 

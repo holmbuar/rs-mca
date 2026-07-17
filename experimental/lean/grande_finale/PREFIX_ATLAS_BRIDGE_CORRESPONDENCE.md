@@ -7,7 +7,10 @@ Reed--Solomon `B_MCA` numerator. The companion generic bridge proves the
 hypothesis-parametric witness-exhaustive to slope-first-match implication for
 the fixed-row `B_MCA` numerator. The concrete witness adapter constructs the
 finite exact-cardinality `(gamma,S,h)` catalogue and proves its slope image is
-exactly the threshold-`a` RS MCA-bad slope set.
+exactly the threshold-`a` RS MCA-bad slope set. The prefix-witness composition
+then partitions that raw catalogue exactly and, under injective evaluation and
+the parity-dimension equation, aligns each cell's slope image with the
+corresponding support-prefix bad-slope cell.
 
 Sources:
 
@@ -21,7 +24,10 @@ Sources:
   exact-support reduction for injectively evaluated Reed--Solomon codes;
 - `experimental/lean/grande_finale/GrandeFinale/RSExactCardWitnessBridge.lean`,
   the finite coefficient-vector witness catalogue and its concrete generic-
-  bridge specialization; and
+  bridge specialization;
+- `experimental/lean/grande_finale/GrandeFinale/RSExactCardPrefixWitnessBridge.lean`,
+  the raw-witness locator-prefix partition and exact support-cell slope
+  alignment; and
 - `experimental/lean/grande_finale/GrandeFinale/FirstMatchAddBack.lean`, the
   ordered finite-set first-match disjointization used by the generic witness
   bridge.
@@ -62,12 +68,21 @@ Sources:
 | RS MCA-bad slopes equal the concrete catalogue's slope image | `GrandeFinale.RSExactCardWitnessBridge.rsMcaBadSlopes_eq_exactCardWitnessSlopeImage` |
 | Concrete witness-exhaustive slope budgets bound `B_MCA` by the supremum of line sums | `GrandeFinale.RSExactCardWitnessBridge.B_MCA_rsEval_le_sup_of_exactCardWitnessExhaustive_firstMatchSlopeBudgets` |
 | A uniform concrete-catalogue line-sum bound gives `B_MCA <= B` | `GrandeFinale.RSExactCardWitnessBridge.B_MCA_rsEval_le_of_exactCardWitnessExhaustive_firstMatchSlopeBudgets` |
+| Locator-prefix key of a literal exact-cardinality witness | `GrandeFinale.RSExactCardPrefixWitnessBridge.rsExactCardWitnessPrefixKey` |
+| Literal catalogue cell over one locator-prefix key | `GrandeFinale.RSExactCardPrefixWitnessBridge.rsExactCardPrefixWitnessCell` |
+| Locator-prefix witness cells exhaust the raw catalogue exactly | `GrandeFinale.RSExactCardPrefixWitnessBridge.rsExactCardPrefixWitnessCells_cover` |
+| Under injective evaluation and the parity-dimension equation, each witness cell's slope image equals its support-prefix bad-slope cell | `GrandeFinale.RSExactCardPrefixWitnessBridge.rsExactCardPrefixWitnessCell_image_slope_eq_rsPrefixBadSlopeCell` |
+| First-match witness slopes are contained in the aligned support cell | `GrandeFinale.RSExactCardPrefixWitnessBridge.firstMatchExactCardPrefixWitnessSlopeCell_subset_rsPrefixBadSlopeCell` |
+| Prefix-witness first-match budgets bound `B_MCA` without a raw-exhaustivity hypothesis | `GrandeFinale.RSExactCardPrefixWitnessBridge.B_MCA_rsEval_le_sup_of_exactCardPrefixWitness_firstMatchSlopeBudgets` |
+| Existing support-prefix budgets feed the same witness adapter | `GrandeFinale.RSExactCardPrefixWitnessBridge.B_MCA_rsEval_le_sup_of_exactCardPrefixBadSlopeBudgets` |
+| A uniform prefix-witness line-sum bound gives `B_MCA <= B` | `GrandeFinale.RSExactCardPrefixWitnessBridge.B_MCA_rsEval_le_of_exactCardPrefixWitness_firstMatchSlopeBudgets` |
 
 The `FirstMatchWitnessBridge` declarations are generic and logically separate
 from locator-prefix support coverage: first match is applied after slope
 projection. `RSExactCardWitnessBridge` supplies the concrete finite RS
-incidence and bad-slope image, but no C1--C9 cell family, raw-witness
-exhaustivity proof, payment, or `(UNIF)` instance is constructed.
+incidence and bad-slope image. `RSExactCardPrefixWitnessBridge` supplies a
+raw-witness-exhaustive structural prefix partition, but no C1--C9 semantic
+cell family, payment, or `(UNIF)` instance is constructed.
 
 ## Statement comparison
 
@@ -137,10 +152,20 @@ badSlopes(rsEval(ev,k),u0,u1,a)
   = image slope (rsExactCardWitnesses(ev,k,a,u0,u1)).
 ```
 
-The concrete outer-line bounds therefore no longer assume that image identity.
-They still assume a raw-witness-exhaustive semantic cell family, first-match
-slope budgets, and, for the fixed bound, a uniform line-sum cap. Exact
-cardinality does not assert that `S` is the complete agreement locus of `h`.
+The generic concrete outer-line bounds therefore no longer assume that image
+identity, but they still accept a raw-witness-exhaustive cell family.
+`RSExactCardPrefixWitnessBridge` supplies one structural instance:
+
+```text
+cell(line,z) = { w in rsExactCardWitnesses(line) :
+                   supportPrefixKey(w.support) = z }.
+```
+
+These cells exhaust the raw catalogue exactly. Under injective evaluation and
+the parity-check dimension equation, each cell's slope image equals the
+corresponding `rsPrefixBadSlopeCell`. First-match slope budgets and the uniform
+line-sum cap remain inputs. Exact cardinality does not assert that `S` is the
+complete agreement locus of `h`.
 
 ## Scope boundaries
 
@@ -157,9 +182,12 @@ hypotheses. Its residual witness cells need not cover the original witnesses;
 only their per-cell slope images are exact.
 
 The concrete adapter supplies the finite RS witnesses and discharges the
-bad-slope image equality. It still constructs no C1--C9 `idx` or `cell`, no
-raw-witness exhaustivity proof, no cell budget, and no uniform sum. Consequently
-it constructs neither a payment nor an asymptotic `(UNIF)` instance.
+bad-slope image equality. On its own it constructs no `idx`, `cell`, raw
+witness exhaustivity proof, cell budget, or uniform sum. The prefix-witness
+composition constructs a structural locator-prefix `idx`, `cell`, and raw
+exhaustivity theorem, but no C1--C9 semantic classifier, cell budget, or
+uniform sum. Consequently neither module constructs a payment nor an
+asymptotic `(UNIF)` instance.
 
 The arbitrary-domain definition accepts a map `point : D -> F`; injectivity
 is not needed for its coverage/union statements because cells are cut out on
@@ -178,13 +206,14 @@ single empty-function key and one global cell.
 
 ## Module placement
 
-All three bridges are leaf modules. `PrefixAtlasBridge` imports
+All four bridges are leaf modules. `PrefixAtlasBridge` imports
 `GrandeFinale.SyndromeLine`, which imports the root module `GrandeFinale`;
 `FirstMatchWitnessBridge` imports `GrandeFinale` directly; and
-`RSExactCardWitnessBridge` imports the generic witness bridge. Consequently
-the root `GrandeFinale.lean` cannot import these leaves without creating an
-import cycle. They remain available through their fully qualified module names
-and are checked directly.
+`RSExactCardWitnessBridge` imports the generic witness bridge; the
+prefix-witness composition imports both concrete leaves. Consequently the root
+`GrandeFinale.lean` cannot import these leaves without creating an import
+cycle. They remain available through their fully qualified module names and
+are checked directly.
 
 ## Verification
 
@@ -194,6 +223,7 @@ From `experimental/lean/grande_finale`:
 lake build GrandeFinale.PrefixAtlasBridge
 lake build GrandeFinale.FirstMatchWitnessBridge
 lake build GrandeFinale.RSExactCardWitnessBridge
+lake build GrandeFinale.RSExactCardPrefixWitnessBridge
 ```
 
 The modules print the axioms of their exported coverage, union, first-match,
