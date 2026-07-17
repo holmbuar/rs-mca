@@ -21,10 +21,12 @@ envelope is
 ```
 
 RF3' repairs the content coefficient only conditional on the content-stable
-subtraction bridge.  RF3'' avoids that subtraction arithmetically, but it is
-usable only with a standalone global-degree factor-lift bridge.  Neither
-envelope discharges the retained-Hensel import by itself, so the downstream
-result remains conditional.
+subtraction bridge.  RF3'' avoids that subtraction arithmetically.  The
+standalone proof in
+`experimental/notes/audits/paving_v9_2_rf3_global_degree_bridge.md` now
+supplies the required global-degree factor lift, including its linear and
+content/leading-coefficient cases.  Immutable v9.2 still states the weaker RF3
+assumption, so its downstream result remains conditional.
 
 ## Immutable v9.2 source binding
 
@@ -138,8 +140,9 @@ the conservative arithmetic envelope RF3'',
 (1+alpha)D_Z + (r+1)D_Y.
 ```
 
-It becomes a factor-lift bound only when paired with a standalone global-degree
-factor-lift bridge.  In the counterexample, RF3' has right side
+The companion global-degree bridge note supplies the factor-lift theorem needed
+to turn this RF3'' envelope into a future-version hypothesis.  In the
+counterexample, RF3' has right side
 
 ```text
 11/10 + 1/100 = 111/100,

@@ -1,11 +1,12 @@
 /-!
-# Typed target for the unresolved retained-factor lift
+# Typed target for the original RF3/RF3' retained-factor lift
 
 This file deliberately introduces no axiom.  It provides a proposition-valued
 interface in which a future formalization can package the finite-field,
 polynomial, slope, and chosen-support data from
 `ass:retained-factor-lift`.  The target remains an explicit hypothesis of the
-only theorem that consumes it.
+only theorem that consumes it.  The paper-proved RF3'' global-degree bridge has
+a separate typed interface in `GlobalDegreeBridge.lean`.
 -/
 
 namespace PavingRetainedFactorLift.Target
@@ -21,9 +22,9 @@ structure RetainedFactorLiftInterface (Instance : Type u) where
   antecedent : Instance → Prop
   simultaneouslyExplained : Instance → Prop
 
-/-- The unresolved proposition corresponding to
+/-- The unresolved original RF3/RF3' proposition corresponding to
 `ass:retained-factor-lift`.  Merely defining this proposition does not assert
-or prove it. -/
+or prove it; it is distinct from the conservative RF3'' bridge. -/
 def RetainedFactorLiftTarget {Instance : Type u}
     (I : RetainedFactorLiftInterface Instance) : Prop :=
   ∀ x, I.antecedent x → I.simultaneouslyExplained x

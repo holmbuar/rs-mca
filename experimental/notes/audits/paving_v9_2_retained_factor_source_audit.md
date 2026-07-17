@@ -11,7 +11,10 @@ This note audits **ass:retained-factor-lift** in
 source step: BCIKS Claims 5.6--5.11, Lemma A.1, Claim A.2, BCHKS Section
 3.2, and BCHKS Section 4.2/Theorem 4.3.
 
-The assumption is **not discharged**.
+The original v9.2 assumption is **not discharged**, because its RF3 antecedent
+is too weak.  The standalone conservative RF3'' bridge isolated by this audit
+is now proved in
+**experimental/notes/audits/paving_v9_2_rf3_global_degree_bridge.md**.
 
 There are two independent obstructions.
 
@@ -39,14 +42,14 @@ There are two independent obstructions.
    whose numerator has degree three.
 
 If the original **global** $Y,Z$ degrees of the factors are retained, the
-BCIKS local bounds give the conservative universal envelope
+the corrected BCIKS-style local bounds give the conservative universal envelope
 \[
   |S|>(1+2UD_Y^2)D_Z+(r+1)D_Y.                   \tag{RF3''}
 \]
 RF3'' leaves all four printed KoalaBear rows below the 128-bit budget.
-Promotion therefore requires either:
+Future-version promotion can therefore use:
 
-- a standalone global-degree factor-lift proof using RF3''; or
+- the now-proved standalone global-degree factor lift using RF3''; or
 - a new valid sharper local lemma that controls the $X$-dependent
   coefficients missed by the BCHKS content-free specialization and recovers
   RF3'.
@@ -290,23 +293,30 @@ Those conditions hold after the separability, regular-point, and pole
 deletions.  Lemma A.1 supplies a local root count, not the global
 $D_Y^2D_Z$ sum.
 
-### Claim A.2 with the original global degree
+### Corrected global-degree replacement for Claim A.2
 
 Let
 \[
  a_i=\deg_YR_i,\qquad b_{ij}=\deg_YH_{ij},
 \]
 and let $g_i$ bound the global total $Y,Z$ degree of $R_i(X,Y,Z)$.
-Claim A.2 expresses
+The intended Claim A.2 form is
 \[
  \alpha_t=\frac{\beta_t}{W^{t+1}\xi^{e_t}},
  \qquad e_t=\max(0,2t-1),
 \]
-and its final coarse weight gives
+with the final coarse target
 \[
  \Lambda(\beta_t)<(2t+1)a_i g_i.
 \]
-Together with Lemma A.1 this yields the local charge
+However, Claim A.2 cannot be cited verbatim.  Its printed linear case uses
+$W^{a_i-2}$ with a negative exponent, its base-case equality
+$\Lambda(T)=\Lambda(W)+1$ is false in general, and its derivative-numerator
+bound fails for the explicit cubic witness recorded in the bridge note.
+
+The corrected nonlinear induction in that note retains
+$y=\Lambda(T)-\deg W\ge1$ and proves the same coarse global-degree target.
+Together with Lemma A.1 it yields the local charge
 \[
  (2t+1)a_i b_{ij}g_i
  \le(2U-1)a_i b_{ij}g_i.
@@ -316,12 +326,11 @@ $a_i b_{ij}g_i$.  Thus more than
 $2U a_i b_{ij}g_i$ starting slopes leave more than the required
 $(2U-1)$ charge.
 
-For $a_i=1$, one intermediate simplification printed in Claim A.2 uses a
-negative coefficient $a_i-2$ and should not be reused with an upper bound
-on $\Lambda(W)$.  The coarse global-degree conclusion is compatible with
-witness (W), and the linear case can be checked directly.  A standalone
-bridge proof should split off $a_i=1$ rather than copying that intermediate
-inequality blindly.
+For $a_i=1$, the bridge note instead solves $A(X,Z)Y+B(X,Z)=0$ directly,
+proves
+$\deg N_t\le(t+1)g_i-t$, and clears all coordinate comparisons over the
+fixed denominator $A(x_0,Z)^K$.  This handles even coordinates where
+$A(x,Z)$ vanishes identically.
 
 ## Exact obstruction to the BCHKS content-free replacement
 
@@ -346,9 +355,10 @@ $\beta_1=-(Z^3+1)$ has degree $3$, so the strict inequality fails.
 Equivalently, the derivative denominator contains the discarded
 $C_i=Z^2$.
 
-Using the global degree $D=3$ instead gives the valid coarse allowance
-$\Lambda(\beta_1)<9$.  The witness therefore does not refute the original
-global-degree Hensel method; it refutes exactly the BCHKS sentence that
+Using the global degree $D=3$ instead gives the corrected recurrence enough
+coarse allowance to charge this numerator below $9$.  The witness therefore
+does not refute the corrected global-degree Hensel method; it refutes exactly
+the BCHKS sentence that
 specialization content can be removed without affecting the Hensel weights.
 
 The reason is structural.  Dividing $R(0,Y,Z)$ by $C_i(Z)$ says nothing
@@ -419,9 +429,10 @@ global-degree bounds gives
  &<(1+2UD_Y^2)D_Z+(r+1)D_Y.
 \end{aligned}
 \]
-This proves the conservative envelope RF3'' conditional only on the
-original global-degree local Hensel claim, not on the false content-free
-replacement.
+The standalone bridge note proves precisely the corrected global-degree local
+claim, including the nonlinear recurrence, direct linear branch, all content
+charges, and leading-coefficient guard.  Thus this conservative RF3'' envelope
+is now discharged; it does not use the false content-free replacement.
 
 The extra $D_Z$ is genuine in this conservative ledger: specialization
 content is paid separately while its degree may also be needed inside the
@@ -446,10 +457,10 @@ The common 128-bit numerator budget is
 \[
  274980728111395087.
 \]
-Thus every row still clears the budget, with large exact margin.  This is
-an arithmetic nonimpact result.  It does not make the rows unconditional;
-the global-degree arbitrary-parameter bridge must still be written and
-reviewed.
+Thus every row still clears the budget, with large exact margin.  The
+global-degree arbitrary-parameter bridge is now supplied and mechanically
+audited.  The immutable v9.2 rows remain conditional until a future release
+states RF3'' and uses these ceilings.
 
 ## Constrained-support step
 
@@ -482,8 +493,9 @@ $B$.  At a point of $A_\gamma\cap B$, the affine combinations agree at
 slope $\gamma$, and one point of $B$ cannot serve two distinct slopes.
 Thus $|T|\le|B|\le r$, contradicting $|T|>r+1$.
 
-This step is valid and preserves the chosen support.  The obstruction lies
-earlier, in obtaining $T$ with the claimed content-free degree charge.
+This step is valid and preserves the chosen support.  For RF3' the obstruction
+still lies earlier, in obtaining $T$ with the claimed content-free degree
+charge; RF3'' avoids that replacement.
 
 ## Real-to-integer and endpoint ledger
 
@@ -502,35 +514,34 @@ earlier, in obtaining $T$ with the claimed content-free degree charge.
 
 Established:
 
-- the complete source dependency is Claims 5.6--5.11, Lemma A.1, and Claim
-  A.2, not the shorter list printed in v9.2;
+- the intended source dependency is Claims 5.6--5.11, Lemma A.1, and Claim
+  A.2, not the shorter list printed in v9.2, and Claim A.2 needs the corrected
+  replacement above;
 - the dimension translation is $k=K-1$;
 - $2U-1$ is the correct integer truncation;
 - the characteristic and common-regular-point guards are adequate after
   leading coefficients are included;
 - the top-incidence and chosen-support double counts are valid;
 - universal RF3 has the known content-absorption counterexample;
-- the BCHKS content-free Hensel-degree reduction has witness (W); and
-- RF3'' preserves all four printed numerical budget crossings.
+- the BCHKS content-free Hensel-degree reduction has witness (W);
+- RF3'' preserves all four printed numerical budget crossings; and
+- the standalone corrected global-degree bridge proves RF3'', including the
+  nonlinear, linear, content, leading-coefficient, incidence, and
+  chosen-support cases.
 
 Not established:
 
 - RF3 or RF3' as a source-supported arbitrary-parameter factor lift;
 - a valid content-free local Hensel bound that controls coefficients away
   from $x_0$;
-- a fully written global-degree bridge handling all factor/content cases;
-  or
 - unconditional promotion of the four retained KoalaBear rows.
 
-The next hard proof target is an integer global-degree local factor-lift
-lemma with actual bounds
-$d_X\le U-1$, $d_Y\le V-1$, and $d_Z\le W-1$, including a direct
-linear-factor case and the full leading-coefficient/content partition.
-Its conservative corollary is RF3''.  A sharper RF3' theorem would require a
-new invariant that measures the $X$-dependent rational coefficients exposed
-by witness (W), not only the content-free specialization.
+The next mathematical target, if the sharper threshold is still wanted, is an
+RF3' invariant that measures the $X$-dependent rational coefficients exposed
+by witness (W), not only the content-free specialization.  The other natural
+next step is a full Lean formalization of the now-proved RF3'' bridge.
 
-A Lean companion can formalize immediately:
+The Lean companion formalizes:
 
 - the ceiling and $2U-1$ truncation;
 - (T-v9) implies (T-exact);
@@ -539,5 +550,5 @@ A Lean companion can formalize immediately:
 - the RF3'' arithmetic; and
 - the chosen-support injection.
 
-The algebraic function-field/Hensel statement should remain an explicit
-imported interface until its corrected global-degree proof is supplied.
+The Lean companion keeps the algebraic function-field/Hensel statement as an
+explicit unasserted target until the corrected paper proof is formalized.

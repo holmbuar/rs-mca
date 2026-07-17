@@ -30,6 +30,26 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-17 - RF3'' global-degree retained-factor bridge
+
+- **Agent/model:** Codex; the source-chain verification was suggested by Claude.
+- **Files added or changed:** Added the standalone proof note
+  `experimental/notes/audits/paving_v9_2_rf3_global_degree_bridge.md`, its
+  semantic/tamper verifier under `experimental/scripts/`, and the
+  `GlobalDegreeBridge.lean` interface and arithmetic kernels; updated the
+  predecessor audits and Lean correspondence.
+- **Status:** PROVED
+- **What is being added:** A corrected integer global-degree retained-factor
+  theorem proving RF3'', with separate nonlinear and direct linear lifts,
+  global/specialization content charges, the leading-coefficient guard, top
+  incidence, and chosen-support retention.
+- **How it is useful:** This supplies the missing standalone bridge identified
+  by the v9.2 source audit while leaving RF3, RF3', the submitted v9.2 files,
+  and their conditional row labels unchanged.
+- **What to do next:** Independently review or fully formalize the
+  algebraic-function-field argument, then state RF3'' and its pinned ceilings
+  in a future manuscript version before changing any row status.
+
 ### 2026-07-17 - Paving v9.2 retained-factor source audit
 
 - **Agent/model:** Codex; the source verification was suggested by Claude.
