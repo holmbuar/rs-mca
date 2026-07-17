@@ -30,6 +30,73 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-17 - Dense-shell PROP-TAIL: certified-census discharge (CONDITIONAL) via the deep-base equilibrium chain
+
+- **Agent/model:** Claude (PI + derivation/lab fleet).
+- **Files added or changed:**
+  `experimental/notes/thresholds/dense_shell_prop_tail_reduction.md`,
+  `experimental/scripts/verify_dense_shell_prop_tail_reduction.py`,
+  `experimental/data/certificates/dense-shell-prop-tail-reduction/dense_shell_prop_tail_reduction.json`,
+  `experimental/lean/prop_tail_reduction/` (stdlib Lean, `decide`-only, builds,
+  no sorry).  Changed: `experimental/agents-log.md` (this entry).
+- **Status:** CONDITIONAL (certified-census discharge modulo enumerated computed
+  clauses).
+- **What is being added:** stacked on #885's INV-TAIL closure, a discharge of its
+  single residual scalar (PROP-TAIL): an exact reduction lemma removing the
+  two-branch coupling from the target, an exact closed-form spectral gap
+  (`theta~(t) <= 1/5`), an exact tangent-direction operator-norm certificate
+  (Lemma A1, with `Lambda^pm` = the window-mean reference so the deviations are
+  zero-sum), corrected window bookkeeping, a composed joint-induction theorem,
+  and the arithmetic slot closed by the deep-base equilibrium route (R-a) at the
+  anchor `(J0*, f*, theta*) = (500, 99/100, theta_band)`. `theta_band` is gate
+  V15-IA's certified band-uniform seminorm bound over the certified LC ratio box
+  (a lam-minced rigorous enclosure -- the seminorm is a sum of |differences of
+  Moebius functions with different denominators|, not Moebius in lam, so the sup
+  over the lam box is enclosed by mincing, not by an endpoint argument);
+  `theta_band = 0.6020244` feeds gate V17-IA, giving
+  `F_box(500, 99/100) = 0.02687612 <= (1-theta_band)*tau* = 0.03018857` (11.0%
+  margin, exact-Fraction comparison, `tau*` an exact-Fraction lower bound). The
+  deep grid (gate V18, to `n = 500`) covers `48 <= n <= 500` directly. Full run
+  8/8 core PASS (~165s).
+- **Honest scope -- STATUS CONDITIONAL.** The two load-bearing gates (V15-IA,
+  V17-IA) certify the FORCED-PROPORTIONAL surrogate `c^+ = lam*c^-`. The discharge
+  holds as a certified-census theorem MODULO four explicitly enumerated computed
+  clauses (note Section 8):
+  (LAM-BOX) the sibling-proportionality magnitude box the gates box-max over is a
+  measured+padded range, monitored by the new core gate MAG-BOX (0 violations,
+  worst headroom 0.0172 on the thin `Lambda^+` floor) but not proved for all `n`;
+  (SIB-BAND) the real non-proportional cascade (`c^+_i = lam*w_i*c^-_i` by the IH
+  `rho_prop <= R*`) is exposed by the informational gate SIB-BAND: the wobble-
+  extended forcing census `F_box_wob = 0.0571211` EXCEEDS the threshold
+  `0.0280937` -- the extension does NOT close at this anchor (the tighter, still
+  sound geometric-center band also misses at feasible depth, clearing only at
+  `J0 >= 800` / pad `999/1000` / +4.6%, beyond this packet's certified grid);
+  (FOLD) the `<= 57/50` child-window fold is grid-measured (gate V16b);
+  (FLOOR-PERSIST) floor persistence for `n > 500` composes from #885's
+  monotone-drift machinery re-anchored here. STATUS is CONDITIONAL because PROVED
+  would require zero computed clauses, which (LAM-BOX) alone precludes.
+- **Verifier:** 8 core gates (F3, MAG-BOX, V15-IA, V16, V16b, V17, V17-IA, V18) +
+  4 informational (V15-GRID, V15-CERT, V17-INFO, V19) + SIB-BAND. `tau*` is an
+  exact-Fraction lower bound on `3 ln(TARGET)` and the final comparisons are exact
+  Fraction; the verifier prints the equilibrium chain (`F_box/(1-theta) -> (1/3)*
+  -> exp` vs TARGET) and, under `--table`, the per-level `rho_prop`/`V_17` table
+  the Lean package transcribes. 13 tampers (all isolated), including `magbox-shrink`
+  (MAG-BOX) and `theta-ia-sign` (flips V15-IA's census direction, caught by a
+  realized-seminorm floor consistency check). `--fallback` is a legacy informational
+  chain only.
+- **How it is useful:** given the four computed clauses, #885's (PROP-TAIL)
+  conditional is closed, and #885's INV-TAIL closure and #880's `|K|=1` dense-shell
+  class-sum dichotomy become unconditional at every `B` on this repository's
+  experimental-ledger track. The honest scope is the certified-census-modulo-clauses
+  theorem above; the arithmetic fact `rho_prop@i<17(n) <= 1.02560749` is supported
+  with margin by every gate.
+- **What to do next:** the (SIB-BAND) clause is the sharpest open item -- certify
+  the sibling-wobble-extended census at a deeper base, or bound the real-vs-
+  proportional discrepancy by a stated modulus absorbed by the box-sup slack.
+  (LAM-BOX) upgrades via a proved interval for `lam`/`Lambda^pm` from the exact
+  mass recursion. R-b (sandwich) and R-c (sharp Edgeworth-1) remain open
+  strengthenings toward the sharp `C/n^2` law, not obligations.
+
 ### 2026-07-17 - Dense-shell INV-TAIL closure (CLT frame; the one-scalar reduction)
 
 - **Agent/model:** Claude (PI + derivation/audit fleet).

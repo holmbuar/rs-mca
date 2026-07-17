@@ -1,0 +1,1618 @@
+#!/usr/bin/env python3
+"""Verifier: dense-shell PROP-TAIL structural reduction + certified contraction frame.
+
+Stacked on the predecessor packet (dense_shell_inv_tail_closure.md /
+verify_dense_shell_inv_tail_closure.py, PR #885). Objects as there: level vectors
+G_n(t), t in [1/6,1/2], c-dictionary c_0=b_0, c_i=b_i/2 even-extended; one branch =
+Z-convolution with K_d=(1/4,d,1/4), d(t)=-cos(2 pi t)/2; children t_pm=(1 pm t)/3;
+mass factor a(t)=sin^2(pi t)=1/2+d(t), a'(t)=pi sin(2 pi t). The step (STEP):
+c(G_n(t)) = K_{d(t_+)}*c(G_{n-1}(t_+)) + K_{d(t_-)}*c(G_{n-1}(t_-)).
+
+Write rc_i := c_{i+1}/c_i (band ratio), L_i := d/dt log c_i (log-t-derivative),
+g_i(n,t) := c_i(G_n(t_-))/c_i(G_n(t_+)) (sibling ratio, V13 convention), rho_prop@i<W
+:= max_{i<W} g_i / min_{i<W} g_i. Operative window i<17 throughout (OPWIN=17); the
+honest child-read window is i<18 (CWIN=18, Lemma W1/W2 of the note).
+
+HONEST CLAIM STRUCTURE. (PROP-TAIL) is discharged as a CERTIFIED-CENSUS theorem
+MODULO a small, explicitly enumerated set of COMPUTED clauses (Section 8 of the note).
+The composed equilibrium chain and its algebra are PROVED; the load-bearing gates
+V15-IA (contraction constant theta_band) and V17-IA (forcing F_box) are exact-Fraction
+interval-arithmetic censuses over the certified LC ratio box. What is NOT certified,
+and is monitored by named gates rather than asserted, is enumerated in the discharge
+note's "Computed clauses" subsection and reproduced here:
+  (LAM-BOX)   the sibling-proportionality magnitude box [lam,Lambda^+,Lambda^-] that
+              both load-bearing gates box-max over is a COMPUTED (measured+padded)
+              range; gate MAG-BOX verifies the realized magnitudes lie inside it at
+              every grid level, but does not PROVE the enclosure holds for all n.
+  (SIB-BAND)  V15-IA/V17-IA certify the FORCED-PROPORTIONAL surrogate c^+ = lam*c^-.
+              The real cascade is non-proportional; the IH rho_prop<=TARGET makes it
+              c^+_i = lam*w_i*c^-_i with a per-entry sibling wobble w_i. The informational
+              gate SIB-BAND prints the wobble-EXTENDED censuses (each profile entry given
+              an independent factor in [1/R*,R*]); at the shipped anchor the extended
+              forcing EXCEEDS the equilibrium threshold (the extension does not close --
+              a real gap, reported not hidden). The shipped load-bearing values are the
+              proportional-surrogate ones; the real-vs-proportional coverage rests on
+              this computed reduction.
+  (FOLD)      the child-window fold factor <=57/50 (Lemma W1) is a grid-measured bound
+              (gate V16b), COMPUTED.
+  (FLOOR-PERSIST) floor persistence for n>J0* composes from the predecessor packet's
+              monotone-drift machinery re-anchored at (J0*,f*); COMPUTED there, imported.
+STATUS: CONDITIONAL. PROVED would require zero computed clauses; (LAM-BOX) alone
+precludes that. The arithmetic fact rho_prop@i<17(n)<=1.02560749 is supported with
+margin by every gate; the packet's rigor is scoped by the clauses above.
+
+Gates (8 core, determine RESULT; informational lines printed but NOT counted):
+  F3   [FLOORS]    re-certifies the floor family r_i(J0*,t) at the anchor (positivity,
+                   LC-compatibility, the i=0 halving-convention cross-check).
+  MAG-BOX [LAM-BOX] verifies the realized magnitudes lam=sum(c^+)/sum(c^-),
+                   Lambda^+/-, and the per-entry sibling ratios rho_i=c^+_i/c^-_i lie
+                   inside the hardcoded (COMPUTED) magnitude boxes at every grid level;
+                   prints worst headroom (the Lambda^+ floor is thin, ~0.017).
+  V15-IA [THETA-BAND, LOAD-BEARING] the certified upper bound on the Lemma A1 tangent
+                   seminorm over the certified LC ratio box, folded by the Window Lemma
+                   factor (<=57/50). The sup over the magnitude scalar lam is enclosed by
+                   MINCING lam into panels and taking each Moebius-in-lam matrix entry's
+                   exact per-panel range (no endpoint-sufficiency assumption); feeds
+                   gate_forcing_ia as theta_star.
+  V16 [THETASYMB] the exact Fraction polynomial identity
+                   75(1-x^2)-(6+3x)^2 = -3(2x-1)(14x+13), x=cos(2 pi t/3), plus the
+                   domain sign argument on x in [1/2,cos(pi/9)] ((2x-1)>=0,(14x+13)>0):
+                   proves theta~(t)<=1/5 exactly, equality only at t=1/2.
+  V16b [WINDOW]   the rational fact 289/256<=57/50 (asymptotic vs certified child-window
+                   inflation factor), the grid check sup spread_{i<18}(L)/spread_{i<17}(L)
+                   <=57/50 (a grid-measured COMPUTED bound (FOLD)), and the child-window
+                   read-set structural check (Lemma W2): omitting c_17 undercounts.
+  V17 [FORCING]    F_ext(n)*n^2 and Curv(n)*n^2 bounded <=200 (window i<17, edge locus);
+                   PLUS the G2/alpha-route source census (V12-band corners filtered by
+                   rho_prop<=TARGET) reproduced as a NEGATIVE CONTROL -- INFORMATIONAL,
+                   printed inline, does not affect this gate's PASS/FAIL.
+  V17-IA [FORCING, LOAD-BEARING] the minced/closed-form interval-arithmetic census of
+                   F_box(J0*,f*) <= (1-theta_band)*tau*, theta_band supplied by V15-IA.
+                   Certifies the FORCED-PROPORTIONAL surrogate; see (SIB-BAND).
+  V18 [VTRACK]     the deep grid rho_prop@i<17(n)<=1.02560749 (all levels) + monotone
+                   non-increasing + the V_17(n) vs tau*=3log(1.02560749) crossover at
+                   n=62 (every-integer scan) + margins.
+  (informational): SIB-BAND (wobble-extended censuses + gap), V15-GRID (grid theta
+                   census, robustness), V17-INFO (G2 negative control), V19 [BRIDGE]
+                   w(n)<=0.62, alpha-only.
+
+Flags: --quick runs a shallow dev-only subset (NOT a certified claim); --table prints
+the full per-level rho_prop/V_17 table (transcribed by the Lean package); --fallback
+switches the WHOLE triple atomically to the legacy chain (J0=430, f=49/50, theta*=1/2
+fixed) as an informational alternative; --tamper-selftest runs the tamper suite (each
+isolated to its own report/info line), always at the default (non-quick) depth. stdlib
+only, deterministic.
+"""
+import itertools
+import math
+import sys
+import time
+from decimal import Decimal, getcontext
+from fractions import Fraction as Fr
+
+PI = math.pi
+K = 80
+
+NODES = [0.25 * (1 + math.cos(PI * m / K)) for m in range(K + 1)]
+BW = [(0.5 if m in (0, K) else 1.0) * (1 if m % 2 == 0 else -1) for m in range(K + 1)]
+
+# ---------------------------------------------------------------- cascade (verbatim)
+# Same functions as the predecessor verifier (V1-checked there to 1.8e-15).
+
+def a_of(t):
+    s = math.sin(PI * t)
+    return s * s
+
+def d_of(t):
+    return -0.5 * math.cos(2 * PI * t)
+
+def dprime(t):                      # a'(t) = d'(t), exact identity
+    return PI * math.sin(2 * PI * t)
+
+def mult_root(c, a):
+    out = [0.0] * (len(c) + 1)
+    for i, ci in enumerate(c):
+        out[i] += (0.5 - a) * ci
+        out[i + 1] += (0.25 if i >= 1 else 0.5) * ci
+        if i >= 1:
+            out[i - 1] += 0.25 * ci
+    return out
+
+def flip(c):
+    d = len(c) - 1
+    return [ci if (d - i) % 2 == 0 else -ci for i, ci in enumerate(c)]
+
+def bary(tq, vals):
+    for m, tm in enumerate(NODES):
+        if abs(tq - tm) < 1e-14:
+            return vals[m][:]
+    num = [0.0] * len(vals[0]); den = 0.0
+    for m, tm in enumerate(NODES):
+        s = BW[m] / (tq - tm); den += s
+        for i in range(len(num)):
+            num[i] += s * vals[m][i]
+    return [x / den for x in num]
+
+def cvec(t, lev_j):
+    b = flip(bary(t, lev_j))
+    return [b[0]] + [x / 2.0 for x in b[1:]]
+
+def conv_even(c, d):
+    n = len(c)
+    def get(i):
+        i = abs(i)
+        return c[i] if i < n else 0.0
+    return [0.25 * get(i - 1) + d * get(i) + 0.25 * get(i + 1) for i in range(n + 1)]
+
+def build_levels(jmax):
+    levs = [[[1.0] for _ in NODES]]
+    for _ in range(jmax):
+        prev = levs[-1]; out = []
+        for t in NODES:
+            acc = None
+            for dd in (-1.0, 1.0):
+                tv = abs((dd + t) / 3.0)
+                c = mult_root(bary(tv, prev), a_of(tv))
+                acc = c if acc is None else [x + y for x, y in zip(acc, c)]
+            out.append(acc)
+        levs.append(out)
+    return levs
+
+def spread(xs):
+    return max(xs) - min(xs)
+
+# ------------------------------------------------------------------- shared conventions
+
+CENSUS_DEG = 16
+OPWIN = CENSUS_DEG + 1        # 17: the operative window (V12/V13's corner-vector length)
+CWIN = OPWIN + 1              # 18: the honest child-read window (tridiagonal reads 1 beyond)
+NPAR = 41
+PARENTS = [1.0 / 6 + (1.0 / 3 - 1e-4) * k / (NPAR - 1) for k in range(NPAR)]
+EDGE = PARENTS[-1]
+TARGET = 1.02560749
+LTARGET = math.log(TARGET)
+TAU_STAR = 3 * LTARGET         # float, display/legacy only (= 0.075855...)
+
+# tau* = 3*ln(TARGET), needed as a certified Fraction LOWER bound (rounded DOWN) so it is
+# safe in BOTH uses: (a) as the equilibrium threshold factor (1-theta)*tau* -- a smaller
+# tau* gives a smaller threshold = a HARDER test = conservative; (b) as the reduction
+# ceiling, where the conclusion rho_prop <= exp((1/3)*ceiling) <= TARGET needs
+# (1/3)*ceiling <= ln(TARGET), i.e. ceiling <= 3*ln(TARGET) = tau* -- checking against an
+# UNDER-estimate of tau* is again conservative (ceiling <= tau*_lo <= tau*_true). The
+# float 3*math.log(TARGET) rounds UP (by ~2e-16, the UNSAFE direction), so we transcribe a
+# rational with stated digits strictly below the true value and CERTIFY the bracket via a
+# 50-digit Decimal ln at import (assert TAU_STAR_FR <= true 3*ln(TARGET)).
+TAU_STAR_FR = Fr(75855330599169, 10**15)     # 0.075855330599169 <= 3*ln(1.02560749)
+getcontext().prec = 50
+_TAU_TRUE = 3 * Decimal("1.02560749").ln()    # 0.07585533059916962964... (50 sig digits)
+assert TAU_STAR_FR <= Fr(_TAU_TRUE), "TAU_STAR_FR must be a LOWER bound on 3*ln(TARGET)"
+assert Fr(75855330599170, 10**15) > Fr(_TAU_TRUE), "TAU_STAR_FR bracket too loose"  # tight to 1e-15
+
+DEEP_GRID_DEFAULT = [48, 60, 80, 100, 128]
+DEEP_GRID_DEEP = [48, 50, 55, 60, 70, 80, 100, 128, 160, 200, 240, 300]
+THETA_GRID_DEFAULT = [60, 80, 100, 128]
+THETA_GRID_DEEP = [60, 80, 100, 128, 200, 300]
+BRIDGE_GRID_DEFAULT = [60, 80, 100, 128]
+BRIDGE_GRID_DEEP = [60, 80, 100, 128, 200]
+G2_GRID = [60, 100]             # the two levels the note's inflation figures cite
+MAG_GRID = [48, 60, 100, 200, 300, 500]   # levels MAG-BOX monitors (incl. the thin-headroom band)
+
+# ---------------------------------------------------------- discharge anchor
+#
+# The deep-base equilibrium route closes the arithmetic slot on finite checks at a deep
+# base J0*, no decay-rate / no-Edgeworth input. theta* = theta_band is COMPUTED at runtime
+# by gate_theta_ia (the certified band-uniform seminorm bound over the box, valid for every
+# n>=J0) and fed directly into gate_forcing_ia as theta_star -- the two load-bearing gates
+# are chained, not independent checks of a fixed constant. Both certify the forced-
+# PROPORTIONAL surrogate (see the (SIB-BAND) clause); the shipped anchor is
+# (J0*, f*, theta*) = (500, 99/100, theta_band). DEEP_GRID_FULL is the default grid (this
+# IS the discharge, not behind a flag); DEEP_GRID_QUICK is a shallow dev-only subset
+# (--quick), NOT a certified claim. --fallback switches atomically to a shallower legacy
+# chain (J0=430, f=49/50, theta*=1/2 fixed) as an informational alternative only.
+J0_STAR = 500
+J0_FALLBACK = 430
+F_STAR = Fr(99, 100)                 # 0.99 pad, the shipped anchor
+F_LEGACY = Fr(49, 50)                # 0.98 pad, the legacy --fallback alternative only
+THETA_FALLBACK = Fr(1, 2)            # legacy fallback theta* = 0.50 (--fallback only,
+                                     # a fixed constant resting on a grid measurement,
+                                     # informational -- NOT part of the certified chain)
+
+DEEP_GRID_FULL = [48, 50, 55, 60, 62, 70, 80, 100, 128, 160, 200, 240, 300, 340,
+                   400, 430, 450, 500]
+DEEP_GRID_QUICK = [48, 50, 55, 60, 70, 80, 100, 128, 160, 200]
+THETA_GRID_FULL = [60, 80, 100, 128, 200, 300, 430, 500]
+BRIDGE_GRID_FULL = [60, 80, 100, 128, 200, 430, 500]
+
+WIN_STAR = OPWIN                     # P_i, i=0..16 (17 values) -- the forcing's own window
+FLOOR_WIN = CWIN                     # F3 emits ratios i<18 (CWIN=18), one wider (Lemma W2 margin)
+
+def frac_exact(x):
+    """Exact Fraction conversion of an IEEE double -- introduces NO additional rounding
+    (Fraction(float) is exact: it reads off the double's own binary value)."""
+    return Fr(x)
+
+def frac_outward(x, lo, slop=Fr(1, 10**9)):
+    """Convert float x to a Fraction, then nudge OUTWARD by `slop` (relative) in the
+    conservative direction: `lo=True` rounds down (a valid lower bound), `lo=False`
+    rounds up (a valid upper bound). Documented, printed slop covering the residual
+    floating-point error inherited from the cascade's trig/barycentric evaluation
+    (~1e-15 relative) -- slop=1e-9 is six orders of magnitude more conservative than
+    that residual, at zero measurable cost against the certified margins below."""
+    base = frac_exact(x)
+    adj = (abs(base) if base != 0 else Fr(1)) * slop
+    return base - adj if lo else base + adj
+
+IA_SLOP = Fr(1, 10**9)               # the documented outward slop (printed by the gates)
+LAM_MINCE = 24                       # lam-panels for V15-IA's certified sup over the lam box
+                                     # (see the V15-IA method note: NO endpoint-sufficiency)
+
+def round_up_frac(x, denom=10**7):
+    """Round a Fraction UP (outward, conservative direction) to a clean denominator --
+    used only so theta_band (an exact Fraction accumulated over many box/lam corner
+    divisions, hence an impractically large numerator/denominator pair) prints and
+    threads through the rest of the chain as a manageable rational, while remaining a
+    valid (very slightly more conservative, never less) certified upper bound: rounding
+    theta_band UP only SHRINKS the downstream requirement (1-theta_band)*tau*, so any
+    margin computed against the rounded value is a valid, if marginally more
+    conservative, margin against the true certified value too."""
+    return Fr(math.ceil(x * denom), denom)
+
+def rho_win_locus(levs, j, nmax, parents=PARENTS):
+    worst = 0.0; wt = None
+    for t in parents:
+        tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+        bp = flip(bary(tp, levs[j])); bm = flip(bary(tm, levs[j]))
+        vp = [bp[0]] + [x / 2.0 for x in bp[1:]]
+        vm = [bm[0]] + [x / 2.0 for x in bm[1:]]
+        n = min(nmax, len(vp), len(vm))
+        g = [vm[i] / vp[i] for i in range(n) if vp[i] > 1e-250]
+        r = max(g) / min(g)
+        if r > worst:
+            worst = r; wt = t
+    return worst, wt
+
+def Lvec(t, j, levs, nmax, h=2e-4):
+    """L_i = d/dt log c_i(G_j(t)), Richardson central diff O(h^4)."""
+    a1 = cvec(t + h, levs[j]); b1 = cvec(t - h, levs[j])
+    a2 = cvec(t + h / 2, levs[j]); b2 = cvec(t - h / 2, levs[j])
+    n = min(nmax, len(a1), len(b1))
+    out = []
+    for i in range(n):
+        d1 = (math.log(a1[i]) - math.log(b1[i])) / (2 * h)
+        d2 = (math.log(a2[i]) - math.log(b2[i])) / h
+        out.append((4 * d2 - d1) / 3.0)
+    return out
+
+def V17_locus(j, levs, win=OPWIN, parents=PARENTS):
+    best = 0.0; bt = None
+    for t in parents:
+        s = spread(Lvec(t, j, levs, win))
+        if s > best:
+            best, bt = s, t
+    return best, bt
+
+# ---------------------------------------------------- onestep T1/T2/T3 cascade (Lemma 2)
+
+def onestep_raw(t, j, levs, win=OPWIN, cwin=CWIN):
+    tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+    cp = cvec(tp, levs[j - 1]); cm = cvec(tm, levs[j - 1]); cj = cvec(t, levs[j])
+    Lp = Lvec(tp, j - 1, levs, cwin); Lm = Lvec(tm, j - 1, levs, cwin)
+    Lact = Lvec(t, j, levs, win)
+    Ljm1 = Lvec(t, j - 1, levs, win)
+    n = min(win, len(cp) - 1, len(cm) - 1, len(cj), len(Lact))
+    L = min(len(Lp), len(Lm), len(cp), len(cm))
+    dp_, dm_ = d_of(tp), d_of(tm)
+    ap_, at3 = dprime(tp), dprime(t / 3.0)
+    Wp = conv_even(cp, dp_); Wm = conv_even(cm, dm_)
+    Vj = spread(Lact); Vjm1 = spread(Ljm1)
+    Curv = spread([Wp[i] / cp[i] for i in range(n)])
+    return dict(t=t, j=j, cp=cp, cm=cm, cj=cj, Lp=Lp, Lm=Lm, Lact=Lact, n=n, L=L,
+                dp_=dp_, dm_=dm_, ap_=ap_, at3=at3, Wp=Wp, Wm=Wm, Vj=Vj, Vjm1=Vjm1, Curv=Curv)
+
+def onestep_compose(raw, lam_mode='mid'):
+    cp, cm, cj = raw['cp'], raw['cm'], raw['cj']
+    Lp, Lm, Lact = raw['Lp'], raw['Lm'], raw['Lact']
+    n, L = raw['n'], raw['L']
+    dp_, dm_, ap_, at3 = raw['dp_'], raw['dm_'], raw['ap_'], raw['at3']
+    Wp, Wm = raw['Wp'], raw['Wm']
+    if lam_mode == 'mid':
+        Lamp = 0.5 * (max(Lp) + min(Lp)); Lamm = 0.5 * (max(Lm) + min(Lm))
+    else:
+        Lamp = sum(Lp[i] * cp[i] for i in range(L)) / sum(cp[i] for i in range(L))
+        Lamm = sum(Lm[i] * cm[i] for i in range(L)) / sum(cm[i] for i in range(L))
+    delp = [Lp[i] - Lamp for i in range(L)]
+    delm = [Lm[i] - Lamm for i in range(L)]
+    Phip = conv_even([delp[i] * cp[i] for i in range(L)], dp_)
+    Phim = conv_even([delm[i] * cm[i] for i in range(L)], dm_)
+    T1 = []; T2 = []; T3 = []
+    for i in range(n):
+        T1.append((Lamp * Wp[i] / cj[i] - Lamm * Wm[i] / cj[i]) / 3.0)
+        T2.append((Phip[i] - Phim[i]) / (3.0 * cj[i]))
+        T3.append((ap_ * (cp[i] - cm[i]) - at3 * cm[i]) / (3.0 * cj[i]))
+    recon = max(abs(T1[i] + T2[i] + T3[i] - Lact[i]) for i in range(n))
+    lam = sum(cp[i] for i in range(n)) / sum(cm[i] for i in range(n))
+    cpP = [lam * cm[i] for i in range(len(cm))]
+    WpP = conv_even(cpP, dp_)
+    cjP = [x + y for x, y in zip(WpP, Wm)]
+    T1P = [(Lamp * WpP[i] - Lamm * Wm[i]) / (3.0 * cjP[i]) for i in range(n)]
+    T3P = [(ap_ * (cpP[i] - cm[i]) - at3 * cm[i]) / (3.0 * cjP[i]) for i in range(n)]
+    Fext = spread([T1P[i] + T3P[i] for i in range(n)])
+    return dict(T1=T1, T2=T2, T3=T3, recon=recon, Fext=Fext, delp=delp, delm=delm,
+                Lamp=Lamp, Lamm=Lamm)
+
+def gap_quadrature(t, j, levs, M, win=OPWIN):
+    tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+    xs = [tm + (tp - tm) * k / M for k in range(M + 1)]
+    ys = [spread(Lvec(x, j, levs, win)) for x in xs]
+    h = (tp - tm) / M
+    s = ys[0] + ys[-1]
+    for k in range(1, M):
+        s += ys[k] * (4 if k % 2 == 1 else 2)
+    return s * h / 3.0
+
+# ---------------------------------------------------------- Lemma A1 tangent seminorm
+#
+# T2_i = sum_k M^+_{ik} delta^+_k + M^-_{ik} delta^-_k, M^s_{ik} = (1/3)(K_ds)_{ik} c^s_k/o_i.
+# osc(T2) is a max of linear functionals of (delta^+,delta^-) -> a seminorm; its exact
+# closed form over the arbitrary-delta osc<=1 polytope is a max, over index pairs, of
+# 1/2*[sum_k|Delta^+_k-mu^+| + sum_k|Delta^-_k-mu^-|] (the note's Lemma A1). K_d is
+# tridiagonal (even-extension at i=0), so each row has <=3 nonzero entries.
+
+def kernel_row(i, d):
+    if i == 0:
+        return {0: d, 1: 0.5}
+    return {i - 1: 0.25, i: d, i + 1: 0.25}
+
+def m_row(i, d, c_branch, o_i):
+    row = kernel_row(i, d)
+    return dict((k, (w * c_branch[k] / o_i) / 3.0) for k, w in row.items() if k < len(c_branch))
+
+def seminorm_pair(rowA, rowB, cwin):
+    # Lemma A1 seminorm term (1/2)*[.] for one branch. mu := (sum_k Delta_k)/cwin is the
+    # WINDOW-MEAN over the CWIN=18 child indices -- NOT a free/arbitrary reference. Reason
+    # (the hypothesis Lemma A1 requires, D5): sum_k(T2_i - T2_i') = (row_i - row_i')-mass !=
+    # 0, so osc(T2)/osc(delta) is INFINITE over unconstrained-level delta (add a constant to
+    # delta: osc(delta)=0 but osc(T2)!=0). The finite formula (1/2)Sum|Delta_k - mu| is the
+    # sup over ZERO-SUM delta, i.e. requires the L-split L^pm_k = Lambda^pm + delta^pm_k to
+    # take Lambda^pm = mean_{k<18} L^pm_k (the window mean). Subtracting mu = mean_k Delta_k
+    # here is exactly that zero-sum projection; osc(delta) = spread(L) = V_17(n-1) is
+    # unchanged by the choice of Lambda (shift-invariance), so the choice is free and sound.
+    keys = set(rowA) | set(rowB)
+    vals = dict((k, rowA.get(k, 0.0) - rowB.get(k, 0.0)) for k in keys)
+    mu = sum(vals.values()) / cwin        # window-mean of Delta over the CWIN child indices
+    s = sum(abs(v - mu) for v in vals.values())
+    s += (cwin - len(vals)) * abs(mu)
+    return s
+
+def n_free_from_raw(raw, cwin=CWIN):
+    cp, cm, cj = raw['cp'], raw['cm'], raw['cj']
+    dp_, dm_ = raw['dp_'], raw['dm_']
+    n = raw['n']
+    rowsP = [m_row(i, dp_, cp, cj[i]) for i in range(n)]
+    rowsM = [m_row(i, dm_, cm, cj[i]) for i in range(n)]
+    best = 0.0
+    for i in range(n):
+        for ip in range(i + 1, n):
+            val = 0.5 * (seminorm_pair(rowsP[i], rowsP[ip], cwin)
+                          + seminorm_pair(rowsM[i], rowsM[ip], cwin))
+            if val > best:
+                best = val
+    return best
+
+# ------------------------------------------------------- V12 census machinery (verbatim)
+
+CENSUS_NC = 5
+CENSUS_MU = [math.exp(-2.0 + 2.6 * k / 12) for k in range(13)]
+
+def floors_at48(t, levs):
+    b = flip(bary(t, levs[48]))
+    return [b[i + 1] / b[i] if (i + 1 < len(b) and b[i] > 1e-250) else 0.4
+            for i in range(CENSUS_DEG)]
+
+def sigma_max_at(t, jmax2, levs):
+    tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+    sm = 0.0
+    for j in range(8, jmax2):
+        cp = cvec(tp, levs[j - 1]); cm = cvec(tm, levs[j - 1])
+        Sp = a_of(tp) * sum(cp) - 0.25 * (cp[0] - cp[1])
+        Sm = a_of(tm) * sum(cm) - 0.25 * (cm[0] - cm[1])
+        sm = max(sm, Sm / (Sp + Sm))
+    return sm
+
+def census_lc_corner(phi, bits):
+    rc = []; prev = 1.0
+    for i in range(CENSUS_DEG):
+        lo = (phi[i] / 2.0) if i == 0 else phi[i]
+        hi = min(prev, 1.0)
+        lo = min(lo, hi)
+        rc.append((hi if bits[i] else lo) if i < CENSUS_NC else lo)
+        prev = rc[-1]
+    c = [1.0]
+    for r in rc:
+        c.append(c[-1] * r)
+    return c
+
+# ------------------------------------------------------- window-lemma helpers (W1/W2)
+
+def window_ratio(t, j, levs):
+    """Lemma W1: spread_{i<18}(L)/spread_{i<17}(L)."""
+    Lfull = Lvec(t, j, levs, CWIN)
+    return spread(Lfull) / spread(Lfull[:OPWIN])
+
+def curv_window_undercounts(t, j, levs):
+    """Lemma W2 structural check: the correct spread_{i<17}(P) (P_0..P_16, needs
+    c_0..c_17, i.e. CWIN=18 c-values) vs the undercounting proxy spread_{i<16}(P)
+    (P_0..P_15, needs only c_0..c_16, i.e. OPWIN=17 c-values -- the census's own
+    corner-vector length, one index short)."""
+    c = cvec(t, levs[j])
+    d = d_of(t)
+    def P(i):
+        if i == 0:
+            return d + 0.5 * (c[1] / c[0])
+        return d + 0.25 * (c[i + 1] / c[i] + c[i - 1] / c[i])
+    full = [P(i) for i in range(OPWIN)]     # i=0..16, needs c_0..c_17
+    short = full[:OPWIN - 1]                 # i=0..15, needs only c_0..c_16
+    return spread(full), spread(short)
+
+# ===================================================================================
+# DISCHARGE UPGRADE machinery: F3 (deep-base floor re-cert) + V17-IA (the load-bearing
+# minced interval-arithmetic forcing census).
+# ===================================================================================
+
+def anchor_c_ratios(t, levs, J0, win=FLOOR_WIN):
+    """rc_i = c_{i+1}/c_i at the anchor level J0, i=0..win-1 (needs c_0..c_win)."""
+    c = cvec(t, levs[J0])
+    return [c[i + 1] / c[i] for i in range(win)]
+
+def b_convention_rc0(t, levs, J0):
+    """The b-convention ratio b_1/b_0 (no c_0=b_0,c_i=b_i/2 halving applied) -- used
+    only for F3's i=0 halving-convention cross-check against the c-convention rc_0."""
+    b = flip(bary(t, levs[J0]))
+    return b[1] / b[0] if b[0] > 1e-250 else float('nan')
+
+# ---- V17-IA: the rigorous width-2-locality minced enclosure -----------------------
+#
+# P_i (the curvature normal form, Lemma C0) depends on EXACTLY TWO ratios: P_0=(1/2)rc_0,
+# P_i=(1/4)(1/rc_{i-1}+rc_i) for i>=1 -- tighter locality than the width-4 band the
+# separate tangent-seminorm object (Lemma A1, used by gate V15) needs, since P_i is a
+# single scalar, not a kernel row. The box is rc_i in [f_i,1] (f_i = f*anchor_rc_i(J0))
+# with the LC chain rc_i<=rc_{i-1}. Rather than an LC-endpoint shortcut (checking only
+# i=0,16 and relying on "P monotone in i" holding at every box point -- true on the
+# realized/measured cascade, COMPUTED, but not proved to hold at every point of the box),
+# this computes a marginal box for EVERY i=0..16 by mincing each ratio's range into m
+# panels and enumerating LC-feasible ADJACENT panel pairs (rc_{i-1} panel, rc_i panel) --
+# i.e. explicit "mince, evaluate each cell, outward-round" IA, done in EXACT Fraction
+# arithmetic (no sampling anywhere).
+#
+# The m->infinity limit of this mincing has a closed form (verified against explicit
+# finite-m mincing, m=1..32, which converges monotonically DOWN to it from above,
+# confirming validity as an upper bound): the LC-clipped 2-variable
+# region {(a,b): a in [f_{i-1},1], b in [f_i,a]} has h(a,b)=1/a+b maximized at a=b=f_{i-1}
+# (both floors coincide -- an LC-admissible point since floors are anchor-LC-compatible)
+# and minimized at a=1,b=f_i. This IS the closed-form cell; we ALSO run explicit finite-m
+# mincing (below, `p_i_box_minced`) as a numerical corroboration, not as the certified
+# value (the closed form is used for the certificate since it is exact, not merely
+# converged-to).
+#
+# For EACH i, the marginal g(P_i) range is then box-maxed over the (lam,Lambda^+,
+# Lambda^-) magnitude box: for FIXED P, g is Mobius in lam (A,B linear in lam; nc,nl
+# linear in lam) and AFFINE in Lambda^+/Lambda^- (their coefficients don't touch the
+# denominator) -- so each is corner-sufficient over ITS OWN box (2 endpoints), and the
+# joint box is corner-sufficient by the standard coordinatewise-monotone argument
+# (moving one coordinate to its bound never decreases a coordinatewise-monotone
+# objective, regardless of the other coordinates' values -- iterate coordinate by
+# coordinate to reach a corner without decreasing the value). The osc bound at a FIXED
+# magnitude corner is max_i(g at P_i's box endpoints) - min_i(g at P_i's box endpoints)
+# -- matching the existing F_perindex convention (fix the corner, then osc across i,
+# then max over corners) -- and this per-i-per-corner marginal bounding is valid
+# REGARDLESS of whether the extremizing profile is mutually consistent across different
+# i (a standard marginal-bound argument: each g(P_i) lies in its own interval for ANY
+# point of the box, so max_i(over its own hi) - min_i(over its own lo) upper-bounds the
+# true osc for that corner).
+
+def p_i_marginal_box(floors):
+    """Closed-form (mince-limit) per-index P_i box, i=0..WIN-1, width-2 LC-pairwise
+    locality. `floors` is a length-WIN list of Fractions (or floats)."""
+    half = floors[0].__class__(1, 2) if isinstance(floors[0], Fr) else 0.5
+    one = floors[0].__class__(1) if isinstance(floors[0], Fr) else 1.0
+    P = [ (floors[0] * half, half) ]
+    for i in range(1, WIN_STAR):
+        f_im1 = floors[i - 1]; f_i = floors[i]
+        lo = (one + f_i) / 4 if isinstance(f_i, Fr) else 0.25 * (1.0 + f_i)
+        hi = (one / f_im1 + f_im1) / 4 if isinstance(f_i, Fr) else 0.25 * (1.0 / f_im1 + f_im1)
+        P.append((lo, hi))
+    return P
+
+def p_i_box_minced(floors, m):
+    """Explicit finite-m mincing (numerical corroboration only -- see module docstring
+    above): subdivide each ratio's [f_i,1] into m panels, enumerate LC-feasible adjacent
+    panel pairs, union the resulting P_i intervals. Float; used only for the console
+    convergence check, never for the certified value."""
+    panels = []
+    for i in range(WIN_STAR):
+        f_i = floors[i]; w = (1.0 - f_i) / m
+        panels.append([(f_i + k * w, f_i + (k + 1) * w) for k in range(m)])
+    P = [(0.5 * floors[0], 0.5)]
+    for i in range(1, WIN_STAR):
+        pa, pb = panels[i - 1], panels[i]
+        lo = 1e18; hi = -1e18
+        for (alo, ahi) in pa:
+            for (blo, bhi) in pb:
+                if blo > ahi + 1e-15:
+                    continue
+                b_hi_eff = min(bhi, ahi)
+                if b_hi_eff < blo - 1e-15:
+                    continue
+                v_lo = 0.25 * (1.0 / ahi + blo)
+                v_hi = 0.25 * (1.0 / alo + b_hi_eff)
+                lo = min(lo, v_lo); hi = max(hi, v_hi)
+        P.append((lo, hi))
+    return P
+
+# COMPUTED magnitude box (LAM-BOX clause): these six literals are a MEASURED range of the
+# realized sibling-proportionality magnitudes (lam = mass ratio, Lambda^+/- the L-reference
+# offsets) + a ~8% pad. They are NOT derived or proved here; both load-bearing gates
+# box-max over them. Gate MAG-BOX (gate_magnitude_box) verifies the realized magnitudes lie
+# inside these boxes at every grid level (turning a silent constant into a monitored,
+# tamperable invariant) -- but that is a grid check, not a proof for all n. Hence COMPUTED.
+LAM_LO_F, LAM_HI_F = Fr(72, 100), Fr(95, 100)      # COMPUTED (measured realized ~[0.776,0.919] + pad)
+LAP_LO_F, LAP_HI_F = Fr(-116, 100), Fr(-82, 100)   # COMPUTED (measured ~[-1.143,-0.888]; floor headroom ~0.017, thin)
+LAM2_LO_F, LAM2_HI_F = Fr(-66, 100), Fr(-35, 100)  # COMPUTED (measured ~[-0.633,-0.379] + pad)
+
+# (SIB-BAND clause) sibling wobble band. The IH rho_prop@i<17(n-1) <= TARGET makes the real
+# cascade c^+_i = lam*w_i*c^-_i with per-entry wobble w_i whose spread max_i w_i/min_i w_i
+# <= TARGET. The independent-per-entry SAFE superset is w_i in [1/R*, R*], R*=TARGET (exact
+# Fraction, TARGET being a terminating decimal). WOB_HALF is the tighter geometric-center
+# normalization w_i in [1/sqrt R*, sqrt R*] (still sound: lam := sqrt(min rho * max rho)
+# lands in the MAG-BOX and w_i = rho_i/lam lies in the half-band by the IH). The forced-
+# proportional gates are the w_i == 1 slice; the informational gate SIB-BAND re-runs the
+# censuses over these bands to expose the real-vs-proportional gap.
+R_STAR_FR = Fr(102560749, 100000000)               # = TARGET, exact
+WOB_FULL = (Fr(1) / R_STAR_FR, R_STAR_FR)          # [1/R*, R*]
+def _sqrt_hi_frac(fr, iters=64):                   # rational upper bound on sqrt(fr) (outward)
+    lo, hi = Fr(0), fr + 1
+    for _ in range(iters):
+        mid = (lo + hi) / 2
+        if mid * mid <= fr:
+            lo = mid
+        else:
+            hi = mid
+    return hi
+_SQ_HI = _sqrt_hi_frac(R_STAR_FR)                  # >= sqrt(R*)
+WOB_HALF = (Fr(1) / _SQ_HI, _SQ_HI)                # [1/sqrt R*, sqrt R*] (outward, sound superset)
+
+def osc_bound_at_parent_frac(P, dp_, dm_, ap_, at3):
+    """Rigorous box-max (Fraction) of osc_{i<17}(T1P+T3P) at one parent: P is the
+    per-index marginal box (Fractions), dp_,dm_,ap_,at3 are Fractions (outward-rounded
+    from the float trig evaluation). Box-maxes over the (lam,Lamp,Lamm) magnitude
+    corners (2x2x2=8, each side corner-sufficient per the module docstring)."""
+    best = Fr(0)
+    for lam in (LAM_LO_F, LAM_HI_F):
+        A = lam * dp_ + dm_; B = lam + 1
+        if A + B * P[0][0] <= 0:
+            continue
+        for Lamp in (LAP_LO_F, LAP_HI_F):
+            for Lamm in (LAM2_LO_F, LAM2_HI_F):
+                nc = Lamp * lam * dp_ - Lamm * dm_ + ap_ * (lam - 1) - at3
+                nl = Lamp * lam - Lamm
+                his = []; los = []
+                for i in range(WIN_STAR):
+                    plo, phi = P[i]
+                    denom_lo = A + B * plo; denom_hi = A + B * phi
+                    if denom_lo <= 0 or denom_hi <= 0:
+                        continue
+                    v1 = (nc + nl * plo) / (3 * denom_lo)
+                    v2 = (nc + nl * phi) / (3 * denom_hi)
+                    his.append(v1 if v1 > v2 else v2)
+                    los.append(v1 if v1 < v2 else v2)
+                if not his:
+                    continue
+                v = max(his) - min(los)
+                if v > best:
+                    best = v
+    return best
+
+def F_box_ia_certified(levs, J0, f_pad, tamper=None):
+    """The certified sup over 41 parents of the rigorous width-2 minced-IA forcing
+    bound at anchor J0, pad f_pad. Returns (sup_as_Fraction, locus_t, slop_used)."""
+    slop = IA_SLOP
+    worst = Fr(0); wt = None
+    for t in PARENTS:
+        tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+        rc = anchor_c_ratios(t, levs, J0, win=WIN_STAR)
+        floors = [frac_outward(f_pad * r, lo=True, slop=slop) for r in rc]
+        dp_ = frac_exact(d_of(tp)); dm_ = frac_exact(d_of(tm))
+        ap_ = frac_exact(dprime(tp)); at3 = frac_exact(dprime(t / 3.0))
+        P = p_i_marginal_box(floors)
+        v = osc_bound_at_parent_frac(P, dp_, dm_, ap_, at3)
+        v = v * (1 + slop)             # final documented outward slop (float-input safety margin)
+        if v > worst:
+            worst = v; wt = t
+    return worst, wt, slop
+
+def gate_floors(report, levs, J0, f_pad, tamper=None):
+    """F3 FLOORS: re-certify the floor family at anchor J0 -- emit r_i(J0,t) over the
+    41-parent grid, i<18 (FLOOR_WIN=CWIN), pad f_pad; verify the admissibility
+    conditions the box bound (V17-IA) and the curvature census (Lemma W2) consume:
+    (1) positivity r_i(J0,t)>0; (2) LC-compatibility, the anchor ratios non-increasing
+    in i at every parent (so the padded floor f_pad*r_i inherits monotonicity, and
+    floor<=r_i<=1=cap is a valid band); (3) the i=0 halving-convention cross-check
+    (c-convention rc_0 = b-convention b_1/b_0, divided by 2 -- mirrors the #885
+    verifier's floors_at48/census_lc_corner special-casing of index 0)."""
+    bad_pos = 0; bad_lc = 0; worst_half_err = 0.0
+    fpad_eff = f_pad * Fr(3, 2) if tamper == "f3-corrupt" else f_pad   # >1 pad breaks floor<=r_i
+    tightest_band = 1e18
+    for t in PARENTS:
+        rc = anchor_c_ratios(t, levs, J0, win=FLOOR_WIN)
+        prev = 2.0
+        for i, r in enumerate(rc):
+            if r <= 0:
+                bad_pos += 1
+            if r > prev + 1e-9:
+                bad_lc += 1
+            prev = r
+        floor0 = float(fpad_eff) * rc[0]
+        if not (floor0 <= rc[0] + 1e-12):
+            bad_lc += 1
+        band = rc[-1] - float(fpad_eff) * rc[0]  # crude within-band sanity (non-negative-ish typical)
+        tightest_band = min(tightest_band, band) if band == band else tightest_band
+        rc0_b = b_convention_rc0(t, levs, J0) / 2.0
+        err = abs(rc0_b - rc[0])
+        worst_half_err = max(worst_half_err, err)
+    ok = (bad_pos == 0) and (bad_lc == 0) and (worst_half_err < 1e-9)
+    report.append(("F3 FLOORS [anchor J0=%d, pad f=%s=%.4f, window i<%d] positivity"
+                    " r_i>0 (violations=%d), LC-compatibility r_i non-increasing +"
+                    " floor<=r_i<=1 (violations=%d), i=0 halving cross-check"
+                    " |c-conv rc_0 - b-conv rc_0/2|<1e-9 (worst %.2e) over 41 parents"
+                    % (J0, str(f_pad), float(f_pad), FLOOR_WIN, bad_pos, bad_lc,
+                       worst_half_err), ok))
+
+# ---- V15-IA: the certified band-uniform Lemma A1 (tangent seminorm) enclosure --------
+#
+# Certifies theta_band, a BAND-uniform (valid for every n>=J0, not merely tested grid
+# points) upper bound on the Lemma A1 tangent seminorm, used as gate_forcing_ia's
+# theta_star. Under the forced sibling-proportionality surrogate V17-IA also uses
+# (c^+ = lam*c^-, lam in the COMPUTED magnitude box [LAM_LO_F,LAM_HI_F] -- see the
+# (SIB-BAND) clause: this surrogate does NOT cover the real non-proportional cascade;
+# gate SIB-BAND exposes the gap), the Lemma A1 matrix entries M^pm_{ik} =
+# (1/3)(K_d(t_pm))_{ik} c^pm_k/o_i (note Section 5) reduce to
+#
+#   M^+_{ik} = (1/3) w_ik * lam * (c^-_k/c^-_i) / (A+B*P_i)
+#   M^-_{ik} = (1/3) w_ik *       (c^-_k/c^-_i) / (A+B*P_i)
+#   A = lam*d_+ + d_-,  B = lam+1,  P_i as in Lemma C0 / p_i_marginal_box above.
+#
+# Row i's support (kernel_row): i=0 -> {0:d, 1:1/2}; i>=1 -> {i-1:1/4, i:d, i+1:1/4}.
+# The c^-_k/c^-_i factor is 1 (k=i), rc_i (k=i+1), or 1/rc_{i-1} (k=i-1).
+#
+# The (a,b):=(rc_{i-1},rc_i) direction. For FIXED lam, the DIAGONAL entry (k=i) depends
+# on (a,b) only via the scalar P_i, monotone in P (reuse P_i's tight box from
+# p_i_marginal_box). The OFF-DIAGONAL entries, by direct partial derivatives (denominators
+# A+B/(4a) resp. A+(B/4)b, strictly positive under the A>0,B>0 feasibility check), are
+# strictly coordinatewise monotone in BOTH (a,b), sign independent of lam, so their
+# extremes sit at two (a,b) points (a monotone-path argument): M_{i,i+1} (ratio b) at
+# {(1,1),(f_{i-1},f_i)}, M_{i,i-1} (ratio 1/a) at the same two points (assignment flips).
+#
+# The lam direction -- CERTIFIED BY MINCING lam, not by an endpoint-sufficiency claim.
+# Each single matrix entry is Moebius (ratio of two affines) in lam, hence monotone in
+# lam. But the certified object is the SEMINORM (1/2)Sum_k|Delta^pm_k - mu^pm| with
+# Delta_k = M_{ik} - M_{i'k} -- a sum of absolute values of DIFFERENCES of Moebius
+# functions with DIFFERENT denominators (D_i(lam) vs D_{i'}(lam)); each Delta_k is a
+# degree-(2,2) rational in lam, so the seminorm is NOT Moebius and CAN have an interior-lam
+# maximum. Evaluating only lam in {LAM_LO_F,LAM_HI_F} is therefore NOT a proof of the sup
+# over [LAM_LO_F,LAM_HI_F]. Instead theta_band_at_parent MINCES [LAM_LO_F,LAM_HI_F] into
+# LAM_MINCE panels; on each panel it takes every matrix entry's EXACT per-panel interval
+# (by the entry's lam-monotonicity: its range over the panel is the hull of its values at
+# the two panel endpoints, combined with the (a,b) 2-point extremization -- a genuine
+# corner enclosure), then evaluates the seminorm by interval subtraction (valid regardless
+# of correlation between the two rows). max over panels and pairs is a RIGOROUS upper
+# bound converging DOWN to the true sup as LAM_MINCE grows. Mincing decouples the shared-
+# lam constraint safely: on a narrow panel each entry moves little, so the independent-
+# interval combination is tight; a single panel over the whole box (the naive per-entry
+# independent-lam bound) inflates by ~9%, but LAM_MINCE panels recover the tightness while
+# staying sound (no false claim that the seminorm itself is monotone or Moebius in lam).
+
+def _hull_row(rowA, rowB):
+    """Entry-wise hull of two row dicts (same support): each entry's per-panel interval
+    is the hull of its two lam-panel-endpoint intervals. Sound because each matrix entry
+    is monotone (Moebius) in lam, so its range over the panel lies in that hull."""
+    out = {}
+    zero = ((Fr(0), Fr(0)), (Fr(0), Fr(0)))
+    for k in set(rowA) | set(rowB):
+        (apl, aph), (aml, amh) = rowA.get(k, zero)
+        (bpl, bph), (bml, bmh) = rowB.get(k, zero)
+        out[k] = ((min(apl, bpl), max(aph, bph)), (min(aml, bml), max(amh, bmh)))
+    return out
+
+def _m_diag_at_lam(P_lo, P_hi, dp_, dm_, lam):
+    """Exact (Mplus_lo,Mplus_hi),(Mminus_lo,Mminus_hi) for the diagonal entry (k=i) at
+    a FIXED lam -- over the 2 points {P_lo,P_hi} (the (a,b)-extremization). The caller
+    (theta_band_at_parent) sweeps lam over panel endpoints and hulls; it does NOT assume
+    endpoint-sufficiency of the seminorm in lam. None if infeasible (A+B*P<=0)."""
+    pv = []; mv = []
+    for P in (P_lo, P_hi):
+        A = lam * dp_ + dm_; B = lam + 1
+        denom = A + B * P
+        if denom <= 0:
+            return None
+        pv.append(lam * dp_ / (3 * denom)); mv.append(dm_ / (3 * denom))
+    return (min(pv), max(pv)), (min(mv), max(mv))
+
+def _m_off_at_lam(a1, b1, a2, b2, weight, dp_, dm_, lam, ratio_is_b):
+    """Exact extremes over the 2 points {(a1,b1),(a2,b2)} at a FIXED lam for an
+    off-diagonal entry (numerator ratio = b if ratio_is_b else 1/a; P=(1/4)(1/a+b))."""
+    pv = []; mv = []
+    for (a, b) in ((a1, b1), (a2, b2)):
+        P = Fr(1, 4) * (1 / a + b)
+        A = lam * dp_ + dm_; B = lam + 1
+        denom = A + B * P
+        if denom <= 0:
+            return None
+        ratio = b if ratio_is_b else 1 / a
+        pv.append(lam * weight * ratio / (3 * denom))
+        mv.append(weight * ratio / (3 * denom))
+    return (min(pv), max(pv)), (min(mv), max(mv))
+
+def theta_band_row_entries_at_lam(i, P, floors, dp_, dm_, lam, win):
+    """Row i's support -> {k: ((Mplus_lo,Mplus_hi),(Mminus_lo,Mminus_hi))} at a FIXED
+    lam (the (a,b)-extremization only). None if infeasible. theta_band_at_parent calls
+    this at each lam-panel endpoint and hulls (each entry is Moebius/monotone in lam),
+    then evaluates the seminorm per panel and maxes over panels -- a rigorous enclosure
+    of the sup over the lam box that does NOT assume the seminorm is monotone/Moebius in
+    lam (it is neither: a sum of |differences of Moebius functions with different
+    denominators|)."""
+    out = {}
+    if i == 0:
+        d = _m_diag_at_lam(P[0][0], P[0][1], dp_, dm_, lam)
+        if d is None:
+            return None
+        out[0] = d
+        f0 = floors[0]
+        pv = []; mv = []
+        for b in (f0, Fr(1)):
+            P0 = b / 2
+            A = lam * dp_ + dm_; B = lam + 1
+            denom = A + B * P0
+            if denom <= 0:
+                return None
+            pv.append(lam * Fr(1, 2) * b / (3 * denom)); mv.append(Fr(1, 2) * b / (3 * denom))
+        out[1] = ((min(pv), max(pv)), (min(mv), max(mv)))
+        return out
+    d = _m_diag_at_lam(P[i][0], P[i][1], dp_, dm_, lam)
+    if d is None:
+        return None
+    out[i] = d
+    f_im1, f_i = floors[i - 1], floors[i]
+    e_p1 = _m_off_at_lam(Fr(1), Fr(1), f_im1, f_i, Fr(1, 4), dp_, dm_, lam, ratio_is_b=True)
+    if e_p1 is None:
+        return None
+    out[i + 1] = e_p1
+    e_m1 = _m_off_at_lam(Fr(1), Fr(1), f_im1, f_i, Fr(1, 4), dp_, dm_, lam, ratio_is_b=False)
+    if e_m1 is None:
+        return None
+    out[i - 1] = e_m1
+    return out
+
+def theta_band_seminorm_pair(rowA, rowB, cwin, branch_idx):
+    """Exact Fraction upper bound on sum_k|Delta_k-mu| for one branch, Delta_k :=
+    M_{ik}-M_{i'k}, mirroring seminorm_pair's float logic but combining EXTREME
+    intervals via independent-interval subtraction: valid regardless of any
+    correlation between the two rows' box points, since interval difference always
+    contains the true pointwise Delta_k (standard IA soundness, not assuming the two
+    rows' extremizing (a,b,lam) coincide)."""
+    keys = set(rowA) | set(rowB)
+    zero = ((Fr(0), Fr(0)), (Fr(0), Fr(0)))
+    deltas = {}
+    for k in keys:
+        a = rowA.get(k, zero)[branch_idx]
+        b = rowB.get(k, zero)[branch_idx]
+        deltas[k] = (a[0] - b[1], a[1] - b[0])
+    total_lo = sum((deltas[k][0] for k in keys), Fr(0))
+    total_hi = sum((deltas[k][1] for k in keys), Fr(0))
+    mu = (total_lo / cwin, total_hi / cwin)
+    s = Fr(0)
+    for k in keys:
+        d_lo, d_hi = deltas[k]
+        diff_lo, diff_hi = d_lo - mu[1], d_hi - mu[0]
+        s += max(abs(diff_lo), abs(diff_hi))
+    mu_bound = max(abs(mu[0]), abs(mu[1]))
+    s += (cwin - len(keys)) * mu_bound
+    return s
+
+def theta_band_at_parent(t, levs, J0, f_pad, tamper=None):
+    """The certified sup, at one parent t, of the Lemma A1 seminorm over the certified LC
+    ratio box (width-2-per-row locality) and the magnitude scalar lam in
+    [LAM_LO_F,LAM_HI_F]. The lam box is MINCED into LAM_MINCE panels; on each panel every
+    matrix entry's exact per-panel interval is the hull of its two lam-endpoint values
+    (entry Moebius/monotone in lam) combined with the (a,b) 2-point extremization, and the
+    seminorm is evaluated by interval subtraction. max over panels + pairs is a rigorous
+    upper bound (NO endpoint-sufficiency assumption; see the V15-IA method note).
+
+    Direction tamper 'theta-ia-sign' (M8 finding): flips the pair-extremization from max
+    to min -- the sign/direction choice that PRODUCES the sup. It DEFLATES theta_band well
+    below the realized seminorm, caught by gate_theta_ia's realized-floor consistency check
+    (a too-LOW theta_band is the unsound direction -- a valid upper bound must dominate the
+    realized value; V17-IA's threshold merely relaxes, so the flip is isolated to V15-IA).
+
+    Returns (value, (locus_pair, locus_panel)) or (None, reason) if infeasible."""
+    rc = anchor_c_ratios(t, levs, J0, win=WIN_STAR)
+    slop = IA_SLOP
+    floors = [frac_outward(f_pad * r, lo=True, slop=slop) for r in rc]
+    tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+    dp_ = frac_exact(d_of(tp)); dm_ = frac_exact(d_of(tm))
+    P = p_i_marginal_box(floors)
+    edges = [LAM_LO_F + (LAM_HI_F - LAM_LO_F) * Fr(j, LAM_MINCE) for j in range(LAM_MINCE + 1)]
+    edge_rows = []
+    for lam in edges:
+        rows = [theta_band_row_entries_at_lam(i, P, floors, dp_, dm_, lam, WIN_STAR)
+                for i in range(WIN_STAR)]
+        if any(r is None for r in rows):
+            return None, "INFEASIBLE at lam=%s" % str(lam)
+        edge_rows.append(rows)
+    best = None; bestpair = None; bestpanel = None
+    flip = (tamper == "theta-ia-sign")
+    for pj in range(LAM_MINCE):
+        rows = [_hull_row(edge_rows[pj][i], edge_rows[pj + 1][i]) for i in range(WIN_STAR)]
+        for i in range(WIN_STAR):
+            for ip in range(i + 1, WIN_STAR):
+                sp = theta_band_seminorm_pair(rows[i], rows[ip], CWIN, 0)
+                sm = theta_band_seminorm_pair(rows[i], rows[ip], CWIN, 1)
+                val = (sp + sm) / 2
+                take = (best is None) or (val < best if flip else val > best)
+                if take:
+                    best = val; bestpair = (i, ip); bestpanel = (edges[pj], edges[pj + 1])
+    return best, (bestpair, bestpanel)
+
+def theta_band_ia_certified(levs, J0, f_pad, tamper=None):
+    """The certified sup over 41 parents of theta_band_at_parent, folded by the certified
+    Window Lemma factor (<=57/50, gate V16b -- itself a COMPUTED (FOLD) bound) and the
+    documented outward slop. Returns (theta_band, locus_t, locus_pair, slop)."""
+    slop = IA_SLOP
+    worst = None; wt = None; wpair = None
+    for t in PARENTS:
+        val, info = theta_band_at_parent(t, levs, J0, f_pad, tamper=tamper)
+        if val is None:
+            raise ValueError("theta_band_at_parent infeasible at t=%r (J0=%d,f=%s): %s"
+                              % (t, J0, str(f_pad), info))
+        if worst is None or val > worst:
+            worst = val; wt = t; wpair = info
+    theta_band = worst * Fr(57, 50) * (1 + slop)
+    return theta_band, wt, wpair, slop
+
+def realized_seminorm_floor(levs, J0):
+    """A realized-profile lower reference for theta_band: max over parents of the Lemma A1
+    seminorm at the REAL level-J0 sibling profile (n_free_from_raw), folded by 57/50. The
+    band-uniform certified theta_band must DOMINATE this (the realized profile is a point of
+    the census's own box); a certified value below it signals a broken direction/sign in the
+    census (the 'theta-ia-sign' tamper). A consistency monitor, not a proof."""
+    worst = 0.0
+    for t in PARENTS:
+        raw = onestep_raw(t, J0, levs, win=WIN_STAR, cwin=CWIN)
+        worst = max(worst, n_free_from_raw(raw))
+    return worst * float(Fr(57, 50))
+
+def gate_theta_ia(report, levs, J0, f_pad, tamper=None):
+    """V15-IA THETA-BAND [LOAD-BEARING]: the certified band-uniform upper bound on the
+    Lemma A1 tangent seminorm over the certified LC ratio box, folded by the Window Lemma
+    factor (<=57/50). The sup over the magnitude scalar lam in [LAM_LO_F,LAM_HI_F] is
+    enclosed by MINCING lam into LAM_MINCE panels and hulling each Moebius-in-lam matrix
+    entry per panel (theta_band_at_parent) -- a rigorous enclosure, NOT an endpoint-
+    sufficiency claim (the seminorm is not Moebius in lam). Valid for EVERY n>=J0 over the
+    certified box. NOTE (SIB-BAND clause): this certifies the forced-PROPORTIONAL surrogate
+    (c^+ = lam*c^-); the real non-proportional cascade is covered only up to the sibling
+    wobble the informational gate SIB-BAND quantifies. Returns theta_band (Fraction) for
+    gate_forcing_ia to consume as theta_star.
+
+    Two checks make up ok: (upper) theta_band <= 9/10 (an unconditional contraction
+    ceiling; tamper 'theta-ia-tighten' grazes THIS ceiling to 1/2, isolated -- the returned
+    value and V17-IA's line are untouched). (lower) theta_band >= the realized-profile
+    seminorm (realized_seminorm_floor), a consistency monitor: a certified upper bound must
+    dominate the realized value. Tamper 'theta-ia-sign' flips the census's max->min
+    direction, deflating theta_band below this floor (caught here); since a lower theta_band
+    only RELAXES V17-IA's threshold, that flip is isolated to this gate."""
+    theta_band_exact, wt, wpair, slop = theta_band_ia_certified(levs, J0, f_pad, tamper=tamper)
+    theta_band = round_up_frac(theta_band_exact)   # outward-rounded to a printable Fraction
+    ceiling = Fr(1, 2) if tamper == "theta-ia-tighten" else Fr(9, 10)
+    floor = realized_seminorm_floor(levs, J0)      # realized-profile lower consistency ref
+    valf = float(theta_band)
+    ok = (theta_band <= ceiling) and (valf >= floor - 1e-12)
+    report.append(("V15-IA THETA-BAND [LOAD-BEARING, window i<17, anchor J0=%d, pad"
+                    " f=%s] certified seminorm sup [lam-minced %d panels, Fraction,"
+                    " outward slop=%s] * window fold 57/50 = %.7f (locus t=%.4f,"
+                    " pair=%s); realized-floor %.4f <= theta_band <= sanity ceiling %s%s"
+                    % (J0, str(f_pad), LAM_MINCE, str(slop), valf, wt, wpair, floor,
+                       str(ceiling),
+                       " [TAMPERED %s]" % tamper if tamper in ("theta-ia-tighten",
+                       "theta-ia-sign") else ""), ok))
+    return theta_band
+
+# ------------------------------------------------------- G2/alpha route-cut census (info)
+
+def g2_band_survivors(levs, jmax2):
+    corner_bits = list(itertools.product((0, 1), repeat=CENSUS_NC))
+    surv = {}
+    for t in PARENTS:
+        tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+        dp_, dm_ = d_of(tp), d_of(tm)
+        ap_a, am_a = a_of(tp), a_of(tm)
+        fp = floors_at48(tp, levs); fm = floors_at48(tm, levs)
+        sig = sigma_max_at(t, jmax2, levs)
+        phip = [x * 0.98 for x in fp]; phim = [x * 0.98 for x in fm]
+        Pc = []
+        for bp in corner_bits:
+            vp = census_lc_corner(phip, bp)
+            Wp = conv_even(vp, dp_)
+            Pc.append((vp, Wp, sum(vp)))
+        Mc = [census_lc_corner(phim, bm) for bm in corner_bits]
+        rows = []
+        for vp, Wp, Sp in Pc:
+            for vm in Mc:
+                gs = [vm[i] / vp[i] for i in range(len(vp))]
+                if max(gs) / min(gs) > TARGET * (1 + 1e-9):
+                    continue
+                for mu in CENSUS_MU:
+                    Sm = mu * sum(vm)
+                    share = am_a * Sm / (ap_a * Sp + am_a * Sm)
+                    if share > sig + 1e-9:
+                        continue
+                    Wm = conv_even([mu * x for x in vm], dm_)
+                    cj = [x + y for x, y in zip(Wp, Wm)]
+                    nuse = min(OPWIN, len(cj))
+                    if any(cj[i] <= 0 for i in range(nuse)):
+                        continue
+                    rows.append((Wp[:nuse], Wm[:nuse], cj[:nuse], vp[:nuse], [mu * x for x in vm[:nuse]]))
+        surv[t] = rows
+    return surv
+
+def g2_band_stress(levs, surv, n):
+    worst = 0.0
+    for t in PARENTS:
+        rows = surv[t]
+        if not rows:
+            continue
+        tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+        ap_ = dprime(tp); at3 = dprime(t / 3.0)
+        Lp_real = Lvec(tp, n - 1, levs, CWIN); Lm_real = Lvec(tm, n - 1, levs, CWIN)
+        cp_real = cvec(tp, levs[n - 1]); cm_real = cvec(tm, levs[n - 1])
+        Lr = min(len(Lp_real), len(cp_real))
+        Lamp = sum(Lp_real[i] * cp_real[i] for i in range(Lr)) / sum(cp_real[i] for i in range(Lr))
+        Lamm = sum(Lm_real[i] * cm_real[i] for i in range(Lr)) / sum(cm_real[i] for i in range(Lr))
+        local_worst = 0.0
+        for (Wp, Wm, cj, vp_s, vm_s) in rows:
+            nuse = len(cj)
+            vals = []
+            for i in range(nuse):
+                t1_i = (Lamp * Wp[i] / cj[i] - Lamm * Wm[i] / cj[i]) / 3.0
+                t3_i = (ap_ * (vp_s[i] - vm_s[i]) - at3 * vm_s[i]) / (3.0 * cj[i])
+                vals.append(t1_i + t3_i)
+            s = spread(vals)
+            if s > local_worst:
+                local_worst = s
+        if local_worst > worst:
+            worst = local_worst
+    return worst
+
+def g2_realized(levs, n):
+    worst = 0.0
+    for t in PARENTS:
+        raw = onestep_raw(t, n, levs, win=OPWIN, cwin=CWIN)
+        mass = onestep_compose(raw, 'mass')
+        s = spread([mass['T1'][i] + mass['T3'][i] for i in range(raw['n'])])
+        if s > worst:
+            worst = s
+    return worst
+
+# =====================================================================================
+# gates
+# =====================================================================================
+
+def gate_theta(report, info, levs, grid, tamper=None):
+    """V15-GRID THETA [INFORMATIONAL, robustness view]: theta_tot<=1/2 & theta_win<=27/100
+    grid census (41 parents), plus the closed-form tangent seminorm N_free<=0.9 (Lemma A1,
+    arbitrary child deviations, no sampling) -- theta_tot/theta_win are COMPUTED (grid
+    census, a measurement at tested (n,t) points only); N_free is rigorous-in-the-tangent-
+    direction but, like theta_tot, evaluated at the realized/grid profile, not a band-
+    uniform enclosure. This is a cross-check that the realized dynamics sit comfortably
+    inside the certified band V15-IA computes (they do: theta_tot's worst grid value is well
+    under theta_band); it does NOT determine RESULT.
+
+    ALSO reports (informational) a grid-sampled box bound theta_cert := N_free * (57/50
+    window fold): N_free's closed form is stated against spread_{i<18}(delta)<=1 (the true
+    child read-set, CWIN=18), so composing with the IH needs the certified fold
+    spread_{i<18}<=(<=57/50)*spread_{i<17} (Lemma W1/V16b). This grid-sampled value is NOT
+    band-uniform (it evaluates N_free at realized profiles only); the certified enclosure is
+    V15-IA's, which does not sample. Kept as a numerical cross-reference only."""
+    thr_tot = 0.05 if tamper == "theta-tot-gate" else 0.5
+    worst_tot = 0.0; worst_win = 0.0; worst_nfree = 0.0; worst_wratio = 0.0
+    tot_first = tot_last = win_first = win_last = None
+    for j in grid:
+        sup_tot = 0.0; sup_win = 0.0; sup_nfree = 0.0; sup_wratio = 0.0
+        for t in PARENTS:
+            raw = onestep_raw(t, j, levs, win=OPWIN, cwin=CWIN)
+            mid = onestep_compose(raw, 'mid')
+            mass = onestep_compose(raw, 'mass')
+            theta_tot = (raw['Vj'] - mid['Fext']) / raw['Vjm1']
+            childspread = max(spread(mass['delp']), spread(mass['delm']))
+            theta_win = spread(mass['T2']) / childspread if childspread > 1e-14 else 0.0
+            nfree = n_free_from_raw(raw)
+            nfree = nfree * 2.0 if tamper == "nfree-corrupt" else nfree
+            wratio = window_ratio(t, j, levs)
+            sup_tot = max(sup_tot, theta_tot)
+            sup_win = max(sup_win, theta_win)
+            sup_nfree = max(sup_nfree, nfree)
+            sup_wratio = max(sup_wratio, wratio)
+        worst_tot = max(worst_tot, sup_tot); worst_win = max(worst_win, sup_win)
+        worst_nfree = max(worst_nfree, sup_nfree); worst_wratio = max(worst_wratio, sup_wratio)
+        if tot_first is None:
+            tot_first, win_first = sup_tot, sup_win
+        tot_last, win_last = sup_tot, sup_win
+    ok = worst_tot <= thr_tot and worst_win <= 0.27 and worst_nfree <= 0.9
+    info.append(("V15-GRID THETA [INFORMATIONAL, window i<17, child i<18] theta_tot<=%.3g"
+                 " (worst %.4f, plateau [%.4f,%.4f]) & theta_win<=0.27 (worst %.4f,"
+                 " plateau [%.4f,%.4f]); closed-form tangent seminorm N_free<=0.9"
+                 " (Lemma A1, worst %.4f) -- grid-sampled, superseded as the gating"
+                 " theta_star by V15-IA's band-uniform certificate above"
+                 % (thr_tot, worst_tot, tot_first, tot_last, worst_win, win_first, win_last,
+                    worst_nfree), ok))
+
+    theta_cert = worst_nfree * float(Fr(57, 50))
+    theta_cert_measured = worst_nfree * worst_wratio
+    info.append(("V15-CERT [INFORMATIONAL, grid-sampled box bound, cross-reference only]"
+                  " theta_cert := N_free*(57/50 window fold) = %.4f*1.1400 = %.4f"
+                  " (measured-ratio variant %.4f*%.4f=%.4f) -- a GRID-SAMPLED bound (N_free"
+                  " at realized profiles), NOT band-uniform; the certified enclosure is"
+                  " V15-IA's lam-minced census above, which does not sample"
+                  % (worst_nfree, theta_cert, worst_nfree, worst_wratio, theta_cert_measured),
+                  True))
+
+def gate_thetasymb(report):
+    """V16 THETASYMB: exact Fraction polynomial identity + domain sign argument for
+    theta~(t) = sqrt3 sin(2 pi t/3)/(6+3cos(2 pi t/3)) <= 1/5, x = cos(2 pi t/3)."""
+    def poly_mul(p, q):
+        out = [Fr(0)] * (len(p) + len(q) - 1)
+        for i, a in enumerate(p):
+            for jx, b in enumerate(q):
+                out[i + jx] += a * b
+        return out
+    def poly_sub(p, q):
+        n = max(len(p), len(q))
+        return [(p[i] if i < len(p) else Fr(0)) - (q[i] if i < len(q) else Fr(0)) for i in range(n)]
+    term1 = [Fr(75), Fr(0), Fr(-75)]                     # 75*(1 - x^2)
+    term2 = poly_mul([Fr(6), Fr(3)], [Fr(6), Fr(3)])     # (6 + 3x)^2
+    LHS = poly_sub(term1, term2)
+    prod = poly_mul([Fr(-1), Fr(2)], [Fr(13), Fr(14)])   # (2x-1)*(14x+13)
+    RHS = [Fr(-3) * c for c in prod]
+    exact_match = (LHS == RHS)
+    half = Fr(1, 2)
+    rhs_half = sum(c * half ** i for i, c in enumerate(RHS))
+    cos_pi9 = math.cos(PI / 9)
+    xs_t = [1.0 / 6 + (1.0 / 3) * k / 200 for k in range(201)]
+    sign_ok = True
+    for t in xs_t:
+        x = math.cos(2 * PI * t / 3)
+        if not ((2 * x - 1) >= -1e-12 and (14 * x + 13) > 0):
+            sign_ok = False
+    worst_gap = min(0.2 - math.sqrt(3) * math.sin(2 * PI * t / 3) / (6 + 3 * math.cos(2 * PI * t / 3))
+                     for t in xs_t)
+    ok = exact_match and (rhs_half == 0) and sign_ok and (worst_gap >= -1e-12)
+    report.append(("V16 THETASYMB exact 75(1-x^2)-(6+3x)^2 = -3(2x-1)(14x+13) [Fraction"
+                    " coeff match=%s, RHS(1/2)=%s]; domain x in [1/2,cos(pi/9)]=[1/2,%.6f]:"
+                    " (2x-1)>=0 & (14x+13)>0 = %s => theta~(t)<=1/5 exact, numeric worst-gap"
+                    " %.6f (equality at t=1/2)" % (exact_match, rhs_half, cos_pi9, sign_ok,
+                                                    worst_gap), ok))
+
+def gate_window(report, levs, grid, tamper=None):
+    """V16b WINDOW: 289/256<=57/50 rational fact + grid ratio check + the child-window
+    read-set structural check (Lemma W2)."""
+    asym = Fr(289, 256)
+    bound = Fr(21, 20) if tamper == "window-bound" else Fr(57, 50)
+    asym_ok = asym <= bound
+    worst_ratio = 0.0; worst_loc = (grid[0], PARENTS[0])
+    for j in grid:
+        for t in PARENTS:
+            r = window_ratio(t, j, levs)
+            if r > worst_ratio:
+                worst_ratio = r; worst_loc = (j, t)
+    grid_ok = worst_ratio <= float(bound)
+    worst_u = 1e18; best_u = 0.0
+    for j in grid:
+        for t in PARENTS:
+            full_s, short_s = curv_window_undercounts(t, j, levs)
+            ratio = full_s / short_s if short_s > 1e-300 else float('inf')
+            worst_u = min(worst_u, ratio); best_u = max(best_u, ratio)
+    struct_ok = worst_u > 1.0 + 1e-9
+    ok = asym_ok and grid_ok and struct_ok
+    report.append(("V16b WINDOW [output i<17 reads child i<18] asymptotic V_18/V_17"
+                    "->289/256=%.6f <= 57/50=%.4f [rational fact]; grid sup"
+                    " spread_{i<18}(L)/spread_{i<17}(L)<=57/50 (worst %.4f @ n=%d); child-window"
+                    " read-set (Lemma W2): omitting c_17 undercounts Curv_{i<17} (ratio range"
+                    " [%.4f,%.4f], all >1)"
+                    % (float(asym), float(bound), worst_ratio, worst_loc[0], worst_u, best_u), ok))
+
+def gate_forcing(report, info, levs, grid, survivors, g2_grid, tamper=None):
+    """V17 FORCING: F_ext*n^2 & Curv*n^2 <=200 (core); the G2/alpha route-cut stress
+    reproduced as a negative control, appended to `info` -- INFORMATIONAL, does not
+    affect this gate's ok."""
+    thr = 50.0 if tamper == "forcing-bound" else 200.0
+    fext = {}; curv = {}
+    for j in grid:
+        raw = onestep_raw(EDGE, j, levs, win=OPWIN, cwin=CWIN)
+        mid = onestep_compose(raw, 'mid')
+        fext[j] = mid['Fext']; curv[j] = raw['Curv']
+    worst_fe = max(fext[j] * j * j for j in grid)
+    worst_cv = max(curv[j] * j * j for j in grid)
+    ok = worst_fe <= thr and worst_cv <= thr
+    report.append(("V17 FORCING [window i<17, edge locus] F_ext*n^2<=%.0f (worst %.2f) &"
+                    " Curv*n^2<=%.0f (worst %.2f), grid n in {%s}"
+                    % (thr, worst_fe, thr, worst_cv, ",".join(str(j) for j in grid)), ok))
+
+    g2_ceiling = 0.02 if tamper == "g2-ceiling" else 0.10
+    band = dict((n, g2_band_stress(levs, survivors, n)) for n in g2_grid)
+    realized = dict((n, g2_realized(levs, n)) for n in g2_grid)
+    worst_band = max(band.values())
+    g2_ok = worst_band <= g2_ceiling
+    infl = ", ".join("%dx@%d" % (round(band[n] / realized[n]), n) for n in g2_grid if realized[n] > 0)
+    info.append(("V17-INFO [INFORMATIONAL, window i<17] G2/alpha route-cut stress"
+                  " (rho_prop-constrained V12-band census) <=%.2f ceiling: worst BAND"
+                  " s_sup=%.4f over n in {%s} (route-cut %s; inflation vs realized %s)"
+                  % (g2_ceiling, worst_band, ",".join(str(n) for n in g2_grid),
+                     "CONFIRMED (exceeds ceiling)" if not g2_ok else "NOT confirmed", infl), g2_ok))
+
+def gate_forcing_ia(report, levs, J0, f_pad, theta_star, tamper=None):
+    """V17-IA FORCING [THE LOAD-BEARING GATE]: the minced interval-arithmetic census of
+    the box-certified forcing bound F_box(J0, f_pad) <= threshold, threshold :=
+    (1-theta_star)*tau*, tau* = 3*log(1.02560749) = 0.0758553... . Derivation of the
+    threshold: Lemma 1 (PROVED) gives log rho_prop@i<17(n) <= (1/3)V_17(n); the
+    V-recursion gives V_17(n) <= theta*V_17(n-1) + Phi(n-1); at a CONSTANT box forcing
+    Phi<=F_box the equilibrium ceiling is sup_n V_17(n) <= max(V_17(J0), F_box/(1-theta*));
+    this stays <= tau* (closing (T*), hence (PROP-TAIL)) iff F_box <= (1-theta*)*tau* --
+    exactly this gate's threshold.
+
+    Method (the closed form of Section "V17-IA" above): the box is rc_i in
+    [f_pad*anchor_rc_i(J0,t), 1] (LC chain). P_i (the curvature normal form, Lemma C0)
+    has WIDTH-2 locality (depends only on rc_{i-1},rc_i) -- tighter than the width-4 band
+    the separate Lemma-A1/tangent object (gate V15) needs. Rather than an LC-endpoint
+    shortcut (checking only i=0,16, relying on "P monotone in i" holding everywhere in
+    the box -- true on the realized cascade, COMPUTED, not proved box-wide), this
+    computes a RIGOROUS per-index marginal box for EVERY i=0..16 -- the mince-to-infinity
+    limit of subdividing each ratio's range into panels and enclosing every LC-feasible
+    adjacent panel pair (see p_i_marginal_box/p_i_box_minced above; the two are cross-
+    checked directly, mincing converges monotonically down onto the closed form from
+    above, confirming validity as an upper bound) -- then box-maxes
+    over the (lam,Lambda^+,Lambda^-) magnitude corners (each side corner-sufficient:
+    Mobius/affine in the fixed-P slice), all in EXACT Fraction arithmetic (the floors
+    and trig constants are converted from float via frac_outward with a documented,
+    printed slop=1e-9 -- six orders of magnitude past the cascade's own ~1e-15 relative
+    float error; the combinatorial/algebraic propagation itself introduces ZERO further
+    rounding). The gate PASSES iff the certified sup <= threshold."""
+    # tau* as the certified Fraction LOWER bound (TAU_STAR_FR); threshold and the final
+    # comparison are EXACT Fraction (no float rounding at the decision point). Using an
+    # UNDER-estimate of tau* is conservative in BOTH the threshold and the ceiling uses.
+    tau_star = TAU_STAR_FR
+    threshold = (1 - theta_star) * tau_star
+    thr_eff = threshold * Fr(4, 5) if tamper == "v17ia-graze" else threshold
+    val, wt, slop = F_box_ia_certified(levs, J0, f_pad, tamper=tamper)   # exact Fraction
+    ok = val <= thr_eff                                                   # EXACT comparison
+    valf = float(val)
+    margin = float((thr_eff - val) / thr_eff) if thr_eff != 0 else 0.0
+    # equilibrium chain, each number printed (audit S1): F_box/(1-theta) -> (1/3)(.) ->
+    # exp(.) vs TARGET. The ceiling and its comparison to tau* are exact; the exp/ln display
+    # is float. (1/3)*ceiling <= ln(TARGET) is the reduction-lemma conclusion.
+    ceiling = val / (1 - theta_star)                     # F_box/(1-theta*), exact Fraction
+    log_rho = ceiling / 3                                # (1/3)*ceiling, exact Fraction
+    ceiling_ok = ceiling <= tau_star                     # exact: equilibrium ceiling <= tau*
+    exp_bound = math.exp(float(log_rho))
+    report.append(("V17-IA FORCING [LOAD-BEARING, window i<17, anchor J0=%d, pad f=%s]"
+                    " certified F_box(J0,f) [width-2 minced-IA, Fraction, outward slop=%s]"
+                    " = %.8f (locus t=%.4f) <= threshold (1-theta*)*tau* = %.8f%s"
+                    " (margin %.1f%%, exact-Fraction compare)\n"
+                    "        equilibrium chain: F_box/(1-theta*) = %.8f <= tau* = %.8f"
+                    " [%s]; (1/3)* = %.8f <= ln(TARGET) = %.8f; exp(.) = %.6f <= TARGET"
+                    " = %.8f [%s]"
+                    % (J0, str(f_pad), str(slop), valf, wt, float(thr_eff),
+                       " [TAMPERED]" if tamper == "v17ia-graze" else "", margin * 100,
+                       float(ceiling), float(tau_star), "OK" if ceiling_ok else "MISS",
+                       float(log_rho), LTARGET, exp_bound, TARGET,
+                       "OK" if exp_bound <= TARGET else "MISS"), ok))
+    return valf, float(thr_eff), margin
+
+# ===================================================================================
+# MAG-BOX (LAM-BOX clause) + SIB-BAND (sibling wobble) -- both make a COMPUTED input
+# honest: MAG-BOX monitors the magnitude box both load-bearing gates box-max over;
+# SIB-BAND exposes the forced-proportional-vs-real gap.
+# ===================================================================================
+
+def gate_magnitude_box(report, levs, grid, tamper=None):
+    """MAG-BOX [core, (LAM-BOX) clause]: verify the realized sibling-proportionality
+    magnitudes lie inside the COMPUTED magnitude boxes at every (grid level, parent):
+    lam = sum(c^+)/sum(c^-) in [LAM_LO_F,LAM_HI_F]; the mass-weighted window-mean
+    Lambda^+/- in their boxes; and every per-entry sibling ratio rho_i = c^+_i/c^-_i in
+    [LAM_LO_F,LAM_HI_F] (rho_i in the box underwrites the (SIB-BAND) representation
+    c^+_i = lam*w_i*c^-_i with lam in the box). This turns six silent hardcoded literals
+    into a monitored, tamperable invariant -- still COMPUTED (a grid check, not a proof for
+    all n), now honest. Prints worst headroom; the Lambda^+ floor is genuinely thin (~0.017).
+    Tamper 'magbox-shrink' tightens the boxes so the realized magnitudes leave them."""
+    # box boundaries (optionally shrunk inward by the tamper so realized leaves the box)
+    sh = Fr(6, 100) if tamper == "magbox-shrink" else Fr(0)
+    lam_lo = float(LAM_LO_F + sh); lam_hi = float(LAM_HI_F - sh)
+    lap_lo = float(LAP_LO_F + sh); lap_hi = float(LAP_HI_F - sh)
+    lm_lo = float(LAM2_LO_F + sh); lm_hi = float(LAM2_HI_F - sh)
+    viol = 0; worst_head = 1e18; worst_which = ""
+    for n in grid:
+        for t in PARENTS:
+            raw = onestep_raw(t, n, levs, win=WIN_STAR, cwin=CWIN); nn = raw['n']
+            cp, cm = raw['cp'], raw['cm']
+            lam = sum(cp[i] for i in range(nn)) / sum(cm[i] for i in range(nn))
+            m = onestep_compose(raw, 'mass'); Lp, Lm = m['Lamp'], m['Lamm']
+            # the ARITHMETIC window-mean reference (the one Lemma A1's seminorm requires --
+            # zero-sum delta; the forcing T1 must use the same split, so the box must cover
+            # it, per D5). Checked alongside the mass-weighted reference.
+            LA = min(CWIN, len(raw['Lp']), len(raw['Lm']))
+            LpA = sum(raw['Lp'][:LA]) / LA; LmA = sum(raw['Lm'][:LA]) / LA
+            rhos = [cp[i] / cm[i] for i in range(nn)]
+            checks = [("lam", lam, lam_lo, lam_hi),
+                      ("Lam+mass", Lp, lap_lo, lap_hi), ("Lam-mass", Lm, lm_lo, lm_hi),
+                      ("Lam+mean", LpA, lap_lo, lap_hi), ("Lam-mean", LmA, lm_lo, lm_hi)]
+            checks += [("rho_%d" % i, r, lam_lo, lam_hi) for i, r in enumerate(rhos)]
+            for name, v, lo, hi in checks:
+                h = min(v - lo, hi - v)
+                if h < 0:
+                    viol += 1
+                if h < worst_head:
+                    worst_head = h; worst_which = "%s@n=%d" % (name, n)
+    ok = (viol == 0)
+    report.append(("MAG-BOX [core, (LAM-BOX) COMPUTED clause, window i<17] realized"
+                    " lam, Lambda^+/- (mass AND arithmetic window-mean, per D5), per-entry"
+                    " rho_i in the magnitude boxes over %d levels x 41 parents"
+                    " (violations=%d); worst headroom %.4f (%s) -- the Lambda^+ floor is"
+                    " thin; boxes are COMPUTED (measured+pad), monitored here not proved%s"
+                    % (len(grid), viol, worst_head, worst_which,
+                       " [TAMPERED]" if tamper == "magbox-shrink" else ""), ok))
+
+# ---- (SIB-BAND) sibling-wobble census -------------------------------------------
+# The forced-proportional gates (V15-IA, V17-IA) are the w_i==1 slice. Under the IH
+# rho_prop@i<17(n-1)<=TARGET the real cascade is c^+_i = lam*w_i*c^-_i; the per-entry
+# marginal SAFE band is WOB_FULL=[1/R*,R*]. g_i (forcing) and the Lemma-A1 M-entries stay
+# ratios of MULTI-AFFINE functions in (a=rc_{i-1}, b=rc_i, u=w_{i-1}, v=w_i, x=w_{i+1},
+# lam, Lambda^pm) -> coordinatewise MONOTONE (fix all-but-one: num,den affine => Moebius =>
+# monotone, no pole since den>0) -> EXACT box range by corner enumeration. Magnitude
+# (lam,Lambda^pm) is SHARED across indices (fixed per osc-evaluation, max over the 8
+# corners); wobble+ratio are per-index marginal (sound over-approx). Derivation, verifier
+# convention (cp=c^+ from t_+, cm=c^- from t_-): Q^+_i = 0.25 u/a + d_+ v + 0.25 x b,
+# Q^-_i = d_- + 0.25/a + 0.25 b, D_i = lam Q^+_i + Q^-_i; T1+T3 num = Lambda^+ lam Q^+_i -
+# Lambda^- Q^-_i + a'(t_+)(lam v - 1) - a'(t/3); i=0: Q^+_0 = d_+ w_0 + 0.5 w_1 rc_0.
+
+def _ab_lc_vertices(i, floors):
+    if i == 0:
+        return [(Fr(1), floors[0]), (Fr(1), Fr(1))]
+    fa, fb = floors[i - 1], floors[i]
+    verts = [(fa, fb), (Fr(1), fb), (Fr(1), Fr(1))]
+    if fa >= fb:
+        verts.append((fa, fa))
+    return verts
+
+def _g_wob(i, a, b, u, v, x, lam, Lp, Lm, dp_, dm_, ap_, at3):
+    if i == 0:
+        Qp = dp_ * u + Fr(1, 2) * x * b; Qm = dm_ + Fr(1, 2) * b; wv = u
+    else:
+        Qp = Fr(1, 4) * u / a + dp_ * v + Fr(1, 4) * x * b; Qm = dm_ + Fr(1, 4) / a + Fr(1, 4) * b; wv = v
+    D = lam * Qp + Qm
+    if D <= 0:
+        return None
+    return (Lp * lam * Qp - Lm * Qm + ap_ * (lam * wv - 1) - at3) / (3 * D)
+
+def F_box_wobble_certified(levs, J0, f_pad, wob):
+    worst = Fr(0); wt = None
+    for t in PARENTS:
+        floors = [frac_outward(f_pad * r, lo=True, slop=IA_SLOP)
+                  for r in anchor_c_ratios(t, levs, J0, win=WIN_STAR)]
+        tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+        dp_ = frac_exact(d_of(tp)); dm_ = frac_exact(d_of(tm))
+        ap_ = frac_exact(dprime(tp)); at3 = frac_exact(dprime(t / 3.0))
+        ab = [_ab_lc_vertices(i, floors) for i in range(WIN_STAR)]
+        best = Fr(0)
+        for lam in (LAM_LO_F, LAM_HI_F):
+            for Lp in (LAP_LO_F, LAP_HI_F):
+                for Lm in (LAM2_LO_F, LAM2_HI_F):
+                    his = []; los = []; feas = True
+                    for i in range(WIN_STAR):
+                        lo_i = hi_i = None
+                        for (a, b) in ab[i]:
+                            for u in wob:
+                                for v in wob:
+                                    for x in wob:
+                                        g = _g_wob(i, a, b, u, v, x, lam, Lp, Lm, dp_, dm_, ap_, at3)
+                                        if g is None:
+                                            continue
+                                        if lo_i is None or g < lo_i:
+                                            lo_i = g
+                                        if hi_i is None or g > hi_i:
+                                            hi_i = g
+                        if lo_i is None:
+                            feas = False; break
+                        his.append(hi_i); los.append(lo_i)
+                    if not feas:
+                        continue
+                    d = max(his) - min(los)
+                    if d > best:
+                        best = d
+        v = best * (1 + IA_SLOP)
+        if v > worst:
+            worst = v; wt = t
+    return worst, wt
+
+def _row_entries_wob(i, floors, dp_, dm_, lam, wob):
+    if i == 0:
+        aset = [Fr(1)]; bset = [floors[0], Fr(1)]
+    else:
+        aset = [floors[i - 1], Fr(1)]; bset = [floors[i], Fr(1)]
+    acc = {}
+    for a in aset:
+        for b in bset:
+            for u in wob:
+                for v in wob:
+                    for x in wob:
+                        if i == 0:
+                            Qp = dp_ * u + Fr(1, 2) * x * b; Qm = dm_ + Fr(1, 2) * b
+                        else:
+                            Qp = Fr(1, 4) * u / a + dp_ * v + Fr(1, 4) * x * b; Qm = dm_ + Fr(1, 4) / a + Fr(1, 4) * b
+                        D = lam * Qp + Qm
+                        if D <= 0:
+                            return None
+                        d3 = 3 * D
+                        if i == 0:
+                            ents = {0: (lam * dp_ * u / d3, dm_ / d3),
+                                    1: (lam * Fr(1, 2) * b * x / d3, Fr(1, 2) * b / d3)}
+                        else:
+                            ents = {i: (lam * dp_ * v / d3, dm_ / d3),
+                                    i + 1: (lam * Fr(1, 4) * b * x / d3, Fr(1, 4) * b / d3),
+                                    i - 1: (lam * Fr(1, 4) * (1 / a) * u / d3, Fr(1, 4) * (1 / a) / d3)}
+                        for k, (mp, mm) in ents.items():
+                            if k not in acc:
+                                acc[k] = [mp, mp, mm, mm]
+                            r = acc[k]
+                            if mp < r[0]: r[0] = mp
+                            if mp > r[1]: r[1] = mp
+                            if mm < r[2]: r[2] = mm
+                            if mm > r[3]: r[3] = mm
+    return dict((k, ((r[0], r[1]), (r[2], r[3]))) for k, r in acc.items())
+
+def theta_band_wobble_certified(levs, J0, f_pad, wob):
+    worst = Fr(0)
+    for t in PARENTS:
+        floors = [frac_outward(f_pad * r, lo=True, slop=IA_SLOP)
+                  for r in anchor_c_ratios(t, levs, J0, win=WIN_STAR)]
+        tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+        dp_ = frac_exact(d_of(tp)); dm_ = frac_exact(d_of(tm))
+        for lam in (LAM_LO_F, LAM_HI_F):
+            rows = [_row_entries_wob(i, floors, dp_, dm_, lam, wob) for i in range(WIN_STAR)]
+            if any(r is None for r in rows):
+                continue
+            for i in range(WIN_STAR):
+                for ip in range(i + 1, WIN_STAR):
+                    val = (theta_band_seminorm_pair(rows[i], rows[ip], CWIN, 0)
+                           + theta_band_seminorm_pair(rows[i], rows[ip], CWIN, 1)) / 2
+                    if val > worst:
+                        worst = val
+    return round_up_frac(worst * Fr(57, 50) * (1 + IA_SLOP))
+
+def gate_sibling_band(info, levs, J0, f_pad):
+    """SIB-BAND [informational, the (SIB-BAND) computed clause]: re-runs BOTH load-bearing
+    censuses over the sibling WOBBLE band (per-entry factor in WOB_FULL=[1/R*,R*], the IH-
+    implied worst case), exposing the real-vs-proportional gap the forced-proportional
+    gates hide. At the shipped anchor the wobble-extended forcing EXCEEDS the equilibrium
+    threshold: the census does NOT extend to the real cascade here (a real gap, reported
+    not hidden -- see note Section 8). Marked FAIL to keep the gap visible; INFORMATIONAL,
+    does not count toward RESULT. The tighter (still sound) geometric-center band
+    [1/sqrt R*, sqrt R*] narrows the gap but also misses at this depth (note Section 8)."""
+    tb = theta_band_wobble_certified(levs, J0, f_pad, WOB_FULL)
+    fb, wt = F_box_wobble_certified(levs, J0, f_pad, WOB_FULL)
+    thr = (1 - tb) * TAU_STAR_FR
+    ok = fb <= thr
+    gap = float((fb - thr) / thr) * 100 if thr != 0 else 0.0
+    info.append(("SIB-BAND [INFORMATIONAL, (SIB-BAND) COMPUTED clause, window i<17, anchor"
+                  " J0=%d, pad f=%s] wobble-extended censuses (per-entry w in [1/R*,R*]):"
+                  " theta_band_wob=%.6f, F_box_wob=%.7f vs threshold (1-theta_wob)*tau*"
+                  " = %.7f -- forced-proportional surrogate %s the real cascade by %.1f%%"
+                  " (the extension does NOT close at this anchor)"
+                  % (J0, str(f_pad), float(tb), float(fb), float(thr),
+                     "covers" if ok else "UNDER-COVERS", abs(gap)), ok))
+
+def gate_vtrack(report, levs, grid, expect_max, tamper=None, show_table=False):
+    """V18 VTRACK: deep-grid rho_prop@i<17(n)<=TARGET + monotone + V_17 tau*-crossover,
+    over n in {48,...,expect_max} (expect_max=J0*=500 in the default FULL run -- NOT
+    hidden behind --deep; this IS the ship's default grid, see DEEP_GRID_FULL; a smaller
+    expect_max is used only under --quick, an explicitly non-certified dev-iteration
+    mode). Reports the rho_prop margin at every tested level (tightest->widest), the
+    V_17(n) values (which determine the equilibrium ceiling other gates consume), and
+    the tau*-crossover."""
+    grid_eff = grid[:-1] if (tamper == "vtrack-level-drop" and len(grid) > 1) else grid
+    target = 1.0 if tamper == "c1-target" else TARGET
+    rho_vals = dict((j, rho_win_locus(levs, j, OPWIN)[0]) for j in grid_eff)
+    v17_vals = dict((j, V17_locus(j, levs, OPWIN)[0]) for j in grid_eff)
+    ok_target = all(rho_vals[j] <= target for j in grid_eff)
+    ok_mono = all(rho_vals[a] >= rho_vals[b] - 1e-9 for a, b in zip(grid_eff, grid_eff[1:]))
+    tight_margin = min(target - rho_vals[j] for j in grid_eff)
+    wide_margin = max(target - rho_vals[j] for j in grid_eff)
+    cross_n = None; prev_v = None
+    for n in range(55, 71):
+        v, _ = V17_locus(n, levs, OPWIN)
+        if prev_v is not None and prev_v > TAU_STAR and v <= TAU_STAR and cross_n is None:
+            cross_n = n
+        prev_v = v
+    ok_cross = (cross_n == 62)
+    # base-coverage check: the grid actually reaches expect_max (catches
+    # vtrack-level-drop's truncation, and any accidental grid-shrinking regression).
+    ok_covers = (max(grid_eff) >= expect_max)
+    ok = ok_target and ok_mono and ok_cross and ok_covers
+    v17_top = v17_vals[max(grid_eff)]
+    if show_table:
+        # per-level table (the values the Lean package transcribes); --table flag
+        print("  V18 per-level table (n : rho_prop@i<17 : margin : V_17):")
+        for j in grid_eff:
+            print("    n=%-4d rho_prop=%.8f  margin=%+.6e  V_17=%.6e"
+                  % (j, rho_vals[j], target - rho_vals[j], v17_vals[j]))
+    report.append(("V18 VTRACK [window i<17] rho_prop@i<17(n)<=%.8f over n in {%s}"
+                    " (monotone=%s, margin %.2e@tightest -> %.4f@widest); V_17(n): %.6f@n=48"
+                    " -> %.2e@n=%d (base anchor), monotone-dec=%s; tau*-crossover at n=%s"
+                    " (expect 62); base coverage to expect_max=%d: %s"
+                    % (target, ",".join(str(j) for j in grid_eff), ok_mono, tight_margin,
+                       wide_margin, v17_vals.get(48, float('nan')), v17_top,
+                       max(grid_eff), all(v17_vals[a] >= v17_vals[b] - 1e-12
+                                           for a, b in zip(grid_eff, grid_eff[1:])),
+                       cross_n, expect_max, ok_covers), ok))
+
+def gate_bridge(info, levs, grid, tamper=None):
+    """V19 BRIDGE [INFORMATIONAL/alpha-only]: w(n)<=0.62."""
+    thr = 0.30 if tamper == "bridge-w-gate" else 0.62
+    w_vals = {}
+    for j in grid:
+        V17n, _ = V17_locus(j, levs, OPWIN)
+        I32 = gap_quadrature(EDGE, j, levs, 32)
+        w_vals[j] = I32 / ((2 * EDGE / 3) * V17n)
+    worst = max(w_vals.values())
+    ok = worst <= thr
+    info.append(("V19 BRIDGE [INFORMATIONAL/alpha-only, window i<17] w(n)<=%.2f over n"
+                  " in {%s} (worst=%.4f)" % (thr, ",".join(str(x) for x in grid), worst), ok))
+
+# ---------------------------------------------------------------- driver
+
+_LEV_CACHE = {}
+_SURV_CACHE = {}
+
+def _get_levels(jmax):
+    if jmax not in _LEV_CACHE:
+        _LEV_CACHE[jmax] = build_levels(jmax)
+    return _LEV_CACHE[jmax]
+
+def _get_survivors(levs, jmax, jmax2):
+    key = (jmax, jmax2)
+    if key not in _SURV_CACHE:
+        _SURV_CACHE[key] = g2_band_survivors(levs, jmax2)
+    return _SURV_CACHE[key]
+
+def compute(mode='full', fallback=False, tamper=None, show_table=False):
+    """mode='full' (default): the discharge's own claim, base anchor J0*=500 (fallback:
+    430), grid DEEP_GRID_FULL -- this is the ship, not hidden behind a flag.
+    mode='quick': a shallow (J0 capped at 200) subset for fast dev iteration ONLY --
+    NOT a certified claim at that depth (MAG-BOX/V17-IA/V18 will typically MISS at
+    J0=200; that is expected and does not represent the ship's result)."""
+    quick = (mode == 'quick')
+    grid = DEEP_GRID_QUICK if quick else DEEP_GRID_FULL
+    theta_grid = THETA_GRID_DEFAULT if quick else THETA_GRID_FULL
+    bridge_grid = BRIDGE_GRID_DEFAULT if quick else BRIDGE_GRID_FULL
+    mag_grid = [n for n in MAG_GRID if n <= (200 if quick else J0_STAR)]
+    J0_full = J0_FALLBACK if fallback else J0_STAR
+    J0 = min(J0_full, 200) if quick else J0_full
+    f_pad = F_LEGACY if fallback else F_STAR
+    jmax = max(grid + theta_grid + bridge_grid + mag_grid + [J0])
+    levs = _get_levels(jmax)
+    jmax2 = min(jmax, 130)
+    survivors = _get_survivors(levs, jmax, jmax2)
+
+    report = []; info = []
+    gate_floors(report, levs, J0, f_pad, tamper=tamper)                        # F3        report[0]
+    gate_magnitude_box(report, levs, mag_grid, tamper=tamper)                  # MAG-BOX   report[1]
+    theta_band = gate_theta_ia(report, levs, J0, f_pad, tamper=tamper)         # V15-IA    report[2] [LOAD-BEARING]
+    theta_star = THETA_FALLBACK if fallback else theta_band
+    gate_theta(report, info, levs, theta_grid, tamper=tamper)                  # info V15-GRID[0]/V15-CERT[1]
+    gate_thetasymb(report)                                                      # V16       report[3]
+    gate_window(report, levs, grid, tamper=tamper)                             # V16b      report[4]
+    gate_forcing(report, info, levs, grid, survivors, G2_GRID, tamper=tamper)   # V17 report[5] (+info V17-INFO[2])
+    gate_forcing_ia(report, levs, J0, f_pad, theta_star, tamper=tamper)        # V17-IA    report[6] [LOAD-BEARING]
+    gate_vtrack(report, levs, grid, max(grid), tamper=tamper, show_table=show_table)  # V18  report[7]
+    gate_bridge(info, levs, bridge_grid, tamper=tamper)                        # V19       info[3]
+    gate_sibling_band(info, levs, J0, f_pad)                                   # SIB-BAND  info[4]
+    return report, info, theta_star
+
+def run(mode='full', fallback=False, tamper=None, show_table=False):
+    t0 = time.time()
+    report, info, theta_star = compute(mode=mode, fallback=fallback, tamper=tamper,
+                                       show_table=show_table)
+    npass = sum(1 for _, ok in report if ok)
+    J0_full = J0_FALLBACK if fallback else J0_STAR
+    f_pad_used = F_LEGACY if fallback else F_STAR
+    print("anchor: (J0*=%d, f*=%s, theta*=%s [%s%.6f])  mode=%s%s"
+          % (J0_full, str(f_pad_used), str(theta_star), "" if fallback else "theta_band, ",
+             float(theta_star), mode, " [FALLBACK]" if fallback else ""))
+    print("GATES (certified-census frame; determine RESULT):")
+    for name, ok in report:
+        print("  [%s] %s" % ("PASS" if ok else "FAIL", name))
+    print("RESULT: %d/%d %s" % (npass, len(report), "PASS" if npass == len(report) else "FAIL"))
+    print("STATUS: CONDITIONAL -- certified-census discharge MODULO the computed clauses"
+          " (LAM-BOX, SIB-BAND, FOLD, FLOOR-PERSIST); see the note's Section 8.")
+    print()
+    print("INFORMATIONAL (reported, NOT counted toward RESULT):")
+    for name, ok in info:
+        print("  [%s] %s" % ("PASS" if ok else "FAIL", name))
+    print()
+    print("elapsed: %.1fs (mode=%s%s)" % (time.time() - t0, mode, " fallback" if fallback else ""))
+    return npass == len(report)
+
+# report indices: 0 F3, 1 MAG-BOX, 2 V15-IA, 3 V16, 4 V16b, 5 V17, 6 V17-IA, 7 V18
+# info indices:   0 V15-GRID, 1 V15-CERT, 2 V17-INFO, 3 V19, 4 SIB-BAND
+TAMPERS = ["f3-corrupt", "magbox-shrink", "theta-tot-gate", "nfree-corrupt",
+           "theta-ia-tighten", "theta-ia-sign", "window-bound", "forcing-bound",
+           "v17ia-graze", "c1-target", "vtrack-level-drop", "g2-ceiling", "bridge-w-gate"]
+TAMPER_TARGET = {
+    "f3-corrupt": ("report", 0),        # F3
+    "magbox-shrink": ("report", 1),     # MAG-BOX: shrink boxes so realized magnitudes leave them
+    "theta-tot-gate": ("info", 0),      # V15-GRID (informational)
+    "nfree-corrupt": ("info", 0),       # V15-GRID seminorm corruption (informational)
+    "theta-ia-tighten": ("report", 2),  # V15-IA sanity-ceiling graze (value untouched -> isolated)
+    "theta-ia-sign": ("report", 2),     # V15-IA max->min direction flip -> deflates below realized floor
+    "window-bound": ("report", 4),      # V16b
+    "forcing-bound": ("report", 5),     # V17
+    "v17ia-graze": ("report", 6),       # V17-IA threshold graze
+    "c1-target": ("report", 7),         # V18
+    "vtrack-level-drop": ("report", 7), # V18 deep-level corruption
+    "g2-ceiling": ("info", 2),          # V17-INFO (already-FAIL baseline; honest substitute)
+    "bridge-w-gate": ("info", 3),       # V19
+}
+
+def tamper_selftest(mode='full', fallback=False):
+    t0 = time.time()
+    base_report, base_info, _ = compute(mode=mode, fallback=fallback, tamper=None)
+    print("baseline (mode=%s%s):" % (mode, " fallback" if fallback else ""))
+    for name, ok in base_report:
+        print("  [%s] %s" % ("PASS" if ok else "FAIL", name))
+    for name, ok in base_info:
+        print("  [%s] %s (informational)" % ("PASS" if ok else "FAIL", name))
+    print()
+    allgood = True
+    for tm in TAMPERS:
+        kind, idx = TAMPER_TARGET[tm]
+        rep, inf, _ = compute(mode=mode, fallback=fallback, tamper=tm)
+        base_list = base_report if kind == "report" else base_info
+        tam_list = rep if kind == "report" else inf
+        base_ok = base_list[idx][1]; tam_ok = tam_list[idx][1]
+        others_report_ok = all(rep[i][1] == base_report[i][1] for i in range(len(base_report))
+                                if not (kind == "report" and i == idx))
+        others_info_ok = all(inf[i][1] == base_info[i][1] for i in range(len(base_info))
+                              if not (kind == "info" and i == idx))
+        isolated = others_report_ok and others_info_ok
+        if base_ok:
+            flipped = not tam_ok
+            verdict = "BROKE (good)" if flipped else "SURVIVED (BAD)"
+            good = flipped and isolated
+        else:
+            verdict = ("N/A (already FAIL at baseline) -- tamper still FAIL" if not tam_ok
+                       else "BAD (tamper flipped an already-failing line to PASS)")
+            good = (not tam_ok) and isolated
+        print("  tamper=%-20s target=%s[%d] %s  isolated=%s" % (tm, kind, idx, verdict, isolated))
+        allgood = allgood and good
+    print("\nTAMPER SELFTEST: %s  (%.1fs)" % ("PASS" if allgood else "FAIL", time.time() - t0))
+    return allgood
+
+def main():
+    args = sys.argv[1:]
+    mode = 'quick' if "--quick" in args else 'full'
+    fallback = "--fallback" in args
+    show_table = "--table" in args
+    if "--tamper-selftest" in args:
+        ok = tamper_selftest(mode=mode, fallback=fallback)
+        sys.exit(0 if ok else 1)
+    ok = run(mode=mode, fallback=fallback, show_table=show_table)
+    sys.exit(0 if ok else 1)
+
+if __name__ == "__main__":
+    main()

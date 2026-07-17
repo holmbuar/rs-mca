@@ -1,0 +1,143 @@
+{
+ "packet": "dense_shell_prop_tail_reduction",
+ "date": "2026-07-17",
+ "status": "CONDITIONAL -- certified-census discharge MODULO the enumerated computed clauses (LAM-BOX, SIB-BAND, FOLD, FLOOR-PERSIST). Composed equilibrium chain PROVED (sufficiency); load-bearing gates V15-IA/V17-IA are exact-Fraction interval-arithmetic censuses of the FORCED-PROPORTIONAL surrogate.",
+ "predecessor": {
+  "packet": "dense_shell_inv_tail_closure",
+  "pr": "#885",
+  "payload_sha": "59e8249",
+  "stacked_on": "a575019",
+  "note_path": "experimental/notes/thresholds/dense_shell_inv_tail_closure.md"
+ },
+ "claim": "(PROP-TAIL) (#885's single residual scalar: rho_prop@i<17(n) <= 1.02560749 for all n) is discharged as a certified-census theorem MODULO the computed clauses below, via the deep-base equilibrium chain: an exact reduction lemma + an exact spectral gap + a certified one-step recursion + a joint induction, closed by the R-a route (deep-base constant forcing) at the shipped anchor (J0*, f*, theta*) = (500, 99/100, theta_band). theta_band is gate V15-IA's certified band-uniform seminorm bound over the certified LC ratio box (lam-minced enclosure); F_box is gate V17-IA's exact-Fraction minced-IA forcing census. BOTH certify the forced-proportional surrogate c^+ = lam*c^- -- the real non-proportional cascade is covered only up to the sibling wobble the (SIB-BAND) clause quantifies (which does not close). The arithmetic fact rho_prop@i<17(n) <= 1.02560749 is supported with margin by every gate.",
+ "status_word": "CONDITIONAL",
+ "headline": "the discharge holds as a certified-census theorem modulo the enumerated computed clauses",
+ "discharge_chain_parametric": [
+  "Lemma 1 (PROVED): log rho_prop@i<17(n) <= (1/3) V_17(n)",
+  "Lemma 2 (PROVED structure): V_17(n) <= osc(T1)+osc(T2)+osc(T3)",
+  "Lemma 3 (PROVED): theta~(t) <= 1/5 exact, closed form",
+  "Lemma A1 (PROVED, tangent direction): the exact osc<-osc seminorm of delta->T2, with Lambda^pm = the WINDOW-MEAN reference (zero-sum delta; not arbitrary)",
+  "Lemmas W1-W3 (window bookkeeping): read-set PROVED; the <=57/50 fold is a grid-measured COMPUTED bound (FOLD clause)",
+  "V-recursion: V_17(n) <= theta* V_17(n-1) + Phi(n-1), theta*=theta_band (gate V15-IA, lam-minced certified enclosure over the box -- certifies the FORCED-PROPORTIONAL surrogate; see SIB-BAND)",
+  "arithmetic slot: v_n <= tau* for n > J* -- via R-a (gates F3 + V15-IA + V17-IA): F_box(500,99/100)=0.02687612 <= (1-theta_band)*tau*=0.03018857, 11.0% margin (exact-Fraction compare)",
+  "slot closed (for the proportional surrogate): rho_prop@i<17(n) <= TARGET for all n>=500",
+  "deep grid (gate V18) covers 48<=n<=500 directly: rho_prop@i<17(n)<=TARGET at every tested level, monotone non-increasing",
+  "CONDITIONAL on the computed clauses (LAM-BOX, SIB-BAND, FOLD, FLOOR-PERSIST): given those, #885's INV-TAIL closure and #880's |K|=1 dichotomy become unconditional at every B on this repo's experimental-ledger track"
+ ],
+ "constants": {
+  "target_rho_prop": 1.02560749,
+  "tau_star_float": 0.07585533059916963,
+  "tau_star_formula": "3*log(1.02560749)",
+  "tau_star_fraction_lower_bound": "75855330599169/1000000000000000 = 0.075855330599169 (certified <= 3*ln(TARGET) via 50-digit Decimal ln; used exactly in both the threshold and the ceiling comparison, both conservative under an under-estimate)",
+  "theta_tilde_bound": "1/5",
+  "theta_tilde_identity": "75(1-x^2)-(6+3x)^2 = -3(2x-1)(14x+13), x=cos(2*pi*t/3), equality only at x=1/2 (t=1/2)",
+  "theta_band_certified": {
+   "value": 0.6020244,
+   "exact_fraction": "1505061/2500000 (round_up_frac of the accumulated Fraction, outward)",
+   "j0": 500,
+   "f_pad": "99/100",
+   "locus_t": 0.4999,
+   "locus_pair": "(13, 16)",
+   "method": "gate V15-IA: the Lemma A1 tangent seminorm over the certified LC ratio box, folded by 57/50. The sup over the magnitude scalar lam in [0.72,0.95] is enclosed by MINCING lam into LAM_MINCE=24 panels and taking each Moebius-in-lam matrix entry's exact per-panel range (hull of its two panel-endpoint values combined with the (a,b) 2-point extremization), then the seminorm by interval subtraction. NOT an endpoint-sufficiency claim: the seminorm is a sum of |differences of Moebius functions with different denominators|, degree-(2,2) in lam, not Moebius, so it can have an interior-lam maximum; mincing is the rigorous enclosure. A consistency check requires theta_band >= the realized-profile seminorm (a valid upper bound must dominate the realized value).",
+   "certifies": "the FORCED-PROPORTIONAL surrogate c^+ = lam*c^- (see sib_band). Lambda-invariant seminorm with Lambda^pm = the WINDOW-MEAN (zero-sum delta requirement).",
+   "outward_slop": "1e-9, plus round_up_frac to a printable Fraction (outward/conservative)"
+  },
+  "f_box_certified": {
+   "value": 0.02687612,
+   "j0": 500,
+   "f_pad": "99/100",
+   "method": "gate V17-IA: exact-Fraction, width-2-locality minced interval arithmetic over every index i=0..16's marginal range (not merely the two window endpoints), box-maxed over the sibling-proportionality magnitude parameters (lam, Lambda^+, Lambda^-). Certifies the forced-proportional surrogate.",
+   "outward_slop": "1e-9 (documented, printed; six orders past the cascade's ~1e-15 relative float error)",
+   "locus_t": 0.4999,
+   "threshold": 0.03018857,
+   "threshold_formula": "(1-theta_band)*tau*, theta_band=0.6020244 (gate V15-IA), tau* the exact-Fraction lower bound; comparison is exact Fraction",
+   "margin_pct": 11.0
+  },
+  "equilibrium_ceiling": {
+   "f_box_over_1_minus_theta": 0.06753207,
+   "v17_j0_star": 0.00111699,
+   "max_of_the_two": 0.06753207,
+   "ceiling_le_tau_star": true,
+   "log_rho_prop_bound": 0.02251069,
+   "ln_target": 0.02528511,
+   "exp_of_bound": 1.022766,
+   "vs_target": 1.02560749,
+   "reads": "F_box/(1-theta_band)=0.06753207 <= tau*=0.07585533 => sup_{n>=500} V_17(n) <= 0.06753207 => log rho_prop@i<17(n) <= 0.02251069 < ln(TARGET)=0.02528511 => rho_prop@i<17(n) <= exp(0.02251069)=1.022766 < TARGET, for all n>=500 -- for the FORCED-PROPORTIONAL surrogate; extension to the real cascade is the (SIB-BAND) computed clause."
+  },
+  "theta_tot_plateau_informational": [0.3662, 0.3766],
+  "theta_tot_note": "gate V15-GRID (informational): a COMPUTED grid census of the realized dynamics, comfortably inside the certified theta_band -- a robustness cross-check only, not part of the certified chain",
+  "n_free_realized_informational": 0.4974,
+  "window_asymptotic_ratio": "289/256 = 1.128906...",
+  "window_certified_bound_computed": "57/50 = 1.14 (grid-measured, gate V16b -- COMPUTED, the FOLD clause)",
+  "window_grid_worst": 1.1322,
+  "v17_crossover_n": 62,
+  "v17_at_j0_star": 0.00111699,
+  "v17_n2_range": [279.578, 284.725]
+ },
+ "computed_clauses": {
+  "note": "The remaining computed inputs to the certified chain. STATUS=CONDITIONAL: PROVED would require zero of these; LAM-BOX alone precludes it.",
+  "LAM_BOX": {
+   "asserts": "the realized magnitudes lam=sum(c^+)/sum(c^-), Lambda^+/-, and per-entry rho_i=c^+_i/c^-_i lie in the hardcoded boxes lam in [0.72,0.95], Lambda^+ in [-1.16,-0.82], Lambda^- in [-0.66,-0.35] that both load-bearing gates box-max over",
+   "monitor_gate": "MAG-BOX (core) -- checks all realized magnitudes in-box over 6 levels x 41 parents",
+   "evidence": "0 violations; realized lam in [0.7759,0.9190], Lambda^+ in [-1.1429,-0.8883], Lambda^- in [-0.6334,-0.3788], rho_i in [0.7734,0.9259]; worst headroom 0.0172 (Lambda^+ floor, thin ~1.5%)",
+   "upgrade": "a PROVED interval for lam/Lambda^pm from the exact mass recursion + explicit a'(t) bounds",
+   "label": "COMPUTED (measured+pad), monitored not proved"
+  },
+  "SIB_BAND": {
+   "asserts": "the load-bearing gates certify the forced-proportional surrogate c^+=lam*c^-; the real non-proportional cascade (c^+_i=lam*w_i*c^-_i, per-entry sibling wobble w_i by the IH rho_prop<=R*) is covered by the extension only if the wobble-enlarged census clears",
+   "monitor_gate": "SIB-BAND (informational)",
+   "evidence": "at the shipped anchor the wobble-extended census (w_i in [1/R*,R*]) gives theta_band_wob=0.629641, F_box_wob=0.0571211 vs threshold (1-theta_band_wob)*tau*=0.0280937 -- EXCEEDS by 103.3%: the extension does NOT close. The tighter, still-sound geometric-center band [1/sqrt R*, sqrt R*] narrows the gap but also misses at feasible depth: F_box_wob=0.0417911 at (500,99/100) (miss 43%), clearing only at J0>=800/pad 999-1000/+4.6% (build ~240s, tamper-selftest beyond the 10-min guard) -- beyond this packet's certified grid depth. The full [1/R*,R*] band cannot clear at ANY depth (its ratio-collapsed deep-base limit 0.0321 already exceeds ~0.028).",
+   "upgrade": "certify the wobble-extended census at a deep enough base, OR a stated-modulus Lipschitz bound of the real-vs-proportional discrepancy shown <= the certified box-sup slack",
+   "label": "COMPUTED reduction (the load-bearing gates are the w_i==1 slice; real-vs-proportional coverage rests on this)"
+  },
+  "FOLD": {
+   "asserts": "the child-window fold spread_{i<18}(L) <= (57/50) spread_{i<17}(L)",
+   "monitor_gate": "V16b (core) -- grid check sup <= 57/50 (worst 1.1322 @ n=48) + the rational fact 289/256 <= 57/50",
+   "evidence": "grid-measured over the finite grid + a COMPUTED CLT quadratic-profile ansatz for the 289/256 asymptotic",
+   "upgrade": "a proved uniform bound on spread_{i<18}/spread_{i<17} for all n,t",
+   "label": "COMPUTED (grid-measured)"
+  },
+  "FLOOR_PERSIST": {
+   "asserts": "floor persistence rc_i(n) >= f* rc_i(500) for n>500",
+   "monitor_gate": "composes from the predecessor packet (#885) monotone-drift machinery re-anchored at the (500,99/100) floors; gate F3 re-certifies the floor family AT J0*=500 only",
+   "evidence": "#885 gates the monotone drift as a grid measurement; imported, not re-established for n>500 here",
+   "upgrade": "a self-contained persistence proof at the deep anchor",
+   "label": "COMPUTED (imported from the predecessor)"
+  }
+ },
+ "sib_band": {
+  "wobble_band_full": "[1/R*, R*], R*=TARGET (safe per-entry superset of the IH constraint max_i w_i/min_i w_i <= R*)",
+  "wobble_band_geometric_center": "[1/sqrt R*, sqrt R*] (tighter, still sound: lam := sqrt(min rho * max rho) lands in [0.72,0.95] and w_i=rho_i/lam in the half-band by the IH)",
+  "theta_band_wob_full": 0.629641,
+  "f_box_wob_full": 0.0571211,
+  "threshold_wob_full": 0.0280937,
+  "gap_pct_full": 103.3,
+  "f_box_wob_half_at_500_99_100": 0.0417911,
+  "gap_pct_half_at_500_99_100": 43.3,
+  "half_band_clears_at": "J0>=800, pad 999/1000, +4.6% (beyond this packet's certified grid depth and the 10-min tamper-selftest guard)",
+  "full_band_deep_limit": "0.0321 (ratio box collapsed) > threshold ~0.028 -- full band cannot clear at any depth",
+  "outcome": "the wobble extension was attempted seriously and MISSES at the shipped anchor and, for the PI-specified [1/R*,R*] band and ladder, at every feasible anchor; kept as the (SIB-BAND) computed clause with the gap reported"
+ },
+ "gates": {
+  "count_core": 8,
+  "count_informational": 4,
+  "list_core": "F3 FLOORS, MAG-BOX (LAM-BOX monitor), V15-IA THETA-BAND (load-bearing), V16 THETASYMB, V16b WINDOW, V17 FORCING, V17-IA FORCING (load-bearing), V18 VTRACK",
+  "list_informational": "V15-GRID THETA (robustness), V15-CERT (grid-sampled cross-ref), V17-INFO (G2 negative control), V19 BRIDGE; plus SIB-BAND (the wobble gap, marked FAIL to keep it visible)",
+  "result_full": "8/8 PASS, ~165s",
+  "default_mode": "full (J0*=500, f*=99/100) -- this IS the ship",
+  "flags": "--quick (dev subset, NOT certified), --table (per-level rho/V17 table the Lean package transcribes), --fallback (legacy informational (430,49/50,theta*=1/2 fixed) chain), --tamper-selftest",
+  "tampers": 13,
+  "tampers_added": ["magbox-shrink (MAG-BOX: shrink boxes so realized magnitudes leave them)", "theta-ia-sign (V15-IA: flip the census max->min direction; caught by the realized-seminorm floor check; isolated since a lower theta_band only relaxes V17-IA)"]
+ },
+ "lean": {
+  "package": "experimental/lean/prop_tail_reduction",
+  "sorry_count": 0,
+  "decide_only": true,
+  "scope_note": "exact/finite skeleton only (ring identity + sign corollary behind theta~<=1/5 post-squaring, the 289/256<=57/50 rational fact, and two transcribed-table threshold/monotonicity checks); the trig substitution, the squaring step, tau*'s transcendental value, and every contraction/Birkhoff/CLT argument stay informal by design. The per-level table transcribed matches the verifier's --table output."
+ },
+ "scope": {
+  "track": "repo experimental-profile-ledger only: #880's |K|=1 dense-shell class-sum dichotomy and #885's INV-TAIL closure chain",
+  "risk_limits": "This packet makes no claim about, and is not on the critical path of, any separately submitted manuscript's conditionals (e.g. a paving-track ePrint submission and its own line-item conditionals). Those are a distinct obligation, entirely out of scope here; nothing in this packet's discharge chain, residual ladder, or consumer framing should be read as bearing on them."
+ },
+ "discharge_note": "This packet discharges (PROP-TAIL) as a certified-census theorem MODULO the four enumerated computed clauses (LAM-BOX, SIB-BAND, FOLD, FLOOR-PERSIST), all green/monitored at the shipped anchor. STATUS=CONDITIONAL: the load-bearing gates certify the forced-proportional surrogate, and the sibling-wobble extension (SIB-BAND) does not close at feasible depth. R-b (sandwich) and R-c (sharp Edgeworth-1) remain OPEN STRENGTHENINGS toward the sharp C/n^2 law, not obligations."
+}
