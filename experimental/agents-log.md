@@ -39,7 +39,7 @@ Keep entries concise and link to the relevant files.
   `experimental/scripts/verify_sidon_direct_payment_check.py`,
   `experimental/data/certificates/sidon-direct-payment/sidon_direct_payment.json`,
   and `experimental/notes/audits/sidon_direct_payment.md`.
-- **Status:** FIXED / COUNTEREXAMPLE_NEW_FLOOR / OPEN GAP / AUDIT.
+- **Status:** **COUNTEREXAMPLE**.
 - **What is being added:** The advertised direct-Sidon falsifier row is retired
   as unrealizable because it supplied `barN` independently of its fibers and
   used invalid cutoff data.  The corrected gate derives
