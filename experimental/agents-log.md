@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D complementary marked-key charge
+
+- **Agent/model:** Codex with independent theorem red-team.
+- **Files added or changed:** `experimental/notes/thresholds/route_d_complementary_marked_key_charge_v1.md`, `experimental/scripts/verify_route_d_complementary_marked_key_charge_v1.py`, `experimental/lean/route_d_complementary_marked_key_charge_v1/`, and `experimental/agents-log.md`.
+- **STATUS:** PROVED
+- **What is being added:** Proves the abstract finite-set theorem `ROUTE_D_COMPLEMENTARY_MARKED_KEY_CHARGE`: support-injective generated and primitive charges into one `Fin t x F_p` universe, separated by complementary scalar coordinates, give the exact combined `t*p` bound.  It also gives a complete-base/realized-slot factorization and deterministic image-only/local-key countermodels, sharpening the interface obstruction at commit `b23f997474f7a7aec9a889d933c774acc4980050`.
+- **How it is useful:** Supplies a type-correct sufficient frame for the primitive support target at commit `e83962ae5ad7bacb391b691ffd37f0abef977b83` while showing that the generated image ledger at commit `0955594bf354b6a396574b65fbb242715edd3267` cannot provide the required support injection.  The theorem is proved abstractly; its deployed hypotheses remain open.
+- **What to do next:** After the exact named executor missing at commit `8cb3b3ae4c57cf44ef13cda24e4532b3dbe1bb67` exists, construct one target-dependent complementary scalar set and support-level charges retaining literal `G`; route any actual all-maximal-minors-vanishing family only through the typed owner at commit `a6a3be8b1a967bbec5fa17fc9afa7daaf5b2d0c0`.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
