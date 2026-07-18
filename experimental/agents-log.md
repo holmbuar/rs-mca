@@ -30,6 +30,44 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Fiber-denominator Vandermonde resolution formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:** Producer source
+  `experimental/notes/thresholds/fiber_denominator_tension.md @ ea4eb078` and
+  deterministic verifier
+  `experimental/scripts/verify_fiber_denominator_tension.py @ ea4eb078`;
+  Lean proof
+  `experimental/lean/moment_to_max/MomentToMax/FiberDenominatorVandermonde.lean @ e22d582f`,
+  aggregate
+  `experimental/lean/moment_to_max/MomentToMax.lean @ e22d582f`, theorem map
+  `experimental/lean/moment_to_max/README.md @ e22d582f`, and focused audit
+  `experimental/notes/thresholds/fiber_denominator_vandermonde_formalization.md @ e22d582f`;
+  PR #916, proof-payload head `e22d582f`.
+- **Status:** PROVED
+- **What is being added:** Lemma V's ordered three-point Vandermonde combination exactly
+  isolates the quadratic coefficient, and Corollary V.1's trapped phases give
+  an explicit integer quotient `k / Vdm` with the proved weighted, diameter,
+  half-cell, positivity, and cubic-denominator bounds.
+- **How it is useful:** Producer PR #692 (head `10d6e6b3`, integrated at `ea4eb078`)
+  supplies Lemma V/Corollary V.1 and formalizes the resolution half of
+  antecedent PR #691 (head `b101070b`, T1 corrected by PR #700 at head
+  `19acb4f8`).  Direct consumer PR #701 (head `ae8fc805`) composes that
+  resolution kernel with the corrected denominator window.  PR #663 (head
+  `1082b430`) is contextual, not a Lean dependency.  This packet does not
+  certify Theorem AP, regime disjointness, or PR #701's wall/no-pincer claim.
+- **What to do next:** CHECK: `cd experimental/lean/moment_to_max && lake clean && lake exe cache get && lake build`
+  -> `Build completed successfully (8032 jobs).`;
+  `python3 experimental/scripts/verify_fiber_denominator_tension.py` ->
+  `RESULT: PASS (56/56)`.  Printing axioms for all seven new theorem
+  declarations reports exactly `[propext, Classical.choice, Quot.sound]`, and
+  `rg -n '^[[:space:]]*(sorry|admit|axiom)\b|sorryAx' experimental/lean/moment_to_max/MomentToMax/FiberDenominatorVandermonde.lean experimental/lean/moment_to_max/MomentToMax.lean`
+  returns no declaration-level matches.
+  Consumers may use only the proved three-point
+  resolution kernel and explicit `k / Vdm` quotient.  A reduced-denominator
+  divisibility theorem, Theorem AP, mass law, or wall conclusion requires a
+  separate formalization packet.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
