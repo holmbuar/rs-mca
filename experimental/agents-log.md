@@ -30,6 +30,70 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Actual-error-support full-agreement lift formalization
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Pinned producer inputs
+  `experimental/notes/m1/m1_kb_branch2_rank_deep_owner_v1.md @ 168e9ba0`,
+  `experimental/data/certificates/m1-kb-branch2-rank-deep-owner-v1/README.md @ 168e9ba0`,
+  `experimental/data/certificates/m1-kb-branch2-rank-deep-owner-v1/m1_kb_branch2_rank_deep_owner_v1.json @ 168e9ba0`,
+  `experimental/scripts/verify_m1_kb_branch2_rank_deep_owner_v1.py @ 168e9ba0`,
+  and `experimental/scripts/verify_m1_kb_branch2_rank_deep_owner_v1.sage @ 168e9ba0`;
+  Lean proof
+  `experimental/lean/rs_mca_thresholds/RsMcaThresholds/ActualErrorSupportLift.lean @ ef4bdfad`,
+  aggregate
+  `experimental/lean/rs_mca_thresholds/RsMcaThresholds.lean @ ef4bdfad`,
+  theorem map
+  `experimental/lean/rs_mca_thresholds/README.md @ ef4bdfad`,
+  correspondence map
+  `experimental/lean/rs_mca_thresholds/CORRESPONDENCE.md @ ef4bdfad`,
+  and focused audit
+  `experimental/notes/m1/m1_kb_branch2_actual_error_support_lift_formalization.md @ ef4bdfad`;
+  PR #921, proof-payload head `ef4bdfad`.
+- **Status:** PROVED
+- **What is being added:** Given an explicit codeword `c ∈ C` explaining
+  `f₀ + γf₁` on `S`, pair noncontainment on `S`, and actual-error-support
+  cardinality at most `r`, the complement of that error support contains `S`,
+  is explained by the same codeword, preserves noncontainment, and witnesses
+  `GrandeFinale.MCABad C f₀ f₁ (Fintype.card D - r) γ`; with
+  `S.card = A`, `k + 1 ≤ A`, `t = A - k`, and error cardinality at most
+  `t - 1`, it yields the repaired endpoint `Fintype.card D - t + 1`.
+  This is the kernel-checked, not statements-only, formalization of
+  `Exact support and actual error support` and `Lift to the deep agreement`
+  in `experimental/notes/m1/m1_kb_branch2_rank_deep_owner_v1.md @ 168e9ba0`.
+  It includes one definition and six proved theorem declarations, and records
+  explicitly that `n - (t - 1) = n - t + 1` over naturals requires
+  `0 < t` and `t ≤ n`; the reusable `n - r` theorem needs no hypothesis
+  `r ≤ n`.
+- **How it is useful:** Source producer PR #845 (head `ca577d24`, integrated
+  at `168e9ba0`) supplies the witness lift, and API producer PR #781
+  (head `72b19e77`) supplies the reused support and MCA predicates.
+  Open PR #912 (head `f79c27a2`) is only a logical rank predecessor after a
+  separate application-specific matrix/support adapter; formal deep-count
+  consumer PR #724 (head `d422458e`) is not composed here. Direct certificate
+  consumer PR #851 (head `927a076d`) was integrated through superset PR #864
+  (head `e9407944`), while PR #849 (head `94ae45c4`) consumes the whole source
+  packet and PR #850 (head `995040aa`) is only its restack. PR #882
+  (head `af213091`) is context only, and Route-D PRs #910 (head `5ead2bb5`)
+  and #913 (head `7a5036e7`) are neither dependencies nor adapters. This
+  packet does not prove exact-support reduction, equation (3), identification
+  of PR #912's abstract matrix with `M_A(γ)`, raw-rank-drop-to-witness
+  conversion, a RIM/Route-D-to-owner/payment adapter, pivot/tangent/cyclotomic
+  equivalence, the deep-MCA count, the `67,472` charge, branch closure, or
+  KoalaBear row closure.
+- **What to do next:** Compose the lift with PR #912 only after a separate
+  application-specific adapter supplies the source matrix identification,
+  distinct actual error support, and nonzero weights. Printing axioms for all
+  six theorem declarations reports `[propext, Classical.choice, Quot.sound]`,
+  except `nat_sub_pred_eq_sub_add_one`, which reports
+  `[propext, Quot.sound]`. CHECK:
+  `cd experimental/lean/rs_mca_thresholds && lake clean && lake exe cache get && lake build`
+  -> `Build completed successfully (8093 jobs).`;
+  `python3 experimental/scripts/verify_m1_kb_branch2_rank_deep_owner_v1.py --check`
+  -> `M1_KB_BRANCH2_RANK_DEEP_OWNER_V1_VERIFY_PASS`;
+  `rg -n '^[[:space:]]*(sorry|admit|axiom)\b|sorryAx' experimental/lean/rs_mca_thresholds/RsMcaThresholds/ActualErrorSupportLift.lean experimental/lean/rs_mca_thresholds/RsMcaThresholds.lean`
+  -> no declaration-level matches.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
