@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D marked RIM all-maximal-minors adapter v1
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/thresholds/route_d_marked_rim_all_minors_adapter_v1.md`, `experimental/scripts/verify_route_d_marked_rim_all_minors_adapter_v1.py`, and the standalone Lean package `experimental/lean/route_d_marked_rim_all_minors_adapter_v1/`.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** The packet proves the type-correct all-maximal-minors route from an actual marked incidence to the existing rank-drop predicate, preserves the common-core mark, and gives marked minimal-seam reconstruction and primitive fixed-target cross-section interfaces.  Its exact F31 corpus supplies 99 projectively primitive distinct-core representatives, exceeding toy capacities 93 and 90 while all packets retain full Hankel row rank and the same field-native pivot.
+- **How it is useful:** It rules out a pre-deletion arbitrary-Q marked pivot-representative owner based on one selected minor or one field-native pivot, without claiming the deployed KoalaBear bound fails.
+- **What to do next:** Make the exact named first-match deletions executable, route only the all-maximal-minors vanishing locus to `DEEP_MCA_RANK_DROP`, and prove a multiplicity-aware nonvanishing representative injection that deletes or pays the F31 obstruction family.
+
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
