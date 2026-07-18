@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D F31 root-compiler no-go
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/thresholds/route_d_f31_root_compiler_no_go_v1.md`, `experimental/scripts/verify_route_d_f31_root_compiler_no_go_v1.py`, and standalone Lean package `experimental/lean/route_d_f31_root_compiler_no_go_v1/`.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** A deterministic finite compiler/type audit showing that `119` primitive raw mates collapse to `28` depth-three child units in the restricted `F_31` parent; the declared least-support toy order gives `20` algebraic cells and `8` nonextension projectively primitive same-cell comparison candidates.
+- **How it is useful:** It blocks promotion of raw marked-support multiplicity into Route-D branch-excess units without a named compiler, preserves the canonical common-core mark, and records exact all-base-choice and overlap-truncation diagnostics without claiming first-match execution or a deployed-row conclusion.
+- **What to do next:** Construct an executable admission-and-priority compiler for actual branch-excess units, including a theorem for deeper disjoint multiplicity and marked-anchor/core interaction, or retain this type obstruction as the residual floor.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
