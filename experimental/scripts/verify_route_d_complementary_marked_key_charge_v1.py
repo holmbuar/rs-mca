@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Verify the Route-D complementary marked-key charge v1.
 
-The script checks a saturated positive fixture for the complementary charge
-theorem and two negative interfaces: image-only labeling and summing local
-per-key caps.  It is deterministic and fail-closed.
+The script checks saturated scalar- and strict cell-complement fixtures for
+the complementary charge theorem and two negative interfaces: image-only
+labeling and summing local per-key caps.  It is deterministic and fail-closed.
 """
 
 from __future__ import annotations
@@ -20,6 +20,9 @@ P = 5
 TARGET = T * P
 MARKED = frozenset({0, 1})
 SCALARS = tuple(range(P))
+CELL_T = 2
+CELL_P = 3
+CELL_TARGET = CELL_T * CELL_P
 SOURCE_PINS = {
     "prefix_commit": "e83962ae5ad7bacb391b691ffd37f0abef977b83",
     "marked_key_commit": "b23f997474f7a7aec9a889d933c774acc4980050",
@@ -125,6 +128,78 @@ def positive_fixture() -> dict[str, object]:
     }
 
 
+def strict_cell_complement_fixture() -> dict[str, object]:
+    scalars = tuple(range(CELL_P))
+    generated = tuple(("generated", scalar) for scalar in scalars)
+    defects = tuple(
+        (
+            "defect",
+            scalar,
+            ("literal_G", scalar),
+            ("beta", 7),
+            ("U0", scalar * scalar % CELL_P),
+            ("H", 1),
+            ("decoder", scalar + 20),
+        )
+        for scalar in scalars
+    )
+    generated_charge = {item: (0, item[1]) for item in generated}
+    defect_charge = {item: (1, item[1]) for item in defects}
+    marked_cells = {(0, scalar) for scalar in scalars}
+    literal_common_core_preserved = all(
+        item[2] == ("literal_G", item[1]) for item in defects
+    )
+    require(literal_common_core_preserved, "cell fixture lost literal common core")
+
+    require(len(set(generated_charge.values())) == len(generated),
+            "cell fixture generated charge is not injective")
+    require(len(set(defect_charge.values())) == len(defects),
+            "cell fixture defect charge is not injective")
+    require(all(label in marked_cells for label in generated_charge.values()),
+            "cell fixture generated charge left E")
+    require(all(label not in marked_cells for label in defect_charge.values()),
+            "cell fixture defect charge entered E")
+
+    combined_labels = set(generated_charge.values()) | set(defect_charge.values())
+    require(len(combined_labels) == len(generated) + len(defects),
+            "cell fixture combined charge is not injective")
+    require(len(combined_labels) == CELL_TARGET,
+            "cell fixture did not saturate target")
+
+    generated_scalars = {label[1] for label in generated_charge.values()}
+    defect_scalars = {label[1] for label in defect_charge.values()}
+    scalar_subsets = tuple(
+        frozenset(s for s in scalars if mask & (1 << s))
+        for mask in range(1 << CELL_P)
+    )
+    scalar_separators = tuple(
+        marked for marked in scalar_subsets
+        if generated_scalars <= marked and defect_scalars.isdisjoint(marked)
+    )
+    require(generated_scalars == set(scalars),
+            "cell fixture generated scalar projection drift")
+    require(defect_scalars == set(scalars),
+            "cell fixture defect scalar projection drift")
+    require(not scalar_separators,
+            "cell fixture unexpectedly admits scalar separation")
+
+    return {
+        "t": CELL_T,
+        "p": CELL_P,
+        "target": CELL_TARGET,
+        "generated_count": len(generated),
+        "defect_count": len(defects),
+        "combined_label_count": len(combined_labels),
+        "marked_cell_count": len(marked_cells),
+        "generated_scalar_count": len(generated_scalars),
+        "defect_scalar_count": len(defect_scalars),
+        "scalar_separator_count": len(scalar_separators),
+        "cell_separation_saturates_target": len(combined_labels) == CELL_TARGET,
+        "scalar_separation_impossible": not scalar_separators,
+        "literal_common_core_preserved": literal_common_core_preserved,
+    }
+
+
 def negative_fixtures() -> dict[str, object]:
     labels = tuple((row, scalar) for row in range(T) for scalar in SCALARS)
     generated_supports = tuple(
@@ -166,6 +241,7 @@ def summarize() -> dict[str, object]:
         "source_pins": dict(SOURCE_PINS),
         "parameters": {"t": T, "p": P, "target": TARGET},
         "positive": positive_fixture(),
+        "strict_cell_complement": strict_cell_complement_fixture(),
         "negative": negative_fixtures(),
     }
 
@@ -183,6 +259,21 @@ EXPECTED = {
         "saturates_target": True,
         "complete_base_count": 3,
         "profile_base_key_count": 6,
+    },
+    "strict_cell_complement": {
+        "t": 2,
+        "p": 3,
+        "target": 6,
+        "generated_count": 3,
+        "defect_count": 3,
+        "combined_label_count": 6,
+        "marked_cell_count": 3,
+        "generated_scalar_count": 3,
+        "defect_scalar_count": 3,
+        "scalar_separator_count": 0,
+        "cell_separation_saturates_target": True,
+        "scalar_separation_impossible": True,
+        "literal_common_core_preserved": True,
     },
     "negative": {
         "label_image_count": 10,
@@ -212,6 +303,15 @@ def tamper_suite(summary: Mapping[str, object]) -> int:
         ("positive", "saturates_target", False),
         ("positive", "complete_base_count", 2),
         ("positive", "profile_base_key_count", 5),
+        ("strict_cell_complement", "target", 5),
+        ("strict_cell_complement", "generated_count", 2),
+        ("strict_cell_complement", "defect_count", 2),
+        ("strict_cell_complement", "combined_label_count", 5),
+        ("strict_cell_complement", "marked_cell_count", 2),
+        ("strict_cell_complement", "scalar_separator_count", 1),
+        ("strict_cell_complement", "cell_separation_saturates_target", False),
+        ("strict_cell_complement", "scalar_separation_impossible", False),
+        ("strict_cell_complement", "literal_common_core_preserved", False),
         ("negative", "label_image_count", 9),
         ("negative", "copy_bit_support_count", 19),
         ("negative", "image_only_violates_target", False),
@@ -251,6 +351,14 @@ def main() -> int:
         print("PASS: Route-D complementary marked-key charge v1")
         print(f"positive mass: {summary['positive']['combined_count']}")
         print(f"target: {summary['parameters']['target']}")
+        print(
+            "strict cell mass: "
+            f"{summary['strict_cell_complement']['combined_label_count']}"
+        )
+        print(
+            "strict cell scalar separators: "
+            f"{summary['strict_cell_complement']['scalar_separator_count']}"
+        )
         print(f"image-only support: {summary['negative']['copy_bit_support_count']}")
         print(f"summed local mass: {summary['negative']['summed_local_mass']}")
         if args.self_test:

@@ -102,6 +102,62 @@ def complementaryCharge
   | Sum.inl generated => generatedCharge generated
   | Sum.inr defect => defectCharge defect
 
+theorem complementaryCellCharge_injective
+    {Generated Defect Row Scalar : Type}
+    (markedCell : Row × Scalar → Prop)
+    (generatedCharge : Generated → Row × Scalar)
+    (defectCharge : Defect → Row × Scalar)
+    (generatedInjective :
+      ∀ ⦃x y⦄, generatedCharge x = generatedCharge y → x = y)
+    (defectInjective :
+      ∀ ⦃x y⦄, defectCharge x = defectCharge y → x = y)
+    (generatedInside :
+      ∀ generated, markedCell (generatedCharge generated))
+    (defectOutside :
+      ∀ defect, ¬ markedCell (defectCharge defect)) :
+    ∀ ⦃x y⦄,
+      complementaryCharge generatedCharge defectCharge x =
+        complementaryCharge generatedCharge defectCharge y →
+      x = y := by
+  intro left right equality
+  cases left with
+  | inl generatedLeft =>
+      cases right with
+      | inl generatedRight =>
+          have chargeEquality :
+              generatedCharge generatedLeft =
+                generatedCharge generatedRight := by
+            simpa [complementaryCharge] using equality
+          exact congrArg Sum.inl (generatedInjective chargeEquality)
+      | inr defectRight =>
+          have chargeEquality :
+              generatedCharge generatedLeft =
+                defectCharge defectRight := by
+            simpa [complementaryCharge] using equality
+          have enteredMarked :
+              markedCell (defectCharge defectRight) := by
+            rw [← chargeEquality]
+            exact generatedInside generatedLeft
+          exact (defectOutside defectRight enteredMarked).elim
+  | inr defectLeft =>
+      cases right with
+      | inl generatedRight =>
+          have chargeEquality :
+              defectCharge defectLeft =
+                generatedCharge generatedRight := by
+            simpa [complementaryCharge] using equality
+          have enteredMarked :
+              markedCell (defectCharge defectLeft) := by
+            rw [chargeEquality]
+            exact generatedInside generatedRight
+          exact (defectOutside defectLeft enteredMarked).elim
+      | inr defectRight =>
+          have chargeEquality :
+              defectCharge defectLeft =
+                defectCharge defectRight := by
+            simpa [complementaryCharge] using equality
+          exact congrArg Sum.inr (defectInjective chargeEquality)
+
 theorem complementaryCharge_injective
     {Generated Defect Row Scalar : Type}
     (marked : Scalar → Prop)
@@ -158,6 +214,27 @@ theorem complementaryCharge_injective
             simpa [complementaryCharge] using equality
           exact congrArg Sum.inr (defectInjective chargeEquality)
 
+
+theorem route_d_complementary_cell_charge
+    (generatedCard defectCard t p : Nat)
+    (markedCell : Fin t × Fin p → Prop)
+    (generatedCharge : Fin generatedCard → Fin t × Fin p)
+    (defectCharge : Fin defectCard → Fin t × Fin p)
+    (generatedInjective :
+      ∀ ⦃x y⦄, generatedCharge x = generatedCharge y → x = y)
+    (defectInjective :
+      ∀ ⦃x y⦄, defectCharge x = defectCharge y → x = y)
+    (generatedInside :
+      ∀ generated, markedCell (generatedCharge generated))
+    (defectOutside :
+      ∀ defect, ¬ markedCell (defectCharge defect)) :
+    generatedCard + defectCard ≤ t * p := by
+  apply sum_card_le_target_of_direct_injection _ _ _ _
+    (complementaryCharge generatedCharge defectCharge)
+  exact complementaryCellCharge_injective markedCell generatedCharge
+    defectCharge generatedInjective defectInjective generatedInside
+    defectOutside
+
 theorem route_d_complementary_marked_key_charge
     (generatedCard defectCard t p : Nat)
     (marked : Fin p → Prop)
@@ -172,9 +249,8 @@ theorem route_d_complementary_marked_key_charge
     (defectUnmarked :
       ∀ defect, ¬ marked (defectCharge defect).2) :
     generatedCard + defectCard ≤ t * p := by
-  apply sum_card_le_target_of_direct_injection _ _ _ _
-    (complementaryCharge generatedCharge defectCharge)
-  exact complementaryCharge_injective marked generatedCharge defectCharge
+  exact route_d_complementary_cell_charge generatedCard defectCard t p
+    (fun cell => marked cell.2) generatedCharge defectCharge
     generatedInjective defectInjective generatedMarked defectUnmarked
 
 theorem complementary_complete_base_charge
@@ -232,6 +308,57 @@ theorem complementary_complete_base_charge
   exact route_d_complementary_marked_key_charge
     generatedCard defectCard t p marked generatedCharge defectCharge
     generatedInjective defectInjective generatedMarked defectUnmarked
+
+
+def cellFixtureGeneratedCharge (scalar : Fin 3) : Fin 2 × Fin 3 :=
+  (⟨0, by decide⟩, scalar)
+
+def cellFixtureDefectCharge (scalar : Fin 3) : Fin 2 × Fin 3 :=
+  (⟨1, by decide⟩, scalar)
+
+def cellFixtureMarked (cell : Fin 2 × Fin 3) : Prop :=
+  cell.1 = ⟨0, by decide⟩
+
+theorem cellFixtureGeneratedInjective :
+    ∀ ⦃x y⦄,
+      cellFixtureGeneratedCharge x = cellFixtureGeneratedCharge y → x = y := by
+  intro x y equality
+  exact congrArg Prod.snd equality
+
+theorem cellFixtureDefectInjective :
+    ∀ ⦃x y⦄,
+      cellFixtureDefectCharge x = cellFixtureDefectCharge y → x = y := by
+  intro x y equality
+  exact congrArg Prod.snd equality
+
+theorem cellFixtureGeneratedInside :
+    ∀ generated,
+      cellFixtureMarked (cellFixtureGeneratedCharge generated) := by
+  intro generated
+  rfl
+
+theorem cellFixtureDefectOutside :
+    ∀ defect,
+      ¬ cellFixtureMarked (cellFixtureDefectCharge defect) := by
+  intro defect equality
+  have valueEquality := congrArg Fin.val equality
+  simp [cellFixtureMarked, cellFixtureDefectCharge] at valueEquality
+
+theorem strict_cell_complement_fixture_bound :
+    3 + 3 ≤ 2 * 3 :=
+  route_d_complementary_cell_charge 3 3 2 3
+    cellFixtureMarked cellFixtureGeneratedCharge cellFixtureDefectCharge
+    cellFixtureGeneratedInjective cellFixtureDefectInjective
+    cellFixtureGeneratedInside cellFixtureDefectOutside
+
+theorem strict_cell_fixture_has_no_scalar_separator :
+    ¬ ∃ marked : Fin 3 → Prop,
+      (∀ generated, marked (cellFixtureGeneratedCharge generated).2) ∧
+      (∀ defect, ¬ marked (cellFixtureDefectCharge defect).2) := by
+  intro existsMarked
+  obtain ⟨marked, generatedMarked, defectUnmarked⟩ := existsMarked
+  let scalar : Fin 3 := ⟨0, by decide⟩
+  exact defectUnmarked scalar (generatedMarked scalar)
 
 theorem deployed_target_pin :
     67472 * 2130706433 = 143763024447376 := by
