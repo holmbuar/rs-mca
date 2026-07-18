@@ -58,10 +58,7 @@ Keep entries concise and link to the relevant files.
   `lamBoxLamPLoOrig`, four `decide` theorems — three containment, one widened-floor
   consistency — `Int` numerators, house convention extended to signed quantities).
   Changed: `experimental/agents-log.md` (this entry).
-- **Status:** CONDITIONAL (certified-census discharge; clause count reduced: three open
-  computed clauses -> two open (`FOLD`, `FLOOR-PERSIST`) plus one monitored constant
-  (`C'-CAP`); `(LAM-BOX)` moves from open to DISCHARGED-conditional, joining `(SIB-BAND)`
-  which was already discharged).
+- **Status:** CONDITIONAL.
 - **What is being added:** the (LAM-BOX) computed clause — the sibling-proportionality
   magnitude box `[lam,Lambda^+,Lambda^-]` both load-bearing gates box-max over, previously
   a measured+padded range monitored by gate MAG-BOX but not proved for all `n` — is
@@ -95,6 +92,16 @@ Keep entries concise and link to the relevant files.
   20 tampers); `sibcert-band` re-checked for no regression. `--quick`/`--fallback` print
   an informational LAM-INV-SKIPPED line (NG=3841 field census is full-mode-only, like
   SIB-CERT).
+- **Round-2 addendum (same day, PI review):** `gate_magnitude_box`'s own report text
+  updated per spec -- `lam`/mass-weighted `Lambda^+/-` lines now read "PROVED-CONDITIONAL
+  INTERVAL (gate LAM-INV), monitoring RETAINED"; arithmetic-mean `Lambda^+/-` variants
+  labeled "COMPUTED-monitored ONLY" (LAB_LAMBOX Q1: they widen with depth). Added a
+  broader realized-vs-field `C'` consistency check at MAG-BOX's own 6 grid levels x 41
+  parents (worst `0.0023 <= CPRIME=0.006`) -- refactored `gate_lam_inv`'s computation into
+  a memoized `_laminv_certify` (keyed by the 3 tampers that actually change it, normalizing
+  every other tamper name to the baseline key) so `compute()` runs it once, before
+  MAG-BOX, and both gates share the result at zero extra cost (confirmed: `gate_lam_inv`'s
+  own call is a 0.0s cache hit after MAG-BOX's precompute).
 - **What to do next:** a human/later-agent check of the Birkhoff ray-normalization
   argument (`sc_exact`) and the floor-box `gamma<=GMAX` derivation (Section 8.4 of the
   note); R1 mitigation (a) — the exact floor-box bound on `C'` — would discharge

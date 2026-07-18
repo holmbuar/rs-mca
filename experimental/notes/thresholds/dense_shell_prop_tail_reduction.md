@@ -732,11 +732,15 @@ comfortable; `Lambda^+`'s floor was thin and is now widened to match.
   intervals, not the sole evidence for them.
 - *Evidence*: realized `lam in [0.7759, 0.9190]`, `Lambda^+ in [-1.1429, -0.8883]`,
   `Lambda^- in [-0.6334, -0.3788]`, per-entry `rho_i in [0.7734, 0.9259]` — all inside
-  the proved boxes; worst headroom against the widened `Lambda^+_mass` floor `0.0271`
-  (was `0.0172` pre-widening); the OVERALL worst across all monitored quantities is now
-  `0.0196` (the arithmetic-mean `Lambda^+` variant at `n=48` — COMPUTED/monitored only,
-  per LAB_LAMBOX's Q1 finding that this variant is NOT covered by the LAM-INV
-  enclosure, which proves only the mass-weighted variants).
+  the proved boxes; `Lambda^+_mass`'s own headroom against the widened floor is `0.0271`
+  (was `0.0172` pre-widening); the worst headroom over the WHOLE proved-conditional
+  category (`lam`, mass-weighted `Lambda^+/-`, every `rho_i`) is `0.0241`, at `rho_16`,
+  `n=48`. The arithmetic-mean `Lambda^+/-` variants (COMPUTED-monitored only — NOT
+  covered by the LAM-INV enclosure, and per LAB_LAMBOX's Q1 finding they WIDEN with
+  depth) are the overall tightest, `0.0196` at `n=48`. Gate MAG-BOX also now cross-checks
+  the realized-vs-field correction-derivative `C'` at its own 6 grid levels x 41
+  parents (broader than gate LAM-INV's own sparser one-anchor sample): worst `0.0023`
+  vs `CPRIME = 0.006`, comfortable.
 - *Remaining open item*: mitigation (a) above — the exact floor-box bound on `C'` would
   discharge `(C'-CAP)` and remove the last conditional content from this clause.
 
@@ -1048,17 +1052,21 @@ SIB-CERT and LAM-INV censuses.
   certificate F3/MAG-BOX/V15-IA/V17-IA all consume. All checks PASS at `J0*=500,
   f*=99/100` (0 violations).
 - **MAG-BOX** [core, **empirical cross-check of the now-proved clause (LAM-BOX)**].
-  Verifies that the realized sibling-proportionality magnitudes lie inside the magnitude
-  box that both load-bearing gates box-max over (`lam in [0.72, 0.95]`, `Lambda^+ in
-  [-1.17, -0.82]` — widened this revision, R1 mitigation (b) — `Lambda^- in
-  [-0.66, -0.35]`): realized `lam in [0.7759, 0.9190]`, `Lambda^+ in [-1.1429, -0.8883]`,
-  `Lambda^- in [-0.6334, -0.3788]`, per-entry `rho_i = c^+_i/c^-_i in [0.7734, 0.9259]`,
-  all inside the boxes at every grid level. Worst headroom against the widened
-  `Lambda^+_mass` floor `0.0271` (was `0.0172` pre-widening); the OVERALL worst across
-  all monitored quantities is `0.0196` (arithmetic-mean `Lambda^+` at `n=48`,
-  COMPUTED/monitored, not covered by the LAM-INV enclosure). See Section 8.4 (LAM-BOX) — the
-  box is now a **PROVED** invariant interval (gate LAM-INV below); MAG-BOX's grid check
-  is retained as the empirical cross-check, not the sole evidence. **(round 2)** ALSO
+  `lam` and mass-weighted `Lambda^+/-`: PROVED-CONDITIONAL INTERVAL (gate LAM-INV),
+  monitoring RETAINED here as the empirical cross-check, not the sole evidence — box
+  `lam in [0.72, 0.95]`, `Lambda^+ in [-1.17, -0.82]` (widened this revision, R1
+  mitigation (b)), `Lambda^- in [-0.66, -0.35]`: realized `lam in [0.7759, 0.9190]`,
+  `Lambda^+_mass in [-1.1429, -0.8883]`, `Lambda^-_mass in [-0.6334, -0.3788]`, per-entry
+  `rho_i = c^+_i/c^-_i in [0.7734, 0.9259]`, all inside the boxes at every grid level;
+  worst headroom over this proved-conditional category `0.0241` (`rho_16`, `n=48`).
+  Arithmetic-mean `Lambda^+/-` variants: COMPUTED-monitored ONLY (NOT covered by the
+  LAM-INV enclosure; LAB_LAMBOX's Q1 finding is they WIDEN with depth) — worst headroom
+  `0.0196` (`n=48`), the overall tightest of all monitored quantities. **ALSO** (this
+  revision) cross-checks the realized-vs-field correction-derivative `C'` at MAG-BOX's
+  own 6 grid levels x 41 parents against `CPRIME` (the a-posteriori side of risk
+  register R1, broader than gate LAM-INV's own sparser one-anchor sample): worst
+  `0.0023 <= CPRIME = 0.006`, comfortable; SKIPPED under `--quick`/`--fallback` (gate
+  LAM-INV does not run there). See Section 8.4 (LAM-BOX). **(round 2)** ALSO
   monitors the SIB-CERT **boundary slot** `w_17 := rho_17/lam_gc` against its own deep
   box `W17 = [0.999, 1.001]`, over `n in {500,...,800}` (`W17_GRID`, SIB-CERT's own
   operative domain, 7 levels x 41 parents) — the `(LAM-BOX)`-class hypothesis the

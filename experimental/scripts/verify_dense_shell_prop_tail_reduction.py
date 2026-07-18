@@ -1298,16 +1298,32 @@ def gate_forcing_ia(report, levs, J0, f_pad, theta_star, tamper=None):
 # SIB-BAND exposes the forced-proportional-vs-real gap.
 # ===================================================================================
 
-def gate_magnitude_box(report, levs, grid, tamper=None):
-    """MAG-BOX [core, (LAM-BOX) clause]: verify the realized sibling-proportionality
-    magnitudes lie inside the COMPUTED magnitude boxes at every (grid level, parent):
-    lam = sum(c^+)/sum(c^-) in [LAM_LO_F,LAM_HI_F]; the mass-weighted window-mean
-    Lambda^+/- in their boxes; and every per-entry sibling ratio rho_i = c^+_i/c^-_i in
-    [LAM_LO_F,LAM_HI_F] (rho_i in the box underwrites the (SIB-BAND) representation
-    c^+_i = lam*w_i*c^-_i with lam in the box). This turns six silent hardcoded literals
-    into a monitored, tamperable invariant -- still COMPUTED (a grid check, not a proof for
-    all n), now honest. Prints worst headroom; the Lambda^+ floor is genuinely thin (~0.017).
-    Tamper 'magbox-shrink' tightens the boxes so the realized magnitudes leave them.
+def gate_magnitude_box(report, levs, grid, tamper=None, laminv=None):
+    """MAG-BOX [core, (LAM-BOX) empirical cross-check]: verify the realized sibling-
+    proportionality magnitudes lie inside the magnitude boxes at every (grid level,
+    parent): lam = sum(c^+)/sum(c^-) in [LAM_LO_F,LAM_HI_F]; the mass-weighted
+    window-mean Lambda^+/- in their boxes; and every per-entry sibling ratio
+    rho_i = c^+_i/c^-_i in [LAM_LO_F,LAM_HI_F] (rho_i in the box underwrites the
+    (SIB-BAND) representation c^+_i = lam*w_i*c^-_i with lam in the box). This turns six
+    silent hardcoded literals into a monitored, tamperable invariant. Prints worst
+    headroom. Tamper 'magbox-shrink' tightens the boxes so the realized magnitudes leave
+    them.
+
+    STATUS (post gate LAM-INV): the lam and mass-weighted Lambda^+/- lines are now a
+    PROVED-CONDITIONAL INTERVAL (gate LAM-INV), not merely a measured range -- this gate's
+    grid check is monitoring RETAINED as the empirical cross-check of that proved
+    enclosure, not the sole evidence for it. The arithmetic-MEAN Lambda^+/- variants
+    (Lam+mean/Lam-mean below) stay COMPUTED-monitored ONLY: LAM-INV's enclosure covers the
+    mass-weighted variants alone, and LAB_LAMBOX.md's Q1 finding is that the arithmetic-
+    mean variant WIDENS with depth (shallow n UNDERSTATES its true range) -- so it is
+    watched here, not claimed proved.
+
+    `laminv`, if given (compute() passes gate LAM-INV's own cached result, computed once,
+    before this gate runs, to avoid paying the ~47s float precompute twice): ALSO reports
+    the realized-vs-field correction-derivative C' consistency check (the a-posteriori
+    side of R1) at every (grid level, parent) this gate already samples -- a broader,
+    independent cross-check than gate LAM-INV's own sparser one-anchor C' monitor. None
+    under --quick/--fallback (LAM-INV does not run there); the C' line is SKIPPED then.
 
     (round 2, PI review) ALSO monitors the BOUNDARY SLOT: w_17 := rho_17/lam_gc,
     lam_gc := sqrt(min_i rho_i * max_i rho_i) over i<17 (the geometric-center scalar
@@ -1327,6 +1343,9 @@ def gate_magnitude_box(report, levs, grid, tamper=None):
     else:                                        # every W17_GRID level (n=800 min ~1.000018)
         w17_lo, w17_hi = float(W17_LO_F), float(W17_HI_F)
     viol = 0; worst_head = 1e18; worst_which = ""
+    worst_head_proved = 1e18; worst_which_proved = ""    # lam + mass-weighted Lambda^+/-
+    worst_head_mean = 1e18; worst_which_mean = ""         # arithmetic-mean variants only
+    cprime_realized = 0.0; cprime_realized_loc = ""
     for n in grid:
         for t in PARENTS:
             raw = onestep_raw(t, n, levs, win=WIN_STAR, cwin=CWIN); nn = raw['n']
@@ -1349,6 +1368,26 @@ def gate_magnitude_box(report, levs, grid, tamper=None):
                     viol += 1
                 if h < worst_head:
                     worst_head = h; worst_which = "%s@n=%d" % (name, n)
+                is_mean = name in ("Lam+mean", "Lam-mean")
+                if is_mean:
+                    if h < worst_head_mean:
+                        worst_head_mean = h; worst_which_mean = "%s@n=%d" % (name, n)
+                else:
+                    if h < worst_head_proved:
+                        worst_head_proved = h; worst_which_proved = "%s@n=%d" % (name, n)
+            # C' consistency check (a-posteriori side of R1): realized mass-weighted
+            # Lambda^+/- (Lp,Lm, already computed above) vs gate LAM-INV's own converged
+            # field prediction at the SAME (t+,t-), broader than gate LAM-INV's own
+            # sparse one-anchor sample (this loop already covers MAG_GRID x 41 parents).
+            if laminv is not None:
+                tp_fr = frac_exact((1 + t) / 3.0); tm_fr = frac_exact((1 - t) / 3.0)
+                Lp_lo_f, Lp_hi_f = _brk_L_exact_lam(laminv['loc'], laminv['Lam_F'], tp_fr, LIP_L_LAM_F)
+                Lm_lo_f, Lm_hi_f = _brk_L_exact_lam(laminv['loc'], laminv['Lam_F'], tm_fr, LIP_L_LAM_F)
+                Lp_field = float(Lp_lo_f + Lp_hi_f) / 2.0
+                Lm_field = float(Lm_lo_f + Lm_hi_f) / 2.0
+                d_here = max(abs(Lp - Lp_field), abs(Lm - Lm_field))
+                if d_here > cprime_realized:
+                    cprime_realized = d_here; cprime_realized_loc = "n=%d,t=%.4f" % (n, t)
     # boundary-slot pass: w_17 := rho_17/lam_gc against its OWN deep box, W17_GRID only.
     # `levs` may not reach W17_GRID's depth (e.g. --quick, capped ~200; SIB-CERT/this
     # check are both full-mode-only in spirit) -- filter to levels `levs` actually has
@@ -1382,14 +1421,27 @@ def gate_magnitude_box(report, levs, grid, tamper=None):
     else:
         w17_desc = ("SKIPPED in this mode (deep anchor levels %s not built -- SIB-CERT's"
                     " own boundary slot is likewise full-mode-only)" % str(W17_GRID))
-    report.append(("MAG-BOX [core, (LAM-BOX) COMPUTED clause, window i<17] realized"
-                    " lam, Lambda^+/- (mass AND arithmetic window-mean, per D5), per-entry"
-                    " rho_i in the magnitude boxes over %d levels x 41 parents"
-                    " (violations=%d); worst headroom %.4f (%s) -- the Lambda^+ floor is"
-                    " thin; boxes are COMPUTED (measured+pad), monitored here not proved%s"
+    if laminv is not None:
+        cprime_note = (" | C' consistency (a-posteriori R1, realized-vs-field, %d levels x"
+                        " 41 parents): worst=%.4f @%s vs CPRIME=%s [%s]"
+                        % (len(grid), cprime_realized, cprime_realized_loc,
+                           str(laminv['cprime_eff']),
+                           "OK" if cprime_realized <= float(laminv['cprime_eff']) else "MISS"))
+    else:
+        cprime_note = " | C' consistency check SKIPPED in this mode (gate LAM-INV does not run)"
+    report.append(("MAG-BOX [core, (LAM-BOX) empirical cross-check, window i<17] lam and"
+                    " mass-weighted Lambda^+/- lines: PROVED-CONDITIONAL INTERVAL (gate"
+                    " LAM-INV), monitoring RETAINED -- realized lam, Lambda^+/-mass,"
+                    " per-entry rho_i in the magnitude boxes over %d levels x 41 parents"
+                    " (violations=%d); worst headroom (lam/mass/rho) %.4f (%s)."
+                    " Lam+/-mean (arithmetic-mean variants): COMPUTED-monitored ONLY --"
+                    " NOT covered by the LAM-INV enclosure, and WIDENS with depth"
+                    " (LAB_LAMBOX Q1) -- worst headroom %.4f (%s)%s"
                     " + boundary wobble w17=rho_17/lam_gc in its deep box [0.999,1.001] %s"
-                    % (len(grid), viol - w17_viol, worst_head, worst_which,
-                       " [TAMPERED]" if tamper == "magbox-shrink" else "", w17_desc), ok))
+                    % (len(grid), viol - w17_viol, worst_head_proved, worst_which_proved,
+                       worst_head_mean, worst_which_mean,
+                       " [TAMPERED]" if tamper == "magbox-shrink" else "", w17_desc)
+                    + cprime_note, ok))
 
 # ---- (SIB-BAND) sibling-wobble census -------------------------------------------
 # The forced-proportional gates (V15-IA, V17-IA) are the w_i==1 slice. Under the IH
@@ -2030,26 +2082,30 @@ def _mass_recursion_identity_spotcheck():
         break   # one cached level set suffices for the spot-check
     return worst, checked
 
-def gate_lam_inv(report, levs, J0, f_pad, tamper=None):
-    """LAM-INV [core, FULL MODE ONLY, PROVED-conditional upgrade of (LAM-BOX)]: implements
-    DERIV_LAMBOX.md's finite-check list items 3-5 (Section 6) -- items 1-2 (the floor
-    family, the exact base-case grid) are the EXISTING gates F3 and MAG-BOX/V18, cited not
-    re-derived here. Item 3: one forward-pass T-invariance of the mass interval field
-    (NG=%d) + a-posteriori sup|Lambda|<=LIP_S. Item 4: one forward-pass invariance of the
-    coupled Lambda field + a-posteriori sup|Lambda'|<=LIP_L. Item 5: floor-box bound on
-    gamma<=GMAX (PROVED here, exact Fraction, from the F3 floor family alone) and
-    C'<=CPRIME (MONITORED -- the (C'-CAP) clause, the ONE remaining computed/monitored
-    literal). See the module-level note above this function for the two identities (I1,
-    I2) and their verification status.
+_LAMINV_CACHE = {}   # module-level memo, keyed (J0,str(f_pad),tamper): the ~47s float
+                     # precompute + one-pass certification is expensive; compute() calls
+                     # _laminv_certify once (before MAG-BOX, so MAG-BOX can report the
+                     # realized-vs-field C' check at its own grid levels) and gate_lam_inv
+                     # reuses the SAME result at its normal report position -- one
+                     # computation, two consumers, no double cost.
 
-    Tampers (isolated, each touches only this gate's line): 'laminv-grid' (NG far below
-    the note's R4 threshold -> the between-grid Lipschitz slop blows up the FINAL proved
-    interval past the shipped box -- the gate's own grid-sufficiency/containment check
-    trips); 'laminv-lip' (the A-POSTERIORI comparison threshold for LIP_L only is lowered
-    below the realized sup|Lambda'| -- the field's own Lipschitz bracket construction is
-    UNCHANGED, isolating the tamper to that one self-check line); 'laminv-floor' (R1
-    stress: restores the PRE-widening Lambda^+ floor -116/100 AND forces CPRIME to 2x the
-    shipped value, 0.008 -- DERIV_LAMBOX's own R1 finding, the gate must FAIL containment)."""
+_LAMINV_TAMPERS = ("laminv-grid", "laminv-lip", "laminv-floor")
+
+def _laminv_certify(levs, J0, f_pad, tamper=None):
+    """All of gate LAM-INV's computation, no report/print side effects -- returns a dict.
+    See gate_lam_inv below for the report-line formatting and the full method docstring
+    (identities, the Birkhoff enclosure, the tamper semantics)."""
+    # cache key normalizes `tamper` to None unless it's one of THIS gate's own tampers --
+    # every other tamper value (including every other gate's tamper, and the untampered
+    # baseline) computes an IDENTICAL result here, so tamper_selftest's ~20 compute() runs
+    # pay the ~47s float precompute only twice (baseline-equivalent + laminv-lip, which
+    # doesn't change ng_eff/cprime_eff/lap_lo_eff either -- effectively once per distinct
+    # (ng_eff,cprime_eff) pair), not once per tamper name.
+    tamper_key = tamper if tamper in _LAMINV_TAMPERS else None
+    key = (J0, str(f_pad), tamper_key)
+    if key in _LAMINV_CACHE:
+        return _LAMINV_CACHE[key]
+
     ng_eff = 241 if tamper == "laminv-grid" else NG_LAM
     cprime_eff = Fr(8, 1000) if tamper == "laminv-floor" else CPRIME_LAM_F
     lap_lo_eff = LAP_LO_F_ORIG if tamper == "laminv-floor" else LAP_LO_F
@@ -2109,6 +2165,45 @@ def gate_lam_inv(report, levs, J0, f_pad, tamper=None):
     ok = (mass_inv_ok and lam_inv_ok and ok_S and ok_L and gamma_ok and cprime_ok
           and id1_ok and lam_inside and lp_inside and lm_inside)
 
+    result = dict(ng_eff=ng_eff, cprime_eff=cprime_eff, lap_lo_eff=lap_lo_eff,
+                  lip_l_check_eff=lip_l_check_eff, loc=loc, S_F=S_F, Lam_F=Lam_F,
+                  mlo=mlo, mhi=mhi, mass_inv_ok=mass_inv_ok, llo=llo, lhi=lhi,
+                  lam_inv_ok=lam_inv_ok, sup_abs=sup_abs, ok_S=ok_S, sup_slope=sup_slope,
+                  ok_L=ok_L, gamma_bound=gamma_bound, gamma_wt=gamma_wt, gamma_ok=gamma_ok,
+                  cprime_measured=cprime_measured, cprime_ok=cprime_ok,
+                  id1_residual=id1_residual, id1_checked=id1_checked,
+                  lam_lo=lam_lo, lam_hi=lam_hi, lp_lo=lp_lo, lp_hi=lp_hi,
+                  lm_lo=lm_lo, lm_hi=lm_hi, lam_inside=lam_inside, lp_inside=lp_inside,
+                  lm_inside=lm_inside, lp_headroom=lp_headroom, ok=ok,
+                  elapsed=time.time() - t0, tamper=tamper)
+    _LAMINV_CACHE[key] = result
+    return result
+
+def gate_lam_inv(report, levs, J0, f_pad, tamper=None):
+    """LAM-INV [core, FULL MODE ONLY, PROVED-conditional upgrade of (LAM-BOX)]: implements
+    DERIV_LAMBOX.md's finite-check list items 3-5 (Section 6) -- items 1-2 (the floor
+    family, the exact base-case grid) are the EXISTING gates F3 and MAG-BOX/V18, cited not
+    re-derived here. Item 3: one forward-pass T-invariance of the mass interval field
+    (NG=%d) + a-posteriori sup|Lambda|<=LIP_S. Item 4: one forward-pass invariance of the
+    coupled Lambda field + a-posteriori sup|Lambda'|<=LIP_L. Item 5: floor-box bound on
+    gamma<=GMAX (PROVED here, exact Fraction, from the F3 floor family alone) and
+    C'<=CPRIME (MONITORED -- the (C'-CAP) clause, the ONE remaining computed/monitored
+    literal). See the module-level note above this function for the two identities (I1,
+    I2) and their verification status. The actual computation lives in
+    _laminv_certify (memoized in _LAMINV_CACHE): compute() calls it once, BEFORE
+    gate_magnitude_box, so MAG-BOX can report the realized-vs-field C' consistency check
+    at its own grid levels without paying the ~47s float precompute a second time; this
+    function reuses the SAME cached result to format its own report line.
+
+    Tampers (isolated, each touches only this gate's line): 'laminv-grid' (NG far below
+    the note's R4 threshold -> the between-grid Lipschitz slop blows up the FINAL proved
+    interval past the shipped box -- the gate's own grid-sufficiency/containment check
+    trips); 'laminv-lip' (the A-POSTERIORI comparison threshold for LIP_L only is lowered
+    below the realized sup|Lambda'| -- the field's own Lipschitz bracket construction is
+    UNCHANGED, isolating the tamper to that one self-check line); 'laminv-floor' (R1
+    stress: restores the PRE-widening Lambda^+ floor -116/100 AND forces CPRIME to 2x the
+    shipped value, 0.008 -- DERIV_LAMBOX's own R1 finding, the gate must FAIL containment)."""
+    r = _laminv_certify(levs, J0, f_pad, tamper=tamper)
     report.append(("LAM-INV [core, FULL MODE ONLY, PROVED-conditional upgrade of (LAM-BOX),"
         " window i<17/i<18, NG=%d]\n"
         "        identities: (I1) exact windowed mass recursion sum_i<17(K_d*c)=a(t)Mw"
@@ -2130,23 +2225,23 @@ def gate_lam_inv(report, levs, J0, f_pad, tamper=None):
         "        window provenance: E_W reads c_17, ONE PAST the operative i<17 window,"
         " only via rc_16 in [f_16,1], F3-certified over i<18 (FLOOR_WIN=CWIN=18) -- no new"
         " hypothesis beyond the existing F3 gate. (%.1fs)"
-        % (ng_eff, id1_residual, id1_checked,
-           float(mlo), float(mhi), "OK" if mass_inv_ok else "FAIL",
-           float(sup_abs), str(LIP_S_LAM_F), "OK" if ok_S else "FAIL",
-           float(llo), float(lhi), "OK" if lam_inv_ok else "FAIL",
-           float(sup_slope), str(lip_l_check_eff), "OK" if ok_L else "FAIL",
+        % (r['ng_eff'], r['id1_residual'], r['id1_checked'],
+           float(r['mlo']), float(r['mhi']), "OK" if r['mass_inv_ok'] else "FAIL",
+           float(r['sup_abs']), str(LIP_S_LAM_F), "OK" if r['ok_S'] else "FAIL",
+           float(r['llo']), float(r['lhi']), "OK" if r['lam_inv_ok'] else "FAIL",
+           float(r['sup_slope']), str(r['lip_l_check_eff']), "OK" if r['ok_L'] else "FAIL",
            " [TAMPERED laminv-lip]" if tamper == "laminv-lip" else "",
-           str(GMAX_LAM_F), J0, str(f_pad), float(gamma_bound), gamma_wt,
-           "OK" if gamma_ok else "MISS", str(cprime_eff), cprime_measured,
-           "OK" if cprime_ok else "MISS",
+           str(GMAX_LAM_F), J0, str(f_pad), float(r['gamma_bound']), r['gamma_wt'],
+           "OK" if r['gamma_ok'] else "MISS", str(r['cprime_eff']), r['cprime_measured'],
+           "OK" if r['cprime_ok'] else "MISS",
            " [TAMPERED laminv-floor, CPRIME forced 2x]" if tamper == "laminv-floor" else "",
-           float(lam_lo), float(lam_hi), str(LAM_LO_F), str(LAM_HI_F),
-           "yes" if lam_inside else "NO",
-           float(lp_lo), float(lp_hi), str(lap_lo_eff), str(LAP_HI_F),
-           "yes" if lp_inside else "NO", lp_headroom,
-           float(lm_lo), float(lm_hi), str(LAM2_LO_F), str(LAM2_HI_F),
-           "yes" if lm_inside else "NO",
-           time.time() - t0), ok))
+           float(r['lam_lo']), float(r['lam_hi']), str(LAM_LO_F), str(LAM_HI_F),
+           "yes" if r['lam_inside'] else "NO",
+           float(r['lp_lo']), float(r['lp_hi']), str(r['lap_lo_eff']), str(LAP_HI_F),
+           "yes" if r['lp_inside'] else "NO", r['lp_headroom'],
+           float(r['lm_lo']), float(r['lm_hi']), str(LAM2_LO_F), str(LAM2_HI_F),
+           "yes" if r['lm_inside'] else "NO",
+           r['elapsed']), r['ok']))
 
 def gate_vtrack(report, levs, grid, expect_max, tamper=None, show_table=False):
     """V18 VTRACK: deep-grid rho_prop@i<17(n)<=TARGET + monotone + V_17 tau*-crossover,
@@ -2247,9 +2342,16 @@ def compute(mode='full', fallback=False, tamper=None, show_table=False):
     jmax2 = min(jmax, 130)
     survivors = _get_survivors(levs, jmax, jmax2)
 
+    # LAM-INV's field census is computed EARLY (before MAG-BOX), memoized in
+    # _LAMINV_CACHE, so gate_magnitude_box can report the realized-vs-field C'
+    # consistency check at its own grid levels without paying the ~47s float
+    # precompute twice; gate_lam_inv (below, at its normal report position) reuses
+    # the SAME cached result. None under --quick/--fallback (matches SIB-CERT's scope).
+    laminv_precomp = _laminv_certify(levs, J0, f_pad, tamper=tamper) if run_sibcert else None
+
     report = []; info = []
     gate_floors(report, levs, J0, f_pad, tamper=tamper)                        # F3        report[0]
-    gate_magnitude_box(report, levs, mag_grid, tamper=tamper)                  # MAG-BOX   report[1]
+    gate_magnitude_box(report, levs, mag_grid, tamper=tamper, laminv=laminv_precomp)  # MAG-BOX report[1]
     theta_band = gate_theta_ia(report, levs, J0, f_pad, tamper=tamper)         # V15-IA    report[2] [LOAD-BEARING]
     theta_star = THETA_FALLBACK if fallback else theta_band
     gate_theta(report, info, levs, theta_grid, tamper=tamper)                  # info V15-GRID[0]/V15-CERT[1]
