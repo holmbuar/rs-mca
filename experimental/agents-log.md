@@ -30,6 +30,57 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Realized/group/ambient heavy-count ordering formalization
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Pinned source producer
+  `experimental/notes/thresholds/nonfiber_decomposition_realized_scale.md @ 2633895a`,
+  source verifier
+  `experimental/scripts/verify_nonfiber_decomposition_realized_scale.py @ 2633895a`,
+  and frozen certificate
+  `experimental/data/certificates/nonfiber-decomposition-realized-scale/nonfiber_decomposition_realized_scale.json @ 2633895a`;
+  Lean proof
+  `experimental/lean/nonfiber_decomposition_realized_scale/NonfiberDecompositionRealizedScale.lean @ b9f9b56e`,
+  theorem map
+  `experimental/lean/nonfiber_decomposition_realized_scale/README.md @ b9f9b56e`,
+  and focused audit
+  `experimental/notes/thresholds/nonfiber_scale_order_formalization.md @ b9f9b56e`;
+  PR #933, proof-payload head `b9f9b56e`.
+- **Status:** PROVED
+- **What is being added:** For one fixed finite list of fiber sizes, define
+  heaviness by the exact cleared predicate `K * M <= f * D`.  The Lean package
+  proves that the heavy count is monotone when the cell scale `D` increases and
+  composes `L <= |G_lambda| <= |G|` into the source ordering
+  `heavy_realized <= heavy_group <= heavy_ambient`.  The reusable natural
+  multiplier `K` explicitly generalizes the verifier's row `K = 2`; no
+  truncated natural-number division is used.
+- **How it is useful:** Source producer PR #760 (head `dabf6510`, integrated at
+  `2633895a`) supplied the realized-scale packet and arithmetic stub; contextual
+  profile-envelope PR #759 (head `8cd4f4b6`, integrated at `2633895a`) supplied
+  the normalization interlock.  PR #933 now supplies the missing finite `(ORD)`
+  theorem.  Downstream consumer PR #739 (head `1e8b9871`) uses this only as the
+  favorable-to-larger-scale count-order kernel; this theorem does not close its
+  asymptotic concentration claim.  The proof keeps the same fixed census and
+  does not supply the positive-threshold zero-padding bridge or the source-side
+  mass/cardinality identifications.  It does not prove an asymptotic
+  concentration estimate, Sidon-paired heaviness; charge or semantic
+  decomposition; `(NFB)`;
+  image-scale MI/MA or a Sidon payment; a
+  reverse count inequality or ambient-lower-bound transfer; a profile-envelope
+  comparison, lower reserve, MCA threshold, or Proximity Prize claim.
+- **What to do next:** Use this theorem only after discharging the explicit
+  fixed-census and positive-threshold semantic bridge; keep the remaining
+  concentration and decomposition routes separate.  Printing axioms for both
+  new public theorem declarations reports only `[propext]`. CHECK:
+  `cd experimental/lean/nonfiber_decomposition_realized_scale && lake clean && lake build`
+  -> `Build completed successfully.`;
+  `python3 experimental/scripts/verify_nonfiber_decomposition_realized_scale.py`
+  -> `RESULT: PASS (90/90)`;
+  `python3 experimental/scripts/verify_nonfiber_decomposition_realized_scale.py --tamper-selftest`
+  -> `tamper-selftest: caught 3/3` and `RESULT: PASS (90/90)`;
+  `rg -n '^[[:space:]]*(sorry|admit|axiom|opaque)\b|sorryAx' experimental/lean/nonfiber_decomposition_realized_scale/NonfiberDecompositionRealizedScale.lean`
+  -> no declaration-level matches.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
