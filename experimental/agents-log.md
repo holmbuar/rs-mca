@@ -30,6 +30,66 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Map-smooth agreement-window formalization
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Lean proof
+  `experimental/lean/petal_fiber/PetalFiber.lean @ 46a4d6b4`, theorem map
+  `experimental/lean/petal_fiber/README.md @ 46a4d6b4`, focused audit
+  `experimental/notes/thresholds/map_smooth_agreement_window_formalization.md @ 46a4d6b4`,
+  package audit
+  `experimental/notes/audits/lean_petal_fiber.md @ 46a4d6b4`, and source
+  verifier
+  `experimental/scripts/verify_map_smooth_agreement_window.py @ 46a4d6b4`;
+  PR #944, proof-payload head `46a4d6b4`.
+- **Status:** PROVED
+- **What is being added:** For natural `k,a`, the Lean package proves the exact
+  remainder identity
+  `a * (k / a + 2) + k % a = k + 2 * a`, derives the source agreement window
+  `k + a + 1 <= A <= k + 2 * a` under the sole necessary hypothesis `0 < a`,
+  and characterizes the upper equality by `a | k`.  It explicitly repairs an
+  unrestricted natural-number transcription: at `a = k = 0`, the lower
+  endpoint would assert `1 <= 0`.  The former fixed numerical theorem names
+  remain compatibility corollaries.
+- **How it is useful:** The active source producer is
+  `experimental/rs_mca_thresholds.tex @ 856d8362`, label
+  `lem:map-smooth-fiber`; its identical predecessor is
+  `experimental/rs_mca_entropy_frontiers.tex @ 2b1a7e20`, and the statement is
+  retained in
+  `experimental/asymptotic_rs_mca_frontiers.tex @ c4856fa6`.  Original finite
+  Lean producer PR #552 (head `81dd418a`, integrated at `e190193c`) supplied
+  only fixed anchors; PR #944 (head `46a4d6b4`) supplies their general
+  arithmetic kernel.  The direct TeX consumer `prop:map-smooth-cap` in
+  `experimental/rs_mca_thresholds.tex @ c4856fa6` may reuse this kernel only
+  after its semantic hypotheses and constructions are formalized.  This does
+  not encode fields, `phi`, `D`, `Q`, `N`, or map-smooth semantics; prove the
+  general `ell <= N - 1` side condition; construct fibers, `z`, `u_z`,
+  codewords, or distinctness; formalize pigeonhole, polynomial-composition
+  injectivity, degree, or general list-size arguments; apply the
+  collision-aware pole conversion; or define and bound an MCA/CA object.  It
+  does not supply a witness-exhaustive first-match atlas, image-scale MI/MA or
+  direct Sidon payment, a residual ray compiler, a complete profile-envelope
+  comparison, or a lower reserve; prove a Chebyshev/circle transfer, deployed
+  row, MCA threshold, deep-MCA count, charge, branch closure, or Proximity Prize
+  claim.
+- **What to do next:** Formalize the map-smooth fiber/list construction with
+  explicit positive degree and `ell <= N - 1`, then connect it to the
+  collision-aware cap without upgrading the numerical anchor into an MCA
+  theorem.  Printing axioms for `map_smooth_agreement_remainder`,
+  `map_smooth_agreement_lower`, `map_smooth_agreement_upper`,
+  `map_smooth_agreement_window`, and `map_smooth_agreement_eq_top_iff` reports
+  only `[propext, Quot.sound]`; `map_smooth_agreement_eq_of_dvd` reports only
+  `[propext]`; and `map_smooth_agreement_lower_false_at_zero` reports only
+  `[Lean.ofReduceBool]`. CHECK:
+  `cd experimental/lean/petal_fiber && lake clean && lake build`
+  -> `Build completed successfully.`;
+  `python3 experimental/scripts/verify_map_smooth_agreement_window.py --check`
+  -> `RESULT: PASS (66841/66841)`;
+  `python3 experimental/scripts/verify_map_smooth_agreement_window.py --tamper-selftest --check`
+  -> `tamper-selftest: caught 4/4` and `RESULT: PASS (66841/66841)`;
+  `rg -n '^[[:space:]]*(sorry|admit|axiom|opaque)\b|sorryAx' experimental/lean/petal_fiber/PetalFiber.lean`
+  -> no declaration-level matches.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
