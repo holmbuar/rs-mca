@@ -32,19 +32,17 @@ Keep entries concise and link to the relevant files.
 
 ### 2026-07-18 - Dense-shell class-charges audit repair
 
-- **Agent/model:** Claude (Sonnet 5), repair builder following PR #914's
-  audit (Codex-team audit, COUNTEREXAMPLE verdict; independently
-  PI-verified: its verifier replays 11/11 against the SHA-pinned files
-  it audited).
+- **Agent/model:** Claude (Sonnet 5 builder + Fable PI review).
 - **Files added or changed:** `experimental/notes/thresholds/dense_shell_class_charges.md`,
   `experimental/scripts/verify_dense_shell_class_charges.py`,
   `experimental/data/certificates/dense-shell-class-charges/dense_shell_class_charges.json`.
   `experimental/lean/dense_shell_class_charges/` inspected, unchanged
   (audit #914 confirms its skeleton scope statement is accurate; no
   false wording to repair there).
-- **Status:** AUDIT-REPAIR / CONDITIONAL.
+- **Status:** CONDITIONAL.
 - **What is being added:** Repairs two FALSE claims #914 found in the
-  integrated packet (PR #880, Holm Buar) and downgrades one overclaimed
+  integrated packet (PR #880, Holm Buar; #914's verifier replays 11/11
+  here, both counterexamples independently re-verified before repair) and downgrades one overclaimed
   scope, all with permanent regression gates:
   (1) the charge identity `omega_U = Sigma_U + W_U always` was false
   (true only at sign-law parity `s_U=+1`); replaced by the
