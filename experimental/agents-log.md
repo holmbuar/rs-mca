@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D priority-zero admission gap
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/thresholds/route_d_priority_zero_admission_gap_v1.md`, `experimental/scripts/verify_route_d_priority_zero_admission_gap_v1.py`, `experimental/lean/route_d_priority_zero_admission_gap_v1/`, and this log.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** An exact-SHA schema audit proving that the eight Route-D deletion names are examples under one aggregate rather than executable typed projectors, together with a deterministic verifier and theorem-shaped Lean interfaces for the missing admission executor and residual payment compiler.
+- **How it is useful:** It prevents the undefined priority-zero residual, image cells, or distinct slopes from being treated as paid marked support mass while preserving the deployed conditional arithmetic and common-core requirement.
+- **What to do next:** Implement the marked first-match executor of Theorem A before promoting any raw WSP corpus, then discharge the typed owner and row-budget obligations in Theorem B.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
