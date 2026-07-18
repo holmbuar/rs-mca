@@ -24,24 +24,35 @@ note's "Computed clauses" subsection and reproduced here:
               both load-bearing gates box-max over is a COMPUTED (measured+padded)
               range; gate MAG-BOX verifies the realized magnitudes lie inside it at
               every grid level, but does not PROVE the enclosure holds for all n.
-  (SIB-BAND)  V15-IA/V17-IA certify the FORCED-PROPORTIONAL surrogate c^+ = lam*c^-.
-              The real cascade is non-proportional; the IH rho_prop<=TARGET makes it
-              c^+_i = lam*w_i*c^-_i with a per-entry sibling wobble w_i. The informational
-              gate SIB-BAND prints the wobble-EXTENDED censuses (each profile entry given
-              an independent factor in [1/R*,R*]); at the shipped anchor the extended
-              forcing EXCEEDS the equilibrium threshold (the extension does not close --
-              a real gap, reported not hidden). The shipped load-bearing values are the
-              proportional-surrogate ones; the real-vs-proportional coverage rests on
-              this computed reduction.
+  (SIB-BAND)  DISCHARGED at a deep anchor (gate SIB-CERT, full mode only). V15-IA/V17-IA
+              (at J0*=500) still certify only the FORCED-PROPORTIONAL surrogate
+              c^+ = lam*c^-; the real cascade is non-proportional, c^+_i = lam*w_i*c^-_i
+              with per-entry sibling wobble w_i, IH rho_prop<=TARGET. The GEOMETRIC-CENTER
+              LEMMA (3 lines, no new assumption beyond (LAM-BOX)): lam_gc :=
+              sqrt(min_i rho_i * max_i rho_i) is itself a legal (LAM-BOX) point, and
+              w_i := rho_i/lam_gc lies in the half-band [1/sqrt R*,sqrt R*] by the IH
+              alone. Re-running the wobble census over that half-band at a deep anchor
+              (J0=800, pad=999/1000) CLEARS the equilibrium threshold (+4.6% margin,
+              gate SIB-CERT) -- shallower deep anchors miss (600: -11.1%, 700: -1.9%),
+              and the full (non-geometric-center) band [1/R*,R*] never clears at any
+              depth. This closes the real-vs-proportional gap the surrogate leaves open;
+              see note Section 8.
   (FOLD)      the child-window fold factor <=57/50 (Lemma W1) is a grid-measured bound
               (gate V16b), COMPUTED.
   (FLOOR-PERSIST) floor persistence for n>J0* composes from the predecessor packet's
               monotone-drift machinery re-anchored at (J0*,f*); COMPUTED there, imported.
+              SIB-CERT's own deep anchor (n>800) relies on the same clause AT PAD
+              999/1000 (the V18 grid extension to n=800 empirically confirms monotone
+              drift through the new anchor).
 STATUS: CONDITIONAL. PROVED would require zero computed clauses; (LAM-BOX) alone
-precludes that. The arithmetic fact rho_prop@i<17(n)<=1.02560749 is supported with
-margin by every gate; the packet's rigor is scoped by the clauses above.
+precludes that. Three computed clauses remain (LAM-BOX, FOLD, FLOOR-PERSIST);
+(SIB-BAND) is DISCHARGED at the deep anchor by gate SIB-CERT (geometric-center
+certified census) GIVEN (LAM-BOX) -- see note Section 8. The arithmetic fact
+rho_prop@i<17(n)<=1.02560749 is supported with margin by every gate; the packet's
+rigor is scoped by the clauses above.
 
-Gates (8 core, determine RESULT; informational lines printed but NOT counted):
+Gates (8 core in --quick/--fallback; 9 core in the default full mode, determine RESULT;
+informational lines printed but NOT counted):
   F3   [FLOORS]    re-certifies the floor family r_i(J0*,t) at the anchor (positivity,
                    LC-compatibility, the i=0 halving-convention cross-check).
   MAG-BOX [LAM-BOX] verifies the realized magnitudes lam=sum(c^+)/sum(c^-),
@@ -68,13 +79,24 @@ Gates (8 core, determine RESULT; informational lines printed but NOT counted):
                    printed inline, does not affect this gate's PASS/FAIL.
   V17-IA [FORCING, LOAD-BEARING] the minced/closed-form interval-arithmetic census of
                    F_box(J0*,f*) <= (1-theta_band)*tau*, theta_band supplied by V15-IA.
-                   Certifies the FORCED-PROPORTIONAL surrogate; see (SIB-BAND).
-  V18 [VTRACK]     the deep grid rho_prop@i<17(n)<=1.02560749 (all levels) + monotone
-                   non-increasing + the V_17(n) vs tau*=3log(1.02560749) crossover at
-                   n=62 (every-integer scan) + margins.
-  (informational): SIB-BAND (wobble-extended censuses + gap), V15-GRID (grid theta
-                   census, robustness), V17-INFO (G2 negative control), V19 [BRIDGE]
-                   w(n)<=0.62, alpha-only.
+                   Certifies the FORCED-PROPORTIONAL surrogate; the real-vs-proportional
+                   gap this leaves is closed by SIB-CERT below, not by this gate.
+  V18 [VTRACK]     the deep grid rho_prop@i<17(n)<=1.02560749 (all levels, now to n=800)
+                   + monotone non-increasing + the V_17(n) vs tau*=3log(1.02560749)
+                   crossover at n=62 (every-integer scan) + margins.
+  SIB-CERT [core, FULL MODE ONLY, discharges (SIB-BAND)] the geometric-center half-band
+                   wobble census (GEOMETRIC-CENTER LEMMA: lam_gc=sqrt(min rho_i*max rho_i)
+                   is a legal (LAM-BOX) point, w_i=rho_i/lam_gc lies in
+                   [1/sqrt R*,sqrt R*] by the IH alone -- no assumption beyond (LAM-BOX))
+                   re-run at the deep anchor (J0=800,pad=999/1000), where it clears
+                   (+4.6% margin) -- covering the REAL non-proportional cascade, not
+                   merely the surrogate. Outwardness self-check on the sqrt bracket.
+                   SKIPPED (informational line only) under --quick/--fallback, since the
+                   deep anchor needs the full J0=800 build.
+  (informational): SIB-BAND (the shallow-anchor (J0*=500) wobble-extended exhibit +
+                   gap, superseded as the discharge by SIB-CERT above), V15-GRID (grid
+                   theta census, robustness), V17-INFO (G2 negative control), V19
+                   [BRIDGE] w(n)<=0.62, alpha-only.
 
 Flags: --quick runs a shallow dev-only subset (NOT a certified claim); --table prints
 the full per-level rho_prop/V_17 table (transcribed by the Lean package); --fallback
@@ -217,8 +239,17 @@ THETA_FALLBACK = Fr(1, 2)            # legacy fallback theta* = 0.50 (--fallback
                                      # a fixed constant resting on a grid measurement,
                                      # informational -- NOT part of the certified chain)
 
+# SIB-CERT deep anchor: discharges the (SIB-BAND) computed clause (see gate_sib_cert
+# below). A much deeper base than (J0_STAR, F_STAR) is required for the geometric-center
+# wobble census to clear -- soundings at (600,999/1000) and (700,999/1000) still MISS
+# (-11.1%, -1.9%); (800, 999/1000) CLEARS (+4.6%). FULL mode only (--quick/--fallback
+# skip gate_sib_cert; see compute()).
+J0_SIB = 800
+PAD_SIB = Fr(999, 1000)              # 0.999 pad -- tighter than F_STAR (99/100); required
+                                     # at this depth (pad 99/100 at J0=800 still misses, -12.2%)
+
 DEEP_GRID_FULL = [48, 50, 55, 60, 62, 70, 80, 100, 128, 160, 200, 240, 300, 340,
-                   400, 430, 450, 500]
+                   400, 430, 450, 500, 550, 600, 650, 700, 750, 800]
 DEEP_GRID_QUICK = [48, 50, 55, 60, 70, 80, 100, 128, 160, 200]
 THETA_GRID_FULL = [60, 80, 100, 128, 200, 300, 430, 500]
 BRIDGE_GRID_FULL = [60, 80, 100, 128, 200, 430, 500]
@@ -580,6 +611,22 @@ def _sqrt_hi_frac(fr, iters=64):                   # rational upper bound on sqr
     return hi
 _SQ_HI = _sqrt_hi_frac(R_STAR_FR)                  # >= sqrt(R*)
 WOB_HALF = (Fr(1) / _SQ_HI, _SQ_HI)                # [1/sqrt R*, sqrt R*] (outward, sound superset)
+
+# (round 2, PI review) BOUNDARY SLOT box. Both wobble censuses range u,v,x over the band
+# at every row i<WIN_STAR; at i=WIN_STAR-1=16, x multiplies entry k=i+1=17 -- i.e. x IS
+# w_17, the sibling wobble at index 17, ONE PAST the IH's operative window i<17. Neither
+# the IH (rho_prop@i<17<=TARGET) nor gate MAG-BOX's per-entry monitoring (also i<17, see
+# gate_magnitude_box's nn=WIN_STAR cap) says anything about w_17 -- a genuine gap, not
+# pedantic: the naive "same band as the window" claim is FALSE at shallow levels
+# (measured w_17(48) up to 1.016780 > WOB_HALF's outward bracket 1.012723; scratchpad
+# probe). SIB-CERT's operative domain is n>800 (V18 covers 48..800 on the grid directly),
+# where the measured w_17 sits deep inside a MUCH tighter box (n=800: [1.000018,
+# 1.000056], decaying ~C/n^2) -- W17_LO_F/W17_HI_F is that deep box, monitored by MAG-BOX
+# (gate_magnitude_box) at W17_GRID exactly as lam/Lambda^pm are monitored: a (LAM-BOX)-
+# class COMPUTED box, not a proof for all n, but an honest, checked hypothesis where
+# before there was none. See note Section 8.4's BOUNDARY ANNEX.
+W17_LO_F, W17_HI_F = Fr(999, 1000), Fr(1001, 1000)   # deep box for the i=16 boundary slot
+W17_GRID = [500, 550, 600, 650, 700, 750, 800]        # SIB-CERT's operative domain only
 
 def osc_bound_at_parent_frac(P, dp_, dm_, ap_, at3):
     """Rigorous box-max (Fraction) of osc_{i<17}(T1P+T3P) at one parent: P is the
@@ -1230,12 +1277,25 @@ def gate_magnitude_box(report, levs, grid, tamper=None):
     c^+_i = lam*w_i*c^-_i with lam in the box). This turns six silent hardcoded literals
     into a monitored, tamperable invariant -- still COMPUTED (a grid check, not a proof for
     all n), now honest. Prints worst headroom; the Lambda^+ floor is genuinely thin (~0.017).
-    Tamper 'magbox-shrink' tightens the boxes so the realized magnitudes leave them."""
+    Tamper 'magbox-shrink' tightens the boxes so the realized magnitudes leave them.
+
+    (round 2, PI review) ALSO monitors the BOUNDARY SLOT: w_17 := rho_17/lam_gc,
+    lam_gc := sqrt(min_i rho_i * max_i rho_i) over i<17 (the geometric-center scalar
+    gate SIB-CERT's lemma uses) -- the ONE index (i=WIN_STAR-1=16's x-slot) the wobble
+    censuses read one past the IH's own window, with no hypothesis before this gate.
+    Checked only over W17_GRID (SIB-CERT's operative n>800 domain), NOT the full `grid`
+    (the naive full-window band is false at shallow n, see the module comment above
+    W17_LO_F -- this gate does not claim it there). Tamper 'w17-shrink' replaces the box
+    with a tiny one strictly below the realized range, so the realized w_17 leaves it."""
     # box boundaries (optionally shrunk inward by the tamper so realized leaves the box)
     sh = Fr(6, 100) if tamper == "magbox-shrink" else Fr(0)
     lam_lo = float(LAM_LO_F + sh); lam_hi = float(LAM_HI_F - sh)
     lap_lo = float(LAP_LO_F + sh); lap_hi = float(LAP_HI_F - sh)
     lm_lo = float(LAM2_LO_F + sh); lm_hi = float(LAM2_HI_F - sh)
+    if tamper == "w17-shrink":
+        w17_lo, w17_hi = 1.0000001, 1.0000002   # strictly below the realized range at
+    else:                                        # every W17_GRID level (n=800 min ~1.000018)
+        w17_lo, w17_hi = float(W17_LO_F), float(W17_HI_F)
     viol = 0; worst_head = 1e18; worst_which = ""
     for n in grid:
         for t in PARENTS:
@@ -1259,18 +1319,53 @@ def gate_magnitude_box(report, levs, grid, tamper=None):
                     viol += 1
                 if h < worst_head:
                     worst_head = h; worst_which = "%s@n=%d" % (name, n)
+    # boundary-slot pass: w_17 := rho_17/lam_gc against its OWN deep box, W17_GRID only.
+    # `levs` may not reach W17_GRID's depth (e.g. --quick, capped ~200; SIB-CERT/this
+    # check are both full-mode-only in spirit) -- filter to levels `levs` actually has
+    # (onestep_raw needs levs[n-1] and levs[n], so require n < len(levs)) rather than
+    # index-error; an empty effective grid is vacuously ok (nothing claimed, nothing
+    # checked, matching SIB-CERT's own --quick/--fallback skip).
+    w17_grid_eff = [n for n in W17_GRID if n < len(levs)]
+    w17_viol = 0; w17_worst = 1e18; w17_worst_n = None
+    for n in w17_grid_eff:
+        for t in PARENTS:
+            raw = onestep_raw(t, n, levs, win=WIN_STAR, cwin=CWIN)
+            cp, cm = raw['cp'], raw['cm']
+            if len(cp) < 18 or len(cm) < 18 or raw['n'] < WIN_STAR:
+                continue   # defensive; never triggers on w17_grid_eff (deep levels)
+            window_rhos = [cp[i] / cm[i] for i in range(WIN_STAR)]
+            lam_gc = math.sqrt(min(window_rhos) * max(window_rhos))
+            w17 = (cp[17] / cm[17]) / lam_gc
+            h = min(w17 - w17_lo, w17_hi - w17)
+            if h < 0:
+                w17_viol += 1
+            if h < w17_worst:
+                w17_worst = h; w17_worst_n = n
+    viol += w17_viol
     ok = (viol == 0)
+    if w17_grid_eff:
+        w17_desc = ("over %d levels {%s} (SIB-CERT's boundary slot; decays ~C/n^2)"
+                    " (violations=%d, worst headroom %.6f @n=%s)%s"
+                    % (len(w17_grid_eff), ",".join(str(x) for x in w17_grid_eff),
+                       w17_viol, w17_worst, w17_worst_n,
+                       " [TAMPERED w17-shrink]" if tamper == "w17-shrink" else ""))
+    else:
+        w17_desc = ("SKIPPED in this mode (deep anchor levels %s not built -- SIB-CERT's"
+                    " own boundary slot is likewise full-mode-only)" % str(W17_GRID))
     report.append(("MAG-BOX [core, (LAM-BOX) COMPUTED clause, window i<17] realized"
                     " lam, Lambda^+/- (mass AND arithmetic window-mean, per D5), per-entry"
                     " rho_i in the magnitude boxes over %d levels x 41 parents"
                     " (violations=%d); worst headroom %.4f (%s) -- the Lambda^+ floor is"
                     " thin; boxes are COMPUTED (measured+pad), monitored here not proved%s"
-                    % (len(grid), viol, worst_head, worst_which,
-                       " [TAMPERED]" if tamper == "magbox-shrink" else ""), ok))
+                    " + boundary wobble w17=rho_17/lam_gc in its deep box [0.999,1.001] %s"
+                    % (len(grid), viol - w17_viol, worst_head, worst_which,
+                       " [TAMPERED]" if tamper == "magbox-shrink" else "", w17_desc), ok))
 
 # ---- (SIB-BAND) sibling-wobble census -------------------------------------------
 # The forced-proportional gates (V15-IA, V17-IA) are the w_i==1 slice. Under the IH
-# rho_prop@i<17(n-1)<=TARGET the real cascade is c^+_i = lam*w_i*c^-_i; the per-entry
+# rho_prop@i<17(n-1)<=TARGET the real cascade is c^+_i = lam*w_i*c^-_i (w_i band from
+# the IH for i<17; boundary slot i=17 via the W17 deep box -- gate SIB-CERT / note S8.4
+# annex; see W17_LO_F/W17_HI_F above); the per-entry
 # marginal SAFE band is WOB_FULL=[1/R*,R*]. g_i (forcing) and the Lemma-A1 M-entries stay
 # ratios of MULTI-AFFINE functions in (a=rc_{i-1}, b=rc_i, u=w_{i-1}, v=w_i, x=w_{i+1},
 # lam, Lambda^pm) -> coordinatewise MONOTONE (fix all-but-one: num,den affine => Moebius =>
@@ -1300,7 +1395,15 @@ def _g_wob(i, a, b, u, v, x, lam, Lp, Lm, dp_, dm_, ap_, at3):
         return None
     return (Lp * lam * Qp - Lm * Qm + ap_ * (lam * wv - 1) - at3) / (3 * D)
 
-def F_box_wobble_certified(levs, J0, f_pad, wob):
+def F_box_wobble_certified(levs, J0, f_pad, wob, boundary_band=None):
+    """(round 2) `boundary_band`, if given, replaces `wob` for the x-slot (representing
+    w_{i+1}) ONLY at i == WIN_STAR-1 (the i=16 row's k=17 entry -- w_17, the one wobble
+    index that reads past the IH's i<17 window; see the W17_LO_F/W17_HI_F module comment
+    and note Section 8.4's BOUNDARY ANNEX). Every other slot (u, v everywhere; x at
+    i<WIN_STAR-1) is unaffected. Default None reproduces the ORIGINAL behavior exactly
+    (x uses `wob` at every i, including i=WIN_STAR-1) -- gate_sibling_band (the shallow-
+    anchor exhibit) relies on this: it does not pass boundary_band, so its numbers are
+    byte-identical to before this round's change."""
     worst = Fr(0); wt = None
     for t in PARENTS:
         floors = [frac_outward(f_pad * r, lo=True, slop=IA_SLOP)
@@ -1315,11 +1418,13 @@ def F_box_wobble_certified(levs, J0, f_pad, wob):
                 for Lm in (LAM2_LO_F, LAM2_HI_F):
                     his = []; los = []; feas = True
                     for i in range(WIN_STAR):
+                        x_band = (boundary_band if (boundary_band is not None
+                                                     and i == WIN_STAR - 1) else wob)
                         lo_i = hi_i = None
                         for (a, b) in ab[i]:
                             for u in wob:
                                 for v in wob:
-                                    for x in wob:
+                                    for x in x_band:
                                         g = _g_wob(i, a, b, u, v, x, lam, Lp, Lm, dp_, dm_, ap_, at3)
                                         if g is None:
                                             continue
@@ -1340,17 +1445,22 @@ def F_box_wobble_certified(levs, J0, f_pad, wob):
             worst = v; wt = t
     return worst, wt
 
-def _row_entries_wob(i, floors, dp_, dm_, lam, wob):
+def _row_entries_wob(i, floors, dp_, dm_, lam, wob, boundary_band=None):
+    """(round 2) `boundary_band`, if given (non-None), replaces `wob` for the x-slot
+    (entry k=i+1, i.e. w_{i+1}) -- the caller (theta_band_wobble_certified) passes it
+    ONLY when i == WIN_STAR-1, so this only ever changes the i=16 row's k=17 (w_17)
+    entry; every other call site (all i<WIN_STAR-1, and u/v at every i) is unaffected."""
     if i == 0:
         aset = [Fr(1)]; bset = [floors[0], Fr(1)]
     else:
         aset = [floors[i - 1], Fr(1)]; bset = [floors[i], Fr(1)]
+    x_band = wob if boundary_band is None else boundary_band
     acc = {}
     for a in aset:
         for b in bset:
             for u in wob:
                 for v in wob:
-                    for x in wob:
+                    for x in x_band:
                         if i == 0:
                             Qp = dp_ * u + Fr(1, 2) * x * b; Qm = dm_ + Fr(1, 2) * b
                         else:
@@ -1376,7 +1486,12 @@ def _row_entries_wob(i, floors, dp_, dm_, lam, wob):
                             if mm > r[3]: r[3] = mm
     return dict((k, ((r[0], r[1]), (r[2], r[3]))) for k, r in acc.items())
 
-def theta_band_wobble_certified(levs, J0, f_pad, wob):
+def theta_band_wobble_certified(levs, J0, f_pad, wob, boundary_band=None):
+    """(round 2) `boundary_band`: forwarded to `_row_entries_wob` ONLY for the row
+    i == WIN_STAR-1 (the sole row whose x-slot, w_17, reads past the IH's i<17 window);
+    every other row gets `boundary_band=None`, reproducing the original `wob`-everywhere
+    behavior exactly. Default None (no kwarg passed) reproduces the ORIGINAL function
+    exactly at every row -- gate_sibling_band's numbers are unaffected."""
     worst = Fr(0)
     for t in PARENTS:
         floors = [frac_outward(f_pad * r, lo=True, slop=IA_SLOP)
@@ -1384,7 +1499,10 @@ def theta_band_wobble_certified(levs, J0, f_pad, wob):
         tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
         dp_ = frac_exact(d_of(tp)); dm_ = frac_exact(d_of(tm))
         for lam in (LAM_LO_F, LAM_HI_F):
-            rows = [_row_entries_wob(i, floors, dp_, dm_, lam, wob) for i in range(WIN_STAR)]
+            rows = [_row_entries_wob(i, floors, dp_, dm_, lam, wob,
+                                      boundary_band=(boundary_band if i == WIN_STAR - 1
+                                                      else None))
+                    for i in range(WIN_STAR)]
             if any(r is None for r in rows):
                 continue
             for i in range(WIN_STAR):
@@ -1403,7 +1521,11 @@ def gate_sibling_band(info, levs, J0, f_pad):
     threshold: the census does NOT extend to the real cascade here (a real gap, reported
     not hidden -- see note Section 8). Marked FAIL to keep the gap visible; INFORMATIONAL,
     does not count toward RESULT. The tighter (still sound) geometric-center band
-    [1/sqrt R*, sqrt R*] narrows the gap but also misses at this depth (note Section 8)."""
+    [1/sqrt R*, sqrt R*] narrows the gap but also misses at this depth (note Section 8).
+    This gap IS closed -- see gate SIB-CERT below, which reruns this same geometric-center
+    census at a deep anchor (J0=800, pad=999/1000) where it clears (+4.6% margin),
+    discharging (SIB-BAND). This gate remains exactly as shipped: the shallow-anchor
+    (J0*=500) exhibit of the gap, kept informational for the historical record."""
     tb = theta_band_wobble_certified(levs, J0, f_pad, WOB_FULL)
     fb, wt = F_box_wobble_certified(levs, J0, f_pad, WOB_FULL)
     thr = (1 - tb) * TAU_STAR_FR
@@ -1416,6 +1538,158 @@ def gate_sibling_band(info, levs, J0, f_pad):
                   " (the extension does NOT close at this anchor)"
                   % (J0, str(f_pad), float(tb), float(fb), float(thr),
                      "covers" if ok else "UNDER-COVERS", abs(gap)), ok))
+
+# ---- SIB-CERT: discharges (SIB-BAND) at a deep anchor -----------------------------
+#
+# GEOMETRIC-CENTER LEMMA. Given (i) the IH rho_prop@i<17(n-1) <= R* (R_STAR_FR) and
+# (ii) MAG-BOX's own per-entry box: rho_i = c^+_i/c^-_i in [LAM_LO_F, LAM_HI_F] for
+# every i (the (LAM-BOX) clause, monitored not proved -- but ALREADY a named, gated
+# assumption every load-bearing gate in this file rests on; this lemma adds NOTHING
+# beyond it), set lam_gc := sqrt(min_i rho_i * max_i rho_i). Then, in 3 lines:
+#   (i)   min_i rho_i <= lam_gc <= max_i rho_i (the geometric mean of two positive
+#         numbers sits between them), and both min_i rho_i, max_i rho_i lie in
+#         [LAM_LO_F, LAM_HI_F] by (LAM-BOX) -- so lam_gc is ITSELF a legal point of the
+#         (already-monitored) lam box: no new box, no new assumption.
+#   (ii)  w_i := rho_i / lam_gc satisfies max_i w_i = sqrt(max_i rho_i / min_i rho_i)
+#         = sqrt(rho_prop@i<17(n-1)) <= sqrt(R*) by the IH, and symmetrically
+#         min_i w_i = 1/sqrt(max_i rho_i/min_i rho_i) >= 1/sqrt(R*) -- so w_i lies in
+#         WOB_HALF = [1/sqrt(R*), sqrt(R*)] for every i, again from the IH alone.
+#   (iii) Hence the REAL one-step pair c^+_i = lam_gc * w_i * c^-_i, with lam_gc in the
+#         lam box and w_i in WOB_HALF per-entry, is exactly the object
+#         theta_band_wobble_certified/F_box_wobble_certified already box-max over (they
+#         box-max lam over [LAM_LO_F,LAM_HI_F] -- lam_gc qualifies by (i) -- AND
+#         independently per-entry over the given wobble band -- w_i qualifies by (ii),
+#         and independent-per-entry is a SAFE superset of the lam_gc-linked real w_i).
+# So a census clearing the equilibrium threshold at WOB_HALF covers the REAL cascade,
+# not merely the lam_gc==const/w_i==1 forced-proportional slice V15-IA/V17-IA certify.
+#
+# The deep anchor. At the shipped (J0*,F_STAR)=(500,99/100) this half-band census still
+# MISSES (note Section 8.4/SIB-BAND: F_box_wob=0.0417911 vs threshold, -43%). Sounding a
+# deeper, more tightly padded anchor (scratchpad diag4, reproduced exactly here by the
+# gate itself): J0=600 pad=999/1000 misses (-11.1%), J0=700 misses (-1.9%), J0=800
+# CLEARS (+4.6%) -- monotone improvement with depth, as expected (deeper anchor = looser
+# floors = smaller F_box, while theta_band_wob is comparatively flat). (J0_SIB,PAD_SIB)
+# = (800, 999/1000) is the discharge anchor; see J0_SIB/PAD_SIB above.
+
+_SIBCERT_CERT = {}   # module-level exact-Fraction record of the last SIB-CERT run, for
+                      # the cert JSON / Lean transcription (see the verification driver).
+
+def gate_sib_cert(report, levs, tamper=None):
+    """SIB-CERT [core, FULL MODE ONLY -- discharges (SIB-BAND) at the deep anchor GIVEN
+    (LAM-BOX)]: re-runs the geometric-center half-band censuses (theta_band_wobble_
+    certified / F_box_wobble_certified over WOB_HALF = [1/sqrt R*, sqrt R*]) at the deep
+    anchor (J0_SIB=800, PAD_SIB=999/1000), where -- unlike the shipped (J0*=500) anchor
+    gate_sibling_band exhibits -- the wobble-extended census CLEARS the equilibrium
+    threshold. By the GEOMETRIC-CENTER LEMMA above (a 3-line consequence of (LAM-BOX)
+    plus the IH, no new assumption), this closes the real-vs-proportional gap
+    (SIB-BAND) names: the REAL non-proportional cascade, not merely the
+    lam==const/w==1 forced-proportional surrogate V15-IA/V17-IA certify, is covered for
+    n >= 800. Combined with the deep grid (V18, now extended to n=800) covering
+    48<=n<=800 directly, (SIB-BAND) is discharged.
+
+    Outwardness self-check (runs first, unconditionally): _SQ_HI is defined as a
+    rational OUTWARD (upper) bound on sqrt(R*) -- WOB_HALF := (1/_SQ_HI, _SQ_HI) is only
+    a safe (superset) wobble band if _SQ_HI really does satisfy _SQ_HI*_SQ_HI >= R_STAR_FR
+    (an INWARD/lower bracket would silently shrink WOB_HALF below what the lemma
+    requires, making the census unsound even if it happens to clear numerically). This
+    gate re-verifies that inequality every run; if it fails, the gate FAILs immediately
+    and the (otherwise ~35s) wobble census is not run (a census built on an unsound
+    bracket is not worth computing).
+
+    Tampers (all isolated to this gate, report index 8): 'sibcert-sqrt' substitutes an
+    explicitly INWARD rational bracket on sqrt(R*) (bisection converged from below
+    instead of above) in place of _SQ_HI, tripping the outwardness self-check above.
+    'sibcert-pad' swaps the anchor pad from PAD_SIB=999/1000 to F_STAR=99/100 (the
+    shipped V17-IA anchor's pad) at the same J0=800 -- too shallow a pad at this depth
+    (sounding: -12.2%), flipping fb<=thr to MISS. 'sibcert-band' swaps the
+    geometric-center half-band WOB_HALF for the full IH band WOB_FULL=[1/R*,R*], which
+    the note's SIB-BAND sounding ladder shows cannot clear at ANY depth -- also flips to
+    MISS. None of the three touch J0_STAR/F_STAR/DEEP_GRID_FULL or any other gate's
+    inputs (tamper is checked here by name only). ('w17-shrink' targets gate MAG-BOX,
+    report index 1, not this gate -- see gate_magnitude_box.)
+
+    (round 2, PI review) BOUNDARY SLOT. Both wobble censuses range u,v,x over `wob` at
+    every row i<WIN_STAR; at i=WIN_STAR-1=16, the x-slot is entry k=17 -- w_17, ONE PAST
+    the IH's i<17 window, with no hypothesis from the IH or from MAG-BOX's ordinary
+    per-entry monitoring (also capped at i<17). This gate passes `boundary_band =
+    (W17_LO_F, W17_HI_F)` to both censuses, which routes ONLY that one x-slot (i=16) to
+    the deep box W17_LO_F/W17_HI_F=[999/1000,1001/1000] instead of WOB_HALF -- a box
+    gate MAG-BOX separately monitors over W17_GRID={500,...,800} (SIB-CERT's own
+    operative domain), the same (LAM-BOX)-class epistemic status as lam/Lambda^pm. The
+    naive "same band as the window" claim is FALSE at shallow n (w_17(48) measured up to
+    1.016780 > WOB_HALF's 1.012723); the deep box is honest and checked where the naive
+    claim was neither. See note Section 8.4's BOUNDARY ANNEX."""
+    if tamper == "sibcert-sqrt":
+        lo, hi = Fr(0), R_STAR_FR + 1          # bisection identical to _sqrt_hi_frac,
+        for _ in range(64):                    # but returning the INWARD (lo) bracket
+            mid = (lo + hi) / 2
+            if mid * mid <= R_STAR_FR:
+                lo = mid
+            else:
+                hi = mid
+        sq_hi_eff = lo                         # <= sqrt(R*) (unsound as an upper bound)
+    else:
+        sq_hi_eff = _SQ_HI                     # the shipped OUTWARD bracket, >= sqrt(R*)
+    outward_ok = (sq_hi_eff * sq_hi_eff >= R_STAR_FR)
+
+    pad = F_STAR if tamper == "sibcert-pad" else PAD_SIB
+    wob = WOB_FULL if tamper == "sibcert-band" else (Fr(1) / sq_hi_eff, sq_hi_eff)
+    boundary_band = (W17_LO_F, W17_HI_F)   # the i=16 x-slot's OWN deep box (round 2);
+                                            # unconditional -- no sibcert-* tamper touches it
+
+    if not outward_ok:
+        _SIBCERT_CERT.clear()
+        _SIBCERT_CERT["error"] = "outwardness self-check failed [tamper=%s]" % tamper
+        report.append(("SIB-CERT [core, discharges (SIB-BAND) at the deep anchor GIVEN"
+                        " (LAM-BOX), window i<17, anchor J0=%d, pad f=%s] outwardness"
+                        " self-check FAILED: sqrt-bracket %s is NOT >= sqrt(R*) (R*=%s) --"
+                        " an inward bracket would make WOB_HALF unsound, so the wobble"
+                        " census is not run [TAMPERED %s]"
+                        % (J0_SIB, str(pad), str(sq_hi_eff), str(R_STAR_FR), tamper),
+                        False))
+        return
+
+    tb = theta_band_wobble_certified(levs, J0_SIB, pad, wob, boundary_band=boundary_band)
+    fb, wt = F_box_wobble_certified(levs, J0_SIB, pad, wob, boundary_band=boundary_band)
+    thr = (1 - tb) * TAU_STAR_FR
+    ok = fb <= thr
+    margin = float((thr - fb) / thr) * 100 if thr != 0 else 0.0
+
+    # equilibrium chain, mirroring gate_forcing_ia's printed form exactly.
+    ceiling = fb / (1 - tb)
+    log_rho = ceiling / 3
+    ceiling_ok = ceiling <= TAU_STAR_FR
+    exp_bound = math.exp(float(log_rho))
+
+    _SIBCERT_CERT.clear()
+    _SIBCERT_CERT.update(dict(
+        anchor_J0=J0_SIB, pad=str(pad), locus_t=wt, tamper=tamper, ok=bool(ok),
+        F_box_wob="%d/%d" % (fb.numerator, fb.denominator),
+        theta_band_wob="%d/%d" % (tb.numerator, tb.denominator),
+        threshold="%d/%d" % (thr.numerator, thr.denominator),
+        F_box_wob_float=float(fb), theta_band_wob_float=float(tb),
+        threshold_float=float(thr), margin_pct=margin))
+
+    report.append(("SIB-CERT [core, discharges (SIB-BAND) at the deep anchor GIVEN"
+                    " (LAM-BOX), window i<17, anchor J0=%d, pad f=%s] geometric-center"
+                    " half-band censuses (lemma: MAG-BOX per-entry rho_i in"
+                    " [LAM_LO,LAM_HI] => lam_gc=sqrt(min*max) in the lam box,"
+                    " w_i=rho_i/lam_gc in [1/sqrtR*,sqrtR*]): theta_band_wob=%.6f,"
+                    " F_box_wob=%.7f (locus t=%.4f) <= threshold (1-theta_wob)*tau*"
+                    " = %.7f (margin %.1f%%, exact-Fraction compare; sqrt bracket"
+                    " outward-checked), floors (FLOOR-PERSIST @ 999/1000)%s; boundary slot"
+                    " (i=16,x)=w_17 (outside the IH window) ranges over the monitored deep"
+                    " box W17=[999/1000,1001/1000] ((LAM-BOX) class, gate MAG-BOX,"
+                    " levels 500..800)\n"
+                    "        equilibrium chain: F_box_wob/(1-theta_wob) = %.8f <= tau*"
+                    " = %.8f [%s]; (1/3)* = %.8f <= ln(TARGET) = %.8f; exp(.) = %.6f"
+                    " <= TARGET = %.8f [%s]"
+                    % (J0_SIB, str(pad), float(tb), float(fb), wt, float(thr), margin,
+                       " [TAMPERED %s]" % tamper
+                       if tamper in ("sibcert-pad", "sibcert-band") else "",
+                       float(ceiling), float(TAU_STAR_FR),
+                       "OK" if ceiling_ok else "MISS", float(log_rho), LTARGET,
+                       exp_bound, TARGET, "OK" if exp_bound <= TARGET else "MISS"), ok))
 
 def gate_vtrack(report, levs, grid, expect_max, tamper=None, show_table=False):
     """V18 VTRACK: deep-grid rho_prop@i<17(n)<=TARGET + monotone + V_17 tau*-crossover,
@@ -1492,11 +1766,17 @@ def _get_survivors(levs, jmax, jmax2):
 
 def compute(mode='full', fallback=False, tamper=None, show_table=False):
     """mode='full' (default): the discharge's own claim, base anchor J0*=500 (fallback:
-    430), grid DEEP_GRID_FULL -- this is the ship, not hidden behind a flag.
+    430), grid DEEP_GRID_FULL -- this is the ship, not hidden behind a flag. Also runs
+    gate SIB-CERT (deep anchor J0_SIB=800), UNLESS fallback=True: SIB-CERT is skipped
+    under --fallback (an informational SKIPPED line is printed instead) since the
+    deep-anchor discharge is specific to the primary (J0*,F_STAR) chain's own (LAM-BOX)
+    monitoring, not the legacy fallback chain.
     mode='quick': a shallow (J0 capped at 200) subset for fast dev iteration ONLY --
     NOT a certified claim at that depth (MAG-BOX/V17-IA/V18 will typically MISS at
-    J0=200; that is expected and does not represent the ship's result)."""
+    J0=200; that is expected and does not represent the ship's result). SIB-CERT is
+    always skipped under --quick (deep anchor J0_SIB=800 requires the full build)."""
     quick = (mode == 'quick')
+    run_sibcert = (mode == 'full') and (not fallback)
     grid = DEEP_GRID_QUICK if quick else DEEP_GRID_FULL
     theta_grid = THETA_GRID_DEFAULT if quick else THETA_GRID_FULL
     bridge_grid = BRIDGE_GRID_DEFAULT if quick else BRIDGE_GRID_FULL
@@ -1504,7 +1784,8 @@ def compute(mode='full', fallback=False, tamper=None, show_table=False):
     J0_full = J0_FALLBACK if fallback else J0_STAR
     J0 = min(J0_full, 200) if quick else J0_full
     f_pad = F_LEGACY if fallback else F_STAR
-    jmax = max(grid + theta_grid + bridge_grid + mag_grid + [J0])
+    jmax = max(grid + theta_grid + bridge_grid + mag_grid + [J0]
+               + ([J0_SIB] if run_sibcert else []))
     levs = _get_levels(jmax)
     jmax2 = min(jmax, 130)
     survivors = _get_survivors(levs, jmax, jmax2)
@@ -1522,6 +1803,11 @@ def compute(mode='full', fallback=False, tamper=None, show_table=False):
     gate_vtrack(report, levs, grid, max(grid), tamper=tamper, show_table=show_table)  # V18  report[7]
     gate_bridge(info, levs, bridge_grid, tamper=tamper)                        # V19       info[3]
     gate_sibling_band(info, levs, J0, f_pad)                                   # SIB-BAND  info[4]
+    if run_sibcert:
+        gate_sib_cert(report, levs, tamper=tamper)                             # SIB-CERT  report[8]
+    else:
+        info.append(("SIB-CERT [SKIPPED in this mode: deep anchor J0=%d requires the"
+                      " full build]" % J0_SIB, True))                          # info[5]
     return report, info, theta_star
 
 def run(mode='full', fallback=False, tamper=None, show_table=False):
@@ -1538,8 +1824,10 @@ def run(mode='full', fallback=False, tamper=None, show_table=False):
     for name, ok in report:
         print("  [%s] %s" % ("PASS" if ok else "FAIL", name))
     print("RESULT: %d/%d %s" % (npass, len(report), "PASS" if npass == len(report) else "FAIL"))
-    print("STATUS: CONDITIONAL -- certified-census discharge MODULO the computed clauses"
-          " (LAM-BOX, SIB-BAND, FOLD, FLOOR-PERSIST); see the note's Section 8.")
+    print("STATUS: CONDITIONAL -- certified-census discharge MODULO three computed clauses"
+          " (LAM-BOX, FOLD, FLOOR-PERSIST); (SIB-BAND) DISCHARGED at the deep anchor by"
+          " gate SIB-CERT (geometric-center certified census) GIVEN (LAM-BOX); see the"
+          " note's Section 8.")
     print()
     print("INFORMATIONAL (reported, NOT counted toward RESULT):")
     for name, ok in info:
@@ -1548,11 +1836,14 @@ def run(mode='full', fallback=False, tamper=None, show_table=False):
     print("elapsed: %.1fs (mode=%s%s)" % (time.time() - t0, mode, " fallback" if fallback else ""))
     return npass == len(report)
 
-# report indices: 0 F3, 1 MAG-BOX, 2 V15-IA, 3 V16, 4 V16b, 5 V17, 6 V17-IA, 7 V18
-# info indices:   0 V15-GRID, 1 V15-CERT, 2 V17-INFO, 3 V19, 4 SIB-BAND
+# report indices: 0 F3, 1 MAG-BOX, 2 V15-IA, 3 V16, 4 V16b, 5 V17, 6 V17-IA, 7 V18,
+#                 8 SIB-CERT (full mode only; absent in --quick/--fallback)
+# info indices:   0 V15-GRID, 1 V15-CERT, 2 V17-INFO, 3 V19, 4 SIB-BAND,
+#                 5 SIB-CERT-SKIPPED (quick/fallback only; absent in full mode)
 TAMPERS = ["f3-corrupt", "magbox-shrink", "theta-tot-gate", "nfree-corrupt",
            "theta-ia-tighten", "theta-ia-sign", "window-bound", "forcing-bound",
-           "v17ia-graze", "c1-target", "vtrack-level-drop", "g2-ceiling", "bridge-w-gate"]
+           "v17ia-graze", "c1-target", "vtrack-level-drop", "g2-ceiling", "bridge-w-gate",
+           "sibcert-sqrt", "sibcert-pad", "sibcert-band", "w17-shrink"]
 TAMPER_TARGET = {
     "f3-corrupt": ("report", 0),        # F3
     "magbox-shrink": ("report", 1),     # MAG-BOX: shrink boxes so realized magnitudes leave them
@@ -1567,6 +1858,10 @@ TAMPER_TARGET = {
     "vtrack-level-drop": ("report", 7), # V18 deep-level corruption
     "g2-ceiling": ("info", 2),          # V17-INFO (already-FAIL baseline; honest substitute)
     "bridge-w-gate": ("info", 3),       # V19
+    "sibcert-sqrt": ("report", 8),      # SIB-CERT: inward sqrt bracket, trips the outwardness self-check
+    "sibcert-pad": ("report", 8),       # SIB-CERT: shallower pad (99/100) at J0=800 -- misses
+    "sibcert-band": ("report", 8),      # SIB-CERT: full (non-geometric-center) band -- misses
+    "w17-shrink": ("report", 1),        # MAG-BOX: shrink the W17 boundary-slot box below realized
 }
 
 def tamper_selftest(mode='full', fallback=False):

@@ -30,6 +30,55 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - (SIB-BAND) discharged at deep anchor (SIB-CERT gate)
+
+- **Agent/model:** Claude Fable 5 (PI) + Sonnet builder.
+- **Files added or changed:**
+  `experimental/scripts/verify_dense_shell_prop_tail_reduction.py` (new gate
+  `gate_sib_cert`/SIB-CERT, anchor constants `J0_SIB=800`/`PAD_SIB=999/1000`, `DEEP_GRID_FULL`
+  extended to `n=800`, 3 new tampers, docstring/STATUS updates);
+  `experimental/notes/thresholds/dense_shell_prop_tail_reduction.md` (Section 8.4 SIB-BAND
+  entry rewritten to DISCHARGED, geometric-center lemma + proof, sounding trend; every
+  "four computed clauses" site updated to three-plus-discharged);
+  `experimental/data/certificates/dense-shell-prop-tail-reduction/dense_shell_prop_tail_reduction.json`
+  (new `discharged_clauses.SIB_BAND.sib_cert` block with exact-Fraction certified numbers;
+  old `sib_band` exhibit block kept, marked `role: exhibit_shallow_anchor`);
+  `experimental/lean/prop_tail_reduction/PropTailReduction.lean` (gateRows extended to
+  `n=800`; SibCert `decide` theorem, see What/Next). Changed:
+  `experimental/agents-log.md` (this entry).
+- **Status:** CONDITIONAL (certified-census discharge; clause count reduced 4 -> 3).
+- **What is being added:** the (SIB-BAND) computed clause — whether the load-bearing
+  gates' forced-proportional surrogate `c^+=lam*c^-` (certified at the shallow anchor
+  `J0*=500`) actually covers the real, non-proportional cascade — is DISCHARGED by a new
+  core gate SIB-CERT, using a 3-line GEOMETRIC-CENTER LEMMA (`lam_gc :=
+  sqrt(min_i rho_i*max_i rho_i)` is itself a legal `(LAM-BOX)` point, so
+  `w_i := rho_i/lam_gc` lies in the geometric-center half-band `[1/sqrt(R*),sqrt(R*)]` by
+  the governing IH alone — no assumption beyond `(LAM-BOX)`, already a named, monitored
+  clause). Re-running the wobble census at a much deeper anchor (`J0_SIB=800`, pad
+  `999/1000`) clears the equilibrium threshold: `theta_band_wob=0.602930`,
+  `F_box_wob=0.0287228 <= threshold=0.0301199` (margin `+4.6%`, exact-Fraction compare).
+  Shallower deep anchors miss (`J0=600`: `-11.1%`; `J0=700`: `-1.9%`); the full
+  (non-geometric-center) band never clears at any depth. The deep grid (V18) is extended
+  to `n=800` to match. The three remaining computed clauses are (LAM-BOX), (FOLD),
+  (FLOOR-PERSIST).
+- **How it is useful:** reduces the packet's conditional clause list from four to three,
+  tightening the (PROP-TAIL) discharge that #885's INV-TAIL closure and #880's `|K|=1`
+  dense-shell class-sum dichotomy rest on, on this repository's experimental-ledger
+  track. Full verifier run: RESULT 9/9 PASS (was 8/8; SIB-CERT is report index 8, full
+  mode only). All three new tampers (`sibcert-sqrt`, `sibcert-pad`, `sibcert-band`) flip
+  only SIB-CERT to FAIL, confirmed isolated; one old tamper (`magbox-shrink`) re-checked
+  for no regression. `--quick`/`--fallback` print an informational SIB-CERT-SKIPPED line
+  and keep their prior gate counts (SIB-CERT needs the full `J0=800` build).
+- **What to do next:** a human/later-agent check of the geometric-center lemma's 3-line
+  proof (Section 8.4 of the note) and the SIB-CERT gate's outwardness self-check
+  (`_SQ_HI^2 >= R_STAR_FR`); the Lean package's SibCert `decide` theorem transcribes the
+  gate's own rounded-outward rationals and should be spot-checked against a fresh
+  `--table` run. (LAM-BOX)/(FOLD)/(FLOOR-PERSIST) remain open — see note Section 8.4 for
+  their upgrade paths.
+- **Round-2 addendum (same day):** PI review caught the out-of-window boundary slot
+  (`i=16, x=w_17`); discharged via the monitored `W17` deep box (`(LAM-BOX)` class); the
+  shallow counterexample `w17(48)=1.0168` vs `1.0127` is documented in the note annex.
+
 ### 2026-07-17 - Dense-shell PROP-TAIL: certified-census discharge (CONDITIONAL) via the deep-base equilibrium chain
 
 - **Agent/model:** Claude (PI + derivation/lab fleet).

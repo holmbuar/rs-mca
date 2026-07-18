@@ -1,7 +1,7 @@
 {
  "packet": "dense_shell_prop_tail_reduction",
- "date": "2026-07-17",
- "status": "CONDITIONAL -- certified-census discharge MODULO the enumerated computed clauses (LAM-BOX, SIB-BAND, FOLD, FLOOR-PERSIST). Composed equilibrium chain PROVED (sufficiency); load-bearing gates V15-IA/V17-IA are exact-Fraction interval-arithmetic censuses of the FORCED-PROPORTIONAL surrogate.",
+ "date": "2026-07-18",
+ "status": "CONDITIONAL -- certified-census discharge MODULO three computed clauses (LAM-BOX, FOLD, FLOOR-PERSIST). The fourth, (SIB-BAND), is DISCHARGED at a deep anchor by gate SIB-CERT (geometric-center certified census, GIVEN (LAM-BOX) alone -- see discharged_clauses.SIB_BAND below). Composed equilibrium chain PROVED (sufficiency); load-bearing gates V15-IA/V17-IA are exact-Fraction interval-arithmetic censuses of the FORCED-PROPORTIONAL surrogate at the shallow anchor (J0*=500, f*=99/100); gate SIB-CERT separately certifies the REAL non-proportional cascade at the deep anchor (J0_SIB=800, PAD_SIB=999/1000). ROUND 2 (PI review, same day): corrected a boundary-slot gap -- the wobble censuses' i=16 row reads x=w_17, one index past the IH's i<17 window; w_17 now gets its own (LAM-BOX)-class deep box, monitored by MAG-BOX (see discharged_clauses.SIB_BAND.boundary_slot). Clause count and STATUS unaffected; the fix only tightens SIB-CERT's margin.",
  "predecessor": {
   "packet": "dense_shell_inv_tail_closure",
   "pr": "#885",
@@ -9,7 +9,7 @@
   "stacked_on": "a575019",
   "note_path": "experimental/notes/thresholds/dense_shell_inv_tail_closure.md"
  },
- "claim": "(PROP-TAIL) (#885's single residual scalar: rho_prop@i<17(n) <= 1.02560749 for all n) is discharged as a certified-census theorem MODULO the computed clauses below, via the deep-base equilibrium chain: an exact reduction lemma + an exact spectral gap + a certified one-step recursion + a joint induction, closed by the R-a route (deep-base constant forcing) at the shipped anchor (J0*, f*, theta*) = (500, 99/100, theta_band). theta_band is gate V15-IA's certified band-uniform seminorm bound over the certified LC ratio box (lam-minced enclosure); F_box is gate V17-IA's exact-Fraction minced-IA forcing census. BOTH certify the forced-proportional surrogate c^+ = lam*c^- -- the real non-proportional cascade is covered only up to the sibling wobble the (SIB-BAND) clause quantifies (which does not close). The arithmetic fact rho_prop@i<17(n) <= 1.02560749 is supported with margin by every gate.",
+ "claim": "(PROP-TAIL) (#885's single residual scalar: rho_prop@i<17(n) <= 1.02560749 for all n) is discharged as a certified-census theorem MODULO the computed clauses below, via the deep-base equilibrium chain: an exact reduction lemma + an exact spectral gap + a certified one-step recursion + a joint induction, closed by the R-a route (deep-base constant forcing) at the shipped anchor (J0*, f*, theta*) = (500, 99/100, theta_band). theta_band is gate V15-IA's certified band-uniform seminorm bound over the certified LC ratio box (lam-minced enclosure); F_box is gate V17-IA's exact-Fraction minced-IA forcing census. BOTH certify the forced-proportional surrogate c^+ = lam*c^- at this shallow anchor -- the real non-proportional cascade is covered by gate SIB-CERT's geometric-center wobble census at a deep anchor (J0_SIB=800, PAD_SIB=999/1000), which DISCHARGES the (SIB-BAND) clause given (LAM-BOX) alone (see discharged_clauses.SIB_BAND). The arithmetic fact rho_prop@i<17(n) <= 1.02560749 is supported with margin by every gate.",
  "status_word": "CONDITIONAL",
  "headline": "the discharge holds as a certified-census theorem modulo the enumerated computed clauses",
  "discharge_chain_parametric": [
@@ -21,8 +21,9 @@
   "V-recursion: V_17(n) <= theta* V_17(n-1) + Phi(n-1), theta*=theta_band (gate V15-IA, lam-minced certified enclosure over the box -- certifies the FORCED-PROPORTIONAL surrogate; see SIB-BAND)",
   "arithmetic slot: v_n <= tau* for n > J* -- via R-a (gates F3 + V15-IA + V17-IA): F_box(500,99/100)=0.02687612 <= (1-theta_band)*tau*=0.03018857, 11.0% margin (exact-Fraction compare)",
   "slot closed (for the proportional surrogate): rho_prop@i<17(n) <= TARGET for all n>=500",
-  "deep grid (gate V18) covers 48<=n<=500 directly: rho_prop@i<17(n)<=TARGET at every tested level, monotone non-increasing",
-  "CONDITIONAL on the computed clauses (LAM-BOX, SIB-BAND, FOLD, FLOOR-PERSIST): given those, #885's INV-TAIL closure and #880's |K|=1 dichotomy become unconditional at every B on this repo's experimental-ledger track"
+  "deep grid (gate V18) covers 48<=n<=800 directly (extended for the SIB-CERT anchor): rho_prop@i<17(n)<=TARGET at every tested level, monotone non-increasing",
+  "SIB-CERT (gate, full mode only): the geometric-center wobble census (GEOMETRIC-CENTER LEMMA, no assumption beyond LAM-BOX) re-run at a deep anchor (J0_SIB=800, PAD_SIB=999/1000) CLEARS the equilibrium threshold, covering the REAL non-proportional cascade -- DISCHARGES (SIB-BAND)",
+  "CONDITIONAL on three computed clauses (LAM-BOX, FOLD, FLOOR-PERSIST): given those, #885's INV-TAIL closure and #880's |K|=1 dichotomy become unconditional at every B on this repo's experimental-ledger track"
  ],
  "constants": {
   "target_rho_prop": 1.02560749,
@@ -75,20 +76,13 @@
   "v17_n2_range": [279.578, 284.725]
  },
  "computed_clauses": {
-  "note": "The remaining computed inputs to the certified chain. STATUS=CONDITIONAL: PROVED would require zero of these; LAM-BOX alone precludes it.",
+  "note": "The remaining THREE computed inputs to the certified chain (a fourth, SIB_BAND, is DISCHARGED -- see discharged_clauses below, not here). STATUS=CONDITIONAL: PROVED would require zero of these; LAM-BOX alone precludes it.",
   "LAM_BOX": {
    "asserts": "the realized magnitudes lam=sum(c^+)/sum(c^-), Lambda^+/-, and per-entry rho_i=c^+_i/c^-_i lie in the hardcoded boxes lam in [0.72,0.95], Lambda^+ in [-1.16,-0.82], Lambda^- in [-0.66,-0.35] that both load-bearing gates box-max over",
    "monitor_gate": "MAG-BOX (core) -- checks all realized magnitudes in-box over 6 levels x 41 parents",
    "evidence": "0 violations; realized lam in [0.7759,0.9190], Lambda^+ in [-1.1429,-0.8883], Lambda^- in [-0.6334,-0.3788], rho_i in [0.7734,0.9259]; worst headroom 0.0172 (Lambda^+ floor, thin ~1.5%)",
    "upgrade": "a PROVED interval for lam/Lambda^pm from the exact mass recursion + explicit a'(t) bounds",
    "label": "COMPUTED (measured+pad), monitored not proved"
-  },
-  "SIB_BAND": {
-   "asserts": "the load-bearing gates certify the forced-proportional surrogate c^+=lam*c^-; the real non-proportional cascade (c^+_i=lam*w_i*c^-_i, per-entry sibling wobble w_i by the IH rho_prop<=R*) is covered by the extension only if the wobble-enlarged census clears",
-   "monitor_gate": "SIB-BAND (informational)",
-   "evidence": "at the shipped anchor the wobble-extended census (w_i in [1/R*,R*]) gives theta_band_wob=0.629641, F_box_wob=0.0571211 vs threshold (1-theta_band_wob)*tau*=0.0280937 -- EXCEEDS by 103.3%: the extension does NOT close. The tighter, still-sound geometric-center band [1/sqrt R*, sqrt R*] narrows the gap but also misses at feasible depth: F_box_wob=0.0417911 at (500,99/100) (miss 43%), clearing only at J0>=800/pad 999-1000/+4.6% (build ~240s, tamper-selftest beyond the 10-min guard) -- beyond this packet's certified grid depth. The full [1/R*,R*] band cannot clear at ANY depth (its ratio-collapsed deep-base limit 0.0321 already exceeds ~0.028).",
-   "upgrade": "certify the wobble-extended census at a deep enough base, OR a stated-modulus Lipschitz bound of the real-vs-proportional discrepancy shown <= the certified box-sup slack",
-   "label": "COMPUTED reduction (the load-bearing gates are the w_i==1 slice; real-vs-proportional coverage rests on this)"
   },
   "FOLD": {
    "asserts": "the child-window fold spread_{i<18}(L) <= (57/50) spread_{i<17}(L)",
@@ -105,7 +99,59 @@
    "label": "COMPUTED (imported from the predecessor)"
   }
  },
+ "discharged_clauses": {
+  "note": "Clauses that WERE computed/open and are now discharged by a deeper certified census. Distinct from computed_clauses above (still open) -- kept separate so 'modulo N clauses' always means N genuinely open items.",
+  "SIB_BAND": {
+   "asserts": "(as before discharge) the load-bearing gates V15-IA/V17-IA certify only the forced-proportional surrogate c^+=lam*c^-; the real non-proportional cascade (c^+_i=lam*w_i*c^-_i, per-entry sibling wobble w_i by the IH rho_prop<=R*) is covered by the extension only if the wobble-enlarged census clears.",
+   "discharged_by": "gate SIB-CERT: the GEOMETRIC-CENTER LEMMA (lam_gc:=sqrt(min_i rho_i*max_i rho_i) is itself a legal (LAM-BOX) point since both factors are, by (LAM-BOX); w_i:=rho_i/lam_gc then lies in [1/sqrt(R*),sqrt(R*)] by the IH alone, for i<17 -- no assumption beyond (LAM-BOX)) re-run at a deep anchor, where the census clears. round 2 (PI review): the lemma's IH covers i<17 only; the census's single out-of-window slot (i=16 row's x, i.e. w_17) is discharged separately via boundary_slot below, a (LAM-BOX)-class box MAG-BOX monitors on SIB-CERT's own operative domain.",
+   "sib_cert": {
+    "anchor_J0": 800,
+    "pad": "999/1000",
+    "band": "geometric-center [1/sqrtR*, sqrtR*] for i<17 (outward bracket _SQ_HI, self-checked >= sqrt(R*) every run) PLUS the boundary_slot box below for the single i=16/x=w_17 slot",
+    "F_box_wob": "22315674672124847218921246647651124162712054805224003354507892753661940133563149547023459195670090922582059999250908784570831945754390757/776933629129533432642428554173058794001973506720746287976072140157112829619532019823429809948687092992006240415057779236358773700000000000",
+    "F_box_wob_float": 0.028722755503744955,
+    "theta_band_wob": "1205859/2000000",
+    "theta_band_wob_float": 0.6029295,
+    "threshold": "60239828097354668829/2000000000000000000000",
+    "threshold_float": 0.030119914048677334,
+    "margin_pct": 4.638653824424623,
+    "round2_note": "the numbers above are ROUND 1 (pre-boundary-fix: the i=16 x-slot used WOB_HALF, not the boundary_slot box). Round 2's corrected numbers (>= 4.64% margin, boundary-fix can only tighten) are in round2 below.",
+    "round2": {
+     "F_box_wob": "70840699623939855318929690172961316204030703196213216412796072922867002249713113682983434237812761874191039255149625880991979147875175543/2535173759877739039510772089485732923682119458113648656189059673461945296508458428071614138023834279941004641856392597926466056300000000000",
+     "F_box_wob_float": 0.02794313381791874,
+     "theta_band_wob": "1204131/2000000",
+     "theta_band_wob_float": 0.6020655,
+     "threshold": "60370906108630032861/2000000000000000000000",
+     "threshold_float": 0.030185453054315015,
+     "margin_pct": 7.428476333820458,
+     "boundary_band": "[999/1000, 1001/1000] at the i=16 row's x-slot only (w_17); WOB_HALF=[1/sqrtR*,sqrtR*] at every other slot (i<17)",
+     "lean_literals": {"sibcertFHi": 27943134, "sibcertThetaHi": 602065500, "tauStarNum_reused": 758553, "note": "both rounded UP over 10^9 (conservative direction); lake build green"}
+    },
+    "soundness": "lam_gc in LAM box via MAG-BOX per-entry rho_i for i<17; no assumption beyond (LAM-BOX); boundary slot (i=16,x=w_17) discharged via boundary_slot below, same (LAM-BOX) epistemic class",
+    "gate": "SIB-CERT",
+    "tampers": ["sibcert-sqrt", "sibcert-pad", "sibcert-band"],
+    "sounding_trend_at_pad_999_1000": {
+     "note": "round 1 (pre-boundary-fix) sounding, kept as the qualitative motivation for the deep anchor; not re-derived under the round-2 fix (out of scope this round)",
+     "J0=600": "F_box_wob=0.0331175, threshold=0.0298019, margin=-11.1% MISS",
+     "J0=700": "F_box_wob=0.0305601, threshold=0.0299836, margin=-1.9% MISS",
+     "J0=800": "F_box_wob=0.0287228, threshold=0.0301199, margin=+4.6% CLEARS (round 1; see round2 above for the corrected value)"
+    },
+    "full_band_at_deep_anchor": "F_box_wob(800,999/1000, full [1/R*,R*] band)=0.0445412 vs threshold 0.0290492, margin -53.3% MISS -- the full band never clears, even at the deep anchor; only the tighter geometric-center half-band does"
+   },
+   "boundary_slot": {
+    "slot": "i=16, x=w_17",
+    "box": "[999/1000, 1001/1000]",
+    "monitored": "MAG-BOX, levels 500..800, 41 parents",
+    "measured_at_800": "[1.000018, 1.000056]",
+    "decay": "~C/n^2, C~36",
+    "shallow_exit": "w17(48)max=1.016780 > 1.012723 (why the slot needs its own box)"
+   },
+   "label": "DISCHARGED (anchored census, gate SIB-CERT, given (LAM-BOX)); round-2 boundary-slot correction applied (PI review)"
+  }
+ },
  "sib_band": {
+  "role": "exhibit_shallow_anchor -- historical record of the gap at the SHIPPED (J0*=500,f*=99/100) anchor; kept exactly as originally shipped, unchanged",
+  "superseded_by": "discharged_clauses.SIB_BAND.sib_cert (gate SIB-CERT, deep anchor J0=800, pad=999/1000) -- the gap this block exhibits at the shallow anchor is CLOSED there",
   "wobble_band_full": "[1/R*, R*], R*=TARGET (safe per-entry superset of the IH constraint max_i w_i/min_i w_i <= R*)",
   "wobble_band_geometric_center": "[1/sqrt R*, sqrt R*] (tighter, still sound: lam := sqrt(min rho * max rho) lands in [0.72,0.95] and w_i=rho_i/lam in the half-band by the IH)",
   "theta_band_wob_full": 0.629641,
@@ -114,30 +160,33 @@
   "gap_pct_full": 103.3,
   "f_box_wob_half_at_500_99_100": 0.0417911,
   "gap_pct_half_at_500_99_100": 43.3,
-  "half_band_clears_at": "J0>=800, pad 999/1000, +4.6% (beyond this packet's certified grid depth and the 10-min tamper-selftest guard)",
+  "half_band_clears_at": "J0>=800, pad 999/1000, +4.6% -- see discharged_clauses.SIB_BAND.sib_cert (this is no longer beyond the packet's grid depth: V18 is now extended to n=800)",
   "full_band_deep_limit": "0.0321 (ratio box collapsed) > threshold ~0.028 -- full band cannot clear at any depth",
-  "outcome": "the wobble extension was attempted seriously and MISSES at the shipped anchor and, for the PI-specified [1/R*,R*] band and ladder, at every feasible anchor; kept as the (SIB-BAND) computed clause with the gap reported"
+  "outcome": "at THIS (shallow) anchor the wobble extension MISSES, exactly as originally shipped; the gap is discharged at the deep anchor instead (discharged_clauses.SIB_BAND), not by strengthening this exhibit"
  },
  "gates": {
   "count_core": 8,
   "count_informational": 4,
-  "list_core": "F3 FLOORS, MAG-BOX (LAM-BOX monitor), V15-IA THETA-BAND (load-bearing), V16 THETASYMB, V16b WINDOW, V17 FORCING, V17-IA FORCING (load-bearing), V18 VTRACK",
-  "list_informational": "V15-GRID THETA (robustness), V15-CERT (grid-sampled cross-ref), V17-INFO (G2 negative control), V19 BRIDGE; plus SIB-BAND (the wobble gap, marked FAIL to keep it visible)",
-  "result_full": "8/8 PASS, ~165s",
-  "default_mode": "full (J0*=500, f*=99/100) -- this IS the ship",
-  "flags": "--quick (dev subset, NOT certified), --table (per-level rho/V17 table the Lean package transcribes), --fallback (legacy informational (430,49/50,theta*=1/2 fixed) chain), --tamper-selftest",
-  "tampers": 13,
-  "tampers_added": ["magbox-shrink (MAG-BOX: shrink boxes so realized magnitudes leave them)", "theta-ia-sign (V15-IA: flip the census max->min direction; caught by the realized-seminorm floor check; isolated since a lower theta_band only relaxes V17-IA)"]
+  "count_core_full_mode": 9,
+  "count_core_quick_or_fallback_mode": 8,
+  "list_core": "F3 FLOORS, MAG-BOX (LAM-BOX monitor), V15-IA THETA-BAND (load-bearing), V16 THETASYMB, V16b WINDOW, V17 FORCING, V17-IA FORCING (load-bearing), V18 VTRACK, SIB-CERT (discharges SIB-BAND -- full mode only, SKIPPED with an informational line under --quick/--fallback)",
+  "list_informational": "V15-GRID THETA (robustness), V15-CERT (grid-sampled cross-ref), V17-INFO (G2 negative control), V19 BRIDGE; plus SIB-BAND (the shallow-anchor wobble exhibit, marked FAIL to keep the historical record visible -- discharged elsewhere by SIB-CERT); plus SIB-CERT-SKIPPED (quick/fallback only)",
+  "result_full": "9/9 PASS, ~340s (build now reaches n=800 for the SIB-CERT anchor)",
+  "default_mode": "full (J0*=500, f*=99/100, PLUS the SIB-CERT deep anchor J0_SIB=800, PAD_SIB=999/1000) -- this IS the ship",
+  "flags": "--quick (dev subset, NOT certified; SIB-CERT skipped), --table (per-level rho/V17 table the Lean package transcribes, now to n=800), --fallback (legacy informational (430,49/50,theta*=1/2 fixed) chain; SIB-CERT skipped), --tamper-selftest",
+  "tampers": 17,
+  "tampers_added": ["magbox-shrink (MAG-BOX: shrink boxes so realized magnitudes leave them)", "theta-ia-sign (V15-IA: flip the census max->min direction; caught by the realized-seminorm floor check; isolated since a lower theta_band only relaxes V17-IA)", "sibcert-sqrt (SIB-CERT: substitute an inward rational bracket on sqrt(R*), tripping the gate's own outwardness self-check before the census runs)", "sibcert-pad (SIB-CERT: swap the deep anchor's pad 999/1000 for the shallower 99/100 -- sounds -12.2% at J0=800, flips to MISS)", "sibcert-band (SIB-CERT: swap the geometric-center half-band for the full [1/R*,R*] band -- cannot clear at any depth, flips to MISS)", "w17-shrink (round 2, MAG-BOX: shrink the boundary-slot box W17 to a tiny interval strictly below the realized w_17 range on W17_GRID -- flips MAG-BOX, not SIB-CERT, since the boundary slot's hypothesis is monitored by MAG-BOX)"]
  },
  "lean": {
   "package": "experimental/lean/prop_tail_reduction",
   "sorry_count": 0,
   "decide_only": true,
-  "scope_note": "exact/finite skeleton only (ring identity + sign corollary behind theta~<=1/5 post-squaring, the 289/256<=57/50 rational fact, and two transcribed-table threshold/monotonicity checks); the trig substitution, the squaring step, tau*'s transcendental value, and every contraction/Birkhoff/CLT argument stay informal by design. The per-level table transcribed matches the verifier's --table output."
+  "scope_note": "exact/finite skeleton only (ring identity + sign corollary behind theta~<=1/5 post-squaring, the 289/256<=57/50 rational fact, and transcribed-table threshold/monotonicity checks); the trig substitution, the squaring step, tau*'s transcendental value, the GEOMETRIC-CENTER LEMMA, and every contraction/Birkhoff/CLT argument stay informal by design. The per-level table (gateRows, now n=48..800) matches the verifier's --table output.",
+  "sibcert_addition": "gateRows extended with n=550,600,650,700,750,800 (same 8-digit convention); new theorem sibcert_clears : sibcertFHi*10^7 <= (10^9-sibcertThetaHi)*tauStarNum := by decide, where sibcertFHi=28722756 and sibcertThetaHi=602929500 are F_box_wob/theta_band_wob rounded UP to 9 digits (conservative direction) and tauStarNum (758553/10^7) is reused unchanged. Builds clean (lake build, ~1s, no sorry)."
  },
  "scope": {
   "track": "repo experimental-profile-ledger only: #880's |K|=1 dense-shell class-sum dichotomy and #885's INV-TAIL closure chain",
   "risk_limits": "This packet makes no claim about, and is not on the critical path of, any separately submitted manuscript's conditionals (e.g. a paving-track ePrint submission and its own line-item conditionals). Those are a distinct obligation, entirely out of scope here; nothing in this packet's discharge chain, residual ladder, or consumer framing should be read as bearing on them."
  },
- "discharge_note": "This packet discharges (PROP-TAIL) as a certified-census theorem MODULO the four enumerated computed clauses (LAM-BOX, SIB-BAND, FOLD, FLOOR-PERSIST), all green/monitored at the shipped anchor. STATUS=CONDITIONAL: the load-bearing gates certify the forced-proportional surrogate, and the sibling-wobble extension (SIB-BAND) does not close at feasible depth. R-b (sandwich) and R-c (sharp Edgeworth-1) remain OPEN STRENGTHENINGS toward the sharp C/n^2 law, not obligations."
+ "discharge_note": "This packet discharges (PROP-TAIL) as a certified-census theorem MODULO three enumerated computed clauses (LAM-BOX, FOLD, FLOOR-PERSIST), all green/monitored at the shipped anchor. The fourth, (SIB-BAND), is DISCHARGED (this revision) at a deep anchor (J0=800, pad=999/1000) by gate SIB-CERT's geometric-center wobble census, given (LAM-BOX) alone -- no new assumption. STATUS=CONDITIONAL: the load-bearing gates V15-IA/V17-IA certify the forced-proportional surrogate at the shallow anchor; SIB-CERT separately certifies the real, non-proportional cascade at the deep anchor. R-b (sandwich) and R-c (sharp Edgeworth-1) remain OPEN STRENGTHENINGS toward the sharp C/n^2 law, not obligations."
 }

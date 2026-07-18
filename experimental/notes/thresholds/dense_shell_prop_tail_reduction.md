@@ -15,27 +15,37 @@ certified by an exact-Fraction, lam-minced interval-arithmetic census of the tan
 seminorm (gate V15-IA) feeding an exact-Fraction minced interval-arithmetic forcing
 census (gate V17-IA), plus a re-certified floor family at the deep base (gate F3) plus
 full base coverage to `n = 500` (gate V18). **The discharge holds as a certified-census
-theorem MODULO the enumerated computed clauses** (Section 8.4: LAM-BOX, SIB-BAND, FOLD,
+theorem MODULO the enumerated computed clauses** (Section 8.4: LAM-BOX, FOLD,
 FLOOR-PERSIST) — its two load-bearing gates certify a **forced-proportional surrogate**
 (`c^+ = lam c^-`) of the real cascade, so the STATUS is **CONDITIONAL**, not PROVED. The
 contraction gate `theta* = theta_band` is a certified band-uniform constant from gate
-V15-IA, not an asserted number.
+V15-IA, not an asserted number. **Upgrade (this revision):** the fourth clause,
+(SIB-BAND) — whether the forced-proportional surrogate's coverage extends to the real,
+non-proportional cascade — is now **DISCHARGED**: gate SIB-CERT re-runs the same
+wobble census at a much deeper anchor (`J0 = 800`, floor pad `999/1000`) using the
+tighter, geometric-center wobble band (its own boundary slot, `i=17`, one past the IH's
+window, covered by a separately-monitored deep box — Section 8.4's BOUNDARY ANNEX), and
+it clears (`+7.4%` margin), covering the real cascade with no assumption beyond
+(LAM-BOX) itself (Section 8.4). The deep grid (gate V18) is extended to `n = 800` to
+match. Three computed clauses remain.
 
 ## 0. Status (S0)
 
 **(PROP-TAIL) DISCHARGED as a certified-census theorem MODULO the enumerated computed
 clauses (Section 8.4) — STATUS: CONDITIONAL.** House form: **PROVED (equilibrium chain,
 sufficiency) + census-closed (gates F3 / MAG-BOX / V15-IA / V17-IA / V18), conditional on
-the four computed clauses (LAM-BOX, SIB-BAND, FOLD, FLOOR-PERSIST)**. The composed
+three computed clauses (LAM-BOX, FOLD, FLOOR-PERSIST) — the fourth, (SIB-BAND), is
+DISCHARGED at a deep anchor by gate SIB-CERT (Section 8.4)**. The composed
 theorem (Section 7) is PROVED-given-gates; every core gate it depends on is green at the
 shipped triple `(J0*, f*, theta*) = (500, 99/100, theta_band)`, where **`theta_band` is
 itself a certified band-uniform output of gate V15-IA** (Section 5), not an asserted
 constant. The two load-bearing gates (V15-IA, V17-IA) certify the **forced-proportional
-surrogate** `c^+ = lam c^-` of the cascade; the residual computed content (the magnitude
-box the gates box-max over, the real non-proportional cascade, the window fold, and floor
-persistence for `n > 500`) is enumerated explicitly in Section 8.4. Certified equilibrium
-arithmetic (exact values; final gate comparisons are exact Fraction; gates V15-IA /
-V17-IA / V18):
+surrogate** `c^+ = lam c^-` of the cascade at that shallower anchor; the residual
+computed content (the magnitude box the gates box-max over, the window fold, and floor
+persistence for `n > 500`) is enumerated explicitly in Section 8.4, together with the
+now-discharged (SIB-BAND) clause and the SIB-CERT deep-anchor census that discharges it.
+Certified equilibrium arithmetic (exact values; final gate comparisons are exact
+Fraction; gates V15-IA / V17-IA / V18):
 
 ```
     theta_band                  = 0.6020244   (certified band-uniform sup, gate V15-IA,
@@ -335,7 +345,8 @@ sanity ceiling `0.9`, and consistent with the realized `theta_tot approx 0.35-0.
 realized deviation is far from the seminorm's own worst-case vertex). This forced-
 proportional surrogate is what the load-bearing gates certify; the real cascade is
 non-proportional, and that gap is enumerated as computed clause (SIB-BAND) in Section
-8.4. `theta_band` feeds gate V17-IA's threshold as `theta*` (Section 8.1) — the
+8.4 — now DISCHARGED there at a deep anchor (gate SIB-CERT), given (LAM-BOX) alone.
+`theta_band` feeds gate V17-IA's threshold as `theta*` (Section 8.1) — the
 discharge's contraction gate is a **certified band-uniform constant**, not a grid
 measurement.
 
@@ -445,10 +456,12 @@ Section 5) and the certified `F_box(500, 99/100) = 0.02687612` (gate V17-IA, Sec
 deep grid (gate V18) directly covers `48 <= n <= 500`. **Every hypothesis of the
 Composed Theorem is discharged on finite checks, with `theta*` itself a certified
 band-uniform constant, not an asserted one** — no decay-rate input, no Edgeworth content,
-Edgeworth-free and mu-sign-free throughout. The remaining computed inputs to this
-certified chain (the magnitude box the gates box-max over, the forced-proportional
-surrogate, the window fold, floor persistence) are enumerated as computed clauses in
-Section 8.4, which is why the STATUS is CONDITIONAL. R-b/R-c remain open as
+Edgeworth-free and mu-sign-free throughout. This closes the slot for the
+**forced-proportional surrogate**; Section 8.4's SIB-CERT deep anchor separately closes
+it for the real cascade (DISCHARGING (SIB-BAND)). The remaining computed inputs to this
+certified chain (the magnitude box the gates box-max over, the window fold, floor
+persistence) are enumerated as computed clauses in Section 8.4, which is why the STATUS
+is CONDITIONAL. R-b/R-c remain open as
 **strengthenings** toward the sharp `C/n^2` law (Section 8.2-8.3) — genuinely
 interesting, but **not needed** for this discharge.
 
@@ -566,10 +579,13 @@ a fixed window) in this packet.
 
 ### 8.4 Computed clauses (the remaining computed inputs to the certified chain)
 
-The discharge is a certified-census theorem **modulo** the following four computed
-inputs. Each is monitored by a named gate; none is a proof valid for all `n`. Their
-existence is exactly why the STATUS is **CONDITIONAL** rather than PROVED (PROVED would
-require zero computed clauses, which (LAM-BOX) alone precludes).
+The discharge is a certified-census theorem **modulo** the following three computed
+inputs, plus one further clause, (SIB-BAND), that is **DISCHARGED** below (not open —
+recorded in this section because it is the same "named gate, not a proof for all `n`"
+bookkeeping the other three use, and because its discharge is itself a computed-census
+fact, not an unconditional proof). Each is monitored by a named gate. Their existence
+is exactly why the STATUS is **CONDITIONAL** rather than PROVED (PROVED would require
+zero computed clauses, which (LAM-BOX) alone precludes).
 
 **(LAM-BOX) — the sibling-proportionality magnitude box.**
 - *Asserts*: both load-bearing gates box-max the seminorm/forcing over a fixed magnitude
@@ -583,23 +599,148 @@ require zero computed clauses, which (LAM-BOX) alone precludes).
 - *Upgrade*: a proved interval for `lam`/`Lambda^pm` from the exact mass recursion plus
   explicit `a'(t)` bounds.
 
-**(SIB-BAND) — the forced-proportional surrogate vs the real cascade.**
-- *Asserts*: the load-bearing gates certify the **forced-proportional surrogate**
-  `c^+ = lam c^-`; the real cascade is non-proportional (`c^+_i = lam w_i c^-_i` by the
-  IH `rho_prop <= R*`, per-entry sibling wobble `w_i in [1/R*, R*]`).
-- *Gate*: SIB-BAND prints the wobble-extended censuses.
-- *Evidence (the gap, stated honestly)*: at the shipped anchor `(500, 99/100)`, the
-  wobble-extended forcing `F_box_wob = 0.0571211` **EXCEEDS** the threshold `0.0280937`
-  by **103.3%** — the extension does **NOT** close. The tighter, still-sound
-  geometric-center band `[1/sqrt R*, sqrt R*]` narrows the gap but also misses at feasible
-  depth: at `(500, 99/100)` it gives `F_box_wob = 0.0417911` (miss by 43%), clearing only
-  at a much deeper base (`J0 >= 800`, pad `999/1000`, +4.6% — build cost ~240s, beyond
-  this packet's certified grid depth). The full `[1/R*, R*]` band cannot clear at **any**
-  depth (its ratio-box-collapsed deep-base limit `F_box = 0.0321` already exceeds the
-  threshold ~`0.028`).
-- *Upgrade*: certify the wobble-extended census at a deep enough base, or a
-  stated-modulus Lipschitz bound of the real-vs-proportional discrepancy absorbed by the
-  box-sup slack.
+**(SIB-BAND) — the forced-proportional surrogate vs the real cascade. DISCHARGED
+(anchored census, gate SIB-CERT).**
+- *Asserts (what the clause is about)*: the load-bearing gates V15-IA/V17-IA, at the
+  shallow anchor `(J0*, f*) = (500, 99/100)`, certify only the **forced-proportional
+  surrogate** `c^+ = lam c^-`; the real cascade is non-proportional
+  (`c^+_i = lam w_i c^-_i` by the IH `rho_prop <= R*`, per-entry sibling wobble
+  `w_i in [1/R*, R*]`). Whether that surrogate's coverage extends to the real cascade is
+  exactly this clause.
+- **The GEOMETRIC-CENTER LEMMA (discharges the clause, 3 lines, no assumption beyond
+  (LAM-BOX)).** Fix a level `n` and parent `t`. Let `rho_i := c^+_i/c^-_i` (the realized
+  per-entry sibling ratio at that level/parent) and suppose (LAM-BOX) holds: every
+  `rho_i in [LAM_LO, LAM_HI] = [0.72, 0.95]` (gate MAG-BOX's own hypothesis). Set
+  `lam_gc := sqrt(min_i rho_i * max_i rho_i)`. Then:
+  1. `min_i rho_i <= lam_gc <= max_i rho_i` (the geometric mean of two positive numbers
+     lies between them), and both `min_i rho_i, max_i rho_i in [LAM_LO, LAM_HI]` by
+     (LAM-BOX) — so `lam_gc` is *itself* a legal point of the **same, already-monitored**
+     lam box. No new box, no new assumption.
+  2. `w_i := rho_i / lam_gc` satisfies `max_i w_i = sqrt(max_i rho_i / min_i rho_i) =
+     sqrt(rho_prop@i<17(n)) <= sqrt(R*)` by the governing IH `rho_prop@i<17 <= R*`, and
+     symmetrically `min_i w_i >= 1/sqrt(R*)` — so `w_i` lies in the **geometric-center
+     half-band** `WOB_HALF := [1/sqrt(R*), sqrt(R*)]` for every `i < 17` (**the IH's own
+     window — boundary slot: see the BOUNDARY ANNEX immediately below**), from the IH
+     alone.
+  3. Hence the *real* one-step pair `c^+_i = lam_gc * w_i * c^-_i` — with `lam_gc` in the
+     lam box and `w_i` in `WOB_HALF` per-entry, for `i < 17` — is exactly the object the
+     wobble censuses (`theta_band_wobble_certified`/`F_box_wobble_certified`) already
+     box-max over on their `i<17`-indexed slots: lam ranges over the full lam box
+     (`lam_gc` qualifies, by 1), and each in-window `w_i` ranges *independently* over
+     `WOB_HALF` (a safe superset of the `lam_gc`-linked real `w_i`, by 2). A census
+     clearing the equilibrium threshold, WITH the boundary slot's own hypothesis in place
+     (annex below), therefore covers the **real, non-proportional cascade** — not merely
+     the `lam_gc == const, w_i == 1` forced-proportional slice V15-IA/V17-IA certify. No
+     assumption is used beyond (LAM-BOX) (already a named, monitored clause) and the IH
+     (already the induction hypothesis every gate in this chain assumes) — **for the
+     in-window slots**; the boundary slot needs one further, separately-monitored
+     hypothesis, below.
+
+  **BOUNDARY ANNEX (round-2 correction; PI review caught this).** (a) The IH
+  `rho_prop@i<17(n-1) <= R*` bounds `rho_i`, hence `w_i`, only for `i < 17` — it says
+  nothing about `rho_17`. (b) The two wobble censuses range three coordinates `(u,v,x)`
+  per row `i` — `u = w_{i-1}`, `v = w_i`, `x = w_{i+1}` (the tridiagonal kernel's three
+  neighbors) — over every row `i = 0,...,16`. At row `i = 16` (the *top* of the window),
+  `x = w_{17}`: **one index past the IH's window**. This is the *only* out-of-window
+  slot in the whole census: the row coefficients `(a,b) = (rc_{i-1}, rc_i)` come from
+  gate F3's re-certified floor family, itself valid to `i < 18` (`FLOOR_WIN = CWIN = 18`,
+  Section 6), so `a,b` are covered; `u,v` at every row satisfy `i-1 <= 15` and `i <= 16`,
+  both `< 17`, so always in-window; `lam, Lambda^+, Lambda^-` are the *shared* magnitude
+  scalars gate MAG-BOX already monitors directly (not per-entry), unaffected by this
+  question. Only `x` at `i=16` reaches `w_{17}`. (c) **The naive "same band as the
+  window" claim is FALSE at shallow levels.** Measured directly (`w_17(n) :=
+  (c^+_{17}/c^-_{17}) / lam_gc`, `lam_gc` as above, over `i<17`): at `n=48`,
+  `w_17 in [1.005459, 1.016780]` — the upper end, `1.016780`, EXCEEDS `WOB_HALF`'s own
+  outward bracket `1.012723`. So before this correction, the top-row census silently
+  used a band `w_{17}` does not actually satisfy at shallow `n`; the boundary slot
+  genuinely needed its own hypothesis, not a rhetorical one. (d) **SIB-CERT's operative
+  domain is `n > 800`** (the deep grid, gate V18, covers `48 <= n <= 800` directly on
+  the grid — Section 11); at that depth the measured `w_17` is far tighter:
+  `w_17(800) in [1.000018, 1.000056]`, decaying like `C/n^2` (`C ~ 36`, matching the
+  window's own `Curv = O(1/n^2)` shape, Section 8.3) — comfortably inside a much smaller
+  box, `W17 := [999/1000, 1001/1000] = [0.999, 1.001]` (`>= 6x` headroom against the
+  realized range on the monitored grid below). Gate **MAG-BOX** now monitors `w_17`
+  against exactly this box, over `n in {500,550,600,650,700,750,800}` (`W17_GRID`,
+  SIB-CERT's own operative domain — the check is not attempted, and not claimed, at
+  shallow `n` where (c) shows it would be false) — the *same epistemic status* as the
+  `lam`/`Lambda^pm` boxes: a **(LAM-BOX)-class COMPUTED hypothesis**, monitored not
+  proved, honest where before there was silence. (e) The full-band shallow-anchor
+  **exhibit** gate (`gate_sibling_band`, informational, unchanged by this correction —
+  it passes no `boundary_band` and its printed numbers are byte-identical to before) is
+  unaffected in spirit: it is already marked FAIL, and its "the extension does NOT
+  close" message is, if anything, *reinforced* by (a)–(c) — an out-of-window `w_17` with
+  no band at all only makes that shallow-anchor non-closure more clearly expected, not
+  less. Gate **SIB-CERT** (below) is the one that changes: it now passes
+  `boundary_band = (W17_LO_F, W17_HI_F)`, routing *only* the `i=16` row's `x`-slot to the
+  `W17` box instead of `WOB_HALF`, leaving every other slot (`u,v` everywhere; `x` at
+  `i<16`) untouched.
+- *Gate*: **SIB-CERT** [core, full mode only] re-runs the geometric-center half-band
+  censuses at a **deep anchor**: `J0_SIB = 800`, floor pad `PAD_SIB = 999/1000`, band
+  `WOB_HALF = [1/sqrt(R*), sqrt(R*)]` for the in-window slots (the *outward* rational
+  bracket on `sqrt(R*)`, `_SQ_HI`, already used by the shipped `gate_sibling_band`
+  exhibit — SIB-CERT additionally self-checks `_SQ_HI * _SQ_HI >= R_STAR_FR` every run,
+  so an inward (unsound) bracket cannot silently pass), PLUS `boundary_band =
+  W17 = [999/1000, 1001/1000]` for the single boundary slot (annex above). Both
+  censuses are exact-Fraction interval arithmetic, identical in kind to
+  V15-IA/V17-IA/SIB-BAND, just re-anchored deeper, re-banded tighter, and — this
+  revision — honest about the one slot that needs a separate box.
+- *Evidence (certified numbers, gate SIB-CERT at the shipped deep anchor, round-2
+  boundary-corrected)*:
+  ```
+      theta_band_wob(800, 999/1000)  = 0.6020655   (exact Fraction 1204131/2000000)
+      F_box_wob(800, 999/1000)       = 0.0279431   (exact Fraction, width-2 minced-IA,
+                                                      geometric-center half-band for i<17
+                                                      PLUS the W17 boundary box at i=16)
+      threshold (1-theta_wob)*tau*   = 0.0301855   (exact Fraction
+                                                      60370906108630032861/2*10^21)
+      margin                         = +7.4%       (F_box_wob <= threshold —
+                                                      CLEARS, exact-Fraction compare)
+  ```
+  (Exact Fraction numerator/denominator strings for all three are recorded by the gate
+  into `_SIBCERT_CERT` and transcribed verbatim into the packet's cert JSON.) The
+  boundary-slot fix (annex above) TIGHTENS this value relative to round 1's (pre-fix)
+  `F_box_wob = 0.0287228`, margin `+4.6%` — restricting one census slot's range from
+  `WOB_HALF` to the narrower `W17` box never increases a box-max, and the round-2 value
+  confirms it: `F_box_wob` drops to `0.0279431`, margin improves to `+7.4%`.
+
+  The **sounding trend** with anchor depth below is retained from round 1's sounding
+  (pre-boundary-fix: the `x`-slot at `i=16` used `WOB_HALF`, not `W17`, at every anchor
+  tested) as a qualitative illustration of *why* a deep anchor is needed at all — the
+  MISS-MISS-CLEAR shape is not expected to flip from the (small, one-slot, tightening-
+  only) boundary correction, but re-sounding `J0=600/700` under the corrected code was
+  out of scope for this round (only the shipped anchor, `J0=800`, was re-verified
+  exactly): at the same pad `999/1000`, `J0=600`: `F_box_wob = 0.0331175` vs threshold
+  `0.0298019`, margin **-11.1% (MISS)**; `J0=700`: `F_box_wob = 0.0305601` vs
+  `0.0299836`, margin **-1.9% (MISS)**; `J0=800`: **CLEARS** — monotone improvement with
+  depth (deeper anchor -> looser floors -> smaller `F_box`, while `theta_band_wob` stays
+  comparatively flat). The **full** (non-geometric-center) band `[1/R*, R*]` still
+  misses even at the deep anchor (same pre-fix sounding): `F_box_wob(800, 999/1000)
+  = 0.0445412` vs threshold `0.0290492`, margin **-53.3% (MISS)** — the tightening from
+  full band to geometric-center half-band is what makes the deep anchor sufficient; the
+  full band was already shown (earlier in this section, historically) to miss at *every*
+  depth. See gate SIB-CERT's report line and the note's verifier map (Section 11) for
+  the full gate text, and `experimental/scripts/verify_dense_shell_prop_tail_reduction.py`
+  tampers `sibcert-sqrt`/`sibcert-pad`/`sibcert-band`/`w17-shrink` for the isolated
+  negative controls (the last catches gate MAG-BOX's own boundary-slot monitor, not
+  SIB-CERT itself).
+- *Honest dependence (what the discharge still rests on)*: the SIB-CERT discharge adds
+  **no new open clause** — it is a corollary of (LAM-BOX) plus the IH, both already
+  named — but it does **inherit** the existing computed clauses at the deep anchor
+  specifically: (LAM-BOX) itself (the per-entry `rho_i` boxes must contain the realized
+  ratios for all `n`, not merely the `MAG_GRID` levels gate MAG-BOX actually samples —
+  unchanged in kind from the shallow anchor, just relied on more directly here, since the
+  lemma's soundness is conditional on it holding pointwise) — **now including the
+  boundary slot's own `W17` box** (the annex's `(LAM-BOX)`-class hypothesis, monitored
+  by MAG-BOX over `W17_GRID = {500,...,800}` only, i.e. exactly SIB-CERT's own operative
+  domain — this is a new *instance* of the (LAM-BOX) clause's kind, not a new named
+  clause); (FOLD) (the `<=57/50` child-window fold enters `theta_band_wob` exactly as it
+  enters `theta_band`, via the same `theta_band_wobble_certified` machinery); and
+  (FLOOR-PERSIST), now specifically **at pad `999/1000`** for `n > 800` (rather than at
+  pad `99/100` for `n > 500`) — the V18 deep-grid extension to `n = 800` (Section 11)
+  empirically confirms monotone drift through the new anchor, but persistence *beyond*
+  `800` at this tighter pad is imported reasoning, not re-derived from scratch. These
+  three are exactly the three clauses this section still lists as open; SIB-CERT does
+  not add a fourth.
 
 **(FOLD) — the 57/50 child-window fold.**
 - *Asserts*: the Window Lemma (W1) fold factor `spread_{i<18}/spread_{i<17} <= 57/50`.
@@ -720,16 +861,24 @@ precision gap for the record; it is not a retraction of any shipped claim.
 
 ## 11. Verifier map
 
-`experimental/scripts/verify_dense_shell_prop_tail_reduction.py`. **The default run IS
-the discharge**: base anchor `J0* = 500`, pad `f* = 99/100`. Flags: `--quick` (dev
+`experimental/scripts/verify_dense_shell_prop_tail_reduction.py`. **The default (full)
+run IS the discharge**: base anchor `J0* = 500`, pad `f* = 99/100`, PLUS the SIB-CERT
+deep anchor `J0_SIB = 800`, pad `999/1000` (full mode only). Flags: `--quick` (dev
 subset, shallow `J0 <= 200` — not a certified claim at that depth; V17-IA expectedly
-misses at the shallow anchor), `--table` (per-level `rho`/`V_17` table), `--fallback`
-(legacy informational alternative chain `(J0 = 430, f = 49/50, theta* = 1/2 fixed)`, not
-part of the certified claim), and `--tamper-selftest`. **8 core gates determine the
-RESULT**; 4 informational gates plus the SIB-BAND gap gate are printed, not counted
-(SIB-BAND is deliberately marked FAIL to keep the surrogate-vs-real gap visible). Every
-gate's message states its operative index window. The full run measures **~165s** (8/8
-core PASS).
+misses at the shallow anchor; SIB-CERT is skipped, an informational SKIPPED line is
+printed instead), `--table` (per-level `rho`/`V_17` table, now to `n = 800`),
+`--fallback` (legacy informational alternative chain `(J0 = 430, f = 49/50,
+theta* = 1/2 fixed)`, not part of the certified claim; SIB-CERT is likewise skipped
+there), and `--tamper-selftest`. **9 core gates determine the RESULT in the default
+full mode** (8 in `--quick`/`--fallback`, where SIB-CERT does not run); 4 informational
+gates plus the SIB-BAND gap gate (and, in `--quick`/`--fallback`, the SIB-CERT-SKIPPED
+line) are printed, not counted (SIB-BAND is deliberately marked FAIL to keep the
+shallow-anchor surrogate-vs-real gap visible as a historical exhibit, even though
+SIB-CERT now closes that gap at the deep anchor). Every gate's message states its
+operative index window. The full run measures **~355s** (build now reaches `n=800`,
+~240s of that; 9/9 core PASS, SIB-CERT margin `+7.4%`, round-2 boundary-corrected);
+`--quick` is unaffected in cost (still a shallow `J0<=200` build); `--fallback` now also
+reaches `n=800` (V18's grid is shared), but skips the SIB-CERT census itself.
 
 - **F3 FLOORS** [core]. Re-certifies the floor family `r_i(J0*, t)` over the 41-parent
   grid, `i < 18`: positivity, LC-compatibility (non-increasing + floor `<=` actual `<=`
@@ -742,7 +891,13 @@ core PASS).
   `Lambda^- in [-0.66, -0.35]`): realized `lam in [0.7759, 0.9190]`, `Lambda^+ in
   [-1.1429, -0.8883]`, `Lambda^- in [-0.6334, -0.3788]`, per-entry `rho_i = c^+_i/c^-_i
   in [0.7734, 0.9259]`, all inside the boxes at every grid level. Worst headroom `0.0172`
-  (the `Lambda^+` floor, thin, ~1.5%). See Section 8.4 (LAM-BOX).
+  (the `Lambda^+` floor, thin, ~1.5%). See Section 8.4 (LAM-BOX). **(round 2)** ALSO
+  monitors the SIB-CERT **boundary slot** `w_17 := rho_17/lam_gc` against its own deep
+  box `W17 = [0.999, 1.001]`, over `n in {500,...,800}` (`W17_GRID`, SIB-CERT's own
+  operative domain, 7 levels x 41 parents) — the `(LAM-BOX)`-class hypothesis the
+  BOUNDARY ANNEX (Section 8.4) needs; not attempted at shallow `n`, where it would be
+  false (the annex's counterexample). Tamper `w17-shrink` shrinks this box below the
+  realized range, isolated to this gate.
 - **V15-IA THETA-BAND** [core, **load-bearing**]. The certified band-uniform enclosure of
   the Lemma A1 tangent seminorm (Section 5) over the *entire* certified LC ratio box, not
   the realized profile or a tested grid, folded by the certified Window Lemma factor
@@ -776,11 +931,25 @@ core PASS).
   documented outward slop (`1e-9`, six orders of magnitude past the cascade's own
   floating-point precision).
 - **V18 VTRACK** [core]. The deep-grid `rho_prop@i<17(n) <= 1.02560749` over
-  `n in {48,...,500}` (18 levels, including the `340/400/430/450/500` deep tail),
+  `n in {48,...,800}` (24 levels, including the `340/400/430/450/500` deep tail and the
+  new `550/600/650/700/750/800` extension added for the SIB-CERT deep anchor),
   monotone non-increasing, the `V_17(n)` values at every tested level (`0.1236` at
-  `n=48` down to `0.00112` at `n=500`), the `tau*` crossover (confirmed `n=62`), and an
-  explicit base-coverage check (`max(grid) >= expect_max`). The `--table` flag prints the
-  full per-level `rho`/`V_17` table.
+  `n=48` down to a smaller value at `n=800`), the `tau*` crossover (confirmed `n=62`), and
+  an explicit base-coverage check (`max(grid) >= expect_max`, `expect_max` now `800`).
+  The `--table` flag prints the full per-level `rho`/`V_17` table.
+- **SIB-CERT** [core, FULL MODE ONLY — **discharges computed clause (SIB-BAND)**]. The
+  geometric-center half-band wobble census (Section 8.4's GEOMETRIC-CENTER LEMMA: no
+  assumption beyond (LAM-BOX)) re-run at the deep anchor `(J0_SIB, PAD_SIB) =
+  (800, 999/1000)`, where it CLEARS the equilibrium threshold (margin `+7.4%`,
+  round-2 exact value, Section 8.4) — covering the **real, non-proportional** cascade,
+  not merely the forced-proportional surrogate V15-IA/V17-IA certify. Self-checks the
+  outward sqrt bracket (`_SQ_HI^2 >= R_STAR_FR`) every run before running the (otherwise
+  ~35s) census. **(round 2)** passes `boundary_band = (W17_LO_F, W17_HI_F)` so the single
+  out-of-window census slot (`i=16`'s `x`, i.e. `w_17` — BOUNDARY ANNEX, Section 8.4)
+  uses its own deep box (monitored by MAG-BOX) instead of `WOB_HALF`; every other slot
+  is unaffected. SKIPPED (an informational line is printed instead) under
+  `--quick`/`--fallback`, since the deep anchor needs the full `J0=800` build. See
+  Section 8.4 (SIB-BAND) for the lemma, the annex, exact numbers, and sounding trend.
 - **V15-GRID THETA** [informational]. `theta_tot <= 1/2` and `theta_win <= 27/100`, grid
   census over 41 parents to `n = 500`; plus the closed-form tangent seminorm `N_free <=
   0.9` (Lemma A1, evaluated at realized profiles only). Measured worst: `theta_tot =
@@ -795,18 +964,20 @@ core PASS).
 - **V19 BRIDGE** [informational/alpha-only]. `w(n) <= 0.62` (measured worst `0.6115`).
   Not part of the RESULT tally: the shipped equilibrium chain never uses the tight
   integral bridge, only the loose `(1/3)` form plus the certified constant forcing.
-- **SIB-BAND** [informational gap gate — **marked FAIL to keep the gap visible; verifies
-  computed clause (SIB-BAND)**]. Prints the wobble-extended censuses at the shipped
-  anchor (per-entry sibling wobble `w_i in [1/R*, R*]`): `theta_band_wob = 0.629641`,
-  `F_box_wob = 0.0571211` vs threshold `0.0280937` — the extended forcing **EXCEEDS** the
-  threshold by **103.3%**, so the extension does **NOT** close. The tighter, still-sound
+- **SIB-BAND** [informational — the shallow-anchor exhibit; **DISCHARGED elsewhere by
+  SIB-CERT above, kept exactly as shipped**]. Prints the wobble-extended censuses at the
+  *shallow* anchor `(J0*, f*) = (500, 99/100)` (per-entry sibling wobble
+  `w_i in [1/R*, R*]`): `theta_band_wob = 0.629641`, `F_box_wob = 0.0571211` vs threshold
+  `0.0280937` — the extended forcing **EXCEEDS** the threshold by **103.3%** at *this*
+  (shallow) anchor, so the extension does **NOT** close here. The tighter, still-sound
   geometric-center band `[1/sqrt R*, sqrt R*]` gives `F_box_wob = 0.0417911` (miss by 43%)
-  at `(500, 99/100)`, clearing only at `J0 >= 800` / pad `999/1000` / +4.6% (beyond this
-  packet's certified grid depth); the full `[1/R*, R*]` band cannot clear at any depth
-  (deep-base limit `F_box = 0.0321 > ~0.028`). Deliberately marked **FAIL** so the
-  surrogate-vs-real gap stays visible. See Section 8.4 (SIB-BAND).
+  at `(500, 99/100)` too. Deliberately marked **FAIL** and left unchanged, as the
+  historical record of the shallow-anchor gap; the gap itself is now closed — see
+  **SIB-CERT** above, which re-runs the same geometric-center half-band census at the
+  deep anchor `(800, 999/1000)`, where it clears. Section 8.4 (SIB-BAND) has the lemma
+  and the full sounding trend across anchors.
 
-Tamper suite (13, each isolated to one report/info line): `f3-corrupt` (F3 — a `>1` pad
+Tamper suite (17, each isolated to one report/info line): `f3-corrupt` (F3 — a `>1` pad
 breaks the floor-`<=`-actual ordering), `magbox-shrink` (**MAG-BOX** — shrinks the
 magnitude box so a realized `lam`/`Lambda^pm`/`rho_i` falls outside, flipping MAG-BOX to
 FAIL), `theta-tot-gate` (`V15-GRID`, informational), `nfree-corrupt` (`V15-GRID` seminorm
@@ -819,9 +990,19 @@ silently pass through the load-bearing chain), `window-bound` (V16b), `forcing-b
 (V17), `v17ia-graze` (V17-IA threshold graze — shrinks the threshold `20%`, flipping the
 margin PASS to FAIL), `c1-target` (V18), `vtrack-level-drop` (V18 deep-level corruption —
 drops the grid's top level, caught by the base-coverage check), `g2-ceiling` (the V17
-informational sub-check — honest substitute), `bridge-w-gate` (V19, informational). All 13
-confirmed isolated to their own line at full (`J0*=500`) depth; no other gate's outcome
-changes under any tamper.
+informational sub-check — honest substitute), `bridge-w-gate` (V19, informational),
+`sibcert-sqrt` (**SIB-CERT** — substitutes an explicitly inward rational bracket on
+`sqrt(R*)`, tripping the gate's own outwardness self-check before the census runs),
+`sibcert-pad` (**SIB-CERT** — swaps the deep anchor's pad from `999/1000` to the
+shallower `99/100`, which sounds `-12.2%` at `J0=800`, flipping the margin PASS to
+FAIL), `sibcert-band` (**SIB-CERT** — swaps the geometric-center half-band for the full
+`[1/R*, R*]` band, which cannot clear at any depth, flipping to FAIL), `w17-shrink`
+(**MAG-BOX**, round 2 — shrinks the boundary-slot box `W17` to a tiny interval strictly
+below the realized `w_17` range on `W17_GRID`, flipping MAG-BOX, not SIB-CERT, to FAIL:
+the boundary slot's hypothesis is monitored by MAG-BOX, and SIB-CERT merely *consumes*
+the box `(W17_LO_F, W17_HI_F)` as a constant, so a shrunk box is a MAG-BOX-monitoring
+failure, not a SIB-CERT-census one). All 17 confirmed isolated to their own line at
+full (`J0*=500`/`J0_SIB=800`) depth; no other gate's outcome changes under any tamper.
 
 **Lean layer**: `experimental/lean/prop_tail_reduction/` — a statement-level companion
 package (stdlib-only, no mathlib, no `sorry`, `decide`-only kernel checks, builds
@@ -870,11 +1051,16 @@ enumerated computed clauses (Section 8.4): the deep-base equilibrium route (R-a,
 lam-minced interval-arithmetic census of the tangent seminorm (gate V15-IA) feeding an
 exact-Fraction minced interval-arithmetic forcing census (gate V17-IA) at a re-certified
 floor family (gate F3, magnitude box verified by MAG-BOX) with full base coverage to
-`n = 500` (gate V18). **(PROP-TAIL) is DISCHARGED as a certified-census theorem MODULO
-the enumerated computed clauses (LAM-BOX, SIB-BAND, FOLD, FLOOR-PERSIST; Section 8.4) —
-STATUS CONDITIONAL**, given this packet's own certified gate set
-(F3/MAG-BOX/V15-IA/V16/V16b/V17/V17-IA/V18). The two load-bearing gates certify the
-forced-proportional surrogate `c^+ = lam c^-`.
+`n = 500` (gate V18), **plus** — this revision — the real-vs-proportional gap that
+leaves open (the geometric-center wobble census, gate SIB-CERT, at a deep anchor
+`J0=800`, discharging computed clause (SIB-BAND) given (LAM-BOX) alone; Section 8.4).
+**(PROP-TAIL) is DISCHARGED as a certified-census theorem MODULO the enumerated
+computed clauses (LAM-BOX, FOLD, FLOOR-PERSIST; Section 8.4) — STATUS CONDITIONAL**,
+given this packet's own certified gate set
+(F3/MAG-BOX/V15-IA/V16/V16b/V17/V17-IA/V18/SIB-CERT). The two load-bearing gates
+(V15-IA/V17-IA) certify the forced-proportional surrogate `c^+ = lam c^-` at the
+shallower `J0*=500` anchor; gate SIB-CERT separately certifies the real,
+non-proportional cascade at the deeper `J0_SIB=800` anchor.
 
 **What #885/#880 gain now, concretely.** #885's own (PROP-TAIL) conditional is **closed
 modulo the Section 8.4 computed clauses** by this packet's certificates. #885's INV-TAIL

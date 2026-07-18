@@ -201,8 +201,11 @@ structure GateRow where
   rhoPropNum : Nat
   deriving DecidableEq, Repr
 
-/-- The deep-grid table, `j = 48` through `300`; shipped gate V13 covers
-`{48,50,55,60}`, this extends the same measurement to the deeper grid. -/
+/-- The deep-grid table, `j = 48` through `800`; shipped gate V13 covers
+`{48,50,55,60}`, this extends the same measurement to the deeper grid. The
+`550..800` tail (added alongside the SIB-CERT deep anchor, Section 7 below)
+is transcribed from the verifier's `--table` output at the same 8-digit
+precision as every other row. -/
 def gateRows : List GateRow :=
   [ { level := 48,  rhoPropNum := 102559050 }
   , { level := 50,  rhoPropNum := 102352050 }
@@ -215,7 +218,13 @@ def gateRows : List GateRow :=
   , { level := 160, rhoPropNum := 100222350 }
   , { level := 200, rhoPropNum := 100142050 }
   , { level := 240, rhoPropNum := 100098530 }
-  , { level := 300, rhoPropNum := 100063000 } ]
+  , { level := 300, rhoPropNum := 100063000 }
+  , { level := 550, rhoPropNum := 100018713 }
+  , { level := 600, rhoPropNum := 100015721 }
+  , { level := 650, rhoPropNum := 100013394 }
+  , { level := 700, rhoPropNum := 100011548 }
+  , { level := 750, rhoPropNum := 100010059 }
+  , { level := 800, rhoPropNum := 100008840 } ]
 
 /-- The (PROP-TAIL) target `1.02560749`, as a numerator over `10^8`. -/
 def gateTarget : Nat := 102560749
@@ -288,5 +297,79 @@ at the transcribed rows; it is not an independent recomputation of
 `V_17` or `tau*`. -/
 theorem v17_below_from_62 :
     ∀ row ∈ v17Rows, 62 <= row.level → row.v17Num <= tauStarNum := by decide
+
+/- ------------------------------------------------------------------ -/
+/- 7. SIB-CERT — the deep-anchor geometric-center wobble census.       -/
+/-
+   Gate SIB-CERT (`verify_dense_shell_prop_tail_reduction.py`) discharges
+   the (SIB-BAND) computed clause: the GEOMETRIC-CENTER LEMMA (informal,
+   note Section 8.4 — `lam_gc := sqrt(min_i rho_i * max_i rho_i)` is itself
+   a legal (LAM-BOX) point since both factors are, and `w_i := rho_i/lam_gc`
+   then lies in the half-band `[1/sqrt(R*), sqrt(R*)]` by the governing IH
+   alone, no assumption beyond (LAM-BOX)) reduces coverage of the REAL,
+   non-proportional cascade to the SAME kind of exact-Fraction
+   interval-arithmetic census `V15-IA`/`V17-IA` already certify above, just
+   re-anchored at a deep base (`J0=800`, pad `999/1000`) and re-banded to
+   the geometric-center half-band FOR `i < 17` (the IH's own window).
+
+   **Round-2 correction (PI review, note Section 8.4's BOUNDARY ANNEX):**
+   the IH bounds `w_i` only for `i < 17`; the census's ONE out-of-window
+   slot (row `i = 16`'s `x`, i.e. `w_17`) is discharged separately via a
+   deep box `W17 = [999/1000, 1001/1000]` gate MAG-BOX monitors on
+   `n in {500,...,800}` — a `(LAM-BOX)`-class hypothesis, not a consequence
+   of the IH. The shallow counterexample (`w_17(48)` measured up to
+   `1.016780`, exceeding the naive half-band bracket `1.012723`) is why this
+   separate box is needed; the deep value (`w_17(800) in [1.000018,
+   1.000056]`) sits deep inside `W17`. None of this changes what THIS
+   section kernel-checks: only the resulting rational threshold inequality
+   `F_box_wob <= (1 - theta_band_wob) * tau*`, at printed precision —
+   exactly as items 5/6 above check the deep-grid table and the crossover,
+   NOT a re-derivation of the interval-arithmetic computation itself, and
+   NOT a formalization of the GEOMETRIC-CENTER LEMMA or the BOUNDARY ANNEX
+   (all stay informal, exactly as the analytic content behind V15-IA/V17-IA
+   does). The literals below are the ROUND-2 (boundary-corrected) values;
+   the correction TIGHTENED the margin (round 1: `~4.64%`; round 2: `~7.43%`).
+
+   Transcription (SAFE/conservative direction, mirroring `tauStarNum`
+   above): `F_box_wob` is rounded UP to 9 digits (`sibcertFHi`, numerator
+   over `10^9`) and `theta_band_wob` is rounded UP to 9 digits
+   (`sibcertThetaHi`, numerator over `10^9`). Rounding `theta` UP makes
+   `(1 - theta)` a valid LOWER bound; combined with `tauStarNum` (already a
+   certified LOWER bound on `tau*`), the product
+   `(1 - sibcertThetaHi/10^9) * (tauStarNum/10^7)` is a valid lower bound on
+   the true threshold, while `sibcertFHi/10^9` is a valid upper bound on the
+   true `F_box_wob` — so the kernel-checked inequality below is a
+   conservative (never unsafe) proxy for the gate's own exact-Fraction
+   comparison, exactly as `TAU_STAR_FR`'s own use is conservative in the
+   Python verifier (see its module docstring).
+-/
+
+/-- `F_box_wob(800, 999/1000)` (geometric-center half-band for `i<17`, PLUS
+the `W17` boundary box for the `i=16` row's `x`-slot), rounded UP to 9
+digits, as a numerator over `10^9`: gate SIB-CERT's round-2 exact Fraction
+is `0.02794313381791874...`; `ceil(. * 10^9) = 27943134`. -/
+def sibcertFHi : Nat := 27943134
+
+/-- `theta_band_wob(800, 999/1000)`, round-2 (boundary-corrected), rounded
+UP to 9 digits, as a numerator over `10^9`: gate SIB-CERT's exact Fraction
+is `1204131/2000000 = 0.6020655` exactly (terminating decimal, so rounding
+up is a no-op at this precision); `ceil(. * 10^9) = 602065500`. -/
+def sibcertThetaHi : Nat := 602065500
+
+/-- **The SIB-CERT discharge, kernel-checked (round-2, boundary-corrected).**
+The threshold inequality
+`sibcertFHi/10^9 <= (1 - sibcertThetaHi/10^9) * (tauStarNum/10^7)`, cleared
+of denominators (multiply both sides by `10^9 * 10^7`, both positive):
+`sibcertFHi * 10^7 <= (10^9 - sibcertThetaHi) * tauStarNum`. This is the
+downstream rational comparison gate SIB-CERT computes in exact Fraction
+arithmetic (`F_box_wob <= (1 - theta_band_wob) * tau*`), transcribed at
+printed precision in the conservative direction described above; margin
+at these rounded literals is `~7.43%`, consistent with the gate's own
+reported `+7.4%` (exact-Fraction) round-2 margin — TIGHTER than round 1's
+`~4.64%`, since the boundary-slot correction only restricts a box-max
+domain (the `i=16` row's `x`-slot moved from the wider `WOB_HALF` to the
+narrower `W17`), which cannot increase the certified sup. -/
+theorem sibcert_clears :
+    sibcertFHi * 10000000 <= (1000000000 - sibcertThetaHi) * tauStarNum := by decide
 
 end PropTail
