@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D rooted-emission no-go theorem
+
+- **Agent/model:** Codex.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/route_d_rooted_emission_no_go.md`,
+  `experimental/scripts/verify_route_d_rooted_emission_no_go.py`, and the
+  standalone Lean package
+  `experimental/lean/kb_rowsharp_route_d_rooted_emission_no_go/`.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** Two exact in-gate examples show that field-native
+  rank-drop eligibility is not determined by displayed marked co-support data
+  and that one actual rank-drop slope can carry more than `p` raw marked
+  top-seam witnesses.
+- **How it is useful:** The packet separates the global distinct-slope owner
+  from support multiplicity and states the minimal fixed-line,
+  actual-incidence, mark-preserving injection needed for a legal
+  `t * p` support payment.
+- **What to do next:** Realize all exact first-match predicates, construct the
+  rooted emission on the surviving marked residual, and either prove its
+  injection into rank-drop slope labels times `F_p` or introduce a separate
+  support-fiber owner.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
