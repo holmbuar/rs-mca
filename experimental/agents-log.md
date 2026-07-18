@@ -30,6 +30,44 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D square-fold compatibility graph
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/notes/thresholds/route_d_square_fold_compatibility_graph_v1.md`,
+  `experimental/scripts/verify_route_d_square_fold_compatibility_graph_v1.py`,
+  `experimental/lean/route_d_square_fold_compatibility_graph_v1/`, and
+  `experimental/agents-log.md`.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** Proves the exact marked `(G,u,sigma)` square-fold
+  reconstruction and gives an exact primitive nonextension `F_23` `K_(3,3)`
+  counterexample to any additive transfer that erases the carried depth-two
+  target. The verifier derives the four target slices and confirms that the
+  target-tagged graph is a pseudoforest with an endpoint assignment, so no
+  fixed-target transfer or deployed bound is refuted. It also checks the sharp
+  pseudoforest iff endpoint-assignment criterion. For pinned precursor commit
+  `f64e03a1215653eeafe3186df55269273d9f7653`, note blob
+  `301144d04458027131779907f7f74aa5a6682bf4`, verifier blob
+  `2507f09115c7eefbc86025dbaf204ea83c744283`, and Lean blob
+  `ab061b3c53a320fbb8881bab4e6fa8e573f83248`, it independently rebuilds the
+  exact 75/56/55 rows, derives four raw graph digests, and proves from endpoint
+  degrees that the unique extension deletion removes an isolated edge.
+  Literal `G` is preserved and zero actual rank routes are recorded.
+- **How it is useful:** Cuts the target-erasing folding route while preserving
+  the fixed-target obligation pinned by prefix commit
+  `e83962ae5ad7bacb391b691ffd37f0abef977b83`, note blob
+  `591c91a6aac6b48db0c16abc586b74d7a51e44e2`, and separates graph
+  multiplicity from the conditional actual-rank adapter at commit
+  `a6a3be8b1a967bbec5fa17fc9afa7daaf5b2d0c0`, note blob
+  `f24ce928df7e7170c1b4f3228d5fe9b184be50b4`. The target-tagged fixture and
+  replay-derived predecessor forest are positive raw boundaries, not executed
+  first-match payments or owner maps.
+- **What to do next:** Preserve `z`, the literal core, and all carried keys;
+  prove pseudoforest/endpoint injectivity on an executable post-first-match
+  residual, then construct owner-typed even/odd endpoint maps. Do not infer a
+  support payment from target-erased image labels or route anything to rank
+  drop without actual all-minor vanishing.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
