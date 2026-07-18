@@ -279,7 +279,9 @@ machinery (L4/L5 of #880); shipped meanwhile as the certified-grid gate V6
 
 CORRECTED CONSTANTS (note-exact re-derivation, validated to 9 decimals
 against the shipped P8 margin): gamma_req(eps) = D1/((rho2 - need) rho1)
-has max (at eps -> 1/4) = 1.1011 at the CERTIFIED caps (0.85, 1.61) — the
+has max (at eps -> 1/4) = 1.1011 at the gated caps (0.85, 1.61; post
+#914/#917 these are coupled-curve-scoped — coupled census sup 1.2296, the
+broad-domain sup 1.6101 lies off the consumed curves) — the
 lane's banked 1.036 was an error — and 1.1471 at the LOOSE caps
 (1.086, 1.663) (banked 1.149 was rounding, safe side). The shipped gates
 quantify the share floor over ALL indices (P12, verifier line 897;
