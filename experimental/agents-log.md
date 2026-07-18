@@ -30,6 +30,68 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - All-depth cylinder modulus identity formalization
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Lean proof
+  `experimental/lean/cylinder_renormalization/CylinderRenormalization.lean @ 1a82a5e7`,
+  theorem map
+  `experimental/lean/cylinder_renormalization/README.md @ 1a82a5e7`,
+  focused audit
+  `experimental/notes/thresholds/cylinder_modulus_identity_formalization.md @ 1a82a5e7`,
+  and source verifier
+  `experimental/scripts/verify_cylinder_modulus_identity.py @ 1a82a5e7`;
+  PR #947, proof-payload head `1a82a5e7`.
+- **Status:** PROVED
+- **What is being added:** For every natural depth `B`, the Lean package
+  proves the subtraction-free identity
+  `2 * ((3 ^ B + 1) / 2) = 3 ^ B + 1` and derives the U1/V1 normalization
+  `3 ^ B = 2 * realizedImage B - 1`.  The former six-depth
+  `modulus_identity` declaration keeps its exact type and is now a wrapper
+  around the universal theorem.  The proof exposes oddness and exact division
+  explicitly, so zero and odd depths are arithmetic boundary checks without
+  silently extending the source's realized-image semantics.
+- **How it is useful:** The source producer is the corrected packet
+  `experimental/notes/thresholds/cylinder_renormalization.md @ 02728b20`,
+  originally produced at `c844abb1` and integrated at `764f1c02`.
+  Correction `02728b20` withdrew false twisted-coset and hierarchy-wide
+  cube-flatness while leaving U1/V1 unchanged.  The thresholds interface
+  `experimental/rs_mca_thresholds.tex @ 856d8362` contains PO3/PO4 and SAT1;
+  the frontiers interface
+  `experimental/asymptotic_rs_mca_frontiers.tex @ 4e3c4ee8` contains PO3/PO4
+  but not SAT1, and neither TeX file states this cylinder theorem.  Corrected
+  explanatory consumer PR #816 (head `98e2a620`, integrated at `168e9ba0`)
+  uses the same base-3 normalization.  Finite `B=8` consumer PR #933 (head
+  `db7efdaa`) and its correspondence overlap PR #936 (head `f52f1553`) may
+  reuse PR #947 (head `1a82a5e7`) only after establishing a package import or
+  shared-definition bridge; there is currently no direct Lean consumer.  This
+  does not formalize U1 Parseval or wide-band estimates; U2 suffix structure;
+  U3 trigonometric or polynomial renormalization; a general Vandermonde
+  identity; the slice-staircase/class-constancy lemma; subgroup cube-flatness;
+  or recursive certificate compression.  It does not restore twisted-coset
+  flatness, which is false; transfer U2/U3 to base 5; prove admission; supply
+  image-scale MI/MA or direct Sidon payment; compile a residual ray; compare
+  the complete profile envelope; establish lower reserve; close a deployed
+  row or branch; or prove an MCA threshold, charge, deep-MCA count, or
+  Proximity Prize claim.
+- **What to do next:** A general graded Vandermonde/U3 arithmetic theorem must
+  expose `k <= B`; omitting it is false under natural subtraction.  Formalize
+  that larger theorem separately before replacing the remaining finite
+  convolution anchors, and connect consumers through an explicit shared API
+  rather than duplicating definitions.  Printing axioms for
+  `realizedImage_double`, `modulus_identity_all`, and `modulus_identity`
+  reports only `[propext, Quot.sound]`; the existing finite declarations
+  `degenerate_cylinder_consistency`, `graded_vandermonde`, and `class_pins`
+  report only `[Lean.ofReduceBool]`. CHECK:
+  `cd experimental/lean/cylinder_renormalization && lake clean && lake build`
+  -> `Build completed successfully.`;
+  `python3 experimental/scripts/verify_cylinder_modulus_identity.py --check`
+  -> `RESULT: PASS (1558/1558)`;
+  `python3 experimental/scripts/verify_cylinder_modulus_identity.py --tamper-selftest --check`
+  -> `tamper-selftest: caught 4/4` and `RESULT: PASS (1558/1558)`;
+  `rg -n '^[[:space:]]*(sorry|admit|axiom|opaque)\b|sorryAx' experimental/lean/cylinder_renormalization/CylinderRenormalization.lean`
+  -> no declaration-level matches.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
