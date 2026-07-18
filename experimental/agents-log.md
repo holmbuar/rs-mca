@@ -30,6 +30,68 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - All-integer dense-shell S-cubic expansion
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Lean proof
+  `experimental/lean/dense_shell_sign_dichotomy/DenseShellSignDichotomy.lean @ 1c4a5e50`,
+  theorem map
+  `experimental/lean/dense_shell_sign_dichotomy/README.md @ 1c4a5e50`,
+  focused audit
+  `experimental/notes/thresholds/dense_shell_cubic_identity_formalization.md @ 1c4a5e50`,
+  and source verifier
+  `experimental/scripts/verify_dense_shell_cubic_identity.py @ 1c4a5e50`;
+  PR #952, proof-payload head `1c4a5e50`.
+- **Status:** PROVED
+- **What is being added:** Proves for every `x : Int` the exact expansion
+  `x * (3 - 4*x) * (3 - 4*x) = 16*x^3 - 24*x^2 + 9*x`.  This replaces an
+  external point-pinning meta-step with direct Lean algebra while preserving
+  `sExpandOK` and `s_expand_census` at their exact former types as finite
+  regression declarations.  The ambient type is an explicit repair: the same
+  surface statement over `Nat` is false at `x=1`, where truncated subtraction
+  gives `0` on the left and `9` on the right.
+- **How it is useful:** The source producer is D1 in
+  `experimental/notes/thresholds/dense_shell_sign_dichotomy.md @ 06b2a6fb`,
+  produced by PR #858 (head `6f8dae62`) and integrated at `06b2a6fb`; the
+  original finite Lean census in
+  `experimental/lean/dense_shell_sign_dichotomy/DenseShellSignDichotomy.lean @ 06b2a6fb`
+  supplied no universal theorem.  The downstream pointwise-versus-class-sum
+  correction is
+  `experimental/notes/thresholds/dense_shell_class_charges.md @ a5750192`,
+  produced by PR #880 (head `e465ee44`) and integrated at `a5750192`; it does
+  not alter this cubic identity.  Adjacent analytic and class-charge work in
+  PR #884 (head `d82fd423`), PR #885 (head `ccb44433`), PR #900 (head
+  `e49be773`), PR #905 (head `00009641`), PR #911 (head `8d47b40c`), PR #914
+  (head `37883e5c`), PR #917 (head `d23012e6`), and PR #924 (head `2d13a61a`)
+  has no payload-path overlap or direct Lean consumer and is neither repaired
+  nor promoted by PR #952 (head `1c4a5e50`).  This result proves only the
+  integer expansion shadow of `S(a)=a(3-4a)^2`: it does not prove the full
+  S-preimage product, root existence or multiplicities, Vieta data, the real
+  Chebyshev/arcsine orbit, a triple-angle identity, the dense-shell sign
+  theorem, alternating-cone preservation, analytic tail certification, shell
+  emission, or class charges.  It does not provide exact-support reduction,
+  the rank-to-support equation, an explaining or raw-rank witness, a
+  Route-D/RIM/payment adapter, image-scale MI/MA or direct Sidon payment, a
+  residual ray compiler, complete profile-envelope comparison, lower reserve,
+  the 67,472 charge, a deep-MCA count, branch or KoalaBear-row closure, an MCA
+  threshold, or a Proximity Prize claim.
+- **What to do next:** Formalize the full S-preimage product separately only
+  after choosing an ambient polynomial/root API that states existence and
+  multiplicities explicitly; do not treat this integer expansion as that
+  theorem or as a consumer payment.  The axiom reports for `s_expand` and
+  `s_expand_census` contain only standard axioms. CHECK:
+  `cd experimental/lean/dense_shell_sign_dichotomy && lake clean && lake build`
+  -> `Build completed successfully.`;
+  `python3 experimental/scripts/verify_dense_shell_cubic_identity.py --check`
+  -> `RESULT: PASS (1047/1047)`;
+  `python3 experimental/scripts/verify_dense_shell_cubic_identity.py --tamper-selftest --check`
+  -> `tamper-selftest: caught 4/4` and `RESULT: PASS (1047/1047)`;
+  `cd experimental/lean/dense_shell_sign_dichotomy && printf '%s\n' 'import DenseShellSignDichotomy' '#print axioms DenseShellSignDichotomy.s_expand' '#print axioms DenseShellSignDichotomy.s_expand_census' | lake env lean /dev/stdin`
+  -> `'DenseShellSignDichotomy.s_expand' depends on axioms: [propext, Quot.sound]`
+  and `'DenseShellSignDichotomy.s_expand_census' depends on axioms: [Lean.ofReduceBool]`;
+  `rg -n '^[[:space:]]*(sorry|admit|axiom|opaque)\b|sorryAx' experimental/lean/dense_shell_sign_dichotomy/DenseShellSignDichotomy.lean`
+  -> no declaration-level matches.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
