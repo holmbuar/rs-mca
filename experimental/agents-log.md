@@ -38,6 +38,37 @@ Keep entries concise and link to the relevant files.
 - **What is being added:** Proves `ROUTE_D_OWNER_TYPED_FOREST_TO_COMPLEMENTARY_CELL_COMPILER`: after actual all-maximal-minors vanishing is routed once with the fixed target and literal core preserved, full-rank primitive edges in a fixed-target marked forest biject with nonroot vertices; complementary generated/nonroot support injections then give the exact `67472*2130706433` bound by commit `19c061ee094388e3261e8151e6c799826801ae12`, note blob `c1bceae338a55c3f94381bf8f71d8b1584f05e95`.
 - **How it is useful:** Supplies a type-correct compiler for the primitive target at commit `e83962ae5ad7bacb391b691ffd37f0abef977b83`, note blob `591c91a6aac6b48db0c16abc586b74d7a51e44e2`; a saturating six-cell fixture checks the composition, while the exact raw forest at commit `f64e03a1215653eeafe3186df55269273d9f7653`, verifier blob `2507f09115c7eefbc86025dbaf204ea83c744283`, proves forest orientation alone is insufficient because `55>2*23`; all 55 share fixed analogue `beta=(10)` and an incomplete printed key while `G` varies, with maximum fixed-complete-base fiber 5, so this is not a deployed-`z` or fixed-complete-base floor. The target-preserving criterion is pinned at commit `fe34ed4dbbd4564d3f8af5c5de3fdf78c589e0d1`, note blob `58c722cac2655aabf8ec887837607db7c79d6987`, verifier blob `597524e7f639bd4abc90e12986c67eb84c7fce10`, and Lean blob `14d2975fd4e9897748c863d7f7383bba104d51d4`; its counterexample is target-erasure-only and the fixed-target transfer remains open.
 - **What to do next:** Implement the named deletion executor missing at commit `8cb3b3ae4c57cf44ef13cda24e4532b3dbe1bb67`, note blob `fdeabf0708cb8806feefae9322ed9002339332cf`; then construct the survivor-to-actual-incidence map, prove the post-deletion fixed-target forest theorem, and supply both support-level complementary injections, routing vanishing only through commit `a6a3be8b1a967bbec5fa17fc9afa7daaf5b2d0c0`, note blob `f24ce928df7e7170c1b4f3228d5fe9b184be50b4`.
+### 2026-07-18 - Reviewed PR integration sweep
+
+- **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
+  Hughes, DannyExperiments, Vadim Avdeev, and Adam Mohammed A Latif.
+- **Files added or changed:** Integrated scoped experimental notes,
+  certificates, scripts, and Lean formalization artifacts from PRs #881,
+  #882, #888, #890--#894, #900, #902--#905, #910--#914, #916--#950.
+  PRs #883, #886, #887, #889, #895, #896, #898, #899, #901, #906--#909,
+  and #915 were treated as stacked predecessors and integrated through the
+  later #889/#940/#950 route-cut stacks where applicable.  PR #885 was
+  integrated through the stronger #900 packet.
+- **Status:** PROVED / CONDITIONAL / COUNTEREXAMPLE / AUDIT / EXPERIMENTAL,
+  according to each note's own status block.
+- **What is being added:** A large reviewed experimental wave covering
+  Route-D no-go and recursion tools, dense-shell class-charge repairs and
+  transfer-shape evidence, PROP-TAIL/INV-TAIL route work, M1 KoalaBear
+  rank-nine route cuts, L2 rank-16 fixed-26/fixed-27 local route cuts,
+  Paving v9.2 retained-factor audits, and Lean formalization progress for
+  `cs25_cap_v12`, `grande_finale`, `moment_to_max`, `powersum_rigidity`,
+  and related local arithmetic kernels.
+- **How it is useful:** The integration banks useful proof targets and
+  counterexamples while preserving the status discipline: class-charge
+  overclaims are repaired, transfer-shape claims remain guarded by audit
+  notes, rank-nine and rank-16 packets remain local route cuts with zero
+  official score movement, and new Lean modules document formalized kernels
+  without promoting unproved global MCA/List conclusions.
+- **What to do next:** Audit the dense-shell transfer certificates, the
+  M1 rank-nine post-tangent source-load terminal, and the L2 fixed-27 route
+  cuts before any paper promotion.  Do not run heavy Sage/Python/Lean
+  replays unless explicitly requested; use the integrated notes and frozen
+  transcripts as the review map.
 
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
