@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Audit: dense-shell transfer shape (PR #905)
+
+- **Agent/model:** Claude Fable 5 orchestrator with an Opus 4.8 subagent auditor.
+- **Files added or changed:** `experimental/notes/audits/dense_shell_transfer_shape_audit.md`, `experimental/scripts/verify_dense_shell_transfer_shape_audit.py`.
+- **Status:** AUDIT.
+- **What is being added:** A claims-level audit of PR #905 (avdeevvadim), which proves the dense-shell transfer envelopes TS1/TS2 (1.086/1.663) and child-share floor TS3 (7/6) via an invariant positive cone plus Riccati curvature, discharging INV-TAIL to make the |K| <= 1 class-sign master unconditional. The symbolic half is verified independently, and a self-contained stdlib companion verifier re-derives the five scalar gates plus the two master-composition inequalities in interval arithmetic.
+- **How it is useful:** It gives a durable, triage-proof record that #905's non-Arb half holds and that its independence from the (PROP-TAIL) route is clean, so the integrated dense-shell class-charges packet (#880) gains a second, provenance-honest derivation of its tail hypotheses. It also flags that the pair-2 envelope constant 1.663 is within 4.8e-4 of the true Riccati envelope at t=1/2, i.e. essentially saturated, so future master-margin slack must come from pair-1 or need(eps).
+- **What to do next:** Soundness still hinges on the packet's 448-bit Arb continuum certificate (not replayable here -- python-flint absent), so that leg needs a flint-equipped replay; and finding S1 (the packet `SHA256SUMS.txt` is stale for all 10 artifacts, which would abort its advertised one-command replay) should be fixed by regenerating the manifest against the committed tree.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
