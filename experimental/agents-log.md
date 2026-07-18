@@ -30,6 +30,64 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - All-depth rank-one negation-pairing formalization
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Pinned source statement
+  `experimental/notes/thresholds/rank_one_emission_arithmetic.md @ 168e9ba0`,
+  balanced-ternary convention
+  `experimental/notes/thresholds/twisted_coset_cube_spectrum.md @ 168e9ba0`,
+  source verifier
+  `experimental/scripts/verify_rank_one_emission_arithmetic.py @ 168e9ba0`,
+  and frozen certificate
+  `experimental/data/certificates/rank-one-emission-arithmetic/rank_one_emission_arithmetic.json @ 168e9ba0`;
+  Lean proof
+  `experimental/lean/rank_one_emission_arithmetic/RankOneEmissionArithmetic.lean @ a6753ddf`,
+  theorem map
+  `experimental/lean/rank_one_emission_arithmetic/README.md @ a6753ddf`,
+  and focused audit
+  `experimental/notes/thresholds/rank_one_negation_pairing_formalization.md @ a6753ddf`;
+  PR #938, proof-payload head `a6753ddf`.
+- **Status:** PROVED
+- **What is being added:** For every depth `k`, the Lean package proves that
+  complementing a canonical residue modulo `3^k` preserves its recursive
+  balanced-ternary nonzero-digit count.  It proves the bounded induction kernel
+  for `a <= 3^k`, the source-shaped theorem for `a < 3^k`, and an unrestricted
+  wrapper that reduces `a` modulo `3^k` before natural subtraction.  The former
+  depths-1--7 theorem name is retained as a compatibility corollary.  This
+  explicitly repairs the false unrestricted natural-number transcription:
+  at `k = 1`, `a = 4`, saturating subtraction gives counts `0` and `1`.
+- **How it is useful:** Source packet #818 (head `03fa2958`, integrated at
+  `168e9ba0`) uses this digit-count identity in Lemma R(a).  Twisted-coset
+  producer #816 (head `98e2a620`, integrated at `168e9ba0`) supplies the
+  upstream balanced-ternary and `G` context.  Direct emission consumers #820
+  (head `d5f67b4b`, integrated at `168e9ba0`) and #824 (head `2f5162fc`,
+  integrated at `168e9ba0`) may reuse the kernel only after an explicit bridge
+  to their duplicate local `s3` definitions.  PR #938 supplies the missing
+  all-depth arithmetic theorem.  It does not construct balanced-digit vectors
+  or prove their uniqueness; prove periodicity of unnormalized `s3`; formalize
+  complex finite-sum pairing, conjugation, cosine folding, reality or
+  nonvanishing of `G`, or an all-depth pair census; prove Lemma R(b,c), the
+  rank-one cube product law, an emission budget, soundness, admission, or an
+  all-depth greedy theorem; supply image-scale MI/MA, a direct Sidon payment, a
+  residual ray compiler, a complete profile-envelope comparison, or an unsafe
+  lower reserve; or prove an MCA threshold, finite deployed row, deep-MCA
+  count, charge, branch closure, or Proximity Prize claim.
+- **What to do next:** If a downstream package needs the theorem, first add a
+  transparent equality or shared-definition bridge for its local `s3`; do not
+  infer the analytic reality statement from this arithmetic kernel alone.
+  Printing axioms for `s3_pow_sub`, `pairing_symmetry_all`,
+  `pairing_symmetry_mod`, and `pairing_symmetry` reports only
+  `[propext, Quot.sound]`. CHECK:
+  `cd experimental/lean/rank_one_emission_arithmetic && lake clean && lake build`
+  -> `Build completed successfully.`;
+  `python3 experimental/scripts/verify_rank_one_emission_arithmetic.py`
+  -> `RESULT: PASS (20/20)`;
+  `python3 experimental/scripts/verify_rank_one_emission_arithmetic.py --tamper-selftest`
+  -> `tamper-selftest: caught 7/7`;
+  `rg -n '^[[:space:]]*(sorry|admit|axiom|opaque)\b|sorryAx' experimental/lean/rank_one_emission_arithmetic/RankOneEmissionArithmetic.lean`
+  -> no declaration-level matches.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
