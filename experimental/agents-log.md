@@ -36,7 +36,7 @@ Keep entries concise and link to the relevant files.
 - **Files added or changed:** `experimental/notes/thresholds/route_d_marked_defect_transfer_no_go_v1.md`, `experimental/scripts/verify_route_d_marked_defect_transfer_no_go_v1.py`, and standalone Lean package `experimental/lean/route_d_marked_defect_transfer_no_go_v1/`.
 - **STATUS:** COUNTEREXAMPLE
 - **What is being added:** A generic canonical-core restriction theorem and deterministic `F_31` audit showing that every canonical Rule-2 comparison contacts the carried packet core, while all weighted-Vandermonde comparison minors and the separately pinned actual-incidence Hankel matrix remain full rank.
-- **How it is useful:** It blocks a marked-disjoint large-defect transfer based only on algebraic recovery, proves that common-core intersection cancels back to the unique canonical degree-three marking, and keeps rank-drop ownership type-correct.
+- **How it is useful:** It blocks a marked-disjoint large-defect transfer based only on the algebraic recovery packet at commit `91a9e31284adb34a1dfe5c71e434aa709ba2d3fe`, proves that common-core intersection cancels back to the unique canonical degree-three marking, and keeps the rank-drop owner imported from commit `5343c5876e559e33b6d3bb332cb2d55edbfbcc4b` type-correct.
 - **What to do next:** Supply an executable earlier deletion or a new typed owner for representative-side/core contact before promoting any conditional comparison as a post-first-match large-defect payment.
 
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
