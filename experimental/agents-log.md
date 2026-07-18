@@ -36,7 +36,7 @@ Keep entries concise and link to the relevant files.
 - **Files added or changed:** `experimental/notes/thresholds/route_d_f31_all_depth_tree_no_go_v1.md`, `experimental/scripts/verify_route_d_f31_all_depth_tree_no_go_v1.py`, `experimental/lean/route_d_f31_all_depth_tree_no_go_v1/`, and this log entry.
 - **STATUS:** COUNTEREXAMPLE
 - **What is being added:** An exact restricted `F_31` all-depth prefix-tree census and mask-DP certificate proving that every base-child ordering has at most `60<81` algebraic same-cell comparisons, together with the lex `45..48` nonextension range and the four-row toy-budget obstruction.
-- **How it is useful:** It prevents promotion of the fixed-base algebraic candidate floor through disjoint branch-excess accounting while preserving the canonical common-core mark and keeping first-match ownership explicit.
+- **How it is useful:** It prevents promotion of the fixed-base algebraic candidate floor from commit `36d560d7421dace47bf48b3fecc9389adaf0977b` through the root compiler audited at commit `91a9e31284adb34a1dfe5c71e434aa709ba2d3fe`, while preserving the canonical common-core mark and keeping first-match ownership explicit.
 - **What to do next:** Treat the packet as a finite compiler obstruction only; any replacement must construct actual post-first-match buckets, execute the named priority predicates, preserve `G`, and print the missing numerical owner.
 
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
