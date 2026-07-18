@@ -30,6 +30,66 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Universal section-nonpositive degree gate
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Lean proof
+  `experimental/lean/section_nonpositive_extraction/SectionNonpositiveExtraction.lean @ 55b1982f`,
+  theorem map
+  `experimental/lean/section_nonpositive_extraction/README.md @ 55b1982f`,
+  focused audit
+  `experimental/notes/thresholds/section_nonpositive_degree_gate_formalization.md @ 55b1982f`,
+  and source verifier
+  `experimental/scripts/verify_section_nonpositive_degree_gate.py @ 55b1982f`;
+  PR #954, proof-payload head `55b1982f`.
+- **Status:** PROVED
+- **What is being added:** In the exact printed compiler regime
+  `1 <= k < n` and `k+1 <= a <= n`, proves universally that
+  `a^2 <= n(k-1)` forces `2a-k <= n-1`.  The proof compares exact natural
+  squares through `4n(k-1) < (n+k)^2`, retains both source `a`-range
+  hypotheses even though the square comparison does not consume them, and
+  uses `k+1<=a` to keep the printed `2a-k` nontruncated.  The former
+  `gateHoldsUpTo` and `degree_gate_n_le_40` declarations retain their exact
+  types as finite regressions.
+- **How it is useful:** The source producer is compiler section 4.1 in
+  `experimental/notes/thresholds/canonical_reduced_rational_host_compiler.md @ c23dcaa0`,
+  produced by PR #721 (head `aa66634e`) and integrated at `c23dcaa0`.  Its
+  explicit consumer is Theorem 3 in
+  `experimental/notes/thresholds/section_nonpositive_extraction_counterexample.md @ 9262f63c`,
+  produced by PR #730 (head `539d8f0d`) and integrated with the former finite
+  module
+  `experimental/lean/section_nonpositive_extraction/SectionNonpositiveExtraction.lean @ 9262f63c`.
+  No current open PR imports, modifies, or semantically duplicates the payload
+  of PR #954 (head `55b1982f`).  This theorem proves only natural-number degree
+  arithmetic.  It does not construct or extract a rational-host presentation;
+  formalize polynomial, interpolation, field, domain, or Reed--Solomon
+  semantics; prove the counterexample's Theorem-1 iff; build a non-host family
+  or generic-failure count; enumerate denominators; construct a first-match,
+  LineRay, Route-D, RIM, owner, or payment adapter; supply image-scale MI/MA or
+  direct Sidon payment; compile a residual ray; compare the complete profile
+  envelope; establish lower reserve; prove exact-support reduction,
+  rank-to-support, an explaining/raw-rank witness, the 67,472 charge, or a
+  deep-MCA count; close a branch, KoalaBear row, or deployed row; prove an MCA
+  threshold; or make a Proximity Prize claim.
+- **What to do next:** Connect `degree_gate` to future polynomial-host semantics
+  only through explicit interpolation and reducedness APIs; do not treat this
+  arithmetic implication as extraction or as a compiler payment.  Its axiom
+  report and the retained finite census report contain only standard axioms.
+  CHECK:
+  `cd experimental/lean/section_nonpositive_extraction && lake clean && lake build`
+  -> `Build completed successfully.`;
+  `python3 experimental/scripts/verify_section_nonpositive_degree_gate.py --check`
+  -> `RESULT: PASS (105595/105595)`;
+  `python3 experimental/scripts/verify_section_nonpositive_degree_gate.py --tamper-selftest --check`
+  -> `tamper-selftest: caught 4/4` and `RESULT: PASS (105595/105595)`;
+  `python3 experimental/scripts/verify_section_nonpositive_extraction.py`
+  -> `RESULT: PASS`;
+  `cd experimental/lean/section_nonpositive_extraction && printf '%s\n' 'import SectionNonpositiveExtraction' '#print axioms SectionNonpositiveExtraction.degree_gate' '#print axioms SectionNonpositiveExtraction.degree_gate_n_le_40' | lake env lean /dev/stdin`
+  -> `'SectionNonpositiveExtraction.degree_gate' depends on axioms: [propext, Quot.sound]`
+  and `'SectionNonpositiveExtraction.degree_gate_n_le_40' depends on axioms: [Lean.ofReduceBool]`;
+  `rg -n '^[[:space:]]*(sorry|admit|axiom|opaque)\b|sorryAx' experimental/lean/section_nonpositive_extraction/SectionNonpositiveExtraction.lean`
+  -> no declaration-level matches.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
