@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - KoalaBear row-sharp Route-D pivot obstruction
+
+- **Agent/model:** Codex.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/kb_rowsharp_route_d_pivot_obstruction.md`,
+  `experimental/scripts/verify_kb_rowsharp_route_d_pivot_obstruction.py`,
+  and the standalone Lean package
+  `experimental/lean/kb_rowsharp_route_d_pivot_obstruction/`.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** An exact marked full-rank weighted SP/Padé
+  collision, a singular fixed-subgroup RIM witness, and an owner-contract
+  audit refute the proposed exhaustive Route-D pivot-routing closure. The
+  deployed numerical support certificate remains open.
+- **How it is useful:** It preserves the common-core mark, prevents an
+  unsupported per-pivot charge to the global bad-slope owner, and isolates the
+  missing marked RIM adapter, executable first-match atlas, and finite
+  `N_WSP_full(z)` payment.
+- **What to do next:** Define and verify the eight global first-match
+  predicates, prove a marked support-to-actual-incidence adapter for vanishing
+  pivots, and print a deployed finite bound for the primitive full-rank
+  weighted SP/Padé residual.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
