@@ -84,7 +84,7 @@ def positive_fixture_records() -> tuple[list[dict[str, object]], list[dict[str, 
     core = (7,)
     carried = ("base-key", 11)
     rank_drop = [{
-        "id": "rd0", "z": target, "G": core, "kappa": carried, "actual_incidence": True,
+        "id": "rd0", "z": target, "G": core, "carried_base": carried, "actual_incidence": True,
         "matrix": ((1, 0, 1), (0, 0, 0)),
     }]
     endpoints = (
@@ -94,14 +94,14 @@ def positive_fixture_records() -> tuple[list[dict[str, object]], list[dict[str, 
         ("u2", "s1"),
     )
     primitive = [{
-        "id": f"d{index}", "z": target, "G": core, "kappa": carried,
+        "id": f"d{index}", "z": target, "G": core, "carried_base": carried,
         "actual_incidence": True,
         "left": (target, core, carried, left), "right": (target, core, carried, right),
         "matrix": ((1, 0, index + 1), (0, 1, index + 2)),
     } for index, (left, right) in enumerate(endpoints)]
     routes = [{
         "source_id": "rd0", "owner": "DEEP_MCA_RANK_DROP",
-        "route_count": 1, "z": target, "G": core, "kappa": carried,
+        "route_count": 1, "z": target, "G": core, "carried_base": carried,
     }]
     return rank_drop, primitive, routes
 
@@ -118,10 +118,10 @@ def verify_owner_partition(rank_drop: Sequence[Mapping[str, object]],
             "owner partition crossed fixed targets")
     require(len({record["G"] for record in records}) == 1,
             "owner partition crossed literal cores")
-    require(len({record["kappa"] for record in records}) == 1,
+    require(len({record["carried_base"] for record in records}) == 1,
             "owner partition crossed carried keys")
     for record in primitive:
-        expected_prefix = (record["z"], record["G"], record["kappa"])
+        expected_prefix = (record["z"], record["G"], record["carried_base"])
         require(tuple(record["left"][:3]) == expected_prefix,
                 "primitive left endpoint lost z, G, or carried keys")
         require(tuple(record["right"][:3]) == expected_prefix,
@@ -143,7 +143,7 @@ def verify_owner_partition(rank_drop: Sequence[Mapping[str, object]],
         require(route["owner"] == "DEEP_MCA_RANK_DROP" and route["route_count"] == 1,
                 "rank-drop owner/count drift")
         require(route["z"] == record["z"] and route["G"] == record["G"]
-                and route["kappa"] == record["kappa"],
+                and route["carried_base"] == record["carried_base"],
                 "rank-drop route lost fixed target, literal G, or carried keys")
     require(all(route["source_id"] not in {record["id"] for record in full_rank}
                 for route in routes), "full-rank record routed to rank drop")
@@ -263,10 +263,10 @@ def positive_fixture() -> dict[str, object]:
     records = [*rank_drop, *primitive]
     fixed_z = records[0]["z"]
     literal_G = records[0]["G"]
-    carried_kappa = records[0]["kappa"]
+    carried_base = records[0]["carried_base"]
     require(fixed_z == "zeta-fixed", "positive fixture target pin drift")
     require(literal_G == (7,), "positive fixture literal G pin drift")
-    require(carried_kappa == ("base-key", 11),
+    require(carried_base == ("base-key", 11),
             "positive fixture carried-key pin drift")
     owner = verify_owner_partition(rank_drop, primitive, routes)
     require(len({edge["z"] for edge in primitive}) == 1,
@@ -286,7 +286,7 @@ def positive_fixture() -> dict[str, object]:
     return {
         "owner_partition": owner,
         "fixed_z": fixed_z, "literal_G": list(literal_G),
-        "carried_kappa": list(carried_kappa),
+        "carried_base": list(carried_base),
         "forest": {
             "vertices": forest["vertices"], "edges": forest["edges"],
             "components": forest["components"], "roots": forest["roots"],
@@ -484,6 +484,12 @@ def build_f23_rows() -> list[dict[str, object]]:
 
 def f23_negative_control() -> dict[str, object]:
     rows = build_f23_rows()
+    analogue_betas = {((sum(row["G"]) + sum(row["A"])) % P23,) for row in rows}
+    require(analogue_betas == {(10,)}, "F23 fixed analogue beta drift")
+    literal_core_histogram = Counter(row["G"] for row in rows)
+    require(len(literal_core_histogram) == 21
+            and max(literal_core_histogram.values()) == 5,
+            "F23 fixed literal-core slice drift")
     serialized_edges = []
     adjacency: dict[Node, set[Node]] = defaultdict(set)
     for row in rows:
@@ -531,7 +537,15 @@ def f23_negative_control() -> dict[str, object]:
         "ordered_graph_sha256": sha256_json(serialized_edges),
         "all_fold_rows_sha256": sha256_json(rows),
         "raw_pre_first_match": True,
-        "fixed_deployed_z": False,
+        "fixed_analogue_beta": list(next(iter(analogue_betas))),
+        "fixed_analogue_beta_all_rows": True,
+        "is_deployed_prefix_target": False,
+        "incomplete_printed_key": "(r,c,U0,H,beta)",
+        "printed_key_includes_literal_G": False,
+        "distinct_literal_G": len(literal_core_histogram),
+        "maximum_fixed_complete_base_fiber": max(literal_core_histogram.values()),
+        "fixed_complete_base_exceeds_cell_capacity":
+            max(literal_core_histogram.values()) > 2 * P23,
         "actual_incidence_constructed": False,
         "toy_pivot_routed": False,
         "rank_drop_routes": 0,
@@ -555,7 +569,7 @@ def summarize() -> dict[str, object]:
         },
         "abstract_compiler": {
             "rank_drop_gate": "actual incidence and all maximal minors vanish",
-            "rank_drop_route": "DEEP_MCA_RANK_DROP exactly once with z,G,kappa preserved",
+            "rank_drop_route": "DEEP_MCA_RANK_DROP exactly once with z,G,carriedBase preserved",
             "primitive_domain": "fixed-z full-rank survivor edges",
             "edge_condition": "endpoint-pair injective compatibility forest",
             "forest_transfer": "one root per component; edges biject nonroot vertices",
@@ -582,7 +596,7 @@ def summarize() -> dict[str, object]:
     }
 
 
-EXPECTED_CERTIFICATE_SHA256 = "df5c919786f14a032d0cc61b7b2bab6a2ff54b7260bf5c28a52ed5c039416bf1"
+EXPECTED_CERTIFICATE_SHA256 = "5c8f78389d70f8703c731c0c10000a2a899621a9cf69a1db5642dde8bba19406"
 
 
 def validate(certificate: Mapping[str, object]) -> None:
@@ -624,10 +638,10 @@ def targeted_tamper_selftest() -> int:
     records = [*rank_drop, *primitive]
     fixed_z = records[0]["z"]
     literal_G = records[0]["G"]
-    carried_kappa = records[0]["kappa"]
+    carried_base = records[0]["carried_base"]
     require(fixed_z == "zeta-fixed", "positive fixture target pin drift")
     require(literal_G == (7,), "positive fixture literal G pin drift")
-    require(carried_kappa == ("base-key", 11),
+    require(carried_base == ("base-key", 11),
             "positive fixture carried-key pin drift")
     trials = 0
 
@@ -646,7 +660,7 @@ def targeted_tamper_selftest() -> int:
     bad_route[0]["G"] = (8,)
     expect_rejection(lambda: verify_owner_partition(rank_drop, primitive, bad_route)); trials += 1
     for field, replacement in (("z", "other-z"), ("G", (8,)),
-                               ("kappa", ("other-key", 99))):
+                               ("carried_base", ("other-key", 99))):
         crossed_rank_drop = copy.deepcopy(rank_drop)
         crossed_routes = copy.deepcopy(routes)
         crossed_rank_drop[0][field] = replacement

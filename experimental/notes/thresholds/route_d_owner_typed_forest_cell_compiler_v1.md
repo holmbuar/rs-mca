@@ -62,18 +62,23 @@ extension_slope.
 For every residual marked packet retain
 
 ```text
-(z,G,kappa,f,g,gamma,S,T),
+(z,G,carriedBase,f,g,gamma,S,T),
 ```
 
-where `G` is the literal common-core mark and `kappa` contains the full
+where `G` is the literal common-core mark and `carriedBase` contains the full
 prefix, fixed Rule-2 key, normalization, cell, and every other first-match
 datum used by recovery.
+At minimum, `carriedBase` contains `(r,c,U0,H,beta,G)` plus every
+actual first-match and owner tag used by recovery; carrying `G` separately in
+the displayed packet is intentional marked redundancy. This is **not** the
+source contact weight
+`kappa_contact = 1_(A0 cap G) - 1_(R0 cap G)`.
 
 The owner partition is:
 
 1. The packet is an actual finite noncontained incidence and every maximal
    minor of its field-native `t x (j+1)` Hankel matrix vanishes. Route it
-   exactly once to `DEEP_MCA_RANK_DROP`, without changing `(z,G,kappa)`.
+   exactly once to `DEEP_MCA_RANK_DROP`, without changing `(z,G,carriedBase)`.
 2. At least one actual maximal minor is nonzero. Retain the packet in
    `D_prim(z)`; a canonical nonzero minor may select a chart but supplies no
    support payment.
@@ -94,8 +99,8 @@ Let `P_z=D_prim(z)`. For each `d in P_z`, define complete marked endpoint
 keys
 
 ```text
-L(d)=(z,G,kappa,u(d)),
-R(d)=(z,G,kappa,sigma(d)).
+L(d)=(z,G,carriedBase,u(d)),
+R(d)=(z,G,carriedBase,sigma(d)).
 ```
 
 The endpoint key may contain additional actual chart data, provided the same
@@ -263,10 +268,18 @@ exists. Nevertheless,
 55 > 2*23 = 46.
 ```
 
+
+All 55 rows share the fixed one-coordinate prefix analogue `beta=(10)` and
+the incomplete printed key `(r,c,U0,H,beta)`. Their literal `G` varies over
+21 values, and the maximum fixed-`G` fiber is 5. Thus `55>46` is a
+fixed-analogue-prefix/incomplete-key floor, not a fixed-complete-base or
+deployed-fixed-`z` floor.
+
 Thus forest orientation alone cannot manufacture a `Fin(2) x F_23` cell
 injection. The cell-map hypothesis is genuine.
 
-This is raw, pre-first-match algebra. It is not the deployed target `z`, it
+This is raw, pre-first-match algebra. It has fixed analogue `beta=(10)`, but it
+is not the deployed target `z in F_p^67471`; it
 does not execute the named deletion mask, and it does not refute the deployed
 certificate. Its nonzero determinant is only the predecessor's toy
 diagnostic; it is never routed or identified with an actual RIM pivot.
