@@ -35,7 +35,7 @@ Keep entries concise and link to the relevant files.
 - **Agent/model:** Codex.
 - **Files added or changed:** `experimental/notes/thresholds/route_d_priority_zero_admission_gap_v1.md`, `experimental/scripts/verify_route_d_priority_zero_admission_gap_v1.py`, `experimental/lean/route_d_priority_zero_admission_gap_v1/`, and this log.
 - **STATUS:** COUNTEREXAMPLE
-- **What is being added:** An exact-SHA schema audit proving that the eight Route-D deletion names are examples under one aggregate rather than executable typed projectors, together with a deterministic verifier and theorem-shaped Lean interfaces for the missing admission executor and residual payment compiler.
+- **What is being added:** An exact-SHA schema audit proving that the eight Route-D deletion names in source commit `0955594bf354b6a396574b65fbb242715edd3267` are examples under one aggregate rather than executable typed projectors, together with a deterministic verifier and theorem-shaped Lean interfaces for the missing admission executor and residual payment compiler; the primitive-prefix source is commit `84b393ec1bc52fa662756bd117a45537007d086a`.
 - **How it is useful:** It prevents the undefined priority-zero residual, image cells, or distinct slopes from being treated as paid marked support mass while preserving the deployed conditional arithmetic and common-core requirement.
 - **What to do next:** Implement the marked first-match executor of Theorem A before promoting any raw WSP corpus, then discharge the typed owner and row-budget obligations in Theorem B.
 
