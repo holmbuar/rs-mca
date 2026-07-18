@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D marked-puncture contact recursion v1
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/thresholds/route_d_marked_puncture_contact_recursion_v1.md`, `experimental/scripts/verify_route_d_marked_puncture_contact_recursion_v1.py`, and the standalone Lean package `experimental/lean/route_d_marked_puncture_contact_recursion_v1/`.
+- **STATUS:** PROVED
+- **What is being added:** The exact carried-Q least-contact erase/insert theorem is proved at the finite certificate layer for an arbitrary carried predicate Q, with exhaustive checks of all 8 Boolean predicates on the three-support F7 parent fiber and all 27 local hereditary assignments.  The standalone Lean module records the exact generic equivalence and contact-partition interfaces, a conditional hereditary cardinality interface whose carried-to-coarse inclusion is explicitly generated from deletion heredity, three intentional proof stubs, and kernel-checked F7/F11 fixture pins.
+- **How it is useful:** This preserves the common-core root mark, rules out raw-cell double counting and a root-blind division by the ambient group order, and supplies the marked-puncture recursion needed by the CAP25-v13 KoalaBear-MCA row-sharp-Q Route-D lane without claiming the primitive support target bound itself.
+- **What to do next:** The root-blind child orbit and child stabilizer jump remain an open fixed-subgroup/RIM rank-drop owner; construct the actual-incidence adapter routing each vanishing pivot to `rank_drop_pivot`, and do not promote the global bound until that owner and the large signed-defect folding transfer are discharged.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
