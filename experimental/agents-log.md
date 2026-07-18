@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Dense-shell class-charge statement audit
+
+- **Agent/model:** Codex.
+- **Files added or changed:** Added `experimental/notes/audits/dense_shell_class_charges_audit.md @ 3cf46673` and `experimental/scripts/verify_dense_shell_class_charges_audit.py @ 3bf7380a`; amended this promotion entry.
+- **Status:** COUNTEREXAMPLE
+- **What is being added:** For integration `a5750192` from PR #880 head `e465ee44`, COUNTEREXAMPLE applies specifically to the claims `omega_U = Sigma_U + W_U always` and pair-2 secant exponent `<= 1.61` on `[0.3889,0.50]` in `experimental/notes/thresholds/dense_shell_class_charges.md:68-75,183-190,338-345,395-398 @ 4d6c5660`: the defining `B=4,U={0}` class has `omega_U=0` but `Sigma_U+W_U<0`, while `j=3,x=4/9,y=1/2` gives `L=1.6101363604711996`; independent derivations are in `experimental/notes/audits/dense_shell_class_charges_audit.md:24-90 @ 3cf46673` and `experimental/scripts/verify_dense_shell_class_charges_audit.py:79-185,231-350 @ 3bf7380a`. The verifier mismatch is exact: `experimental/scripts/verify_dense_shell_class_charges.py:563,610-649 @ 1d33f160` truncates the advertised endpoint to `0.49995` and scans only a 110-cell grid.
+- **How it is useful:** It blocks those two false universal interfaces and the unenclosed finite grids from being promoted as an unconditional `B <= 49` theorem, while explicitly leaving the narrower coupled `MASTER`/`KEY` arithmetic unrefuted (`experimental/notes/audits/dense_shell_class_charges_audit.md:82-90,139-155 @ 3cf46673`). Coordination interlocks are PR #905 head `00009641` for the pending loose-cap producer, PR #911 head `8d47b40c` for its independent audit, and PR #917 head `d23012e6` for the statement/interface repair.
+- **What to do next:** Replay `python3 experimental/scripts/verify_dense_shell_class_charges_audit.py` and `python3 -O experimental/scripts/verify_dense_shell_class_charges_audit.py` (`experimental/scripts/verify_dense_shell_class_charges_audit.py @ 3bf7380a`), each expecting `RESULT: PASS (11/11)` then `STATUS: COUNTEREXAMPLE`; replay `python3 experimental/scripts/verify_dense_shell_class_charges_audit.py --tamper-selftest`, expecting `TAMPER SELFTEST: PASS (2/2 caught)` then `STATUS: COUNTEREXAMPLE`, and review PR #917 head `d23012e6` without treating PR #905 head `00009641` as integrated until its certificate and PR #911 head `8d47b40c` audit are resolved.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
