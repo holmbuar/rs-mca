@@ -27,10 +27,11 @@ note's "Computed clauses" subsection and reproduced here:
               + a Birkhoff mass-field enclosure + a coupled Lambda-field enclosure,
               CONDITIONAL on the existing floor box, the existing finite base-case
               census (MAG-BOX/V18), an a-posteriori Lipschitz self-check, and one
-              remaining generous MONITORED constant, the correction-derivative cap
-              C' (clause (C'-CAP)). Gate MAG-BOX still monitors the realized
-              magnitudes at every grid level (now the empirical cross-check of the
-              proved intervals, not the sole evidence for them).
+              correction-derivative cap C' (clause (C'-CAP) -- a generous MONITORED
+              constant when this upgrade landed, itself DISCHARGED-conditional as of
+              this revision, see the (C'-CAP) block below). Gate MAG-BOX still
+              monitors the realized magnitudes at every grid level (now the empirical
+              cross-check of the proved intervals, not the sole evidence for them).
   (SIB-BAND)  DISCHARGED at a deep anchor (gate SIB-CERT, full mode only). V15-IA/V17-IA
               (at J0*=500) still certify only the FORCED-PROPORTIONAL surrogate
               c^+ = lam*c^-; the real cascade is non-proportional, c^+_i = lam*w_i*c^-_i
@@ -39,30 +40,37 @@ note's "Computed clauses" subsection and reproduced here:
               sqrt(min_i rho_i * max_i rho_i) is itself a legal (LAM-BOX) point, and
               w_i := rho_i/lam_gc lies in the half-band [1/sqrt R*,sqrt R*] by the IH
               alone. Re-running the wobble census over that half-band at a deep anchor
-              (J0=800, pad=999/1000) CLEARS the equilibrium threshold (+4.6% margin,
-              gate SIB-CERT) -- shallower deep anchors miss (600: -11.1%, 700: -1.9%),
+              (J0=800, pad=999/1000) CLEARS the equilibrium threshold (+7.4% margin
+              round-2 boundary-corrected, gate SIB-CERT; round 1 was +4.6%) --
+              shallower deep anchors miss (600: -11.1%, 700: -1.9%),
               and the full (non-geometric-center) band [1/R*,R*] never clears at any
               depth. This closes the real-vs-proportional gap the surrogate leaves open;
               see note Section 8.
   (FOLD)      the child-window fold factor <=57/50 (Lemma W1) is a grid-measured bound
               (gate V16b), COMPUTED.
-  (FLOOR-PERSIST) floor persistence for n>J0* composes from the predecessor packet's
-              monotone-drift machinery re-anchored at (J0*,f*); COMPUTED there, imported.
-              SIB-CERT's own deep anchor (n>800) relies on the same clause AT PAD
-              999/1000 (the V18 grid extension to n=800 empirically confirms monotone
-              drift through the new anchor).
-  (C'-CAP)    the Lambda correction-derivative cap CPRIME=0.006 gate LAM-INV's coupled
-              Lambda-field enclosure rests on; MONITORED (measured impact ~0.002-0.003
-              against the real cascade), not proved from the floor box. The ONE
-              computed/monitored literal the (LAM-BOX) upgrade introduces.
+  (FLOOR-PERSIST) floor persistence for n>J0* -- the exact as-consumed form (note S8.4):
+              child ratio profiles at the branch parameters vs the parent-t anchor
+              family, at both anchors. COMPUTED (the upward CLT drift), now FIRST-CLASS:
+              gate FLOOR-DRIFT monitors the drift mechanism directly (123 parameters,
+              consecutive deep-grid pairs) plus the as-consumed margins; the pointwise
+              corner-census discharge route is CLOSED as a route-cut (note S9(v),
+              reproduced as an informational negative control on the gate line).
+  (C'-CAP)    the Lambda correction-derivative cap CPRIME=3/500 -- DISCHARGED-conditional
+              (this revision, R1 mitigation (a)): gate LAM-INV certifies the exact-
+              identity drop bound [gbar*|Lambda_pure| + C'/P]/(1-gbar) <= CPRIME at
+              every NG node from per-branch floor-box data + the (FOLD)-folded
+              equilibrium ceiling (untampered V15-IA/V17-IA chain); worst 0.004245,
+              29% margin. The a-posteriori monitor is RETAINED as cross-check. No
+              monitored-only literal remains in the packet.
 STATUS: CONDITIONAL. PROVED would require zero computed clauses. Remaining computed
-clauses: (FOLD), (FLOOR-PERSIST), (C'-CAP). (LAM-BOX) is DISCHARGED-conditional by gate
-LAM-INV; (SIB-BAND) is DISCHARGED at the deep anchor by gate SIB-CERT (geometric-center
-certified census) GIVEN (LAM-BOX) -- see note Section 8. The arithmetic fact
+clauses: (FOLD), (FLOOR-PERSIST). (LAM-BOX) is DISCHARGED-conditional by gate LAM-INV;
+(SIB-BAND) is DISCHARGED at the deep anchor by gate SIB-CERT (geometric-center
+certified census) GIVEN (LAM-BOX); (C'-CAP) is DISCHARGED-conditional by LAM-INV's
+floor-box node census -- see note Section 8. The arithmetic fact
 rho_prop@i<17(n)<=1.02560749 is supported with margin by every gate; the packet's
 rigor is scoped by the clauses above.
 
-Gates (8 core in --quick/--fallback; 10 core in the default full mode, determine RESULT;
+Gates (8 core in --quick/--fallback; 11 core in the default full mode, determine RESULT;
 informational lines printed but NOT counted):
   F3   [FLOORS]    re-certifies the floor family r_i(J0*,t) at the anchor (positivity,
                    LC-compatibility, the i=0 halving-convention cross-check).
@@ -101,19 +109,29 @@ informational lines printed but NOT counted):
                    is a legal (LAM-BOX) point, w_i=rho_i/lam_gc lies in
                    [1/sqrt R*,sqrt R*] by the IH alone -- no assumption beyond (LAM-BOX))
                    re-run at the deep anchor (J0=800,pad=999/1000), where it clears
-                   (+4.6% margin) -- covering the REAL non-proportional cascade, not
-                   merely the surrogate. Outwardness self-check on the sqrt bracket.
+                   (+7.4% margin, round-2 boundary-corrected) -- covering the REAL
+                   non-proportional cascade, not merely the surrogate. Outwardness
+                   self-check on the sqrt bracket + the W17 boundary-slot box.
                    SKIPPED (informational line only) under --quick/--fallback, since the
                    deep anchor needs the full J0=800 build.
-  LAM-INV [core, FULL MODE ONLY, discharges (LAM-BOX)] the PROVED invariant-interval
-                   upgrade (DERIV_LAMBOX.md): one forward-pass T-invariance of the mass
-                   interval field (NG=3841) + a-posteriori sup|Lambda|<=LIP_S; one
-                   forward-pass invariance of the coupled Lambda field + a-posteriori
-                   sup|Lambda'|<=LIP_L; a floor-box-PROVED bound on the mass-correction
-                   fraction gamma<=GMAX; a MONITORED bound on the Lambda correction
-                   derivative C'<=CPRIME (the (C'-CAP) clause). Base case (finite grid)
-                   cited from the existing MAG-BOX/V18 gates, not re-derived. SKIPPED
-                   (informational line only) under --quick/--fallback, like SIB-CERT.
+  LAM-INV [core, FULL MODE ONLY, discharges (LAM-BOX) and (C'-CAP)] the PROVED
+                   invariant-interval upgrade (DERIV_LAMBOX.md): one forward-pass
+                   T-invariance of the mass interval field (NG=3841) + a-posteriori
+                   sup|Lambda|<=LIP_S; one forward-pass invariance of the coupled
+                   Lambda field + a-posteriori sup|Lambda'|<=LIP_L; a floor-box-PROVED
+                   bound on the mass-correction fraction gamma<=GMAX; and -- this
+                   revision -- the floor-box-PROVED (C'-CAP) node census (exact drop
+                   identity + per-branch floor data + the (FOLD)-folded equilibrium
+                   ceiling from the untampered memoized V15-IA/V17-IA chain), with the
+                   a-posteriori C' monitor retained as cross-check. Base case (finite
+                   grid) cited from the existing MAG-BOX/V18 gates, not re-derived.
+                   SKIPPED (informational line only) under --quick/--fallback.
+  FLOOR-DRIFT [core, FULL MODE ONLY, monitors (FLOOR-PERSIST) -- monitoring, NOT a
+                   proof] the drift mechanism rc_i(n2,s)>=rc_i(n1,s) over consecutive
+                   deep-grid pairs n1>=J0*, 123 parameters (parents+branches), i<18,
+                   PLUS the exact as-consumed floor margins at both anchors, PLUS the
+                   note-S9(v) route-cut negative control (informational, inline).
+                   SKIPPED (informational line only) under --quick/--fallback.
   (informational): SIB-BAND (the shallow-anchor (J0*=500) wobble-extended exhibit +
                    gap, superseded as the discharge by SIB-CERT above), V15-GRID (grid
                    theta census, robustness), V17-INFO (G2 negative control), V19
@@ -389,8 +407,15 @@ def onestep_compose(raw, lam_mode='mid'):
     T1P = [(Lamp * WpP[i] - Lamm * Wm[i]) / (3.0 * cjP[i]) for i in range(n)]
     T3P = [(ap_ * (cpP[i] - cm[i]) - at3 * cm[i]) / (3.0 * cjP[i]) for i in range(n)]
     Fext = spread([T1P[i] + T3P[i] for i in range(n)])
+    # The W=17 (OPWIN) mass-weighted references -- gate LAM-INV's FIELD object,
+    # (log S^17)'(t_pm), matching the (I1)@W=17 identity and the gamma/C' floor-box
+    # covers (window-coherence fix, round 4: the field's reality-side comparisons use
+    # THESE; the 18-window variants above are retained for the D5 box monitoring).
+    L17 = min(OPWIN, L)
+    Lamp17 = sum(Lp[i] * cp[i] for i in range(L17)) / sum(cp[i] for i in range(L17))
+    Lamm17 = sum(Lm[i] * cm[i] for i in range(L17)) / sum(cm[i] for i in range(L17))
     return dict(T1=T1, T2=T2, T3=T3, recon=recon, Fext=Fext, delp=delp, delm=delm,
-                Lamp=Lamp, Lamm=Lamm)
+                Lamp=Lamp, Lamm=Lamm, Lamp17=Lamp17, Lamm17=Lamm17)
 
 def gap_quadrature(t, j, levs, M, win=OPWIN):
     tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
@@ -689,9 +714,18 @@ def osc_bound_at_parent_frac(P, dp_, dm_, ap_, at3):
                     best = v
     return best
 
+_FBOX_IA_CACHE = {}
+
 def F_box_ia_certified(levs, J0, f_pad, tamper=None):
     """The certified sup over 41 parents of the rigorous width-2 minced-IA forcing
-    bound at anchor J0, pad f_pad. Returns (sup_as_Fraction, locus_t, slop_used)."""
+    bound at anchor J0, pad f_pad. Returns (sup_as_Fraction, locus_t, slop_used).
+    Memoized on (J0, f_pad, tamper): gate LAM-INV's (C'-CAP) floor-box bound consumes
+    the UNTAMPERED result (tamper=None) for its equilibrium-ceiling input, so the
+    baseline full run computes this census once and the gate re-uses it; only a
+    tamper run that targets THIS census pays a second (tampered) evaluation."""
+    key = (J0, str(f_pad), tamper)
+    if key in _FBOX_IA_CACHE:
+        return _FBOX_IA_CACHE[key]
     slop = IA_SLOP
     worst = Fr(0); wt = None
     for t in PARENTS:
@@ -705,6 +739,7 @@ def F_box_ia_certified(levs, J0, f_pad, tamper=None):
         v = v * (1 + slop)             # final documented outward slop (float-input safety margin)
         if v > worst:
             worst = v; wt = t
+    _FBOX_IA_CACHE[key] = (worst, wt, slop)
     return worst, wt, slop
 
 def gate_floors(report, levs, J0, f_pad, tamper=None):
@@ -939,10 +974,17 @@ def theta_band_at_parent(t, levs, J0, f_pad, tamper=None):
                     best = val; bestpair = (i, ip); bestpanel = (edges[pj], edges[pj + 1])
     return best, (bestpair, bestpanel)
 
+_THETA_IA_CACHE = {}
+
 def theta_band_ia_certified(levs, J0, f_pad, tamper=None):
     """The certified sup over 41 parents of theta_band_at_parent, folded by the certified
     Window Lemma factor (<=57/50, gate V16b -- itself a COMPUTED (FOLD) bound) and the
-    documented outward slop. Returns (theta_band, locus_t, locus_pair, slop)."""
+    documented outward slop. Returns (theta_band, locus_t, locus_pair, slop).
+    Memoized on (J0, f_pad, tamper) -- same rationale as F_box_ia_certified's cache:
+    gate LAM-INV's (C'-CAP) bound consumes the UNTAMPERED chain."""
+    key = (J0, str(f_pad), tamper)
+    if key in _THETA_IA_CACHE:
+        return _THETA_IA_CACHE[key]
     slop = IA_SLOP
     worst = None; wt = None; wpair = None
     for t in PARENTS:
@@ -953,6 +995,7 @@ def theta_band_ia_certified(levs, J0, f_pad, tamper=None):
         if worst is None or val > worst:
             worst = val; wt = t; wpair = info
     theta_band = worst * Fr(57, 50) * (1 + slop)
+    _THETA_IA_CACHE[key] = (theta_band, wt, wpair, slop)
     return theta_band, wt, wpair, slop
 
 def realized_seminorm_floor(levs, J0):
@@ -1312,11 +1355,15 @@ def gate_magnitude_box(report, levs, grid, tamper=None, laminv=None):
     STATUS (post gate LAM-INV): the lam and mass-weighted Lambda^+/- lines are now a
     PROVED-CONDITIONAL INTERVAL (gate LAM-INV), not merely a measured range -- this gate's
     grid check is monitoring RETAINED as the empirical cross-check of that proved
-    enclosure, not the sole evidence for it. The arithmetic-MEAN Lambda^+/- variants
-    (Lam+mean/Lam-mean below) stay COMPUTED-monitored ONLY: LAM-INV's enclosure covers the
-    mass-weighted variants alone, and LAB_LAMBOX.md's Q1 finding is that the arithmetic-
-    mean variant WIDENS with depth (shallow n UNDERSTATES its true range) -- so it is
-    watched here, not claimed proved.
+    enclosure, not the sole evidence for it. (Round 4, window coherence:) the FIELD's
+    own object is the W=17 mass-weighted reference (log S^17)'(t_pm) -- matching
+    (I1)@17 and the gamma/C' floor-box covers -- so the field consistency check and the
+    in-box monitoring now include the W=17 variants (Lam+mass17/Lam-mass17); the
+    W=18 mass-weighted variants are RETAINED alongside. The arithmetic-MEAN Lambda^+/-
+    variants (Lam+mean/Lam-mean below) stay COMPUTED-monitored ONLY: LAM-INV's
+    enclosure covers the mass-weighted field object alone, and LAB_LAMBOX.md's Q1
+    finding is that the arithmetic-mean variant WIDENS with depth (shallow n
+    UNDERSTATES its true range) -- so it is watched here, not claimed proved.
 
     `laminv`, if given (compute() passes gate LAM-INV's own cached result, computed once,
     before this gate runs, to avoid paying the ~47s float precompute twice): ALSO reports
@@ -1352,13 +1399,19 @@ def gate_magnitude_box(report, levs, grid, tamper=None, laminv=None):
             cp, cm = raw['cp'], raw['cm']
             lam = sum(cp[i] for i in range(nn)) / sum(cm[i] for i in range(nn))
             m = onestep_compose(raw, 'mass'); Lp, Lm = m['Lamp'], m['Lamm']
+            # the FIELD's own object (window-coherence fix, round 4): the W=17 mass-
+            # weighted references (log S^17)'(t_pm), matching gate LAM-INV's (I1)@17
+            # identity and gamma/C' covers -- the field's realized counterpart, and the
+            # object its enclosure must contain at the base-case levels.
+            Lp17, Lm17 = m['Lamp17'], m['Lamm17']
             # the ARITHMETIC window-mean reference (the one Lemma A1's seminorm requires --
             # zero-sum delta; the forcing T1 must use the same split, so the box must cover
-            # it, per D5). Checked alongside the mass-weighted reference.
+            # it, per D5). Checked alongside the mass-weighted references.
             LA = min(CWIN, len(raw['Lp']), len(raw['Lm']))
             LpA = sum(raw['Lp'][:LA]) / LA; LmA = sum(raw['Lm'][:LA]) / LA
             rhos = [cp[i] / cm[i] for i in range(nn)]
             checks = [("lam", lam, lam_lo, lam_hi),
+                      ("Lam+mass17", Lp17, lap_lo, lap_hi), ("Lam-mass17", Lm17, lm_lo, lm_hi),
                       ("Lam+mass", Lp, lap_lo, lap_hi), ("Lam-mass", Lm, lm_lo, lm_hi),
                       ("Lam+mean", LpA, lap_lo, lap_hi), ("Lam-mean", LmA, lm_lo, lm_hi)]
             checks += [("rho_%d" % i, r, lam_lo, lam_hi) for i, r in enumerate(rhos)]
@@ -1375,17 +1428,19 @@ def gate_magnitude_box(report, levs, grid, tamper=None, laminv=None):
                 else:
                     if h < worst_head_proved:
                         worst_head_proved = h; worst_which_proved = "%s@n=%d" % (name, n)
-            # C' consistency check (a-posteriori side of R1): realized mass-weighted
-            # Lambda^+/- (Lp,Lm, already computed above) vs gate LAM-INV's own converged
-            # field prediction at the SAME (t+,t-), broader than gate LAM-INV's own
-            # sparse one-anchor sample (this loop already covers MAG_GRID x 41 parents).
+            # C' consistency check (a-posteriori side of R1): the realized FIELD object
+            # -- the W=17 mass-weighted Lambda^+/- (Lp17,Lm17; window-coherence fix,
+            # round 4: previously the 18-window variant was compared here, one edge term
+            # off the field's own (I1)@17 identity) vs gate LAM-INV's converged field
+            # prediction at the SAME (t+,t-), broader than gate LAM-INV's own sparse
+            # one-anchor sample (this loop already covers MAG_GRID x 41 parents).
             if laminv is not None:
                 tp_fr = frac_exact((1 + t) / 3.0); tm_fr = frac_exact((1 - t) / 3.0)
                 Lp_lo_f, Lp_hi_f = _brk_L_exact_lam(laminv['loc'], laminv['Lam_F'], tp_fr, LIP_L_LAM_F)
                 Lm_lo_f, Lm_hi_f = _brk_L_exact_lam(laminv['loc'], laminv['Lam_F'], tm_fr, LIP_L_LAM_F)
                 Lp_field = float(Lp_lo_f + Lp_hi_f) / 2.0
                 Lm_field = float(Lm_lo_f + Lm_hi_f) / 2.0
-                d_here = max(abs(Lp - Lp_field), abs(Lm - Lm_field))
+                d_here = max(abs(Lp17 - Lp_field), abs(Lm17 - Lm_field))
                 if d_here > cprime_realized:
                     cprime_realized = d_here; cprime_realized_loc = "n=%d,t=%.4f" % (n, t)
     # boundary-slot pass: w_17 := rho_17/lam_gc against its OWN deep box, W17_GRID only.
@@ -1795,7 +1850,12 @@ def gate_sib_cert(report, levs, tamper=None):
 #        window -- but only via rc_16 = c_17/c_16 in [f_16,1], and F3 already certifies
 #        the floor family over i<18 (FLOOR_WIN=CWIN=18), so rc_16 sits INSIDE the
 #        certified floor window: no new hypothesis beyond the existing F3 gate.
-#   (I2) Lambda^pm_mass = (log S^18)'(t_pm),  S^18(s) := sum_{i<18} c_i(G(s)).
+#   (I2) Lambda^pm_mass = (log S^W)'(t_pm),  S^W(s) := sum_{i<W} c_i(G(s)) -- the
+#        identity is WINDOW-GENERIC; the field instantiates it at W = OPWIN = 17,
+#        MATCHING (I1) and the gamma/C' floor-box covers (window-coherence fix,
+#        round 4: an earlier revision cited it at W=18 while (I1)/gamma were @17 --
+#        one edge term of slippage between the field and its realized comparisons;
+#        the monitors now compare the field against the W=17 object, Lamp17/Lamm17).
 #        PROVED: an elementary algebraic identity (L_i c_i = c_i' by the definition
 #        L_i := d/dt log c_i, so sum_i L_i c_i = sum_i c_i' = d/dt sum_i c_i; dividing by
 #        sum_i c_i gives d/dt log(sum_i c_i)); confirmed to 1e-11 by finite-difference
@@ -2047,8 +2107,122 @@ def _cprime_monitor_lam(levs, J0, loc, Lam_F, LIP_L_F):
         Lp_lo, Lp_hi = _brk_L_exact_lam(loc, Lam_F, tp, LIP_L_F)
         Lm_lo, Lm_hi = _brk_L_exact_lam(loc, Lam_F, tm, LIP_L_F)
         Lp_field = float(Lp_lo + Lp_hi) / 2.0; Lm_field = float(Lm_lo + Lm_hi) / 2.0
-        worst = max(worst, abs(mass['Lamp'] - Lp_field), abs(mass['Lamm'] - Lm_field))
+        # window-coherence (round 4): compare the field against ITS OWN object, the
+        # W=17 mass-weighted Lambda (matches (I1)@17 + the gamma/C' floor-box covers);
+        # the 18-window variant compared here previously is one edge term off.
+        worst = max(worst, abs(mass['Lamp17'] - Lp_field), abs(mass['Lamm17'] - Lm_field))
     return worst
+
+_HEAD_CACHE = {}
+
+def _anchor_heads(levs, J0, W):
+    key = (J0, W)
+    if key not in _HEAD_CACHE:
+        _HEAD_CACHE[key] = [v[:W] for v in levs[J0]]
+    return _HEAD_CACHE[key]
+
+def _anchor_head_cvec(t, levs, J0, W):
+    """First W entries of cvec(t, levs[J0]) without materializing the full ~J0-length
+    barycentric interpolation: bary() on pre-sliced heads + the parity-aware flip sign
+    (levs[J0] vectors have length J0+1, so flip's sign at entry i is +1 iff (J0-i) is
+    even) + the c-convention halving. Numerically IDENTICAL to cvec(t, levs[J0])[:W]
+    (same per-entry float operations in the same order; asserted against cvec at 3
+    parents by gate LAM-INV's own live self-check)."""
+    b = bary(t, _anchor_heads(levs, J0, W))
+    out = []
+    for i in range(W):
+        s = b[i] if ((J0 - i) % 2 == 0) else -b[i]
+        out.append(s if i == 0 else s / 2.0)
+    return out
+
+def _floor_down_frac(x, denom=10**7):
+    """Outward-DOWN decimal rounding for the (C'-CAP) node census's floor data: a floor
+    rounded down makes G (which consumes 1-f) LARGER and Q (a product-sum of floors)
+    SMALLER -- BOTH conservative directions for the bound below -- while keeping the
+    Fraction denominators tiny (1e7) so the 2x3841-node census's big-int chains stay
+    cheap (the exact-2^52-denominator route is equally sound but ~100x slower here)."""
+    return Fr(math.floor(float(x) * denom), denom)
+
+def _gamma_branch_floor_data(levs, J0, f_pad, s):
+    """Per-branch floor-box data at branch parameter s: (G, Q, a_lo), all outward, with
+    G >= gamma(s) = (1/4)(Delta_0+E_W)/(a(s)*M_w) for EVERY profile in the floor box at
+    s -- the SAME derivation as _gamma_floor_bound_lam (Delta_0 <= c_0(1-f_0), E_W <=
+    c_0(1-f_16), M_w/c_0 >= Q := sum_k prod_{i<k} f_i), evaluated at an arbitrary band
+    parameter (the node's children t_pm) from the anchor level's own head vectors."""
+    c = _anchor_head_cvec(s, levs, J0, FLOOR_WIN + 1)
+    floors = [_floor_down_frac(float(f_pad) * (c[i + 1] / c[i]))
+              for i in range(FLOOR_WIN)]
+    f0, f16 = floors[0], floors[16]
+    Q = Fr(1); prod = Fr(1)
+    for i in range(16):
+        prod = prod * floors[i]; Q += prod
+    a_lo = _floor_down_frac(a_of(s))
+    G = (Fr(1, 4) * ((1 - f0) + (1 - f16))) / (a_lo * Q)
+    return G, Q, a_lo
+
+def _cprime_floor_proved_lam(levs, J0, f_pad, loc, S_F, Lam_F, GMAX_F, LIP_S_F, LIP_L_F,
+                              v17_ceiling_F, tamper=None):
+    """PROVED-conditional floor-box bound on the (C'-CAP) drop (this revision, R1
+    mitigation (a)). The cap is consumed by the Lambda-recursion ONLY at the NG grid
+    nodes (between-grid coverage rides the existing LIP_S/LIP_L brackets), so a node
+    census is exactly where the cap is needed. At each node t, from the EXACT one-step
+    windowed-mass relation ((I1) summed over branches; P := a_+S^+ + a_-S^-,
+    C := (1/4)sum_pm(Delta_0+E_W)^pm >= 0, S_n = P - C):
+
+        Lambda_true(t) - Lambda_pure(t) = [gbar*Lambda_pure - C'/P] / (1-gbar),
+        gbar := C/P = sum_pm w_pm*gamma^pm  (an elementary identity:
+        (P'-C')/(P-C) - P'/P),
+
+    so |drop| <= [gbar*|Lambda_pure| + |C'|/P]/(1-gbar), with, all outward:
+      gamma^pm <= G^pm, the per-branch floor-box gamma bound at t_pm
+        (_gamma_branch_floor_data -- the same derivation as the PROVED gamma<=GMAX);
+      w_pm from the SAME lam-enclosure corner bracket the invariance check uses
+        (each occurrence maximized separately over the two w corners -- a sound
+        marginal bound; every expression below is affine in w);
+      |Lambda_pure| <= abs-max of the SAME 8-corner candidate enumeration the
+        invariance check runs (bilinear in (w,gp,gm) -> corner-sufficient);
+      |C'|/P <= (1/3)[w*G^+*L^+ + (1-w)*G^-*L^-]
+               + (1/12)*V18c*[(w/a^+_lo)*(2/Q^+) + ((1-w)/a^-_lo)*(2/Q^-)]
+        from Delta_0' = L_0*Delta_0 + c_1(L_0-L_1) and E_W' = L_16*E_W +
+        c_17(L_16-L_17) (product rule + FTC), |L_i| <= |Lambda^pm_child| + V18c =: L^pm
+        (window-mean split; zero-sum deviations), |L_0-L_1|, |L_16-L_17| <= V18c,
+        (c_1+c_17)/S^pm <= 2/Q^pm, (Delta_0+E_W)^pm/P = 4*gamma^pm*w_pm, and the
+        chain-rule factor |dt_pm/dt| = 1/3 (whence (1/4)*(1/3) = 1/12).
+    V18c := (57/50)*v17_ceiling_F -- the (FOLD)-folded equilibrium ceiling
+    max(V_17(J0), F_box/(1-theta_band)), passed in as an exact Fraction from the
+    UNTAMPERED load-bearing censuses (joint induction: the pass n-1 -> n consumes
+    H(n-1)'s V-ceiling and field membership; base n-1 in [48, J0) rides the existing
+    base-case grid, so the cap is only ever needed at child levels >= J0 where the
+    ceiling holds). Tamper 'cprime-bound-graze' doubles the final bound (isolated:
+    nothing upstream of the comparison changes). Returns (worst_bound, locus_t, diag)."""
+    graze = Fr(2) if tamper == "cprime-bound-graze" else Fr(1)
+    V18c = Fr(57, 50) * v17_ceiling_F
+    worst = None; wt = None; diag = None
+    for t in loc.GT_F:
+        tp = (1 + t) / 3; tm = (1 - t) / 3
+        wlo, whi = _w_bracket_exact_lam(loc, S_F, t, GMAX_F, LIP_S_F, tp, tm)
+        Lp_lo, Lp_hi = _brk_L_exact_lam(loc, Lam_F, tp, LIP_L_F)
+        Lm_lo, Lm_hi = _brk_L_exact_lam(loc, Lam_F, tm, LIP_L_F)
+        gp_lo = _loga_prime_bracket_lam(float(tp), True) + Lp_lo
+        gp_hi = _loga_prime_bracket_lam(float(tp), False) + Lp_hi
+        gm_lo = _loga_prime_bracket_lam(float(tm), True) + Lm_lo
+        gm_hi = _loga_prime_bracket_lam(float(tm), False) + Lm_hi
+        cands = [Fr(1, 3) * (w * gp - (1 - w) * gm)
+                 for w in (wlo, whi) for gp in (gp_lo, gp_hi) for gm in (gm_lo, gm_hi)]
+        Lpure_abs = max(abs(min(cands)), abs(max(cands)))
+        Gp, Qp, aplo = _gamma_branch_floor_data(levs, J0, f_pad, float(tp))
+        Gm, Qm, amlo = _gamma_branch_floor_data(levs, J0, f_pad, float(tm))
+        Lp_abs = max(abs(Lp_lo), abs(Lp_hi)) + V18c
+        Lm_abs = max(abs(Lm_lo), abs(Lm_hi)) + V18c
+        gbar = max(w * Gp + (1 - w) * Gm for w in (wlo, whi))
+        term_L = max(w * Gp * Lp_abs + (1 - w) * Gm * Lm_abs for w in (wlo, whi)) / 3
+        term_S = V18c * max((w / aplo) * (2 / Qp) + ((1 - w) / amlo) * (2 / Qm)
+                            for w in (wlo, whi)) / 12
+        bound = graze * (gbar * Lpure_abs + term_L + term_S) / (1 - gbar)
+        if worst is None or bound > worst:
+            worst = bound; wt = t
+            diag = dict(gbar=gbar, Lpure=Lpure_abs, term_L=term_L, term_S=term_S)
+    return worst, wt, diag
 
 def _mass_recursion_identity_spotcheck():
     """Live exact-Fraction confirmation of identity (I1) (module note above): residual
@@ -2089,7 +2263,7 @@ _LAMINV_CACHE = {}   # module-level memo, keyed (J0,str(f_pad),tamper): the ~47s
                      # reuses the SAME result at its normal report position -- one
                      # computation, two consumers, no double cost.
 
-_LAMINV_TAMPERS = ("laminv-grid", "laminv-lip", "laminv-floor")
+_LAMINV_TAMPERS = ("laminv-grid", "laminv-lip", "laminv-floor", "cprime-bound-graze")
 
 def _laminv_certify(levs, J0, f_pad, tamper=None):
     """All of gate LAM-INV's computation, no report/print side effects -- returns a dict.
@@ -2138,6 +2312,25 @@ def _laminv_certify(levs, J0, f_pad, tamper=None):
     cprime_measured = _cprime_monitor_lam(levs, J0, loc, Lam_F, LIP_L_LAM_F)
     cprime_ok = cprime_measured <= float(cprime_eff)
 
+    # (C'-CAP) PROVED-conditional floor-box bound (this revision, R1 mitigation (a)).
+    # Head-cvec self-check first: _anchor_head_cvec must reproduce cvec exactly.
+    for t_chk in (PARENTS[0], PARENTS[len(PARENTS) // 2], PARENTS[-1]):
+        full = cvec(t_chk, levs[J0])[:FLOOR_WIN + 1]
+        head = _anchor_head_cvec(t_chk, levs, J0, FLOOR_WIN + 1)
+        assert head == full, "head-cvec mismatch at t=%r" % t_chk
+    # Equilibrium ceiling from the UNTAMPERED load-bearing chain (memoized censuses;
+    # tamper isolation: a tampered V15-IA/V17-IA never feeds this bound).
+    tb_exact, _, _, _ = theta_band_ia_certified(levs, J0, f_pad, tamper=None)
+    fb_clean, _, _ = F_box_ia_certified(levs, J0, f_pad, tamper=None)
+    v17_j0_up = frac_outward(V17_locus(J0, levs, OPWIN)[0], lo=False, slop=IA_SLOP)
+    v17_ceiling_F = fb_clean / (1 - round_up_frac(tb_exact))
+    if v17_j0_up > v17_ceiling_F:
+        v17_ceiling_F = v17_j0_up
+    cprime_proved, cprime_proved_t, cprime_diag = _cprime_floor_proved_lam(
+        levs, J0, f_pad, loc, S_F, Lam_F, GMAX_LAM_F, LIP_S_LAM_F, LIP_L_LAM_F,
+        v17_ceiling_F, tamper=tamper)
+    cprime_proved_ok = cprime_proved <= cprime_eff
+
     id1_residual, id1_checked = _mass_recursion_identity_spotcheck()
     id1_ok = (id1_residual == 0)
 
@@ -2163,7 +2356,7 @@ def _laminv_certify(levs, J0, f_pad, tamper=None):
     lp_headroom = float(lp_lo - lap_lo_eff)
 
     ok = (mass_inv_ok and lam_inv_ok and ok_S and ok_L and gamma_ok and cprime_ok
-          and id1_ok and lam_inside and lp_inside and lm_inside)
+          and cprime_proved_ok and id1_ok and lam_inside and lp_inside and lm_inside)
 
     result = dict(ng_eff=ng_eff, cprime_eff=cprime_eff, lap_lo_eff=lap_lo_eff,
                   lip_l_check_eff=lip_l_check_eff, loc=loc, S_F=S_F, Lam_F=Lam_F,
@@ -2171,6 +2364,9 @@ def _laminv_certify(levs, J0, f_pad, tamper=None):
                   lam_inv_ok=lam_inv_ok, sup_abs=sup_abs, ok_S=ok_S, sup_slope=sup_slope,
                   ok_L=ok_L, gamma_bound=gamma_bound, gamma_wt=gamma_wt, gamma_ok=gamma_ok,
                   cprime_measured=cprime_measured, cprime_ok=cprime_ok,
+                  cprime_proved=cprime_proved, cprime_proved_t=cprime_proved_t,
+                  cprime_diag=cprime_diag, cprime_proved_ok=cprime_proved_ok,
+                  v17_ceiling_F=v17_ceiling_F,
                   id1_residual=id1_residual, id1_checked=id1_checked,
                   lam_lo=lam_lo, lam_hi=lam_hi, lp_lo=lp_lo, lp_hi=lp_hi,
                   lm_lo=lm_lo, lm_hi=lm_hi, lam_inside=lam_inside, lp_inside=lp_inside,
@@ -2209,16 +2405,23 @@ def gate_lam_inv(report, levs, J0, f_pad, tamper=None):
         "        identities: (I1) exact windowed mass recursion sum_i<17(K_d*c)=a(t)Mw"
         "-1/4(c0-c1)-1/4(c16-c17) [PROVED; live Fraction spot-check residual=%s over %d"
         " (n,t,branch) points -- exactly 0 -- independently confirmed by the lab lane];"
-        " (I2) Lambda^pm_mass=(log S^18)'(t_pm) [PROVED, elementary algebraic identity].\n"
+        " (I2) Lambda^pm_mass=(log S^17)'(t_pm), W=17=OPWIN matching (I1) and the"
+        " gamma/C' covers (window-coherence, round 4) [PROVED, elementary].\n"
         "        mass-field T-invariance (one fwd pass): worst gap lo=%.2e hi=%.2e [%s];"
         " a-posteriori sup|Lambda|=%.4f <= LIP_S=%s [%s]\n"
         "        coupled Lambda-field T-invariance (one fwd pass): worst gap lo=%.2e"
         " hi=%.2e [%s]; a-posteriori sup|Lambda'|=%.4f <= LIP_L=%s [%s]%s\n"
         "        gamma<=GMAX=%s: PROVED from the F3 floor box (anchor J0=%d,f=%s), exact"
-        " bound=%.6f (locus branch=%.4f) [%s]; C'<=CPRIME=%s: MONITORED, the (C'-CAP)"
-        " clause -- the ONE remaining computed input -- measured impact=%.4f [%s]%s\n"
-        "        conditional basis: F3 floors + finite base-case census (gates MAG-BOX/"
-        "V18, n in {48..800}) + this gate's a-posteriori Lipschitz self-check + (C'-CAP).\n"
+        " bound=%.6f (locus branch=%.4f) [%s]; C'<=CPRIME=%s: PROVED floor-box bound"
+        "=%.6f (locus t=%.4f; node census over all NG nodes; gbar=%.6f Lpure=%.4f"
+        " termL=%.6f termS=%.6f at locus) [%s] -- (C'-CAP) DISCHARGED-conditional"
+        " (V18-ceiling (57/50)*%.8f via (FOLD) + the untampered V15-IA/V17-IA chain);"
+        " a-posteriori monitor RETAINED as the empirical cross-check: measured"
+        " impact=%.4f [%s]%s\n"
+        "        conditional basis: F3 floors + floor persistence at the node branch"
+        " parameters ((FLOOR-PERSIST), gate FLOOR-DRIFT) + (FOLD) + finite base-case"
+        " census (gates MAG-BOX/V18, n in {48..800}) + this gate's a-posteriori"
+        " Lipschitz self-check + the joint IH (V-ceiling + field membership).\n"
         "        PROVED intervals vs shipped boxes: lam [%.6f,%.6f] subset [%s,%s] %s;"
         " Lambda+ [%.6f,%.6f] subset [%s,%s] %s (floor headroom %+.4f); Lambda-"
         " [%.6f,%.6f] subset [%s,%s] %s\n"
@@ -2232,9 +2435,15 @@ def gate_lam_inv(report, levs, J0, f_pad, tamper=None):
            float(r['sup_slope']), str(r['lip_l_check_eff']), "OK" if r['ok_L'] else "FAIL",
            " [TAMPERED laminv-lip]" if tamper == "laminv-lip" else "",
            str(GMAX_LAM_F), J0, str(f_pad), float(r['gamma_bound']), r['gamma_wt'],
-           "OK" if r['gamma_ok'] else "MISS", str(r['cprime_eff']), r['cprime_measured'],
-           "OK" if r['cprime_ok'] else "MISS",
-           " [TAMPERED laminv-floor, CPRIME forced 2x]" if tamper == "laminv-floor" else "",
+           "OK" if r['gamma_ok'] else "MISS", str(r['cprime_eff']),
+           float(r['cprime_proved']), float(r['cprime_proved_t']),
+           float(r['cprime_diag']['gbar']), float(r['cprime_diag']['Lpure']),
+           float(r['cprime_diag']['term_L']), float(r['cprime_diag']['term_S']),
+           "OK" if r['cprime_proved_ok'] else "MISS", float(r['v17_ceiling_F']),
+           r['cprime_measured'], "OK" if r['cprime_ok'] else "MISS",
+           " [TAMPERED laminv-floor, CPRIME forced 2x]" if tamper == "laminv-floor"
+           else (" [TAMPERED cprime-bound-graze, bound forced 2x]"
+                 if tamper == "cprime-bound-graze" else ""),
            float(r['lam_lo']), float(r['lam_hi']), str(LAM_LO_F), str(LAM_HI_F),
            "yes" if r['lam_inside'] else "NO",
            float(r['lp_lo']), float(r['lp_hi']), str(r['lap_lo_eff']), str(LAP_HI_F),
@@ -2242,6 +2451,156 @@ def gate_lam_inv(report, levs, J0, f_pad, tamper=None):
            float(r['lm_lo']), float(r['lm_hi']), str(LAM2_LO_F), str(LAM2_HI_F),
            "yes" if r['lm_inside'] else "NO",
            r['elapsed']), r['ok']))
+
+def _rc_head(s, levs, n, win=FLOOR_WIN):
+    """rc_0..rc_{win-1} at level n, parameter s, via the head-cvec fast path (identical
+    floats to anchor_c_ratios(s, levs, n, win) -- same self-checked head machinery)."""
+    c = _anchor_head_cvec(s, levs, n, win + 1)
+    return [c[i + 1] / c[i] for i in range(win)]
+
+def _floor_census_routecut(levs, J0, f_pad, j0_sib=None, pad_sib=None):
+    """INFORMATIONAL route-cut census (float): the box-worst one-step output ratio over
+    the (FLOOR-PERSIST) pointwise box -- minus-child ratios at their own-parameter
+    floors/caps (LC vertices), sibling magnitude lam in the (LAM-BOX) box, per-entry
+    wobble in the geometric-center half-band (boundary slots w_17 in the W17 deep box,
+    w_18/w_19 in a generous [0.998,1.002], rc_18 in [0,1]) -- against the output floor
+    pad*rc_i(J0,t). Verdict (the route-cut, note Section 9(v)): a V12-style pointwise
+    corner census CANNOT re-derive floor persistence at any practical pad -- the box has
+    no mechanism coupling input-floor slack to output-floor slack (the same structural
+    boundary as Section 10's 'no free O(1/n) in the box' correction). Float,
+    informational only; returns (worst_ratio, frac_rows_failing, locus)."""
+    WH = (float(WOB_HALF[0]), float(WOB_HALF[1]))
+    W17B = (float(W17_LO_F), float(W17_HI_F))
+    W1819 = (0.998, 1.002)
+    LAMB = (float(LAM_LO_F), float(LAM_HI_F))
+
+    def wset(k):
+        if k < 17: return WH
+        if k == 17: return W17B
+        return W1819
+
+    def rmin_row(i, Fm, tp, tm):
+        dp_, dm_ = d_of(tp), d_of(tm)
+        def fset(j):
+            if j < 0: return [None]
+            if j < FLOOR_WIN: return [Fm[j], 1.0]
+            return [0.0, 1.0]
+        best = 1e18
+        for a in fset(i - 1):
+            for b in fset(i):
+                if a is not None and b > a + 1e-12: continue
+                for e in fset(i + 1):
+                    if e > b + 1e-12: continue
+                    for lam in LAMB:
+                        for u in wset(i - 1):
+                            for v in wset(i):
+                                for x in wset(i + 1):
+                                    for y in wset(i + 2):
+                                        if i == 0:
+                                            den = (dm_ + dp_ * lam * u) + 0.5 * b * (1 + lam * v)
+                                            num = 0.25 * (1 + lam * u) + (dm_ + dp_ * lam * v) * b \
+                                                  + 0.25 * b * e * (1 + lam * x)
+                                        else:
+                                            den = 0.25 / a * (1 + lam * u) + (dm_ + dp_ * lam * v) \
+                                                  + 0.25 * b * (1 + lam * x)
+                                            num = 0.25 * (1 + lam * v) + (dm_ + dp_ * lam * x) * b \
+                                                  + 0.25 * b * e * (1 + lam * y)
+                                        if den <= 0: continue
+                                        r = num / den
+                                        if r < best: best = r
+        return best
+
+    out = []
+    for (jj, pp) in [(J0, float(f_pad))] + ([(j0_sib, float(pad_sib))] if j0_sib else []):
+        worst = 1e18; loc = None; nfail = 0; ntot = 0
+        for t in PARENTS:
+            tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+            Ft = [pp * r for r in _rc_head(t, levs, jj)]
+            Fm = [pp * r for r in _rc_head(tm, levs, jj)]
+            for i in range(FLOOR_WIN):
+                m = rmin_row(i, Fm, tp, tm) / Ft[i]
+                ntot += 1
+                if m < 1.0: nfail += 1
+                if m < worst: worst, loc = m, (t, i)
+        out.append((jj, pp, worst, nfail, ntot, loc))
+    return out
+
+def gate_floor_drift(report, levs, grid, tamper=None):
+    """FLOOR-DRIFT [core, FULL MODE ONLY]: first-class monitoring of the (FLOOR-PERSIST)
+    computed clause -- NOT a proof (the clause stays COMPUTED; see the route-cut below
+    for why a pointwise census cannot prove it). Before this revision the clause was
+    IMPORTED reasoning ('the predecessor's monotone-drift machinery'), with no gate of
+    its own in this packet; this gate makes it a named, monitored, tamperable invariant:
+
+      (1) DRIFT (the mechanism): rc_i(n2,s) >= rc_i(n1,s) for consecutive deep-grid
+          level pairs with n1 >= J0*, over s in PARENTS union both branch values
+          (123 parameters), i < 18 -- the upward CLT flattening the imported reasoning
+          rests on, checked directly at every monitored parameter (the full-grid worst
+          from n=48 is also printed, informational).
+      (2) AS-CONSUMED MARGINS: the exact statement the census gates consume --
+          rc_i(n, t_pm) >= f*rc_i(J0*, t) (children at branch parameters vs the
+          parent-t anchor family) at every deep-grid level n >= J0*, and the same at
+          the SIB-CERT anchor (J0_SIB, PAD_SIB) for n >= J0_SIB.
+
+    Tamper 'floordrift-margin' raises the required drift ratio to 1.0001 (above the
+    realized worst step ratio ~1.00005), isolated to this gate. The gate line also
+    prints, INFORMATIONAL, the route-cut negative control (_floor_census_routecut):
+    the box-worst census output ratio vs floor at both anchors -- quantifying WHY the
+    (FLOOR-PERSIST) discharge cannot come from a pointwise corner census."""
+    drift_req = 1.0001 if tamper == "floordrift-margin" else (1.0 - 1e-12)
+    svals = sorted(set(list(PARENTS) + [(1 + t) / 3.0 for t in PARENTS]
+                       + [(1 - t) / 3.0 for t in PARENTS]))
+    pairs_all = list(zip(grid, grid[1:]))
+    worst_op = 1e18; loc_op = None; worst_full = 1e18
+    rc_cache = {}
+    def rc_of(s, n):
+        key = (s, n)
+        if key not in rc_cache:
+            rc_cache[key] = _rc_head(s, levs, n)
+        return rc_cache[key]
+    for s in svals:
+        for (n1, n2) in pairs_all:
+            r1 = rc_of(s, n1); r2 = rc_of(s, n2)
+            for i in range(FLOOR_WIN):
+                d = r2[i] / r1[i]
+                if d < worst_full: worst_full = d
+                if n1 >= J0_STAR:
+                    if d < worst_op: worst_op, loc_op = d, (s, n1, n2, i)
+    drift_ok = worst_op >= drift_req
+    # as-consumed margins at both anchors
+    margins = []
+    for (jj, pp, nmin) in ((J0_STAR, float(F_STAR), J0_STAR), (J0_SIB, float(PAD_SIB), J0_SIB)):
+        wm = 1e18; lm = None
+        for t in PARENTS:
+            anc = rc_of(t, jj)
+            for n in [n for n in grid if n >= nmin]:
+                for tb in ((1 + t) / 3.0, (1 - t) / 3.0):
+                    cur = rc_of(tb, n)
+                    for i in range(FLOOR_WIN):
+                        m = cur[i] / (pp * anc[i])
+                        if m < wm: wm, lm = m, (t, n, i)
+        margins.append((jj, pp, wm, lm))
+    margins_ok = all(wm >= 1.0 for (_, _, wm, _) in margins)
+    rc_out = _floor_census_routecut(levs, J0_STAR, F_STAR, j0_sib=J0_SIB, pad_sib=PAD_SIB)
+    ok = drift_ok and margins_ok
+    report.append(("FLOOR-DRIFT [core, FULL MODE ONLY, monitors the (FLOOR-PERSIST)"
+        " COMPUTED clause -- monitoring, NOT a proof] (1) drift: rc_i(n2,s)>=rc_i(n1,s)"
+        "%s over consecutive deep-grid pairs n1>=%d, 123 parameters (parents+branches),"
+        " i<18: worst step ratio %.8f @ %s [%s] (full-grid-from-48 worst %.8f,"
+        " informational); (2) as-consumed floor margins: anchor (%d,%s) worst"
+        " rc_i(n,t_pm)/(f*rc_i(J0,t)) = %.6f @ %s [%s]; anchor (%d,%s) worst = %.6f"
+        " @ %s [%s] | INFORMATIONAL route-cut (why no census can prove this): box-worst"
+        " output-ratio/floor = %.3f (%d/%d rows fail) at (%d,%s); %.3f (%d/%d) at"
+        " (%d,%s) -- the pointwise corner census route to (FLOOR-PERSIST) is CLOSED"
+        " (note Section 9(v))"
+        % (" >=1.0001 [TAMPERED floordrift-margin]" if tamper == "floordrift-margin" else "",
+           J0_STAR, worst_op, str(loc_op), "OK" if drift_ok else "MISS", worst_full,
+           margins[0][0], str(F_STAR), margins[0][2], str(margins[0][3]),
+           "OK" if margins[0][2] >= 1.0 else "MISS",
+           margins[1][0], str(PAD_SIB), margins[1][2], str(margins[1][3]),
+           "OK" if margins[1][2] >= 1.0 else "MISS",
+           rc_out[0][2], rc_out[0][3], rc_out[0][4], rc_out[0][0], str(F_STAR),
+           rc_out[1][2], rc_out[1][3], rc_out[1][4], rc_out[1][0], str(PAD_SIB)), ok))
 
 def gate_vtrack(report, levs, grid, expect_max, tamper=None, show_table=False):
     """V18 VTRACK: deep-grid rho_prop@i<17(n)<=TARGET + monotone + V_17 tau*-crossover,
@@ -2365,11 +2724,15 @@ def compute(mode='full', fallback=False, tamper=None, show_table=False):
     if run_sibcert:
         gate_sib_cert(report, levs, tamper=tamper)                             # SIB-CERT  report[8]
         gate_lam_inv(report, levs, J0, f_pad, tamper=tamper)                   # LAM-INV   report[9]
+        gate_floor_drift(report, levs, grid, tamper=tamper)                    # FLOOR-DRIFT report[10]
     else:
         info.append(("SIB-CERT [SKIPPED in this mode: deep anchor J0=%d requires the"
                       " full build]" % J0_SIB, True))                          # info[5]
         info.append(("LAM-INV [SKIPPED in this mode: the NG=%d field census is scoped"
                       " to the full-mode discharge, like SIB-CERT]" % NG_LAM, True))  # info[6]
+        info.append(("FLOOR-DRIFT [SKIPPED in this mode: the drift monitor + as-consumed"
+                      " margins are anchored at (J0*=%d, J0_SIB=%d), full build only]"
+                      % (J0_STAR, J0_SIB), True))                              # info[7]
     return report, info, theta_star
 
 def run(mode='full', fallback=False, tamper=None, show_table=False):
@@ -2387,11 +2750,13 @@ def run(mode='full', fallback=False, tamper=None, show_table=False):
         print("  [%s] %s" % ("PASS" if ok else "FAIL", name))
     print("RESULT: %d/%d %s" % (npass, len(report), "PASS" if npass == len(report) else "FAIL"))
     print("STATUS: CONDITIONAL -- (SIB-BAND) DISCHARGED at the deep anchor by gate SIB-CERT"
-          " (geometric-center certified census) GIVEN (LAM-BOX); (LAM-BOX) itself is now"
-          " DISCHARGED-conditional by gate LAM-INV (proved invariant intervals, full mode"
-          " only) modulo the floor box + finite census + a-posteriori Lipschitz + the"
-          " (C'-CAP) monitored constant. Remaining computed clauses: (FOLD),"
-          " (FLOOR-PERSIST), (C'-CAP); see the note's Section 8.")
+          " GIVEN (LAM-BOX); (LAM-BOX) DISCHARGED-conditional by gate LAM-INV (proved"
+          " invariant intervals); (C'-CAP) DISCHARGED-conditional by LAM-INV's floor-box"
+          " node census (this revision, R1 mitigation (a) -- the monitored constant is now"
+          " a PROVED bound, monitor retained as cross-check). Remaining computed clauses:"
+          " (FOLD) and (FLOOR-PERSIST) -- the latter now first-class monitored (gate"
+          " FLOOR-DRIFT, with the census route to proving it CLOSED as a route-cut);"
+          " see the note's Section 8.4.")
     print()
     print("INFORMATIONAL (reported, NOT counted toward RESULT):")
     for name, ok in info:
@@ -2401,14 +2766,17 @@ def run(mode='full', fallback=False, tamper=None, show_table=False):
     return npass == len(report)
 
 # report indices: 0 F3, 1 MAG-BOX, 2 V15-IA, 3 V16, 4 V16b, 5 V17, 6 V17-IA, 7 V18,
-#                 8 SIB-CERT, 9 LAM-INV (both full mode only; absent in --quick/--fallback)
+#                 8 SIB-CERT, 9 LAM-INV, 10 FLOOR-DRIFT (all three full mode only;
+#                 absent in --quick/--fallback)
 # info indices:   0 V15-GRID, 1 V15-CERT, 2 V17-INFO, 3 V19, 4 SIB-BAND,
-#                 5 SIB-CERT-SKIPPED, 6 LAM-INV-SKIPPED (quick/fallback only; absent in full mode)
+#                 5 SIB-CERT-SKIPPED, 6 LAM-INV-SKIPPED, 7 FLOOR-DRIFT-SKIPPED
+#                 (quick/fallback only; absent in full mode)
 TAMPERS = ["f3-corrupt", "magbox-shrink", "theta-tot-gate", "nfree-corrupt",
            "theta-ia-tighten", "theta-ia-sign", "window-bound", "forcing-bound",
            "v17ia-graze", "c1-target", "vtrack-level-drop", "g2-ceiling", "bridge-w-gate",
            "sibcert-sqrt", "sibcert-pad", "sibcert-band", "w17-shrink",
-           "laminv-grid", "laminv-lip", "laminv-floor"]
+           "laminv-grid", "laminv-lip", "laminv-floor", "cprime-bound-graze",
+           "floordrift-margin"]
 TAMPER_TARGET = {
     "f3-corrupt": ("report", 0),        # F3
     "magbox-shrink": ("report", 1),     # MAG-BOX: shrink boxes so realized magnitudes leave them
@@ -2430,6 +2798,8 @@ TAMPER_TARGET = {
     "laminv-grid": ("report", 9),       # LAM-INV: NG far below threshold -- containment check misses
     "laminv-lip": ("report", 9),        # LAM-INV: LIP_L a-posteriori threshold lowered below realized
     "laminv-floor": ("report", 9),      # LAM-INV: R1 stress -- pre-widening floor + CPRIME forced 2x
+    "cprime-bound-graze": ("report", 9),  # LAM-INV: (C'-CAP) proved bound forced 2x -- exceeds CPRIME
+    "floordrift-margin": ("report", 10),  # FLOOR-DRIFT: required drift ratio raised above realized
 }
 
 def tamper_selftest(mode='full', fallback=False):

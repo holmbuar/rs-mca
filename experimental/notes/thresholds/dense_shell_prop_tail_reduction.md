@@ -15,8 +15,8 @@ certified by an exact-Fraction, lam-minced interval-arithmetic census of the tan
 seminorm (gate V15-IA) feeding an exact-Fraction minced interval-arithmetic forcing
 census (gate V17-IA), plus a re-certified floor family at the deep base (gate F3) plus
 full base coverage to `n = 500` (gate V18). **The discharge holds as a certified-census
-theorem MODULO the enumerated computed clauses** (Section 8.4: (FOLD), (FLOOR-PERSIST),
-(C'-CAP)) — its two load-bearing gates certify a **forced-proportional surrogate**
+theorem MODULO the enumerated computed clauses** (Section 8.4: (FOLD),
+(FLOOR-PERSIST)) — its two load-bearing gates certify a **forced-proportional surrogate**
 (`c^+ = lam c^-`) of the real cascade, so the STATUS is **CONDITIONAL**, not PROVED. The
 contraction gate `theta* = theta_band` is a certified band-uniform constant from gate
 V15-IA, not an asserted number. **Upgrade (this revision):** the fourth clause,
@@ -37,17 +37,32 @@ Lambda-field enclosure (DERIV_LAMBOX.md), conditional on the existing floor box,
 existing finite base-case census (MAG-BOX/V18), an a-posteriori Lipschitz self-check, and
 one remaining generous monitored constant (the `(C'-CAP)` clause). The `Lambda^+` floor
 is widened `-1.16 -> -1.17` (R1 mitigation (b)) to give the proved interval comfortable
-headroom; every consumer census is re-run over the wider box (Section 8.4). Two computed
-clauses remain open ((FOLD), (FLOOR-PERSIST)), plus the one new named literal (C'-CAP).
+headroom; every consumer census is re-run over the wider box (Section 8.4). **Upgrade
+(this revision, round 4):** (C'-CAP) itself is **DISCHARGED-conditional** — R1
+mitigation (a), the exact floor-box bound on the correction derivative, is carried out:
+gate LAM-INV now PROVES `C' <= CPRIME = 3/500` at every node of its own NG grid (the
+only places the recursion consumes the cap), via an exact identity for the dropped term
+(`Lambda_true - Lambda_pure = [gbar*Lambda_pure - C'/P]/(1-gbar)`) and per-branch
+floor-box data, with the a-posteriori monitor retained as the empirical cross-check
+(Section 8.4). And (FLOOR-PERSIST) — until now IMPORTED reasoning with no gate of its
+own — becomes a **first-class monitored clause**: new core gate FLOOR-DRIFT checks the
+drift mechanism directly (123 parameters, deep-grid pairs) plus the exact as-consumed
+floor margins at both anchors, and the natural discharge route is **CLOSED as a
+route-cut** (Section 9(v): a V12-style pointwise corner census box-worst misses the
+floors by ~42% — the box has no mechanism coupling input-floor slack to output-floor
+slack). Two computed clauses remain open: **(FOLD)** and **(FLOOR-PERSIST)** — both
+named, gated, and tamperable; no monitored-only literal remains.
 
 ## 0. Status (S0)
 
 **(PROP-TAIL) DISCHARGED as a certified-census theorem MODULO the enumerated computed
 clauses (Section 8.4) — STATUS: CONDITIONAL.** House form: **PROVED (equilibrium chain,
-sufficiency) + census-closed (gates F3 / MAG-BOX / V15-IA / V17-IA / V18 / LAM-INV),
-conditional on two computed clauses (FOLD), (FLOOR-PERSIST) plus one monitored constant
-(C'-CAP) — (LAM-BOX) is DISCHARGED-conditional by gate LAM-INV, and (SIB-BAND) is
-DISCHARGED at a deep anchor by gate SIB-CERT (Section 8.4)**. The composed
+sufficiency) + census-closed (gates F3 / MAG-BOX / V15-IA / V17-IA / V18 / LAM-INV /
+FLOOR-DRIFT), conditional on exactly two computed clauses (FOLD), (FLOOR-PERSIST) —
+(LAM-BOX) is DISCHARGED-conditional by gate LAM-INV, (SIB-BAND) is DISCHARGED at a deep
+anchor by gate SIB-CERT, and (C'-CAP) is DISCHARGED-conditional by LAM-INV's floor-box
+node census (this revision; the a-posteriori monitor is retained as a cross-check)
+(Section 8.4)**. The composed
 theorem (Section 7) is PROVED-given-gates; every core gate it depends on is green at the
 shipped triple `(J0*, f*, theta*) = (500, 99/100, theta_band)`, where **`theta_band` is
 itself a certified band-uniform output of gate V15-IA** (Section 5), not an asserted
@@ -447,7 +462,12 @@ log(TARGET) = 0.075855...`.
   imported** here — enumerated as computed clause **(FLOOR-PERSIST)** in Section 8.4.
 
 Base = the deep grid (`48 <= n <= J*`), well-founded (single intra-level edge,
-acyclic, matching the predecessor's own joint-induction argument).
+acyclic, matching the predecessor's own joint-induction argument). **Joint clauses
+(this revision's bookkeeping):** the induction's `H(m)` also carries LAM-INV's
+field-membership clause, and the (C'-CAP) node-census bound consumed by the field's
+step at level `n` reads `H(n-1)`'s V-ceiling — acyclic per level, same shape as gate
+SIB-CERT's lemma consuming the IH's `rho_prop` clause (Section 8.4's (C'-CAP) entry
+spells out the step order).
 
 ### 7.1 The arithmetic slot — INSTANTIATED (R-a, the deep-base equilibrium)
 
@@ -592,12 +612,14 @@ a fixed window) in this packet.
 ### 8.4 Computed clauses (the remaining computed inputs to the certified chain)
 
 The discharge is a certified-census theorem **modulo** the following two computed
-inputs plus one monitored constant, plus two further clauses, (LAM-BOX) and (SIB-BAND),
-that are **DISCHARGED** below (not open — recorded in this section because their
-discharge is itself a computed-census fact resting on a named gate, not an unconditional
-proof). Each open item is monitored by a named gate. Their existence is exactly why the
-STATUS is **CONDITIONAL** rather than PROVED (PROVED would require zero computed
-clauses).
+inputs — **(FOLD)** and **(FLOOR-PERSIST)** — plus three further clauses, (LAM-BOX),
+(SIB-BAND), and (C'-CAP), that are **DISCHARGED** below (not open — recorded in this
+section because their discharge is itself a computed-census fact resting on a named
+gate, not an unconditional proof). Each open item is monitored by a named gate; as of
+this revision no monitored-only literal remains (the (C'-CAP) constant, the last one,
+is now a PROVED floor-box bound with its monitor retained as a cross-check). The two
+open clauses' existence is exactly why the STATUS is **CONDITIONAL** rather than PROVED
+(PROVED would require zero computed clauses).
 
 **(LAM-BOX) — the sibling-proportionality magnitude box. DISCHARGED-conditional
 (gate LAM-INV, full mode only).**
@@ -632,8 +654,12 @@ remaining generous monitored constant.
 > already certifies the floor family over `i<18` (`FLOOR_WIN=CWIN=18`), so `rc_16` sits
 > **inside** the certified floor window: no new hypothesis.
 
-> **(I2) The Lambda log-derivative identity.** `Lambda^pm_mass = (log S^18)'(t_pm)`,
-> `S^18(s) := sum_{i<18} c_i(G(s))`. *Proof.* `L_i := d/dt log c_i` by definition, so
+> **(I2) The Lambda log-derivative identity.** `Lambda^pm_mass = (log S^W)'(t_pm)`,
+> `S^W(s) := sum_{i<W} c_i(G(s))` — window-generic; **the field instantiates `W = 17 =
+> OPWIN`**, matching (I1) and the `gamma`/`C'` floor-box covers (window-coherence fix,
+> this revision — see Section 10; an earlier revision cited `W = 18` here while (I1)
+> and `gamma` were at `W = 17`, one edge term of slippage between the field and its
+> realized comparisons; the monitors now compare against the `W = 17` object). *Proof.* `L_i := d/dt log c_i` by definition, so
 > `L_i c_i = c_i'`; summing, `sum_i L_i c_i = sum_i c_i' = d/dt sum_i c_i`; dividing by
 > `sum_i c_i` gives `d/dt log(sum_i c_i)`, i.e. the mass-weighted mean of `L` over the
 > window equals the log-derivative of the windowed mass. **PROVED** (elementary algebra;
@@ -685,8 +711,9 @@ composing with the existing base-case grid; consumed where):
 **Conditional basis** — the *same* conditional basis the other load-bearing gates already
 stand on: the existing F3 floor box; the existing finite base-case census (gates
 MAG-BOX/V18, `n in {48..800}`, cited not re-derived by LAM-INV); this gate's own
-a-posteriori Lipschitz self-check; and one remaining generous monitored constant, the
-`(C'-CAP)` clause (below). `gamma <= GMAX` (the branch-mass correction fraction) is
+a-posteriori Lipschitz self-check; and the `(C'-CAP)` clause (below — a generous
+monitored constant when this upgrade first landed, and **itself DISCHARGED-conditional
+as of this revision** by the floor-box node census in its own entry). `gamma <= GMAX` (the branch-mass correction fraction) is
 itself **PROVED** here, in exact Fraction, from the F3 floor box alone (not merely
 monitored): `Delta_0 = c_0(1-rc_0) <= c_0(1-f_0)`, `E_W = c_16(1-rc_16) <= c_0(1-f_16)`
 (`c_16<=c_0` by monotonicity), and `M_w/c_0 >= Q := sum_{k=0}^{16} prod_{i<k} f_i` (each
@@ -708,19 +735,19 @@ monitored): `Delta_0 = c_0(1-rc_0) <= c_0(1-f_0)`, `E_W = c_16(1-rc_16) <= c_0(1
   1%** (see the verifier's own printed margins, and the builder round's run log for the
   exact before/after numbers). The proved `Lambda^+` headroom against the *widened* floor
   is `+0.0104` — comfortable, no longer razor-thin.
-- **Mitigation (a) — full rigor, OPEN.** Derive the exact floor-box bound on
-  `C' = d/ds[(1/4)(Delta_0+E_W)]` (the correction *derivative*, distinct from `gamma`
-  itself, which *is* floor-box-proved above). Measured impact against the real cascade
-  is `~0.001-0.003` (gate LAM-INV's own a-posteriori monitor, sampled against
-  `onestep_compose`'s mass-weighted `Lambda`); `CPRIME = 0.006` is a generous cover, not
-  a proved bound. This is the **one remaining computed/monitored literal** the (LAM-BOX)
-  upgrade introduces — named clause **(C'-CAP)** below, so the remaining conditional
-  content is countable.
+- **Mitigation (a) — full rigor, TAKEN (this revision).** The exact floor-box bound on
+  the correction derivative's drop is derived and gated: see the (C'-CAP) entry below
+  (DISCHARGED-conditional; certified node census, worst bound well under `CPRIME`,
+  the identity + the three outward ingredients spelled out there). The monitored
+  constant `CPRIME = 0.006` remains in the recursion as the applied slop, but it is now
+  a **proved** cover, not merely a generous one; the a-posteriori monitor (measured
+  `~0.001-0.003`) is retained as the empirical cross-check.
 
-**Honest labels.** Net effect of this revision: **"six silent computed literals,
-grid-monitored, unproved for all `n`"** becomes **"invariant intervals on the same
+**Honest labels.** Net effect of the LAM-INV revision: **"six silent computed literals,
+grid-monitored, unproved for all `n`"** became **"invariant intervals on the same
 conditional basis as the load-bearing censuses, plus one generous monitored cap"** — the
-`(C'-CAP)` constant is the *only* new computed content; `gamma<=GMAX` moved from
+`(C'-CAP)` constant was the *only* new computed content (and is itself
+DISCHARGED-conditional as of this revision, see its entry); `gamma<=GMAX` moved from
 monitored to proved; the base case and floor box were already-named, already-monitored
 inputs the rest of the chain depends on regardless. `lam` and `Lambda^-` are solidly
 comfortable; `Lambda^+`'s floor was thin and is now widened to match.
@@ -739,10 +766,14 @@ comfortable; `Lambda^+`'s floor was thin and is now widened to match.
   covered by the LAM-INV enclosure, and per LAB_LAMBOX's Q1 finding they WIDEN with
   depth) are the overall tightest, `0.0196` at `n=48`. Gate MAG-BOX also now cross-checks
   the realized-vs-field correction-derivative `C'` at its own 6 grid levels x 41
-  parents (broader than gate LAM-INV's own sparser one-anchor sample): worst `0.0023`
+  parents (broader than gate LAM-INV's own sparser one-anchor sample; W=17 field object
+  per the round-4 window-coherence fix, Section 10): worst `0.0027`
   vs `CPRIME = 0.006`, comfortable.
-- *Remaining open item*: mitigation (a) above — the exact floor-box bound on `C'` would
-  discharge `(C'-CAP)` and remove the last conditional content from this clause.
+- *Remaining open item*: **NONE as of this revision** — mitigation (a), the exact
+  floor-box bound on `C'`, is carried out below ((C'-CAP), DISCHARGED-conditional),
+  removing the last monitored-only content from this clause. (LAM-BOX)'s conditional
+  basis is now: the floor box, the finite base-case census, the a-posteriori Lipschitz
+  self-check, and — via the (C'-CAP) bound's own inputs — (FOLD) and the joint IH.
 
 **(SIB-BAND) — the forced-proportional surrogate vs the real cascade. DISCHARGED
 (anchored census, gate SIB-CERT).**
@@ -897,30 +928,102 @@ comfortable; `Lambda^+`'s floor was thin and is now widened to match.
   ansatz; not proved for all `n`.
 - *Upgrade*: a proved uniform bound on `spread_{i<18}/spread_{i<17}`.
 
-**(FLOOR-PERSIST) — floor persistence for `n > 500`.**
-- *Asserts*: the level-500 floors persist for all `n > 500`.
-- *Gate*: composed from the predecessor packet's monotone-drift machinery at the
-  re-anchored `(500, 99/100)` floors (F3 re-certifies the floors AT the base).
-- *Evidence*: COMPUTED in the predecessor packet and imported here (`rc_i` drifts upward
-  in `n`).
-- *Upgrade*: a self-contained persistence proof at the deep anchor.
+**(FLOOR-PERSIST) — floor persistence for `n > 500`. STILL COMPUTED — but now
+first-class: named, gated, tamperable (gate FLOOR-DRIFT, this revision), with its
+natural discharge route CLOSED as a route-cut (Section 9(v)).**
+- *Asserts (made precise this revision — the exact as-consumed form)*: for every parent
+  `t` (41-grid) and every `n >= 500`, the CHILD ratio profiles at the branch parameters
+  satisfy `rc_i(n, t_pm) >= (99/100) rc_i(500, t)` for `i < 18` (the census gates box
+  child profiles by the parent-`t` anchor family); and the same at the SIB-CERT anchor,
+  `rc_i(n, t_pm) >= (999/1000) rc_i(800, t)` for `n >= 800`. Both a parameter-transfer
+  (child-vs-parent parameter, measured to consume `~0.003%` of the pad) and a
+  level-transfer (the drift) are inside this statement.
+- *Gate*: **FLOOR-DRIFT** [core, full mode only, this revision] — monitoring, NOT a
+  proof: (1) the drift mechanism directly, `rc_i(n2, s) >= rc_i(n1, s)` over
+  consecutive deep-grid pairs `n1 >= 500`, all 123 monitored parameters (41 parents +
+  82 branch values), `i < 18` — worst step ratio `~1.00005`, decaying but strictly
+  above 1; (2) the as-consumed margins at both anchors — worst `1.0101` at
+  `(500, 99/100)` (the pad is what carries it; the raw margin over the pad is `~1.0%`)
+  and `1.0010` at `(800, 999/1000)`. Tamper `floordrift-margin` (isolated).
+- *Evidence*: the drift (`rc_i` upward in `n`, the CLT flattening) was COMPUTED in the
+  predecessor and previously *imported silently*; it is now checked directly at every
+  monitored parameter and level pair in THIS packet's own verifier.
+- *Route-cut (this revision)*: the natural discharge — re-run a V12-style pointwise
+  corner census of the one-step output ratios over the floor box at the deep anchor —
+  is **REFUTED**: box-worst `r'_i`/floor `= 0.58` at `(500, 99/100)` (94% of rows
+  fail; 100% at `(800, 999/1000)`). See Section 9(v). Any future discharge must be a
+  trajectory/drift argument (e.g. a quantitative no-spike-tower bound, the same open
+  handle as R-b), not a box census.
+- *Upgrade*: a self-contained drift proof (quantitative monotone-comparison /
+  no-spike-tower argument) — now sharply separated from the dead census route.
 
-**(C'-CAP) — the Lambda correction-derivative cap.** (New literal, introduced by the
-(LAM-BOX) upgrade of this revision; Section 8.4 above has the full derivation.)
-- *Asserts*: `C' <= CPRIME = 0.006`, where `C'` is the derivative of the branch-mass
-  correction `(1/4)(Delta_0+E_W)` that the coupled Lambda-field recursion drops as an
-  outward slop (gate LAM-INV's `lambda_invariance_check`, applied both when building the
-  candidate field and, isolated, at the final one-pass comparison).
-- *Gate*: LAM-INV [core, full mode only] — MONITORED, not proved: a live a-posteriori
-  comparison of the pure-operator field's `Lambda` prediction against the real cascade's
-  mass-weighted `Lambda` (`onestep_compose`), sampled at the shipped anchor.
-- *Evidence*: measured impact `~0.001-0.003` against the real cascade (well inside the
-  `0.006` cap); `DERIV_LAMBOX.md`'s own proto4-vs-proto1 comparison independently cites
-  `~0.002`.
-- *Upgrade*: the exact floor-box bound on `C'` (R1 mitigation (a), Section 8.4) — the
-  single most promising remaining sub-problem this revision identifies, since it would
-  discharge `(C'-CAP)` and remove the `Lambda^+` floor's dependence on a monitored
-  (rather than proved) constant entirely.
+**(C'-CAP) — the Lambda correction-derivative cap. DISCHARGED-conditional (gate
+LAM-INV, floor-box node census, this revision — R1 mitigation (a) carried out).**
+
+*What the clause was about.* The coupled Lambda-field recursion drops the derivative of
+the branch-mass correction as an outward slop `CPRIME = 3/500` per pass; before this
+revision that cap was MONITORED (measured `~0.001-0.003`), not proved — the one
+monitored-only literal in the packet.
+
+**The exact identity (the drop, in closed form).** Sum (I1) over the two branches:
+`S_n(t) = P(t) - C(t)` with `P := a_+ S^+ + a_- S^-` (the pure operator) and
+`C := (1/4) sum_pm (Delta_0 + E_W)^pm >= 0`. Then, elementarily
+(`(P'-C')/(P-C) - P'/P`):
+
+```
+    Lambda_true(t) - Lambda_pure(t) = [ gbar*Lambda_pure - C'/P ] / (1 - gbar),
+    gbar := C/P = sum_pm w_pm gamma^pm,      w_pm := a_pm S^pm / P  (mass weights),
+```
+
+so `|drop| <= [gbar*|Lambda_pure| + |C'|/P]/(1-gbar)`. **Three ingredients, all outward
+(gate LAM-INV's node census, exact Fraction):**
+1. `gamma^pm <= G^pm(t_pm)` — the *same* per-branch floor-box derivation as the PROVED
+   `gamma <= GMAX` bound (`Delta_0 <= c_0(1-f_0)`, `E_W <= c_0(1-f_16)`,
+   `M_w/c_0 >= Q`), evaluated at the node's two child parameters from the anchor
+   level's own head vectors; `gbar` maximized over the lam-enclosure's `w`-corners
+   (every expression below is affine in `w` — corner-sufficient; each occurrence is
+   maximized separately, a sound marginal bound). The mass-weight split is what makes
+   the bound clear: the worst per-branch `gamma` (the `t_- ~ 1/6` branch, `0.0043`)
+   carries only `~0.2` mass weight at the binding parent `t ~ 1/2`.
+2. `|Lambda_pure|` — enclosed by the *same* 8-corner candidate enumeration the
+   invariance check runs (bilinear in `(w, gp, gm)` — corner-sufficient), re-derived
+   per node with identical brackets.
+3. `|C'|/P` — from `Delta_0' = L_0 Delta_0 + c_1(L_0 - L_1)` and `E_W' = L_16 E_W +
+   c_17(L_16 - L_17)` (product rule + FTC on `c_i' = L_i c_i`):
+   ```
+   |C'|/P <= (1/3)[ w G^+ L^+ + (1-w) G^- L^- ]
+           + (1/12) V18c [ (w/a^+_lo)(2/Q^+) + ((1-w)/a^-_lo)(2/Q^-) ],
+   ```
+   with `|L_i| <= |Lambda^pm_child| + V18c =: L^pm` (window-mean split, zero-sum
+   deviations), `|L_0-L_1|, |L_16-L_17| <= V18c`, `(c_1+c_17)/S^pm <= 2/Q^pm`,
+   `(Delta_0+E_W)^pm/P = 4 gamma^pm w_pm`, chain rule `|dt_pm/dt| = 1/3`
+   (whence `(1/4)(1/3) = 1/12`), and
+   `V18c := (57/50) * max(V_17(J0), F_box/(1-theta_band))` — the **(FOLD)-folded
+   equilibrium ceiling**, consumed as an exact Fraction from the UNTAMPERED V15-IA /
+   V17-IA chain (memoized; a tampered load-bearing census never feeds this bound).
+
+**Where the cap is needed — node census suffices.** The Lambda recursion consumes
+`CPRIME` only **at the NG grid nodes** (the between-grid coverage rides the existing
+`LIP_S`/`LIP_L` brackets), so certifying the bound at every node is certifying it
+everywhere it is used. **The joint-induction step is acyclic per level**: the pass
+`n-1 -> n` consumes `H(n-1)`'s V-ceiling (the IH tracks `V_17 <= v_m`) and `H(n-1)`'s
+field membership (lam in its box); the base `n-1 in [48, J0)` rides the existing
+base-case grid, so the cap is only ever invoked at child levels `>= J0` where the
+equilibrium ceiling holds. This is the same joint-IH structure gate SIB-CERT's lemma
+already uses (its wobble band consumes the IH's `rho_prop` clause).
+- *Gate*: **LAM-INV** [core, full mode only] — the node census over all NG grid points;
+  worst bound, locus, and the per-ingredient split (`gbar`, `|Lambda_pure|`, the two
+  `C'/P` terms) are printed on the gate line and recorded in the cert JSON. The
+  a-posteriori realized-vs-field monitor is **RETAINED as the empirical cross-check**
+  (the same demotion MAG-BOX received when LAM-INV landed). Tamper `cprime-bound-graze`
+  doubles the final bound (isolated: nothing upstream of the comparison changes).
+- *Honest dependence*: floors at the node's branch parameters (gate F3 at the parent
+  grid + the (FLOOR-PERSIST) clause, gate FLOOR-DRIFT), **(FOLD)** (the `57/50` fold
+  enters `V18c`), the joint IH (V-ceiling + field membership), and the finite base-case
+  census — all already-named inputs; **no new clause and no monitored-only literal**.
+- *Sounding vs certificate*: the float per-`t` sounding sups at `~0.0046` vs
+  `CPRIME = 0.006`; the exact census's worst (with all outward slops) is the certified
+  number on the gate line.
 
 ## 9. ROUTE-CUT RESULTS (valuable negatives)
 
@@ -980,7 +1083,24 @@ of the same pattern) — it is specifically wrong to do it with a variable, like
 that a single composite object (the seminorm over a *pair* of rows) must hold fixed
 across all of its own sub-terms.
 
-## 10. CORRECTIONS (house discipline)
+**(v) The pointwise corner-census route to (FLOOR-PERSIST) is CLOSED (this revision).**
+The natural discharge of (FLOOR-PERSIST) — prove the floor family *step-closed* by a
+V12-style corner census (per parent `t`, per row `i < 18`: box-minimize the one-step
+output ratio `r'_i = o_{i+1}/o_i` over the minus-child ratio box `[F_j(t_-), 1]`
+(LC vertices), the sibling magnitude `lam` in the (LAM-BOX) box, and per-entry wobble
+in the geometric-center half-band, and compare against the output floor `F_i(t)`) —
+**misses catastrophically, and structurally**: box-worst `r'_i/floor = 0.579` at
+`(500, 99/100)` (697/738 rows fail), `0.568` at `(800, 999/1000)` (**all** 738 rows
+fail). The failure is not marginal and no deeper anchor or pad tuning can fix it: the
+box-worst adversarial profile puts numerator-adjacent ratios at their floors and
+denominator-adjacent ratios at their caps, producing an output-ratio swing of order
+`(1 - f_i) ~ 4-5%` per index against a pad slack of `1%` (resp. `0.1%`) — the box has
+**no mechanism coupling input-floor slack to output-floor slack**, exactly the same
+structural boundary as Section 10's "no free `O(1/n)` sits in the caps/floors box"
+correction. Persistence is a property of the *realized trajectory* (the upward CLT
+drift, gate FLOOR-DRIFT's check (1)), not of the certified box. Reproduced as an
+INFORMATIONAL negative control on gate FLOOR-DRIFT's own line
+(`_floor_census_routecut`), so the dead end stays visible and un-relitigated.
 
 Plain statements of drift/error found and fixed against earlier material that
 fed into this packet.
@@ -1007,6 +1127,25 @@ fed into this packet.
 - The `--fallback` flag switches the whole triple atomically to a **legacy,
   informational** alternative chain `(J0 = 430, f = 49/50, theta* = 1/2 fixed)`; it is
   not part of the certified primary claim.
+- **Window coherence of the LAM-INV field (found and fixed this revision).** The
+  round-3 text cited identity (I2) at `W = 18` (`Lambda^pm_mass = (log S^18)'`) while
+  identity (I1), the `gamma <= GMAX` floor-box bound, and the live Fraction spot-check
+  all use `W = 17 = OPWIN` — and the field's reality-side comparisons (the `C'`
+  monitor, MAG-BOX's realized-vs-field consistency check) compared against the
+  **18-window** mass-weighted `Lambda`. The field pair `(S, Lambda)` is
+  self-consistent for exactly one window, and its drop covers (`gamma`, `C'`) are
+  derived at `W = 17` — so the mismatch was one edge term (`(1/4)(c_17 - c_18)` vs
+  `(1/4)(c_16 - c_17)`) of slippage between the certified invariance argument and the
+  monitored realized object. **Fix**: (I2) is restated window-generic and instantiated
+  at `W = 17`; `onestep_compose` now emits the `W = 17` mass-weighted references
+  (`Lamp17`/`Lamm17`); the `C'` monitor and MAG-BOX's field consistency check compare
+  against those; MAG-BOX additionally monitors the `W = 17` variants in-box alongside
+  the (retained) `W = 18` mass and arithmetic-mean variants. Numerically the shift is
+  small (all boxes/headrooms re-verified green; see the re-run gate lines) — the fix
+  is bookkeeping coherence, not a value correction; the (C'-CAP) node census (this
+  revision) is derived at `W = 17` throughout and is unaffected. Same finding class as
+  this section's existing V12 out-LC precision note: a latent statement-vs-check
+  mismatch surfaced by adversarial re-derivation, fixed before it could bite.
 
 **Precision note on the predecessor's V12 (#885)**: the predecessor's corner census
 certifies its **cap** and **floor** clauses by a genuine corner-sufficiency theorem
@@ -1034,17 +1173,19 @@ misses at the shallow anchor; SIB-CERT is skipped, an informational SKIPPED line
 printed instead), `--table` (per-level `rho`/`V_17` table, now to `n = 800`),
 `--fallback` (legacy informational alternative chain `(J0 = 430, f = 49/50,
 theta* = 1/2 fixed)`, not part of the certified claim; SIB-CERT and LAM-INV are likewise
-skipped there), and `--tamper-selftest`. **10 core gates determine the RESULT in the
-default full mode** (8 in `--quick`/`--fallback`, where SIB-CERT and LAM-INV do not
-run); 4 informational gates plus the SIB-BAND gap gate (and, in `--quick`/`--fallback`,
-the SIB-CERT-SKIPPED and LAM-INV-SKIPPED lines) are printed, not counted (SIB-BAND is
-deliberately marked FAIL to keep the shallow-anchor surrogate-vs-real gap visible as a
-historical exhibit, even though SIB-CERT now closes that gap at the deep anchor). Every
-gate's message states its operative index window. The full run measures **~380s**
-(build now reaches `n=800`, ~225s of that; LAM-INV's own NG=3841 field census adds
-~25-30s; 10/10 core PASS); `--quick` is unaffected in cost (still a shallow `J0<=200`
-build); `--fallback` now also reaches `n=800` (V18's grid is shared), but skips the
-SIB-CERT and LAM-INV censuses.
+skipped there), and `--tamper-selftest`. **11 core gates determine the RESULT in the
+default full mode** (8 in `--quick`/`--fallback`, where SIB-CERT, LAM-INV, and
+FLOOR-DRIFT do not run); 4 informational gates plus the SIB-BAND gap gate (and, in
+`--quick`/`--fallback`, the SIB-CERT/LAM-INV/FLOOR-DRIFT SKIPPED lines) are printed,
+not counted (SIB-BAND is deliberately marked FAIL to keep the shallow-anchor
+surrogate-vs-real gap visible as a historical exhibit, even though SIB-CERT now closes
+that gap at the deep anchor). Every gate's message states its operative index window.
+The full run measures **~380s** (build to `n=800` dominates; LAM-INV's NG=3841 field
+census plus this revision's (C'-CAP) floor-box node census total ~40s — the node
+census's cost is offset by the new memoization of the V15-IA/V17-IA censuses, which
+LAM-INV's ceiling input and the report gates now share; 11/11 core PASS); `--quick` is
+unaffected in cost (still a shallow `J0<=200` build); `--fallback` reaches `n=800`
+(V18's grid is shared) but skips the SIB-CERT, LAM-INV, and FLOOR-DRIFT censuses.
 
 - **F3 FLOORS** [core]. Re-certifies the floor family `r_i(J0*, t)` over the 41-parent
   grid, `i < 18`: positivity, LC-compatibility (non-increasing + floor `<=` actual `<=`
@@ -1065,7 +1206,8 @@ SIB-CERT and LAM-INV censuses.
   revision) cross-checks the realized-vs-field correction-derivative `C'` at MAG-BOX's
   own 6 grid levels x 41 parents against `CPRIME` (the a-posteriori side of risk
   register R1, broader than gate LAM-INV's own sparser one-anchor sample): worst
-  `0.0023 <= CPRIME = 0.006`, comfortable; SKIPPED under `--quick`/`--fallback` (gate
+  `0.0027 <= CPRIME = 0.006` (W=17 field object, round-4 window coherence), comfortable;
+  SKIPPED under `--quick`/`--fallback` (gate
   LAM-INV does not run there). See Section 8.4 (LAM-BOX). **(round 2)** ALSO
   monitors the SIB-CERT **boundary slot** `w_17 := rho_17/lam_gc` against its own deep
   box `W17 = [0.999, 1.001]`, over `n in {500,...,800}` (`W17_GRID`, SIB-CERT's own
@@ -1132,17 +1274,43 @@ SIB-CERT and LAM-INV censuses.
   ray-normalization and `GMAX`-tolerance comparison, plus the a-posteriori
   `sup|Lambda|<=LIP_S` self-check; one forward-pass invariance of the coupled
   Lambda field with `CPRIME`-tolerance comparison, plus the a-posteriori
-  `sup|Lambda'|<=LIP_L` self-check; a floor-box-**PROVED** bound `gamma<=GMAX`; a
-  **MONITORED** bound `C'<=CPRIME` (the `(C'-CAP)` clause). Base case (the finite grid)
-  is cited from the existing MAG-BOX/V18 gates, not re-derived. Reports the proved
-  intervals against the shipped (post-widening) boxes with headroom. SKIPPED (an
-  informational line is printed instead) under `--quick`/`--fallback`, like SIB-CERT.
+  `sup|Lambda'|<=LIP_L` self-check; a floor-box-**PROVED** bound `gamma<=GMAX`; and —
+  this revision — a floor-box-**PROVED** bound `C'<=CPRIME` (the `(C'-CAP)` clause,
+  DISCHARGED-conditional): the node census over all NG grid points of the exact-identity
+  drop bound (Section 8.4's (C'-CAP) entry — certified worst `0.004245 <= 3/500`,
+  `29%` margin, locus `t=0.5`; ingredient split printed on the gate line), consuming
+  the (FOLD)-folded equilibrium ceiling from the UNTAMPERED, memoized V15-IA/V17-IA
+  chain; the a-posteriori realized-vs-field monitor is RETAINED as the empirical
+  cross-check (measured `0.0013` at LAM-INV's own sample; `0.0027` at MAG-BOX's broader
+  grid). Base case (the finite grid) is cited from the existing MAG-BOX/V18 gates, not
+  re-derived. Reports the proved intervals against the shipped (post-widening) boxes
+  with headroom. A live self-check asserts the fast head-vector path (`_anchor_head_cvec`)
+  reproduces `cvec` exactly before the census runs. SKIPPED (an informational line is
+  printed instead) under `--quick`/`--fallback`, like SIB-CERT.
   Tampers: `laminv-grid` (NG far below the R4 threshold — the between-grid Lipschitz
   slop blows the final proved interval past the shipped box), `laminv-lip` (the
   a-posteriori `LIP_L` comparison threshold alone is lowered below the realized value,
   isolated to that one self-check line), `laminv-floor` (R1 stress: restores the
   pre-widening `-1.16` floor AND forces `CPRIME` to `2x` shipped, `0.008` — the gate
-  must FAIL containment, matching the risk register's own finding).
+  must FAIL containment, matching the risk register's own finding), `cprime-bound-graze`
+  (this revision: the certified (C'-CAP) node-census bound alone is doubled,
+  `0.0085 > 3/500` — the proved-bound comparison FAILs; nothing upstream changes,
+  isolated to this gate's line).
+- **FLOOR-DRIFT** [core, FULL MODE ONLY — **first-class monitoring of the
+  (FLOOR-PERSIST) COMPUTED clause; monitoring, NOT a proof** (this revision)]. (1) The
+  drift mechanism directly: `rc_i(n2, s) >= rc_i(n1, s)` over consecutive deep-grid
+  pairs with `n1 >= 500`, at all 123 monitored parameters (41 parents + 82 branch
+  values), `i < 18` — worst step ratio `1.00005212` (edge parent, pair `750 -> 800`,
+  `i=0`); the full-grid-from-48 worst is printed as informational. (2) The exact
+  as-consumed floor margins (Section 8.4's (FLOOR-PERSIST) *Asserts*): worst
+  `rc_i(n, t_pm)/(f* rc_i(J0, t)) = 1.010070` at `(500, 99/100)` (locus: edge parent,
+  `n=500`, `i=17` — the parameter-transfer eats `~0.003%` of the `1%` pad) and
+  `1.000989` at `(800, 999/1000)`. The gate line also prints, INFORMATIONAL, the
+  Section 9(v) route-cut negative control (`_floor_census_routecut`): box-worst
+  output-ratio/floor `0.579` (697/738 rows fail) at `(500, 99/100)`, `0.568` (738/738)
+  at `(800, 999/1000)` — quantifying why no pointwise corner census can discharge this
+  clause. Tamper `floordrift-margin` (raises the required drift ratio to `1.0001`,
+  above the realized worst — isolated FAIL).
 - **V15-GRID THETA** [informational]. `theta_tot <= 1/2` and `theta_win <= 27/100`, grid
   census over 41 parents to `n = 500`; plus the closed-form tangent seminorm `N_free <=
   0.9` (Lemma A1, evaluated at realized profiles only). Measured worst: `theta_tot =
@@ -1170,7 +1338,7 @@ SIB-CERT and LAM-INV censuses.
   deep anchor `(800, 999/1000)`, where it clears. Section 8.4 (SIB-BAND) has the lemma
   and the full sounding trend across anchors.
 
-Tamper suite (20, each isolated to one report/info line): `f3-corrupt` (F3 — a `>1` pad
+Tamper suite (22, each isolated to one report/info line): `f3-corrupt` (F3 — a `>1` pad
 breaks the floor-`<=`-actual ordering), `magbox-shrink` (**MAG-BOX** — shrinks the
 magnitude box so a realized `lam`/`Lambda^pm`/`rho_i` falls outside, flipping MAG-BOX to
 FAIL), `theta-tot-gate` (`V15-GRID`, informational), `nfree-corrupt` (`V15-GRID` seminorm
@@ -1202,7 +1370,12 @@ a-posteriori `LIP_L` comparison threshold alone is lowered below the realized
 construction is untouched), `laminv-floor` (**LAM-INV** — R1 stress: restores the
 pre-widening `Lambda^+` floor `-1.16` AND forces `CPRIME` to `2x` shipped, `0.008` —
 flips the `Lambda^+` containment check to FAIL, matching the risk register's own
-prediction). All 20 confirmed isolated to their own line at full (`J0*=500`/`J0_SIB=800`)
+prediction), `cprime-bound-graze` (**LAM-INV**, this revision — doubles the certified
+(C'-CAP) node-census bound alone, `0.0085 > 3/500`: the proved-bound comparison FAILs;
+the field construction, the monitored cross-check, and every other gate are untouched),
+`floordrift-margin` (**FLOOR-DRIFT**, this revision — raises the required drift step
+ratio to `1.0001`, above the realized worst `1.00005212`, flipping only FLOOR-DRIFT).
+All 22 confirmed isolated to their own line at full (`J0*=500`/`J0_SIB=800`)
 depth; no other gate's outcome changes under any tamper — `sibcert-band`, re-run as a
 regression check this revision, remains isolated to SIB-CERT's own line with LAM-INV's
 line (report index 9, appended after SIB-CERT) confirmed unaffected.
@@ -1218,7 +1391,13 @@ itself stay informal/analytic; (2) Lemma W1's rational fact `289*50 <= 57*256` (
 `tau*` crossover-at-`n=62` table, both transcribed from this packet's printed decimals
 to exact rationals at printed precision, with threshold + strict-monotonicity checks
 on the transcribed table itself (not a re-derivation of the underlying floating-point
-computation). Everything else in this note — Lemma 1's reduction, Lemma 2's cascade,
+computation); (4) the SIB-CERT deep-anchor threshold comparison (`sibcert_clears`,
+denominator-cleared, conservative transcription); (5) the LAM-INV proved-interval
+containments and the widened-floor consistency check; (6) — this revision — the
+(C'-CAP) discharge comparison (`cprime_bound_clears`: the certified node-census bound
+`<= 3/500`, cleared form) and the FLOOR-DRIFT transcriptions (drift step ratio `>= 1`,
+both as-consumed margins `>= 1`, and the Section 9(v) route-cut exhibits `< 1` — the
+kernel-checked negative). Everything else in this note — Lemma 1's reduction, Lemma 2's cascade,
 Lemma A1's tangent seminorm (including the band-uniform enclosure, gate V15-IA), Lemma
 W2's read-set argument, the composed theorem, and the residual ladder's strengthenings
 (R-b/R-c) — stays informal by design; the Lean package does not claim otherwise.
@@ -1256,14 +1435,19 @@ exact-Fraction minced interval-arithmetic forcing census (gate V17-IA) at a re-c
 floor family (gate F3, magnitude box verified by MAG-BOX) with full base coverage to
 `n = 500` (gate V18), **plus** the real-vs-proportional gap (the geometric-center wobble
 census, gate SIB-CERT, at a deep anchor `J0=800`, discharging computed clause (SIB-BAND)
-given (LAM-BOX) alone; Section 8.4), **plus** — this revision — the magnitude box itself
+given (LAM-BOX) alone; Section 8.4), **plus** — the magnitude box itself
 (gate LAM-INV: proved invariant intervals for `lam`/`Lambda^+`/`Lambda^-`, discharging
-computed clause (LAM-BOX)-conditional on the floor box, the finite base-case census, an
-a-posteriori Lipschitz self-check, and one monitored constant; Section 8.4).
+computed clause (LAM-BOX)-conditional on the floor box, the finite base-case census, and
+an a-posteriori Lipschitz self-check; Section 8.4), **plus** — this revision — the
+correction-derivative cap itself (the (C'-CAP) clause: the last monitored-only literal
+becomes a PROVED floor-box node-census bound, `0.004245 <= 3/500`, with the monitor
+retained as a cross-check; Section 8.4) and first-class monitoring of the one remaining
+imported input (gate FLOOR-DRIFT for (FLOOR-PERSIST), whose census-discharge route is
+simultaneously CLOSED as route-cut Section 9(v)).
 **(PROP-TAIL) is DISCHARGED as a certified-census theorem MODULO the enumerated
-computed clauses ((FOLD), (FLOOR-PERSIST), (C'-CAP); Section 8.4) — STATUS CONDITIONAL**,
+computed clauses ((FOLD), (FLOOR-PERSIST); Section 8.4) — STATUS CONDITIONAL**,
 given this packet's own certified gate set
-(F3/MAG-BOX/V15-IA/V16/V16b/V17/V17-IA/V18/SIB-CERT/LAM-INV). The two load-bearing gates
+(F3/MAG-BOX/V15-IA/V16/V16b/V17/V17-IA/V18/SIB-CERT/LAM-INV/FLOOR-DRIFT). The two load-bearing gates
 (V15-IA/V17-IA) certify the forced-proportional surrogate `c^+ = lam c^-` at the
 shallower `J0*=500` anchor; gate SIB-CERT separately certifies the real,
 non-proportional cascade at the deeper `J0_SIB=800` anchor; gate LAM-INV separately

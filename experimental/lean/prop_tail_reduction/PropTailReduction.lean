@@ -448,4 +448,62 @@ range -- confirming the widening is a genuine, conservative RELAXATION of the sa
 theorem lamInv_floor_widened_consistent :
     lamBoxLamPLo <= lamBoxLamPLoOrig ∧ lamBoxLamPLoOrig <= lamBoxLamPHi := by decide
 
+/- ------------------------------------------------------------------ -/
+/- 9. Round 4 -- the (C'-CAP) discharge comparison + FLOOR-DRIFT transcriptions.  -/
+/-
+   Gate LAM-INV's (C'-CAP) floor-box node census (round 4) certifies, in exact Fraction
+   arithmetic, `worst drop bound <= CPRIME = 3/500` over all NG grid nodes; gate
+   FLOOR-DRIFT monitors the (FLOOR-PERSIST) drift mechanism and as-consumed margins,
+   and carries the Section 9(v) route-cut negative control inline. This section
+   kernel-checks the resulting RATIONAL comparisons at printed precision (transcribed
+   in the conservative direction: upper bounds rounded UP, lower bounds rounded DOWN),
+   exactly the items-5-7 pattern -- NOT a re-derivation of the node census, the drift
+   scan, or the route-cut corner census (those stay in the Python verifier).
+-/
+
+/-- The certified (C'-CAP) node-census worst bound, rounded UP at printed precision
+(gate LAM-INV round 4: `0.004245...`; `ceil(. * 10^6) = 4246`), over `10^6`. -/
+def cprimeBoundHi : Nat := 4246
+
+/-- **The (C'-CAP) discharge comparison, kernel-checked.** `cprimeBoundHi/10^6 <=
+3/500` (the CPRIME cap), cleared of denominators (both positive):
+`cprimeBoundHi * 500 <= 3 * 10^6`. This is the gate's own final exact-Fraction
+comparison, transcribed conservatively; margin at the rounded literal is `~29%`. -/
+theorem cprime_bound_clears : cprimeBoundHi * 500 <= 3 * 1000000 := by decide
+
+/-- FLOOR-DRIFT check (1): the worst monitored drift step ratio, rounded DOWN at
+printed precision (gate: `1.00005212...` at the edge parent, pair `750 -> 800`, `i=0`;
+`floor(. * 10^8) = 100005212`), over `10^8`. -/
+def floorDriftWorstLo : Nat := 100005212
+
+/-- **Drift transcription: the worst monitored step ratio is at least 1** (the upward
+drift the (FLOOR-PERSIST) clause rests on holds at every monitored parameter/pair,
+with the worst case strictly above 1 at printed precision). -/
+theorem floordrift_step_ge_one : 100000000 <= floorDriftWorstLo := by decide
+
+/-- FLOOR-DRIFT check (2): the worst as-consumed floor margins, rounded DOWN at
+printed precision, over `10^6`: `1.010070...` at the `(500, 99/100)` anchor and
+`1.000989...` at the `(800, 999/1000)` SIB-CERT anchor. -/
+def floorMarginMainLo : Nat := 1010070
+def floorMarginSibLo : Nat := 1000989
+
+/-- **As-consumed margin transcription: both anchors' worst margins are at least 1**
+(the exact statement the census gates consume holds at every monitored level, with
+the pad absorbing both the level- and the parameter-transfer). -/
+theorem floordrift_margins_ge_one :
+    1000000 <= floorMarginMainLo ∧ 1000000 <= floorMarginSibLo := by decide
+
+/-- The Section 9(v) route-cut exhibits, rounded UP at printed precision, over `10^3`:
+box-worst census output-ratio/floor `0.579...` at `(500, 99/100)` and `0.568...` at
+`(800, 999/1000)` (rounded up to `580`/`569` -- still strictly below 1000). -/
+def floorRouteCutMainHi : Nat := 580
+def floorRouteCutSibHi : Nat := 569
+
+/-- **Route-cut transcription: the pointwise corner census MISSES the floors at both
+anchors** (even the upper-rounded exhibits sit strictly below 1) -- the kernel-checked
+form of the Section 9(v) negative: (FLOOR-PERSIST) cannot be discharged by this
+census, which is exactly why it stays a named COMPUTED clause. -/
+theorem floordrift_routecut_misses :
+    floorRouteCutMainHi < 1000 ∧ floorRouteCutSibHi < 1000 := by decide
+
 end PropTail

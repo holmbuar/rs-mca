@@ -30,6 +30,104 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - (C'-CAP) discharged-conditional; (FLOOR-PERSIST) first-class monitored + census route-cut
+
+- **Agent/model:** Claude Fable 5 (PI).
+- **Files added or changed:**
+  `experimental/scripts/verify_dense_shell_prop_tail_reduction.py` (LAM-INV gains the
+  (C'-CAP) floor-box node census — `_cprime_floor_proved_lam`, `_gamma_branch_floor_data`,
+  `_anchor_head_cvec` fast head path with a live equality self-check against `cvec`;
+  `theta_band_ia_certified`/`F_box_ia_certified` memoized so LAM-INV's UNTAMPERED
+  equilibrium-ceiling input and the report gates share one computation; new core gate
+  `gate_floor_drift`/FLOOR-DRIFT, report index 10, full mode only, with the
+  `_floor_census_routecut` informational negative control; 2 new tampers
+  `cprime-bound-graze`/`floordrift-margin`; STATUS/gate-count/docstrings updated);
+  `experimental/notes/thresholds/dense_shell_prop_tail_reduction.md` (Section 8.4:
+  (C'-CAP) entry rewritten to DISCHARGED-conditional with the exact drop identity
+  `Lambda_true - Lambda_pure = [gbar*Lambda_pure - C'/P]/(1-gbar)` and the three
+  outward ingredients; (FLOOR-PERSIST) entry rewritten first-class with the precise
+  as-consumed form; R1 mitigation (a) marked TAKEN; new route-cut Section 9(v);
+  Section 7 joint-clause bookkeeping note; Section 11: LAM-INV entry updated,
+  FLOOR-DRIFT entry added, tamper suite 20 -> 22; Lean-layer scope list brought
+  current (it was two rounds stale: items (4) SIB-CERT and (5) LAM-INV were missing)
+  and extended with the round-4 items (6));
+  `experimental/data/certificates/dense-shell-prop-tail-reduction/dense_shell_prop_tail_reduction.json`
+  (`computed_clauses.C_PRIME_CAP` moved to `discharged_clauses.C_PRIME_CAP` with the
+  certified numbers and joint-IH bookkeeping; `computed_clauses.FLOOR_PERSIST`
+  rewritten first-class with the route-cut record; `gates` counts 11/22 and lists;
+  `lean.round4_addition`; also FIXED a stale field: `lean.sibcert_addition` still
+  carried round-1 literals `28722756`/`602929500` — corrected to the live round-2
+  values `27943134`/`602065500` matching the Lean file, same staleness class as the
+  round-3 sib_cert correction);
+  `experimental/lean/prop_tail_reduction/PropTailReduction.lean` (new Section 9:
+  `cprime_bound_clears` — the (C'-CAP) discharge comparison, cleared form
+  `4246*500 <= 3*10^6`; `floordrift_step_ge_one`, `floordrift_margins_ge_one`, and the
+  route-cut negative `floordrift_routecut_misses` — all `decide`-only, conservative
+  transcription directions documented per literal) and its `README.md` (scope brought
+  current). Changed: `experimental/agents-log.md` (this entry).
+- **Status:** CONDITIONAL.
+- **What is being added:** two upgrades to the (PROP-TAIL) packet's clause ledger, plus
+  one window-coherence correction to the round-3 LAM-INV bookkeeping (found by
+  adversarial re-derivation while building upgrade (1), fixed in place — note Section
+  10): identity (I2) was cited at `W=18` while (I1), the `gamma<=GMAX` bound, and the
+  Fraction spot-check are all at `W=17=OPWIN`, and the field's reality-side monitors
+  (the `C'` monitor, MAG-BOX's realized-vs-field consistency) compared against the
+  18-window mass-weighted `Lambda` — one edge term of slippage. (I2) is now
+  window-generic instantiated at `W=17`; `onestep_compose` emits `Lamp17`/`Lamm17`;
+  both monitors compare against the `W=17` object; MAG-BOX monitors the `W=17`
+  variants in-box alongside the retained `W=18` and arithmetic-mean variants. The
+  (C'-CAP) census below is derived at `W=17` throughout. Numerically small (all boxes
+  green on re-run); same finding class as the packet's own V12 out-LC precision note.
+  **(1) (C'-CAP) — the last monitored-only literal — is DISCHARGED-conditional.** The
+  drop of the pure-operator Lambda recursion vs the true windowed-mass recursion obeys
+  the exact identity above ((I1) summed over branches, elementary); gate LAM-INV now
+  certifies, at every one of its NG=3841 grid nodes (the only places the recursion
+  consumes the cap — between-grid coverage rides the existing Lipschitz brackets), the
+  outward bound built from: per-branch floor-box gamma bounds at the node's child
+  parameters (same derivation as the PROVED `gamma<=GMAX`), the invariance check's own
+  8-corner `|Lambda_pure|` enclosure, and a `C'/P` bound from
+  `Delta_0' = L_0 Delta_0 + c_1(L_0-L_1)` / `E_W' = L_16 E_W + c_17(L_16-L_17)` with
+  adjacent-index spreads `<= (57/50) * max(V_17(J0), F_box/(1-theta_band))` — the
+  (FOLD)-folded equilibrium ceiling, taken as an exact Fraction from the UNTAMPERED,
+  memoized V15-IA/V17-IA chain. Certified worst `0.004245 <= 3/500` (29% margin, locus
+  `t=0.5`; per-ingredient split printed on the gate line; float sounding was `0.0046`).
+  The joint induction is acyclic per level (the pass `n-1 -> n` consumes `H(n-1)`'s
+  V-ceiling and field membership — same shape as SIB-CERT's lemma consuming the IH's
+  `rho_prop`). The a-posteriori monitor is RETAINED as the empirical cross-check
+  (measured `0.0013`/`0.0027`, the latter at the W=17 field object). **(2) (FLOOR-PERSIST) becomes first-class.** Its exact
+  as-consumed form is now stated (child profiles at branch parameters vs the parent-t
+  anchor family — a parameter-transfer AND a level-transfer), and new core gate
+  FLOOR-DRIFT monitors both the drift mechanism (123 parameters, consecutive deep-grid
+  pairs `n1>=500`, worst step ratio `1.00005212`, strictly above 1 everywhere) and the
+  as-consumed margins at both anchors (`1.010070` at `(500,99/100)`; `1.000989` at
+  `(800,999/1000)`). The natural discharge route is simultaneously CLOSED as route-cut
+  Section 9(v): a V12-style pointwise corner census of one-step output ratios over the
+  floor box box-worst-misses the floors by `~42%` (697/738 rows fail at `(500,99/100)`;
+  738/738 at `(800,999/1000)`) — the box has no mechanism coupling input-floor slack to
+  output-floor slack; persistence is a realized-trajectory (drift) property, so a
+  future discharge must be a quantitative monotone-comparison / no-spike-tower
+  argument, not a census.
+- **How it is useful:** the packet's Section 8.4 ledger drops to exactly TWO computed
+  clauses — (FOLD) and (FLOOR-PERSIST) — with ZERO monitored-only literals; every open
+  input is named, gated, and tamperable, and the dead discharge route for
+  (FLOOR-PERSIST) is recorded so no future session re-litigates it. This tightens the
+  conditional basis under #885's INV-TAIL closure and #880's `|K|=1` dense-shell
+  class-sum dichotomy on this repository's experimental-ledger track. No prior gate
+  value changed (`theta_band`/`F_box`/SIB-CERT bit-identical — this round only ADDS
+  checks); RESULT 10/10 -> 11/11 PASS with total runtime FLAT (the memoization offsets
+  the new node census).
+- **What to do next:** audit the joint-IH bookkeeping (Section 7's new note + Section
+  8.4's (C'-CAP) step order) against the composed theorem; independently re-derive the
+  drop identity ((P'-C')/(P-C) - P'/P — three lines); if a future round wants
+  (FLOOR-PERSIST) proved, start from the note's no-spike-tower handle (Section 8.2),
+  NOT the census (Section 9(v)). Run
+  `python3 experimental/scripts/verify_dense_shell_prop_tail_reduction.py` (full mode,
+  ~380s on a laptop: expect `RESULT: 11/11 PASS`, LAM-INV's line showing
+  `C'<=CPRIME=3/500: PROVED floor-box bound=0.004245 [OK]`, FLOOR-DRIFT's line showing
+  drift `1.00005212 [OK]` + both anchor margins `[OK]` + the route-cut exhibits;
+  `--tamper-selftest` for the 22-tamper isolation matrix; `lake build` in
+  `experimental/lean/prop_tail_reduction/` for the statement layer, expect green).
+
 ### 2026-07-18 - (LAM-BOX) discharged-conditional (LAM-INV gate)
 
 - **Agent/model:** Claude Fable 5 (PI, derivation lane DERIV_LAMBOX.md + lab lane
