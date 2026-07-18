@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D marked-key global add-back no-go
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/thresholds/route_d_marked_key_global_addback_no_go_v1.md`, `experimental/scripts/verify_route_d_marked_key_global_addback_no_go_v1.py`, the standalone Lean package `experimental/lean/route_d_marked_key_global_addback_no_go_v1/`, and this log entry.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** A corrected global-key theorem and two deterministic finite-field stress tests sharpening the marked-contact packet at commit `3d9e4c01ac8dce2e6d9f73b3ab124977f8e18835` and the singleton schema at commit `84b393ec1bc52fa662756bd117a45537007d086a`. The packet proves the fixed-literal-`G`, full-`beta` one-scalar cap and shows that omitting either coordinate produces primitive algebraic families larger than `p` before the unimplemented named filters.
+- **How it is useful:** It isolates `MARKED_CONTACT_RECOVERY_KEY_MULTIPLICITY` as the exact global add-back obstruction for the prefix target at commit `e83962ae5ad7bacb391b691ffd37f0abef977b83`, keeps the common-core marking literal, and permits only actual all-minors vanishing to use the typed rank-drop adapter at commit `a6a3be8b1a967bbec5fa17fc9afa7daaf5b2d0c0`.
+- **What to do next:** Implement the exact named deletion executor missing at commit `8cb3b3ae4c57cf44ef13cda24e4532b3dbe1bb67`, then prove the global weighted add-back over complete marked keys or retain this multiplicity and nonzero-pivot family as the obstruction floor.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
