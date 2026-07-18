@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - First-wall MDS-extension Lean ownership audit
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/audits/first_wall_mds_extension_map_audit.md` @ `5b528fb5`; `experimental/scripts/verify_first_wall_mds_extension_map_audit.py` @ `a3c0eba8`; `experimental/lean/grande_finale/README.md` @ `204fbd61`; `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md` @ `541527e9`.
+- **Status:** AUDIT
+- **What is being added:** Integration `06b2a6fb` added the false map-level claim that `experimental/lean/grande_finale/README.md:24-27` @ `bed5976f` and `experimental/lean/grande_finale/FORMALIZATION_SUMMARY.md:25-27` @ `d1c3e0ed` assigned the Lean module ownership of the MDS-extension equivalence, retained/deleted slack, and graph-arc normalization, although `experimental/lean/grande_finale/GrandeFinale/FirstWallMDSExtensionInverse.lean:3-14,28-103` @ `e03e8e36` declares only abstract finite image/fiber counting and pinned arithmetic. The audit verdict is `AUDIT`: `experimental/notes/audits/first_wall_mds_extension_map_audit.md:14-54` @ `5b528fb5` and `experimental/scripts/verify_first_wall_mds_extension_map_audit.py:212-356` @ `a3c0eba8` independently confirm PR #853 head `0c8d2c3c` and its producer `experimental/notes/thresholds/first_wall_mds_extension_inverse.md` @ `e2f6d996`, `experimental/scripts/verify_first_wall_mds_extension_inverse.py` @ `7ac25269`, `experimental/data/certificates/first-wall-mds-extension-inverse/first_wall_mds_extension_inverse.json` @ `e8417909`, and `experimental/lean/grande_finale/GrandeFinale/FirstWallMDSExtensionInverse.lean` @ `e03e8e36` are clean, while the two inaccurate package-map statements are repaired.
+- **How it is useful:** The corrected ownership boundary preserves the generic `card_eq_sum_ownerFiber` API consumed by open PR #882 head `af213091` at `experimental/lean/grande_finale/GrandeFinale/RSExactCardOccupancyBridge.lean:1-2,60-66` @ `2fb56c97`, without changing any theorem, certificate, numerical frontier, first-match assignment, or submission-facing claim.
+- **What to do next:** Run `python3 experimental/scripts/verify_first_wall_mds_extension_map_audit.py` and `python3 -O experimental/scripts/verify_first_wall_mds_extension_map_audit.py` (the verifier is `experimental/scripts/verify_first_wall_mds_extension_map_audit.py` @ `a3c0eba8`) and expect `RESULT: PASS (14/14)` followed by `STATUS: AUDIT`; then review the two map-only wording repairs before promotion and keep PR #882 head `af213091` generic.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
