@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D square-fold even/odd reconstruction
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/thresholds/route_d_square_fold_even_odd_reconstruction_v1.md`, `experimental/scripts/verify_route_d_square_fold_even_odd_reconstruction_v1.py`, the standalone Lean package `experimental/lean/route_d_square_fold_even_odd_reconstruction_v1/`, and `experimental/agents-log.md`.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** A raw algebraic square-fold packet refining the fixed-target F23 precursor at commit `f23a3b78a6bbe1d50a81b3976f92aa7c135ab300`: three distinct primitive nonextension support-8 defects share literal `G`, complete nonzero odd fiber data, and a nonzero toy pivot, while different even occupancy data separates them. It also proves `MARKED_SQUARE_FOLD_EVEN_ODD_RECONSTRUCTION`, which reconstructs the marked pair from literal `G` and both fiber components.
+- **How it is useful:** It isolates `SQUARE_FOLD_ODD_DATA_RECOVERY_NO_GO` for the prefix support target at commit `e83962ae5ad7bacb391b691ffd37f0abef977b83`, while reserving future actual all-maximal-minors vanishing for the typed adapter at commit `a6a3be8b1a967bbec5fa17fc9afa7daaf5b2d0c0`. Support `8` is a full raw stratum, not a deployed-scale large-defect claim, and the packet preserves the literal common core.
+- **What to do next:** Supply the named first-match executor missing at commit `8cb3b3ae4c57cf44ef13cda24e4532b3dbe1bb67`, then test whether the even occupancy component is independently paid or must remain in every global marked recovery key.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
