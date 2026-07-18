@@ -9,8 +9,12 @@ the Route-D rooted-emission no-go packet.  It kernel-checks only:
 * minor certificates showing that the full `3 x 9` owner Hankel matrices for
   `E₂ = (1,3)` and `E₃ = (1,3,5)` have ranks two and three over `F_17`;
   the displayed `3 x 4` matrices are their leading windows;
+* the `E = (16)` punctured-padding fixture: locator deconvolution from the
+  primitive target `(1,9)` to `(0,9)`, algebraic stabilizer `{1,16}` versus
+  punctured-domain stabilizer `{1}`, the exact 24-element reconstructed fiber,
+  and the rank-one full owner matrix;
 * the repaired deep-gate arithmetic `3(t-1)=6 <= n-k=11` and the strict
-  marked-multiplicity obstruction `19 > 17`.
+  arithmetic obstructions `19 > 17` and `24 > 17`.
 
 The final rooted-emission statement is deliberately theorem-shaped but
 UNPROVED.  It is scoped to one fixed line and an exact residual after the
@@ -68,12 +72,83 @@ def elementaryTwo : List Nat → Nat
 def locatorPrefix17 (support : List Nat) : Nat × Nat :=
   ((17 - support.sum % 17) % 17, elementaryTwo support % 17)
 
+def fullTarget17 : Nat × Nat := (1, 9)
+
 /-- The exact primitive locator-prefix fiber used by the no-go toy. -/
 def primitiveTargetFiber17 : List (List Nat) :=
-  (choose 8 f17Nonzero).filter (fun support => locatorPrefix17 support = (1, 9))
+  (choose 8 f17Nonzero).filter (fun support => locatorPrefix17 support = fullTarget17)
 
 theorem primitive_target_fiber_has_49_supports :
     primitiveTargetFiber17.length = 49 := by
+  native_decide
+
+/-! ## Theorem 3: punctured padding and loss of an acting stabilizer -/
+
+def punctureError17 : List Nat := [16]
+
+def puncturedDomain17 : List Nat :=
+  f17Nonzero.filter (fun point => point != 16)
+
+/-- Deconvolve the first two signed locator coefficients through a fixed
+locator prefix.  The large positive offset makes the natural-number
+representatives safe before reduction modulo 17. -/
+def deconvolvePrefix17
+    (target fixedPrefix : Nat × Nat) : Nat × Nat :=
+  let paddingFirst := (target.1 + 17 - fixedPrefix.1) % 17
+  let paddingSecond :=
+    (target.2 + 17 * 17 - fixedPrefix.2 - fixedPrefix.1 * paddingFirst) % 17
+  (paddingFirst, paddingSecond)
+
+def paddingTarget17 : Nat × Nat :=
+  deconvolvePrefix17 fullTarget17 (locatorPrefix17 punctureError17)
+
+/-- Algebraic scaling stabilizer of a signed depth-two target. -/
+def prefixTargetStabilizer17 (target : Nat × Nat) : List Nat :=
+  f17Nonzero.filter fun scalar =>
+    target.1 * scalar % 17 = target.1 ∧
+    target.2 * scalar ^ 2 % 17 = target.2
+
+/-- Exact preservation of one finite source set under multiplication. -/
+def scalarPreservesSet17 (scalar : Nat) (points : List Nat) : Bool :=
+  (points.all fun point => points.contains (scalar * point % 17)) &&
+  (points.all fun target =>
+    points.any fun point => scalar * point % 17 == target)
+
+def puncturedDomainStabilizer17 : List Nat :=
+  f17Nonzero.filter fun scalar => scalarPreservesSet17 scalar puncturedDomain17
+
+/-- Seven-point padding choices on the fixed punctured domain. -/
+def paddingFiber17 : List (List Nat) :=
+  (choose 7 puncturedDomain17).filter fun padding =>
+    locatorPrefix17 padding = paddingTarget17
+
+/-- Reinsert the fixed error point.  Every padding list is increasing inside
+`1,...,15`, so appending 16 gives the canonical increasing full support. -/
+def reconstructedPaddingFiber17 : List (List Nat) :=
+  paddingFiber17.map fun padding => padding ++ punctureError17
+
+def fullTargetFiberContainingPuncture17 : List (List Nat) :=
+  primitiveTargetFiber17.filter fun support => support.contains 16
+
+theorem puncture_locator_deconvolution_certificate :
+    locatorPrefix17 punctureError17 = (1, 0) ∧
+    paddingTarget17 = (0, 9) := by
+  native_decide
+
+theorem full_and_padding_stabilizer_certificates :
+    prefixTargetStabilizer17 fullTarget17 = [1] ∧
+    prefixTargetStabilizer17 paddingTarget17 = [1, 16] ∧
+    puncturedDomainStabilizer17 = [1] := by
+  native_decide
+
+theorem padding_fiber_reconstruction_certificate :
+    paddingFiber17.length = 24 ∧
+    reconstructedPaddingFiber17 = fullTargetFiberContainingPuncture17 ∧
+    reconstructedPaddingFiber17.all
+      (fun support => locatorPrefix17 support == fullTarget17) = true := by
+  native_decide
+
+theorem twenty_four_exceeds_seventeen : 24 > 17 := by
   native_decide
 
 /-! ## Exact rank certificates over `F_17` -/
@@ -106,6 +181,11 @@ def maximalMinor (matrix : Nat → Nat → Int) (c₀ c₁ c₂ : Nat) : Int :=
 /-- A `2 x 2` minor on the first two rows and named columns. -/
 def firstTwoRowMinor (matrix : Nat → Nat → Int) (c₀ c₁ : Nat) : Int :=
   matrix 0 c₀ * matrix 1 c₁ - matrix 0 c₁ * matrix 1 c₀
+
+/-- A `2 x 2` minor on arbitrary named rows and columns. -/
+def minorTwo
+    (matrix : Nat → Nat → Int) (r₀ r₁ c₀ c₁ : Nat) : Int :=
+  matrix r₀ c₀ * matrix r₁ c₁ - matrix r₀ c₁ * matrix r₁ c₀
 
 /-- A raw power-sum used inside the exact dual-weighted owner entry. -/
 def moment17 (errors : List Nat) (degree : Nat) : Nat :=
@@ -147,6 +227,16 @@ def allFullOwnerMaximalMinorsZero
     | [c₀, c₁, c₂] => maximalMinor matrix c₀ c₁ c₂ % 17 == 0
     | _ => false
 
+/-- Checks every `2 x 2` minor of a three-row, nine-column matrix. -/
+def allFullOwnerTwoMinorsZero
+    (matrix : Nat → Nat → Int) : Bool :=
+  (choose 2 (List.range 3)).all fun rows =>
+    (choose 2 (List.range 9)).all fun columns =>
+      match rows, columns with
+      | [r₀, r₁], [c₀, c₁] =>
+          minorTwo matrix r₀ r₁ c₀ c₁ % 17 == 0
+      | _, _ => false
+
 theorem displayed_matrices_are_leading_owner_windows :
     isLeadingWindow e2Entry e2Errors = true ∧
     isLeadingWindow e3Entry e3Errors = true := by
@@ -176,6 +266,29 @@ theorem e2_full_owner_rank_two_certificate :
 /-- The leading nonzero maximal minor gives full `E₃` owner Hankel rank three. -/
 theorem e3_full_owner_rank_three_certificate :
     maximalMinor (ownerHankelEntry e3Errors) 0 1 2 % 17 = 2 := by
+  native_decide
+
+/-- A nonzero entry and vanishing of all `2 x 2` minors certify that the full
+`3 x 9` owner matrix for `E=(16)` has rank exactly one. -/
+theorem puncture_full_owner_rank_one_certificate :
+    ownerHankelEntry punctureError17 0 0 % 17 = 1 ∧
+    allFullOwnerTwoMinorsZero (ownerHankelEntry punctureError17) = true := by
+  native_decide
+
+/-- Aggregate kernel-checked fixture for Theorem 3. -/
+theorem punctured_padding_obstruction_fixture :
+    locatorPrefix17 punctureError17 = (1, 0) ∧
+    paddingTarget17 = (0, 9) ∧
+    prefixTargetStabilizer17 fullTarget17 = [1] ∧
+    prefixTargetStabilizer17 paddingTarget17 = [1, 16] ∧
+    puncturedDomainStabilizer17 = [1] ∧
+    paddingFiber17.length = 24 ∧
+    reconstructedPaddingFiber17 = fullTargetFiberContainingPuncture17 ∧
+    reconstructedPaddingFiber17.all
+      (fun support => locatorPrefix17 support == fullTarget17) = true ∧
+    24 > 17 ∧
+    ownerHankelEntry punctureError17 0 0 % 17 = 1 ∧
+    allFullOwnerTwoMinorsZero (ownerHankelEntry punctureError17) = true := by
   native_decide
 
 /-! ## The exact pigeonhole obstruction -/

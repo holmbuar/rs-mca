@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify two exact no-go examples for an unrooted Route-D owner adapter."""
+"""Verify exact no-go examples for an unrooted Route-D owner adapter."""
 
 from __future__ import annotations
 
@@ -24,7 +24,10 @@ BASE = (1, 8, 10, 11, 12, 13, 14, 15)
 TOGGLE_SUPPORT = (1, 3, 5, 9, 10, 11, 13, 15)
 E_SMALL = (1, 3)
 E_FULL = (1, 3, 5)
+PUNCTURE_ERROR = (16,)
+PADDING_TARGET = (0, 9)
 EXPECTED_CELLS = {1: 2, 2: 1, 3: 2, 4: 1, 5: 1, 6: 2, 7: 2, 11: 2, 14: 2, 15: 2, 16: 2}
+EXPECTED_PUNCTURED_CELLS = {7: 2, 11: 1, 14: 1, 15: 1, 16: 2}
 
 
 def ensure(condition: bool, message: str) -> None:
@@ -99,7 +102,7 @@ def poly_mul(left: list[int], right: list[int]) -> list[int]:
     return product
 
 
-def interpolate_x5_on(nodes: tuple[int, ...], slope: int) -> tuple[int, ...]:
+def interpolate_values_on(nodes: tuple[int, ...], value_at) -> tuple[int, ...]:
     coefficients = [0] * K
     for i, xi in enumerate(nodes):
         basis = [1]
@@ -109,10 +112,14 @@ def interpolate_x5_on(nodes: tuple[int, ...], slope: int) -> tuple[int, ...]:
                 continue
             basis = poly_mul(basis, [(-xj) % P, 1])
             denominator = denominator * (xi - xj) % P
-        scale = slope * pow(xi, K, P) * pow(denominator, -1, P) % P
+        scale = value_at(xi) * pow(denominator, -1, P) % P
         for degree, value in enumerate(basis):
             coefficients[degree] = (coefficients[degree] + scale * value) % P
     return tuple(coefficients)
+
+
+def interpolate_x5_on(nodes: tuple[int, ...], slope: int) -> tuple[int, ...]:
+    return interpolate_values_on(nodes, lambda x: slope * pow(x, K, P) % P)
 
 
 def eval_poly(coefficients: tuple[int, ...], x: int) -> int:
@@ -120,15 +127,21 @@ def eval_poly(coefficients: tuple[int, ...], x: int) -> int:
 
 
 def max_agreement_for_slope(slope: int) -> int:
+    return max_agreement_for_value(
+        lambda x: slope * pow(x, K, P) % P
+    )
+
+
+def max_agreement_for_value(value_at) -> int:
     maximum = 0
     seen: set[tuple[int, ...]] = set()
     for nodes in itertools.combinations(DOMAIN, K):
-        coefficients = interpolate_x5_on(nodes, slope)
+        coefficients = interpolate_values_on(nodes, value_at)
         if coefficients in seen:
             continue
         seen.add(coefficients)
         agreement = sum(
-            eval_poly(coefficients, x) == slope * pow(x, K, P) % P
+            eval_poly(coefficients, x) == value_at(x)
             for x in DOMAIN
         )
         maximum = max(maximum, agreement)
@@ -142,12 +155,31 @@ def hankel(error_support: tuple[int, ...]) -> list[list[int]]:
     ]
 
 
-def target_stabilizer() -> tuple[int, ...]:
+def prefix_target_stabilizer(target: tuple[int, ...]) -> tuple[int, ...]:
     return tuple(
         scalar
         for scalar in DOMAIN
-        if tuple(value * pow(scalar, degree, P) % P for degree, value in enumerate(TARGET, 1)) == TARGET
+        if tuple(value * pow(scalar, degree, P) % P for degree, value in enumerate(target, 1)) == target
     )
+
+
+def set_stabilizer(points: tuple[int, ...]) -> tuple[int, ...]:
+    point_set = set(points)
+    return tuple(
+        scalar
+        for scalar in DOMAIN
+        if {scalar * point % P for point in point_set} == point_set
+    )
+
+
+def deconvolve_prefix(
+    target: tuple[int, int], fixed_prefix: tuple[int, int]
+) -> tuple[int, int]:
+    padding_first = (target[0] - fixed_prefix[0]) % P
+    padding_second = (
+        target[1] - fixed_prefix[1] - fixed_prefix[0] * padding_first
+    ) % P
+    return padding_first, padding_second
 
 
 def build_result() -> dict:
@@ -175,6 +207,46 @@ def build_result() -> dict:
     max_agreements = tuple(max_agreement_for_slope(slope) for slope in range(P))
     bad_slopes = tuple(slope for slope, maximum in enumerate(max_agreements) if maximum >= AGREEMENT)
 
+    puncture_error_set = set(PUNCTURE_ERROR)
+    punctured_domain = tuple(x for x in DOMAIN if x not in puncture_error_set)
+    puncture_error_prefix = locator_prefix(PUNCTURE_ERROR)
+    padding_target = deconvolve_prefix(TARGET, puncture_error_prefix)
+    padding_choices = [
+        padding
+        for padding in itertools.combinations(
+            punctured_domain, J - len(PUNCTURE_ERROR)
+        )
+        if locator_prefix(padding) == padding_target
+    ]
+    reconstructed_padding_supports = [
+        tuple(sorted(puncture_error_set | set(padding)))
+        for padding in padding_choices
+    ]
+    padding_fiber = [
+        support for support in fiber if puncture_error_set <= set(support)
+    ]
+    punctured_mates = [
+        top_seam_packet(support)
+        for support in padding_fiber
+        if len(set(support) ^ base) == 2 * R
+    ]
+    punctured_max_agreements = tuple(
+        max_agreement_for_value(
+            lambda x, slope=slope: (
+                (1 if x in puncture_error_set else 0)
+                + slope * pow(x, K, P)
+            )
+            % P
+        )
+        for slope in range(P)
+    )
+    punctured_bad_slopes = tuple(
+        slope
+        for slope, maximum in enumerate(punctured_max_agreements)
+        if maximum >= AGREEMENT
+    )
+    punctured_matrix = hankel(PUNCTURE_ERROR)
+
     complements_force_noncontainment = all(
         len({x for x in DOMAIN if x not in set(packet["support"])}) > K
         for packet in mates
@@ -195,7 +267,7 @@ def build_result() -> dict:
         "fixed_direction": "g(x)=x^5",
         "fixed_codeword": "c(x)=0",
         "target": TARGET,
-        "target_stabilizer": target_stabilizer(),
+        "target_stabilizer": prefix_target_stabilizer(TARGET),
         "fiber_size": len(fiber),
         "top_seam_mate_count": len(mates),
         "distinct_common_core_marks": len({packet["core"] for packet in mates}),
@@ -213,6 +285,41 @@ def build_result() -> dict:
         "support_witness_count": len(mates),
         "slope_times_base_field_capacity": P,
         "multiplicity_exceeds_capacity": len(mates) > P,
+        "puncture_error_support": PUNCTURE_ERROR,
+        "puncture_error_prefix": puncture_error_prefix,
+        "padding_target": padding_target,
+        "padding_target_algebraic_stabilizer": prefix_target_stabilizer(
+            padding_target
+        ),
+        "punctured_domain": punctured_domain,
+        "punctured_domain_stabilizer": set_stabilizer(punctured_domain),
+        "padding_fiber_size": len(padding_fiber),
+        "padding_fiber_exceeds_capacity": len(padding_fiber) > P,
+        "padding_factorization_exact": sorted(padding_fiber)
+        == sorted(reconstructed_padding_supports),
+        "padding_choices_have_deconvolved_target": all(
+            locator_prefix(padding) == padding_target
+            for padding in padding_choices
+        ),
+        "reconstructed_supports_have_full_target": all(
+            locator_prefix(support) == TARGET
+            for support in reconstructed_padding_supports
+        ),
+        "punctured_owner_matrix": punctured_matrix,
+        "punctured_actual_rank": matrix_rank_mod_p(punctured_matrix),
+        "punctured_max_agreement_by_slope": punctured_max_agreements,
+        "punctured_bad_slope_set": punctured_bad_slopes,
+        "punctured_top_seam_mate_count": len(punctured_mates),
+        "punctured_distinct_common_core_marks": len(
+            {packet["core"] for packet in punctured_mates}
+        ),
+        "punctured_cell_histogram": dict(
+            sorted(Counter(packet["cell"] for packet in punctured_mates).items())
+        ),
+        "punctured_top_seam_deltas_constant_nonzero": all(
+            packet["cell"] != 0 and packet["delta"][1:] == (0, 0, 0)
+            for packet in punctured_mates
+        ),
         "toggle_packet": toggle,
         "toggle_same_displayed_support_datum": (
             TARGET,
@@ -279,6 +386,62 @@ def validate(result: dict) -> int:
     check(result["slope_times_base_field_capacity"] == 17, "capacity changed")
     check(result["multiplicity_exceeds_capacity"], "multiplicity no longer exceeds p")
 
+    check(result["puncture_error_support"] == (16,), "puncture error changed")
+    check(result["puncture_error_prefix"] == (1, 0), "puncture locator prefix changed")
+    check(result["padding_target"] == PADDING_TARGET, "deconvolved padding target changed")
+    check(
+        result["padding_target_algebraic_stabilizer"] == (1, 16),
+        "padding target algebraic stabilizer changed",
+    )
+    check(
+        len(result["punctured_domain"]) == 15
+        and 16 not in result["punctured_domain"],
+        "punctured domain changed",
+    )
+    check(
+        result["punctured_domain_stabilizer"] == (1,),
+        "punctured-domain stabilizer changed",
+    )
+    check(result["padding_fiber_size"] == 24, "padding fiber size changed")
+    check(result["padding_fiber_exceeds_capacity"], "padding fiber no longer exceeds p")
+    check(result["padding_factorization_exact"], "padding round trip failed")
+    check(
+        result["padding_choices_have_deconvolved_target"],
+        "a padding choice escaped the deconvolved target",
+    )
+    check(
+        result["reconstructed_supports_have_full_target"],
+        "a reconstructed support escaped the full target",
+    )
+    check(
+        len(result["punctured_owner_matrix"]) == 3
+        and all(len(row) == 9 for row in result["punctured_owner_matrix"]),
+        "punctured owner matrix shape changed",
+    )
+    check(result["punctured_actual_rank"] == 1, "punctured actual rank changed")
+    check(result["punctured_bad_slope_set"] == (0,), "punctured bad-slope set changed")
+    check(
+        result["punctured_max_agreement_by_slope"][0] == 15
+        and max(result["punctured_max_agreement_by_slope"][1:]) < AGREEMENT,
+        "punctured exact agreement census changed",
+    )
+    check(
+        result["punctured_top_seam_mate_count"] == 7,
+        "punctured top-seam mate count changed",
+    )
+    check(
+        result["punctured_distinct_common_core_marks"] == 7,
+        "punctured common-core marks collapsed",
+    )
+    check(
+        result["punctured_cell_histogram"] == EXPECTED_PUNCTURED_CELLS,
+        "punctured cell histogram changed",
+    )
+    check(
+        result["punctured_top_seam_deltas_constant_nonzero"],
+        "a punctured mate is not top-seam",
+    )
+
     packet = result["toggle_packet"]
     check(packet["support"] == TOGGLE_SUPPORT, "toggle support changed")
     check(packet["core"] == (1, 10, 11, 13, 15), "toggle common core changed")
@@ -315,6 +478,17 @@ def mutation_test(result: dict) -> int:
         ("multiplicity_exceeds_capacity", False),
         ("deep_gate_holds", False),
         ("bad_slope_set", (0, 1)),
+        ("padding_target", (1, 9)),
+        ("padding_target_algebraic_stabilizer", (1,)),
+        ("punctured_domain_stabilizer", (1, 16)),
+        ("padding_fiber_size", 17),
+        ("padding_fiber_exceeds_capacity", False),
+        ("padding_factorization_exact", False),
+        ("punctured_actual_rank", 2),
+        ("punctured_bad_slope_set", (0, 1)),
+        ("punctured_top_seam_mate_count", 6),
+        ("punctured_distinct_common_core_marks", 1),
+        ("punctured_cell_histogram", {7: 7}),
         ("small_hankel_rank", 3),
         ("full_hankel_rank", 2),
         ("deployed_bound_refuted", True),
@@ -349,6 +523,13 @@ def main() -> None:
     full_rank = result["full_hankel_rank"]
     print(f"primitive_fiber={fiber} top_seam_mates={mates}")
     print(f"one_slope_marked_witnesses={witnesses} capacity={capacity}")
+    padding_size = result["padding_fiber_size"]
+    padding_stabilizer = result["padding_target_algebraic_stabilizer"]
+    punctured_stabilizer = result["punctured_domain_stabilizer"]
+    print(
+        f"punctured_padding={padding_size} algebraic_stabilizer={padding_stabilizer} "
+        f"domain_stabilizer={punctured_stabilizer}"
+    )
     print(f"same_datum_ranks={small_rank},{full_rank}")
     print(f"checks={checks} mutations_caught={caught}")
     print("minimal_repair=FIXED_LINE_MARKED_INJECTION_AFTER_EXACT_FIRST_MATCH")

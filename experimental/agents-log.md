@@ -39,10 +39,12 @@ Keep entries concise and link to the relevant files.
   standalone Lean package
   `experimental/lean/kb_rowsharp_route_d_rooted_emission_no_go/`.
 - **STATUS:** COUNTEREXAMPLE
-- **What is being added:** Two exact in-gate examples show that field-native
+- **What is being added:** Three exact in-gate examples show that field-native
   rank-drop eligibility is not determined by displayed marked co-support data
   and that one actual rank-drop slope can carry more than `p` raw marked
-  top-seam witnesses.
+  top-seam witnesses. They also show that primitive-target deconvolution can
+  produce a nonprimitive punctured padding fiber with no compatible scaling
+  action on its fixed punctured domain.
 - **How it is useful:** The packet separates the global distinct-slope owner
   from support multiplicity and states the minimal fixed-line,
   actual-incidence, mark-preserving injection needed for a legal

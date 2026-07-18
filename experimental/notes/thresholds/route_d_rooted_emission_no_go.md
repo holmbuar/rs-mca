@@ -5,12 +5,15 @@ STATUS: COUNTEREXAMPLE
 ## Outcome
 
 The integrated `DEEP_MCA_RANK_DROP` owner cannot by itself pay marked
-Route-D support mass. Two exact examples prove separate interface failures:
+Route-D support mass. Three exact examples prove separate interface failures:
 
 1. rank-drop eligibility is not determined by the displayed marked co-support
    datum when the received line and error amplitudes are omitted;
 2. even for one fixed received line and one primitive target, one actual
-   rank-drop slope can carry more than `p` marked top-seam witnesses.
+   rank-drop slope can carry more than `p` marked top-seam witnesses;
+3. locator deconvolution can turn a primitive full target into a nonprimitive
+   padding target on a punctured domain which does not carry the corresponding
+   scaling action.
 
 These are counterexamples to unrooted or selector-free support emission. They
 are not counterexamples to the distinct-slope owner, the deployed
@@ -178,6 +181,91 @@ retain only one. They may also be removed by an earlier full-agreement or
 other first-match branch. The example refutes only selector-free emission of
 all marked witnesses to the slope owner.
 
+## Theorem 3: primitivity does not descend through punctured padding
+
+Fix the actual unit-amplitude error support
+
+```text
+E = (16).
+```
+
+Its signed depth-two locator prefix is `(1,0)`. Write every chosen co-support
+containing `E` uniquely as
+
+```text
+T = E disjoint_union P,
+P subset D minus E,
+|P| = 7.
+```
+
+If `a(X)=(a_1,a_2)` denotes the first two signed locator coefficients, then
+`L_T=L_E L_P` gives
+
+```text
+a_1(T) = a_1(E) + a_1(P),
+a_2(T) = a_2(E) + a_1(E)*a_1(P) + a_2(P).
+```
+
+Deconvolving the primitive full target `(1,9)` by `a(E)=(1,0)` therefore
+gives the padding target
+
+```text
+a(P) = (0,9).
+```
+
+The full target has algebraic stabilizer `{1}`, but `(0,9)` has algebraic
+stabilizer `{1,16}` because its first coordinate vanishes and `16^2=1`.
+This does not supply a legal two-to-one quotient of the padding fiber: the
+punctured domain
+
+```text
+D minus E = F_17^* minus {16}
+```
+
+has multiplicative stabilizer only `{1}`. In particular multiplication by
+`16=-1` moves the missing point `16` to `1`, so it sends this punctured domain
+to a different punctured domain.
+
+Exact enumeration gives `24` seven-subsets of `D minus E` with padding target
+`(0,9)`. Union with `E` is an exact bijection from these padding subsets to the
+`24` full eight-supports containing `E` with target `(1,9)`. Thus
+
+```text
+24 > 17=p.
+```
+
+This is a padding-fiber obstruction, not permission to divide the count by
+the algebraic stabilizer of `(0,9)`: that stabilizer does not act on the fixed
+punctured source.
+
+The obstruction is attached to an honest rank-drop incidence. Fix
+
+```text
+f = indicator_{16},
+g(x) = x^5.
+```
+
+At slope zero the explaining codeword is zero, the actual error support is
+exactly `E`, and the dual-weighted `3 x 9` owner matrix has rank one. The exact
+finite bad-slope set is `{0}`. Indeed, for nonzero `gamma`, an eight-point
+agreement with a degree-below-five polynomial contains at least seven points
+outside `E`; on those points the degree-five polynomial
+`gamma*x^5-h(x)` vanishes, which is impossible.
+
+Relative to the same reference `B`, exactly seven members of this padding
+fiber lie in the one-sided-distance-three top-seam cell. They have seven
+distinct common-core marks and cell histogram
+
+```text
+{7:2, 11:1, 14:1, 15:1, 16:2}.
+```
+
+Consequently a primitive certificate on the full cyclic domain cannot simply
+be reapplied after fixing the actual error and deconvolving the locator target.
+A valid transfer must either count the translated target directly on the
+punctured domain or prove an action which preserves that exact puncture and
+the complete mark.
+
 ## Minimal viable rooted-emission lemma
 
 For each deployed primitive target `z`, a support payment through the
@@ -212,6 +300,8 @@ a support payment.
 
 - The `19` packets are not claimed to survive the deployed first-match
   deletion order.
+- The `24` padding packets and their seven top-seam members are likewise not
+  claimed to survive the deployed first-match deletion order.
 - No equality between a Route-D RIM pivot and the field-native owner Hankel
   predicate is asserted.
 - No deployed target exceeds `67472 * 2130706433`.
@@ -229,7 +319,15 @@ lake build
 
 The Python verifier recomputes the target fiber, the `19` marked top-seam
 mates, cell histogram, exact owner matrices and ranks, deep-gate arithmetic,
-unique bad slope, owner-contract fields, and fail-closed mutations. The Lean
-companion kernel-checks the finite arithmetic and matrix-minor certificates.
-Its rooted-emission theorem is an explicit bookkeeping target, not a
-formalization of actual MCA incidence.
+unique bad slope, owner-contract fields, the `E=(16)` locator deconvolution,
+both stabilizers, the `24`-element padding-fiber bijection, its seven marked
+top-seam members, and fail-closed mutations. The Lean companion kernel-checks
+the pre-existing finite arithmetic and matrix-minor certificates. It now also
+checks the exact `E=(16)` locator prefix and deconvolution, the two stabilizer
+lists, the 24-element choose-seven padding fiber and its exact reconstruction
+as the full-target supports containing `16`, `24>17`, and rank one of the full
+`3 x 9` owner matrix via one nonzero entry and all vanishing `2 x 2` minors.
+The semantic bad-slope/root-bound census and the seven marked top-seam packets
+remain Python checks. The rooted-emission theorem remains the package's sole
+explicit unproved bookkeeping target, not a formalization of actual MCA
+incidence.
