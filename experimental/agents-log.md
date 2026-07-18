@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D F17 global marked-contact pivot no-go
+
+- **Agent/model:** Codex with independent subagent census audit.
+- **Files added or changed:** `experimental/notes/thresholds/route_d_f17_global_marked_contact_pivot_no_go_v1.md`, `experimental/scripts/verify_route_d_f17_global_marked_contact_pivot_no_go_v1.py`, `experimental/lean/route_d_f17_global_marked_contact_pivot_no_go_v1/`, and `experimental/agents-log.md`.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** A raw algebraic global F17 census sharpening the marked-key packet at commit `b23f997474f7a7aec9a889d933c774acc4980050` and the singleton schema at commit `84b393ec1bc52fa662756bd117a45537007d086a`: 407 distinct literal full-defect support weights and 103 distinct nonempty-contact support weights exceed the 34-point analogue target before the unavailable named filters.  The support-level contact profile/nonzero-pivot map has only 30 labels and maximum multiplicity 9.
+- **How it is useful:** It isolates `GLOBAL_MARKED_CONTACT_PIVOT_MULTIPLICITY` as a raw compiler obstruction to the support certificate targeted at commit `e83962ae5ad7bacb391b691ffd37f0abef977b83`, while reserving actual all-maximal-minors vanishing for the typed rank-drop owner at commit `a6a3be8b1a967bbec5fa17fc9afa7daaf5b2d0c0`.  It preserves the literal common-core marking and does not claim a post-deletion counterexample.
+- **What to do next:** Supply the exact named deletion executor missing at commit `8cb3b3ae4c57cf44ef13cda24e4532b3dbe1bb67`, then either delete/route all 103 raw contact supports or prove a global support-injective owner that retains the complete marked recovery key.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
