@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D F23 fixed-target marked-core key-addback floor
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/thresholds/route_d_f23_fixed_target_core_key_floor_v1.md`, `experimental/scripts/verify_route_d_f23_fixed_target_core_key_floor_v1.py`, the standalone Lean package `experimental/lean/route_d_f23_fixed_target_core_key_floor_v1/`, and `experimental/agents-log.md`.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** A deterministic raw algebraic F23 counterexample to the printed fixed-key interface at commit `84b393ec1bc52fa662756bd117a45537007d086a`: at fixed target, cell, representative, and exact gcd, `55` distinct primitive nonextension off-core weights with varying literal marked cores exceed both `23` field labels and `46` profile-times-field labels. It also proves the corrected one-scalar cap after the literal core is fixed.
+- **How it is useful:** It isolates `FIXED_TARGET_MARKED_CORE_KEY_ADDBACK_FLOOR` for the support target at commit `e83962ae5ad7bacb391b691ffd37f0abef977b83`, preserves the literal common-core marking, and reserves rank-drop routing for actual all-maximal-minors vanishing under the typed adapter at commit `a6a3be8b1a967bbec5fa17fc9afa7daaf5b2d0c0`. It does not claim a post-first-match or deployed-bound counterexample.
+- **What to do next:** Supply the exact admission and named-deletion executor missing at commit `8cb3b3ae4c57cf44ef13cda24e4532b3dbe1bb67`, then either route/delete the `55` complete algebraic bases or prove a global add-back that includes the literal core in its recovery key.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
