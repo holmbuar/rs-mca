@@ -30,6 +30,55 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - General signed layer-cake identity formalization
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Pinned source producer
+  `experimental/notes/thresholds/general_pruned_signed_bound.md @ 9262f63c`
+  and positive-specialization consumer
+  `experimental/notes/thresholds/charge_preserving_split_decomposition.md @ 9262f63c`;
+  Lean proof
+  `experimental/lean/general_pruned_signed_bound/GeneralPrunedSignedBound.lean @ d6141fe8`,
+  theorem map
+  `experimental/lean/general_pruned_signed_bound/README.md @ d6141fe8`,
+  and focused audit
+  `experimental/notes/thresholds/general_layer_cake_formalization.md @ d6141fe8`;
+  PR #926, proof-payload head `d6141fe8`.
+- **Status:** PROVED
+- **What is being added:** For every integer multiplicity `z`, summing the
+  signed layers at thresholds `1, ..., Wmax` gives
+  `sign(z) * min(|z|, Wmax)` and hence reconstructs `z` whenever
+  `|z| <= Wmax`.  The package proves that each layer is exactly the source's
+  positive-indicator minus negative-indicator mask, takes values in
+  `{-1, 0, 1}`, and creates no support outside the original mask.  It also
+  proves the exact truncated nonnegative layer-mass formula and its bounded
+  total-mass corollary.  The source's exact maximum is generalized explicitly
+  to any common upper bound; excess layers are zero.
+- **How it is useful:** Source producer PR #729 (head `cb9993b2`, integrated at
+  `9262f63c`) states the general layer-cake step but previously supplied only
+  concrete Lean examples.  Positive-specialization consumer PR #732 (head
+  `c8cd4f46`, integrated at `9262f63c`) reuses this combinatorial split.  PR
+  #926 supplies the missing general theorem without rewiring the consumer's
+  duplicate local definitions.  This packet does not prove the Fourier
+  projection bound, signed-clause discharge, charge compatibility,
+  positive-rooted decomposition, a subexponential layer count, heavy-fiber
+  semantic emission, a large-moment signed/Sidon estimate, primitive-Q
+  flatness, a profile-envelope comparison, an MCA threshold, or a Proximity
+  Prize claim.
+- **What to do next:** A later package-integration PR may import this canonical
+  API into the charge-preserving split package and replace its definitionally
+  equal local layer functions; keep that separate from this arithmetic proof.
+  Printing axioms for the eight new public theorem declarations reports only
+  `[propext]` or `[propext, Quot.sound]`. CHECK:
+  `cd experimental/lean/general_pruned_signed_bound && lake clean && lake build`
+  -> `Build completed successfully.`;
+  `python3 experimental/scripts/verify_general_pruned_signed_bound.py`
+  -> `RESULT: PASS (193359/193359)`;
+  `python3 experimental/scripts/verify_general_pruned_signed_bound.py --tamper-selftest`
+  -> `TAMPER SELF-TEST: caught 6/6 mutations` and `RESULT: PASS`;
+  `rg -n '^[[:space:]]*(sorry|admit|axiom)\b|sorryAx' experimental/lean/general_pruned_signed_bound/GeneralPrunedSignedBound.lean`
+  -> no declaration-level matches.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
