@@ -30,6 +30,65 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Heavy-fiber saturation bridge formalization
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Pinned source statement
+  `experimental/notes/thresholds/heavy_fiber_planted_emission.md @ 68ada9ea`,
+  Lean proof and counterexample
+  `experimental/lean/heavy_fiber_planted_emission/HeavyFiberPlantedEmission.lean @ 68ada9ea`,
+  theorem map
+  `experimental/lean/heavy_fiber_planted_emission/README.md @ 68ada9ea`,
+  and focused audit
+  `experimental/notes/thresholds/heavy_fiber_saturation_bridge_formalization.md @ 68ada9ea`;
+  PR #941, proof-payload head `68ada9ea`.  Unchanged replay dependencies:
+  source verifier
+  `experimental/scripts/verify_heavy_fiber_planted_emission.py @ c35a6da3`
+  and frozen certificate
+  `experimental/data/certificates/heavy-fiber-planted-emission/heavy_fiber_planted_emission.json @ 9262f63c`.
+- **Status:** PROVED
+- **What is being added:** The Lean package records a concrete counterexample
+  to the former unrestricted arbitrary-list saturation target and proves the
+  exact replacement: a family below an explicit max-intersection bound and
+  above an explicitly supplied non-saturating ceiling must attain the bound.
+  The source note and theorem map now expose the missing ceiling hypothesis and
+  distinguish finite arithmetic anchors from unformalized fiber semantics.
+- **How it is useful:** Source packet #735 (head `f94d8706`) states the
+  saturation-forcing theorem.  Prefix-fiber producer #717 (head `ae5f1f1e`)
+  supplies its constant-weight/max-intersection interface; the pointwise
+  consequence required from the separate classical Johnson ceiling is exactly
+  the new Lean hypothesis.  Structured grammar owner/consumer #716 (head
+  `bc6280c5`) may reuse PR #941 (head `68ada9ea`) only after supplying that
+  ceiling.  The other source-packet
+  interlocks -- planted seed
+  #732 (head `c8cd4f46`), planted census #725 (head `4bffb1da`), signed
+  complement #729 (head `cb9993b2`), and full-chart cut #739 (head `1e8b9871`)
+  -- are unchanged.  This does not encode distinct `a`-subsets, `Fin n`,
+  `Nodup`, or constant weight; prove that `cwBound` is valid or sharp; prove the
+  full source Theorem 1 without the explicit ceiling; lift the finite arithmetic
+  anchors to the THM 2a or THM 3 structural families; promote the finite
+  verifier census to an asymptotic or Lean theorem; prove exhaustive semantic
+  emission, a general sixth-clause refutation, a ledger-wide subexponential
+  profile census, a ray compiler or payment, or the semantic-or-signed
+  dichotomy; supply image-scale MI/MA, direct Sidon payment, a residual compiler,
+  complete profile-envelope comparison, or lower reserve; or prove an MCA
+  threshold, deployed-row closure, branch closure, charge, or Proximity Prize
+  claim.
+- **What to do next:** Formalize a canonical finite constant-weight-code model
+  and its Johnson ceiling, then instantiate
+  `saturation_forcing_of_nonsaturating_ceiling`; retain the counterexample as a
+  guard against restoring the arbitrary-list interface.  Printing axioms for
+  `old_saturation_target_counterexample` reports only `[Lean.ofReduceBool]`,
+  while `saturation_forcing_of_nonsaturating_ceiling` reports no axioms. CHECK:
+  `cd experimental/lean/heavy_fiber_planted_emission && lake clean && lake build`
+  -> `Build completed successfully.`;
+  `python3 experimental/scripts/verify_heavy_fiber_planted_emission.py --check`
+  -> `RESULT: PASS (138/138)`;
+  `python3 experimental/scripts/verify_heavy_fiber_planted_emission.py --tamper-selftest`
+  -> `tamper-selftest: caught 4/4` and `RESULT: PASS (138/138)`;
+  `rg -n '^[[:space:]]*(sorry|admit|axiom|opaque)\b|sorryAx' experimental/lean/heavy_fiber_planted_emission/HeavyFiberPlantedEmission.lean`
+  -> no declaration-level matches.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
