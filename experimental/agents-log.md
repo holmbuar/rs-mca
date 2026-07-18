@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Lower-reserve deep-remainder certificate-freshness audit
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/audits/lower_reserve_deep_remainder_certificate_freshness_audit.md` @ blob `556d9f61`; `experimental/notes/thresholds/lower_reserve_deep_remainder_atlas.md` @ blob `7dda845f`; `experimental/scripts/verify_lower_reserve_deep_remainder_certificate_freshness_audit.py` @ blob `c64b7d3a`; and `experimental/scripts/verify_lower_reserve_deep_remainder.py` @ blob `a2019520`.
+- **Status:** COUNTEREXAMPLE
+- **What is being added:** The `COUNTEREXAMPLE` is to the integrated certificate-freshness and source-to-verifier claim, not to the corrected deep-remainder theorem: integration `06b2a6fb` (= PR #869 head `0c8023fa`) advertised default/`--check` as a verifier mode in `experimental/scripts/verify_lower_reserve_deep_remainder.py:49-54` @ blob `6f67dc49` and advertised its deterministic certificate in `experimental/notes/thresholds/lower_reserve_deep_remainder_atlas.md:53-60` @ blob `44b6aa91`, but the dispatcher at `experimental/scripts/verify_lower_reserve_deep_remainder.py:608-625` @ blob `6f67dc49` never read `experimental/data/certificates/lower-reserve-deep-remainder/deep_remainder_atlas.json` @ blob `75270ced` and instead overwrote it before returning `RESULT: PASS 44/44`. Changing the frozen value `guaranteed_list_strict_deep_F169` from `6` to `7` therefore passed and erased the tamper; the repaired checker is byte-exact/read-only, with mutation confined to explicit `--write`, as documented in `experimental/notes/audits/lower_reserve_deep_remainder_certificate_freshness_audit.md:9-42` @ blob `556d9f61`.
+- **How it is useful:** Triage can use the repaired certificate contract without disturbing the clean mathematical scope: PR #693 head `5de8e86a` supplies O5c/O7 coverage, PR #699 head `1909e737` supplies QR4 payment and the original wall, PR #712 head `222c1e14` is the retired false theorem, PR #714 head `1df8a072` supplies the corrected label-factored theorem and exact list `6 > 1` witness, PR #727 head `c6d09aed` and PR #736 head `97e2713f` are consumers, and open PR #882 head `af213091` is adjacent but does not touch this repair. PR #869 head `0c8023fa` has no Lean package; O7, general natural-scale payment, deployed thresholds, and paper promotion remain open.
+- **What to do next:** Review this packet before using PR #869 head `0c8023fa` as certificate evidence. Run `python3 experimental/scripts/verify_lower_reserve_deep_remainder_certificate_freshness_audit.py` and `python3 -O experimental/scripts/verify_lower_reserve_deep_remainder_certificate_freshness_audit.py` (script @ blob `c64b7d3a`) -> `RESULT: PASS (12/12)` and `STATUS: COUNTEREXAMPLE`; run `python3 experimental/scripts/verify_lower_reserve_deep_remainder.py --check` and its `python3 -O` form (script @ blob `a2019520`) -> `certificate check: PASS (.../deep_remainder_atlas.json)` and `RESULT: PASS 44/44`; run both modes with `--tamper-selftest` -> `RESULT: PASS 10/10`. Explicit `--write` is the only permitted regeneration path.
+
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
