@@ -6,9 +6,10 @@ charge-preserving semantic-or-signed decomposition -- the object left open after
 the fiber-indexed route was cut on the Sidon-paired class (#739) and per-fiber
 emission was closed (#735).  Reframed by the paper's `rem` PO5 (the correct
 Fourier denominator is the realized-image group `|G_lambda|`, which "does not
-assert that the realized image fills the affine group") and by the profile-
-envelope comparison packet (PR #759, OPEN: identity image can collapse a factor
-`p` at realized scale).
+assert that the realized image fills the affine group") and by the integrated
+profile-envelope comparison packet (PR #759, same `2633895a` wave): its exact
+finite full-codomain deficit for the identity image is motivational only, not an
+asymptotic `(FI)` conclusion; this module's proofs are independent of #759.
 
 Note:     `experimental/notes/thresholds/nonfiber_decomposition_realized_scale.md`.
 Verifier: `experimental/scripts/verify_nonfiber_decomposition_realized_scale.py`
