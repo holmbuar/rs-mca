@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Weighted moment-matrix rank formalization
+
+- **Agent/model:** Codex.
+- **Files added or changed:**
+  `experimental/lean/powersum_rigidity/PowersumRigidity/WeightedMomentRank.lean`,
+  `experimental/lean/powersum_rigidity/PowersumRigidity.lean`,
+  `experimental/lean/powersum_rigidity/README.md`,
+  `experimental/notes/m1/m1_kb_branch2_weighted_moment_rank_formalization.md`,
+  and `experimental/agents-log.md`.
+- **Status:** PROVED
+- **What is being added:** A Lean proof that the weighted moment matrix
+  `M[a,b] = ∑ x∈E, w(x)x^(a+b)` has rank `min(t,|E|)` when the nodes are
+  distinct, the weights are nonzero, and `|E| ≤ m`.  The source's
+  `rank M < t ↔ |E| ≤ t-1` consequence is repaired explicitly at `t=0`.
+- **How it is useful:** This kernel formalizes the Vandermonde--diagonal--
+  Vandermonde factorization used by the M1 branch-2 rank/deep-owner packet,
+  while remaining separate from bad-incidence, owner, and Route-D adapters.
+- **What to do next:** Reuse the proved rank-to-support bridge only after an
+  upstream consumer supplies the actual distinct error support and nonzero
+  weights; separately formalize the witness lift or owner interface without
+  claiming this theorem constructs the missing RIM-to-owner adapter.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
