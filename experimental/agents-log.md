@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Route-D marked-contact fold/profile no-go
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/notes/thresholds/route_d_marked_contact_fold_profile_no_go_v1.md`, `experimental/scripts/verify_route_d_marked_contact_fold_profile_no_go_v1.py`, the standalone Lean package `experimental/lean/route_d_marked_contact_fold_profile_no_go_v1/`, and this log entry.
+- **STATUS:** COUNTEREXAMPLE
+- **What is being added:** An exact contact/off-core decomposition for same-cell Route-D Rule-2 defects, a proof that dense common-core folding cancels back to the original marked defect, and an at-most-`r` nonempty contact-profile compiler with an explicit hypothetical fixed-key `lambda`-family owner bridge. The packet names the missing typed obligation `MARKED_CONTACT_INHOMOGENEOUS_OFFCORE_OWNER` and reconstructs the 245-occurrence `F_31` contact corpus.
+- **How it is useful:** It preserves the canonical common core and generated field while separating the only legal all-maximal-minors rank-drop route from full-rank contact families. It shows exactly why the profile factor `67472` reaches the target arithmetic only if a new fixed-key `lambda`-family `p`-cap plus a separate carried-key add-back is proved.
+- **What to do next:** Construct or refute a typed post-first-match fixed-key `lambda`-family owner/injection and the separate carried-key add-back; route only actual-incidence all-minors-vanishing families to `DEEP_MCA_RANK_DROP` and leave nonzero-pivot multiplicities explicit.
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
