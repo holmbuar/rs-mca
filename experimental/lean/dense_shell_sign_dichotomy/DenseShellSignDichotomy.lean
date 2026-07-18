@@ -1,8 +1,8 @@
 /-!
 # The dense-shell sign dichotomy: decidable arithmetic shadow
 
-Maps to **hard input 2**: twelfth packet of the arc.  The note proves
-`sign(hatf) = (-1)^B` on the whole dense shell via the alternating-cone
+The companion note proves `sign(hatf) = (-1)^B` on the whole dense shell via
+the alternating-cone
 walk: outer roots preserve the cone entrywise, and each isolated inner
 root composes with its EXACTLY-coupled predecessor into a nonnegative
 2-step matrix.  The trig content (arcsine means, sine drifts) lives in
@@ -15,8 +15,9 @@ skeleton (stdlib-only, no mathlib, no `sorry`):
 * the parity impossibility `6 n = 3^k` (strictness of `delta < 1/12`);
 * the alternating-word closed form `4 altN m = 1 -+ P3 m` by parity
   (the exact geometric approach to the T3 fixed point `u = +-1/4`);
-* a 101-point census of the S-expansion `x(3-4x)^2 = 16x^3-24x^2+9x`
-  (degree 3, so >= 5 points pin it; the meta-step is in the note);
+* the exact all-integer S-expansion
+  `x(3-4x)^2 = 16x^3-24x^2+9x`, plus the former 101-point census as a
+  regression check;
 * a `native_decide` census at B = 8: every inner state in every dense
   word is isolated, never first, and satisfies the coupling identity.
 
@@ -101,9 +102,30 @@ theorem alt_closed (m : Nat) :
         rw [hs, hp]
         omega
 
-/-- S-expansion census: `x (3 - 4x)^2 = 16x^3 - 24x^2 + 9x` on
-    `x in [-50, 50]` (degree 3: five points already pin the identity;
-    the meta-step is recorded in the note). -/
+/-- Exact S-expansion over every integer.  The ambient type is intentionally
+    `Int`: the analogous surface syntax over `Nat` is false because subtraction
+    truncates. -/
+theorem s_expand (x : Int) :
+    x * (3 - 4 * x) * (3 - 4 * x) =
+      16 * x * x * x - 24 * x * x + 9 * x := by
+  have h44 : (4 * x) * (4 * x) = 16 * (x * x) := by
+    calc
+      (4 * x) * (4 * x) = (4 * 4) * (x * x) := by ac_rfl
+      _ = 16 * (x * x) := by rfl
+  have hsq :
+      (3 - 4 * x) * (3 - 4 * x) =
+        9 - 24 * x + 16 * (x * x) := by
+    rw [Int.sub_mul, Int.mul_sub, Int.mul_sub, h44]
+    omega
+  have h9 : x * 9 = 9 * x := Int.mul_comm x 9
+  have h24 : x * (24 * x) = 24 * x * x := by ac_rfl
+  have h16 : x * (16 * (x * x)) = 16 * x * x * x := by ac_rfl
+  rw [Int.mul_assoc, hsq, Int.mul_add, Int.mul_sub, h9, h24, h16]
+  omega
+
+/-- Finite regression for the S-expansion on `x in [-50, 50]`.  The universal
+    theorem above supplies the mathematical statement; this Boolean census is
+    retained unchanged for API and source compatibility. -/
 def sExpandOK : Bool :=
   (List.range 101).all fun i =>
     let x : Int := Int.ofNat i - 50
