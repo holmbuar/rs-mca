@@ -30,6 +30,77 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - (LAM-BOX) discharged-conditional (LAM-INV gate)
+
+- **Agent/model:** Claude Fable 5 (PI, derivation lane DERIV_LAMBOX.md + lab lane
+  LAB_LAMBOX.md) + Sonnet builder.
+- **Files added or changed:**
+  `experimental/scripts/verify_dense_shell_prop_tail_reduction.py` (new core gate
+  `gate_lam_inv`/LAM-INV, full mode only, report index 9; new constants `NG_LAM=3841`,
+  `LIP_S_LAM_F=6/5`, `LIP_L_LAM_F=13/5`, `GMAX_LAM_F=1/200`, `CPRIME_LAM_F=3/500`;
+  `LAP_LO_F` widened `-116/100 -> -117/100` (R1 mitigation (b), `LAP_LO_F_ORIG` kept for
+  the stress tamper); 3 new tampers `laminv-grid`/`laminv-lip`/`laminv-floor`;
+  docstring/STATUS/gate-count updates throughout);
+  `experimental/notes/thresholds/dense_shell_prop_tail_reduction.md` (Section 8.4
+  LAM-BOX entry rewritten to DISCHARGED-conditional: two identities + proofs, the
+  Birkhoff enclosure method, the proved-intervals table, the provenance table, the R1
+  risk register with both mitigations, honest labels; new (C'-CAP) clause entry; every
+  "three computed clauses" site updated to two-plus-(C'-CAP)-plus-two-discharged;
+  Section 11 verifier map gets a LAM-INV entry and an updated MAG-BOX entry; tamper
+  suite count 17 -> 20);
+  `experimental/data/certificates/dense-shell-prop-tail-reduction/dense_shell_prop_tail_reduction.json`
+  (new `discharged_clauses.LAM_BOX` block with identities/constants/gate results/proved
+  intervals/risk register; `computed_clauses.LAM_BOX` replaced by
+  `computed_clauses.C_PRIME_CAP`; `constants.f_box_certified`/`equilibrium_ceiling`
+  updated to the post-widening re-run values; `gates`/`lean`/`discharge_note` updated);
+  `experimental/lean/prop_tail_reduction/PropTailReduction.lean` (new Section 8:
+  `lamInvLamLo/Hi`, `lamInvLamPLo/Hi`, `lamInvLamMLo/Hi`, `lamBoxLam*` box endpoints,
+  `lamBoxLamPLoOrig`, four `decide` theorems — three containment, one widened-floor
+  consistency — `Int` numerators, house convention extended to signed quantities).
+  Changed: `experimental/agents-log.md` (this entry).
+- **Status:** CONDITIONAL (certified-census discharge; clause count reduced: three open
+  computed clauses -> two open (`FOLD`, `FLOOR-PERSIST`) plus one monitored constant
+  (`C'-CAP`); `(LAM-BOX)` moves from open to DISCHARGED-conditional, joining `(SIB-BAND)`
+  which was already discharged).
+- **What is being added:** the (LAM-BOX) computed clause — the sibling-proportionality
+  magnitude box `[lam,Lambda^+,Lambda^-]` both load-bearing gates box-max over, previously
+  a measured+padded range monitored by gate MAG-BOX but not proved for all `n` — is
+  DISCHARGED-conditional by a new core gate LAM-INV. Two identities underlie it: (I1) the
+  exact windowed mass recursion `sum_{i<W}(K_d*c)=a(t)M_w-(1/4)(c_0-c_1)-(1/4)(c_{W-1}-c_W)`
+  (PROVED, verified exactly in Fraction arithmetic here, residual `0`, and independently
+  by the lab lane); (I2) `Lambda^pm_mass=(log S^18)'(t_pm)` (PROVED, elementary algebra).
+  The pure `a`-operator is Birkhoff-contracting to a fixed RAY (not a fixed point —
+  `a(t+)+a(t-) in [1.25,1.47]`, strictly `>1`); gate LAM-INV represents the mass/Lambda
+  fields on a fine grid (`NG=3841`), pre-converges a candidate in float, then CERTIFIES
+  it with one rigorous exact-Fraction forward pass per field (`T(S)/sc_exact subset S`,
+  `sc_exact` derived from that same pass), comparison tolerance `GMAX`/`CPRIME` applied
+  only at the final comparison (additive field-padding was tried and found
+  counterproductive — the `sc_exact` self-reference amplifies it the wrong way). Result:
+  `lam in [0.767193,0.929926]`, `Lambda^+ in [-1.159560,-0.868700]`,
+  `Lambda^- in [-0.650454,-0.360426]`, all inside the shipped boxes. `gamma<=GMAX` is
+  PROVED from the F3 floor box alone (exact bound `0.004318<=0.005`); `C'<=CPRIME` is
+  MONITORED (measured impact `0.0013`) — the one new named clause, `(C'-CAP)`. R1 (the
+  `Lambda^+` floor was RAZOR-thin, `+0.0004` headroom, and fails at `2x` the measured
+  `C'` bound): mitigated by widening the floor `-1.16 -> -1.17`; every consumer re-run —
+  V15-IA UNAFFECTED (`theta_band` bit-identical `0.6020244`, structurally independent of
+  `Lambda^+/-`), V17-IA margin `11.0% -> 10.9%`, SIB-CERT margin unchanged `+7.4%` to
+  displayed precision, MAG-BOX headroom `0.0172 -> 0.0271` (mass variant).
+- **How it is useful:** upgrades the (LAM-BOX) clause from "six silent measured
+  literals" to "invariant intervals on the same conditional basis as the load-bearing
+  censuses, plus one generous monitored cap" — tightening the (PROP-TAIL) discharge
+  that #885's INV-TAIL closure and #880's `|K|=1` dense-shell class-sum dichotomy rest
+  on. Full verifier run: RESULT 10/10 PASS (was 9/9; LAM-INV is report index 9, full
+  mode only), 405.7s. All three new tampers (`laminv-grid`, `laminv-lip`,
+  `laminv-floor`) flip only LAM-INV to FAIL, confirmed isolated (full tamper-selftest,
+  20 tampers); `sibcert-band` re-checked for no regression. `--quick`/`--fallback` print
+  an informational LAM-INV-SKIPPED line (NG=3841 field census is full-mode-only, like
+  SIB-CERT).
+- **What to do next:** a human/later-agent check of the Birkhoff ray-normalization
+  argument (`sc_exact`) and the floor-box `gamma<=GMAX` derivation (Section 8.4 of the
+  note); R1 mitigation (a) — the exact floor-box bound on `C'` — would discharge
+  `(C'-CAP)` and close the last conditional content in this clause; `(FOLD)` and
+  `(FLOOR-PERSIST)` remain open, unaffected by this round.
+
 ### 2026-07-18 - (SIB-BAND) discharged at deep anchor (SIB-CERT gate)
 
 - **Agent/model:** Claude Fable 5 (PI) + Sonnet builder.
@@ -46,7 +117,7 @@ Keep entries concise and link to the relevant files.
   `experimental/lean/prop_tail_reduction/PropTailReduction.lean` (gateRows extended to
   `n=800`; SibCert `decide` theorem, see What/Next). Changed:
   `experimental/agents-log.md` (this entry).
-- **Status:** CONDITIONAL (certified-census discharge; clause count reduced 4 -> 3).
+- **Status:** CONDITIONAL.
 - **What is being added:** the (SIB-BAND) computed clause — whether the load-bearing
   gates' forced-proportional surrogate `c^+=lam*c^-` (certified at the shallow anchor
   `J0*=500`) actually covers the real, non-proportional cascade — is DISCHARGED by a new
@@ -88,8 +159,7 @@ Keep entries concise and link to the relevant files.
   `experimental/data/certificates/dense-shell-prop-tail-reduction/dense_shell_prop_tail_reduction.json`,
   `experimental/lean/prop_tail_reduction/` (stdlib Lean, `decide`-only, builds,
   no sorry).  Changed: `experimental/agents-log.md` (this entry).
-- **Status:** CONDITIONAL (certified-census discharge modulo enumerated computed
-  clauses).
+- **Status:** CONDITIONAL.
 - **What is being added:** stacked on #885's INV-TAIL closure, a discharge of its
   single residual scalar (PROP-TAIL): an exact reduction lemma removing the
   two-branch coupling from the target, an exact closed-form spectral gap

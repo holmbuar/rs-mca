@@ -372,4 +372,80 @@ narrower `W17`), which cannot increase the certified sup. -/
 theorem sibcert_clears :
     sibcertFHi * 10000000 <= (1000000000 - sibcertThetaHi) * tauStarNum := by decide
 
+/- ------------------------------------------------------------------ -/
+/- 8. LAM-INV -- proved invariant-interval endpoints (endpoint arithmetic only).  -/
+/-
+   Gate LAM-INV (`verify_dense_shell_prop_tail_reduction.py`) proves `lam`/`Lambda^+`/
+   `Lambda^-` are INVARIANT INTERVALS (`DERIV_LAMBOX.md`: an exact windowed-mass-
+   recursion identity + a Birkhoff mass-field enclosure + a coupled Lambda-field
+   enclosure), discharging the (LAM-BOX) computed clause CONDITIONAL on the floor box,
+   the finite base-case census, an a-posteriori Lipschitz self-check, and one monitored
+   constant (the (C'-CAP) clause). This section kernel-checks ONLY the resulting
+   rational CONTAINMENT facts -- the proved-interval endpoints, outward-rounded (floor
+   the lower endpoint, ceil the upper, so the checked box is a superset of the true
+   proved interval), sit inside the shipped (WIDENED this revision) magnitude box -- at
+   printed precision, exactly as items 5/6/7 above check transcribed tables, NOT a
+   re-derivation of the Birkhoff mass-field / coupled Lambda-field one-pass invariance
+   computation itself, the `sc_exact` ray-normalization, or the a-posteriori Lipschitz
+   self-checks (all stay informal, matching the analytic content behind
+   V15-IA/V17-IA/SIB-CERT). Numerators are `Int`, not `Nat` (the house convention
+   elsewhere in this file) -- `Lambda^+`/`Lambda^-` are genuinely negative, unlike every
+   quantity items 5-7 transcribe -- over the fixed denominator `lamInvDen`.
+-/
+
+/-- Common denominator for this section's transcribed literals. -/
+def lamInvDen : Int := 1000000
+
+/-- Proved `lam` interval endpoints (outward-rounded: floor the lower bound, ceil the
+upper -- the checked interval is a SUPERSET of gate LAM-INV's own tighter exact-Fraction
+result, `[0.767193..., 0.929926...]`), numerators over `lamInvDen`. -/
+def lamInvLamLo : Int := 767193
+def lamInvLamHi : Int := 929927
+
+/-- Proved `Lambda^+` interval endpoints (outward-rounded), numerators over `lamInvDen`
+(gate LAM-INV's exact result: `[-1.159560..., -0.868700...]`). -/
+def lamInvLamPLo : Int := -1159560
+def lamInvLamPHi : Int := -868700
+
+/-- Proved `Lambda^-` interval endpoints (outward-rounded), numerators over `lamInvDen`
+(gate LAM-INV's exact result: `[-0.650454..., -0.360426...]`). -/
+def lamInvLamMLo : Int := -650454
+def lamInvLamMHi : Int := -360426
+
+/-- The shipped magnitude box endpoints, numerators over `lamInvDen`: `lam in
+[0.72,0.95]`, `Lambda^+ in [-1.17,-0.82]` (WIDENED this revision `-1.16 -> -1.17`, R1
+mitigation (b)), `Lambda^- in [-0.66,-0.35]`. -/
+def lamBoxLamLo : Int := 720000
+def lamBoxLamHi : Int := 950000
+def lamBoxLamPLo : Int := -1170000
+def lamBoxLamPHi : Int := -820000
+def lamBoxLamMLo : Int := -660000
+def lamBoxLamMHi : Int := -350000
+
+/-- The PRE-widening `Lambda^+` floor (`-1.16`), kept for the widened-floor-consistency
+check below (not used by any other theorem in this file -- MAG-BOX/V17-IA/SIB-CERT all
+consume the WIDENED `lamBoxLamPLo`/`LAP_LO_F` directly). -/
+def lamBoxLamPLoOrig : Int := -1160000
+
+/-- **Containment: the proved `lam` interval sits inside the shipped box.** -/
+theorem lamInv_lam_inside :
+    lamBoxLamLo <= lamInvLamLo ∧ lamInvLamHi <= lamBoxLamHi := by decide
+
+/-- **Containment: the proved `Lambda^+` interval sits inside the WIDENED shipped box.**
+-/
+theorem lamInv_lamP_inside :
+    lamBoxLamPLo <= lamInvLamPLo ∧ lamInvLamPHi <= lamBoxLamPHi := by decide
+
+/-- **Containment: the proved `Lambda^-` interval sits inside the shipped box.** -/
+theorem lamInv_lamM_inside :
+    lamBoxLamMLo <= lamInvLamMLo ∧ lamInvLamMHi <= lamBoxLamMHi := by decide
+
+/-- **Widened-floor consistency.** The widened floor `-1.17` is a valid (more
+permissive, i.e. numerically smaller) lower bound relative to the pre-widening floor
+`-1.16`, AND the pre-widening floor itself sits inside the widened box's `Lambda^+`
+range -- confirming the widening is a genuine, conservative RELAXATION of the same box
+(the new box is a strict superset containing the old floor), not an unrelated shift. -/
+theorem lamInv_floor_widened_consistent :
+    lamBoxLamPLo <= lamBoxLamPLoOrig ∧ lamBoxLamPLoOrig <= lamBoxLamPHi := by decide
+
 end PropTail

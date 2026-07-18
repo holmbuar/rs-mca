@@ -1,7 +1,7 @@
 {
  "packet": "dense_shell_prop_tail_reduction",
  "date": "2026-07-18",
- "status": "CONDITIONAL -- certified-census discharge MODULO three computed clauses (LAM-BOX, FOLD, FLOOR-PERSIST). The fourth, (SIB-BAND), is DISCHARGED at a deep anchor by gate SIB-CERT (geometric-center certified census, GIVEN (LAM-BOX) alone -- see discharged_clauses.SIB_BAND below). Composed equilibrium chain PROVED (sufficiency); load-bearing gates V15-IA/V17-IA are exact-Fraction interval-arithmetic censuses of the FORCED-PROPORTIONAL surrogate at the shallow anchor (J0*=500, f*=99/100); gate SIB-CERT separately certifies the REAL non-proportional cascade at the deep anchor (J0_SIB=800, PAD_SIB=999/1000). ROUND 2 (PI review, same day): corrected a boundary-slot gap -- the wobble censuses' i=16 row reads x=w_17, one index past the IH's i<17 window; w_17 now gets its own (LAM-BOX)-class deep box, monitored by MAG-BOX (see discharged_clauses.SIB_BAND.boundary_slot). Clause count and STATUS unaffected; the fix only tightens SIB-CERT's margin.",
+ "status": "CONDITIONAL -- certified-census discharge MODULO two computed clauses (FOLD, FLOOR-PERSIST) plus one monitored constant (C'-CAP). (LAM-BOX) is DISCHARGED-conditional by gate LAM-INV (proved invariant intervals for lam/Lambda^+/Lambda^-, full mode only -- see discharged_clauses.LAM_BOX below); (SIB-BAND) is DISCHARGED at a deep anchor by gate SIB-CERT (geometric-center certified census, GIVEN (LAM-BOX) -- see discharged_clauses.SIB_BAND below). Composed equilibrium chain PROVED (sufficiency); load-bearing gates V15-IA/V17-IA are exact-Fraction interval-arithmetic censuses of the FORCED-PROPORTIONAL surrogate at the shallow anchor (J0*=500, f*=99/100); gate SIB-CERT separately certifies the REAL non-proportional cascade at the deep anchor (J0_SIB=800, PAD_SIB=999/1000). ROUND 2 (PI review, same day as SIB-CERT): corrected a boundary-slot gap -- the wobble censuses' i=16 row reads x=w_17, one index past the IH's i<17 window; w_17 now gets its own (LAM-BOX)-class deep box, monitored by MAG-BOX (see discharged_clauses.SIB_BAND.boundary_slot). ROUND 3 (this revision, LAM-INV): (LAM-BOX) upgraded from measured+padded (gate MAG-BOX) to PROVED invariant intervals (gate LAM-INV); the Lambda^+ floor is WIDENED -1.16 -> -1.17 (R1 mitigation (b)); every consumer census re-run over the wider box (V15-IA unaffected -- theta_band does not depend on Lambda^+/-, confirmed bit-identical; V17-IA margin 11.0% -> 10.9%; SIB-CERT margin unchanged +7.4% to displayed precision). Clause count: three open -> two open (FOLD, FLOOR-PERSIST) plus one monitored constant (C'-CAP), net one clause fewer.",
  "predecessor": {
   "packet": "dense_shell_inv_tail_closure",
   "pr": "#885",
@@ -9,7 +9,7 @@
   "stacked_on": "a575019",
   "note_path": "experimental/notes/thresholds/dense_shell_inv_tail_closure.md"
  },
- "claim": "(PROP-TAIL) (#885's single residual scalar: rho_prop@i<17(n) <= 1.02560749 for all n) is discharged as a certified-census theorem MODULO the computed clauses below, via the deep-base equilibrium chain: an exact reduction lemma + an exact spectral gap + a certified one-step recursion + a joint induction, closed by the R-a route (deep-base constant forcing) at the shipped anchor (J0*, f*, theta*) = (500, 99/100, theta_band). theta_band is gate V15-IA's certified band-uniform seminorm bound over the certified LC ratio box (lam-minced enclosure); F_box is gate V17-IA's exact-Fraction minced-IA forcing census. BOTH certify the forced-proportional surrogate c^+ = lam*c^- at this shallow anchor -- the real non-proportional cascade is covered by gate SIB-CERT's geometric-center wobble census at a deep anchor (J0_SIB=800, PAD_SIB=999/1000), which DISCHARGES the (SIB-BAND) clause given (LAM-BOX) alone (see discharged_clauses.SIB_BAND). The arithmetic fact rho_prop@i<17(n) <= 1.02560749 is supported with margin by every gate.",
+ "claim": "(PROP-TAIL) (#885's single residual scalar: rho_prop@i<17(n) <= 1.02560749 for all n) is discharged as a certified-census theorem MODULO the computed clauses below, via the deep-base equilibrium chain: an exact reduction lemma + an exact spectral gap + a certified one-step recursion + a joint induction, closed by the R-a route (deep-base constant forcing) at the shipped anchor (J0*, f*, theta*) = (500, 99/100, theta_band). theta_band is gate V15-IA's certified band-uniform seminorm bound over the certified LC ratio box (lam-minced enclosure); F_box is gate V17-IA's exact-Fraction minced-IA forcing census. BOTH certify the forced-proportional surrogate c^+ = lam*c^- at this shallow anchor -- the real non-proportional cascade is covered by gate SIB-CERT's geometric-center wobble census at a deep anchor (J0_SIB=800, PAD_SIB=999/1000), which DISCHARGES the (SIB-BAND) clause given (LAM-BOX) (see discharged_clauses.SIB_BAND). The magnitude box [lam,Lambda^+,Lambda^-] both V15-IA/V17-IA box-max over is itself now PROVED as an invariant-interval enclosure by gate LAM-INV (an exact windowed-mass-recursion identity + a Birkhoff mass-field enclosure + a coupled Lambda-field enclosure, DERIV_LAMBOX.md), DISCHARGING the (LAM-BOX) clause conditional on the floor box, the finite base-case census, an a-posteriori Lipschitz self-check, and one monitored constant (C'-CAP) (see discharged_clauses.LAM_BOX). The arithmetic fact rho_prop@i<17(n) <= 1.02560749 is supported with margin by every gate.",
  "status_word": "CONDITIONAL",
  "headline": "the discharge holds as a certified-census theorem modulo the enumerated computed clauses",
  "discharge_chain_parametric": [
@@ -23,7 +23,8 @@
   "slot closed (for the proportional surrogate): rho_prop@i<17(n) <= TARGET for all n>=500",
   "deep grid (gate V18) covers 48<=n<=800 directly (extended for the SIB-CERT anchor): rho_prop@i<17(n)<=TARGET at every tested level, monotone non-increasing",
   "SIB-CERT (gate, full mode only): the geometric-center wobble census (GEOMETRIC-CENTER LEMMA, no assumption beyond LAM-BOX) re-run at a deep anchor (J0_SIB=800, PAD_SIB=999/1000) CLEARS the equilibrium threshold, covering the REAL non-proportional cascade -- DISCHARGES (SIB-BAND)",
-  "CONDITIONAL on three computed clauses (LAM-BOX, FOLD, FLOOR-PERSIST): given those, #885's INV-TAIL closure and #880's |K|=1 dichotomy become unconditional at every B on this repo's experimental-ledger track"
+  "LAM-INV (gate, full mode only): the magnitude box [lam,Lambda^+,Lambda^-] both V15-IA/V17-IA box-max over is PROVED as an invariant-interval enclosure -- an exact windowed-mass-recursion identity + a Birkhoff mass-field one-pass invariance check (NG=3841, sc_exact ray-normalization, GMAX-tolerance comparison) + a coupled Lambda-field one-pass invariance check (CPRIME-tolerance comparison) + a-posteriori Lipschitz self-checks + a floor-box-PROVED bound gamma<=GMAX -- DISCHARGES (LAM-BOX) conditional on the floor box, the finite base-case census, and one monitored constant (C'-CAP)",
+  "CONDITIONAL on two computed clauses (FOLD, FLOOR-PERSIST) plus one monitored constant (C'-CAP): given those, #885's INV-TAIL closure and #880's |K|=1 dichotomy become unconditional at every B on this repo's experimental-ledger track"
  ],
  "constants": {
   "target_rho_prop": 1.02560749,
@@ -41,10 +42,12 @@
    "locus_pair": "(13, 16)",
    "method": "gate V15-IA: the Lemma A1 tangent seminorm over the certified LC ratio box, folded by 57/50. The sup over the magnitude scalar lam in [0.72,0.95] is enclosed by MINCING lam into LAM_MINCE=24 panels and taking each Moebius-in-lam matrix entry's exact per-panel range (hull of its two panel-endpoint values combined with the (a,b) 2-point extremization), then the seminorm by interval subtraction. NOT an endpoint-sufficiency claim: the seminorm is a sum of |differences of Moebius functions with different denominators|, degree-(2,2) in lam, not Moebius, so it can have an interior-lam maximum; mincing is the rigorous enclosure. A consistency check requires theta_band >= the realized-profile seminorm (a valid upper bound must dominate the realized value).",
    "certifies": "the FORCED-PROPORTIONAL surrogate c^+ = lam*c^- (see sib_band). Lambda-invariant seminorm with Lambda^pm = the WINDOW-MEAN (zero-sum delta requirement).",
-   "outward_slop": "1e-9, plus round_up_frac to a printable Fraction (outward/conservative)"
+   "outward_slop": "1e-9, plus round_up_frac to a printable Fraction (outward/conservative)",
+   "lam_inv_note": "CONFIRMED UNCHANGED after this revision's Lambda^+ floor widening (-1.16 -> -1.17): theta_band depends only on lam and the LC ratio box, never on Lambda^+/Lambda^- (structural, not coincidental -- see the tangent seminorm's Lambda-shift-invariance, Section 3/5 of the note). Re-run value: 0.6020244, bit-identical."
   },
   "f_box_certified": {
-   "value": 0.02687612,
+   "value": 0.02690175,
+   "value_pre_widening": 0.02687612,
    "j0": 500,
    "f_pad": "99/100",
    "method": "gate V17-IA: exact-Fraction, width-2-locality minced interval arithmetic over every index i=0..16's marginal range (not merely the two window endpoints), box-maxed over the sibling-proportionality magnitude parameters (lam, Lambda^+, Lambda^-). Certifies the forced-proportional surrogate.",
@@ -52,18 +55,20 @@
    "locus_t": 0.4999,
    "threshold": 0.03018857,
    "threshold_formula": "(1-theta_band)*tau*, theta_band=0.6020244 (gate V15-IA), tau* the exact-Fraction lower bound; comparison is exact Fraction",
-   "margin_pct": 11.0
+   "margin_pct": 10.9,
+   "margin_pct_pre_widening": 11.0,
+   "widening_note": "re-run after the Lambda^+ floor widening (-1.16 -> -1.17, R1 mitigation (b)): F_box rose 0.02687612 -> 0.02690175 (+0.0000256, <0.1% relative), margin fell 11.0% -> 10.9% (-0.1 percentage point) -- 'well under 1%' as predicted, since only the Lamp box-max corner shifted, not theta_band."
   },
   "equilibrium_ceiling": {
-   "f_box_over_1_minus_theta": 0.06753207,
+   "f_box_over_1_minus_theta": 0.06759647,
    "v17_j0_star": 0.00111699,
-   "max_of_the_two": 0.06753207,
+   "max_of_the_two": 0.06759647,
    "ceiling_le_tau_star": true,
-   "log_rho_prop_bound": 0.02251069,
+   "log_rho_prop_bound": 0.02253216,
    "ln_target": 0.02528511,
-   "exp_of_bound": 1.022766,
+   "exp_of_bound": 1.022788,
    "vs_target": 1.02560749,
-   "reads": "F_box/(1-theta_band)=0.06753207 <= tau*=0.07585533 => sup_{n>=500} V_17(n) <= 0.06753207 => log rho_prop@i<17(n) <= 0.02251069 < ln(TARGET)=0.02528511 => rho_prop@i<17(n) <= exp(0.02251069)=1.022766 < TARGET, for all n>=500 -- for the FORCED-PROPORTIONAL surrogate; extension to the real cascade is the (SIB-BAND) computed clause."
+   "reads": "F_box/(1-theta_band)=0.06759647 <= tau*=0.07585533 => sup_{n>=500} V_17(n) <= 0.06759647 => log rho_prop@i<17(n) <= 0.02253216 < ln(TARGET)=0.02528511 => rho_prop@i<17(n) <= exp(0.02253216)=1.022788 < TARGET, for all n>=500 -- for the FORCED-PROPORTIONAL surrogate; extension to the real cascade is discharged by gate SIB-CERT (see discharged_clauses.SIB_BAND). Post-widening re-run values (previously 0.06753207/0.02251069/1.022766)."
   },
   "theta_tot_plateau_informational": [0.3662, 0.3766],
   "theta_tot_note": "gate V15-GRID (informational): a COMPUTED grid census of the realized dynamics, comfortably inside the certified theta_band -- a robustness cross-check only, not part of the certified chain",
@@ -76,13 +81,13 @@
   "v17_n2_range": [279.578, 284.725]
  },
  "computed_clauses": {
-  "note": "The remaining THREE computed inputs to the certified chain (a fourth, SIB_BAND, is DISCHARGED -- see discharged_clauses below, not here). STATUS=CONDITIONAL: PROVED would require zero of these; LAM-BOX alone precludes it.",
-  "LAM_BOX": {
-   "asserts": "the realized magnitudes lam=sum(c^+)/sum(c^-), Lambda^+/-, and per-entry rho_i=c^+_i/c^-_i lie in the hardcoded boxes lam in [0.72,0.95], Lambda^+ in [-1.16,-0.82], Lambda^- in [-0.66,-0.35] that both load-bearing gates box-max over",
-   "monitor_gate": "MAG-BOX (core) -- checks all realized magnitudes in-box over 6 levels x 41 parents",
-   "evidence": "0 violations; realized lam in [0.7759,0.9190], Lambda^+ in [-1.1429,-0.8883], Lambda^- in [-0.6334,-0.3788], rho_i in [0.7734,0.9259]; worst headroom 0.0172 (Lambda^+ floor, thin ~1.5%)",
-   "upgrade": "a PROVED interval for lam/Lambda^pm from the exact mass recursion + explicit a'(t) bounds",
-   "label": "COMPUTED (measured+pad), monitored not proved"
+  "note": "The remaining TWO computed inputs to the certified chain plus ONE monitored constant (C'-CAP) (two further clauses, LAM_BOX and SIB_BAND, are DISCHARGED -- see discharged_clauses below, not here). STATUS=CONDITIONAL: PROVED would require zero of these.",
+  "C_PRIME_CAP": {
+   "asserts": "C' <= CPRIME = 0.006, where C' is the derivative of the branch-mass correction (1/4)(Delta_0+E_W) that gate LAM-INV's coupled Lambda-field recursion drops as an outward slop (applied both building the candidate field and, isolated, at the final one-pass comparison)",
+   "monitor_gate": "LAM-INV (core, full mode only) -- MONITORED, not proved: a-posteriori comparison of the pure-operator field's Lambda prediction against the real cascade's mass-weighted Lambda (onestep_compose), sampled at the shipped anchor",
+   "evidence": "measured impact 0.0013 against the real cascade (well inside the 0.006 cap); DERIV_LAMBOX.md's own proto4-vs-proto1 comparison independently cites ~0.002",
+   "upgrade": "the exact floor-box bound on C' (R1 mitigation (a) -- see discharged_clauses.LAM_BOX.risk_register) -- the single most promising remaining sub-problem this revision identifies",
+   "label": "COMPUTED/MONITORED (generous cap), the ONE new literal the (LAM-BOX) upgrade introduces"
   },
   "FOLD": {
    "asserts": "the child-window fold spread_{i<18}(L) <= (57/50) spread_{i<17}(L)",
@@ -101,6 +106,36 @@
  },
  "discharged_clauses": {
   "note": "Clauses that WERE computed/open and are now discharged by a deeper certified census. Distinct from computed_clauses above (still open) -- kept separate so 'modulo N clauses' always means N genuinely open items.",
+  "LAM_BOX": {
+   "asserts": "(as before discharge) both load-bearing gates box-max the seminorm/forcing over a fixed magnitude box -- lam in [0.72,0.95], Lambda^+ in [-1.16,-0.82], Lambda^- in [-0.66,-0.35] -- which was a MEASURED+PADDED range (six silent literals), not a proved interval.",
+   "discharged_by": "gate LAM-INV (full mode only): two PROVED identities (I1 the exact windowed mass recursion, I2 the Lambda log-derivative identity) plus a Birkhoff mass-field one-pass invariance check (NG=3841 grid, sc_exact ray-normalization since the pure a-operator grows S by a dominant-eigenvalue-like factor -- Birkhoff-contracting to a RAY not a fixed point -- GMAX-tolerance comparison) plus a coupled Lambda-field one-pass invariance check (CPRIME-tolerance comparison) plus a-posteriori Lipschitz self-checks (sup|Lambda|<=LIP_S, sup|Lambda'|<=LIP_L) plus a floor-box-PROVED bound gamma<=GMAX. Conditional on the existing floor box (F3), the existing finite base-case census (MAG-BOX/V18), the a-posteriori Lipschitz self-check, and one monitored constant (C'-CAP, see computed_clauses.C_PRIME_CAP).",
+   "identities": {
+    "I1_exact_windowed_mass_recursion": "sum_{i<W}(K_d*c)_i = a(t)*M_w(c) - (1/4)(c_0-c_1) - (1/4)(c_{W-1}-c_W), W=OPWIN=17. PROVED (telescoping conv_even's own definition); verified EXACTLY in Fraction arithmetic by gate LAM-INV's own live spot-check (residual=0 over 12 (n,t,branch) points, full-mode run) and independently by the lab lane (LAB_LAMBOX.md Q2, residual=0, 40 checks). E_W reads c_17, one past the operative i<17 window, only via rc_16 in [f_16,1], F3-certified over i<18 -- no new hypothesis.",
+    "I2_lambda_log_derivative": "Lambda^pm_mass = (log S^18)'(t_pm), S^18(s):=sum_{i<18} c_i(G(s)). PROVED (elementary algebraic identity: L_i c_i = c_i' by definition, sum_i L_i c_i = d/dt sum_i c_i); confirmed to 1e-11 by finite-difference cross-check in the derivation lane."
+   },
+   "constants": {"NG": 3841, "LIP_S": "6/5", "LIP_L": "13/5", "GMAX": "1/200", "CPRIME": "3/500", "field_slop": "1/1000000", "iters": 400},
+   "gate_result_full_mode_run": {
+    "mass_invariance_gap_lo": 0.00384, "mass_invariance_gap_hi": 0.00388,
+    "lambda_invariance_gap_lo": 0.00599, "lambda_invariance_gap_hi": 0.00600,
+    "a_posteriori_sup_lambda": 1.1595, "a_posteriori_sup_lambda_prime": 2.4897,
+    "gamma_bound_proved": 0.004318, "gamma_bound_locus_branch_t": 0.1667,
+    "cprime_measured": 0.0013,
+    "note": "all gaps are POSITIVE (PASS): the one-pass invariance checks hold with room (GMAX/CPRIME dominate the between-grid discretization residual, which is 2-3 orders of magnitude smaller -- additive field-padding was tried and found counterproductive, see the verifier's module comment above gate_lam_inv)."
+   },
+   "proved_intervals": {
+    "lam": {"lo": 0.767193, "hi": 0.929926, "box": "[0.72,0.95]", "headroom_lo": 0.047193, "headroom_hi": 0.020074},
+    "lambda_plus": {"lo": -1.159560, "hi": -0.868700, "box": "[-1.17,-0.82] (WIDENED this revision)", "headroom_lo": 0.0104, "headroom_hi": 0.0487, "headroom_lo_pre_widening": 0.00044},
+    "lambda_minus": {"lo": -0.650454, "hi": -0.360426, "box": "[-0.66,-0.35]", "headroom_lo": 0.009546, "headroom_hi": 0.010426}
+   },
+   "risk_register": {
+    "R1": "the load-bearing Lambda^+ floor. At the original box floor -1.16, proved headroom is razor-thin (+0.00044) and FAILS at 2x the measured correction-derivative bound (CPRIME=0.008 -> proved Lambda^+_lo ~-1.1626 < -1.16, confirmed live by tamper laminv-floor).",
+    "mitigation_b_TAKEN": "widen the Lambda^+ floor -1.16 -> -1.17 (0.86% widening). Every consumer re-run: V15-IA UNAFFECTED (theta_band bit-identical, 0.6020244 -- structurally independent of Lambda^+/-); V17-IA margin 11.0% -> 10.9% (-0.1pp); SIB-CERT margin +7.4% -> +7.4% (unchanged to displayed precision); MAG-BOX headroom against Lambda^+_mass 0.0172 -> ~0.0271. Proved headroom against the widened floor: +0.0104, comfortable.",
+    "mitigation_a_OPEN": "the exact floor-box bound on C' = d/ds[(1/4)(Delta_0+E_W)]. Would discharge (C'-CAP) and remove the last conditional content from (LAM-BOX). Measured impact 0.0013-0.002 against the real cascade; not yet derived from the floor box."
+   },
+   "gate": "LAM-INV",
+   "tampers": ["laminv-grid", "laminv-lip", "laminv-floor"],
+   "label": "DISCHARGED-conditional (proved invariant intervals, gate LAM-INV, full mode only), conditional on the floor box + finite base-case census + a-posteriori Lipschitz self-check + one monitored constant (C'-CAP)"
+  },
   "SIB_BAND": {
    "asserts": "(as before discharge) the load-bearing gates V15-IA/V17-IA certify only the forced-proportional surrogate c^+=lam*c^-; the real non-proportional cascade (c^+_i=lam*w_i*c^-_i, per-entry sibling wobble w_i by the IH rho_prop<=R*) is covered by the extension only if the wobble-enlarged census clears.",
    "discharged_by": "gate SIB-CERT: the GEOMETRIC-CENTER LEMMA (lam_gc:=sqrt(min_i rho_i*max_i rho_i) is itself a legal (LAM-BOX) point since both factors are, by (LAM-BOX); w_i:=rho_i/lam_gc then lies in [1/sqrt(R*),sqrt(R*)] by the IH alone, for i<17 -- no assumption beyond (LAM-BOX)) re-run at a deep anchor, where the census clears. round 2 (PI review): the lemma's IH covers i<17 only; the census's single out-of-window slot (i=16 row's x, i.e. w_17) is discharged separately via boundary_slot below, a (LAM-BOX)-class box MAG-BOX monitors on SIB-CERT's own operative domain.",
@@ -167,26 +202,27 @@
  "gates": {
   "count_core": 8,
   "count_informational": 4,
-  "count_core_full_mode": 9,
+  "count_core_full_mode": 10,
   "count_core_quick_or_fallback_mode": 8,
-  "list_core": "F3 FLOORS, MAG-BOX (LAM-BOX monitor), V15-IA THETA-BAND (load-bearing), V16 THETASYMB, V16b WINDOW, V17 FORCING, V17-IA FORCING (load-bearing), V18 VTRACK, SIB-CERT (discharges SIB-BAND -- full mode only, SKIPPED with an informational line under --quick/--fallback)",
-  "list_informational": "V15-GRID THETA (robustness), V15-CERT (grid-sampled cross-ref), V17-INFO (G2 negative control), V19 BRIDGE; plus SIB-BAND (the shallow-anchor wobble exhibit, marked FAIL to keep the historical record visible -- discharged elsewhere by SIB-CERT); plus SIB-CERT-SKIPPED (quick/fallback only)",
-  "result_full": "9/9 PASS, ~340s (build now reaches n=800 for the SIB-CERT anchor)",
-  "default_mode": "full (J0*=500, f*=99/100, PLUS the SIB-CERT deep anchor J0_SIB=800, PAD_SIB=999/1000) -- this IS the ship",
-  "flags": "--quick (dev subset, NOT certified; SIB-CERT skipped), --table (per-level rho/V17 table the Lean package transcribes, now to n=800), --fallback (legacy informational (430,49/50,theta*=1/2 fixed) chain; SIB-CERT skipped), --tamper-selftest",
-  "tampers": 17,
-  "tampers_added": ["magbox-shrink (MAG-BOX: shrink boxes so realized magnitudes leave them)", "theta-ia-sign (V15-IA: flip the census max->min direction; caught by the realized-seminorm floor check; isolated since a lower theta_band only relaxes V17-IA)", "sibcert-sqrt (SIB-CERT: substitute an inward rational bracket on sqrt(R*), tripping the gate's own outwardness self-check before the census runs)", "sibcert-pad (SIB-CERT: swap the deep anchor's pad 999/1000 for the shallower 99/100 -- sounds -12.2% at J0=800, flips to MISS)", "sibcert-band (SIB-CERT: swap the geometric-center half-band for the full [1/R*,R*] band -- cannot clear at any depth, flips to MISS)", "w17-shrink (round 2, MAG-BOX: shrink the boundary-slot box W17 to a tiny interval strictly below the realized w_17 range on W17_GRID -- flips MAG-BOX, not SIB-CERT, since the boundary slot's hypothesis is monitored by MAG-BOX)"]
+  "list_core": "F3 FLOORS, MAG-BOX (LAM-BOX empirical cross-check), V15-IA THETA-BAND (load-bearing), V16 THETASYMB, V16b WINDOW, V17 FORCING, V17-IA FORCING (load-bearing), V18 VTRACK, SIB-CERT (discharges SIB-BAND -- full mode only), LAM-INV (discharges LAM-BOX -- full mode only). SIB-CERT and LAM-INV are both SKIPPED with an informational line under --quick/--fallback.",
+  "list_informational": "V15-GRID THETA (robustness), V15-CERT (grid-sampled cross-ref), V17-INFO (G2 negative control), V19 BRIDGE; plus SIB-BAND (the shallow-anchor wobble exhibit, marked FAIL to keep the historical record visible -- discharged elsewhere by SIB-CERT); plus SIB-CERT-SKIPPED and LAM-INV-SKIPPED (quick/fallback only)",
+  "result_full": "10/10 PASS, 405.7s (build reaches n=800 for the SIB-CERT anchor, ~225s of that; LAM-INV's own NG=3841 field census adds ~47s)",
+  "default_mode": "full (J0*=500, f*=99/100, PLUS the SIB-CERT deep anchor J0_SIB=800, PAD_SIB=999/1000, PLUS the LAM-INV NG=3841 field census) -- this IS the ship",
+  "flags": "--quick (dev subset, NOT certified; SIB-CERT and LAM-INV skipped), --table (per-level rho/V17 table the Lean package transcribes, now to n=800), --fallback (legacy informational (430,49/50,theta*=1/2 fixed) chain; SIB-CERT and LAM-INV skipped), --tamper-selftest",
+  "tampers": 20,
+  "tampers_added": ["magbox-shrink (MAG-BOX: shrink boxes so realized magnitudes leave them)", "theta-ia-sign (V15-IA: flip the census max->min direction; caught by the realized-seminorm floor check; isolated since a lower theta_band only relaxes V17-IA)", "sibcert-sqrt (SIB-CERT: substitute an inward rational bracket on sqrt(R*), tripping the gate's own outwardness self-check before the census runs)", "sibcert-pad (SIB-CERT: swap the deep anchor's pad 999/1000 for the shallower 99/100 -- sounds -12.2% at J0=800, flips to MISS)", "sibcert-band (SIB-CERT: swap the geometric-center half-band for the full [1/R*,R*] band -- cannot clear at any depth, flips to MISS)", "w17-shrink (round 2, MAG-BOX: shrink the boundary-slot box W17 to a tiny interval strictly below the realized w_17 range on W17_GRID -- flips MAG-BOX, not SIB-CERT, since the boundary slot's hypothesis is monitored by MAG-BOX)", "laminv-grid (LAM-INV: NG cut to 241, far below the R4 threshold -- the between-grid Lipschitz slop blows the final proved interval past the shipped box, flipping containment to FAIL)", "laminv-lip (LAM-INV: the a-posteriori LIP_L comparison threshold alone lowered to 2 (below the realized sup|Lambda'|~2.49) -- isolated to that one self-check line)", "laminv-floor (LAM-INV: R1 stress -- restores the pre-widening Lambda^+ floor -1.16 AND forces CPRIME to 2x shipped, 0.008 -- flips the Lambda^+ containment check to FAIL, matching the risk register's own prediction)"]
  },
  "lean": {
   "package": "experimental/lean/prop_tail_reduction",
   "sorry_count": 0,
   "decide_only": true,
-  "scope_note": "exact/finite skeleton only (ring identity + sign corollary behind theta~<=1/5 post-squaring, the 289/256<=57/50 rational fact, and transcribed-table threshold/monotonicity checks); the trig substitution, the squaring step, tau*'s transcendental value, the GEOMETRIC-CENTER LEMMA, and every contraction/Birkhoff/CLT argument stay informal by design. The per-level table (gateRows, now n=48..800) matches the verifier's --table output.",
-  "sibcert_addition": "gateRows extended with n=550,600,650,700,750,800 (same 8-digit convention); new theorem sibcert_clears : sibcertFHi*10^7 <= (10^9-sibcertThetaHi)*tauStarNum := by decide, where sibcertFHi=28722756 and sibcertThetaHi=602929500 are F_box_wob/theta_band_wob rounded UP to 9 digits (conservative direction) and tauStarNum (758553/10^7) is reused unchanged. Builds clean (lake build, ~1s, no sorry)."
+  "scope_note": "exact/finite skeleton only (ring identity + sign corollary behind theta~<=1/5 post-squaring, the 289/256<=57/50 rational fact, transcribed-table threshold/monotonicity checks, and LAM-INV's proved-interval containment facts); the trig substitution, the squaring step, tau*'s transcendental value, the GEOMETRIC-CENTER LEMMA, the Birkhoff mass/Lambda-field one-pass invariance computations, and every contraction/CLT argument stay informal by design. The per-level table (gateRows, now n=48..800) matches the verifier's --table output.",
+  "sibcert_addition": "gateRows extended with n=550,600,650,700,750,800 (same 8-digit convention); new theorem sibcert_clears : sibcertFHi*10^7 <= (10^9-sibcertThetaHi)*tauStarNum := by decide, where sibcertFHi=28722756 and sibcertThetaHi=602929500 are F_box_wob/theta_band_wob rounded UP to 9 digits (conservative direction) and tauStarNum (758553/10^7) is reused unchanged. Builds clean (lake build, ~1s, no sorry).",
+  "laminv_addition": "new section 8 (lamInvDen/lamInvLamLo/Hi/lamInvLamPLo/Hi/lamInvLamMLo/Hi/lamBoxLam*/lamBoxLamPLoOrig): the proved-interval endpoints for lam/Lambda^+/Lambda^-, outward-rounded (floor lower, ceil upper) as Int numerators over 10^6 (Int not Nat -- Lambda^+/- are genuinely negative, unlike every prior transcribed quantity in this file), plus three decide-checked containment theorems (lamInv_lam_inside, lamInv_lamP_inside, lamInv_lamM_inside) and one widened-floor-consistency theorem (lamInv_floor_widened_consistent). Does NOT attempt the Birkhoff one-pass invariance computation, sc_exact ray-normalization, or a-posteriori Lipschitz self-checks -- endpoint arithmetic only, matching the house convention items 5-7 already use. Builds clean (lake build, ~1s, no sorry)."
  },
  "scope": {
   "track": "repo experimental-profile-ledger only: #880's |K|=1 dense-shell class-sum dichotomy and #885's INV-TAIL closure chain",
   "risk_limits": "This packet makes no claim about, and is not on the critical path of, any separately submitted manuscript's conditionals (e.g. a paving-track ePrint submission and its own line-item conditionals). Those are a distinct obligation, entirely out of scope here; nothing in this packet's discharge chain, residual ladder, or consumer framing should be read as bearing on them."
  },
- "discharge_note": "This packet discharges (PROP-TAIL) as a certified-census theorem MODULO three enumerated computed clauses (LAM-BOX, FOLD, FLOOR-PERSIST), all green/monitored at the shipped anchor. The fourth, (SIB-BAND), is DISCHARGED (this revision) at a deep anchor (J0=800, pad=999/1000) by gate SIB-CERT's geometric-center wobble census, given (LAM-BOX) alone -- no new assumption. STATUS=CONDITIONAL: the load-bearing gates V15-IA/V17-IA certify the forced-proportional surrogate at the shallow anchor; SIB-CERT separately certifies the real, non-proportional cascade at the deep anchor. R-b (sandwich) and R-c (sharp Edgeworth-1) remain OPEN STRENGTHENINGS toward the sharp C/n^2 law, not obligations."
+ "discharge_note": "This packet discharges (PROP-TAIL) as a certified-census theorem MODULO two enumerated computed clauses (FOLD, FLOOR-PERSIST) plus one monitored constant (C'-CAP), all green/monitored at the shipped anchor. (SIB-BAND) is DISCHARGED at a deep anchor (J0=800, pad=999/1000) by gate SIB-CERT's geometric-center wobble census, given (LAM-BOX). (LAM-BOX) itself is DISCHARGED-conditional (this revision) by gate LAM-INV's proved invariant intervals for lam/Lambda^+/Lambda^- -- no new assumption beyond the existing floor box, the existing finite base-case census, an a-posteriori Lipschitz self-check, and the one monitored (C'-CAP) constant. The Lambda^+ floor is widened -1.16 -> -1.17 (R1 mitigation (b)); every consumer census re-run (V15-IA unaffected, V17-IA/SIB-CERT margins shrink by well under 1%). STATUS=CONDITIONAL: the load-bearing gates V15-IA/V17-IA certify the forced-proportional surrogate at the shallow anchor; SIB-CERT separately certifies the real, non-proportional cascade at the deep anchor; LAM-INV separately proves the magnitude box itself. R-b (sandwich) and R-c (sharp Edgeworth-1) remain OPEN STRENGTHENINGS toward the sharp C/n^2 law, not obligations; R1 mitigation (a) (the exact C' floor-box bound) remains open toward discharging (C'-CAP)."
 }

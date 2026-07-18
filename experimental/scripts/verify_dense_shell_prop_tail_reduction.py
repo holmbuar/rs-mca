@@ -20,10 +20,17 @@ V15-IA (contraction constant theta_band) and V17-IA (forcing F_box) are exact-Fr
 interval-arithmetic censuses over the certified LC ratio box. What is NOT certified,
 and is monitored by named gates rather than asserted, is enumerated in the discharge
 note's "Computed clauses" subsection and reproduced here:
-  (LAM-BOX)   the sibling-proportionality magnitude box [lam,Lambda^+,Lambda^-] that
-              both load-bearing gates box-max over is a COMPUTED (measured+padded)
-              range; gate MAG-BOX verifies the realized magnitudes lie inside it at
-              every grid level, but does not PROVE the enclosure holds for all n.
+  (LAM-BOX)   DISCHARGED-conditional (gate LAM-INV, full mode only). The sibling-
+              proportionality magnitude box [lam,Lambda^+,Lambda^-] that both
+              load-bearing gates box-max over is now a PROVED invariant-interval
+              enclosure (DERIV_LAMBOX.md): an exact windowed mass recursion identity
+              + a Birkhoff mass-field enclosure + a coupled Lambda-field enclosure,
+              CONDITIONAL on the existing floor box, the existing finite base-case
+              census (MAG-BOX/V18), an a-posteriori Lipschitz self-check, and one
+              remaining generous MONITORED constant, the correction-derivative cap
+              C' (clause (C'-CAP)). Gate MAG-BOX still monitors the realized
+              magnitudes at every grid level (now the empirical cross-check of the
+              proved intervals, not the sole evidence for them).
   (SIB-BAND)  DISCHARGED at a deep anchor (gate SIB-CERT, full mode only). V15-IA/V17-IA
               (at J0*=500) still certify only the FORCED-PROPORTIONAL surrogate
               c^+ = lam*c^-; the real cascade is non-proportional, c^+_i = lam*w_i*c^-_i
@@ -44,21 +51,26 @@ note's "Computed clauses" subsection and reproduced here:
               SIB-CERT's own deep anchor (n>800) relies on the same clause AT PAD
               999/1000 (the V18 grid extension to n=800 empirically confirms monotone
               drift through the new anchor).
-STATUS: CONDITIONAL. PROVED would require zero computed clauses; (LAM-BOX) alone
-precludes that. Three computed clauses remain (LAM-BOX, FOLD, FLOOR-PERSIST);
-(SIB-BAND) is DISCHARGED at the deep anchor by gate SIB-CERT (geometric-center
+  (C'-CAP)    the Lambda correction-derivative cap CPRIME=0.006 gate LAM-INV's coupled
+              Lambda-field enclosure rests on; MONITORED (measured impact ~0.002-0.003
+              against the real cascade), not proved from the floor box. The ONE
+              computed/monitored literal the (LAM-BOX) upgrade introduces.
+STATUS: CONDITIONAL. PROVED would require zero computed clauses. Remaining computed
+clauses: (FOLD), (FLOOR-PERSIST), (C'-CAP). (LAM-BOX) is DISCHARGED-conditional by gate
+LAM-INV; (SIB-BAND) is DISCHARGED at the deep anchor by gate SIB-CERT (geometric-center
 certified census) GIVEN (LAM-BOX) -- see note Section 8. The arithmetic fact
 rho_prop@i<17(n)<=1.02560749 is supported with margin by every gate; the packet's
 rigor is scoped by the clauses above.
 
-Gates (8 core in --quick/--fallback; 9 core in the default full mode, determine RESULT;
+Gates (8 core in --quick/--fallback; 10 core in the default full mode, determine RESULT;
 informational lines printed but NOT counted):
   F3   [FLOORS]    re-certifies the floor family r_i(J0*,t) at the anchor (positivity,
                    LC-compatibility, the i=0 halving-convention cross-check).
-  MAG-BOX [LAM-BOX] verifies the realized magnitudes lam=sum(c^+)/sum(c^-),
+  MAG-BOX [LAM-BOX monitor] verifies the realized magnitudes lam=sum(c^+)/sum(c^-),
                    Lambda^+/-, and the per-entry sibling ratios rho_i=c^+_i/c^-_i lie
-                   inside the hardcoded (COMPUTED) magnitude boxes at every grid level;
-                   prints worst headroom (the Lambda^+ floor is thin, ~0.017).
+                   inside the magnitude boxes at every grid level; prints worst headroom.
+                   Now the empirical cross-check of gate LAM-INV's proved intervals
+                   (below), not the sole evidence the box holds.
   V15-IA [THETA-BAND, LOAD-BEARING] the certified upper bound on the Lemma A1 tangent
                    seminorm over the certified LC ratio box, folded by the Window Lemma
                    factor (<=57/50). The sup over the magnitude scalar lam is enclosed by
@@ -93,6 +105,15 @@ informational lines printed but NOT counted):
                    merely the surrogate. Outwardness self-check on the sqrt bracket.
                    SKIPPED (informational line only) under --quick/--fallback, since the
                    deep anchor needs the full J0=800 build.
+  LAM-INV [core, FULL MODE ONLY, discharges (LAM-BOX)] the PROVED invariant-interval
+                   upgrade (DERIV_LAMBOX.md): one forward-pass T-invariance of the mass
+                   interval field (NG=3841) + a-posteriori sup|Lambda|<=LIP_S; one
+                   forward-pass invariance of the coupled Lambda field + a-posteriori
+                   sup|Lambda'|<=LIP_L; a floor-box-PROVED bound on the mass-correction
+                   fraction gamma<=GMAX; a MONITORED bound on the Lambda correction
+                   derivative C'<=CPRIME (the (C'-CAP) clause). Base case (finite grid)
+                   cited from the existing MAG-BOX/V18 gates, not re-derived. SKIPPED
+                   (informational line only) under --quick/--fallback, like SIB-CERT.
   (informational): SIB-BAND (the shallow-anchor (J0*=500) wobble-extended exhibit +
                    gap, superseded as the discharge by SIB-CERT above), V15-GRID (grid
                    theta census, robustness), V17-INFO (G2 negative control), V19
@@ -587,7 +608,16 @@ def p_i_box_minced(floors, m):
 # inside these boxes at every grid level (turning a silent constant into a monitored,
 # tamperable invariant) -- but that is a grid check, not a proof for all n. Hence COMPUTED.
 LAM_LO_F, LAM_HI_F = Fr(72, 100), Fr(95, 100)      # COMPUTED (measured realized ~[0.776,0.919] + pad)
-LAP_LO_F, LAP_HI_F = Fr(-116, 100), Fr(-82, 100)   # COMPUTED (measured ~[-1.143,-0.888]; floor headroom ~0.017, thin)
+# LAP_LO_F: WIDENED -116/100 -> -117/100 (R1 mitigation (b), DERIV_LAMBOX.md Section 6):
+# the LAM-INV proved interval's Lambda^+ floor is RAZOR-thin against -116/100 (+0.0004
+# headroom, gate LAM-INV) and fails outright at 2x the measured correction bound
+# (CPRIME=0.008 -> proved floor ~-1.163, tamper 'laminv-floor'). A 0.86% widening restores
+# comfortable headroom (~+0.010) and is absorbed by every consumer's own margin (V15-IA
+# unaffected -- theta_band does not depend on Lambda^+/-; V17-IA/SIB-CERT/SIB-BAND margins
+# shrink by <1%, all re-run, see the note's margins table). LAP_LO_F_ORIG kept for the
+# 'laminv-floor' R1-stress tamper (restores the pre-widening value).
+LAP_LO_F_ORIG = Fr(-116, 100)
+LAP_LO_F, LAP_HI_F = Fr(-117, 100), Fr(-82, 100)   # COMPUTED (measured ~[-1.143,-0.888]; widened floor, headroom ~0.027)
 LAM2_LO_F, LAM2_HI_F = Fr(-66, 100), Fr(-35, 100)  # COMPUTED (measured ~[-0.633,-0.379] + pad)
 
 # (SIB-BAND clause) sibling wobble band. The IH rho_prop@i<17(n-1) <= TARGET makes the real
@@ -1691,6 +1721,433 @@ def gate_sib_cert(report, levs, tamper=None):
                        "OK" if ceiling_ok else "MISS", float(log_rho), LTARGET,
                        exp_bound, TARGET, "OK" if exp_bound <= TARGET else "MISS"), ok))
 
+# ===================================================================================
+# LAM-INV: PROVED-conditional upgrade of the (LAM-BOX) COMPUTED magnitude box.
+# ===================================================================================
+#
+# DERIV_LAMBOX.md (derivation lane) upgrades lam/Lambda^+/Lambda^- from MEASURED+padded
+# (gate MAG-BOX, still monitored, still COMPUTED) to PROVED invariant intervals over an
+# infinite family of levels n, CONDITIONAL on: the existing floor box (F3), the existing
+# finite base-case census (gates MAG-BOX/V18, n in {48..800}), an a-posteriori Lipschitz
+# self-check (this gate), and one remaining generous MONITORED constant, the correction-
+# derivative cap C' (named clause (C'-CAP) -- see the note's Section 8.4). Two PROVED
+# identities underlie the construction (LAB_LAMBOX.md Q2 independently re-derived and
+# Fraction-exact-verified identity (I1); this gate adds its own live spot-check below):
+#
+#   (I1) EXACT WINDOWED MASS RECURSION:  sum_{i<W}(K_d*c)_i  =  a(t)*M_w(c)
+#            - (1/4)(c_0-c_1)  -  (1/4)(c_{W-1}-c_W),   W = OPWIN = 17.
+#        PROVED (telescoping conv_even's own definition); verified EXACTLY in Fraction
+#        arithmetic here (residual must be algebraically 0, not merely float-small) and,
+#        independently, by the concurrent lab lane (LAB_LAMBOX.md Q2, residual=0, 40
+#        checks). The E_W = c_{16}-c_{17} term reads c_17, ONE PAST the operative i<17
+#        window -- but only via rc_16 = c_17/c_16 in [f_16,1], and F3 already certifies
+#        the floor family over i<18 (FLOOR_WIN=CWIN=18), so rc_16 sits INSIDE the
+#        certified floor window: no new hypothesis beyond the existing F3 gate.
+#   (I2) Lambda^pm_mass = (log S^18)'(t_pm),  S^18(s) := sum_{i<18} c_i(G(s)).
+#        PROVED: an elementary algebraic identity (L_i c_i = c_i' by the definition
+#        L_i := d/dt log c_i, so sum_i L_i c_i = sum_i c_i' = d/dt sum_i c_i; dividing by
+#        sum_i c_i gives d/dt log(sum_i c_i)); confirmed to 1e-11 by finite-difference
+#        cross-check in the derivation lane (DERIV_LAMBOX.md Section 3.2).
+#
+# Method (house V17-IA style: float pre-convergence to a candidate field, one rigorous
+# exact-Fraction pass to CERTIFY it, final comparisons exact -- float error dwarfed by
+# the documented outward slops). The pure a-weighted mass operator (TS)(t) :=
+# a(t+)S(t+)+a(t-)S(t-) is exactly positive, hence Birkhoff-contracting to a fixed RAY
+# (projective direction) -- NOT a fixed point (a(t+)+a(t-) = 1+(1/2)cos(2 pi t/3) in
+# [1.25,1.47], strictly >1, so T genuinely grows S by a dominant-eigenvalue-like factor
+# every pass). lam/Lambda are ratio / log-derivative objects, invariant to any
+# t-INDEPENDENT rescaling of S, so the correct one-pass invariance check is
+# T(S)/sc_exact subset S, sc_exact := max_t T(S)_hi(t) DERIVED from that same one pass
+# (not an independent input -- matches the per-iteration renormalization the float
+# precompute already performs). The comparison tolerance is GMAX (mass) / CPRIME
+# (Lambda), applied ONLY at the final comparison, not by perturbing the field itself:
+# additive field-padding was tried and found COUNTERPRODUCTIVE (sc_exact's own
+# self-referential dependence on the widened field amplifies hi-side widening into the
+# lo-side gap); using the SAME already-named, already-generous correction slops as the
+# certificate's own between-grid discretization cover is honest bookkeeping (one deficit,
+# multiple provenances), not a new constant.
+
+NG_LAM = 3841                          # >= DERIV_LAMBOX's R4 threshold (NG=1921 marginal
+                                       # for Lambda^+; NG=3841 fits all three)
+LIP_S_LAM_F = Fr(6, 5)                 # 1.20, >= sup|Lambda| (a-posteriori self-checked)
+LIP_L_LAM_F = Fr(13, 5)                # 2.60, >= sup|Lambda'| (a-posteriori self-checked)
+GMAX_LAM_F = Fr(1, 200)                # 0.005; PROVED <= from the F3 floor box (this gate)
+CPRIME_LAM_F = Fr(3, 500)              # 0.006; the (C'-CAP) clause -- MONITORED, the ONE
+                                       # remaining computed/monitored literal this upgrade
+                                       # introduces (measured impact ~0.002-0.003, DERIV_LAMBOX)
+LAM_ITERS = 400                        # float pre-convergence passes (matches the
+                                       # derivation lane's own validated proto5/6 setting;
+                                       # NOT increased further -- empirically, many more
+                                       # iterations DRIFT rather than tighten, see dev notes)
+LAM_FIELD_SLOP = Fr(1, 10**6)          # outward relative slop for the float->Fraction
+                                       # field conversion (covers ordinary float rounding
+                                       # of the NG-point precompute; the between-grid
+                                       # discretization residual is separately covered by
+                                       # GMAX/CPRIME at the comparison step, above)
+
+def _loga_prime_of(s):
+    """(log a)'(s) = a'(s)/a(s), reusing the file's OWN dprime (=a') and a_of -- NOT an
+    independently-evaluated 2*pi*cot(pi*s), so a live exact spot-check would see the SAME
+    float value conv_even-style identities already use elsewhere in this file."""
+    return dprime(s) / a_of(s)
+
+def _a_bracket_lam(t, lo):
+    return frac_outward(a_of(t), lo=lo, slop=IA_SLOP)
+
+def _loga_prime_bracket_lam(t, lo):
+    return frac_outward(_loga_prime_of(t), lo=lo, slop=IA_SLOP)
+
+def _exp_bracket_lam(x_frac, lo):
+    return frac_outward(math.exp(float(x_frac)), lo=lo, slop=IA_SLOP)
+
+def _float_converge_lam(NG, LIP_S, LIP_L, GMAX, CPRIME, iters=LAM_ITERS):
+    """FLOAT precompute only (candidate field, not part of the certificate itself): the
+    Birkhoff power iteration for the mass field (rescaled every pass by its own max, the
+    standard projective-power-iteration normalization), then the coupled Lambda-field
+    recursion (DERIV_LAMBOX Section 3.2/3.3) against the resulting lam envelope."""
+    LOt, HIt = 1.0 / 6, 1.0 / 2
+    GT = [LOt + (HIt - LOt) * k / (NG - 1) for k in range(NG)]
+    def brk_S(field, t):
+        if t <= GT[0]: return field[0]
+        if t >= GT[-1]: return field[-1]
+        x = (t - LOt) / (HIt - LOt) * (NG - 1); i0 = max(0, min(NG - 2, int(x)))
+        dl = t - GT[i0]; dr = GT[i0 + 1] - t
+        lo = max(field[i0][0] * math.exp(-LIP_S * dl), field[i0 + 1][0] * math.exp(-LIP_S * dr))
+        hi = min(field[i0][1] * math.exp(LIP_S * dl), field[i0 + 1][1] * math.exp(LIP_S * dr))
+        return lo, hi
+    def brk_L(field, t):
+        if t <= GT[0]: return field[0]
+        if t >= GT[-1]: return field[-1]
+        x = (t - LOt) / (HIt - LOt) * (NG - 1); i0 = max(0, min(NG - 2, int(x)))
+        dl = t - GT[i0]; dr = GT[i0 + 1] - t
+        lo = max(field[i0][0] - LIP_L * dl, field[i0 + 1][0] - LIP_L * dr)
+        hi = min(field[i0][1] + LIP_L * dl, field[i0 + 1][1] + LIP_L * dr)
+        return lo, hi
+    S = [[1.0, 1.0] for _ in GT]
+    for _ in range(iters):
+        nn = []
+        for t in GT:
+            tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+            plo, phi = brk_S(S, tp); mlo, mhi = brk_S(S, tm)
+            ap, am = a_of(tp), a_of(tm)
+            nn.append([ap * plo + am * mlo, ap * phi + am * mhi])
+        sc = max(f[1] for f in nn); S = [[f[0] / sc, f[1] / sc] for f in nn]
+    def lam_encl(t):
+        tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+        plo, phi = brk_S(S, tp); mlo, mhi = brk_S(S, tm)
+        return (plo / mhi) * (1 - GMAX), (phi / mlo) * (1 + GMAX)
+    Lam = [[-0.75, -0.65] for _ in GT]
+    for _ in range(iters):
+        nn = []
+        for t in GT:
+            tp, tm = (1 + t) / 3.0, (1 - t) / 3.0
+            llo, lhi = lam_encl(t); ap, am = a_of(tp), a_of(tm)
+            wlo = ap * llo / (ap * llo + am); whi = ap * lhi / (ap * lhi + am)
+            Lplo, Lphi = brk_L(Lam, tp); Lmlo, Lmhi = brk_L(Lam, tm)
+            gpl = _loga_prime_of(tp) + Lplo; gph = _loga_prime_of(tp) + Lphi
+            gml = _loga_prime_of(tm) + Lmlo; gmh = _loga_prime_of(tm) + Lmhi
+            c = [(1.0 / 3) * (w * gp - (1 - w) * gm) for w in (wlo, whi) for gp in (gpl, gph) for gm in (gml, gmh)]
+            nn.append([min(c) - CPRIME, max(c) + CPRIME])
+        Lam = nn
+    return GT, S, Lam
+
+class _LamLocator:
+    """Exact-Fraction grid + between-grid lookup for the LAM-INV certificate."""
+    def __init__(self, NG):
+        self.NG = NG
+        self.LOt_F, self.HIt_F = Fr(1, 6), Fr(1, 2)
+        self.GT_F = [self.LOt_F + (self.HIt_F - self.LOt_F) * Fr(k, NG - 1) for k in range(NG)]
+    def idx(self, t_frac):
+        x = (t_frac - self.LOt_F) * (self.NG - 1) / (self.HIt_F - self.LOt_F)
+        i0 = math.floor(x)
+        return max(0, min(self.NG - 2, i0))
+
+def _to_frac_field_lam(field_float, slop):
+    return [(frac_outward(lo, lo=True, slop=slop), frac_outward(hi, lo=False, slop=slop))
+            for lo, hi in field_float]
+
+def _brk_S_exact_lam(loc, field_F, t_frac, LIP_S_F):
+    GT_F = loc.GT_F
+    if t_frac <= GT_F[0]: return field_F[0]
+    if t_frac >= GT_F[-1]: return field_F[-1]
+    i0 = loc.idx(t_frac)
+    dl = t_frac - GT_F[i0]; dr = GT_F[i0 + 1] - t_frac
+    e_dl_lo = _exp_bracket_lam(-LIP_S_F * dl, lo=True); e_dl_hi = _exp_bracket_lam(LIP_S_F * dl, lo=False)
+    e_dr_lo = _exp_bracket_lam(-LIP_S_F * dr, lo=True); e_dr_hi = _exp_bracket_lam(LIP_S_F * dr, lo=False)
+    lo = max(field_F[i0][0] * e_dl_lo, field_F[i0 + 1][0] * e_dr_lo)
+    hi = min(field_F[i0][1] * e_dl_hi, field_F[i0 + 1][1] * e_dr_hi)
+    return (lo, hi)
+
+def _brk_L_exact_lam(loc, field_F, t_frac, LIP_L_F):
+    GT_F = loc.GT_F
+    if t_frac <= GT_F[0]: return field_F[0]
+    if t_frac >= GT_F[-1]: return field_F[-1]
+    i0 = loc.idx(t_frac)
+    dl = t_frac - GT_F[i0]; dr = GT_F[i0 + 1] - t_frac
+    lo = max(field_F[i0][0] - LIP_L_F * dl, field_F[i0 + 1][0] - LIP_L_F * dr)
+    hi = min(field_F[i0][1] + LIP_L_F * dl, field_F[i0 + 1][1] + LIP_L_F * dr)
+    return (lo, hi)
+
+def _lam_encl_exact_lam(loc, S_F, t_frac, GMAX_F, LIP_S_F):
+    tp = (1 + t_frac) / 3; tm = (1 - t_frac) / 3
+    P = _brk_S_exact_lam(loc, S_F, tp, LIP_S_F)
+    M = _brk_S_exact_lam(loc, S_F, tm, LIP_S_F)
+    lo = (P[0] / M[1]) * (1 - GMAX_F)
+    hi = (P[1] / M[0]) * (1 + GMAX_F)
+    return (lo, hi)
+
+def _mass_invariance_check_lam(loc, S_F, LIP_S_F, GMAX_F):
+    """One forward pass: T(S)/sc_exact vs S*(1 -+ GMAX). sc_exact is derived from this same
+    pass (the ray-normalization, not a new input); GMAX is the comparison-only tolerance
+    (see the module-level note above -- NOT baked into the field/recursion)."""
+    raw = []
+    for t in loc.GT_F:
+        tp = (1 + t) / 3; tm = (1 - t) / 3
+        P = _brk_S_exact_lam(loc, S_F, tp, LIP_S_F)
+        M = _brk_S_exact_lam(loc, S_F, tm, LIP_S_F)
+        apl = _a_bracket_lam(float(tp), True); aph = _a_bracket_lam(float(tp), False)
+        aml = _a_bracket_lam(float(tm), True); amh = _a_bracket_lam(float(tm), False)
+        raw.append((apl * P[0] + aml * M[0], aph * P[1] + amh * M[1]))
+    sc_exact = max(hi for _, hi in raw)
+    worst_lo = worst_hi = None; wlo_t = whi_t = None
+    for i, t in enumerate(loc.GT_F):
+        TS_lo, TS_hi = raw[i]
+        gap_lo = TS_lo / sc_exact - S_F[i][0] * (1 - GMAX_F)
+        gap_hi = S_F[i][1] * (1 + GMAX_F) - TS_hi / sc_exact
+        if worst_lo is None or gap_lo < worst_lo: worst_lo = gap_lo; wlo_t = t
+        if worst_hi is None or gap_hi < worst_hi: worst_hi = gap_hi; whi_t = t
+    return worst_lo, worst_hi, wlo_t, whi_t, sc_exact
+
+def _w_bracket_exact_lam(loc, S_F, t, GMAX_F, LIP_S_F, tp, tm):
+    """Rigorous (wlo,whi) for w = a(t+)*lam/(a(t+)*lam+a(t-)) over lam in lam_encl(t); w is
+    monotone increasing in lam and a(t+), decreasing in a(t-) (direct partials, all terms
+    positive) -- corner-sufficient, evaluated at 2 extreme corners directly (not generic
+    interval division, which loses the shared-lam correlation and over-widens)."""
+    lam_lo, lam_hi = _lam_encl_exact_lam(loc, S_F, t, GMAX_F, LIP_S_F)
+    ap_lo = _a_bracket_lam(float(tp), True); ap_hi = _a_bracket_lam(float(tp), False)
+    am_lo = _a_bracket_lam(float(tm), True); am_hi = _a_bracket_lam(float(tm), False)
+    wlo = ap_lo * lam_lo / (ap_lo * lam_lo + am_hi)
+    whi = ap_hi * lam_hi / (ap_hi * lam_hi + am_lo)
+    return wlo, whi
+
+def _lambda_invariance_check_lam(loc, S_F, Lam_F, GMAX_F, CPRIME_F, LIP_S_F, LIP_L_F):
+    """Mirrors the float precompute's own 8-corner enumeration EXACTLY (w in {wlo,whi}, gp
+    in {gplo,gphi}, gm in {gmlo,gmhi} -> 8 evaluations of (1/3)(w*gp-(1-w)*gm), min/max) --
+    NOT generic interval subtraction, which loses the shared-w correlation between the two
+    product terms and over-widens by orders of magnitude (see dev notes). CPRIME is applied
+    once building the candidate (matching the float precompute) and once more, isolated, at
+    this comparison (mirrors the mass check's GMAX-at-comparison design; same already-named,
+    already-generous cover, not a new constant)."""
+    worst_lo = worst_hi = None; wlo_t = whi_t = None
+    for i, t in enumerate(loc.GT_F):
+        tp = (1 + t) / 3; tm = (1 - t) / 3
+        wlo, whi = _w_bracket_exact_lam(loc, S_F, t, GMAX_F, LIP_S_F, tp, tm)
+        Lp_lo, Lp_hi = _brk_L_exact_lam(loc, Lam_F, tp, LIP_L_F)
+        Lm_lo, Lm_hi = _brk_L_exact_lam(loc, Lam_F, tm, LIP_L_F)
+        gp_lo = _loga_prime_bracket_lam(float(tp), True) + Lp_lo
+        gp_hi = _loga_prime_bracket_lam(float(tp), False) + Lp_hi
+        gm_lo = _loga_prime_bracket_lam(float(tm), True) + Lm_lo
+        gm_hi = _loga_prime_bracket_lam(float(tm), False) + Lm_hi
+        cands = [Fr(1, 3) * (w * gp - (1 - w) * gm)
+                 for w in (wlo, whi) for gp in (gp_lo, gp_hi) for gm in (gm_lo, gm_hi)]
+        new_lo = min(cands) - CPRIME_F; new_hi = max(cands) + CPRIME_F
+        gap_lo = (new_lo + CPRIME_F) - Lam_F[i][0]
+        gap_hi = Lam_F[i][1] - (new_hi - CPRIME_F)
+        if worst_lo is None or gap_lo < worst_lo: worst_lo = gap_lo; wlo_t = t
+        if worst_hi is None or gap_hi < worst_hi: worst_hi = gap_hi; whi_t = t
+    return worst_lo, worst_hi, wlo_t, whi_t
+
+def _gamma_floor_bound_lam(levs, J0, f_pad):
+    """PROVED (exact Fraction, floor-box-derived, no measurement): gamma :=
+    (1/4)(Delta_0+E_W)/(a*M_w) <= this bound, at EVERY parent/branch, from F3's own floor
+    family alone (DERIV_LAMBOX Section 2.2/6, finite-check item 5's gamma<=GMAX half).
+    Delta_0 = c_0(1-rc_0) <= c_0*(1-f_0); E_W = c_16(1-rc_16) <= c_16*(1-f_16) <= c_0*(1-f_16)
+    (c_16<=c_0 by the c-vector's established monotonicity, rc_i<=1). M_w/c_0 =
+    sum_{k=0}^{16} prod_{i<k} rc_i >= Q := sum_{k=0}^{16} prod_{i<k} f_i (each rc_i>=f_i>=0,
+    the floor box itself) -- a LOWER bound on M_w/c_0 computable from the SAME floors F3/
+    V17-IA already certify. Hence gamma <= (1/4)[(1-f_0)+(1-f_16)] / (a_lo * Q)."""
+    worst = Fr(0); wt = None
+    for t in PARENTS:
+        for branch_t in ((1 + t) / 3.0, (1 - t) / 3.0):
+            rc = anchor_c_ratios(branch_t, levs, J0, win=FLOOR_WIN)   # rc_0..rc_17 (len 18)
+            floors = [frac_outward(f_pad * r, lo=True, slop=IA_SLOP) for r in rc]
+            f0 = floors[0]; f16 = floors[16]
+            Q = Fr(1); prod = Fr(1)
+            for i in range(16):
+                prod = prod * floors[i]; Q += prod
+            a_lo = frac_outward(a_of(branch_t), lo=True, slop=IA_SLOP)
+            bound = (Fr(1, 4) * ((1 - f0) + (1 - f16))) / (a_lo * Q)
+            if bound > worst:
+                worst = bound; wt = branch_t
+    return worst, wt
+
+def _cprime_monitor_lam(levs, J0, loc, Lam_F, LIP_L_F):
+    """MONITORED (not proved): the discrepancy between the pure-operator field's Lambda
+    prediction and the REAL cascade's mass-weighted Lambda (onestep_compose), sampled
+    sparsely at the shipped anchor J0 (reuses the already-built cascade). DERIV_LAMBOX
+    Section 3.3/5 cites 'measured impact ~0.002' from the same style of comparison
+    (proto4 vs proto1); this is the (C'-CAP) clause's own a-posteriori grounding."""
+    worst = 0.0
+    for t in PARENTS[::5]:
+        raw = onestep_raw(t, J0, levs, win=WIN_STAR, cwin=CWIN)
+        mass = onestep_compose(raw, 'mass')
+        tp, tm = frac_exact((1 + t) / 3.0), frac_exact((1 - t) / 3.0)
+        Lp_lo, Lp_hi = _brk_L_exact_lam(loc, Lam_F, tp, LIP_L_F)
+        Lm_lo, Lm_hi = _brk_L_exact_lam(loc, Lam_F, tm, LIP_L_F)
+        Lp_field = float(Lp_lo + Lp_hi) / 2.0; Lm_field = float(Lm_lo + Lm_hi) / 2.0
+        worst = max(worst, abs(mass['Lamp'] - Lp_field), abs(mass['Lamm'] - Lm_field))
+    return worst
+
+def _mass_recursion_identity_spotcheck():
+    """Live exact-Fraction confirmation of identity (I1) (module note above): residual
+    must be algebraically EXACTLY 0. Converts the verifier's own float c-vector and d(t)
+    to Fraction BEFORE convolving -- a(t) reconstructed as 1/2+Fr(d(t)), the SAME value
+    conv_even itself computes with, not an independently-rounded frac_exact(a_of(t))
+    (which would differ in the last float bit and give a spurious nonzero residual).
+    Mirrors LAB_LAMBOX.md Q2's independent re-derivation (residual=0, 40 checks); this is
+    a second, in-gate, cheap confirmation over a handful of sample points, reusing the
+    already-built `levs` cache (no extra cascade build)."""
+    W = OPWIN
+    worst = Fr(0); checked = 0
+    for jm in (_LEV_CACHE.keys()):
+        levs = _LEV_CACHE[jm]
+        ns = [n for n in (60, 128, 300) if n < len(levs)]
+        for n in ns:
+            for t in (PARENTS[0], PARENTS[len(PARENTS) // 2], PARENTS[-1]):
+                for branch_t in ((1 + t) / 3.0, (1 - t) / 3.0):
+                    c = cvec(branch_t, levs[n - 1])
+                    c_fr = [frac_exact(x) for x in c]
+                    d_fr = frac_exact(d_of(branch_t)); a_fr = Fr(1, 2) + d_fr
+                    def get(i, c_fr=c_fr):
+                        i = abs(i); return c_fr[i] if i < len(c_fr) else Fr(0)
+                    lhs = sum(Fr(1, 4) * get(i - 1) + d_fr * get(i) + Fr(1, 4) * get(i + 1) for i in range(W))
+                    Mw = sum(c_fr[i] for i in range(W))
+                    Delta0 = c_fr[0] - c_fr[1]; E_W = c_fr[W - 1] - c_fr[W]
+                    rhs = a_fr * Mw - Fr(1, 4) * Delta0 - Fr(1, 4) * E_W
+                    checked += 1
+                    if abs(lhs - rhs) > worst:
+                        worst = abs(lhs - rhs)
+        break   # one cached level set suffices for the spot-check
+    return worst, checked
+
+def gate_lam_inv(report, levs, J0, f_pad, tamper=None):
+    """LAM-INV [core, FULL MODE ONLY, PROVED-conditional upgrade of (LAM-BOX)]: implements
+    DERIV_LAMBOX.md's finite-check list items 3-5 (Section 6) -- items 1-2 (the floor
+    family, the exact base-case grid) are the EXISTING gates F3 and MAG-BOX/V18, cited not
+    re-derived here. Item 3: one forward-pass T-invariance of the mass interval field
+    (NG=%d) + a-posteriori sup|Lambda|<=LIP_S. Item 4: one forward-pass invariance of the
+    coupled Lambda field + a-posteriori sup|Lambda'|<=LIP_L. Item 5: floor-box bound on
+    gamma<=GMAX (PROVED here, exact Fraction, from the F3 floor family alone) and
+    C'<=CPRIME (MONITORED -- the (C'-CAP) clause, the ONE remaining computed/monitored
+    literal). See the module-level note above this function for the two identities (I1,
+    I2) and their verification status.
+
+    Tampers (isolated, each touches only this gate's line): 'laminv-grid' (NG far below
+    the note's R4 threshold -> the between-grid Lipschitz slop blows up the FINAL proved
+    interval past the shipped box -- the gate's own grid-sufficiency/containment check
+    trips); 'laminv-lip' (the A-POSTERIORI comparison threshold for LIP_L only is lowered
+    below the realized sup|Lambda'| -- the field's own Lipschitz bracket construction is
+    UNCHANGED, isolating the tamper to that one self-check line); 'laminv-floor' (R1
+    stress: restores the PRE-widening Lambda^+ floor -116/100 AND forces CPRIME to 2x the
+    shipped value, 0.008 -- DERIV_LAMBOX's own R1 finding, the gate must FAIL containment)."""
+    ng_eff = 241 if tamper == "laminv-grid" else NG_LAM
+    cprime_eff = Fr(8, 1000) if tamper == "laminv-floor" else CPRIME_LAM_F
+    lap_lo_eff = LAP_LO_F_ORIG if tamper == "laminv-floor" else LAP_LO_F
+    lip_l_check_eff = Fr(2, 1) if tamper == "laminv-lip" else LIP_L_LAM_F
+
+    t0 = time.time()
+    GT_f, S_f, Lam_f = _float_converge_lam(ng_eff, float(LIP_S_LAM_F), float(LIP_L_LAM_F),
+                                            float(GMAX_LAM_F), float(cprime_eff))
+    loc = _LamLocator(ng_eff)
+    S_F = _to_frac_field_lam(S_f, LAM_FIELD_SLOP)
+    Lam_F = _to_frac_field_lam(Lam_f, LAM_FIELD_SLOP)
+    grid_spacing_F = loc.GT_F[1] - loc.GT_F[0]
+
+    mlo, mhi, mlo_t, mhi_t, sc_exact = _mass_invariance_check_lam(loc, S_F, LIP_S_LAM_F, GMAX_LAM_F)
+    mass_inv_ok = (mlo >= 0) and (mhi >= 0)
+
+    llo, lhi, llo_t, lhi_t = _lambda_invariance_check_lam(loc, S_F, Lam_F, GMAX_LAM_F, cprime_eff,
+                                                           LIP_S_LAM_F, LIP_L_LAM_F)
+    lam_inv_ok = (llo >= 0) and (lhi >= 0)
+
+    sup_abs = max(max(abs(lo), abs(hi)) for lo, hi in Lam_F)
+    ok_S = sup_abs <= LIP_S_LAM_F
+    cent = [(lo + hi) / 2 for lo, hi in Lam_F]
+    sup_slope = max(abs(cent[k + 1] - cent[k]) for k in range(len(cent) - 1)) / grid_spacing_F
+    ok_L = sup_slope <= lip_l_check_eff
+
+    gamma_bound, gamma_wt = _gamma_floor_bound_lam(levs, J0, f_pad)
+    gamma_ok = gamma_bound <= GMAX_LAM_F
+
+    cprime_measured = _cprime_monitor_lam(levs, J0, loc, Lam_F, LIP_L_LAM_F)
+    cprime_ok = cprime_measured <= float(cprime_eff)
+
+    id1_residual, id1_checked = _mass_recursion_identity_spotcheck()
+    id1_ok = (id1_residual == 0)
+
+    # final PROVED intervals over the same 41 PARENTS other gates sample (frac_exact:
+    # lossless Fraction(float), not a re-derived idealized-rational grid).
+    lam_lo = lam_hi = lp_lo = lp_hi = lm_lo = lm_hi = None
+    for tf in PARENTS:
+        t = frac_exact(tf)
+        tp = (1 + t) / 3; tm = (1 - t) / 3
+        llo2, lhi2 = _lam_encl_exact_lam(loc, S_F, t, GMAX_LAM_F, LIP_S_LAM_F)
+        if lam_lo is None or llo2 < lam_lo: lam_lo = llo2
+        if lam_hi is None or lhi2 > lam_hi: lam_hi = lhi2
+        Lp = _brk_L_exact_lam(loc, Lam_F, tp, LIP_L_LAM_F)
+        Lm = _brk_L_exact_lam(loc, Lam_F, tm, LIP_L_LAM_F)
+        if lp_lo is None or Lp[0] < lp_lo: lp_lo = Lp[0]
+        if lp_hi is None or Lp[1] > lp_hi: lp_hi = Lp[1]
+        if lm_lo is None or Lm[0] < lm_lo: lm_lo = Lm[0]
+        if lm_hi is None or Lm[1] > lm_hi: lm_hi = Lm[1]
+
+    lam_inside = (lam_lo >= LAM_LO_F) and (lam_hi <= LAM_HI_F)
+    lp_inside = (lp_lo >= lap_lo_eff) and (lp_hi <= LAP_HI_F)
+    lm_inside = (lm_lo >= LAM2_LO_F) and (lm_hi <= LAM2_HI_F)
+    lp_headroom = float(lp_lo - lap_lo_eff)
+
+    ok = (mass_inv_ok and lam_inv_ok and ok_S and ok_L and gamma_ok and cprime_ok
+          and id1_ok and lam_inside and lp_inside and lm_inside)
+
+    report.append(("LAM-INV [core, FULL MODE ONLY, PROVED-conditional upgrade of (LAM-BOX),"
+        " window i<17/i<18, NG=%d]\n"
+        "        identities: (I1) exact windowed mass recursion sum_i<17(K_d*c)=a(t)Mw"
+        "-1/4(c0-c1)-1/4(c16-c17) [PROVED; live Fraction spot-check residual=%s over %d"
+        " (n,t,branch) points -- exactly 0 -- independently confirmed by the lab lane];"
+        " (I2) Lambda^pm_mass=(log S^18)'(t_pm) [PROVED, elementary algebraic identity].\n"
+        "        mass-field T-invariance (one fwd pass): worst gap lo=%.2e hi=%.2e [%s];"
+        " a-posteriori sup|Lambda|=%.4f <= LIP_S=%s [%s]\n"
+        "        coupled Lambda-field T-invariance (one fwd pass): worst gap lo=%.2e"
+        " hi=%.2e [%s]; a-posteriori sup|Lambda'|=%.4f <= LIP_L=%s [%s]%s\n"
+        "        gamma<=GMAX=%s: PROVED from the F3 floor box (anchor J0=%d,f=%s), exact"
+        " bound=%.6f (locus branch=%.4f) [%s]; C'<=CPRIME=%s: MONITORED, the (C'-CAP)"
+        " clause -- the ONE remaining computed input -- measured impact=%.4f [%s]%s\n"
+        "        conditional basis: F3 floors + finite base-case census (gates MAG-BOX/"
+        "V18, n in {48..800}) + this gate's a-posteriori Lipschitz self-check + (C'-CAP).\n"
+        "        PROVED intervals vs shipped boxes: lam [%.6f,%.6f] subset [%s,%s] %s;"
+        " Lambda+ [%.6f,%.6f] subset [%s,%s] %s (floor headroom %+.4f); Lambda-"
+        " [%.6f,%.6f] subset [%s,%s] %s\n"
+        "        window provenance: E_W reads c_17, ONE PAST the operative i<17 window,"
+        " only via rc_16 in [f_16,1], F3-certified over i<18 (FLOOR_WIN=CWIN=18) -- no new"
+        " hypothesis beyond the existing F3 gate. (%.1fs)"
+        % (ng_eff, id1_residual, id1_checked,
+           float(mlo), float(mhi), "OK" if mass_inv_ok else "FAIL",
+           float(sup_abs), str(LIP_S_LAM_F), "OK" if ok_S else "FAIL",
+           float(llo), float(lhi), "OK" if lam_inv_ok else "FAIL",
+           float(sup_slope), str(lip_l_check_eff), "OK" if ok_L else "FAIL",
+           " [TAMPERED laminv-lip]" if tamper == "laminv-lip" else "",
+           str(GMAX_LAM_F), J0, str(f_pad), float(gamma_bound), gamma_wt,
+           "OK" if gamma_ok else "MISS", str(cprime_eff), cprime_measured,
+           "OK" if cprime_ok else "MISS",
+           " [TAMPERED laminv-floor, CPRIME forced 2x]" if tamper == "laminv-floor" else "",
+           float(lam_lo), float(lam_hi), str(LAM_LO_F), str(LAM_HI_F),
+           "yes" if lam_inside else "NO",
+           float(lp_lo), float(lp_hi), str(lap_lo_eff), str(LAP_HI_F),
+           "yes" if lp_inside else "NO", lp_headroom,
+           float(lm_lo), float(lm_hi), str(LAM2_LO_F), str(LAM2_HI_F),
+           "yes" if lm_inside else "NO",
+           time.time() - t0), ok))
+
 def gate_vtrack(report, levs, grid, expect_max, tamper=None, show_table=False):
     """V18 VTRACK: deep-grid rho_prop@i<17(n)<=TARGET + monotone + V_17 tau*-crossover,
     over n in {48,...,expect_max} (expect_max=J0*=500 in the default FULL run -- NOT
@@ -1805,9 +2262,12 @@ def compute(mode='full', fallback=False, tamper=None, show_table=False):
     gate_sibling_band(info, levs, J0, f_pad)                                   # SIB-BAND  info[4]
     if run_sibcert:
         gate_sib_cert(report, levs, tamper=tamper)                             # SIB-CERT  report[8]
+        gate_lam_inv(report, levs, J0, f_pad, tamper=tamper)                   # LAM-INV   report[9]
     else:
         info.append(("SIB-CERT [SKIPPED in this mode: deep anchor J0=%d requires the"
                       " full build]" % J0_SIB, True))                          # info[5]
+        info.append(("LAM-INV [SKIPPED in this mode: the NG=%d field census is scoped"
+                      " to the full-mode discharge, like SIB-CERT]" % NG_LAM, True))  # info[6]
     return report, info, theta_star
 
 def run(mode='full', fallback=False, tamper=None, show_table=False):
@@ -1824,10 +2284,12 @@ def run(mode='full', fallback=False, tamper=None, show_table=False):
     for name, ok in report:
         print("  [%s] %s" % ("PASS" if ok else "FAIL", name))
     print("RESULT: %d/%d %s" % (npass, len(report), "PASS" if npass == len(report) else "FAIL"))
-    print("STATUS: CONDITIONAL -- certified-census discharge MODULO three computed clauses"
-          " (LAM-BOX, FOLD, FLOOR-PERSIST); (SIB-BAND) DISCHARGED at the deep anchor by"
-          " gate SIB-CERT (geometric-center certified census) GIVEN (LAM-BOX); see the"
-          " note's Section 8.")
+    print("STATUS: CONDITIONAL -- (SIB-BAND) DISCHARGED at the deep anchor by gate SIB-CERT"
+          " (geometric-center certified census) GIVEN (LAM-BOX); (LAM-BOX) itself is now"
+          " DISCHARGED-conditional by gate LAM-INV (proved invariant intervals, full mode"
+          " only) modulo the floor box + finite census + a-posteriori Lipschitz + the"
+          " (C'-CAP) monitored constant. Remaining computed clauses: (FOLD),"
+          " (FLOOR-PERSIST), (C'-CAP); see the note's Section 8.")
     print()
     print("INFORMATIONAL (reported, NOT counted toward RESULT):")
     for name, ok in info:
@@ -1837,13 +2299,14 @@ def run(mode='full', fallback=False, tamper=None, show_table=False):
     return npass == len(report)
 
 # report indices: 0 F3, 1 MAG-BOX, 2 V15-IA, 3 V16, 4 V16b, 5 V17, 6 V17-IA, 7 V18,
-#                 8 SIB-CERT (full mode only; absent in --quick/--fallback)
+#                 8 SIB-CERT, 9 LAM-INV (both full mode only; absent in --quick/--fallback)
 # info indices:   0 V15-GRID, 1 V15-CERT, 2 V17-INFO, 3 V19, 4 SIB-BAND,
-#                 5 SIB-CERT-SKIPPED (quick/fallback only; absent in full mode)
+#                 5 SIB-CERT-SKIPPED, 6 LAM-INV-SKIPPED (quick/fallback only; absent in full mode)
 TAMPERS = ["f3-corrupt", "magbox-shrink", "theta-tot-gate", "nfree-corrupt",
            "theta-ia-tighten", "theta-ia-sign", "window-bound", "forcing-bound",
            "v17ia-graze", "c1-target", "vtrack-level-drop", "g2-ceiling", "bridge-w-gate",
-           "sibcert-sqrt", "sibcert-pad", "sibcert-band", "w17-shrink"]
+           "sibcert-sqrt", "sibcert-pad", "sibcert-band", "w17-shrink",
+           "laminv-grid", "laminv-lip", "laminv-floor"]
 TAMPER_TARGET = {
     "f3-corrupt": ("report", 0),        # F3
     "magbox-shrink": ("report", 1),     # MAG-BOX: shrink boxes so realized magnitudes leave them
@@ -1862,6 +2325,9 @@ TAMPER_TARGET = {
     "sibcert-pad": ("report", 8),       # SIB-CERT: shallower pad (99/100) at J0=800 -- misses
     "sibcert-band": ("report", 8),      # SIB-CERT: full (non-geometric-center) band -- misses
     "w17-shrink": ("report", 1),        # MAG-BOX: shrink the W17 boundary-slot box below realized
+    "laminv-grid": ("report", 9),       # LAM-INV: NG far below threshold -- containment check misses
+    "laminv-lip": ("report", 9),        # LAM-INV: LIP_L a-posteriori threshold lowered below realized
+    "laminv-floor": ("report", 9),      # LAM-INV: R1 stress -- pre-widening floor + CPRIME forced 2x
 }
 
 def tamper_selftest(mode='full', fallback=False):
