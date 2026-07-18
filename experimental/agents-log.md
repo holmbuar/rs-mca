@@ -30,6 +30,88 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-18 - Dense-shell class-charges audit repair
+
+- **Agent/model:** Claude (Sonnet 5), repair builder following PR #914's
+  audit (Codex-team audit, COUNTEREXAMPLE verdict; independently
+  PI-verified: its verifier replays 11/11 against the SHA-pinned files
+  it audited).
+- **Files added or changed:** `experimental/notes/thresholds/dense_shell_class_charges.md`,
+  `experimental/scripts/verify_dense_shell_class_charges.py`,
+  `experimental/data/certificates/dense-shell-class-charges/dense_shell_class_charges.json`.
+  `experimental/lean/dense_shell_class_charges/` inspected, unchanged
+  (audit #914 confirms its skeleton scope statement is accurate; no
+  false wording to repair there).
+- **Status:** AUDIT-REPAIR / CONDITIONAL.
+- **What is being added:** Repairs two FALSE claims #914 found in the
+  integrated packet (PR #880, Holm Buar) and downgrades one overclaimed
+  scope, all with permanent regression gates:
+  (1) the charge identity `omega_U = Sigma_U + W_U always` was false
+  (true only at sign-law parity `s_U=+1`); replaced by the
+  parity-correct `omega_U = W_U + 1_{s_U=+1}|Sigma_U|`, plus the
+  always-valid `omega_U = (M_U+Sigma_U)/2`. New gate P13 (C6-PARITY)
+  exhaustively checks both forms for every support class `U` at every
+  `B<=8`, both parities, printing the audit's `B=4, U={0}` witness
+  (`Sigma_U=-3.599182825207051, W_U=omega_U=0`) explicitly.
+  (2) P7's advertised pair-2 secant cap `1.61` was false on the stated
+  full domain (counterexample `j=3, x=4/9, y=1/2`, true value
+  `~1.6101`, hidden by a silently shrunk grid domain `[.,.49995]`
+  instead of the stated `[.,.50]`). P7 is now scoped to what MASTER
+  actually consumes -- the two COUPLED child curves
+  (`s+r=4/9`, `r2+s2=8/9`, `3.2` Step B) at levels `q=j-1 in [5,47]`,
+  4x-denser grid, both endpoints included -- where the true sups are
+  `0.597`/`1.230`, comfortably inside cap; the old whole-support census
+  survives as a separate, informational, non-load-bearing gate P14
+  (ENV-BROAD, cap corrected to `1.62`, honestly reproducing `~1.6101`).
+  (3) `C3` downgraded `THEOREM -> COMPUTED-GRID/CONDITIONAL` on the
+  `B<=49` leg: no shipped gate supplies a continuum enclosure (P7 has
+  no interpolation remainder or between-node bound; P9's
+  "Lipschitz-certified" floor is an observed discrete slope, not a
+  proven global one; P12 samples 199 interior points and omits both
+  endpoints). The all-j loose caps (1.086/1.663) and (KEY) at those
+  caps are relabeled HYPOTHESIS / CONDITIONAL IMPLICATION (P8's
+  description reworded), no longer PROVED. `C3b`'s `EQUIVALENT` claim
+  is narrowed to the proved SUFFICIENT direction only (termwise `T_pi`
+  positivity implies global positivity; the converse is open),
+  matching what gate P11 actually checks. Also added: gate P15
+  (CERT-BIND), which loads the shipped certificate JSON and attests
+  `commit`/`source_sha256`/`script_sha256`/`command`/`deep`/`jmax`/`horizon`
+  against the current note/script bytes, failing on any drift; the
+  JSON is regenerated with all of it populated. Four new tampers
+  (`ident-universal`, `p7-domain`, `p7-cap`, `cert-unbound`) extend the
+  self-test to 13/13 caught, each isolating exactly its own gate
+  (verified: every tamper run shows 21/22, only the targeted gate
+  failing); all 22 gates (was 19) pass clean, `--deep`, and
+  `--tamper-selftest`.
+- **How it is useful:** Turns two live counterexamples into permanent
+  regression gates instead of leaving them as one-off audit findings,
+  and replaces two false/overclaimed statements with the narrowest
+  claims the shipped verifier actually supports -- restoring the
+  packet's PROOF-LAYER labels to what audit #914 found literally true.
+  The `#905`-producer interlock: PR #905 (`avdeevvadim`, head `0000964`)
+  separately proves the same loose caps (1.086/1.663) plus a 7/6
+  child-share floor via a positive two-state cone, independently
+  audited in PR #911 (head `8d47b40`: symbolic half verified, Arb half
+  NOT replayed there) -- this repair cites #905/#911 as INV-TAIL's
+  producer instead of re-deriving it, and states both integration
+  orders explicitly in the note's Status block so the two PRs compose
+  cleanly regardless of landing order.
+- **What to do next:** Two categories of open item remain, both
+  enumerated in the note's `3.5` ledger: (a) continuum enclosures --
+  P7's interpolation remainder, P9's slope-to-Lipschitz-bound gap, and
+  P12's endpoint/cell coverage are still finite-grid checks, not
+  continuum certificates; closing any of the three (interval
+  arithmetic or an Arb replay in the style of #905) is what would
+  raise `C3` back to `THEOREM` on the `B<=49` leg; (b) `C3b`'s converse
+  (global positivity forcing every per-prefix `T_pi(K)>0`) is open and
+  unattempted. Separately, INV-TAIL itself stays CONDITIONAL until
+  someone independently replays #905's Arb certificate (python-flint)
+  or #905 lands and this packet's verifier reads its contract
+  directly. To re-verify this repair: run
+  `python3 experimental/scripts/verify_dense_shell_class_charges.py`
+  (expect `RESULT: PASS (22/22)`; `--deep` and `--tamper-selftest`
+  13/13 likewise green).
+
 ### 2026-07-17 - RS-MCA Paving v9.2 ePrint submission package
 
 - **Agent/model:** Codex logging a human-submitted ePrint package by Przemek Chojecki.
