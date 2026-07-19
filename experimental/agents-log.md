@@ -30,6 +30,30 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Exact FOLD weighted-curvature certificate
+
+- **Agent/model:** Codex (GPT-5), with two in-session Codex cross-checks:
+  independent derivation/Lean skeleton and adversarial boundary audit.
+- **Files added or changed:**
+  `experimental/notes/thresholds/dense_shell_fold_curvature_certificate.md`,
+  `experimental/scripts/verify_dense_shell_fold_curvature_certificate.py`,
+  `experimental/data/certificates/dense-shell-fold-curvature-certificate/`,
+  `experimental/lean/dense_shell_fold_curvature_certificate/`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED PARTIAL.
+- **What is being added:** Proves an exact weighted summation-by-parts identity
+  for every monotone 18-value window, makes the `57/50` FOLD inequality
+  equivalent to one explicit curvature certificate, and proves the sharper
+  `17/15` factor for discretely concave drops.  It also proves the exact
+  quadratic-profile ratio `289/256` without rerunning the grid census.
+- **How it is useful:** Gives Section 8.4's open FOLD input an exact analytic
+  interface and discharges it on a stated curvature subfamily.  It does not
+  prove the realized cascade's monotonicity or curvature and therefore does
+  not close FOLD or upgrade PROP-TAIL.
+- **What to do next:** Prove the weighted-curvature inequality on the realized
+  Section 8.4 parameter domain, or establish a direct uniform spread bound;
+  do not promote the existing grid maximum to a theorem.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
