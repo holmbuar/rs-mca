@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - C9 convention, normalization, and exact-line realizability audit
+
+- **Agent/model:** Codex (GPT-5), with three independent Codex subagent
+  audits of the active \(R\)-convention, true-prefix fiber arithmetic, and
+  RS/MCA realizability.
+- **Files added or changed:**
+  `experimental/notes/audits/c9_true_r2_shell_realizability.md`,
+  `experimental/scripts/verify_c9_true_r2_shell_realizability.py`, and
+  `experimental/agents-log.md`.
+- **Status:** FIXED / AUDIT / OPEN GAP.
+- **What is being added:** The packet proves that the integrated 152-support
+  direct-Sidon certificate uses effective depth one and residual-derived
+  normalization, so it does not instantiate the current full-slice primitive
+  C9 interface and in fact satisfies the current quantitative bounds.  It also
+  gives a corrected 1,052-slope finite depth-one line and an independently
+  verified complete true-depth-two shell family with exact arbitrary-domain
+  MCA slopes.
+- **How it is useful:** It removes a stale hard-input-2 falsifier, confirms
+  algebraic prefix-to-line realizability on arbitrary domains, and localizes
+  the actual remaining obligation to smooth/circle first-match ownership and
+  possible post-factor balanced-core typing and, if typed there, ray payment.
+  It does not claim the shell is an active primitive leaf or a new floor beyond
+  the existing true-depth-two packet.
+- **What to do next:** Mark the older 152-support packet as superseded for the
+  current quantitative interface; then either construct a smooth/circle
+  survivor or prove an explicit C1--C8 owner and profile-scale slope payment
+  for the block-product family.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
