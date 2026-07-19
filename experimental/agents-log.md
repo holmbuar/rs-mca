@@ -76,6 +76,36 @@ Keep entries concise and link to the relevant files.
   envelopes as threshold progress.  For #974, keep the result as a quotient-
   ownership regression test, not as a smooth/circle-domain theorem.  For #975,
   use the punch-list when preparing the next Paving revision.
+### 2026-07-19 - Complete-fiber subset-packing Lean compiler
+
+- **Agent/model:** Codex (GPT-5.6), with independent proof and source audits.
+- **Files added or changed:**
+  `experimental/lean/complete_fiber_subset_packing/`,
+  `experimental/notes/l2/complete_fiber_subset_packing_formalization.md`,
+  `experimental/scripts/verify_complete_fiber_subset_packing_formalization.py`,
+  and `experimental/agents-log.md`.
+- **Status:** PROVED / AUDIT.
+- **What is being added:** A Lean 4.28 / Mathlib proof of the exact fixed-size
+  subset-packing compiler and its arbitrary-field equation-(2) complete-fiber
+  wrapper.  For an arbitrary object set, the generic theorem derives
+  finiteness and the bound
+  `choose(|ground|,h+1) / choose(e,h+1)` from exact block size, ground-set
+  containment, pairwise intersection at most `h`, and `h+1 <= e`.
+- **How it is useful:** Formalizes the entire elementary double-counting step,
+  then imports the equation-(1) complete-fiber intersection theorem and
+  instantiates the ground set, block map, and fixed-`e` received-list family.
+  Finiteness of the source-indexed family is derived rather than assumed.
+- **Verification:** Clean integrated `lake build` completed in `8029` jobs; the exported
+  theorem has no decidable-equality binder and depends only on
+  `[propext, Classical.choice, Quot.sound]`; the fail-closed verifier passed
+  `78/78` checks and caught `26/26` mutations in normal and optimized Python.
+  Independent proof and source audits returned `GO` after the live upstream
+  rebase and confirmed the exact equation-(2) wrapper and stated boundaries.
+- **What to do next:** If needed, add the separate normalization
+  `(powerImage H c).card = n/c`; the theorem already uses the exact source
+  quantity `N_c=|Q_c|`.  This packet does not formalize the Johnson-ball
+  equation (3), deployed arithmetic, the residual `1792`-profile cap, Grand
+  List, Grand MCA, or exact-threshold closure.
 
 ### 2026-07-18 - Reviewed PR integration sweep
 
