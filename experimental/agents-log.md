@@ -30,6 +30,51 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Marked-puncture recursion wrapper formalization
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Source status paragraph
+  `experimental/notes/thresholds/route_d_marked_puncture_contact_recursion_v1.md @ 03513a8f`;
+  Lean proofs
+  `experimental/lean/route_d_marked_puncture_contact_recursion_v1/RouteDMarkedPunctureContactRecursionV1.lean @ 03513a8f`;
+  theorem map
+  `experimental/lean/route_d_marked_puncture_contact_recursion_v1/README.md @ 03513a8f`;
+  focused audit
+  `experimental/notes/thresholds/route_d_marked_puncture_recursion_formalization.md @ 03513a8f`;
+  and fail-closed correspondence verifier
+  `experimental/scripts/verify_route_d_marked_puncture_recursion_formalization.py @ 03513a8f`;
+  PR #964, immutable proof-payload head `03513a8f`.
+- **Status:** PROVED
+- **What is being added:** The three generic declarations formerly marked
+  `sorry` now have Std-only Lean proofs.  The carried-`Q` theorem constructs the
+  exact parent/child subtype equivalence from the supplied structural and
+  inverse-law hypotheses; the least-contact theorem packages supplied
+  existence and uniqueness into the disjoint first-match predicate; and the
+  hereditary theorem composes carried membership, deletion heredity, coarse
+  acceptance, and the supplied inclusion-cardinality principle before summing
+  pointwise bounds.  The theorem signatures are unchanged from source packet
+  #918 (head `5343c587`, integrated at `3404d21b`).
+- **How it is useful:** This removes three actual proof placeholders from a
+  marked first-match recursion package and kernel-checks reusable carried-key,
+  disjointization, and cardinality wrappers for the witness-atlas and residual
+  recursion tracks.  It does not formalize signed locator deconvolution or the
+  concrete finite tagged union; instantiate executable first-match families;
+  prove deployed first-contact existence/uniqueness, deletion heredity, or a
+  local recursive bound; route a vanishing pivot; construct a root-blind owner;
+  pay a Route-D cell; close a row; or prove an MCA threshold or prize claim.
+- **What to do next:** Instantiate the wrappers only after the literal marked
+  support predicates and structural hypotheses are available; keep the
+  separate owner-forest compiler outside this packet.  CHECK:
+  `cd experimental/lean/route_d_marked_puncture_contact_recursion_v1 && lake clean && lake build`
+  -> `Build completed successfully.` with axiom reports `none`, `none`, and
+  `[propext]` for the three new proofs;
+  `python3 experimental/scripts/verify_route_d_marked_puncture_contact_recursion_v1.py --check`
+  -> `STATUS PROVED`;
+  the same verifier with `--tamper-selftest` -> `caught 11/11 mutations`;
+  `python3 experimental/scripts/verify_route_d_marked_puncture_recursion_formalization.py --check`
+  -> `RESULT: PASS (24/24)`; and the same command with
+  `--tamper-selftest --check` -> `caught 9/9` and the same PASS.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
