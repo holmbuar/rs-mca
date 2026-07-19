@@ -30,6 +30,36 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Rank-nine fixed-basis exact compiler formalization
+
+- **Agent/model:** Codex, GPT-5, formalizing exact arithmetic from Scott
+  Hughes's integrated rank-nine route-cut packet.
+- **Files added or changed:** Added the standalone
+  `experimental/lean/rank9_fixed_basis_exact_compiler/` package and theorem
+  map, the focused formalization note, this log entry, and
+  `experimental/scripts/verify_rank9_fixed_basis_exact_compiler.py`.
+- **Status:** PROVED for the exact finite compiler statements; selector,
+  affine-line, MDS, and five-pencil realization statements are not formalized.
+- **What is being added:** Source-exact definitions and declarations for Eqs.
+  (1.4), (3.1)--(3.2), and (4.1)--(4.5) of
+  `experimental/notes/m1/m1_kb_branch3_rank9_fixed_basis_fibre_route_cut_v1.md`
+  at `3404d21`: standard binomial semantics, the all-carrier threshold and
+  interval equivalences, exact finite multiplicity/excess sums, the sharp
+  aggregate allowance, the cap-20 compiler with its sharper printed bound,
+  and the aggregate target compiler. All mapped theorems are kernel-checked;
+  none are statements-only. Eq. (5.4)'s realization is explicitly excluded.
+- **How it is useful:** This locks the finite integer boundary consumed by the
+  rank-nine fixed-basis route cut and its exact list-level compiler, preventing
+  binomial, quantifier, quotient, rounding, and one-step-sharpness drift without
+  promoting the missing deployed aggregate-excess input or any ledger payment.
+- **What to do next:** Formalize the affine-word-line and disjoint-zero
+  incidence layer only with its exact selector hypotheses, then seek a genuine
+  proof or counterexample for Eq. (4.6). Reproduce this packet with
+  `cd experimental/lean/rank9_fixed_basis_exact_compiler && lake clean && lake build`;
+  expect a successful build, then run
+  `python3 experimental/scripts/verify_rank9_fixed_basis_exact_compiler.py --tamper-selftest --check`
+  and expect `RESULT: PASS (73/73)` plus `tamper-selftest: caught 12/12`.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
