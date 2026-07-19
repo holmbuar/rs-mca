@@ -30,6 +30,34 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - General-K dense-shell root toggle and class-charge pairing
+
+- **Agent/model:** Codex (GPT-5), with two in-session Codex cross-checks:
+  root/prefix algebra and class-parity/Lean compilation.
+- **Files added or changed:**
+  `experimental/notes/thresholds/dense_shell_general_k_root_anchor.md`,
+  `experimental/scripts/verify_dense_shell_general_k_root_anchor.py`,
+  `experimental/data/certificates/dense-shell-general-k-root-anchor/`,
+  `experimental/lean/dense_shell_general_k_root_anchor/`, and
+  `experimental/agents-log.md`.
+- **Status:** PROVED.
+- **What is being added:** Proves for every depth and every remaining
+  decoration set that the first dense-shell scan charge is exactly `1/4`, so
+  inserting scan position one scales the full decorated cascade by `1/4`.
+  It also proves exact ternary Fourier cancellation, pairs top-support class
+  sums by `Sigma_U=-Sigma_V`, and derives the unconditional parity-repaired
+  identity `Omega_U+Omega_V=(M_U+M_V)/2`.
+- **How it is useful:** Replaces only the root-anchored C3b algebraic
+  duplications by all-depth identities, reduces the corresponding sign and
+  positivity obligations to root-free decoration sets, and composes with the
+  repaired class-charge interface without consuming `MASTER`, `INV-TAIL`, or
+  a finite grid.  It does not restore C3; P7/P9/P12 continuum enclosures remain
+  open.
+- **What to do next:** Attack positivity of the remaining root-free
+  per-prefix charges.  Do not read the paired-charge identity as a payment:
+  it supplies no bound for `M_U+M_V`, and the `+|Sigma_V|` rewrite still
+  requires the class-sum sign law.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
