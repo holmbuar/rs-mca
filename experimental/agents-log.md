@@ -30,6 +30,53 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Audit PR #905 certificate source binding
+
+- **Agent/model:** Codex (GPT-5), crediting Vadim Avdeev for the audited
+  construction and Holm Buar with the Claude audit team for #911's original
+  symbolic audit and stale-manifest catch.
+- **Files added or changed:** Added
+  `experimental/notes/audits/dense_shell_transfer_shape_cert_binding_audit.md`
+  and
+  `experimental/scripts/verify_dense_shell_transfer_shape_cert_binding_audit.py`.
+  Audited `experimental/data/certificates/dense-shell-transfer-shape/`
+  `{dense_shell_transfer_shape.json,SHA256SUMS.txt}`,
+  `experimental/notes/thresholds/dense_shell_transfer_shape.md`,
+  `experimental/scripts/{verify_dense_shell_transfer_shape_arb.py,replay_dense_shell_transfer_shape.py}`,
+  and the class-charge note/verifier at PR #905 head `00009641` and integration
+  commit `3404d21`; anchors are certificate fields, note section 7,
+  `certificate_payload` / `--check`, wrapper order, and #911 head `8d47b40`
+  finding S1.
+- **Status:** AUDIT — `OPEN GAP`; SHOULD — CERT BINDING/STALENESS. No Arb
+  replay and no mathematical counterexample.
+- **What is being added:** A transcript-only proof that all six SHA-256 fields
+  inside #905's committed `pass: true` certificate mismatch the exact producer
+  bytes (`6/6` mismatches at both `00009641` and `3404d21`). A timestamped,
+  SHA-256-pinned
+  PR-body snapshot identifies the committed payload, but its `artifact hashes
+  PASS` line contradicts the already-known `10/10` manifest mismatch. The
+  self-contained stdlib verifier embeds the full hashes and five semantic
+  mutations.
+- **How it is useful:** This strengthens #911's packaging diagnosis: the
+  certificate itself, not only `SHA256SUMS.txt`, has stale provenance, so the
+  non-replayed finite Arb leg cannot be treated as source-bound `PROVED`
+  evidence. The repaired class-charge ledger at `3404d21` already contains the
+  impact by keeping `INV-TAIL` open modulo #905; no paper claim or ledger value
+  moves here.
+- **What to do next:** Recover the historical six-file source bundle with both
+  a bound transcript and an audited bridge to the current obligations, or
+  re-emit the certificate and manifest from the exact committed bytes in a
+  capable `python-flint==0.9.0` environment, then bind a complete successful
+  transcript.
+  Replay this audit with
+  `python3 -B experimental/scripts/verify_dense_shell_transfer_shape_cert_binding_audit.py`
+  and
+  `python3 -B experimental/scripts/verify_dense_shell_transfer_shape_cert_binding_audit.py --tamper-selftest`,
+  then recompute pinned Git blobs with
+  `python3 -B experimental/scripts/verify_dense_shell_transfer_shape_cert_binding_audit.py --verify-tree`;
+  expect `RESULT: PASS (11/11)`, `TAMPER RESULT: PASS (5/5)`, and
+  `TREE RESULT: PASS (9/9)`.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
