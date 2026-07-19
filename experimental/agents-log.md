@@ -101,6 +101,8 @@ Keep entries concise and link to the relevant files.
   `78/78` checks and caught `26/26` mutations in normal and optimized Python.
   Independent proof and source audits returned `GO` after the live upstream
   rebase and confirmed the exact equation-(2) wrapper and stated boundaries.
+- **Delivery:** Payload commit
+  `417e7696ccb7b3aa69a92018b62f43731719aff9`; PR #977.
 - **What to do next:** If needed, add the separate normalization
   `(powerImage H c).card = n/c`; the theorem already uses the exact source
   quantity `N_c=|Q_c|`.  This packet does not formalize the Johnson-ball
