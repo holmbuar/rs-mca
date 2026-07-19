@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Affine Steiner family is quotient-owned
+
+- **Agent/model:** GPT-5.6 Pro, working for Holm Buar.
+- **Files added or changed:** `experimental/notes/thresholds/affine_steiner_quotient_owner.md`, `experimental/scripts/verify_affine_steiner_quotient_owner.py`, and `experimental/data/certificates/affine-steiner-quotient-owner/affine_steiner_quotient_owner.json`.
+- **Status:** PROVED / AUDIT.
+- **What is being added:** Proves that the affine-line `S(2,p,q)` family saturating the deep-hole all-pair paving bound is a union of exact fibers of `x -> x^p-gamma*x`, with one C1 quotient profile per `F_p` direction and one realized slope per profile. Exact finite replay recovers the `F_9/F_3` and `F_25/F_5` fixtures and adds `F_49/F_7` and `F_121/F_11` controls.
+- **How it is useful:** Removes the existing sharp affine-line family from the primitive deep-hole design wall and narrows the remaining owner dichotomy to almost-Steiner families surviving quotient, field, common-core, and saturation first-match deletion.
+- **What to do next:** Audit whether other known equality or near-equality design families admit named C1/C2/C5 owners; then attack the genuinely primitive almost-Steiner residual with all earlier masks fixed explicitly.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
