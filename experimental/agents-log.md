@@ -30,6 +30,40 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Complete-fiber intersection Lean proof
+
+- **Agent/model:** Codex (GPT-5.6), with two independent Codex proof/source
+  audits.
+- **Files added or changed:**
+  `experimental/lean/dyadic_complete_fiber_slicing/`,
+  `experimental/notes/l2/dyadic_complete_fiber_slicing_route_cut.md`,
+  `experimental/notes/l2/dyadic_complete_fiber_intersection_formalization.md`,
+  `experimental/scripts/verify_dyadic_complete_fiber_intersection_formalization.py`,
+  and `experimental/agents-log.md`.
+- **Status:** PROVED / AUDIT.
+- **What is being added:** Replaced the standalone statement target with a
+  kernel-checked proof of
+  `DyadicCompleteFiberSlicing.completeFiberIntersection`, exactly matching
+  source equation (1).  Added a pinned Lean 4.28 / Mathlib package,
+  theorem-by-theorem source map, proof-boundary note, and fail-closed verifier.
+- **How it is useful:** Certifies the arbitrary-received-word root-intersection
+  compiler: distinct degree-`< K` list polynomials share at most
+  `floor((K-1)/c)` canonical complete power fibers.  This discharges a concrete
+  L2 field-theoretic formalization target while keeping the residual ledger
+  explicit.
+- **Verification:** Clean `lake build` completed successfully in `8027` jobs;
+  the theorem depends only on `[propext, Classical.choice, Quot.sound]`;
+  placeholder/native-decision scans and `git diff --check` passed; the
+  formalization verifier passed `61/61` checks and caught `19/19` mutations in
+  normal and optimized Python; the existing arithmetic certificate and its
+  canonical output passed their pinned SHA-256 replay.  Both independent
+  audits returned `GO` and confirmed that the local `Classical.decEq F` does
+  not become a public theorem parameter.
+- **What to do next:** Formalize the separate packing consequences (2)--(3)
+  if they become active consumers.  This packet does not prove the deployed
+  integer ledger, the residual `1792`-profile cap, GRS/syndrome transport,
+  Grand List, Grand MCA, or an exact-threshold conclusion.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
