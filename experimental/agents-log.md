@@ -41,7 +41,8 @@ Keep entries concise and link to the relevant files.
   `experimental/scripts/verify_c3_planted_divisor_census.py`,
   `experimental/scripts/verify_c3_planted_divisor_sigma_formalization.py`,
   `experimental/data/certificates/c3-planted-divisor-census/c3_planted_divisor_census.json`,
-  and `experimental/agents-log.md`.
+  and `experimental/agents-log.md`; PR #970, immutable proof-payload commit
+  `24aff1aa874a95d4f7c5b1d46245e96a7e3f9a89`.
 - **Status:** PROVED / AUDIT.
 - **What is being added:** A direct core-Lean dyadic proof of
   `sigmaOf N ≤ N * (1 + Nat.log2 N)` under the source's printed `N ≥ 1`
@@ -57,7 +58,13 @@ Keep entries concise and link to the relevant files.
   or a threshold.
 - **What to do next:** Formalize the all-`N` coset-census identity or another
   source-scoped first-match-atlas elementary kernel; keep C7/C8/C9 and the
-  row-dependent common-factor/resultant branches explicitly open.
+  row-dependent common-factor/resultant branches explicitly open.  CHECK:
+  warning-free clean Lean 4.14 build; all three public declarations use
+  exactly `[propext, Classical.choice, Quot.sound]`; original verifier
+  `PASS (82/82)` with tamper `PASS (56/56)`; correspondence verifier
+  `PASS (50/50)` with `22/22` mutations rejected under normal and optimized
+  Python; three independent final reviews `GO`; generated `.lake` artifacts
+  removed.
 
 ### 2026-07-18 - Reviewed PR integration sweep
 
