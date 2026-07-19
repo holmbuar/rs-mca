@@ -59,6 +59,8 @@ Keep entries concise and link to the relevant files.
   canonical output passed their pinned SHA-256 replay.  Both independent
   audits returned `GO` and confirmed that the local `Classical.decEq F` does
   not become a public theorem parameter.
+- **Delivery:** Payload commit
+  `11f0ad48e0d649eec8000b7a51cbe295d5e4d420`; PR #973.
 - **What to do next:** Formalize the separate packing consequences (2)--(3)
   if they become active consumers.  This packet does not prove the deployed
   integer ledger, the residual `1792`-profile cap, GRS/syndrome transport,
