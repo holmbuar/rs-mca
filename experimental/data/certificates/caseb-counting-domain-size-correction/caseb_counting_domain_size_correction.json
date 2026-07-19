@@ -1,0 +1,399 @@
+{
+  "asymptotic_half_rate_family": {
+    "base_entropy_gate": "2^30 >= 61^5",
+    "base_entropy_gate_holds": true,
+    "odd_step_ratio_gate": "2*61^5 > 63^5",
+    "odd_step_ratio_gate_holds": true,
+    "sample_rows": [
+      {
+        "ambient_bits_floor": 29,
+        "ambient_exponent_loss_bits_floor": 4,
+        "bad_slope_lower_bits_floor": 25,
+        "e": 5,
+        "k": 25,
+        "n": 60,
+        "p": 61
+      },
+      {
+        "ambient_bits_floor": 46,
+        "ambient_exponent_loss_bits_floor": 5,
+        "bad_slope_lower_bits_floor": 41,
+        "e": 7,
+        "k": 45,
+        "n": 100,
+        "p": 101
+      },
+      {
+        "ambient_bits_floor": 119,
+        "ambient_exponent_loss_bits_floor": 6,
+        "bad_slope_lower_bits_floor": 112,
+        "e": 15,
+        "k": 120,
+        "n": 250,
+        "p": 251
+      },
+      {
+        "ambient_bits_floor": 251,
+        "ambient_exponent_loss_bits_floor": 7,
+        "bad_slope_lower_bits_floor": 243,
+        "e": 28,
+        "k": 249,
+        "n": 508,
+        "p": 509
+      },
+      {
+        "ambient_bits_floor": 498,
+        "ambient_exponent_loss_bits_floor": 8,
+        "bad_slope_lower_bits_floor": 489,
+        "e": 50,
+        "k": 499,
+        "n": 1008,
+        "p": 1009
+      },
+      {
+        "ambient_bits_floor": 2040,
+        "ambient_exponent_loss_bits_floor": 10,
+        "bad_slope_lower_bits_floor": 2029,
+        "e": 170,
+        "k": 2044,
+        "n": 4098,
+        "p": 4099
+      }
+    ],
+    "theorem": "For primes p->infinity, n=p-1, m=n/2, w=4, e=max{j:p^(2j)<=2^n}, Q=p^e, the identity-prefix list has L>=Q and theorem (4.2) gives B_MCA(m)>=ceil((Q-n)/(k+1))=Q/exp(o(n)); hence every subexponential target is crossed.",
+    "threshold_p": 61,
+    "w": 4
+  },
+  "claim": "The integrated Case-B polynomial-base calibration uses binom(|B|,m) where the support layer is binom(|D|,m). Its printed m=2e rows are not merely below average: the entire support layer is smaller than 2^-128|F|, so no prefix fiber can be prize-relevant. The broad counting-open conclusion survives only after replacing m=2e by a fixed-density choice such as m=n/2; explicit D=F_p^* rows show that this repair is available on genuine smooth multiplicative domains. On every corrected row, the existing collision-aware pole theorem already gives more than 2^-128|F| distinct bad slopes. The same composition gives an infinite smooth multiplicative family with |F|/exp(o(n)) bad slopes, crossing every subexponential target; only fixed-epsilon constant-fraction coverage remains open.",
+  "corrected_fixed_density_rows": [
+    {
+      "C": 2,
+      "ambient_bits": 8176,
+      "average_field_scale_candidate": true,
+      "average_surplus_bits_floor": 8088,
+      "average_target_scale_candidate": true,
+      "case_b": true,
+      "collision_aware": {
+        "bad_slope_lower_bits_floor": 8163,
+        "collision_aware_ge_simple_lower": true,
+        "normalized_loss_bits_floor": 12,
+        "prefix_list_bits_floor": 16264,
+        "prefix_list_ge_ambient": true,
+        "simple_q_over_k_lower_bits_floor": 8163,
+        "target_headroom_bits_floor": 115,
+        "target_relevant_at_2^-128": true
+      },
+      "density_den": 16384,
+      "density_num": 8192,
+      "e": 292,
+      "k": 8187,
+      "log2_q0": 28,
+      "m": 8192,
+      "n": 16384,
+      "q0": 268435456,
+      "total_supports_bits_floor": 16376,
+      "w": 4
+    },
+    {
+      "C": 3,
+      "ambient_bits": 32736,
+      "average_field_scale_candidate": true,
+      "average_surplus_bits_floor": 32599,
+      "average_target_scale_candidate": true,
+      "case_b": true,
+      "collision_aware": {
+        "bad_slope_lower_bits_floor": 32721,
+        "collision_aware_ge_simple_lower": true,
+        "normalized_loss_bits_floor": 14,
+        "prefix_list_bits_floor": 65335,
+        "prefix_list_ge_ambient": true,
+        "simple_q_over_k_lower_bits_floor": 32721,
+        "target_headroom_bits_floor": 113,
+        "target_relevant_at_2^-128": true
+      },
+      "density_den": 65536,
+      "density_num": 32768,
+      "e": 682,
+      "k": 32763,
+      "log2_q0": 48,
+      "m": 32768,
+      "n": 65536,
+      "q0": 281474976710656,
+      "total_supports_bits_floor": 65527,
+      "w": 4
+    },
+    {
+      "C": 2,
+      "ambient_bits": 131040,
+      "average_field_scale_candidate": true,
+      "average_surplus_bits_floor": 130950,
+      "average_target_scale_candidate": true,
+      "case_b": true,
+      "collision_aware": {
+        "bad_slope_lower_bits_floor": 131023,
+        "collision_aware_ge_simple_lower": true,
+        "normalized_loss_bits_floor": 16,
+        "prefix_list_bits_floor": 261990,
+        "prefix_list_ge_ambient": true,
+        "simple_q_over_k_lower_bits_floor": 131023,
+        "target_headroom_bits_floor": 111,
+        "target_relevant_at_2^-128": true
+      },
+      "density_den": 262144,
+      "density_num": 131072,
+      "e": 3640,
+      "k": 131067,
+      "log2_q0": 36,
+      "m": 131072,
+      "n": 262144,
+      "q0": 68719476736,
+      "total_supports_bits_floor": 262134,
+      "w": 4
+    }
+  ],
+  "exact_gates": {
+    "asymptotic_boundary": "if m/n->beta, e log2(q0)/n->c, and w log2(q0)/n->lambda, then c+lambda=H2(beta) is the average-fiber counting boundary",
+    "asymptotic_half_rate_obstruction": "for primes p->infinity, D=F_p^*, m=(p-1)/2, w=4, and e maximal with p^(2e)<=2^(p-1), one has L>=Q=p^e and M(L)=Q/exp(o(p))",
+    "collision_aware_consequence": "if L=ceil(binom(n,m)/q0^w) >= Q=q0^e, then theorem (4.2) gives M(L) >= ceil((Q-n)/(k+1)), k=m-w-1",
+    "general_subexponential_target_region": "if c+lambda<H2(beta), then L/Q=exp(Omega(n)) and theorem (4.2) gives B_MCA(m)>=Q/exp(o(n)), crossing every T_n=exp(o(n))",
+    "necessary_for_any_target_relevant_fiber": "binom(n,m) > floor(q0^e / 2^tau), equivalently binom(n,m) * 2^tau > q0^e",
+    "sufficient_for_a_depth_w_field_sized_fiber": "ceil(binom(n,m)/q0^w) >= q0^e, equivalently binom(n,m) > q0^w * (q0^e - 1)"
+  },
+  "gate_fixtures": [
+    {
+      "e": 10,
+      "m": 5,
+      "n": 32,
+      "necessary_target_gate": false,
+      "q0": 1048576,
+      "sufficient_average_gate": false,
+      "w": 1
+    },
+    {
+      "e": 2,
+      "m": 5,
+      "n": 32,
+      "necessary_target_gate": true,
+      "q0": 64,
+      "sufficient_average_gate": false,
+      "w": 2
+    },
+    {
+      "e": 2,
+      "m": 32,
+      "n": 64,
+      "necessary_target_gate": true,
+      "q0": 64,
+      "sufficient_average_gate": true,
+      "w": 1
+    }
+  ],
+  "independent_arithmetic_routes": {
+    "domain_binomials": "math.comb = Legendre-prime-exponent reconstruction",
+    "extension_degree": "integer binary search for max e with q0^(2e) <= 2^n",
+    "wrong_universe_binomials": "math.comb = exact multiplicative recurrence"
+  },
+  "nonclaims": [
+    "no fixed-epsilon constant-fraction growing-e subset-product equidistribution theorem",
+    "no C7 semantic survival theorem",
+    "no removal of FI-field'",
+    "no deployed adjacent-row inequality",
+    "no main-paper theorem or official score movement"
+  ],
+  "old_m_eq_2e_rows": [
+    {
+      "C": 2,
+      "ambient_bits": 8176,
+      "bit_deficit_below_target_floor": 4418,
+      "case_b": true,
+      "density_den": 16384,
+      "density_num": 584,
+      "e": 292,
+      "k": 579,
+      "log2_q0": 28,
+      "m": 584,
+      "n": 16384,
+      "q0": 268435456,
+      "target_adjusted_ambient_bits": 8048,
+      "total_supports_bits_floor": 3630,
+      "true_average_feasible": false,
+      "universal_target_impossible": true,
+      "w": 4,
+      "wrong_universe_binom_bits_floor": 11821,
+      "wrong_universe_feasible": true
+    },
+    {
+      "C": 3,
+      "ambient_bits": 32736,
+      "bit_deficit_below_target_floor": 23048,
+      "case_b": true,
+      "density_den": 65536,
+      "density_num": 1364,
+      "e": 682,
+      "k": 1359,
+      "log2_q0": 48,
+      "m": 1364,
+      "n": 65536,
+      "q0": 281474976710656,
+      "target_adjusted_ambient_bits": 32608,
+      "total_supports_bits_floor": 9560,
+      "true_average_feasible": false,
+      "universal_target_impossible": true,
+      "w": 4,
+      "wrong_universe_binom_bits_floor": 53229,
+      "wrong_universe_feasible": true
+    },
+    {
+      "C": 2,
+      "ambient_bits": 131040,
+      "bit_deficit_below_target_floor": 82925,
+      "case_b": true,
+      "density_den": 262144,
+      "density_num": 7280,
+      "e": 3640,
+      "k": 7275,
+      "log2_q0": 36,
+      "m": 7280,
+      "n": 262144,
+      "q0": 68719476736,
+      "target_adjusted_ambient_bits": 130912,
+      "total_supports_bits_floor": 47987,
+      "true_average_feasible": false,
+      "universal_target_impossible": true,
+      "w": 4,
+      "wrong_universe_binom_bits_floor": 179174,
+      "wrong_universe_feasible": true
+    }
+  ],
+  "packet_binding": {
+    "experimental/notes/audits/caseb_counting_domain_size_correction.md": "ef1382188ee1a4b34813560d3439c6432e9220845988ce98ee555dbcf1b490d4",
+    "experimental/scripts/verify_caseb_counting_domain_size_correction.py": "120443125943f5ffaff94112609d72210686e774f11312a629cf6627b4f53287"
+  },
+  "payload_sha256": "e51b20382e0816ca0c610dfa6896f22ce0560035867514a725e8cb207f65e038",
+  "schema": "rs-mca-caseb-counting-domain-size-correction-v1",
+  "source_binding": [
+    {
+      "blob_sha1": "04a75470d173c99a45d92fb7ddefc9dabb8c9775",
+      "markers": [
+        "q0 = n^C",
+        "m = 2e",
+        "log2|G| ~ m log2 q0"
+      ],
+      "path": "experimental/notes/thresholds/caseb_equidistribution.md"
+    },
+    {
+      "blob_sha1": "c5ef7c502108d1bed95068acab74f338cf0631c1",
+      "markers": [
+        "PRIZE regime: POLY-SIZE base field q0 = n^C",
+        "m = 2 * e",
+        "logbinom = m * logq0"
+      ],
+      "path": "experimental/scripts/verify_caseb_equidistribution.py"
+    },
+    {
+      "blob_sha1": "466b35c561b6142013f32a48012b8fafda4e09c3",
+      "markers": [
+        "m_N/N\\in[\\alpha,1-\\alpha]",
+        "\\label{thm:collision-aware-pole}",
+        "\\frac{L(q-n)}{q-n+k(L-1)}",
+        "L_m=\\lceil\\binom nm\\abs\\B^{-w}\\rceil"
+      ],
+      "path": "experimental/asymptotic_rs_mca_frontiers.tex"
+    }
+  ],
+  "status": "COUNTEREXAMPLE / PROVED EXPONENTIAL-FIELD LOWER / OPEN FIXED-EPSILON CONSTANT FRACTION",
+  "structured_prime_multiplicative_rows": [
+    {
+      "ambient_bits_floor": 498,
+      "average_field_scale_candidate": true,
+      "average_surplus_bits_floor": 463,
+      "average_target_scale_candidate": true,
+      "case_b": true,
+      "collision_aware": {
+        "bad_slope_lower_bits_floor": 489,
+        "collision_aware_ge_simple_lower": true,
+        "normalized_loss_bits_floor": 8,
+        "prefix_list_bits_floor": 962,
+        "prefix_list_ge_ambient": true,
+        "simple_q_over_k_lower_bits_floor": 489,
+        "target_headroom_bits_floor": 119,
+        "target_relevant_at_2^-128": true
+      },
+      "density_den": 1008,
+      "density_num": 504,
+      "domain": "F_p^*",
+      "e": 50,
+      "half_rate_degree_exact": true,
+      "k": 499,
+      "m": 504,
+      "n": 1008,
+      "p": 1009,
+      "prefix_adjusted_field_bits_floor": 538,
+      "q0": 1009,
+      "total_supports_bits_floor": 1002,
+      "w": 4
+    },
+    {
+      "ambient_bits_floor": 2040,
+      "average_field_scale_candidate": true,
+      "average_surplus_bits_floor": 2003,
+      "average_target_scale_candidate": true,
+      "case_b": true,
+      "collision_aware": {
+        "bad_slope_lower_bits_floor": 2029,
+        "collision_aware_ge_simple_lower": true,
+        "normalized_loss_bits_floor": 10,
+        "prefix_list_bits_floor": 4043,
+        "prefix_list_ge_ambient": true,
+        "simple_q_over_k_lower_bits_floor": 2029,
+        "target_headroom_bits_floor": 117,
+        "target_relevant_at_2^-128": true
+      },
+      "density_den": 4098,
+      "density_num": 2049,
+      "domain": "F_p^*",
+      "e": 170,
+      "half_rate_degree_exact": true,
+      "k": 2044,
+      "m": 2049,
+      "n": 4098,
+      "p": 4099,
+      "prefix_adjusted_field_bits_floor": 2088,
+      "q0": 4099,
+      "total_supports_bits_floor": 4091,
+      "w": 4
+    },
+    {
+      "ambient_bits_floor": 8191,
+      "average_field_scale_candidate": true,
+      "average_surplus_bits_floor": 8155,
+      "average_target_scale_candidate": true,
+      "case_b": true,
+      "collision_aware": {
+        "bad_slope_lower_bits_floor": 8178,
+        "collision_aware_ge_simple_lower": true,
+        "normalized_loss_bits_floor": 13,
+        "prefix_list_bits_floor": 16346,
+        "prefix_list_ge_ambient": true,
+        "simple_q_over_k_lower_bits_floor": 8178,
+        "target_headroom_bits_floor": 114,
+        "target_relevant_at_2^-128": true
+      },
+      "density_den": 16410,
+      "density_num": 8205,
+      "domain": "F_p^*",
+      "e": 585,
+      "half_rate_degree_exact": true,
+      "k": 8200,
+      "m": 8205,
+      "n": 16410,
+      "p": 16411,
+      "prefix_adjusted_field_bits_floor": 8247,
+      "q0": 16411,
+      "total_supports_bits_floor": 16402,
+      "w": 4
+    }
+  ],
+  "target_bits": 128,
+  "upstream_base": "6f4e918f27a11995d3951f4ebe7546d4add0f345"
+}

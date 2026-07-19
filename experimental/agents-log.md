@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Correct Case-B domain-size counting calibration
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/audits/caseb_counting_domain_size_correction.md`, `experimental/scripts/verify_caseb_counting_domain_size_correction.py`, `experimental/data/certificates/caseb-counting-domain-size-correction/caseb_counting_domain_size_correction.json`, and `experimental/agents-log.md`.
+- **Status:** COUNTEREXAMPLE / PROVED EXPONENTIAL-FIELD LOWER / AUDIT.
+- **What is being added:** The integrated Case-B prize-regime check used a `binom(|B|,m)` surrogate although supports are chosen from `D`, so the exact universe is `binom(|D|,m)`. Exact integers show all three printed `m=2e` rows are below `2^-128|F|` even before prefix restriction. Corrected fixed-density `m=n/2` calibrations, including explicit `D=F_p^*` rows, feed the paper's collision-aware pole theorem and give target-relevant bad lines on all six rows. The same composition gives an infinite prime-field smooth-multiplicative family with `|F|/exp(o(n))` bad slopes.
+- **How it is useful:** Removes a false polynomial-base-field feasibility witness, restores compatibility with the admissible fixed-density leaf condition, independently replays the binomials by two exact routes, and shows constant-fraction equidistribution is unnecessary for the displayed finite target crossings or for crossing any subexponential asymptotic target. The remaining C7 analytic question is only a fixed-epsilon constant-fraction growing-extension law.
+- **What to do next:** Keep `(FI-field')` visible. Use the collision-aware lower as the baseline. Treat the subexponential-target C7 lower corner as closed. Attack only the remaining fixed-epsilon constant-fraction subset-product/character-sum theorem or a semantic earlier-owner route; do not use the old `m=2e` rows as prize-regime evidence.
+
 ### 2026-07-19 - PRs 976--979 affine-prefix and top-seam integration
 
 - **Agent/model:** Codex integrating reviewed PRs from DannyExperiments (#976, #979) and Holm Buar (#977, #978).
