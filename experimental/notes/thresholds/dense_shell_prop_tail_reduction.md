@@ -1173,9 +1173,12 @@ misses at the shallow anchor; SIB-CERT is skipped, an informational SKIPPED line
 printed instead), `--table` (per-level `rho`/`V_17` table, now to `n = 800`),
 `--fallback` (legacy informational alternative chain `(J0 = 430, f = 49/50,
 theta* = 1/2 fixed)`, not part of the certified claim; SIB-CERT and LAM-INV are likewise
-skipped there), and `--tamper-selftest`. **11 core gates determine the RESULT in the
+skipped there), `--tamper-selftest`, and `--emit-cert` (refreshes the certificate's
+`binding` block from the current source bytes — see gate CERT-BIND). **12 core gates
+determine the RESULT in the
 default full mode** (8 in `--quick`/`--fallback`, where SIB-CERT, LAM-INV, and
-FLOOR-DRIFT do not run); 4 informational gates plus the SIB-BAND gap gate (and, in
+FLOOR-DRIFT do not run and CERT-BIND is reported informationally); 4 informational
+gates plus the SIB-BAND gap gate (and, in
 `--quick`/`--fallback`, the SIB-CERT/LAM-INV/FLOOR-DRIFT SKIPPED lines) are printed,
 not counted (SIB-BAND is deliberately marked FAIL to keep the shallow-anchor
 surrogate-vs-real gap visible as a historical exhibit, even though SIB-CERT now closes
@@ -1183,7 +1186,7 @@ that gap at the deep anchor). Every gate's message states its operative index wi
 The full run measures **~380s** (build to `n=800` dominates; LAM-INV's NG=3841 field
 census plus this revision's (C'-CAP) floor-box node census total ~40s — the node
 census's cost is offset by the new memoization of the V15-IA/V17-IA censuses, which
-LAM-INV's ceiling input and the report gates now share; 11/11 core PASS); `--quick` is
+LAM-INV's ceiling input and the report gates now share; 12/12 core PASS); `--quick` is
 unaffected in cost (still a shallow `J0<=200` build); `--fallback` reaches `n=800`
 (V18's grid is shared) but skips the SIB-CERT, LAM-INV, and FLOOR-DRIFT censuses.
 
@@ -1311,6 +1314,24 @@ unaffected in cost (still a shallow `J0<=200` build); `--fallback` reaches `n=80
   at `(800, 999/1000)` — quantifying why no pointwise corner census can discharge this
   clause. Tamper `floordrift-margin` (raises the required drift ratio to `1.0001`,
   above the realized worst — isolated FAIL).
+- **CERT-BIND** [core in the certified full mode; checked but reported informationally
+  under `--quick`/`--fallback`] (this revision). The shipped certificate JSON carries a
+  `binding` block attesting the exact source bytes it certifies: sha256 of this note,
+  the predecessor note (`dense_shell_inv_tail_closure.md` — the stacked #885 source
+  whose prose this packet consumes), the verifier script itself, and the Lean package
+  source (`PropTailReduction.lean`), plus the branch base commit, the run command, and
+  the anchor constants (`J0*`/`f*`, `J0_SIB`/pad, `NG`, `GMAX`, `CPRIME`, `TARGET`) —
+  each checked against the module constant its producing gate consumes, never a second
+  transcription. The gate additionally transcription-checks the cert's own content
+  literals (target, theta-band anchor, SIB-CERT anchor/pad, LAM-INV constants) against
+  the same producers. `--emit-cert` refreshes ONLY the binding block; curated content
+  sections are hand-edited first, then re-emitted, and a plain rerun must PASS — any
+  later note/script/lean edit without a re-emit correctly FAILs the gate. P15 pattern
+  from `verify_dense_shell_class_charges.py` (audit #914's SHOULD item, made a
+  permanent gate by #917); adopted here after two stale-cert incidents in this packet's
+  own history (a round-1 lean literal surviving into round 3; a stale
+  `lean.sibcert_addition` fixed in round 4). Tamper `cert-unbound` (strips the binding
+  block, the pre-P15 shape — isolated FAIL).
 - **V15-GRID THETA** [informational]. `theta_tot <= 1/2` and `theta_win <= 27/100`, grid
   census over 41 parents to `n = 500`; plus the closed-form tangent seminorm `N_free <=
   0.9` (Lemma A1, evaluated at realized profiles only). Measured worst: `theta_tot =

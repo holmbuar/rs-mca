@@ -286,14 +286,14 @@
  "gates": {
   "count_core": 8,
   "count_informational": 4,
-  "count_core_full_mode": 11,
+  "count_core_full_mode": 12,
   "count_core_quick_or_fallback_mode": 8,
-  "list_core": "F3 FLOORS, MAG-BOX (LAM-BOX empirical cross-check), V15-IA THETA-BAND (load-bearing), V16 THETASYMB, V16b WINDOW, V17 FORCING, V17-IA FORCING (load-bearing), V18 VTRACK, SIB-CERT (discharges SIB-BAND -- full mode only), LAM-INV (discharges LAM-BOX and, this revision, C_PRIME_CAP -- full mode only), FLOOR-DRIFT (first-class monitor of FLOOR-PERSIST + the Section 9(v) route-cut negative control -- full mode only, this revision). SIB-CERT, LAM-INV, and FLOOR-DRIFT are SKIPPED with an informational line under --quick/--fallback.",
+  "list_core": "F3 FLOORS, MAG-BOX (LAM-BOX empirical cross-check), V15-IA THETA-BAND (load-bearing), V16 THETASYMB, V16b WINDOW, V17 FORCING, V17-IA FORCING (load-bearing), V18 VTRACK, SIB-CERT (discharges SIB-BAND -- full mode only), LAM-INV (discharges LAM-BOX and, this revision, C_PRIME_CAP -- full mode only), FLOOR-DRIFT (first-class monitor of FLOOR-PERSIST + the Section 9(v) route-cut negative control -- full mode only, this revision). SIB-CERT, LAM-INV, and FLOOR-DRIFT are SKIPPED with an informational line under --quick/--fallback. CERT-BIND (this revision -- certificate binding: sha256 of note/predecessor-note/script/lean sources + branch base commit + anchor constants checked against their producing module constants, plus a transcription cross-check of this file's own content literals; core in full mode, reported informationally under --quick/--fallback).",
   "list_informational": "V15-GRID THETA (robustness), V15-CERT (grid-sampled cross-ref), V17-INFO (G2 negative control), V19 BRIDGE; plus SIB-BAND (the shallow-anchor wobble exhibit, marked FAIL to keep the historical record visible -- discharged elsewhere by SIB-CERT); plus SIB-CERT/LAM-INV/FLOOR-DRIFT SKIPPED lines (quick/fallback only)",
-  "result_full": "11/11 PASS, 197.1s on the build machine (build to n=800 dominates; LAM-INV including the new (C_PRIME_CAP) node census ~42s -- the census cost is offset by the new memoization of the V15-IA/V17-IA censuses, now computed once and shared between LAM-INV's ceiling input and the report gates)",
+  "result_full": "12/12 PASS, 199.9s on the build machine (build to n=800 dominates; the new CERT-BIND gate is hash/equality checks only, sub-ms; census costs unchanged from round 4 -- LAM-INV incl. the (C_PRIME_CAP) node census ~42s, offset by the V15-IA/V17-IA memoization)",
   "default_mode": "full (J0*=500, f*=99/100, PLUS the SIB-CERT deep anchor J0_SIB=800, PAD_SIB=999/1000, PLUS the LAM-INV NG=3841 field census) -- this IS the ship",
-  "flags": "--quick (dev subset, NOT certified; SIB-CERT, LAM-INV, and FLOOR-DRIFT skipped), --table (per-level rho/V17 table the Lean package transcribes, now to n=800), --fallback (legacy informational (430,49/50,theta*=1/2 fixed) chain; SIB-CERT, LAM-INV, and FLOOR-DRIFT skipped), --tamper-selftest",
-  "tampers": 22,
+  "flags": "--quick (dev subset, NOT certified; SIB-CERT, LAM-INV, and FLOOR-DRIFT skipped), --table (per-level rho/V17 table the Lean package transcribes, now to n=800), --fallback (legacy informational (430,49/50,theta*=1/2 fixed) chain; SIB-CERT, LAM-INV, and FLOOR-DRIFT skipped), --tamper-selftest, --emit-cert (refresh this file's binding block from the current source bytes; content sections hand-edited first)",
+  "tampers": 23,
   "tampers_added": [
    "magbox-shrink (MAG-BOX: shrink boxes so realized magnitudes leave them)",
    "theta-ia-sign (V15-IA: flip the census max->min direction; caught by the realized-seminorm floor check; isolated since a lower theta_band only relaxes V17-IA)",
@@ -305,7 +305,8 @@
    "laminv-lip (LAM-INV: the a-posteriori LIP_L comparison threshold alone lowered to 2 (below the realized sup|Lambda'|~2.49) -- isolated to that one self-check line)",
    "laminv-floor (LAM-INV: R1 stress -- restores the pre-widening Lambda^+ floor -1.16 AND forces CPRIME to 2x shipped, 0.008 -- flips the Lambda^+ containment check to FAIL, matching the risk register's own prediction)",
    "cprime-bound-graze (LAM-INV, round 4: double the certified (C_PRIME_CAP) node-census bound alone -- 0.0085 > 3/500, the proved-bound comparison FAILs; field construction, monitored cross-check, and every other gate untouched)",
-   "floordrift-margin (FLOOR-DRIFT, round 4: raise the required drift step ratio to 1.0001, above the realized worst 1.00005212 -- flips only FLOOR-DRIFT)"
+   "floordrift-margin (FLOOR-DRIFT, round 4: raise the required drift step ratio to 1.0001, above the realized worst 1.00005212 -- flips only FLOOR-DRIFT)",
+   "cert-unbound (CERT-BIND, this revision: strip the certificate's binding block -- the pre-P15 unbound shape; the gate must FAIL, isolated)"
   ]
  },
  "lean": {
@@ -321,5 +322,23 @@
   "track": "repo experimental-profile-ledger only: #880's |K|=1 dense-shell class-sum dichotomy and #885's INV-TAIL closure chain",
   "risk_limits": "This packet makes no claim about, and is not on the critical path of, any separately submitted manuscript's conditionals (e.g. a paving-track ePrint submission and its own line-item conditionals). Those are a distinct obligation, entirely out of scope here; nothing in this packet's discharge chain, residual ladder, or consumer framing should be read as bearing on them."
  },
- "discharge_note": "This packet discharges (PROP-TAIL) as a certified-census theorem MODULO exactly two enumerated computed clauses (FOLD, FLOOR-PERSIST) -- zero monitored-only literals -- all gated green at the shipped anchor. (SIB-BAND) is DISCHARGED at a deep anchor (J0=800, pad=999/1000) by gate SIB-CERT's geometric-center wobble census, given (LAM-BOX). (LAM-BOX) itself is DISCHARGED-conditional (this revision) by gate LAM-INV's proved invariant intervals for lam/Lambda^+/Lambda^- -- no new assumption beyond the existing floor box, the existing finite base-case census, and an a-posteriori Lipschitz self-check; the (C'-CAP) cap that basis previously carried as a monitored constant is itself DISCHARGED-conditional (round 4) by the floor-box node census (see discharged_clauses.C_PRIME_CAP), and (FLOOR-PERSIST) is first-class monitored by gate FLOOR-DRIFT with its census-discharge route closed as a route-cut. The Lambda^+ floor is widened -1.16 -> -1.17 (R1 mitigation (b)); every consumer census re-run (V15-IA unaffected, V17-IA/SIB-CERT margins shrink by well under 1%). STATUS=CONDITIONAL: the load-bearing gates V15-IA/V17-IA certify the forced-proportional surrogate at the shallow anchor; SIB-CERT separately certifies the real, non-proportional cascade at the deep anchor; LAM-INV separately proves the magnitude box itself. R-b (sandwich) and R-c (sharp Edgeworth-1) remain OPEN STRENGTHENINGS toward the sharp C/n^2 law, not obligations; R1 mitigation (a) (the exact C' floor-box bound) remains open toward discharging (C'-CAP)."
+ "discharge_note": "This packet discharges (PROP-TAIL) as a certified-census theorem MODULO exactly two enumerated computed clauses (FOLD, FLOOR-PERSIST) -- zero monitored-only literals -- all gated green at the shipped anchor. (SIB-BAND) is DISCHARGED at a deep anchor (J0=800, pad=999/1000) by gate SIB-CERT's geometric-center wobble census, given (LAM-BOX). (LAM-BOX) itself is DISCHARGED-conditional (this revision) by gate LAM-INV's proved invariant intervals for lam/Lambda^+/Lambda^- -- no new assumption beyond the existing floor box, the existing finite base-case census, and an a-posteriori Lipschitz self-check; the (C'-CAP) cap that basis previously carried as a monitored constant is itself DISCHARGED-conditional (round 4) by the floor-box node census (see discharged_clauses.C_PRIME_CAP), and (FLOOR-PERSIST) is first-class monitored by gate FLOOR-DRIFT with its census-discharge route closed as a route-cut. The Lambda^+ floor is widened -1.16 -> -1.17 (R1 mitigation (b)); every consumer census re-run (V15-IA unaffected, V17-IA/SIB-CERT margins shrink by well under 1%). STATUS=CONDITIONAL: the load-bearing gates V15-IA/V17-IA certify the forced-proportional surrogate at the shallow anchor; SIB-CERT separately certifies the real, non-proportional cascade at the deep anchor; LAM-INV separately proves the magnitude box itself. R-b (sandwich) and R-c (sharp Edgeworth-1) remain OPEN STRENGTHENINGS toward the sharp C/n^2 law, not obligations; R1 mitigation (a) (the exact C' floor-box bound) remains open toward discharging (C'-CAP).",
+ "binding": {
+  "commit": "a5750192a2fb4ff7e9f6b2f6bf77fa6652dffda7",
+  "source_sha256": "ef2cf755aa8a704ba7bdffa3c0f0bea18ea43e79d82323ce9e52d8cc5090e3d5",
+  "predecessor_source_sha256": "50e31e5a3633d0ff8bd4aba95d6b300a09717e00b75a28803cc83eeb756828d5",
+  "script_sha256": "4f2cfbc1e19c694a0b3d67817299897c9e75eff8271868236eb290c657b5e413",
+  "lean_sha256": "da0536c74e0c9ff77ef6861a8c87bc093b63218b0a2686969caabc2a170c8287",
+  "command": "python3 experimental/scripts/verify_dense_shell_prop_tail_reduction.py",
+  "anchors": {
+   "j0_star": 500,
+   "f_star": "99/100",
+   "j0_sib": 800,
+   "pad_sib": "999/1000",
+   "ng_lam": 3841,
+   "gmax": "1/200",
+   "cprime": "3/500",
+   "target_rho_prop": 1.02560749
+  }
+ }
 }

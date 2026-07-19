@@ -70,7 +70,7 @@ floor-box node census -- see note Section 8. The arithmetic fact
 rho_prop@i<17(n)<=1.02560749 is supported with margin by every gate; the packet's
 rigor is scoped by the clauses above.
 
-Gates (8 core in --quick/--fallback; 11 core in the default full mode, determine RESULT;
+Gates (8 core in --quick/--fallback; 12 core in the default full mode, determine RESULT;
 informational lines printed but NOT counted):
   F3   [FLOORS]    re-certifies the floor family r_i(J0*,t) at the anchor (positivity,
                    LC-compatibility, the i=0 halving-convention cross-check).
@@ -132,6 +132,16 @@ informational lines printed but NOT counted):
                    PLUS the exact as-consumed floor margins at both anchors, PLUS the
                    note-S9(v) route-cut negative control (informational, inline).
                    SKIPPED (informational line only) under --quick/--fallback.
+  CERT-BIND   [core in the certified full mode; checked but reported informationally
+                   under --quick/--fallback] the shipped certificate JSON carries a
+                   `binding` block attesting the exact source bytes it certifies --
+                   sha256 of the note, the predecessor note (the stacked #885 source),
+                   this script, and the Lean package source, plus the branch base
+                   commit, the run command, and the anchor constants (J0*/f*,
+                   J0_SIB/pad, NG, GMAX, CPRIME, TARGET) checked against the values
+                   this script PRODUCES; plus a transcription cross-check of the
+                   cert's own content literals against the same producers. Any
+                   note/script/lean edit without a re-emit correctly FAILs the gate.
   (informational): SIB-BAND (the shallow-anchor (J0*=500) wobble-extended exhibit +
                    gap, superseded as the discharge by SIB-CERT above), V15-GRID (grid
                    theta census, robustness), V17-INFO (G2 negative control), V19
@@ -141,15 +151,44 @@ Flags: --quick runs a shallow dev-only subset (NOT a certified claim); --table p
 the full per-level rho_prop/V_17 table (transcribed by the Lean package); --fallback
 switches the WHOLE triple atomically to the legacy chain (J0=430, f=49/50, theta*=1/2
 fixed) as an informational alternative; --tamper-selftest runs the tamper suite (each
-isolated to its own report/info line), always at the default (non-quick) depth. stdlib
-only, deterministic.
+isolated to its own report/info line), always at the default (non-quick) depth;
+--emit-cert refreshes the certificate's binding block from the CURRENT source bytes
+(run after ANY note/script/lean edit; curated content sections are hand-edited FIRST,
+then re-emitted -- see gate CERT-BIND). stdlib only, deterministic.
 """
+import hashlib
 import itertools
+import json
 import math
+import os
 import sys
 import time
 from decimal import Decimal, getcontext
 from fractions import Fraction as Fr
+
+# ------------------------------------------------------- source binding
+# Pins the packet's base commit and gives the paths + hashing helper the
+# CERT-BIND gate uses to attest the shipped certificate JSON was generated
+# from these exact source bytes (P15 pattern from
+# verify_dense_shell_class_charges.py -- audit #914's SHOULD item, made a
+# permanent gate there; ported after two stale-cert incidents in THIS
+# packet's own history: a round-1 lean literal surviving into round 3, and
+# a stale lean.sibcert_addition fixed in the round-4 revision).
+COMMIT = "a5750192a2fb4ff7e9f6b2f6bf77fa6652dffda7"   # branch base (stack fork point)
+_HERE = os.path.dirname(__file__) or "."
+NOTE_PATH = os.path.join(_HERE, "..", "notes", "thresholds",
+                         "dense_shell_prop_tail_reduction.md")
+PRED_NOTE_PATH = os.path.join(_HERE, "..", "notes", "thresholds",
+                              "dense_shell_inv_tail_closure.md")
+LEAN_PATH = os.path.join(_HERE, "..", "lean", "prop_tail_reduction",
+                         "PropTailReduction.lean")
+CERT_PATH = os.path.join(_HERE, "..", "data", "certificates",
+                         "dense-shell-prop-tail-reduction",
+                         "dense_shell_prop_tail_reduction.json")
+
+def file_sha256(path):
+    with open(path, "rb") as f:
+        return hashlib.sha256(f.read()).hexdigest()
 
 PI = math.pi
 K = 80
@@ -2675,6 +2714,96 @@ def _get_survivors(levs, jmax, jmax2):
         _SURV_CACHE[key] = g2_band_survivors(levs, jmax2)
     return _SURV_CACHE[key]
 
+# --------------------------------------------- CERT-BIND: certificate binding
+
+def _binding_anchors():
+    """The anchor constants the certificate must transcribe exactly, each taken
+    from the module-level constant its producing gate consumes (window
+    discipline: checked against the PRODUCER, never a second transcription)."""
+    return {"j0_star": J0_STAR, "f_star": str(F_STAR),
+            "j0_sib": J0_SIB, "pad_sib": str(PAD_SIB),
+            "ng_lam": NG_LAM, "gmax": str(GMAX_LAM_F),
+            "cprime": str(CPRIME_LAM_F), "target_rho_prop": TARGET}
+
+def gate_cert_binding(report, tamper=None):
+    """CERT-BIND (P15 pattern from verify_dense_shell_class_charges.py, audit
+    #914's SHOULD item; ported after two stale-cert incidents in THIS packet's
+    history): the shipped certificate JSON must be bound to the exact source
+    bytes it certifies. Attests the `binding` block (base commit + sha256 of
+    note/predecessor-note/script/lean + run command + anchor constants as this
+    script PRODUCES them) and cross-checks the cert's own content literals
+    against the same producers. --emit-cert refreshes ONLY the binding block;
+    curated content sections are hand-edited FIRST, then re-emitted, and a
+    plain rerun must PASS. Tamper 'cert-unbound' strips the binding block
+    (the pre-P15 shape) to confirm the gate catches it."""
+    required = {"commit", "source_sha256", "predecessor_source_sha256",
+                "script_sha256", "lean_sha256", "command", "anchors"}
+    try:
+        with open(CERT_PATH, encoding="utf-8") as f:
+            cert = json.load(f)
+    except (OSError, ValueError):
+        cert = {}
+    binding = dict(cert.get("binding") or {})
+    if tamper == "cert-unbound":
+        binding = {}
+    missing = sorted(required - set(binding))
+    hashes_ok = (not missing
+                 and binding.get("commit") == COMMIT
+                 and binding.get("source_sha256") == file_sha256(NOTE_PATH)
+                 and binding.get("predecessor_source_sha256")
+                     == file_sha256(PRED_NOTE_PATH)
+                 and binding.get("script_sha256") == file_sha256(__file__)
+                 and binding.get("lean_sha256") == file_sha256(LEAN_PATH)
+                 and binding.get("anchors") == _binding_anchors())
+    def _dig(d, *ks):
+        for k in ks:
+            d = d.get(k) if isinstance(d, dict) else None
+        return d
+    content_ok = (
+        _dig(cert, "constants", "target_rho_prop") == TARGET
+        and _dig(cert, "constants", "theta_band_certified", "j0") == J0_STAR
+        and _dig(cert, "constants", "theta_band_certified", "f_pad") == str(F_STAR)
+        and _dig(cert, "discharged_clauses", "SIB_BAND", "sib_cert",
+                 "anchor_J0") == J0_SIB
+        and _dig(cert, "discharged_clauses", "SIB_BAND", "sib_cert",
+                 "pad") == str(PAD_SIB)
+        and _dig(cert, "discharged_clauses", "LAM_BOX", "constants",
+                 "NG") == NG_LAM
+        and _dig(cert, "discharged_clauses", "LAM_BOX", "constants",
+                 "GMAX") == str(GMAX_LAM_F)
+        and _dig(cert, "discharged_clauses", "LAM_BOX", "constants",
+                 "CPRIME") == str(CPRIME_LAM_F))
+    ok = hashes_ok and content_ok
+    report.append(("CERT-BIND certificate JSON bound to note/predecessor-note/script/"
+                   "lean bytes + base commit + produced anchor constants, content"
+                   " literals transcription-checked: missing=%s hashes_ok=%s"
+                   " content_ok=%s%s"
+                   % (missing, hashes_ok, content_ok,
+                      " [TAMPERED cert-unbound]" if tamper == "cert-unbound" else ""),
+                   ok))
+    return ok
+
+def emit_cert():
+    """Refresh the certificate's `binding` block from the CURRENT source bytes.
+    Content sections are deliberately untouched (hand-edit those first, then
+    re-emit). Preserves the file's key order and indent-1/no-trailing-newline
+    formatting so the diff is exactly the binding block."""
+    with open(CERT_PATH, encoding="utf-8") as f:
+        cert = json.load(f)
+    cert["binding"] = {
+        "commit": COMMIT,
+        "source_sha256": file_sha256(NOTE_PATH),
+        "predecessor_source_sha256": file_sha256(PRED_NOTE_PATH),
+        "script_sha256": file_sha256(__file__),
+        "lean_sha256": file_sha256(LEAN_PATH),
+        "command": "python3 experimental/scripts/"
+                   "verify_dense_shell_prop_tail_reduction.py",
+        "anchors": _binding_anchors(),
+    }
+    with open(CERT_PATH, "w", encoding="utf-8") as f:
+        json.dump(cert, f, indent=1)
+    print("CERT-BIND: binding block emitted -> %s" % CERT_PATH)
+
 def compute(mode='full', fallback=False, tamper=None, show_table=False):
     """mode='full' (default): the discharge's own claim, base anchor J0*=500 (fallback:
     430), grid DEEP_GRID_FULL -- this is the ship, not hidden behind a flag. Also runs
@@ -2733,6 +2862,13 @@ def compute(mode='full', fallback=False, tamper=None, show_table=False):
         info.append(("FLOOR-DRIFT [SKIPPED in this mode: the drift monitor + as-consumed"
                       " margins are anchored at (J0*=%d, J0_SIB=%d), full build only]"
                       % (J0_STAR, J0_SIB), True))                              # info[7]
+    if run_sibcert:
+        gate_cert_binding(report, tamper=tamper)                               # CERT-BIND report[11]
+    else:
+        _cb = []
+        gate_cert_binding(_cb, tamper=tamper)
+        info.append((_cb[0][0] + " -- reported informationally in this mode (core"
+                     " in the certified full run)", _cb[0][1]))                # info[8]
     return report, info, theta_star
 
 def run(mode='full', fallback=False, tamper=None, show_table=False):
@@ -2767,16 +2903,18 @@ def run(mode='full', fallback=False, tamper=None, show_table=False):
 
 # report indices: 0 F3, 1 MAG-BOX, 2 V15-IA, 3 V16, 4 V16b, 5 V17, 6 V17-IA, 7 V18,
 #                 8 SIB-CERT, 9 LAM-INV, 10 FLOOR-DRIFT (all three full mode only;
-#                 absent in --quick/--fallback)
+#                 absent in --quick/--fallback), 11 CERT-BIND (full mode; reported
+#                 informationally in --quick/--fallback)
 # info indices:   0 V15-GRID, 1 V15-CERT, 2 V17-INFO, 3 V19, 4 SIB-BAND,
-#                 5 SIB-CERT-SKIPPED, 6 LAM-INV-SKIPPED, 7 FLOOR-DRIFT-SKIPPED
-#                 (quick/fallback only; absent in full mode)
+#                 5 SIB-CERT-SKIPPED, 6 LAM-INV-SKIPPED, 7 FLOOR-DRIFT-SKIPPED,
+#                 8 CERT-BIND-informational
+#                 (5-8 quick/fallback only; absent in full mode)
 TAMPERS = ["f3-corrupt", "magbox-shrink", "theta-tot-gate", "nfree-corrupt",
            "theta-ia-tighten", "theta-ia-sign", "window-bound", "forcing-bound",
            "v17ia-graze", "c1-target", "vtrack-level-drop", "g2-ceiling", "bridge-w-gate",
            "sibcert-sqrt", "sibcert-pad", "sibcert-band", "w17-shrink",
            "laminv-grid", "laminv-lip", "laminv-floor", "cprime-bound-graze",
-           "floordrift-margin"]
+           "floordrift-margin", "cert-unbound"]
 TAMPER_TARGET = {
     "f3-corrupt": ("report", 0),        # F3
     "magbox-shrink": ("report", 1),     # MAG-BOX: shrink boxes so realized magnitudes leave them
@@ -2800,6 +2938,7 @@ TAMPER_TARGET = {
     "laminv-floor": ("report", 9),      # LAM-INV: R1 stress -- pre-widening floor + CPRIME forced 2x
     "cprime-bound-graze": ("report", 9),  # LAM-INV: (C'-CAP) proved bound forced 2x -- exceeds CPRIME
     "floordrift-margin": ("report", 10),  # FLOOR-DRIFT: required drift ratio raised above realized
+    "cert-unbound": ("report", 11),     # CERT-BIND: binding block stripped (the pre-P15 shape)
 }
 
 def tamper_selftest(mode='full', fallback=False):
@@ -2841,6 +2980,9 @@ def main():
     mode = 'quick' if "--quick" in args else 'full'
     fallback = "--fallback" in args
     show_table = "--table" in args
+    if "--emit-cert" in args:
+        emit_cert()
+        sys.exit(0)
     if "--tamper-selftest" in args:
         ok = tamper_selftest(mode=mode, fallback=fallback)
         sys.exit(0 if ok else 1)

@@ -30,6 +30,49 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - (PROP-TAIL) packet: CERT-BIND certificate-binding gate (P15 port)
+
+- **Agent/model:** Claude Fable 5 (PI).
+- **Files added or changed:**
+  `experimental/scripts/verify_dense_shell_prop_tail_reduction.py` (source-binding
+  block `COMMIT`/`NOTE_PATH`/`PRED_NOTE_PATH`/`LEAN_PATH`/`CERT_PATH` + `file_sha256`;
+  new gate `gate_cert_binding`/CERT-BIND, report index 11 — core in full mode,
+  reported informationally under `--quick`/`--fallback`; `_binding_anchors`;
+  `emit_cert` behind the new `--emit-cert` flag; tamper `cert-unbound`, suite
+  22 -> 23; docstrings/counts updated);
+  `experimental/notes/thresholds/dense_shell_prop_tail_reduction.md` (Section 11:
+  CERT-BIND gate entry, flags list, core count 11 -> 12);
+  `experimental/data/certificates/dense-shell-prop-tail-reduction/dense_shell_prop_tail_reduction.json`
+  (new `binding` block: sha256 of note/predecessor-note/script/lean sources + base
+  commit a575019 + run command + anchor constants; `gates` section counts/lists
+  brought current). Changed: `experimental/agents-log.md` (this entry).
+- **Status:** CONDITIONAL.
+- **What is being added:** the packet's certificate JSON is now RE-LOADED by the
+  verifier and bound to the exact source bytes it certifies: gate CERT-BIND attests
+  sha256 of the note, the predecessor note (`dense_shell_inv_tail_closure.md` — the
+  stacked #885 source whose prose this packet consumes), the verifier script itself,
+  and `PropTailReduction.lean`, plus the anchor constants (`J0*`/`f*`, `J0_SIB`/pad,
+  `NG`, `GMAX`, `CPRIME`, `TARGET`) checked against the module constants their
+  producing gates consume, and a transcription cross-check of the cert's own content
+  literals against the same producers. P15 pattern from
+  `verify_dense_shell_class_charges.py` (audit #914's SHOULD item, made a permanent
+  gate by #917); adopted here after two stale-cert incidents in this packet's own
+  history (round-1 lean literals surviving into round 3; the stale
+  `lean.sibcert_addition` fixed in round 4). Clause ledger unchanged: (FOLD) and
+  (FLOOR-PERSIST) remain the only computed inputs; no census or constant changed.
+- **How it is useful:** the staleness class behind two in-packet corrections is now
+  mechanically unshippable: any note/script/lean edit without `--emit-cert` fails the
+  gate, and `--emit-cert` refreshes ONLY the binding block (content sections are
+  hand-edited first, then re-emitted; the transcription cross-check guards those).
+  Downstream consumers of the cert JSON can verify `binding.source_sha256` /
+  `binding.script_sha256` instead of trusting packet prose.
+- **What to do next:** port the same gate to the predecessor verifier
+  (`verify_dense_shell_inv_tail_closure.py`, cert currently unbound) at that packet's
+  next revision. Run:
+  `python3 experimental/scripts/verify_dense_shell_prop_tail_reduction.py` —
+  expected: `RESULT: 12/12 PASS` (full mode, ~200s), CERT-BIND line
+  `missing=[] hashes_ok=True content_ok=True`.
+
 ### 2026-07-18 - (C'-CAP) discharged-conditional; (FLOOR-PERSIST) first-class monitored + census route-cut
 
 - **Agent/model:** Claude Fable 5 (PI).
