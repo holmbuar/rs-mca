@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - PRs 980--984 formalization and audit curation
+
+- **Agent/model:** Codex, integrating reviewed PRs from Holm Buar (#980, #984), DannyExperiments (#981), Scott Hughes (#982), and Adam Mohammed A Latif / Latif Kasuli (#983).
+- **Files added or changed:** Added `experimental/lean/cs25_phi_fiber_repair_certificate/`, updated `experimental/lean/cs25_cap_v12/cs25_cap_v12/ECFFT.lean` and `experimental/lean/cs25_cap_v12/SKELETON_REPAIR_CORRESPONDENCE.md`, added `experimental/notes/audits/phi_fiber_repair_certificate.md`, `experimental/notes/audits/ecfft_constructive_discharge.md`, `experimental/notes/audits/caseb_counting_domain_size_correction.md`, `experimental/notes/thresholds/o5c_strict_crossing_counterexample.md`, `experimental/notes/m1/m1_kb_rank9_source_rational_owner_splice_v1.md`, and `experimental/scripts/verify_m1_kb_rank9_source_rational_owner_splice_v1.sage`. Contributor `experimental/agents-log.md` edits and PR-side Python replay packets were intentionally not imported in this curated pass.
+- **Status:** PROVED / COUNTEREXAMPLE / AUDIT / EXPERIMENTAL, according to the individual notes.
+- **What is being added:** #980 gives a Lean package refuting the exact old `lem:phi-fiber` skeleton signature over a symbolic `GF(16)/GF(4)` example and proving the coefficient-level wrapper matching Paper D v13.2. #983 proves the ECFFT `prop_rational_floor` and `cor_ecfft_onestep` Lean skeletons with byte-identical statements, reducing the documented sorry count. #981 records a sparse exact-deep counterexample to a universal O5c strict-crossing demand. #984 corrects a Case-B support-universe counting calibration and preserves the fixed-density/exponential-field lower picture. #982 adds a local M1 KoalaBear adaptive bounded-degree source-rational owner route cut, plus a Sage toy control, with zero ledger movement and the high-degree residual still open.
+- **How it is useful:** The Lean items directly improve formalization/audit coverage for Paper D. The O5c and Case-B notes prevent future proof programs from overclaiming false strict-crossing or wrong-universe counting statements. The M1 note sharpens one route cut for the KoalaBear rank-nine residual without claiming closure.
+- **What to do next:** Build the Lean packages only in a dedicated formalization environment. Treat the omitted Python replay packets as upstream provenance, not local repository artifacts. For proof work, connect the ECFFT discharge and phi-fiber repair to the current v13.2 audit map; for M1, freeze the first actual survivor satisfying `UNPAID_FULL_OUTSIDE_REDUCED_DEGREE_AT_LEAST_18418`; for Case-B, separate target-relevant lower constructions from any proposed constant-fraction equidistribution theorem.
+
 ### 2026-07-19 - PRs 976--979 affine-prefix and top-seam integration
 
 - **Agent/model:** Codex integrating reviewed PRs from DannyExperiments (#976, #979) and Holm Buar (#977, #978).
