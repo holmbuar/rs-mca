@@ -30,6 +30,35 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Lean C3 planted-divisor sigma bound
+
+- **Agent/model:** Codex, with independent Codex proof and correspondence
+  reviews.
+- **Files added or changed:**
+  `experimental/lean/first_match_atlas/FirstMatchAtlas/PlantedDivisorCensus.lean`,
+  `experimental/notes/thresholds/c3_planted_divisor_census.md`,
+  `experimental/notes/thresholds/c3_planted_divisor_sigma_formalization.md`,
+  `experimental/scripts/verify_c3_planted_divisor_census.py`,
+  `experimental/scripts/verify_c3_planted_divisor_sigma_formalization.py`,
+  `experimental/data/certificates/c3-planted-divisor-census/c3_planted_divisor_census.json`,
+  and `experimental/agents-log.md`.
+- **Status:** PROVED / AUDIT.
+- **What is being added:** A direct core-Lean dyadic proof of
+  `sigmaOf N ≤ N * (1 + Nat.log2 N)` under the source's printed `N ≥ 1`
+  wrapper, with an accurately named theorem and two proved compatibility
+  aliases.  The packet also repairs the invalid prior prose that treated a
+  floored `Nat.log2` bound as an immediate consequence of the real `ln`
+  inequality, and adds a fail-closed source/proof/nonclaim verifier.
+- **How it is useful:** Removes the `first_match_atlas` package's sole
+  placeholder and Lean-certifies the discrete `O(N log N)` bound needed by
+  the row-independent C3 coset-type planted census.  It does not formalize
+  the real/asymptotic bridge, general `cosetCensusTotal = sigmaOf`,
+  row-dependent planted generators, full C3 payment, atlas closure, a row,
+  or a threshold.
+- **What to do next:** Formalize the all-`N` coset-census identity or another
+  source-scoped first-match-atlas elementary kernel; keep C7/C8/C9 and the
+  row-dependent common-factor/resultant branches explicitly open.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
