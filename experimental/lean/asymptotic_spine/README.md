@@ -73,6 +73,33 @@ entropy, Stirling, real-limit, and inverse-theorem inputs remain explicit
 hypotheses or source-side assumptions. Individual module headers state their
 precise proof boundaries.
 
+## Minimal closed-ledger / UNIF compiler
+
+`AsymptoticSpine.UniformClosedLedger` packages the post-deletion semantic
+boundary needed by the profile-envelope proof. Each profile carries a C1--C9
+or primitive owner, its assigned distinct-slope list, the residual/Sidon/ray
+payment chain, and its own natural scale. Each received line also exposes its
+realized-profile cap. The compiler proves
+
+```text
+sup_line bad(line)
+  <= sup_line sum_profile U(line,profile)
+  <= loss * sup_line sum_profile naturalScale(line,profile).
+```
+
+`UniformClosedLedger.compile` consumes the honest line-local `(UNIF)` bound and
+produces the row-level numerator bound. The executable diagonal regression
+`sup_sum_interchange_falsifier` proves that replacing `sup_line sum_profile` by
+`sum_profile sup_line` changes and can loosen the required quantity. The module
+does not construct the semantic
+atlas, C7/C8/C9 payments, residual/full comparison, image-normalized Sidon
+input, ray compiler, subexponential profile count, the actual asymptotic/window-
+uniform estimate, or profile-envelope comparison; those remain explicit
+producer obligations. Its finite `lines` list is supplied by the caller and is
+not itself a completeness proof over all received RS lines, nor does it enforce
+one global profile atlas fixed before the received line. `naturalTotal` contains
+only the profile sum, so the universal terms in the literal frontiers envelope
+must be absorbed by the supplied `envelope`.
 
 ## Upgrade regression locks
 

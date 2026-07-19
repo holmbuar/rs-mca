@@ -4,6 +4,7 @@ import AsymptoticSpine.PrefixAtlas
 import AsymptoticSpine.Moment
 import AsymptoticSpine.Normalization
 import AsymptoticSpine.AddBack
+import AsymptoticSpine.UniformClosedLedger
 import AsymptoticSpine.BooleanFiber
 import AsymptoticSpine.NoHighEnergy
 import AsymptoticSpine.SigmaDiagonal
