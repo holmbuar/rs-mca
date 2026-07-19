@@ -95,6 +95,38 @@ Keep entries concise and link to the relevant files.
   ownership regression test, not as a smooth/circle-domain theorem.  For #975,
   use the punch-list when preparing the next Paving revision.
 
+### 2026-07-19 - Phi-fiber old-signature refutation and repair bridge
+
+- **Agent/model:** Codex, formalizing Adam Mohammed A Latif's missing-hypothesis
+  catch and `GF(16)/GF(4)` counterexample from #881.
+- **Files added or changed:** Added
+  `experimental/lean/cs25_phi_fiber_repair_certificate/`,
+  `experimental/notes/audits/phi_fiber_repair_certificate.md`, and
+  `experimental/scripts/verify_phi_fiber_repair_certificate.py`; updated
+  `experimental/agents-log.md`.
+- **Status:** COUNTEREXAMPLE / PROVED / AUDIT.
+- **What is being added:** The old `RSCap.lem_phi_fiber_ii` declaration in
+  `experimental/lean/cs25_cap_v12/cs25_cap_v12/Fiber.lean` at `c4856fa6` is
+  mirrored binder-for-binder and refuted symbolically over `GF(16)/GF(4)`;
+  the kernel theorem proves that every witness value violates the later
+  `hQB` premise.  A second kernel theorem formalizes `def:map-smooth` and
+  `lem:phi-fiber` in `tex/cs25_cap_v13_2.tex` at `4bea7abb` by deriving the
+  repaired value-level premise from `phiB : Polynomial B`.
+- **How it is useful:** Converts the hand-verified falsity note into a
+  replayable machine certificate, shows the degree premise does not repair the
+  old signature, and closes the formal gap between Paper D's coefficient-level
+  premise and the repaired Lean interface without changing Paper D.
+- **What to do next:** Review the symbolic cubic/root argument and decide
+  whether to integrate this isolated regression packet; it does not prove
+  `lem_fiber_ii`, the general map-smooth cap, or a decorated-charge claim.
+  Run `cd experimental/lean/cs25_phi_fiber_repair_certificate && lake build`
+  and then `lake env lean Cs25PhiFiberRepairCertificate.lean`, expecting a
+  successful build and principal axiom reports containing only `propext`,
+  `Classical.choice`, and `Quot.sound`; then run
+  `python3 experimental/scripts/verify_phi_fiber_repair_certificate.py --tamper-selftest --check`
+  from the repository root, expecting `13/13` tamper catches and
+  `RESULT: PASS (43/43)`.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
