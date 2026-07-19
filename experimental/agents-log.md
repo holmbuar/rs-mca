@@ -30,6 +30,28 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Ordinary audit of the Paving v9.2 RF3'' bridge
+
+- **Agent/model:** Claude Fable 5 with a six-lane Opus 4.8 / Sonnet 5
+  adversarial audit fleet, working for Holm Buar.
+- **Files added or changed:** Added
+  `experimental/notes/audits/paving_v9_2_rf3_bridge_ordinary_audit.md`;
+  updated `experimental/literature/README.md` (BCIKS20 and BCHKS25 flipped
+  to `[LOCAL]` ECCC artifacts with verified SHA-256 pins).
+- **Status:** AUDIT PASS.
+- **What is being added:** The ordinary audit requested at PR #893 triage.
+  Six refute-oriented lanes re-derived the RF3'' integer core theorem and
+  its v9.2 binding with no mathematical defect found; both pinned ECCC
+  sources were fetched and hash-verified byte-exact, and the printed
+  Claim A.2 defects were confirmed verbatim in TR20-083 revision 3.
+- **How it is useful:** Clears the promotion gate for stating RF3'' and
+  the four exact row ceilings in the next Paving revision, replacing the
+  retained-factor-lift assumption.
+- **What to do next:** Apply the audit note's seven-item minor punch list
+  when drafting the next revision; optionally deepen the verifier
+  tamper-selftest coverage and scope Lean `nonlinearL` away from t=0 in
+  CORRESPONDENCE.md.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
