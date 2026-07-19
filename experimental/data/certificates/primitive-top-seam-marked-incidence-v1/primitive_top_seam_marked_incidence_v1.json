@@ -1,0 +1,3139 @@
+{
+  "F17_mark_erasure_and_fixed_target_regression": {
+    "common_pullback_side_pairs": 0,
+    "fixed_no_obvious_symmetry_packet": {
+      "A": [
+        1,
+        4,
+        11
+      ],
+      "A_minus_B": 16,
+      "B": [
+        3,
+        14,
+        16
+      ],
+      "all_core_and_support_affine_stabilizers_trivial": true,
+      "all_core_and_support_multiplicative_stabilizers_trivial": true,
+      "common_pullback_scales": [],
+      "core_count": 3,
+      "displayed_core_family_common_root_intersection": [],
+      "oriented_support_A_family_common_root_intersection": [
+        1,
+        4,
+        11
+      ],
+      "oriented_support_B_family_common_root_intersection": [
+        3,
+        14,
+        16
+      ],
+      "planted_owner_status": "UNKNOWN_MISSING_CONTEXT",
+      "primitive_admission": false,
+      "primitive_admission_blocker": "the rooted first-match owner atlas is unavailable",
+      "raw_Q_prefix_fibre_constraint": {
+        "coefficient_slice_equivalence_condition": "characteristic(F)>w",
+        "equations": "target(G)=target(z)-target(A) in the first w power sums",
+        "meaning": "this tautological fixed-target slice is the common-core multiplicity problem, not an earlier first-match payment",
+        "owner_status": "NOT_AN_OWNER"
+      },
+      "records": [
+        {
+          "A_coefficients_ascending": [
+            7,
+            8,
+            1,
+            1
+          ],
+          "A_minus_B": 16,
+          "A_roots": [
+            1,
+            4,
+            11
+          ],
+          "B_coefficients_ascending": [
+            8,
+            8,
+            1,
+            1
+          ],
+          "B_roots": [
+            3,
+            14,
+            16
+          ],
+          "G_coefficients_ascending": [
+            12,
+            9,
+            7,
+            10,
+            0,
+            1
+          ],
+          "G_roots": [
+            2,
+            5,
+            7,
+            8,
+            12
+          ],
+          "pairwise_coprime": true,
+          "support_A": [
+            1,
+            2,
+            4,
+            5,
+            7,
+            8,
+            11,
+            12
+          ],
+          "support_B": [
+            2,
+            3,
+            5,
+            7,
+            8,
+            12,
+            14,
+            16
+          ],
+          "target": [
+            16,
+            16
+          ]
+        },
+        {
+          "A_coefficients_ascending": [
+            7,
+            8,
+            1,
+            1
+          ],
+          "A_minus_B": 16,
+          "A_roots": [
+            1,
+            4,
+            11
+          ],
+          "B_coefficients_ascending": [
+            8,
+            8,
+            1,
+            1
+          ],
+          "B_roots": [
+            3,
+            14,
+            16
+          ],
+          "G_coefficients_ascending": [
+            5,
+            9,
+            10,
+            10,
+            0,
+            1
+          ],
+          "G_roots": [
+            5,
+            9,
+            10,
+            12,
+            15
+          ],
+          "pairwise_coprime": true,
+          "support_A": [
+            1,
+            4,
+            5,
+            9,
+            10,
+            11,
+            12,
+            15
+          ],
+          "support_B": [
+            3,
+            5,
+            9,
+            10,
+            12,
+            14,
+            15,
+            16
+          ],
+          "target": [
+            16,
+            16
+          ]
+        },
+        {
+          "A_coefficients_ascending": [
+            7,
+            8,
+            1,
+            1
+          ],
+          "A_minus_B": 16,
+          "A_roots": [
+            1,
+            4,
+            11
+          ],
+          "B_coefficients_ascending": [
+            8,
+            8,
+            1,
+            1
+          ],
+          "B_roots": [
+            3,
+            14,
+            16
+          ],
+          "G_coefficients_ascending": [
+            12,
+            7,
+            3,
+            10,
+            0,
+            1
+          ],
+          "G_roots": [
+            6,
+            8,
+            9,
+            13,
+            15
+          ],
+          "pairwise_coprime": true,
+          "support_A": [
+            1,
+            4,
+            6,
+            8,
+            9,
+            11,
+            13,
+            15
+          ],
+          "support_B": [
+            3,
+            6,
+            8,
+            9,
+            13,
+            14,
+            15,
+            16
+          ],
+          "target": [
+            16,
+            16
+          ]
+        }
+      ],
+      "side_affine_maps": [],
+      "six_support_aggregate_common_root_intersection": [],
+      "target": [
+        16,
+        16
+      ]
+    },
+    "fixed_target_core_fibres": {
+      "lexicographically_first_maximum": {
+        "A": [
+          2,
+          3,
+          12
+        ],
+        "B": [
+          5,
+          14,
+          15
+        ],
+        "cores": [
+          [
+            1,
+            4,
+            6,
+            10,
+            13
+          ],
+          [
+            1,
+            6,
+            7,
+            9,
+            11
+          ],
+          [
+            4,
+            7,
+            11,
+            13,
+            16
+          ],
+          [
+            6,
+            8,
+            10,
+            11,
+            16
+          ]
+        ],
+        "target": [
+          0,
+          3
+        ]
+      },
+      "maximum_multiplicity": 4,
+      "multiplicity_histogram": {
+        "1": 91680,
+        "2": 36480,
+        "3": 4000,
+        "4": 192
+      },
+      "nonempty_key_count": 132352
+    },
+    "independent_ordered_support_pair_count": 177408,
+    "mark_erasure_projection": {
+      "cardinality_difference": 176704,
+      "fibre_size_set_without_target": [
+        252
+      ],
+      "identity": "704*252=177408",
+      "map": "(G,A,B) -> (A,B), preserving orientation",
+      "multiplicity_factor": 252
+    },
+    "ordered_marked_triples": 177408,
+    "ordered_side_pairs": 704,
+    "parameters": {
+      "deg_G": 5,
+      "e": 3,
+      "m": 8,
+      "n": 16,
+      "p": 17,
+      "w": 2
+    },
+    "raw_cores_per_side_pair": 252,
+    "side_root_affine_transport_gate_regressions": [
+      {
+        "A": [
+          1,
+          2,
+          4
+        ],
+        "B": [
+          12,
+          14,
+          15
+        ],
+        "missing_for_owner": "a declared domain map, rooted witness descent, natural-profile census, and exact distinct-slope budget",
+        "owner_status": "NOT_ESTABLISHED",
+        "paid_owner_established": false,
+        "primitive_admission": false,
+        "root_set_affine_maps": [
+          [
+            16,
+            16
+          ]
+        ],
+        "state": "STRUCTURAL_TRIGGER_ONLY"
+      },
+      {
+        "A": [
+          12,
+          14,
+          15
+        ],
+        "B": [
+          1,
+          2,
+          4
+        ],
+        "missing_for_owner": "a declared domain map, rooted witness descent, natural-profile census, and exact distinct-slope budget",
+        "owner_status": "NOT_ESTABLISHED",
+        "paid_owner_established": false,
+        "primitive_admission": false,
+        "root_set_affine_maps": [
+          [
+            16,
+            16
+          ]
+        ],
+        "state": "STRUCTURAL_TRIGGER_ONLY"
+      }
+    ]
+  },
+  "claim_scope": "exact top-seam marked normal form, finite F17 regressions, fail-closed owner typing, and exact marked-to-slope projection requirements",
+  "exact_nonclaims": [
+    "no theorem for Q, C7, C8, or C9",
+    "no deployed KoalaBear or Mersenne-31 adjacent payment",
+    "no support-side triple is called an actual primitive first-match survivor",
+    "no root affine relation is treated as a paid affine-fibre owner",
+    "no quotient side-pair trigger is treated as a paid marked-profile owner",
+    "no marked-pair or second-moment count is promoted to a distinct-slope payment",
+    "the four-mate rooted star is not promoted to the complete MCA numerator",
+    "the complete 32-triple raw F17 seam is not called post-first-match primitive",
+    "no paper source is modified"
+  ],
+  "first_match_contract": {
+    "actual_surviving_triple_count": null,
+    "admission_rule": "primitive only if every earlier actual-slope predicate is executable and false; STRUCTURAL_TRIGGER_ONLY or UNKNOWN_MISSING_CONTEXT blocks admission",
+    "affine_candidate_before_primitive": true,
+    "authoritative_semantics": "first match partitions actual bad-slope projections, not support-side triples",
+    "fixed_fixture_states": [
+      {
+        "cell": "C1_multiplicative_periodicity_subcell",
+        "reason": "the displayed fixed-target packet has no common side pullback and its displayed supports have trivial multiplicative stabilizer",
+        "state": "NOT_APPLICABLE"
+      },
+      {
+        "cell": "C1_complete_quotient_remainder",
+        "reason": "not every declared quotient map, canonical remainder, received-line descent, and slope projector is executable from (G,A,B)",
+        "state": "UNKNOWN_MISSING_CONTEXT"
+      },
+      {
+        "cell": "C2",
+        "reason": "no typed dihedral witness projector",
+        "state": "UNKNOWN_MISSING_CONTEXT"
+      },
+      {
+        "cell": "C3",
+        "reason": "the three distinct G marks have no family-wide common root; no predetermined planted divisor family or payment census is supplied",
+        "state": "UNKNOWN_MISSING_CONTEXT"
+      },
+      {
+        "cell": "C4",
+        "reason": "tangent ownership needs the actual received line and witness",
+        "state": "UNKNOWN_MISSING_CONTEXT"
+      },
+      {
+        "cell": "C5",
+        "reason": "base-field toy fixture has no extension-valued parameter",
+        "state": "NOT_APPLICABLE"
+      },
+      {
+        "cell": "C6",
+        "reason": "no actual owner-typed incidence matrix or bounded-SPI projector",
+        "state": "UNKNOWN_MISSING_CONTEXT"
+      },
+      {
+        "cell": "C7",
+        "reason": "support triples do not determine the saturated ray projection",
+        "state": "UNKNOWN_MISSING_CONTEXT"
+      },
+      {
+        "cell": "pre_C8_common_GCD",
+        "reason": "the six-support aggregate has empty intersection, but the oriented support-A and support-B subfamilies retain fixed side divisors; the rooted atlas must specify the classified family",
+        "state": "UNKNOWN_MISSING_CONTEXT"
+      },
+      {
+        "cell": "C8",
+        "reason": "no residual chart after proved removal of earlier common and planted factors is available",
+        "state": "UNKNOWN_MISSING_CONTEXT"
+      },
+      {
+        "cell": "C9",
+        "reason": "Fourier/Sidon is applied only after the earlier actual slope cells",
+        "state": "UNKNOWN_MISSING_CONTEXT"
+      }
+    ],
+    "missing_rooted_chain": "(G,A,B) -> (gamma,S,h) -> (gamma,h) -> (gamma,c) -> gamma",
+    "order": [
+      {
+        "cell": "C1",
+        "owner_or_exclusion": "quotient_pullback_complete_fibre_and_remainder"
+      },
+      {
+        "cell": "C2",
+        "owner_or_exclusion": "chebyshev_dihedral"
+      },
+      {
+        "cell": "C3",
+        "owner_or_exclusion": "planted_block"
+      },
+      {
+        "cell": "C4",
+        "owner_or_exclusion": "tangent_deep_centre"
+      },
+      {
+        "cell": "C5",
+        "owner_or_exclusion": "extension_and_field_descent"
+      },
+      {
+        "cell": "C6",
+        "owner_or_exclusion": "differential_locator_rank_and_bounded_SPI"
+      },
+      {
+        "cell": "C7",
+        "owner_or_exclusion": "saturation_effective_image_collapse"
+      },
+      {
+        "cell": "pre_C8",
+        "owner_or_exclusion": "family_level_common_GCD_exclusion"
+      },
+      {
+        "cell": "C8",
+        "owner_or_exclusion": "balanced_core_after_common_and_planted_factor_removal_and_split_pencil"
+      },
+      {
+        "cell": "C9",
+        "owner_or_exclusion": "fourier_sidon"
+      }
+    ],
+    "order_kind": "local refinement of source C1--C9; added pre_C8 is not part of C8",
+    "paid_owner_count": 0,
+    "paid_owner_required_fields": [
+      "source_cell",
+      "projector_certificate_id",
+      "projection_type",
+      "exact_slope_budget"
+    ],
+    "post_first_match_marked_universe_defined": false,
+    "preprimitive_gate_regressions": {
+      "periodic_support_candidate": {
+        "owner_status": "NOT_ESTABLISHED",
+        "paid_owner_established": false,
+        "periodic_scales": [
+          2
+        ],
+        "primitive_admission": false,
+        "reason": "support periodicity alone does not prove received-line and explanation descent",
+        "state": "STRUCTURAL_TRIGGER_ONLY",
+        "support": [
+          4,
+          6,
+          11,
+          13
+        ]
+      },
+      "scope": "these are fail-closed gate tests, not proofs that either candidate is a paid owner",
+      "side_root_affine_transport_candidate": {
+        "A": [
+          1,
+          2,
+          4
+        ],
+        "B": [
+          12,
+          14,
+          15
+        ],
+        "map_x_to_ax_plus_b": [
+          16,
+          16
+        ],
+        "owner_status": "NOT_ESTABLISHED",
+        "paid_owner_established": false,
+        "primitive_admission": false,
+        "reason": "the root-set map is not a declared domain map and has no rooted slope payment",
+        "state": "STRUCTURAL_TRIGGER_ONLY"
+      }
+    },
+    "quotient_before_primitive": true,
+    "raw_Q_prefix_fibre_is_not_an_owner": true,
+    "version": "top-seam-fail-closed-v1"
+  },
+  "known_F17_multiple_mate_regression": {
+    "complete_ordered_top_seam_triple_count": 32,
+    "complete_ordered_top_seam_triples": [
+      {
+        "A_coefficients_ascending": [
+          11,
+          3,
+          2,
+          1
+        ],
+        "A_minus_B": 14,
+        "A_roots": [
+          1,
+          4,
+          10
+        ],
+        "B_coefficients_ascending": [
+          14,
+          3,
+          2,
+          1
+        ],
+        "B_roots": [
+          3,
+          5,
+          7
+        ],
+        "G_coefficients_ascending": [
+          15,
+          1
+        ],
+        "G_roots": [
+          2
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "support_B": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          9,
+          14,
+          10,
+          1
+        ],
+        "A_minus_B": 15,
+        "A_roots": [
+          1,
+          2,
+          4
+        ],
+        "B_coefficients_ascending": [
+          11,
+          14,
+          10,
+          1
+        ],
+        "B_roots": [
+          3,
+          8,
+          13
+        ],
+        "G_coefficients_ascending": [
+          7,
+          1
+        ],
+        "G_roots": [
+          10
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "support_B": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          14,
+          15,
+          4,
+          1
+        ],
+        "A_minus_B": 5,
+        "A_roots": [
+          1,
+          2,
+          10
+        ],
+        "B_coefficients_ascending": [
+          9,
+          15,
+          4,
+          1
+        ],
+        "B_roots": [
+          6,
+          11,
+          13
+        ],
+        "G_coefficients_ascending": [
+          13,
+          1
+        ],
+        "G_roots": [
+          4
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "support_B": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          14,
+          15,
+          4,
+          1
+        ],
+        "A_minus_B": 12,
+        "A_roots": [
+          1,
+          2,
+          10
+        ],
+        "B_coefficients_ascending": [
+          2,
+          15,
+          4,
+          1
+        ],
+        "B_roots": [
+          7,
+          9,
+          14
+        ],
+        "G_coefficients_ascending": [
+          13,
+          1
+        ],
+        "G_roots": [
+          4
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "support_B": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          9,
+          14,
+          10,
+          1
+        ],
+        "A_minus_B": 13,
+        "A_roots": [
+          1,
+          2,
+          4
+        ],
+        "B_coefficients_ascending": [
+          13,
+          14,
+          10,
+          1
+        ],
+        "B_roots": [
+          12,
+          14,
+          15
+        ],
+        "G_coefficients_ascending": [
+          7,
+          1
+        ],
+        "G_roots": [
+          10
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "support_B": [
+          10,
+          12,
+          14,
+          15
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          14,
+          3,
+          2,
+          1
+        ],
+        "A_minus_B": 3,
+        "A_roots": [
+          3,
+          5,
+          7
+        ],
+        "B_coefficients_ascending": [
+          11,
+          3,
+          2,
+          1
+        ],
+        "B_roots": [
+          1,
+          4,
+          10
+        ],
+        "G_coefficients_ascending": [
+          15,
+          1
+        ],
+        "G_roots": [
+          2
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "support_B": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          15,
+          8,
+          3,
+          1
+        ],
+        "A_minus_B": 1,
+        "A_roots": [
+          2,
+          5,
+          7
+        ],
+        "B_coefficients_ascending": [
+          14,
+          8,
+          3,
+          1
+        ],
+        "B_roots": [
+          8,
+          10,
+          13
+        ],
+        "G_coefficients_ascending": [
+          14,
+          1
+        ],
+        "G_roots": [
+          3
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "support_B": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          4,
+          14,
+          7,
+          1
+        ],
+        "A_minus_B": 15,
+        "A_roots": [
+          2,
+          3,
+          5
+        ],
+        "B_coefficients_ascending": [
+          6,
+          14,
+          7,
+          1
+        ],
+        "B_roots": [
+          4,
+          9,
+          14
+        ],
+        "G_coefficients_ascending": [
+          10,
+          1
+        ],
+        "G_roots": [
+          7
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "support_B": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          4,
+          14,
+          7,
+          1
+        ],
+        "A_minus_B": 13,
+        "A_roots": [
+          2,
+          3,
+          5
+        ],
+        "B_coefficients_ascending": [
+          8,
+          14,
+          7,
+          1
+        ],
+        "B_roots": [
+          13,
+          15,
+          16
+        ],
+        "G_coefficients_ascending": [
+          10,
+          1
+        ],
+        "G_roots": [
+          7
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "support_B": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          11,
+          14,
+          10,
+          1
+        ],
+        "A_minus_B": 2,
+        "A_roots": [
+          3,
+          8,
+          13
+        ],
+        "B_coefficients_ascending": [
+          9,
+          14,
+          10,
+          1
+        ],
+        "B_roots": [
+          1,
+          2,
+          4
+        ],
+        "G_coefficients_ascending": [
+          7,
+          1
+        ],
+        "G_roots": [
+          10
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "support_B": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          14,
+          8,
+          3,
+          1
+        ],
+        "A_minus_B": 16,
+        "A_roots": [
+          8,
+          10,
+          13
+        ],
+        "B_coefficients_ascending": [
+          15,
+          8,
+          3,
+          1
+        ],
+        "B_roots": [
+          2,
+          5,
+          7
+        ],
+        "G_coefficients_ascending": [
+          14,
+          1
+        ],
+        "G_roots": [
+          3
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "support_B": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          15,
+          15,
+          13,
+          1
+        ],
+        "A_minus_B": 7,
+        "A_roots": [
+          3,
+          8,
+          10
+        ],
+        "B_coefficients_ascending": [
+          8,
+          15,
+          13,
+          1
+        ],
+        "B_roots": [
+          4,
+          6,
+          11
+        ],
+        "G_coefficients_ascending": [
+          4,
+          1
+        ],
+        "G_roots": [
+          13
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "support_B": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          15,
+          15,
+          13,
+          1
+        ],
+        "A_minus_B": 12,
+        "A_roots": [
+          3,
+          8,
+          10
+        ],
+        "B_coefficients_ascending": [
+          3,
+          15,
+          13,
+          1
+        ],
+        "B_roots": [
+          7,
+          15,
+          16
+        ],
+        "G_coefficients_ascending": [
+          4,
+          1
+        ],
+        "G_roots": [
+          13
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "support_B": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          11,
+          14,
+          10,
+          1
+        ],
+        "A_minus_B": 15,
+        "A_roots": [
+          3,
+          8,
+          13
+        ],
+        "B_coefficients_ascending": [
+          13,
+          14,
+          10,
+          1
+        ],
+        "B_roots": [
+          12,
+          14,
+          15
+        ],
+        "G_coefficients_ascending": [
+          7,
+          1
+        ],
+        "G_roots": [
+          10
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "support_B": [
+          10,
+          12,
+          14,
+          15
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          9,
+          15,
+          4,
+          1
+        ],
+        "A_minus_B": 12,
+        "A_roots": [
+          6,
+          11,
+          13
+        ],
+        "B_coefficients_ascending": [
+          14,
+          15,
+          4,
+          1
+        ],
+        "B_roots": [
+          1,
+          2,
+          10
+        ],
+        "G_coefficients_ascending": [
+          13,
+          1
+        ],
+        "G_roots": [
+          4
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "support_B": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          8,
+          15,
+          13,
+          1
+        ],
+        "A_minus_B": 10,
+        "A_roots": [
+          4,
+          6,
+          11
+        ],
+        "B_coefficients_ascending": [
+          15,
+          15,
+          13,
+          1
+        ],
+        "B_roots": [
+          3,
+          8,
+          10
+        ],
+        "G_coefficients_ascending": [
+          4,
+          1
+        ],
+        "G_roots": [
+          13
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "support_B": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          9,
+          15,
+          4,
+          1
+        ],
+        "A_minus_B": 7,
+        "A_roots": [
+          6,
+          11,
+          13
+        ],
+        "B_coefficients_ascending": [
+          2,
+          15,
+          4,
+          1
+        ],
+        "B_roots": [
+          7,
+          9,
+          14
+        ],
+        "G_coefficients_ascending": [
+          13,
+          1
+        ],
+        "G_roots": [
+          4
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "support_B": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          8,
+          15,
+          13,
+          1
+        ],
+        "A_minus_B": 5,
+        "A_roots": [
+          4,
+          6,
+          11
+        ],
+        "B_coefficients_ascending": [
+          3,
+          15,
+          13,
+          1
+        ],
+        "B_roots": [
+          7,
+          15,
+          16
+        ],
+        "G_coefficients_ascending": [
+          4,
+          1
+        ],
+        "G_roots": [
+          13
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "support_B": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          2,
+          15,
+          4,
+          1
+        ],
+        "A_minus_B": 5,
+        "A_roots": [
+          7,
+          9,
+          14
+        ],
+        "B_coefficients_ascending": [
+          14,
+          15,
+          4,
+          1
+        ],
+        "B_roots": [
+          1,
+          2,
+          10
+        ],
+        "G_coefficients_ascending": [
+          13,
+          1
+        ],
+        "G_roots": [
+          4
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "support_B": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          6,
+          14,
+          7,
+          1
+        ],
+        "A_minus_B": 2,
+        "A_roots": [
+          4,
+          9,
+          14
+        ],
+        "B_coefficients_ascending": [
+          4,
+          14,
+          7,
+          1
+        ],
+        "B_roots": [
+          2,
+          3,
+          5
+        ],
+        "G_coefficients_ascending": [
+          10,
+          1
+        ],
+        "G_roots": [
+          7
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "support_B": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          2,
+          15,
+          4,
+          1
+        ],
+        "A_minus_B": 10,
+        "A_roots": [
+          7,
+          9,
+          14
+        ],
+        "B_coefficients_ascending": [
+          9,
+          15,
+          4,
+          1
+        ],
+        "B_roots": [
+          6,
+          11,
+          13
+        ],
+        "G_coefficients_ascending": [
+          13,
+          1
+        ],
+        "G_roots": [
+          4
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "support_B": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          6,
+          14,
+          7,
+          1
+        ],
+        "A_minus_B": 15,
+        "A_roots": [
+          4,
+          9,
+          14
+        ],
+        "B_coefficients_ascending": [
+          8,
+          14,
+          7,
+          1
+        ],
+        "B_roots": [
+          13,
+          15,
+          16
+        ],
+        "G_coefficients_ascending": [
+          10,
+          1
+        ],
+        "G_roots": [
+          7
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "support_B": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          3,
+          8,
+          14,
+          1
+        ],
+        "A_minus_B": 1,
+        "A_roots": [
+          4,
+          7,
+          9
+        ],
+        "B_coefficients_ascending": [
+          2,
+          8,
+          14,
+          1
+        ],
+        "B_roots": [
+          10,
+          12,
+          15
+        ],
+        "G_coefficients_ascending": [
+          3,
+          1
+        ],
+        "G_roots": [
+          14
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "support_B": [
+          10,
+          12,
+          14,
+          15
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          8,
+          14,
+          7,
+          1
+        ],
+        "A_minus_B": 4,
+        "A_roots": [
+          13,
+          15,
+          16
+        ],
+        "B_coefficients_ascending": [
+          4,
+          14,
+          7,
+          1
+        ],
+        "B_roots": [
+          2,
+          3,
+          5
+        ],
+        "G_coefficients_ascending": [
+          10,
+          1
+        ],
+        "G_roots": [
+          7
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "support_B": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          3,
+          15,
+          13,
+          1
+        ],
+        "A_minus_B": 5,
+        "A_roots": [
+          7,
+          15,
+          16
+        ],
+        "B_coefficients_ascending": [
+          15,
+          15,
+          13,
+          1
+        ],
+        "B_roots": [
+          3,
+          8,
+          10
+        ],
+        "G_coefficients_ascending": [
+          4,
+          1
+        ],
+        "G_roots": [
+          13
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "support_B": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          3,
+          15,
+          13,
+          1
+        ],
+        "A_minus_B": 12,
+        "A_roots": [
+          7,
+          15,
+          16
+        ],
+        "B_coefficients_ascending": [
+          8,
+          15,
+          13,
+          1
+        ],
+        "B_roots": [
+          4,
+          6,
+          11
+        ],
+        "G_coefficients_ascending": [
+          4,
+          1
+        ],
+        "G_roots": [
+          13
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "support_B": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          8,
+          14,
+          7,
+          1
+        ],
+        "A_minus_B": 2,
+        "A_roots": [
+          13,
+          15,
+          16
+        ],
+        "B_coefficients_ascending": [
+          6,
+          14,
+          7,
+          1
+        ],
+        "B_roots": [
+          4,
+          9,
+          14
+        ],
+        "G_coefficients_ascending": [
+          10,
+          1
+        ],
+        "G_roots": [
+          7
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "support_B": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          6,
+          3,
+          15,
+          1
+        ],
+        "A_minus_B": 3,
+        "A_roots": [
+          7,
+          13,
+          16
+        ],
+        "B_coefficients_ascending": [
+          3,
+          3,
+          15,
+          1
+        ],
+        "B_roots": [
+          10,
+          12,
+          14
+        ],
+        "G_coefficients_ascending": [
+          2,
+          1
+        ],
+        "G_roots": [
+          15
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "support_B": [
+          10,
+          12,
+          14,
+          15
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          13,
+          14,
+          10,
+          1
+        ],
+        "A_minus_B": 4,
+        "A_roots": [
+          12,
+          14,
+          15
+        ],
+        "B_coefficients_ascending": [
+          9,
+          14,
+          10,
+          1
+        ],
+        "B_roots": [
+          1,
+          2,
+          4
+        ],
+        "G_coefficients_ascending": [
+          7,
+          1
+        ],
+        "G_roots": [
+          10
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          10,
+          12,
+          14,
+          15
+        ],
+        "support_B": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          13,
+          14,
+          10,
+          1
+        ],
+        "A_minus_B": 2,
+        "A_roots": [
+          12,
+          14,
+          15
+        ],
+        "B_coefficients_ascending": [
+          11,
+          14,
+          10,
+          1
+        ],
+        "B_roots": [
+          3,
+          8,
+          13
+        ],
+        "G_coefficients_ascending": [
+          7,
+          1
+        ],
+        "G_roots": [
+          10
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          10,
+          12,
+          14,
+          15
+        ],
+        "support_B": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          2,
+          8,
+          14,
+          1
+        ],
+        "A_minus_B": 16,
+        "A_roots": [
+          10,
+          12,
+          15
+        ],
+        "B_coefficients_ascending": [
+          3,
+          8,
+          14,
+          1
+        ],
+        "B_roots": [
+          4,
+          7,
+          9
+        ],
+        "G_coefficients_ascending": [
+          3,
+          1
+        ],
+        "G_roots": [
+          14
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          10,
+          12,
+          14,
+          15
+        ],
+        "support_B": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          3,
+          3,
+          15,
+          1
+        ],
+        "A_minus_B": 14,
+        "A_roots": [
+          10,
+          12,
+          14
+        ],
+        "B_coefficients_ascending": [
+          6,
+          3,
+          15,
+          1
+        ],
+        "B_roots": [
+          7,
+          13,
+          16
+        ],
+        "G_coefficients_ascending": [
+          2,
+          1
+        ],
+        "G_roots": [
+          15
+        ],
+        "pairwise_coprime": true,
+        "support_A": [
+          10,
+          12,
+          14,
+          15
+        ],
+        "support_B": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "target": [
+          0,
+          2
+        ]
+      }
+    ],
+    "fiber_size": 7,
+    "fiber_supports": [
+      [
+        1,
+        2,
+        4,
+        10
+      ],
+      [
+        2,
+        3,
+        5,
+        7
+      ],
+      [
+        3,
+        8,
+        10,
+        13
+      ],
+      [
+        4,
+        6,
+        11,
+        13
+      ],
+      [
+        4,
+        7,
+        9,
+        14
+      ],
+      [
+        7,
+        13,
+        15,
+        16
+      ],
+      [
+        10,
+        12,
+        14,
+        15
+      ]
+    ],
+    "marked_support_S0": [
+      4,
+      6,
+      11,
+      13
+    ],
+    "marked_support_S0_periodic_scales": [
+      2
+    ],
+    "parameters": {
+      "domain": "F_17^*",
+      "e": 3,
+      "m": 4,
+      "p": 17,
+      "w": 2
+    },
+    "pole_line": {
+      "U_z_coefficients_ascending": [
+        0,
+        0,
+        16,
+        0,
+        1
+      ],
+      "all_support_explanation_states": [
+        {
+          "actual_first_match_owner": null,
+          "codeword_evaluation_in_domain_order": [
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12,
+            12
+          ],
+          "explanation_polynomial_ascending": [
+            12
+          ],
+          "periodic_scales": [],
+          "slope": 5,
+          "support": [
+            1,
+            2,
+            4,
+            10
+          ],
+          "support_structural_class": "not_classified_here"
+        },
+        {
+          "actual_first_match_owner": null,
+          "codeword_evaluation_in_domain_order": [
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9,
+            9
+          ],
+          "explanation_polynomial_ascending": [
+            9
+          ],
+          "periodic_scales": [],
+          "slope": 11,
+          "support": [
+            2,
+            3,
+            5,
+            7
+          ],
+          "support_structural_class": "not_classified_here"
+        },
+        {
+          "actual_first_match_owner": null,
+          "codeword_evaluation_in_domain_order": [
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "explanation_polynomial_ascending": [
+            10
+          ],
+          "periodic_scales": [],
+          "slope": 8,
+          "support": [
+            3,
+            8,
+            10,
+            13
+          ],
+          "support_structural_class": "not_classified_here"
+        },
+        {
+          "actual_first_match_owner": null,
+          "codeword_evaluation_in_domain_order": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "explanation_polynomial_ascending": [
+            0
+          ],
+          "periodic_scales": [
+            2
+          ],
+          "slope": 2,
+          "support": [
+            4,
+            6,
+            11,
+            13
+          ],
+          "support_structural_class": "periodic_support_trigger_only"
+        },
+        {
+          "actual_first_match_owner": null,
+          "codeword_evaluation_in_domain_order": [
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7
+          ],
+          "explanation_polynomial_ascending": [
+            7
+          ],
+          "periodic_scales": [],
+          "slope": 8,
+          "support": [
+            4,
+            7,
+            9,
+            14
+          ],
+          "support_structural_class": "not_classified_here"
+        },
+        {
+          "actual_first_match_owner": null,
+          "codeword_evaluation_in_domain_order": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "explanation_polynomial_ascending": [
+            5
+          ],
+          "periodic_scales": [],
+          "slope": 5,
+          "support": [
+            7,
+            13,
+            15,
+            16
+          ],
+          "support_structural_class": "not_classified_here"
+        },
+        {
+          "actual_first_match_owner": null,
+          "codeword_evaluation_in_domain_order": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "explanation_polynomial_ascending": [
+            8
+          ],
+          "periodic_scales": [],
+          "slope": 11,
+          "support": [
+            10,
+            12,
+            14,
+            15
+          ],
+          "support_structural_class": "not_classified_here"
+        }
+      ],
+      "code": "RS(F_17,F_17^*,1)",
+      "complete_MCA_slopes_uncovered_by_rooted_star": [
+        11
+      ],
+      "complete_pole_line": {
+        "codeword_rays": 7,
+        "distinct_MCA_slopes": 4,
+        "explanation_states": 7,
+        "slopes": [
+          2,
+          5,
+          8,
+          11
+        ],
+        "support_count": 7,
+        "witness_rays": 7,
+        "witness_rays_per_slope_histogram": {
+          "1": 1,
+          "2": 3
+        }
+      },
+      "complete_top_seam_marked_incidence": {
+        "HJ_bound_pass": true,
+        "HJ_upper_bound": 8,
+        "codeword_rays": 7,
+        "distinct_slope_image": 4,
+        "explanation_states": 7,
+        "incidence_edges": 32,
+        "marked_degree_by_selected_support": {
+          "1,2,4,10": 5,
+          "10,12,14,15": 4,
+          "2,3,5,7": 4,
+          "3,8,10,13": 5,
+          "4,6,11,13": 4,
+          "4,7,9,14": 5,
+          "7,13,15,16": 5
+        },
+        "marked_degree_by_slope": {
+          "11": 8,
+          "2": 4,
+          "5": 10,
+          "8": 10
+        },
+        "marked_degree_by_witness_ray": {
+          "gamma=11;h=[8]": 4,
+          "gamma=11;h=[9]": 4,
+          "gamma=2;h=[0]": 4,
+          "gamma=5;h=[12]": 5,
+          "gamma=5;h=[5]": 5,
+          "gamma=8;h=[10]": 5,
+          "gamma=8;h=[7]": 5
+        },
+        "marked_triples_T": 32,
+        "marked_triples_per_witness_ray_histogram": {
+          "4": 3,
+          "5": 4
+        },
+        "ordered_full_support_pairs_P_full": 32,
+        "ordered_side_locator_pairs_P_side": 32,
+        "projection_H": 4,
+        "projection_J": 1,
+        "scope": "complete_ordered_top_seam_selected_support_projection",
+        "slopes": [
+          2,
+          5,
+          8,
+          11
+        ],
+        "witness_rays": 7,
+        "witness_rays_per_slope_histogram": {
+          "1": 1,
+          "2": 3
+        }
+      },
+      "complete_top_seam_two_endpoint_relation": {
+        "HJ_bound_pass": true,
+        "HJ_upper_bound": 8,
+        "codeword_rays": 7,
+        "distinct_slope_image": 4,
+        "explanation_states": 7,
+        "incidence_edges": 64,
+        "marked_degree_by_selected_support": {
+          "1,2,4,10": 10,
+          "10,12,14,15": 8,
+          "2,3,5,7": 8,
+          "3,8,10,13": 10,
+          "4,6,11,13": 8,
+          "4,7,9,14": 10,
+          "7,13,15,16": 10
+        },
+        "marked_degree_by_slope": {
+          "11": 16,
+          "2": 8,
+          "5": 20,
+          "8": 20
+        },
+        "marked_degree_by_witness_ray": {
+          "gamma=11;h=[8]": 8,
+          "gamma=11;h=[9]": 8,
+          "gamma=2;h=[0]": 8,
+          "gamma=5;h=[12]": 10,
+          "gamma=5;h=[5]": 10,
+          "gamma=8;h=[10]": 10,
+          "gamma=8;h=[7]": 10
+        },
+        "marked_triples_T": 32,
+        "marked_triples_per_witness_ray_histogram": {
+          "10": 4,
+          "8": 3
+        },
+        "ordered_full_support_pairs_P_full": 32,
+        "ordered_side_locator_pairs_P_side": 32,
+        "projection_H": 8,
+        "projection_J": 2,
+        "scope": "complete_ordered_top_seam_both_endpoints",
+        "slopes": [
+          2,
+          5,
+          8,
+          11
+        ],
+        "witness_rays": 7,
+        "witness_rays_per_slope_histogram": {
+          "1": 1,
+          "2": 3
+        }
+      },
+      "first_match_status": "support periodicity is only a structural trigger; no endpoint ray is assigned an actual first-match owner by this packet",
+      "pole": 0,
+      "received_line": {
+        "domain_order": [
+          1,
+          3,
+          9,
+          10,
+          13,
+          5,
+          15,
+          11,
+          16,
+          14,
+          8,
+          7,
+          4,
+          12,
+          2,
+          6
+        ],
+        "exhaustive_slope_codeword_scan": [
+          {
+            "agreement_size": 4,
+            "agreement_support": [
+              4,
+              6,
+              11,
+              13
+            ],
+            "constant_codeword": 0,
+            "slope": 2
+          },
+          {
+            "agreement_size": 4,
+            "agreement_support": [
+              7,
+              13,
+              15,
+              16
+            ],
+            "constant_codeword": 5,
+            "slope": 5
+          },
+          {
+            "agreement_size": 4,
+            "agreement_support": [
+              1,
+              2,
+              4,
+              10
+            ],
+            "constant_codeword": 12,
+            "slope": 5
+          },
+          {
+            "agreement_size": 4,
+            "agreement_support": [
+              4,
+              7,
+              9,
+              14
+            ],
+            "constant_codeword": 7,
+            "slope": 8
+          },
+          {
+            "agreement_size": 4,
+            "agreement_support": [
+              3,
+              8,
+              10,
+              13
+            ],
+            "constant_codeword": 10,
+            "slope": 8
+          },
+          {
+            "agreement_size": 4,
+            "agreement_support": [
+              10,
+              12,
+              14,
+              15
+            ],
+            "constant_codeword": 8,
+            "slope": 11
+          },
+          {
+            "agreement_size": 4,
+            "agreement_support": [
+              2,
+              3,
+              5,
+              7
+            ],
+            "constant_codeword": 9,
+            "slope": 11
+          }
+        ],
+        "f_definition": "f(x)=U_z(x)/x",
+        "f_values": [
+          0,
+          7,
+          6,
+          4,
+          8,
+          1,
+          11,
+          11,
+          0,
+          10,
+          11,
+          13,
+          9,
+          16,
+          6,
+          6
+        ],
+        "g_definition": "g(x)=-1/x",
+        "g_pairwise_distinct": true,
+        "g_values": [
+          16,
+          11,
+          15,
+          5,
+          13,
+          10,
+          9,
+          3,
+          1,
+          6,
+          2,
+          12,
+          4,
+          7,
+          8,
+          14
+        ],
+        "noncommon_reason": "g is not a degree-less-than-1 codeword on any support of size at least 2"
+      },
+      "reverse_rooted_star_selected_mate_projection": {
+        "HJ_bound_pass": true,
+        "HJ_upper_bound": 2,
+        "codeword_rays": 4,
+        "distinct_slope_image": 2,
+        "explanation_states": 4,
+        "incidence_edges": 4,
+        "marked_degree_by_selected_support": {
+          "1,2,4,10": 1,
+          "3,8,10,13": 1,
+          "4,7,9,14": 1,
+          "7,13,15,16": 1
+        },
+        "marked_degree_by_slope": {
+          "5": 2,
+          "8": 2
+        },
+        "marked_degree_by_witness_ray": {
+          "gamma=5;h=[12]": 1,
+          "gamma=5;h=[5]": 1,
+          "gamma=8;h=[10]": 1,
+          "gamma=8;h=[7]": 1
+        },
+        "marked_triples_T": 4,
+        "marked_triples_per_witness_ray_histogram": {
+          "1": 4
+        },
+        "ordered_full_support_pairs_P_full": 4,
+        "ordered_side_locator_pairs_P_side": 4,
+        "projection_H": 2,
+        "projection_J": 1,
+        "scope": "reverse_rooted_star_selected_mate_supports",
+        "slopes": [
+          5,
+          8
+        ],
+        "witness_rays": 4,
+        "witness_rays_per_slope_histogram": {
+          "2": 2
+        }
+      },
+      "rooted_multiple_mate_star_endpoint_incidence": {
+        "HJ_bound_pass": true,
+        "HJ_upper_bound": 4,
+        "codeword_rays": 5,
+        "distinct_slope_image": 3,
+        "explanation_states": 5,
+        "incidence_edges": 8,
+        "marked_degree_by_selected_support": {
+          "1,2,4,10": 1,
+          "3,8,10,13": 1,
+          "4,6,11,13": 4,
+          "4,7,9,14": 1,
+          "7,13,15,16": 1
+        },
+        "marked_degree_by_slope": {
+          "2": 4,
+          "5": 2,
+          "8": 2
+        },
+        "marked_degree_by_witness_ray": {
+          "gamma=2;h=[0]": 4,
+          "gamma=5;h=[12]": 1,
+          "gamma=5;h=[5]": 1,
+          "gamma=8;h=[10]": 1,
+          "gamma=8;h=[7]": 1
+        },
+        "marked_triples_T": 4,
+        "marked_triples_per_witness_ray_histogram": {
+          "1": 4,
+          "4": 1
+        },
+        "ordered_full_support_pairs_P_full": 4,
+        "ordered_side_locator_pairs_P_side": 4,
+        "projection_H": 2,
+        "projection_J": 2,
+        "scope": "rooted_multiple_mate_star_both_endpoints",
+        "slopes": [
+          2,
+          5,
+          8
+        ],
+        "witness_rays": 5,
+        "witness_rays_per_slope_histogram": {
+          "1": 1,
+          "2": 2
+        }
+      },
+      "rooted_multiple_mate_star_selected_S0_projection": {
+        "HJ_bound_pass": true,
+        "HJ_upper_bound": 1,
+        "codeword_rays": 1,
+        "distinct_slope_image": 1,
+        "explanation_states": 1,
+        "incidence_edges": 4,
+        "marked_degree_by_selected_support": {
+          "4,6,11,13": 4
+        },
+        "marked_degree_by_slope": {
+          "2": 4
+        },
+        "marked_degree_by_witness_ray": {
+          "gamma=2;h=[0]": 4
+        },
+        "marked_triples_T": 4,
+        "marked_triples_per_witness_ray_histogram": {
+          "4": 1
+        },
+        "ordered_full_support_pairs_P_full": 4,
+        "ordered_side_locator_pairs_P_side": 4,
+        "projection_H": 4,
+        "projection_J": 1,
+        "scope": "rooted_multiple_mate_star_selected_S0_support",
+        "slopes": [
+          2
+        ],
+        "witness_rays": 1,
+        "witness_rays_per_slope_histogram": {
+          "1": 1
+        }
+      },
+      "rooted_star_complete_slope_set_HJ_bound_applicable": false,
+      "rooted_star_complete_slope_set_projection_H": 0,
+      "rooted_star_nonpayment_reason": "slope 11 has no incident rooted-star triple, so the four-mate star is not exhaustive over the complete MCA numerator; the separate complete 32-triple top-seam incidence does cover it"
+    },
+    "rooted_multiple_mate_star_triples": [
+      {
+        "A_coefficients_ascending": [
+          9,
+          15,
+          4,
+          1
+        ],
+        "A_minus_B": 12,
+        "A_roots": [
+          6,
+          11,
+          13
+        ],
+        "B_coefficients_ascending": [
+          14,
+          15,
+          4,
+          1
+        ],
+        "B_roots": [
+          1,
+          2,
+          10
+        ],
+        "G_coefficients_ascending": [
+          13,
+          1
+        ],
+        "G_roots": [
+          4
+        ],
+        "pairwise_coprime": true,
+        "side_affine_maps_A_to_B": [],
+        "support_A": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "support_B": [
+          1,
+          2,
+          4,
+          10
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          8,
+          15,
+          13,
+          1
+        ],
+        "A_minus_B": 10,
+        "A_roots": [
+          4,
+          6,
+          11
+        ],
+        "B_coefficients_ascending": [
+          15,
+          15,
+          13,
+          1
+        ],
+        "B_roots": [
+          3,
+          8,
+          10
+        ],
+        "G_coefficients_ascending": [
+          4,
+          1
+        ],
+        "G_roots": [
+          13
+        ],
+        "pairwise_coprime": true,
+        "side_affine_maps_A_to_B": [
+          [
+            16,
+            14
+          ]
+        ],
+        "support_A": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "support_B": [
+          3,
+          8,
+          10,
+          13
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          9,
+          15,
+          4,
+          1
+        ],
+        "A_minus_B": 7,
+        "A_roots": [
+          6,
+          11,
+          13
+        ],
+        "B_coefficients_ascending": [
+          2,
+          15,
+          4,
+          1
+        ],
+        "B_roots": [
+          7,
+          9,
+          14
+        ],
+        "G_coefficients_ascending": [
+          13,
+          1
+        ],
+        "G_roots": [
+          4
+        ],
+        "pairwise_coprime": true,
+        "side_affine_maps_A_to_B": [
+          [
+            16,
+            3
+          ]
+        ],
+        "support_A": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "support_B": [
+          4,
+          7,
+          9,
+          14
+        ],
+        "target": [
+          0,
+          2
+        ]
+      },
+      {
+        "A_coefficients_ascending": [
+          8,
+          15,
+          13,
+          1
+        ],
+        "A_minus_B": 5,
+        "A_roots": [
+          4,
+          6,
+          11
+        ],
+        "B_coefficients_ascending": [
+          3,
+          15,
+          13,
+          1
+        ],
+        "B_roots": [
+          7,
+          15,
+          16
+        ],
+        "G_coefficients_ascending": [
+          4,
+          1
+        ],
+        "G_roots": [
+          13
+        ],
+        "pairwise_coprime": true,
+        "side_affine_maps_A_to_B": [],
+        "support_A": [
+          4,
+          6,
+          11,
+          13
+        ],
+        "support_B": [
+          7,
+          13,
+          15,
+          16
+        ],
+        "target": [
+          0,
+          2
+        ]
+      }
+    ],
+    "side_affine_trigger_count": 2,
+    "target_locator_prefix": [
+      0,
+      16
+    ],
+    "target_power_sums": [
+      0,
+      2
+    ],
+    "top_seam_mate_count": 4
+  },
+  "normal_form": {
+    "coprimality": "G,A,B pairwise coprime",
+    "counted_object": "ordered marked triple (G,A,B)",
+    "degrees": "deg(A)=deg(B)=w+1",
+    "equation": "A-B=c!=0",
+    "support_reconstruction": "M=roots(G) union roots(A), E=roots(G) union roots(B)"
+  },
+  "payload_sha256": "da0f460c0ca57d4a826b16a07cdafd51fbd9e6fbe80a95ad8398164204b30ec4",
+  "projection_interface": {
+    "actual_incidence": "I subseteq Z_T x T_z, where Z_T is exactly the incident slope image",
+    "aggregated_target_rule": "if targets vary, retain z in the side projection key before applying mu_G",
+    "common_core_fibre": "mu_G(z,A,B)=#{G:(G,A,B) in T_z}",
+    "full_MCA_guardrail": "if a complete MCA slope has degree zero from the chosen marked family, then H=0 on the complete slope set and this bound is inapplicable",
+    "mark_erasure_bound": "|T_z| <= max_(A,B) mu_G(z,A,B) * |P_side_z|",
+    "marked_full_pair_bijection": "T_z <-> P_full_z, so |T_z|=|P_full_z|",
+    "natural_scale_requirement": "J*mu_G^max/H = exp(o(n)) when only a natural-scale side-pair bound is available",
+    "nonclaim": "a marked-pair or second-moment estimate without a rooted exhaustive incidence and explicit H,J is not a slope payment",
+    "projection_degrees": {
+      "H": "min_(gamma in Z_T) deg_I(gamma), with H>=1 by declared exhaustivity",
+      "J": "max_(t in T_z) deg_I(t)"
+    },
+    "sets_kept_separate": [
+      "marked_support_incidences_T_z=(G,A,B)",
+      "ordered_reconstructed_support_pairs_P_full_z=(GA,GB)",
+      "ordered_side_locator_pairs_P_side_z=(A,B)",
+      "explanation_states_X=(gamma,S,h)",
+      "witness_rays_R=(gamma,h)",
+      "codeword_rays_C=(gamma,c)",
+      "distinct_MCA_slopes_Z"
+    ],
+    "slope_bound": "|Z_T| <= floor(J*|T_z|/H) <= floor(J*mu_G^max*|P_side_z|/H)"
+  },
+  "schema": "primitive_top_seam_marked_incidence.v1",
+  "source_anchors": [
+    {
+      "label": "thm:capg-second-moment",
+      "line_end": 9595,
+      "line_start": 9575,
+      "path": "experimental/cap25_cap_v13_raw.tex",
+      "sha256": "3ecc3d3afde785e4c765221d6b98b74b0366b59d00e0cf3ff2dcfda8d50a6e14"
+    },
+    {
+      "label": "def:first-match",
+      "line_end": 1467,
+      "line_start": 1452,
+      "path": "experimental/asymptotic_rs_mca_frontiers.tex",
+      "sha256": "317fcaac5c1112d4912b2e78a93cd1ce30417cf93bf7df052588275634114459"
+    },
+    {
+      "label": "def:primitive-first-match-residual",
+      "line_end": 1517,
+      "line_start": 1500,
+      "path": "experimental/asymptotic_rs_mca_frontiers.tex",
+      "sha256": "f3392783e5e10aaf9065f4bb0ae1f8765e95f0bf7b83d029c603e76a06df1c51"
+    },
+    {
+      "label": "def:closed-ledger",
+      "line_end": 190,
+      "line_start": 153,
+      "path": "experimental/asymptotic_rs_mca.tex",
+      "sha256": "85b2a79c9658bed64c3b12e7563f7c222eaef430d5f1bb0fe4b3359fd2cc5451"
+    },
+    {
+      "label": "def:ray-compiler",
+      "line_end": 199,
+      "line_start": 192,
+      "path": "experimental/asymptotic_rs_mca.tex",
+      "sha256": "9b62d1a90e911aa14544f1c441f1bbeb3aa686306d6facdef2ee7d850c197064"
+    },
+    {
+      "label": "prop:line-ray-saturation",
+      "line_end": 1883,
+      "line_start": 1867,
+      "path": "experimental/grande_finale.tex",
+      "sha256": "b5584503f3858a8a8ff0dd7f8d4cad02b20a0f6536b30abf302c452e5467592b"
+    },
+    {
+      "label": "prop:pole-line",
+      "line_end": 600,
+      "line_start": 583,
+      "path": "experimental/grande_finale.tex",
+      "sha256": "0656b15324a513a9abecedcecf7be1f35191dd2128a4d78dc4a6f3b81d606a81"
+    }
+  ],
+  "status": "PROVED_LOCAL / AUDIT / OPEN_GAP",
+  "target_results": {
+    "1_common_core_determinacy": {
+      "exact_nonclaim": "three does not refute an exp(o(n)) multiplicity theorem after full first-match pruning",
+      "finite_result": "multiplicity-one is false: the certified fixed (z,A,B) fixture has three G marks",
+      "proved_reduction": "for fixed (z,A,B), admissible G form a punctured prefix fibre determined by target(G)=z-target(A)",
+      "status": "OPEN"
+    },
+    "2_marked_incidence_payment": {
+      "finite_result": "the complete F17 target-fibre top seam has 32 ordered marked triples and a functional selected-support projection with H=4,J=1",
+      "missing": "an asymptotic natural-profile marked count plus rooted first-match H,J projection bounds",
+      "status": "OPEN"
+    },
+    "3_earlier_owner_classification": {
+      "missing": "paid typed projectors for every earlier actual-slope cell; structural triggers are not payments",
+      "status": "OPEN"
+    },
+    "4_new_obstruction": {
+      "missing": "an actual first-match-surviving rooted marked family with excessive distinct-slope image",
+      "status": "NOT_ESTABLISHED"
+    }
+  },
+  "verdict": "OPEN GAP"
+}

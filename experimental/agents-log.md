@@ -30,6 +30,38 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Primitive top-seam marked-incidence audit v1
+
+- **Agent/model:** Codex with independent counterpacket, owner-typing, and
+  projection-multiplicity reviews.
+- **Files added or changed:** Added
+  `experimental/notes/thresholds/primitive_top_seam_marked_incidence_v1.md`,
+  `experimental/scripts/verify_primitive_top_seam_marked_incidence_v1.py`,
+  `experimental/data/certificates/primitive-top-seam-marked-incidence-v1/README.md`,
+  and
+  `experimental/data/certificates/primitive-top-seam-marked-incidence-v1/primitive_top_seam_marked_incidence_v1.json`;
+  updated this log only. No paper `.tex` or `.pdf` source was changed.
+- **Status:** PROVED_LOCAL / COUNTEREXAMPLE_TO_SHORTCUTS / AUDIT / OPEN GAP.
+- **What is being added:** An exact fail-closed audit of the `e=w+1` seam
+  using ordered marked triples `(G,A,B)`. It reproduces the `F_17^*` four-mate
+  packet and separately enumerates the complete target-fibre seam with `32`
+  ordered triples, `7` explanation states/rays, and `4` slopes; independently
+  verifies `704*252=177408` ordered marked incidences; gives a fixed `(z,A,B)`
+  packet with three distinct cores; and separates reconstructed support pairs,
+  side-locator pairs, explanation states, rays, and MCA slopes with exact
+  `H,J` projection degrees.
+- **How it is useful:** It proves that fixed-side common-core multiplicity is
+  a punctured prefix-fiber problem, refutes multiplicity-one, exposes the type
+  error in triple-level first-match tagging, and prevents periodic/affine
+  candidates, arbitrary core marks, a rooted four-mate star, or marked second
+  moments from being promoted to paid owners or complete slope payments. The
+  verifier fails closed because the current source does not construct an
+  executable rooted post-first-match marked universe.
+- **What to do next:** Instantiate the C1--C9 atlas on actual
+  `(gamma,S,h)` witnesses, preserve literal `G` through the rooted chain, and
+  prove either an `exp(o(n))` fixed-side core-fiber bound plus exact `H,J`, a
+  paid earlier-owner descent, or a genuinely surviving excessive slope image.
+
 ### 2026-07-19 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar,
