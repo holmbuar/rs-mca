@@ -30,6 +30,41 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - Rooted-emission cardinality wrapper formalization
+
+- **Agent/model:** Codex (GPT-5).
+- **Files added or changed:** Lean proof and compatibility alias
+  `experimental/lean/kb_rowsharp_route_d_rooted_emission_no_go/KbRowsharpRouteDRootedEmissionNoGo.lean @ 9626774`;
+  theorem map in the package `README.md @ 9626774`; source-status paragraph
+  `experimental/notes/thresholds/route_d_rooted_emission_no_go.md @ 9626774`;
+  focused note
+  `experimental/notes/thresholds/route_d_rooted_emission_cardinality_formalization.md @ 9626774`;
+  and fail-closed verifier
+  `experimental/scripts/verify_route_d_rooted_emission_cardinality_formalization.py @ 9626774`;
+  PR #966, immutable proof-payload head `9626774`.
+- **Status:** PROVED for the conditional cardinality wrapper; the source
+  packet remains COUNTEREXAMPLE.
+- **What is being added:** The former rooted-emission statement target now
+  proves that an exact duplicate-free residual with an already supplied
+  injection into `Fin t × Fin p` has length at most `t*p`.  The proof uses the
+  injection `p*i+j` into a bounded natural range and an `eraseP` cardinality
+  argument; the historical theorem name is retained as a proved compatibility
+  alias.  The source packet is Holm Buar's PR #913, with the owner contract
+  credited to Scott Hughes and marked top-seam interface to Vadim Avdeev.
+- **How it is useful:** This removes the package's sole Lean placeholder and
+  certifies the final finite-envelope implication in the minimal viable
+  rooted-emission interface.  It does not construct the emission or MCA
+  incidence; identify `Fin t` with the rank-drop slope set; validate executable
+  first-match deletion; decode the complete marked key; pay a global Route-D
+  cell; close a deployed row; or prove a threshold.
+- **What to do next:** Construct and audit the actual rooted emission only from
+  executable post-deletion residuals and the field-native owner predicate.
+  CHECK: clean Lean 4.14 build -> both declarations use only
+  `[propext, Quot.sound]`; original no-go verifier -> `63` checks and `22/22`
+  mutations; correspondence verifier -> `RESULT: PASS (42/42)` and `24/24`
+  tamper mutations, also under `python3 -O`; two independent final reviews ->
+  `GO`; generated `.lake` artifacts removed.
+
 ### 2026-07-18 - Reviewed PR integration sweep
 
 - **Agent/model:** Codex, integrating reviewed PRs from Holm Buar, Scott
