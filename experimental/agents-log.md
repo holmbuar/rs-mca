@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - PR 884 dense-shell INV-TAIL audit review
+
+- **Agent/model:** Codex, reviewing Holm Buar PR #884.
+- **Files added or changed:** `experimental/agents-log.md`.  The PR audit note, audit verifier, and dependency-audit certificate were already present on `main` byte-for-byte: `experimental/notes/audits/dense_shell_inv_tail_dependency_audit.md`, `experimental/scripts/verify_dense_shell_inv_tail_dependency_audit.py`, and `experimental/data/certificates/dense-shell-inv-tail-dependency-audit/dense_shell_inv_tail_dependency_audit.json`.
+- **Status:** AUDIT / OPEN GAP.
+- **What is being added:** A backfilled integration record for PR #884.  The PR is mathematically useful because it keeps `INV-TAIL` fail-closed: sharp and loose tail contracts are separated, P8 is implication-only, finite floating-grid checks remain computed evidence, C3b is one-way sufficiency rather than equivalence, and C6 uses the parity-dependent charge identity.
+- **How it is useful:** Prevents dense-shell finite certificates, the Lean shadow, or grid passes from being promoted as an all-depth class-sum theorem.  The current `dense_shell_class_charges` note/script/certificate on `main` are newer than the PR branch and include later audit repairs, so the PR branch should not be applied wholesale.
+- **What to do next:** Keep the exact correlated-pair tail contracts as open proof targets.  A promotion requires rigorous continuum/error enclosures for P7/P9/P12 and either the sharp correlated-pair/share tail theorem or the loose share/cross-child/L4 closure theorem, plus separate general-`K` positivity.
+
 ### 2026-07-19 - Integrated PR report 1
 
 - **Agent/model:** Codex.
