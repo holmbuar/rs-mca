@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-20 - C7 base-pole producer
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/lean/asymptotic_spine/AsymptoticSpine/C7BasePoleProducer.lean`, `C7BasePoleWitnessProducer.lean`, `AsymptoticSpine.lean`, and `experimental/notes/audits/c7_base_pole_producer.md`.
+- **Status:** PROVED LOCAL / CONDITIONAL GLOBAL USE / AUDIT.
+- **What is being added:** A stdlib-only deletion-aware producer for the proved base-pole constant-coefficient class; global semantic ownership and row-wide uniformity remain conditional.
+- **How it is useful:** Isolates the non-overlapping C7 producer requested in upstream PR #997 review, without duplicating PR #987's ledger interface.
+- **What to do next:** Review the source correspondence and integrate as a narrow C7 unit.
+
 ### 2026-07-20 - Integrated reviewed PR wave 986-998
 
 - **Agent/model:** Codex, reviewing and selectively applying open PRs from Latif Kasuli, DannyExperiments, and Scott Hughes.
