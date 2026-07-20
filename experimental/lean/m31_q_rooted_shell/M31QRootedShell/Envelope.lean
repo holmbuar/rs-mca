@@ -61,10 +61,11 @@ theorem degreeSum_le_intercept_add_excess (b : Nat) :
   induction rows with
   | nil => simp
   | cons row rows ih =>
-      rcases row with ⟨d, h⟩
-      have hd : d ≤ b + (d - b) := by omega
-      have hadd := Nat.add_le_add hd ih
-      simpa [Nat.mul_succ, Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hadd
+      cases row with
+      | mk d h =>
+          have hd : d ≤ b + (d - b) := by omega
+          have hadd := Nat.add_le_add hd ih
+          simpa [Nat.mul_succ, Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using hadd
 
 /-- Pointwise local shell bounds sum after exact cross multiplication. -/
 theorem localEnvelope_mul_le (Q b c : Nat) :
@@ -75,12 +76,13 @@ theorem localEnvelope_mul_le (Q b c : Nat) :
   induction rows with
   | nil => intro _; simp [LocalEnvelope]
   | cons row rows ih =>
-      rcases row with ⟨d, h⟩
-      intro hlocal
-      have hhead : Q * (d - b) ≤ c * h := hlocal.1
-      have htail : LocalEnvelope Q b c rows := hlocal.2
-      have hrest := ih htail
-      simpa [Nat.mul_add] using Nat.add_le_add hhead hrest
+      cases row with
+      | mk d h =>
+          intro hlocal
+          have hhead : Q * (d - b) ≤ c * h := hlocal.1
+          have htail : LocalEnvelope Q b c rows := hlocal.2
+          have hrest := ih htail
+          simpa [Nat.mul_add] using Nat.add_le_add hhead hrest
 
 /-- Convert a strict packet bracket into a natural-number floor bound. -/
 theorem excessSum_le_scaledFloor
