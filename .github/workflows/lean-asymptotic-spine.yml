@@ -1,6 +1,12 @@
-name: Lean - asymptotic spine
+name: Lean - asymptotic spine build mirror
+run-name: Lean asymptotic spine — ${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.ref_name }}
 
+# `codex/lean-build` is a validation mirror, not a research or integration branch.
+# Push a candidate commit there to kernel-build the complete stdlib-only package.
 on:
+  push:
+    branches:
+      - "codex/lean-build"
   workflow_dispatch:
     inputs:
       target_ref:
@@ -8,17 +14,12 @@ on:
         required: true
         default: codex/lean-build
         type: string
-  push:
-    branches:
-      - "codex/lean-build"
-      - "codex/c7-first-match-owner-regression"
-  pull_request: {}
 
 permissions:
   contents: read
 
 concurrency:
-  group: lean-asymptotic-spine-${{ github.ref }}
+  group: lean-asymptotic-spine-${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:
