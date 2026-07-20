@@ -1,0 +1,180 @@
+name: Open upstream PR with explicit one-time authorization
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - ".github/open-upstream-pr-explicit-device"
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  device-code:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'agent/trigger-upstream-pr-explicit-device'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    outputs:
+      device_code_b64: ${{ steps.device.outputs.device_code_b64 }}
+      interval: ${{ steps.device.outputs.interval }}
+      expires_in: ${{ steps.device.outputs.expires_in }}
+    steps:
+      - name: Request one-time GitHub device code
+        id: device
+        shell: bash
+        run: |
+          set -euo pipefail
+          client_id='Iv1.e7b89e013f801f03'
+          response="$(curl --fail-with-body --silent --show-error \
+            -X POST \
+            -H 'Accept: application/json' \
+            --data-urlencode "client_id=$client_id" \
+            --data-urlencode 'scope=public_repo' \
+            https://github.com/login/device/code)"
+          error="$(jq -r '.error // empty' <<<"$response")"
+          if [[ -n "$error" ]]; then
+            jq -c '{error,error_description,error_uri}' <<<"$response"
+            exit 1
+          fi
+          user_code="$(jq -r .user_code <<<"$response")"
+          verification_uri="$(jq -r .verification_uri <<<"$response")"
+          device_code="$(jq -r .device_code <<<"$response")"
+          interval="$(jq -r .interval <<<"$response")"
+          expires_in="$(jq -r .expires_in <<<"$response")"
+          echo "GITHUB_DEVICE_VERIFICATION_URI=$verification_uri"
+          echo "GITHUB_DEVICE_USER_CODE=$user_code"
+          echo "GITHUB_DEVICE_CODE_EXPIRES_IN_SECONDS=$expires_in"
+          encoded="$(printf '%s' "$device_code" | base64 -w0)"
+          echo "device_code_b64=$encoded" >> "$GITHUB_OUTPUT"
+          echo "interval=$interval" >> "$GITHUB_OUTPUT"
+          echo "expires_in=$expires_in" >> "$GITHUB_OUTPUT"
+
+  create-pr:
+    needs: device-code
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FORK_TOKEN: ${{ github.token }}
+      DEVICE_CODE_B64: ${{ needs.device-code.outputs.device_code_b64 }}
+      INITIAL_INTERVAL: ${{ needs.device-code.outputs.interval }}
+      EXPIRES_IN: ${{ needs.device-code.outputs.expires_in }}
+    steps:
+      - name: Poll authorization, verify user, and open upstream PR
+        shell: bash
+        run: |
+          set -euo pipefail
+          client_id='Iv1.e7b89e013f801f03'
+          device_code="$(printf '%s' "$DEVICE_CODE_B64" | base64 -d)"
+          interval="$INITIAL_INTERVAL"
+          deadline=$((SECONDS + EXPIRES_IN))
+          access_token=''
+          while (( SECONDS < deadline )); do
+            sleep "$interval"
+            response="$(curl --fail-with-body --silent --show-error \
+              -X POST \
+              -H 'Accept: application/json' \
+              --data-urlencode "client_id=$client_id" \
+              --data-urlencode "device_code=$device_code" \
+              --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:device_code' \
+              https://github.com/login/oauth/access_token)"
+            access_token="$(jq -r '.access_token // empty' <<<"$response")"
+            if [[ -n "$access_token" ]]; then
+              break
+            fi
+            error="$(jq -r '.error // empty' <<<"$response")"
+            case "$error" in
+              authorization_pending) ;;
+              slow_down) interval=$((interval + 5)) ;;
+              access_denied|expired_token|incorrect_device_code|incorrect_client_credentials|device_flow_disabled)
+                jq -c '{error,error_description,error_uri}' <<<"$response"
+                exit 1
+                ;;
+              *)
+                jq -c '{error,error_description,error_uri}' <<<"$response"
+                exit 1
+                ;;
+            esac
+          done
+          if [[ -z "$access_token" ]]; then
+            echo 'GitHub device authorization expired before completion.'
+            exit 1
+          fi
+          echo "::add-mask::$access_token"
+          login="$(curl --fail-with-body --silent --show-error \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer $access_token" \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            https://api.github.com/user | jq -r .login)"
+          if [[ "$login" != 'holmbuar' ]]; then
+            echo "Authorization was completed by unexpected account '$login'; refusing publication."
+            exit 1
+          fi
+          export GH_TOKEN="$access_token"
+          existing="$(gh pr list --repo przchojecki/rs-mca --state open --head holmbuar:agent/m31-q-rooted-shell-upstream --json url --jq '.[0].url // empty')"
+          if [[ -n "$existing" ]]; then
+            pr_url="$existing"
+          else
+            cat > /tmp/pr-body.md <<'BODY'
+          ## Claim
+
+          This PR adds a complete experimental packet reducing the binding Mersenne-31 row-sharp-Q prefix atom to one explicit local shell inequality.
+
+          For a first-match-pruned prefix family, the generic compiler proves that
+
+          ```text
+          p^w max(d_e(A)-b,0) <= c C(m,e)C(n-m,e)
+          ```
+
+          implies
+
+          ```text
+          |F| <= 1 + b(min(m,n-m)-w) + floor(c C(n,m)/p^w).
+          ```
+
+          At `(b,c)=(3,7)` the exact deployed deductions are:
+
+          - Mersenne-31 list prefix atom: `16,696,786 <= 16,777,215`, reserve `80,429`;
+          - Mersenne-31 MCA companion prefix atom: `15,009,938`, reserve `1,767,277`.
+
+          A faithful finite Chebyshev/twin-coset control refutes the stronger `2+7` route while satisfying `3+7`:
+
+          ```text
+          127(6-2)=508 > 7*64=448,
+          127(6-3)=381 <= 448.
+          ```
+
+          ## Complete packet
+
+          The branch is one commit over upstream `main` and contains the research note, exact JSON certificate, auxiliary replay script, standalone stdlib-only Lean package, documentation, and the required templated `experimental/agents-log.md` entry.
+
+          ## Lean validation
+
+          The package imports only `Std`; it has no Mathlib dependency. No local Lean build was run.
+
+          The exact upstream-candidate head `b90cfa24a9ac4e4bf89b0f38db53f5f07b995c0a` passed the fork's PR-triggered Lean build in `holmbuar/rs-mca#37`:
+
+          - https://github.com/holmbuar/rs-mca/actions/runs/29778834253
+          - `experimental/lean/m31_q_rooted_shell` — success.
+
+          Lean kernel-checks the generic compiler, its contrapositive, the deductions from the pinned deployed packet integers, and the displayed finite `2+7`/`3+7` control.
+
+          ## Boundary and nonclaims
+
+          The enormous binomial quotient values remain explicit packet inputs. This PR does not prove the deployed local `3+7` premise, row-sharp Q, an adjacent safe row, an MCA slope projection, or a complete first-match ledger.
+
+          Python is retained only for exploration, regeneration, and hostile replay; it is not proof validation.
+          BODY
+            pr_url="$(gh pr create \
+              --repo przchojecki/rs-mca \
+              --head holmbuar:agent/m31-q-rooted-shell-upstream \
+              --base main \
+              --title 'Thresholds: add Mersenne-31 rooted-shell Q envelope' \
+              --body-file /tmp/pr-body.md)"
+          fi
+          echo "UPSTREAM_PR_URL=$pr_url"
+          GH_TOKEN="$FORK_TOKEN" gh api \
+            -X POST \
+            repos/holmbuar/rs-mca/issues/37/comments \
+            -f body="Upstream PR opened successfully: $pr_url"
