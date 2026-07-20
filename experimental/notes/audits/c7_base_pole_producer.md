@@ -66,18 +66,24 @@ It does **not** prove that C7 is nonempty independently of the global semantic
 atlas. A raw one-slope collapse may be wholly absorbed by an earlier owner; the
 `basePoleC7_absorbed_fixture` records this boundary directly.
 
-## Proof census
+## Proof and CI census
 
-- `sorry`: **0**
+Fork validation PR `holmbuar/rs-mca#41`, head
+`f12220c3a1a8b122a2472a1f1cab606464468e29`:
+
+- complete `experimental/lean/asymptotic_spine` build: **PASS, 29 jobs**
+- `sorry` / `sorryAx`: **0**
 - `axiom` declarations introduced by this packet: **0**
 - custom axioms: **none**
 - Mathlib imports: **none**
-- validation authority: the fork GitHub Actions `lake build` for the complete
-  stdlib-only `experimental/lean/asymptotic_spine` package
+- printed packet dependencies: only Lean foundations `propext` and
+  `Quot.sound` (some individual statements use only `propext`)
 
-The modules print the axiom dependencies of their exported theorems during the
-build. The final PR description should report the exact CI output; a green
-build establishes compilation only, not the source-to-Lean correspondence.
+A green build establishes compilation only. The source-to-Lean audit above
+checks that the finite structure fields correspond to the source witness
+catalogue, constant coefficient, exact slope law, injectivity of negation, and
+`q - 1` realized-coefficient bound; the finite-field algebra itself remains in
+the proved source theorem rather than being reproved here.
 
 ## Conditional / open
 
