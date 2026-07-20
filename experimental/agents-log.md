@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-20 - High-rigidity modular C8 direct-slope producer
+
+- **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C8ModularHighRigidityDirectSlope.lean` and `C8ModularHighRigidityLineExtension.lean`; added `experimental/notes/audits/c8_modular_high_rigidity_direct_slope_producer.md`; updated the asymptotic-spine root import and README.
+- **Status:** PROVED LOCAL / NONDEPLOYED HIGH-RIGIDITY SUBREGIME / DIRECT DISTINCT-SLOPE PAYMENT / FORMALIZATION / CONDITIONAL GLOBAL USE / AUDIT.
+- **What is being added:** On one root-free fixed-multiplier modular-locator profile, choose one rooted support/polynomial witness per distinct slope. Exchange rigidity and the constant-weight Plotkin count give `|Gamma|(N(h+d+1)-m(N-m))<=N(h+d+1)`; when the gap is positive, earlier C1--C7 slopes are deleted and the survivor image is paid directly at unit natural scale.
+- **How it is useful:** This closes the positive Plotkin-gap modular C8 subregime without replacing slopes by support counts, pair moments, max fibres, or fixed-chart bounds. It appends the survivor profile to an earlier closed line and preserves `sup_line sum_profile`.
+- **What to do next:** Do not apply this theorem to the active deployed rows: their calibrated Plotkin gaps are negative. Attack the nonpositive-gap mixed-character or aggregate first-match slope residual across multipliers. Actual `(UNIF)`, target comparison, and row closure remain open.
+
+
 ### 2026-07-20 - Exact F97 C8 two-cell first-match producer
 
 - **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).

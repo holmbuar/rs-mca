@@ -221,6 +221,27 @@ to an earlier closed line with exact `badCount`, `budgetTotal`, and
 `naturalTotal` telescopes. This is a finite source-specific producer, not
 an arbitrary-line modular-fibre theorem or row-wide `(UNIF)` closure.
 
+## High-rigidity modular C8 direct-slope producer
+
+`AsymptoticSpine.C8ModularHighRigidityDirectSlope` packages one
+root-free fixed-multiplier first-interior modular-locator profile.  The
+source exchange-rigidity theorem is applied after selecting one rooted
+support/polynomial witness per distinct final slope, giving
+
+```text
+|Gamma| * (N * (h+d+1) - m * (N-m)) <= N * (h+d+1).
+```
+
+In the positive Plotkin-gap regime, the post-C1--C7 slope image is paid
+directly at unit natural scale with quadratic loss at most `N^2`.
+`AsymptoticSpine.C8ModularHighRigidityLineExtension` appends the profile
+to an earlier closed line and proves exact budget and natural-profile
+telescopes.
+
+The active deployed first-interior rows have negative Plotkin gap, so
+this module is explicitly nondeployed.  Their mixed-character or
+aggregate first-match slope residual remains open.
+
 ## Upgrade regression locks
 
 `AsymptoticSpine.RegressionLocks` restates the current general interfaces for

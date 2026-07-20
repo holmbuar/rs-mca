@@ -14,6 +14,8 @@ import AsymptoticSpine.C9HighRedundancyLineExtension
 import AsymptoticSpine.C8OnePencilDirectSlope
 import AsymptoticSpine.C8OnePencilLineExtension
 import AsymptoticSpine.C8F97TwoCellFirstMatch
+import AsymptoticSpine.C8ModularHighRigidityDirectSlope
+import AsymptoticSpine.C8ModularHighRigidityLineExtension
 import AsymptoticSpine.BooleanFiber
 import AsymptoticSpine.NoHighEnergy
 import AsymptoticSpine.SigmaDiagonal
