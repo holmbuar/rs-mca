@@ -16,7 +16,7 @@ on:
         type: string
 
 permissions:
-  contents: write
+  contents: read
   statuses: write
 
 concurrency:
@@ -98,57 +98,6 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/statuses/${target_sha}" \
             --data-binary @status.json
-
-      # One-off, idempotent publication bookkeeping and squash for the validated
-      # semantic-owner counterexample. This hook lives only on the fork build
-      # branch and is removed immediately after use.
-      - name: Record and squash C7 semantic-owner counterexample
-        if: steps.lake.outcome == 'success'
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TARGET_BRANCH: codex/c7-base-pole-closed-ledger-producer
-          BASE_COMMIT: 335b9634074fe3a1650749be5985b15e7c8b36ed
-        run: |
-          set -euo pipefail
-          work="$(mktemp -d)"
-          trap 'rm -rf "$work"' EXIT
-          git clone --quiet --branch "$TARGET_BRANCH" \
-            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
-            "$work/repo"
-          cd "$work/repo"
-          python3 - <<'PY'
-          from pathlib import Path
-
-          path = Path("experimental/agents-log.md")
-          text = path.read_text(encoding="utf-8")
-          title = "### 2026-07-20 - C7 singleton-planted semantic absorption"
-          if title not in text:
-              entry = """### 2026-07-20 - C7 singleton-planted semantic absorption
-
-          - **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
-          - **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C7SingletonPlantedAbsorption.lean` and `experimental/notes/audits/c7_singleton_planted_absorption.md`; updated the C7 base-pole adapter audit, root import, and package README.
-          - **Status:** COUNTEREXAMPLE / SEMANTIC OWNER AMBIGUITY / PROVED INTERFACE REGRESSION / AUDIT.
-          - **What is being added:** A fixed earlier C3 atlas indexed by singleton planted divisors `P_t(X)=X-t`. Every positive-agreement witness has nonempty support and therefore enters one of these profiles before C7; on the base-pole family the `n=q-1` profile census and per-profile field-size slope bound are both subexponential, so the atlas is paid and the later C7 first-match image is empty.
-          - **How it is useful:** It proves that the rooted deletion-aware C7 adapter does not imply atlas-independent nonempty C7 ownership. Under the broad planted-cell grammar, `C7-SURV` is false unless C3 is restricted, a canonical order is fixed, C7 is placed earlier, or C3 is accepted as the owner.
-          - **What to do next:** Decide and print the intended semantic rule: positive-density-only C3, named row-derived planted factors, a canonical atlas excluding singleton roots, C7-before-sublinear-planted order, or explicit C3 ownership. After that decision, re-evaluate whether a nonempty C7 survivor theorem remains meaningful; global `(UNIF)` and target comparison are still open.
-          """
-              marker = "## Entries\n"
-              if marker not in text:
-                  raise SystemExit("agents-log marker not found")
-              text = text.replace(marker, marker + "\n" + entry + "\n", 1)
-              path.write_text(text, encoding="utf-8")
-          PY
-          git fetch --quiet origin "$BASE_COMMIT"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add experimental/agents-log.md
-          if ! git diff --cached --quiet; then
-            git commit -m "Record C7 singleton-planted semantic absorption"
-          fi
-          git reset --soft "$BASE_COMMIT"
-          git commit -m "Formalize C7 base-pole adapter and planted absorption regression"
-          git push --quiet --force-with-lease origin "HEAD:${TARGET_BRANCH}"
 
       - name: Fail workflow if Lean failed
         if: steps.lake.outcome != 'success'
