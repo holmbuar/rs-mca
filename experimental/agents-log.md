@@ -30,6 +30,24 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-20 - Archive superseded asymptotic drafts
+
+- **Agent/model:** Codex.
+- **Files added or changed:** Archived `experimental/asymptotic_rs_mca.tex` and `.pdf` as `archived/asymptotic_rs_mca.tex` and `.pdf`; archived `experimental/asymptotic_rs_mca_frontiers.tex` and `.pdf` as `archived/asymptotic_rs_mca_frontiers.tex` and `.pdf`; updated `README.md`, `readme.md`, `AGENTS.md`, `agents.md`, `experimental/asymptotic_rs_mca.md`, and `experimental/agents-log.md`.
+- **Status:** AUDIT / CLEANUP.
+- **What is being added:** The older compact and frontiers asymptotic manuscripts are demoted to archived provenance now that Grande Finale v3 is the canonical experimental final-resolution spine.
+- **How it is useful:** Prevents agents from targeting superseded asymptotic drafts as active proof authorities and redirects proof, audit, and Lean work to `experimental/grande_finale.tex`, Paper D v13.2, and `experimental/rs_mca_thresholds.tex`.
+- **What to do next:** Continue theorem-by-theorem audit of Grande Finale v3 against CAP25 v13.2 and update any future PR notes to cite the archived asymptotic drafts only for provenance.
+
+### 2026-07-20 - Grande Finale v3 promotion
+
+- **Agent/model:** Codex, using maintainer-added `experimental/grande_finale_v3.tex` and `.pdf`.
+- **Files added or changed:** Promoted `experimental/grande_finale_v3.tex` to `experimental/grande_finale.tex`, promoted `experimental/grande_finale_v3.pdf` to `experimental/grande_finale.pdf`, archived the previous `experimental/grande_finale.tex` and `.pdf` as `archived/grande_finale_v2.tex` and `archived/grande_finale_v2.pdf`, and updated `experimental/agents-log.md`.
+- **Status:** PROVED / CONDITIONAL / AUDIT / EXPERIMENTAL, according to the individual theorem statements in the paper.
+- **What is being added:** Grande Finale v3 becomes the canonical experimental final-ledger sequel to CAP25 v13.2.  It adds exact threshold refinements, syndrome--secant and mean-overlap compilers, quotient/remainder normal forms, effective-image Fourier normalization, the primitive-Q/Sidon compiler, saturation, moving-root BC, Q-to-SP, finite max-fiber calibration, and a precise residual completion ledger.
+- **How it is useful:** This is strictly stronger and better organized than the previous `grande_finale.tex`.  It also absorbs much of the useful asymptotic_RS_MCA material by giving one canonical place for the profile envelope, Sidon/Fourier payment, primitive Q, Q-to-SP, and finite adjacent-row obligations.
+- **What to do next:** Audit v3 theorem-by-theorem against CAP25 v13.2 before promotion outside `experimental/`.  Do not yet delete the older asymptotic papers; instead archive them after `README.md`, `AGENTS.md`, and note references are updated to treat `experimental/grande_finale.tex` as the active final-resolution spine.
+
 ### 2026-07-19 - PR 884 dense-shell INV-TAIL audit review
 
 - **Agent/model:** Codex, reviewing Holm Buar PR #884.

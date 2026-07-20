@@ -1,6 +1,8 @@
 # Asymptotic RS MCA Audit Ledger
 
-This file is the audit companion for `experimental/asymptotic_rs_mca.tex`.
+Legacy status: the companion TeX/PDF are now archived as `archived/asymptotic_rs_mca.tex` and `archived/asymptotic_rs_mca.pdf`.  Use this file as historical audit provenance only.  Active final-resolution work should target `experimental/grande_finale.tex`.
+
+This file was the audit companion for `experimental/asymptotic_rs_mca.tex`.
 When a PR proposes changes to `asymptotic_rs_mca.tex` or its PDF, do not apply
 those files directly.  Record the proposed change here first, with enough detail
 for a human maintainer to decide whether the paper should be edited.
