@@ -1,6 +1,6 @@
-# C7 base-pole constant-coefficient producer into the closed ledger
+# C7 base-pole constant-coefficient adapter into the closed ledger
 
-**Status:** `PROVED LOCAL ADAPTER / SOURCE-FACING FORMALIZATION / CONDITIONAL GLOBAL USE`
+**Status:** `PROVED LOCAL ADAPTER / SOURCE-FACING FORMALIZATION / SEMANTIC OWNER AMBIGUITY / CONDITIONAL GLOBAL USE`
 
 **Lean modules:**
 
@@ -8,14 +8,16 @@
 - `AsymptoticSpine.C7BasePoleProducer`
 - `AsymptoticSpine.C7BasePoleWitnessProducer`
 - `AsymptoticSpine.C7BasePoleLineExtension`
+- `AsymptoticSpine.C7SingletonPlantedAbsorption`
 
 **Source theorem:**
 `experimental/notes/thresholds/aperiodic_one_ray_saturation.md`
 
 ## Result
 
-The base-pole constant-coefficient class now supplies a complete local producer
-for the `UniformClosedLedger` interface.
+The base-pole constant-coefficient class supplies a complete local
+deletion-aware adapter for the `UniformClosedLedger` interface.  It does not by
+itself establish an atlas-independent nonempty C7 semantic owner.
 
 For one received base-pole line and one fixed prefix value, the source theorem
 partitions the actual exact-agreement witnesses by locator constant coefficient
@@ -25,9 +27,9 @@ C_d = {S in Fib_w(z) : c_m(S) = d}.
 ```
 
 Every nonempty `C_d` has final slope image exactly `{-d}`.  There are at most
-`q - 1` realized nonzero constant coefficients.  The correct first-match C7
-owner is not the untrimmed raw image.  Given the aggregate C1--C6 assigned slope
-image `E_<7(r)` on the same received line, it is
+`q - 1` realized nonzero constant coefficients.  Given an already-fixed earlier
+C1--C6 assigned slope image `E_<7(r)` on the same received line, the correct C7
+adapter uses
 
 ```text
 Z_C7^o(r) = {-d : C_d is nonempty} \ E_<7(r).
@@ -62,13 +64,13 @@ combined naturalTotal
 ```
 
 The flattened assigned-slope list remains duplicate-free, so the extension
-preserves semantic first-match ownership.  The sum is formed inside the
-received line; no `sum_profile sup_line` interchange occurs.
+preserves first-match ownership.  The sum is formed inside the received line;
+no `sum_profile sup_line` interchange occurs.
 
 ## Rooted chain
 
 The source-facing structure `BasePoleC7WitnessClass` records precisely the data
-proved by the base-pole theorem:
+used from the base-pole theorem:
 
 ```text
 raw witness identifier w
@@ -109,7 +111,7 @@ catalogue.
 
 `BasePoleC7WitnessClass.assignedSlope_has_surviving_witness` roots every assigned
 post-deletion C7 slope in an actual raw witness and records its exclusion from
-the earlier slope image.
+the supplied earlier slope image.
 
 ### Direct payment
 
@@ -150,7 +152,7 @@ The executable extension fixture starts with earlier C1/C2 slopes `100,102`,
 raw C7 slopes `100,101,102,103`, and confirms that only `101,103` are appended;
 the combined budget and natural total are both `4 = 2 + 2`.
 
-## Correction to the earlier regression packet
+## Correction to the earlier affine-Steiner regression packet
 
 The affine-Steiner regression remains valid and necessary:
 
@@ -169,7 +171,7 @@ However, full raw-cell survival
 Z_C7^o(r) = Z_C7_raw(r)
 ```
 
-is stronger than necessary.  A correct producer may form and pay the literal
+is stronger than necessary.  A correct adapter may form and pay the literal
 post-deletion subset
 
 ```text
@@ -177,29 +179,70 @@ Z_C7^o(r) = Z_C7_raw(r) \ E_<7(r).
 ```
 
 For singleton constant-coefficient cells, each cell either survives as one paid
-slope or disappears.  The negative regression and positive producer therefore
-fit together: the former rejects double charging, while the latter performs the
+slope or disappears.  The negative regression and deletion-aware adapter fit
+together: the former rejects double charging, while the latter performs the
 required deletion before payment.
+
+## Singleton-planted absorption of C7
+
+A second, stronger semantic regression is
+`experimental/notes/audits/c7_singleton_planted_absorption.md`.
+
+The broad planted-cell grammar in the frontiers draft admits the fixed profiles
+
+```text
+P_t(X)=X-t,  t in D,
+```
+
+unless a stricter semantic rule is imposed.  The `t`-profile consists of all
+witnesses whose support contains `t`; every positive-agreement witness has
+nonempty support, so these C3 profiles cover every witness before C7.
+
+On the base-pole family there are `n=q-1=exp(o(n))` profiles, and each realized
+profile has at most `q=exp(o(n))` distinct slopes.  The direct field-cardinality
+bound therefore pays them from the additive profile term with subexponential
+loss.  Ordered first match leaves
+
+```text
+Z_C7^o(r)=empty.
+```
+
+`AsymptoticSpine.C7SingletonPlantedAbsorption` kernel-checks the finite interface
+regression: four overlapping singleton-root C3 cells assign all four raw slopes,
+and the later raw C7 list is empty.  Thus the base-pole adapter can be populated
+only relative to a named earlier atlas; it is not a proof that C7 is nonempty
+under every atlas admitted by the current grammar.
+
+A nonempty semantic C7 theorem must therefore do at least one of the following:
+
+1. restrict C3 to positive-density planted blocks;
+2. require planted factors to arise from a named row-dependent common-factor or
+   resultant mechanism;
+3. fix a canonical atlas that excludes singleton-root profiles;
+4. place the direct constant-coefficient saturation profiles before them; or
+5. accept C3 as the semantic owner and C7 as empty.
 
 ## Validation boundary
 
-The stdlib-only package kernel-builds the finite producer, rooted witness
-adapter, earlier-line extension, and executable fixtures.  Printed axiom reports
-for these modules contain no `sorryAx` or custom axioms; the reported foundations
-are the package's existing `propext` and `Quot.sound`.
+The stdlib-only package kernel-builds the finite adapter, rooted witness module,
+earlier-line extension, both ownership regressions, and executable fixtures.
+The full package build passes in 33 jobs.  Printed axiom reports for the C7
+modules contain no `sorryAx` or custom axioms; the reported foundations are the
+package's existing `propext` and `Quot.sound`.
 
 The finite-field algebra is not reproved inside the stdlib-only package.  It
 enters through the explicit fields of `BasePoleC7WitnessClass`, matched above to
-the proved source theorem.  This is the same source/adapter separation used by
-the rest of the asymptotic spine.
+the proved source theorem.  The singleton-planted asymptotic payment is recorded
+in the audit note; the Lean module formalizes its finite first-match consequence.
 
 ## Nonclaims
 
-- No C7 survivor is asserted to exist on every received line.
+- No C7 survivor is asserted to exist on every received line or under every
+  admissible atlas.
 - No completeness theorem over all received RS lines is proved.
 - No single global C1--C9 atlas fixed before the line is constructed.
-- No asymptotic semantic profile-count theorem is proved beyond the local
-  `q - 1` census of this class.
+- No asymptotic semantic profile-count theorem is proved beyond the stated
+  local `q - 1` and singleton-profile censuses.
 - No row-wide `(UNIF)`, envelope-to-target comparison, or row closure is proved.
 - No C8 ray compiler, C9 Sidon theorem, or residual-to-full theorem is claimed.
 - The result does not replace distinct slopes by support counts, pair moments,
@@ -207,11 +250,21 @@ the rest of the asymptotic spine.
 
 ## Research consequence
 
-This closes the requested local C7 producer interface for the established
-base-pole constant-coefficient class.  The next research question is no longer
-how to pay these cells: their exact post-deletion singleton slope image is paid.
-The remaining global work is to place this class inside one row-complete
-fixed-before-line semantic atlas and prove the honest
+The natural-scale payment problem for the base-pole constant-coefficient image
+is solved: after an earlier slope image is supplied, its literal survivor subset
+is paid and composes with the earlier line.
+
+The semantic-owner problem is not solved by the raw theorem.  Under the broad
+frontiers C3 grammar, a paid fixed singleton-root atlas absorbs the entire class.
+The next C7 decision is therefore a definition/theorem choice about the global
+atlas, not another slope estimate:
+
+```text
+restrict C3 / choose canonical order / accept C3 ownership.
+```
+
+Only after that choice can a nonempty C7 survival theorem be meaningfully
+formulated.  Any global use must still preserve the honest
 
 ```text
 sup_line sum_profile
