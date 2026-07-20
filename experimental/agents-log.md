@@ -56,6 +56,24 @@ Keep entries concise and link to the relevant files.
 - **What is being added:** Grande Finale v3 becomes the canonical experimental final-ledger sequel to CAP25 v13.2.  It adds exact threshold refinements, syndrome--secant and mean-overlap compilers, quotient/remainder normal forms, effective-image Fourier normalization, the primitive-Q/Sidon compiler, saturation, moving-root BC, Q-to-SP, finite max-fiber calibration, and a precise residual completion ledger.
 - **How it is useful:** This is strictly stronger and better organized than the previous `grande_finale.tex`.  It also absorbs much of the useful asymptotic_RS_MCA material by giving one canonical place for the profile envelope, Sidon/Fourier payment, primitive Q, Q-to-SP, and finite adjacent-row obligations.
 - **What to do next:** Audit v3 theorem-by-theorem against CAP25 v13.2 before promotion outside `experimental/`.  Do not yet delete the older asymptotic papers; instead archive them after `README.md`, `AGENTS.md`, and note references are updated to treat `experimental/grande_finale.tex` as the active final-resolution spine.
+### 2026-07-20 - C7 singleton-planted semantic absorption
+
+- **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C7SingletonPlantedAbsorption.lean` and `experimental/notes/audits/c7_singleton_planted_absorption.md`; updated the C7 base-pole adapter audit, root import, and package README.
+- **Status:** COUNTEREXAMPLE / SEMANTIC OWNER AMBIGUITY / PROVED INTERFACE REGRESSION / AUDIT.
+- **What is being added:** A fixed earlier C3 atlas indexed by singleton planted divisors `P_t(X)=X-t`. Every positive-agreement witness has nonempty support and therefore enters one of these profiles before C7; on the base-pole family the `n=q-1` profile census and per-profile field-size slope bound are both subexponential, so the atlas is paid and the later C7 first-match image is empty.
+- **How it is useful:** It proves that the rooted deletion-aware C7 adapter does not imply atlas-independent nonempty C7 ownership. Under the broad planted-cell grammar, `C7-SURV` is false unless C3 is restricted, a canonical order is fixed, C7 is placed earlier, or C3 is accepted as the owner.
+- **What to do next:** Decide and print the intended semantic rule: positive-density-only C3, named row-derived planted factors, a canonical atlas excluding singleton roots, C7-before-sublinear-planted order, or explicit C3 ownership. After that decision, re-evaluate whether a nonempty C7 survivor theorem remains meaningful; global `(UNIF)` and target comparison are still open.
+
+
+### 2026-07-20 - Rooted C7 base-pole closed-ledger producer
+
+- **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C7BasePoleProducer.lean`, `C7BasePoleWitnessProducer.lean`, and `C7BasePoleLineExtension.lean`; retained `C7OwnerRegression.lean`; added `experimental/notes/audits/c7_base_pole_closed_ledger_producer.md`; updated the C7 audit, root import, and package README.
+- **Status:** PROVED LOCAL / FORMALIZATION / CONDITIONAL GLOBAL USE / AUDIT.
+- **What is being added:** A rooted deletion-aware producer for the established base-pole constant-coefficient C7 class. It starts from actual witness fibres and the exact coefficient-to-slope law, removes the aggregate C1--C6 assigned slope image, pays each surviving singleton directly at unit natural scale, and appends the survivors to an earlier closed line with exact budget and natural-scale telescopes.
+- **How it is useful:** This supplies one genuine local C7 producer into `UniformClosedLedger`, preserves the required line-local `sup_line sum_profile` order, and corrects the earlier overstrong claim that the entire raw C7 cell must survive before any payment is possible.
+- **What to do next:** Integrate as a focused follow-up to PR #987 after its interface is available on upstream. Global fixed-before-line atlas coherence, completeness over all received lines, survivor nonemptiness on every line, actual `(UNIF)`, target comparison, and row closure remain open.
 
 ### 2026-07-19 - PR 884 dense-shell INV-TAIL audit review
 
@@ -83,6 +101,24 @@ Keep entries concise and link to the relevant files.
 - **What to do next:** Use the report as a triage index before promoting any
   PR-derived result into a main TeX paper.  The finite adjacent safe certificate
   and the asymptotic entropy-frontier upper theorem remain open.
+
+### 2026-07-19 - Minimal closed-ledger / UNIF Lean interface
+
+- **Agent/model:** GPT-5.6 Pro (handoff draft); Codex (Lean replay and repair).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/UniformClosedLedger.lean` and `experimental/notes/audits/lean_uniform_closed_ledger_interface.md`; updated the asymptotic-spine root import and README.
+- **Status:** FORMALIZATION / PROVED FINITE COMPILER INTERFACE / CONDITIONAL / AUDIT.
+- **What is being added:** A stdlib-only typed compiler from post-deletion semantic profiles to the row-level bound `sup_line bad(line) <= compilerLoss * envelope`, preserving the required `sup_line sum_profile` order.  It keeps residual-to-full, image-normalized Sidon, ray compilation, natural-scale payment, and realized-profile count as separate fields, and includes the minimal two-line diagonal countermodel to `sum_profile sup_line` plus a positive direct-payment fixture.
+- **How it is useful:** This is the common composition boundary for C7, C9, C8, and Q/SP/BC work: a local packet must supply rooted distinct-slope first-match payment through the printed residual/Sidon/ray chain, while the global producer must supply the honest line-local `(UNIF)` envelope comparison and profile cap.
+- **What to do next:** The focused 7-job build and full 28-job package build pass on Lean 4.31 after a one-line associativity proof repair; printed axiom reports contain no `sorryAx`.  Add concrete producer adapters only when an actual semantic atlas or cell theorem supplies the required fields.  Do not read this compiler as a proof of line-list completeness, fixed-before-line atlas coherence, atlas witness coverage, residual/full comparison, Sidon payment, RC, the actual asymptotic/window-uniform estimate, or target comparison.
+
+### 2026-07-19 - C7 raw-payment / first-match-owner regression
+
+- **Agent/model:** GPT-5.6 Pro (packet); Codex (kernel validation and fail-closed verifier repair).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C7OwnerRegression.lean`, `experimental/notes/audits/c7_first_match_owner_regression.md`, and `experimental/scripts/verify_c7_first_match_owner_regression.py`; updated the asymptotic-spine root import and README.
+- **Status:** COUNTEREXAMPLE / FORMALIZATION PACKET / OPEN GAP.
+- **What is being added:** The actual affine-Steiner C1 quotient owner is connected to the minimal closed-ledger interface as a negative C7 producer test.  A raw one-slope C7-style payment is numerically valid but cannot populate `ClosedLineLedger` when the slope is already C1-owned; first match leaves the C7 assigned cell empty.  The verifier uses explicit fail-closed checks that remain active under `python3 -O`.
+- **How it is useful:** It blocks the invalid inference from raw collapse/payment to semantic C7 ownership, preserves `sup_line sum_profile`, and isolates the exact missing theorem for the base-pole constant-coefficient proposal: exclusion from every earlier C1--C6 slope image.
+- **What to do next:** Prove the printed `(C7-SURV)` statement on one actual post-prefix class, then reuse the existing direct one-slope payment.  Do not install raw C7 cells in the ledger before that survival theorem is available.
 
 ### 2026-07-19 - PR 985 M1 moving-root C5 boundary cut
 
