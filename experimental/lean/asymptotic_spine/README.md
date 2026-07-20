@@ -73,6 +73,89 @@ entropy, Stirling, real-limit, and inverse-theorem inputs remain explicit
 hypotheses or source-side assumptions. Individual module headers state their
 precise proof boundaries.
 
+## Minimal closed-ledger / UNIF compiler
+
+`AsymptoticSpine.UniformClosedLedger` packages the post-deletion semantic
+boundary needed by the profile-envelope proof. Each profile carries a C1--C9
+or primitive owner, its assigned distinct-slope list, the residual/Sidon/ray
+payment chain, and its own natural scale. Each received line also exposes its
+realized-profile cap. The compiler proves
+
+```text
+sup_line bad(line)
+  <= sup_line sum_profile U(line,profile)
+  <= loss * sup_line sum_profile naturalScale(line,profile).
+```
+
+`UniformClosedLedger.compile` consumes the honest line-local `(UNIF)` bound and
+produces the row-level numerator bound. The executable diagonal regression
+`sup_sum_interchange_falsifier` proves that replacing `sup_line sum_profile` by
+`sum_profile sup_line` changes and can loosen the required quantity. The module
+does not construct the semantic
+atlas, C7/C8/C9 payments, residual/full comparison, image-normalized Sidon
+input, ray compiler, subexponential profile count, the actual asymptotic/window-
+uniform estimate, or profile-envelope comparison; those remain explicit
+producer obligations. Its finite `lines` list is supplied by the caller and is
+not itself a completeness proof over all received RS lines, nor does it enforce
+one global profile atlas fixed before the received line. `naturalTotal` contains
+only the profile sum, so the universal terms in the literal frontiers envelope
+must be absorbed by the supplied `envelope`.
+
+## C7 first-match regressions and rooted base-pole adapter
+
+`AsymptoticSpine.C7OwnerRegression` is the affine-Steiner negative guardrail. It
+models one slope occurring in both an earlier C1 quotient projection and a
+later raw C7-style collapse projection. The raw C7 direct inequality is
+numerically valid, but installing the untrimmed raw cell after C1 violates
+`ClosedLineLedger.firstMatchOwnership`. This rejects double charging; it does
+not require a correct adapter to retain every raw C7 slope.
+
+`AsymptoticSpine.C7BasePoleProducer` is the deletion-aware slope-level adapter
+for the real base-pole constant-coefficient class. Given the aggregate earlier
+C1--C6 slope image on the same received line, it defines the assigned C7 image
+as `raw \ earlier`, installs one direct unit-scale
+`ProfilePayment.ofDirect .c7` for each survivor, and proves that the C7
+line-local budget and natural sum both equal the survivor count and are bounded
+by the raw `q - 1` census.
+
+`AsymptoticSpine.C7BasePoleWitnessProducer` records the preceding rooted source
+boundary. Its `BasePoleC7WitnessClass` contains the witness catalogue, locator
+constant coefficient, exact slope law `slope(w) = slopeOfCoeff(d)`, injectivity
+of the coefficient-to-slope map, and the realized-coefficient census. It proves
+witness-exhaustive constant-coefficient fibres, exact equality between the
+constructed raw slope list and the witness slope image, and a raw witness for
+every assigned C7 slope.
+
+`AsymptoticSpine.C7BasePoleLineExtension` appends those surviving singleton
+profiles to an already-closed C1--C6 line. It preserves duplicate-free
+first-match ownership and proves the exact line-local telescopes
+
+```text
+combined budgetTotal
+  = prior budgetTotal + number of C7 survivors,
+
+combined naturalTotal
+  = prior naturalTotal + number of C7 survivors.
+```
+
+The added cost is at most `q - 1`. The executable fixture deletes two earlier-
+owned raw slopes and appends exactly the two survivors.
+
+`AsymptoticSpine.C7SingletonPlantedAbsorption` is the semantic-owner regression
+for the broader frontiers planted-cell grammar. A fixed C3 atlas indexed by
+`P_t(X)=X-t`, `t in D`, covers every nonempty-support witness before C7. On the
+base-pole family it has `n=q-1=exp(o(n))` profiles, and each realized profile has
+at most `q=exp(o(n))` slopes, so the direct field-cardinality bound pays it from
+the additive profile term with subexponential loss. The finite fixture assigns
+all four raw slopes to C3 and leaves the later C7 list empty.
+
+Consequently the rooted C7 modules are valid deletion-aware adapters, not a
+proof of atlas-independent nonempty C7 ownership. A nonempty semantic C7 theorem
+must additionally restrict C3 to positive-density or otherwise named
+row-derived planted factors, fix a canonical atlas that omits singleton-root
+profiles, place C7 earlier, or accept C3 as the owner. No global fixed-before-
+line atlas, actual row-wide `(UNIF)`, target comparison, or row closure is
+asserted.
 
 ## Upgrade regression locks
 
