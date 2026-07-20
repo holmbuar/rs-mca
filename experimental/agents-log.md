@@ -30,14 +30,14 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
-### 2026-07-20 - Mersenne-31 rooted-shell Q envelope
+### 2026-07-20 - Mersenne-31 rooted-shell envelope and support-only `3+7` route cut
 
 - **Agent/model:** GPT-5.6 Pro.
-- **Files added or changed:** `experimental/notes/thresholds/m31_q_rooted_shell_envelope.md`, `experimental/data/certificates/m31-q-rooted-shell-envelope/m31_q_rooted_shell_envelope.json`, `experimental/scripts/verify_m31_q_rooted_shell_envelope.py`, `experimental/lean/m31_q_rooted_shell/`, and `experimental/agents-log.md`.
-- **Status:** PROVED REDUCTION / EXACT ARITHMETIC / COUNTEREXAMPLE / OPEN DEPLOYED INPUT.
-- **What is being added:** A rooted-shell summation compiler reducing the binding Mersenne-31 row-sharp Q atom to the local `3+7` shell inequality, together with exact deployed arithmetic and a faithful finite counterexample to the stronger `2+7` route. A standalone stdlib-only Lean package formalizes the compiler, conditional arithmetic deductions, and finite control.
-- **How it is useful:** It gives a precise sufficient theorem target for the Mersenne-31 list and MCA prefix atoms while preserving the first-match residual, anchor, shell, normalization, and proof-status boundary.
-- **What to do next:** Prove the deployed `3+7` local shell premise or route every violation to an earlier paid owner. Audit each Lean declaration directly against the research note before any further promotion.
+- **Files added or changed:** `experimental/notes/thresholds/m31_q_rooted_shell_envelope.md`, `experimental/notes/thresholds/m31_q_three_plus_seven_multiplicative_counterexample.md`, `experimental/data/certificates/m31-q-rooted-shell-envelope/m31_q_rooted_shell_envelope.json`, `experimental/data/certificates/m31-q-3plus7-multiplicative-counterexample/m31_q_three_plus_seven_multiplicative_counterexample.json`, `experimental/scripts/verify_m31_q_rooted_shell_envelope.py`, `experimental/scripts/verify_m31_q_three_plus_seven_multiplicative_counterexample.py`, `experimental/lean/m31_q_rooted_shell/`, and `experimental/agents-log.md`.
+- **Status:** PROVED REDUCTION / EXACT ARITHMETIC / COUNTEREXAMPLE_TO_SUPPORT_ONLY_3PLUS7 / OPEN DEPLOYED EXACT RESIDUAL.
+- **What is being added:** The packet first formalizes the rooted-shell summation compiler and exact Mersenne-31 list/MCA arithmetic, with a faithful finite counterexample to the stronger `2+7` route. It then gives an explicit order-twenty multiplicative-subgroup packet over `F_241` proving that support-level dihedral and planted-core pruning does not imply `3+7`: the retained fifteen-support target has trivial support stabilizers and empty common core, yet one rooted shell has degree ten and exact violation margin `97,867`; a standalone stdlib-only Lean package validates the explicit counterexample and its connection to the existing `LocalEnvelope` interface.
+- **How it is useful:** This narrows the binding C9 target from a support-only shell inequality to a semantic theorem. Any successful deployed proof must either use the actual slope-level C1--C8 first-match deletion, explanation/ray information, or route each shell excess to a named paid owner; increasing the universal additive intercept is not affordable at the binding row.
+- **What to do next:** Prove the semantic disjunction `3+7 OR certified earlier paid slope owner`, using the `F_241` multiplicative orbit as a mandatory regression, and then instantiate it on the deployed Mersenne-31 exact residual. Re-audit every Lean declaration against both research notes before upstream submission.
 
 ### 2026-07-20 - Integrated reviewed PR wave 986-998
 
