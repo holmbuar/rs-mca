@@ -11,6 +11,8 @@ on:
   push:
     branches:
       - "codex/lean-build"
+      - "codex/c7-first-match-owner-regression"
+  pull_request: {}
 
 permissions:
   contents: read
