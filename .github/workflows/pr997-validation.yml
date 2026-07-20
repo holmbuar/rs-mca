@@ -1,0 +1,72 @@
+name: Validate PR 997 active C7 adapter
+
+on:
+  push:
+    branches:
+      - codex/pr997-validation
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out validation commit
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Static diff and source checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check HEAD^ HEAD
+          lean_root=experimental/lean/grande_finale/GrandeFinale
+          if grep -nER '(^|[[:space:]])(sorry|admit|axiom|unsafe)([[:space:]]|$)' \
+            "$lean_root/BasePoleC7NumericAdapter.lean" \
+            "$lean_root/BasePoleC7NumericAdapter"; then
+            echo "forbidden Lean declaration or placeholder found" >&2
+            exit 1
+          fi
+
+      - name: Set up Lean and mathlib cache
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9
+        with:
+          lake-package-directory: experimental/lean/grande_finale
+          auto-config: false
+          use-mathlib-cache: true
+
+      - name: Build focused module
+        shell: bash
+        working-directory: experimental/lean/grande_finale
+        run: |
+          set -euo pipefail
+          lake build GrandeFinale.BasePoleC7NumericAdapter 2>&1 | tee focused-build.log
+
+      - name: Build full Grande Finale package
+        shell: bash
+        working-directory: experimental/lean/grande_finale
+        run: |
+          set -euo pipefail
+          lake build 2>&1 | tee full-build.log
+
+      - name: Run Python regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 experimental/scripts/verify_base_pole_c7_numeric_adapter.py 2>&1 | tee python-regression.log
+          python3 -O experimental/scripts/verify_base_pole_c7_numeric_adapter.py 2>&1 | tee -a python-regression.log
+
+      - name: Upload validation logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pr997-active-c7-validation
+          path: |
+            experimental/lean/grande_finale/focused-build.log
+            experimental/lean/grande_finale/full-build.log
+            python-regression.log
+          if-no-files-found: warn
