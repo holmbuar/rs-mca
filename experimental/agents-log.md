@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-20 - Exact F97 C8 two-cell first-match producer
+
+- **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C8F97TwoCellFirstMatch.lean` and `experimental/notes/audits/c8_f97_two_cell_closed_ledger_producer.md`; updated the asymptotic-spine root import and README.
+- **Status:** PROVED-SPECIAL / EXACT FINITE FIRST-MATCH PRODUCER / FORMALIZATION / AUDIT.
+- **What is being added:** The pinned `F_97 / mu_16` first-interior certificate is connected to `UniformClosedLedger`. Four rooted witnesses are covered by two common-GCD projective-plane cells with identical raw slope images `{0,1,2}`; raw chart summation gives six, ordered slope first match gives three, and the surviving image is paid directly at unit natural scale.
+- **How it is useful:** It closes the exact retained F97 subincidence, provides a concrete regression against summing overlapping chart projections, preserves `sup_line sum_profile`, and appends the exact C8 payment to an earlier closed line with explicit telescopes.
+- **What to do next:** Keep this fixture closed. Attack the root-free nonconstant-`W1` modular-locator residual on arbitrary first-interior lines using mixed-character control, aggregate occupancy, or a direct slope theorem. General chart classification, actual `(UNIF)`, target comparison, and row closure remain open.
+
+
 ### 2026-07-20 - Primitive one-parameter C8 direct-slope producer
 
 - **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).

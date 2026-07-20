@@ -206,6 +206,21 @@ every post-common-core chart is one-dimensional, exhaust higher-dimensional
 charts, supply an unbounded-kernel ray compiler, prove actual row-wide `(UNIF)`,
 compare to the target, or close a row.
 
+## Exact F97 C8 two-cell first-match producer
+
+`AsymptoticSpine.C8F97TwoCellFirstMatch` consumes the pinned
+`F_97 / mu_16` first-interior certificate. Four rooted witnesses are
+covered by two distinct common-GCD projective-plane cells, but both raw
+cells project to the same slope image `[0,1,2]`. The module proves that
+raw chart summation gives `6`, while ordered slope-level first match gives
+the correct total `3` with leaves `[[0,1,2],[]]`.
+
+After arbitrary earlier C1--C7 slope deletion, the surviving exact image
+is paid directly at unit natural scale with loss three and can be appended
+to an earlier closed line with exact `badCount`, `budgetTotal`, and
+`naturalTotal` telescopes. This is a finite source-specific producer, not
+an arbitrary-line modular-fibre theorem or row-wide `(UNIF)` closure.
+
 ## Upgrade regression locks
 
 `AsymptoticSpine.RegressionLocks` restates the current general interfaces for
