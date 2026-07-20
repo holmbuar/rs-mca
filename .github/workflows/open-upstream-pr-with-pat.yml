@@ -1,0 +1,122 @@
+name: Open upstream PR with configured maintainer token
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - ".github/open-upstream-pr-with-pat"
+
+permissions:
+  contents: read
+
+jobs:
+  open:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'agent/trigger-upstream-pr-with-pat'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TOKEN_GH_PAT: ${{ secrets.GH_PAT }}
+      TOKEN_PAT: ${{ secrets.PAT }}
+      TOKEN_GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
+      TOKEN_PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      TOKEN_UPSTREAM_TOKEN: ${{ secrets.UPSTREAM_TOKEN }}
+      TOKEN_REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+      TOKEN_BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      TOKEN_PR_TOKEN: ${{ secrets.PR_TOKEN }}
+      TOKEN_CROSS_REPO_TOKEN: ${{ secrets.CROSS_REPO_TOKEN }}
+      TOKEN_GITHUB_PERSONAL_ACCESS_TOKEN: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+    steps:
+      - name: Select configured token and open cross-fork PR
+        shell: bash
+        run: |
+          set -euo pipefail
+          token=""
+          label=""
+          for pair in \
+            GH_PAT:TOKEN_GH_PAT \
+            PAT:TOKEN_PAT \
+            GITHUB_PAT:TOKEN_GITHUB_PAT \
+            PERSONAL_ACCESS_TOKEN:TOKEN_PERSONAL_ACCESS_TOKEN \
+            UPSTREAM_TOKEN:TOKEN_UPSTREAM_TOKEN \
+            REPO_TOKEN:TOKEN_REPO_TOKEN \
+            BOT_TOKEN:TOKEN_BOT_TOKEN \
+            PR_TOKEN:TOKEN_PR_TOKEN \
+            CROSS_REPO_TOKEN:TOKEN_CROSS_REPO_TOKEN \
+            GITHUB_PERSONAL_ACCESS_TOKEN:TOKEN_GITHUB_PERSONAL_ACCESS_TOKEN
+          do
+            name="${pair%%:*}"
+            var="${pair##*:}"
+            value="${!var:-}"
+            if [[ -n "$value" ]]; then
+              token="$value"
+              label="$name"
+              break
+            fi
+          done
+          if [[ -z "$token" ]]; then
+            echo "No configured maintainer token found among approved candidate secret names."
+            exit 2
+          fi
+          echo "Using configured token label: $label"
+          export GH_TOKEN="$token"
+          existing="$(gh pr list --repo przchojecki/rs-mca --state open --head holmbuar:agent/m31-q-rooted-shell-upstream --json url --jq '.[0].url // empty')"
+          if [[ -n "$existing" ]]; then
+            echo "$existing"
+            exit 0
+          fi
+          cat > /tmp/pr-body.md <<'BODY'
+          ## Claim
+
+          This PR adds a complete experimental packet reducing the binding Mersenne-31 row-sharp-Q prefix atom to one explicit local shell inequality.
+
+          For a first-match-pruned prefix family, the generic compiler proves that
+
+          ```text
+          p^w max(d_e(A)-b,0) <= c C(m,e)C(n-m,e)
+          ```
+
+          implies
+
+          ```text
+          |F| <= 1 + b(min(m,n-m)-w) + floor(c C(n,m)/p^w).
+          ```
+
+          At `(b,c)=(3,7)` the exact deployed deductions are:
+
+          - Mersenne-31 list prefix atom: `16,696,786 <= 16,777,215`, reserve `80,429`;
+          - Mersenne-31 MCA companion prefix atom: `15,009,938`, reserve `1,767,277`.
+
+          A faithful finite Chebyshev/twin-coset control refutes the stronger `2+7` route while satisfying `3+7`:
+
+          ```text
+          127(6-2)=508 > 7*64=448,
+          127(6-3)=381 <= 448.
+          ```
+
+          ## Complete packet
+
+          The branch is one commit over upstream `main` and contains the research note, exact JSON certificate, auxiliary replay script, standalone stdlib-only Lean package, documentation, and the required templated `experimental/agents-log.md` entry.
+
+          ## Lean validation
+
+          The package imports only `Std`; it has no Mathlib dependency. No local Lean build was run.
+
+          The exact upstream-candidate head `b90cfa24a9ac4e4bf89b0f38db53f5f07b995c0a` passed the fork's PR-triggered Lean build in `holmbuar/rs-mca#37`:
+
+          - https://github.com/holmbuar/rs-mca/actions/runs/29778834253
+          - `experimental/lean/m31_q_rooted_shell` — success.
+
+          Lean kernel-checks the generic compiler, its contrapositive, the deductions from the pinned deployed packet integers, and the displayed finite `2+7`/`3+7` control.
+
+          ## Boundary and nonclaims
+
+          The enormous binomial quotient values remain explicit packet inputs. This PR does not prove the deployed local `3+7` premise, row-sharp Q, an adjacent safe row, an MCA slope projection, or a complete first-match ledger.
+
+          Python is retained only for exploration, regeneration, and hostile replay; it is not proof validation.
+          BODY
+          gh pr create \
+            --repo przchojecki/rs-mca \
+            --head holmbuar:agent/m31-q-rooted-shell-upstream \
+            --base main \
+            --title "Thresholds: add Mersenne-31 rooted-shell Q envelope" \
+            --body-file /tmp/pr-body.md
