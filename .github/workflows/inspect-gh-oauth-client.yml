@@ -1,0 +1,27 @@
+name: Inspect GitHub CLI OAuth client identifier
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - ".github/inspect-gh-oauth-client"
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'agent/inspect-gh-oauth-client'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Extract public OAuth client identifier from official gh binary
+        shell: bash
+        run: |
+          set -euo pipefail
+          binary="$(command -v gh)"
+          echo "gh=$binary"
+          echo "Iv1 candidates:"
+          strings "$binary" | grep -oE 'Iv1\.[A-Za-z0-9]{12,32}' | sort -u || true
+          echo "20-char hexadecimal candidates near auth strings:"
+          strings "$binary" | grep -i -B3 -A3 'login/device/code' | grep -oE '[a-f0-9]{20}' | sort -u || true
