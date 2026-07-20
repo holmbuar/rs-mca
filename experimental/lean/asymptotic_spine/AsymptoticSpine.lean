@@ -6,6 +6,7 @@ import AsymptoticSpine.Normalization
 import AsymptoticSpine.AddBack
 import AsymptoticSpine.UniformClosedLedger
 import AsymptoticSpine.C7OwnerRegression
+import AsymptoticSpine.C7BasePoleProducer
 import AsymptoticSpine.BooleanFiber
 import AsymptoticSpine.NoHighEnergy
 import AsymptoticSpine.SigmaDiagonal
