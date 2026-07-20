@@ -99,6 +99,12 @@ theorem extendLine_flatten_assignedSlopes {profileCap : Nat}
       (fun profile => profile.assignedSlopes)).flatten) =
       lineAssignedSlopes line ++
         data.assignedSlopes (lineAssignedSlopes line) := by
+  change
+    (((line.profiles ++
+      basePoleC7Profiles (lineAssignedSlopes line) data.rawSlopes).map
+        (fun profile => profile.assignedSlopes)).flatten) =
+      lineAssignedSlopes line ++
+        basePoleC7AssignedSlopes (lineAssignedSlopes line) data.rawSlopes
   rw [List.map_append, List.flatten_append]
   exact congrArg (List.append (lineAssignedSlopes line))
     (basePoleC7Profiles_flatten_assignedSlopes
