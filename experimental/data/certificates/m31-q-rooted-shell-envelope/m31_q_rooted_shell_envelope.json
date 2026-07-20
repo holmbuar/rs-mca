@@ -1,0 +1,260 @@
+{
+  "deployed": {
+    "M31_MCA": {
+      "Bstar": 16777215,
+      "C_bit_length": 2090878,
+      "Q_bit_length": 2090857,
+      "admissible_shell_count_R": 913681,
+      "avg_ceil": 1752700,
+      "avg_floor": 1752699,
+      "b_kappa_table": [
+        {
+          "b": 0,
+          "integer_coefficient_7_fits": true,
+          "kappa_to_fit_decimal": 9.572214947
+        },
+        {
+          "b": 1,
+          "integer_coefficient_7_fits": true,
+          "kappa_to_fit_decimal": 9.050915587
+        },
+        {
+          "b": 2,
+          "integer_coefficient_7_fits": true,
+          "kappa_to_fit_decimal": 8.529616226
+        },
+        {
+          "b": 3,
+          "integer_coefficient_7_fits": true,
+          "kappa_to_fit_decimal": 8.008316866
+        },
+        {
+          "b": 4,
+          "integer_coefficient_7_fits": true,
+          "kappa_to_fit_decimal": 7.487017506
+        },
+        {
+          "b": 18,
+          "integer_coefficient_7_fits": false,
+          "kappa_to_fit_decimal": 0.188826462
+        }
+      ],
+      "integer_reserve": 1767277,
+      "m": 981128,
+      "n": 2097152,
+      "naive_same_shell_star_from_Bstar_plus_one": 19,
+      "name": "Mersenne-31 MCA",
+      "p": 2147483647,
+      "peak_shell": null,
+      "three_plus_seven_bound": 15009938,
+      "w": 67447
+    },
+    "M31_list": {
+      "Bstar": 16777215,
+      "C_bit_length": 2090878,
+      "Q_bit_length": 2090857,
+      "admissible_shell_count_R": 913682,
+      "avg_ceil": 1993678,
+      "avg_floor": 1993677,
+      "b_kappa_table": [
+        {
+          "b": 0,
+          "integer_coefficient_7_fits": true,
+          "kappa_to_fit_decimal": 8.415211213
+        },
+        {
+          "b": 1,
+          "integer_coefficient_7_fits": true,
+          "kappa_to_fit_decimal": 7.956921355
+        },
+        {
+          "b": 2,
+          "integer_coefficient_7_fits": true,
+          "kappa_to_fit_decimal": 7.498631498
+        },
+        {
+          "b": 3,
+          "integer_coefficient_7_fits": true,
+          "kappa_to_fit_decimal": 7.040341641
+        },
+        {
+          "b": 4,
+          "integer_coefficient_7_fits": false,
+          "kappa_to_fit_decimal": 6.582051783
+        },
+        {
+          "b": 18,
+          "integer_coefficient_7_fits": false,
+          "kappa_to_fit_decimal": 0.16599378
+        }
+      ],
+      "integer_reserve": 80429,
+      "m": 981129,
+      "n": 2097152,
+      "naive_same_shell_star_from_Bstar_plus_one": 19,
+      "name": "Mersenne-31 list",
+      "p": 2147483647,
+      "peak_shell": {
+        "H_bit_length": 2090869,
+        "H_over_Q_ceil": 2207,
+        "H_over_Q_floor": 2206,
+        "e": 522119,
+        "three_plus_seven_degree_ceiling": 15445
+      },
+      "three_plus_seven_bound": 16696786,
+      "w": 67447
+    }
+  },
+  "payload_sha256": "e2263ffc3792a10372d2d26581cce2fff85638f252d16945c7967f2d92fc8cfa",
+  "schema": "m31-q-rooted-shell-envelope-v1",
+  "status": {
+    "deployed_arithmetic": "PROVED_EXACT",
+    "deployed_row_sharp_q": "OPEN",
+    "general_lemma": "PROVED",
+    "three_plus_seven_toys": "EXHAUSTIVE_MEASUREMENT",
+    "two_plus_seven": "COUNTEREXAMPLE_ON_FAITHFUL_TOY"
+  },
+  "theorem": {
+    "conclusion": "|F| <= 1 + 3(min(m,n-m)-w) + floor(7 C(n,m)/p^w)",
+    "contrapositive": "if |F| exceeds the displayed bound, every anchor has a shell with p^w(d_e(A)-3)>7H_e",
+    "hypothesis": "p^w * max(d_e(A)-3,0) <= 7 H_e for every anchor A and e>w",
+    "shell_size": "H_e = C(m,e) C(n-m,e)"
+  },
+  "toy_rows": [
+    {
+      "domain_values": [101, 104, 65, 95, 50, 19, 100, 82, 26, 23, 62, 32, 77, 108, 27, 45],
+      "m": 8,
+      "max_required_coefficient_b2": {"decimal": 3.96875, "denominator": 32, "numerator": 127},
+      "max_required_coefficient_b3": {"decimal": 2.753826530612245, "denominator": 784, "numerator": 2159},
+      "max_residual_fiber": 120,
+      "n": 16,
+      "p": 127,
+      "planted_keys_removed": 0,
+      "primitive_prefix_keys": 127,
+      "residual_prefix_keys": 127,
+      "row": "Chebyshev p=127,n=16,m=8,w=1,offset=1",
+      "three_plus_seven_holds": true,
+      "total_supports": 12870,
+      "w": 1
+    },
+    {
+      "domain_values": [101, 104, 65, 95, 50, 19, 100, 82, 26, 23, 62, 32, 77, 108, 27, 45],
+      "m": 9,
+      "max_required_coefficient_b2": {"decimal": 3.5277777777777777, "denominator": 36, "numerator": 127},
+      "max_required_coefficient_b3": {"decimal": 2.687830687830688, "denominator": 189, "numerator": 508},
+      "max_residual_fiber": 112,
+      "n": 16,
+      "p": 127,
+      "planted_keys_removed": 0,
+      "primitive_prefix_keys": 127,
+      "residual_prefix_keys": 127,
+      "row": "Chebyshev p=127,n=16,m=9,w=1,offset=1",
+      "three_plus_seven_holds": true,
+      "total_supports": 11440,
+      "w": 1
+    },
+    {
+      "domain_values": [81, 29, 41, 34, 67, 7, 15, 78, 46, 98, 86, 93, 60, 120, 112, 49],
+      "m": 8,
+      "max_required_coefficient_b2": {"decimal": 5.953125, "denominator": 64, "numerator": 381},
+      "max_required_coefficient_b3": {"decimal": 3.96875, "denominator": 32, "numerator": 127},
+      "max_residual_fiber": 135,
+      "n": 16,
+      "p": 127,
+      "planted_keys_removed": 0,
+      "primitive_prefix_keys": 127,
+      "residual_prefix_keys": 127,
+      "row": "Chebyshev p=127,n=16,m=8,w=1,offset=2",
+      "three_plus_seven_holds": true,
+      "total_supports": 12870,
+      "w": 1
+    },
+    {
+      "domain_values": [81, 29, 41, 34, 67, 7, 15, 78, 46, 98, 86, 93, 60, 120, 112, 49],
+      "m": 9,
+      "max_required_coefficient_b2": {"decimal": 3.5277777777777777, "denominator": 36, "numerator": 127},
+      "max_required_coefficient_b3": {"decimal": 3.35978835978836, "denominator": 189, "numerator": 635},
+      "max_residual_fiber": 119,
+      "n": 16,
+      "p": 127,
+      "planted_keys_removed": 0,
+      "primitive_prefix_keys": 127,
+      "residual_prefix_keys": 127,
+      "row": "Chebyshev p=127,n=16,m=9,w=1,offset=2",
+      "three_plus_seven_holds": true,
+      "total_supports": 11440,
+      "w": 1
+    },
+    {
+      "domain_values": [5, 39, 89, 42, 22, 125, 9, 53, 122, 88, 38, 85, 105, 2, 118, 74],
+      "m": 8,
+      "max_required_coefficient_b2": {"decimal": 7.9375, "denominator": 16, "numerator": 127},
+      "max_required_coefficient_b3": {"decimal": 5.953125, "denominator": 64, "numerator": 381},
+      "max_residual_fiber": 125,
+      "n": 16,
+      "p": 127,
+      "planted_keys_removed": 0,
+      "primitive_prefix_keys": 127,
+      "residual_prefix_keys": 127,
+      "row": "Chebyshev p=127,n=16,m=8,w=1,offset=3",
+      "three_plus_seven_holds": true,
+      "total_supports": 12870,
+      "w": 1
+    },
+    {
+      "domain_values": [5, 39, 89, 42, 22, 125, 9, 53, 122, 88, 38, 85, 105, 2, 118, 74],
+      "m": 9,
+      "max_required_coefficient_b2": {"decimal": 3.5277777777777777, "denominator": 36, "numerator": 127},
+      "max_required_coefficient_b3": {"decimal": 3.35978835978836, "denominator": 189, "numerator": 635},
+      "max_residual_fiber": 117,
+      "n": 16,
+      "p": 127,
+      "planted_keys_removed": 0,
+      "primitive_prefix_keys": 127,
+      "residual_prefix_keys": 127,
+      "row": "Chebyshev p=127,n=16,m=9,w=1,offset=3",
+      "three_plus_seven_holds": true,
+      "total_supports": 11440,
+      "w": 1
+    },
+    {
+      "domain_values": [1, 32, 14, 44, 95, 10, 17, 39, 36, 41, 100, 69, 87, 57, 6, 91, 84, 62, 65, 60],
+      "m": 12,
+      "max_required_coefficient_b2": {"decimal": 4.8300189393939394, "denominator": 2112, "numerator": 10201},
+      "max_required_coefficient_b3": {"decimal": 3.532813852813853, "denominator": 5775, "numerator": 20402},
+      "max_residual_fiber": 40,
+      "n": 20,
+      "p": 101,
+      "planted_keys_removed": 1290,
+      "primitive_prefix_keys": 10201,
+      "residual_prefix_keys": 8911,
+      "row": "multiplicative p=101,n=20,m=12,w=2",
+      "three_plus_seven_holds": true,
+      "total_supports": 125970,
+      "w": 2
+    }
+  ],
+  "two_plus_seven_counterexample": {
+    "ambient_shell_size": 64,
+    "anchor_indices": [0, 1, 3, 4, 7, 8, 13, 14],
+    "anchor_values": [5, 39, 42, 22, 53, 122, 2, 118],
+    "degree": 6,
+    "domain_values": [5, 39, 89, 42, 22, 125, 9, 53, 122, 88, 38, 85, 105, 2, 118, 74],
+    "exchange_distance": 7,
+    "neighbors_digest": "c674ee4d16ded9401adea1c9141b6ebf22fd6cb06a39a0c9dfb676811f41b962",
+    "neighbors_indices": [
+      [0, 2, 5, 6, 10, 11, 12, 15],
+      [2, 3, 6, 9, 10, 11, 12, 15],
+      [2, 4, 5, 6, 9, 10, 11, 15],
+      [2, 5, 6, 9, 10, 11, 12, 14],
+      [2, 5, 6, 9, 10, 12, 13, 15],
+      [2, 5, 7, 9, 10, 11, 12, 15]
+    ],
+    "prefix_key": [22],
+    "residual_fiber_size": 88,
+    "row": "Chebyshev p=127,n=16,m=8,w=1,offset=3",
+    "seven_H": 448,
+    "three_plus_seven_lhs": 381,
+    "two_plus_seven_lhs": 508
+  }
+}

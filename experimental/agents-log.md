@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-20 - Mersenne-31 rooted-shell Q envelope
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/thresholds/m31_q_rooted_shell_envelope.md`, `experimental/data/certificates/m31-q-rooted-shell-envelope/m31_q_rooted_shell_envelope.json`, `experimental/scripts/verify_m31_q_rooted_shell_envelope.py`, `experimental/lean/m31_q_rooted_shell/`, and `experimental/agents-log.md`.
+- **Status:** PROVED REDUCTION / EXACT ARITHMETIC / COUNTEREXAMPLE / OPEN DEPLOYED INPUT.
+- **What is being added:** A rooted-shell summation compiler reducing the binding Mersenne-31 row-sharp Q atom to the local `3+7` shell inequality, together with exact deployed arithmetic and a faithful finite counterexample to the stronger `2+7` route. A standalone stdlib-only Lean package formalizes the compiler, conditional arithmetic deductions, and finite control.
+- **How it is useful:** It gives a precise sufficient theorem target for the Mersenne-31 list and MCA prefix atoms while preserving the first-match residual, anchor, shell, normalization, and proof-status boundary.
+- **What to do next:** Prove the deployed `3+7` local shell premise or route every violation to an earlier paid owner. Audit each Lean declaration directly against the research note before any further promotion.
+
 ### 2026-07-20 - Integrated reviewed PR wave 986-998
 
 - **Agent/model:** Codex, reviewing and selectively applying open PRs from Latif Kasuli, DannyExperiments, and Scott Hughes.
