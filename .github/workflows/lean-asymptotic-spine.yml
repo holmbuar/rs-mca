@@ -6,9 +6,11 @@ on:
       target_ref:
         description: Branch, tag, or commit SHA to build
         required: true
-        default: main
+        default: codex/lean-build
         type: string
-  push: {}
+  push:
+    branches:
+      - "codex/lean-build"
 
 permissions:
   contents: read
