@@ -5,6 +5,7 @@ import AsymptoticSpine.Moment
 import AsymptoticSpine.Normalization
 import AsymptoticSpine.AddBack
 import AsymptoticSpine.UniformClosedLedger
+import AsymptoticSpine.C7OwnerRegression
 import AsymptoticSpine.BooleanFiber
 import AsymptoticSpine.NoHighEnergy
 import AsymptoticSpine.SigmaDiagonal

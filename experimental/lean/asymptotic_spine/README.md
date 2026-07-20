@@ -101,6 +101,22 @@ one global profile atlas fixed before the received line. `naturalTotal` contains
 only the profile sum, so the universal terms in the literal frontiers envelope
 must be absorbed by the supplied `envelope`.
 
+## C7 first-match owner regression
+
+`AsymptoticSpine.C7OwnerRegression` is a negative producer test layered on the
+minimal closed-ledger interface.  It models the established affine-Steiner
+regression in which one slope lies in both an earlier C1 quotient projection
+and a later raw C7-style collapse projection.  The raw C7 direct payment is
+numerically valid, but installing it after the C1 payment violates
+`ClosedLineLedger.firstMatchOwnership`; ordered first match leaves the C7
+assigned cell empty.  In the finite one-slope interface model, the corrected
+line-local sum contains only the C1 term and replays through
+`UniformClosedLedger.compile`; this is not actual `(UNIF)` or row closure.
+
+This does not classify the base-pole constant-coefficient family.  It proves
+that its current one-ray theorem cannot be adapted as a nonempty C7 producer
+until survival from all earlier C1--C6 slope images is established.
+
 ## Upgrade regression locks
 
 `AsymptoticSpine.RegressionLocks` restates the current general interfaces for
