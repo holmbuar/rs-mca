@@ -221,7 +221,13 @@ def distanceHistogramCheck : Bool :=
 
 /-- Shell and inequality constants. -/
 def q : Nat := p ^ w
-def ambientShell6 : Nat := Nat.choose m 6 * Nat.choose (n - m) 6
+/-- Pascal recursion for the small binomial coefficient used by this packet. -/
+def choose : Nat → Nat → Nat
+  | _, 0 => 1
+  | 0, _ + 1 => 0
+  | n + 1, k + 1 => choose n k + choose n (k + 1)
+
+def ambientShell6 : Nat := choose m 6 * choose (n - m) 6
 def counterexampleRows : List ShellRow := [(rootedDegree 6, ambientShell6)]
 
 /-- The displayed domain really is the order-twenty multiplicative control. -/
@@ -287,6 +293,10 @@ theorem least_integer_coefficient_at_b3 :
 
 /-- Direct connection to the generic compiler predicate from `Envelope.lean`. -/
 theorem localEnvelope_three_seven_fails :
-    ¬ LocalEnvelope q 3 7 counterexampleRows := by decide
+    ¬ LocalEnvelope q 3 7 counterexampleRows := by
+  intro hlocal
+  have hle : q * (rootedDegree 6 - 3) ≤ 7 * ambientShell6 := by
+    simpa [counterexampleRows, LocalEnvelope] using hlocal
+  exact (Nat.not_lt_of_ge hle) three_plus_seven_fails
 
 end M31QRootedShell.MultiplicativeCounterexample
