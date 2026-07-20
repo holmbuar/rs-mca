@@ -1,5 +1,5 @@
 name: Lean - asymptotic spine build mirror
-run-name: Lean asymptotic spine — exact semantic atlas head
+run-name: Lean asymptotic spine — exact semantic atlas head retry
 
 on:
   push:
