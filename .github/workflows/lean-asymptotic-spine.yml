@@ -16,7 +16,7 @@ on:
         type: string
 
 permissions:
-  contents: write
+  contents: read
   statuses: write
 
 concurrency:
@@ -98,33 +98,6 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/statuses/${target_sha}" \
             --data-binary @status.json
-
-      # One-off publication cleanup: preserve the validated tree and agents-log
-      # entry, but present it upstream as one intentional follow-up commit.
-      - name: Squash validated C7 publication branch onto PR 987 head
-        if: steps.lake.outcome == 'success'
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TARGET_BRANCH: codex/c7-base-pole-closed-ledger-producer
-          BASE_COMMIT: 335b9634074fe3a1650749be5985b15e7c8b36ed
-        run: |
-          set -euo pipefail
-          work="$(mktemp -d)"
-          trap 'rm -rf "$work"' EXIT
-          git clone --quiet --branch "$TARGET_BRANCH" \
-            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
-            "$work/repo"
-          cd "$work/repo"
-          git fetch --quiet origin "$BASE_COMMIT"
-          if [[ "$(git rev-list --count "${BASE_COMMIT}..HEAD")" -le 1 ]]; then
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git reset --soft "$BASE_COMMIT"
-          git commit -m "Formalize rooted C7 base-pole closed-ledger producer"
-          git push --quiet --force-with-lease origin "HEAD:${TARGET_BRANCH}"
 
       - name: Fail workflow if Lean failed
         if: steps.lake.outcome != 'success'
