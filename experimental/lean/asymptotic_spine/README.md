@@ -157,6 +157,32 @@ profiles, place C7 earlier, or accept C3 as the owner. No global fixed-before-
 line atlas, actual row-wide `(UNIF)`, target comparison, or row closure is
 asserted.
 
+## True-R2 shell: C7 collapse before C9
+
+`AsymptoticSpine.C9TrueR2CollapseRegression` records the finite interface
+consequence of the complete true-`R=2` shell from
+`c9_true_r2_shell_realizability.md`.  The full fixed-weight two-moment image has
+full effective span over the construction field but exponentially fewer
+realized values, so the C7 effective-image-collapse trigger fires before the
+primitive C9 cell.
+
+At the exact `k=6` anchor, the earlier C7 and later raw C9 cells carry the same
+twenty slope identifiers; ordered first match leaves the C9 list empty.  The
+module also records the normalization mismatch:
+
+```text
+M_6 = 2704156,
+L_6 = 2545055,
+|Z| = 20.
+```
+
+Residual self-normalization makes the fibre appear unit-paid, while the correct
+full-slice additive profile scale, cleared by `L_6`, rejects loss nine and first
+passes at loss ten.  The source theorem proves that the required loss grows as
+`exp(k log(15/8)-O(log k))`, so the unrefined C7 collapse is not paid uniformly.
+This is a C7 routing/payment obstruction, not a primitive C9 producer or a C9
+Sidon counterexample on intended smooth/circle rows.
+
 ## Upgrade regression locks
 
 `AsymptoticSpine.RegressionLocks` restates the current general interfaces for
