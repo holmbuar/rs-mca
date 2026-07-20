@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-20 - Rooted C7 base-pole closed-ledger producer
+
+- **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C7BasePoleProducer.lean`, `C7BasePoleWitnessProducer.lean`, and `C7BasePoleLineExtension.lean`; retained `C7OwnerRegression.lean`; added `experimental/notes/audits/c7_base_pole_closed_ledger_producer.md`; updated the C7 audit, root import, and package README.
+- **Status:** PROVED LOCAL / FORMALIZATION / CONDITIONAL GLOBAL USE / AUDIT.
+- **What is being added:** A rooted deletion-aware producer for the established base-pole constant-coefficient C7 class. It starts from actual witness fibres and the exact coefficient-to-slope law, removes the aggregate C1--C6 assigned slope image, pays each surviving singleton directly at unit natural scale, and appends the survivors to an earlier closed line with exact budget and natural-scale telescopes.
+- **How it is useful:** This supplies one genuine local C7 producer into `UniformClosedLedger`, preserves the required line-local `sup_line sum_profile` order, and corrects the earlier overstrong claim that the entire raw C7 cell must survive before any payment is possible.
+- **What to do next:** Integrate as a focused follow-up to PR #987 after its interface is available on upstream. Global fixed-before-line atlas coherence, completeness over all received lines, survivor nonemptiness on every line, actual `(UNIF)`, target comparison, and row closure remain open.
+
+
 ### 2026-07-19 - PR 884 dense-shell INV-TAIL audit review
 
 - **Agent/model:** Codex, reviewing Holm Buar PR #884.
@@ -65,6 +75,15 @@ Keep entries concise and link to the relevant files.
 - **What is being added:** A stdlib-only typed compiler from post-deletion semantic profiles to the row-level bound `sup_line bad(line) <= compilerLoss * envelope`, preserving the required `sup_line sum_profile` order.  It keeps residual-to-full, image-normalized Sidon, ray compilation, natural-scale payment, and realized-profile count as separate fields, and includes the minimal two-line diagonal countermodel to `sum_profile sup_line` plus a positive direct-payment fixture.
 - **How it is useful:** This is the common composition boundary for C7, C9, C8, and Q/SP/BC work: a local packet must supply rooted distinct-slope first-match payment through the printed residual/Sidon/ray chain, while the global producer must supply the honest line-local `(UNIF)` envelope comparison and profile cap.
 - **What to do next:** The focused 7-job build and full 28-job package build pass on Lean 4.31 after a one-line associativity proof repair; printed axiom reports contain no `sorryAx`.  Add concrete producer adapters only when an actual semantic atlas or cell theorem supplies the required fields.  Do not read this compiler as a proof of line-list completeness, fixed-before-line atlas coherence, atlas witness coverage, residual/full comparison, Sidon payment, RC, the actual asymptotic/window-uniform estimate, or target comparison.
+
+### 2026-07-19 - C7 raw-payment / first-match-owner regression
+
+- **Agent/model:** GPT-5.6 Pro (packet); Codex (kernel validation and fail-closed verifier repair).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C7OwnerRegression.lean`, `experimental/notes/audits/c7_first_match_owner_regression.md`, and `experimental/scripts/verify_c7_first_match_owner_regression.py`; updated the asymptotic-spine root import and README.
+- **Status:** COUNTEREXAMPLE / FORMALIZATION PACKET / OPEN GAP.
+- **What is being added:** The actual affine-Steiner C1 quotient owner is connected to the minimal closed-ledger interface as a negative C7 producer test.  A raw one-slope C7-style payment is numerically valid but cannot populate `ClosedLineLedger` when the slope is already C1-owned; first match leaves the C7 assigned cell empty.  The verifier uses explicit fail-closed checks that remain active under `python3 -O`.
+- **How it is useful:** It blocks the invalid inference from raw collapse/payment to semantic C7 ownership, preserves `sup_line sum_profile`, and isolates the exact missing theorem for the base-pole constant-coefficient proposal: exclusion from every earlier C1--C6 slope image.
+- **What to do next:** Prove the printed `(C7-SURV)` statement on one actual post-prefix class, then reuse the existing direct one-slope payment.  Do not install raw C7 cells in the ledger before that survival theorem is available.
 
 ### 2026-07-19 - PR 985 M1 moving-root C5 boundary cut
 
