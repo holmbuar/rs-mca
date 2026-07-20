@@ -1,0 +1,104 @@
+name: Lean - asymptotic spine build mirror
+run-name: Lean asymptotic spine — ${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.ref_name }}
+
+# `codex/lean-build` is a validation mirror, not a research or integration branch.
+# Push a candidate commit there to kernel-build the complete stdlib-only package.
+on:
+  push:
+    branches:
+      - "codex/lean-build"
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: Branch, tag, or commit SHA to build
+        required: true
+        default: codex/lean-build
+        type: string
+
+permissions:
+  contents: read
+  statuses: write
+
+concurrency:
+  group: lean-asymptotic-spine-${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out target
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.sha }}
+          persist-credentials: false
+
+      - name: Set up Lean
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1.5.0
+        with:
+          lake-package-directory: experimental/lean/asymptotic_spine
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: false
+          use-github-cache: false
+
+      - name: Lake build asymptotic spine
+        id: lake
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          cd experimental/lean/asymptotic_spine
+          lake build 2>&1 | tee "$GITHUB_WORKSPACE/lean-build.log"
+
+      - name: Upload Lean build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lean-build-log
+          path: lean-build.log
+          if-no-files-found: warn
+
+      - name: Publish Lean commit status
+        if: always()
+        shell: bash
+        env:
+          BUILD_OUTCOME: ${{ steps.lake.outcome }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          target_sha="$(git rev-parse HEAD)"
+          target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          if [[ "$BUILD_OUTCOME" == "success" ]]; then
+            state="success"
+            description="Full asymptotic-spine lake build passed"
+          else
+            state="failure"
+            description="Full asymptotic-spine lake build failed"
+          fi
+          python3 - "$state" "$target_url" "$description" > status.json <<'PY'
+          import json
+          import sys
+          state, target_url, description = sys.argv[1:]
+          print(json.dumps({
+              "state": state,
+              "target_url": target_url,
+              "description": description,
+              "context": "lean/asymptotic-spine",
+          }))
+          PY
+          curl --fail-with-body --silent --show-error \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/statuses/${target_sha}" \
+            --data-binary @status.json
+
+      - name: Fail workflow if Lean failed
+        if: steps.lake.outcome != 'success'
+        run: exit 1
