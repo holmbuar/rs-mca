@@ -51,6 +51,8 @@ theorem trueR2_gone_by_end_of_c7 (earlier : List Nat) :
     firstMatchLeaves earlier trueR2C7ThenC9RawSlopeCells =
       [newPaid earlier trueR2K6Slopes, []] := by
   simp [trueR2C7ThenC9RawSlopeCells, firstMatchLeaves, newPaid]
+  intro a ha hnot
+  exact ⟨ha, hnot⟩
 
 /-- Exact full fixed-weight slice mass `M_6 = binom(24,12)`. -/
 def trueR2K6FullMass : Nat := 2704156
