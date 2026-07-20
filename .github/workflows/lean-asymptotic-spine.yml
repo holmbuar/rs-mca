@@ -1,8 +1,8 @@
 name: Lean - asymptotic spine build mirror
-run-name: Lean asymptotic spine — repaired F97 C8 two-cell candidate
+run-name: Lean asymptotic spine — final F97 C8 finite proof repair
 
-# Fork-only validation/control branch. Apply the two finite proof repairs found
-# by the kernel, then build that exact target commit.
+# Fork-only validation/control branch. Close the two remaining finite goals,
+# then build the exact repaired target commit.
 on:
   push:
     branches:
@@ -14,7 +14,7 @@ permissions:
   statuses: write
 
 concurrency:
-  group: lean-asymptotic-spine-c8-f97-repair
+  group: lean-asymptotic-spine-c8-f97-final-repair
   cancel-in-progress: true
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Apply finite proof repairs
+      - name: Apply final finite proof repair
         id: prepare
         shell: bash
         env:
@@ -44,49 +44,30 @@ jobs:
 
           path = Path("experimental/lean/asymptotic_spine/AsymptoticSpine/C8F97TwoCellFirstMatch.lean")
           text = path.read_text(encoding="utf-8")
-          old_cover = """theorem f97C8WitnessCells_cover :
-              forall w, w ∈ f97C8WitnessCells.flatten <-> w ∈ f97C8Witnesses := by
-            decide
-          """
-          new_cover = """theorem f97C8WitnessCells_cover :
-              forall w, w ∈ f97C8WitnessCells.flatten <-> w ∈ f97C8Witnesses := by
-            intro w
+          old_cover = """  intro w
             simp [f97C8WitnessCells, f97C8CellA, f97C8CellB, f97C8Witnesses]
+          """
+          new_cover = """  intro w
+            simp [f97C8WitnessCells, f97C8CellA, f97C8CellB, f97C8Witnesses]
+            tauto
           """
           if old_cover in text:
               text = text.replace(old_cover, new_cover, 1)
 
-          old_witness = """  have hassigned := (mem_f97C8AssignedSlopes earlier gamma).mp hgamma
-            rcases hassigned.1 with h0 | hrest
-            · subst gamma
-              exact ⟨0, by decide, rfl, hassigned.2⟩
-            · rcases hrest with h1 | hrest
-              · subst gamma
-                exact ⟨1, by decide, rfl, hassigned.2⟩
-              · have h2 : gamma = 2 := by simpa using hrest
-                subst gamma
-                exact ⟨2, by decide, rfl, hassigned.2⟩
-          """
-          new_witness = """  have hassigned := (mem_f97C8AssignedSlopes earlier gamma).mp hgamma
-            rcases hassigned with ⟨hraw, hnot⟩
-            simp only [List.mem_cons, List.mem_singleton] at hraw
-            rcases hraw with h0 | hrest
-            · subst gamma
-              exact ⟨0, by decide, rfl, hnot⟩
-            · rcases hrest with h1 | h2
-              · subst gamma
-                exact ⟨1, by decide, rfl, hnot⟩
-              · subst gamma
+          old_last = """    · subst gamma
                 exact ⟨2, by decide, rfl, hnot⟩
           """
-          if old_witness in text:
-              text = text.replace(old_witness, new_witness, 1)
-
+          new_last = """    · have h2' : gamma = 2 := by simpa using h2
+                subst gamma
+                exact ⟨2, by decide, rfl, hnot⟩
+          """
+          if old_last in text:
+              text = text.replace(old_last, new_last, 1)
           path.write_text(text, encoding="utf-8")
           PY
           if ! git diff --quiet; then
             git add experimental/lean/asymptotic_spine/AsymptoticSpine/C8F97TwoCellFirstMatch.lean
-            git commit -m "Repair exact F97 C8 finite proofs"
+            git commit -m "Finish exact F97 C8 finite proof repair"
             git push --quiet origin "HEAD:${TARGET_BRANCH}"
           fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
