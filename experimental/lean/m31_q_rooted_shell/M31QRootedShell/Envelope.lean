@@ -74,7 +74,7 @@ theorem localEnvelope_mul_le (Q b c : Nat) :
         Q * excessSum b rows ≤ c * shellSum rows := by
   intro rows
   induction rows with
-  | nil => intro _; simp [LocalEnvelope]
+  | nil => intro _; simp
   | cons row rows ih =>
       cases row with
       | mk d h =>
@@ -97,13 +97,15 @@ theorem excessSum_le_scaledFloor
     Nat.mul_le_mul_left c htotal
   have hmul : Q * excessSum b rows ≤ c * totalShell :=
     Nat.le_trans hlocalMul htotalMul
-  by_contra hnot
-  have hsucc : scaledFloor + 1 ≤ excessSum b rows := by omega
-  have hscaled : Q * (scaledFloor + 1) ≤ Q * excessSum b rows :=
-    Nat.mul_le_mul_left Q hsucc
-  have hbad : Q * (scaledFloor + 1) ≤ c * totalShell :=
-    Nat.le_trans hscaled hmul
-  exact (Nat.not_lt_of_ge hbad) hfloor
+  have hlt : Q * excessSum b rows < Q * (scaledFloor + 1) :=
+    Nat.lt_of_le_of_lt hmul hfloor
+  have hQ : 0 < Q := by
+    cases Q with
+    | zero => simp at hfloor
+    | succ q => exact Nat.succ_pos q
+  have hexcessLt : excessSum b rows < scaledFloor + 1 :=
+    (Nat.mul_lt_mul_left hQ).mp hlt
+  omega
 
 /--
 Rooted-shell envelope in packet form.
