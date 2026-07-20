@@ -1,0 +1,63 @@
+name: Temporary append C7 agents log
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  append:
+    if: >-
+      github.repository == 'holmbuar/rs-mca' &&
+      github.event.issue.pull_request != null &&
+      github.event.issue.number == 41 &&
+      github.actor == 'holmbuar' &&
+      github.event.comment.body == '/append-c7-agents-log'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out candidate branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          ref: codex/c7-base-pole-narrow-ci
+          persist-credentials: true
+
+      - name: Insert minimal coordination entry
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('experimental/agents-log.md')
+          text = path.read_text()
+          title = '### 2026-07-20 - C7 base-pole producer'
+          if title in text:
+              raise SystemExit(0)
+
+          entry = '''### 2026-07-20 - C7 base-pole producer
+
+          - **Agent/model:** GPT-5.6 Pro.
+          - **Files added or changed:** `experimental/lean/asymptotic_spine/AsymptoticSpine/C7BasePoleProducer.lean`, `C7BasePoleWitnessProducer.lean`, `AsymptoticSpine.lean`, and `experimental/notes/audits/c7_base_pole_producer.md`.
+          - **Status:** PROVED LOCAL / CONDITIONAL GLOBAL USE / AUDIT.
+          - **What is being added:** A stdlib-only deletion-aware producer for the proved base-pole constant-coefficient class; global semantic ownership and row-wide uniformity remain conditional.
+          - **How it is useful:** Isolates the non-overlapping C7 producer requested in upstream PR #997 review, without duplicating PR #987's ledger interface.
+          - **What to do next:** Review the source correspondence and integrate as a narrow C7 unit.
+
+          '''
+          marker = '## Entries\n\n'
+          if marker not in text:
+              raise SystemExit('agents-log marker not found')
+          path.write_text(text.replace(marker, marker + entry, 1))
+          PY
+
+          if git diff --quiet -- experimental/agents-log.md; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experimental/agents-log.md
+          git commit -m 'Record narrow C7 producer packet'
+          git push origin HEAD:codex/c7-base-pole-narrow-ci
