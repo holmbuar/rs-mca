@@ -101,28 +101,47 @@ one global profile atlas fixed before the received line. `naturalTotal` contains
 only the profile sum, so the universal terms in the literal frontiers envelope
 must be absorbed by the supplied `envelope`.
 
-## C7 first-match owner regression and base-pole producer
+## C7 first-match regression and rooted base-pole producer
 
-`AsymptoticSpine.C7OwnerRegression` is a negative producer test layered on the
-minimal closed-ledger interface.  It models the established affine-Steiner
-regression in which one slope lies in both an earlier C1 quotient projection
-and a later raw C7-style collapse projection.  The raw C7 direct payment is
-numerically valid, but installing it after the C1 payment violates
-`ClosedLineLedger.firstMatchOwnership`; ordered first match leaves the C7
-assigned cell empty.  In the finite one-slope interface model, the corrected
-line-local sum contains only the C1 term and replays through
-`UniformClosedLedger.compile`; this is not actual `(UNIF)` or row closure.
+`AsymptoticSpine.C7OwnerRegression` is the negative guardrail. It models the
+established affine-Steiner family in which one slope occurs in both an earlier
+C1 quotient projection and a later raw C7-style collapse projection. The raw C7
+direct inequality is numerically valid, but installing the untrimmed raw cell
+after C1 violates `ClosedLineLedger.firstMatchOwnership`. This rejects double
+charging; it does not require a correct producer to retain every raw C7 slope.
 
-`AsymptoticSpine.C7BasePoleProducer` is the corresponding positive local
-adapter for the real base-pole constant-coefficient class.  It starts from the
-source-side theorem that the raw constant-coefficient cells have singleton slope
-images and at most `q - 1` realized slopes.  Given the aggregate earlier C1--C6
-slope image on the same received line, it defines the assigned C7 slopes as the
-post-deletion subset `raw \ earlier`, installs one direct unit-scale
-`ProfilePayment.ofDirect .c7` for each survivor, and proves that both the
-line-local budget sum and natural-scale sum equal the survivor count and are
-bounded by the raw `q - 1` census.  It asserts no survivor nonemptiness, global
-atlas, actual row-wide `(UNIF)`, target comparison, or row closure.
+`AsymptoticSpine.C7BasePoleProducer` is the deletion-aware slope-level adapter
+for the real base-pole constant-coefficient class. Given the aggregate earlier
+C1--C6 slope image on the same received line, it defines the assigned C7 image
+as `raw \ earlier`, installs one direct unit-scale
+`ProfilePayment.ofDirect .c7` for each survivor, and proves that the C7
+line-local budget and natural sum both equal the survivor count and are bounded
+by the raw `q - 1` census.
+
+`AsymptoticSpine.C7BasePoleWitnessProducer` records the preceding rooted source
+boundary. Its `BasePoleC7WitnessClass` contains the actual witness catalogue,
+locator constant coefficient, exact slope law `slope(w) = slopeOfCoeff(d)`,
+injectivity of the coefficient-to-slope map, and the realized-coefficient
+census. It proves witness-exhaustive constant-coefficient fibres, exact equality
+between the constructed raw slope list and the witness slope image, and a
+surviving raw witness for every assigned C7 slope.
+
+`AsymptoticSpine.C7BasePoleLineExtension` appends those surviving singleton
+profiles to an already-closed C1--C6 line. It preserves duplicate-free
+first-match ownership and proves the exact line-local telescopes
+
+```text
+combined budgetTotal
+  = prior budgetTotal + number of C7 survivors,
+
+combined naturalTotal
+  = prior naturalTotal + number of C7 survivors.
+```
+
+The added cost is at most `q - 1`. The executable fixture deletes two earlier-
+owned raw slopes and appends exactly the two survivors. These modules assert no
+survivor nonemptiness on every line, global fixed-before-line atlas, actual
+row-wide `(UNIF)`, target comparison, or row closure.
 
 ## Upgrade regression locks
 
