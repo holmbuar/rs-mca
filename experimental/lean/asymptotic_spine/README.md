@@ -88,18 +88,3 @@ It does not construct the finite-field incidence ledger, prove the residual
 ray compiler, remove the profile compiler inputs, or upgrade a conditional
 source theorem to an unconditional one. See `REGRESSION_LOCKS.md` for the
 direct statement map.
-
-## C7 base-pole producer
-
-`AsymptoticSpine.C7BasePoleProducer` and
-`AsymptoticSpine.C7BasePoleWitnessProducer` formalize the narrow,
-deletion-aware constant-coefficient producer from
-`experimental/notes/thresholds/aperiodic_one_ray_saturation.md`.
-
-The modules prove witness-fibre exhaustiveness, the exact coefficient-to-slope
-image, deletion by a supplied earlier-owner slope list, and a direct singleton
-budget bounded by the source-side `q - 1` census. They do not duplicate the
-uniform closed-ledger interface from PR #987 and do not prove a global semantic
-atlas, survivor nonemptiness, row-wide uniformity, or target comparison. See
-`experimental/notes/audits/c7_base_pole_producer.md` for the exact statement
-and axiom census.
