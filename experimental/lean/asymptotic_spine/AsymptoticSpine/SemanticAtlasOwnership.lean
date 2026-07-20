@@ -75,11 +75,11 @@ structure CertifiedC3ThenLater
   c3CountControl : c3Profiles.length ≤ c3Cap
   laterCountControl : laterProfiles.length ≤ laterCap
   ownership :
-    ((c3Profiles.map (fun p => p.assignedSlopes)) ++
+    ((c3Profiles.map (fun p => p.payment.assignedSlopes)) ++
       (laterProfiles.map (fun p => p.assignedSlopes))).flatten.Nodup
   exhaustive :
     badCount ≤
-      (((c3Profiles.map (fun p => p.assignedSlopes)) ++
+      (((c3Profiles.map (fun p => p.payment.assignedSlopes)) ++
         (laterProfiles.map (fun p => p.assignedSlopes))).flatten).length
 
 namespace CertifiedC3ThenLater
