@@ -1,0 +1,1678 @@
+\documentclass[a4paper,11pt]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools,amsthm}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[capitalize,nameinlink,noabbrev]{cleveref}
+
+\allowdisplaybreaks[2]
+\emergencystretch=3em
+\setlist[enumerate]{leftmargin=*,itemsep=2pt,topsep=4pt}
+\setlist[itemize]{leftmargin=*,itemsep=2pt,topsep=4pt}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{metaconjecture}[theorem]{Meta-conjecture}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\crefname{theorem}{theorem}{theorems}
+\Crefname{theorem}{Theorem}{Theorems}
+\crefname{proposition}{proposition}{propositions}
+\Crefname{proposition}{Proposition}{Propositions}
+\crefname{lemma}{lemma}{lemmas}
+\Crefname{lemma}{Lemma}{Lemmas}
+\crefname{corollary}{corollary}{corollaries}
+\Crefname{corollary}{Corollary}{Corollaries}
+\crefname{conjecture}{conjecture}{conjectures}
+\Crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{metaconjecture}{meta-conjecture}{meta-conjectures}
+\Crefname{metaconjecture}{Meta-conjecture}{Meta-conjectures}
+\crefname{problem}{problem}{problems}
+\Crefname{problem}{Problem}{Problems}
+\crefname{definition}{definition}{definitions}
+\Crefname{definition}{Definition}{Definitions}
+\crefname{remark}{remark}{remarks}
+\Crefname{remark}{Remark}{Remarks}
+
+\DeclareMathOperator{\RS}{RS}
+\DeclareMathOperator{\MCA}{MCA}
+\DeclareMathOperator{\im}{im}
+\newcommand{\F}{\mathbb F}
+\newcommand{\B}{\mathbb B}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Gam}{\Gamma}
+\newcommand{\Om}{\Omega}
+\newcommand{\Lam}{\Lambda}
+\newcommand{\calE}{\mathfrak E}
+\newcommand{\Htwo}{H_2}
+\newcommand{\barN}{\overline N}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\defeq}{\mathrel{:=}}
+
+\title{Conjectures and Barriers for RS--MCA}
+\author{Przemek Chojecki}
+\address{Ulam.ai}
+\email{prz.chojecki@gmail.com}
+\urladdr{https://github.com/przchojecki/rs-mca}
+\date{July 19, 2026}
+\hypersetup{
+  pdftitle={Conjectures and Barriers for RS--MCA},
+  pdfauthor={Przemek Chojecki},
+  pdfsubject={Profile conjectures, inverse problems, and finite barriers for Reed--Solomon mutual correlated agreement},
+  pdfkeywords={Reed-Solomon codes, mutual correlated agreement, Proximity Prize, profile compiler, additive energy, Balog-Szemeredi-Gowers theorem}}
+\subjclass[2020]{94B35, 11T71, 05B40, 11B30}
+\keywords{Reed--Solomon codes, mutual correlated agreement, profile certificates,
+additive energy, smooth domains, proximity gaps}
+
+\begin{document}
+\raggedbottom
+
+\begin{abstract}
+As a companion to the proved bounds in \emph{Shortening Bounds for Reed--Solomon MCA}, we formulate the complete finite Reed--Solomon mutual correlated agreement (MCA) problem and a pole-aware conjectural positive-density profile envelope.  An exact first-match compiler and realized-image moment and incidence inequalities isolate the payments required for a safe certificate without confusing supports, pairs, rays, and affine slopes.  We prove a ceiling-normalized moment obstruction, a projective incidence theorem and benchmark dimension diagnostic, and a moving-scale consequence of the previously proved implication from a Sidon payment through the Balog--Szemer\'edi--Gowers theorem and Boolean-cube growth.  Exact unsafe edges, repository audits, and numerical margins lead to four direct adjacent conjectures---two MCA and two auxiliary list inequalities---whose safe sides still require primitive-fiber, residual-projection, algebraic-routing, and add-back payments.  In a collision-nonbinding, subexponential-budget identity-candidate branch, we conjecture a non-oracular exhaustive atlas whose exact unsafe--safe bracket, through a proved crossing reduction, yields \(\delta^*_{C_n,\mathrm{off,sup}}=1-\rho_n-g^*(\rho_n,\log_2\abs{\mathbb B_n})+o(g_n^*)\); the general identity lower route instead uses an exact pole-adjusted target, and no matching bracket is claimed for the unrestricted smooth or circle problem.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+The preliminary Proximity Prize asks one to determine the complete security
+frontier of
+Reed--Solomon mutual correlated agreement (MCA) on structured evaluation
+domains \cite{ProximityPrize,ABF26}.  Its grand MCA challenge takes
+\[
+ C=\RS_{\F}(D,k)
+ =\{(f(x))_{x\in D}:f\in\F[X],\ \deg f<k\},\qquad n=\abs D,
+\]
+at a rate \(k/n\in\{1/2,1/4,1/8,1/16\}\).  The preliminary statement phrases
+the task as finding the largest safe radius in the official interval
+\([0,1]\) at a target such as \(\varepsilon^*=2^{-128}\).  That wording hides a finite staircase,
+and the soundness gap between an attack and a safe certificate is meaningful
+only after its integer and endpoint conventions have been fixed.
+
+For a received pair \(r=(r_0,r_1)\), the affine received line is
+\(\{r_0+\gamma r_1:\gamma\in\F\}\).  At agreement \(a\), a slope
+\(\gamma\) is MCA-bad if there are a support \(S\subseteq D\), with
+\(\abs S\ge a\), and \(h\in\F[X]_{<k}\) for which
+\((r_0+\gamma r_1)|_S=h|_S\), while \(r_0\) and \(r_1\) are not both
+explained by degree-less-than-\(k\) polynomials on that same support.  Thus
+MCA counts distinct affine slopes, not supports, locators, polynomials,
+pairs, or projective directions.  For a nonempty challenge set
+\(\Gam\subseteq\F\), let \(B_{C,\Gam}^{\MCA}(a)\) be the maximum number of
+bad slopes in \(\Gam\), over all received pairs.  At radius \(\delta\), put
+\[
+ a(\delta)=n-\floor{\delta n},\qquad
+ \varepsilon_{\MCA,\Gam}(C,\delta)
+ =\frac{B_{C,\Gam}^{\MCA}(a(\delta))}{\abs\Gam}.     \tag{1.1}\label{eq:intro-error}
+\]
+The official challenge is the full-field case \(\Gam=\F\).  The
+challenge-restricted notation is our refinement for sampled variants; it
+does not change the support-wise witness predicate.  We abbreviate
+\(B_C^{\MCA}=B_{C,\F}^{\MCA}\).
+
+\begin{problem}[Complete finite Proximity Prize problem]\label{prob:finite-prize}
+Given the official data above, determine the complete safe set
+\[
+ \mathsf S_{C,\Gam}(\varepsilon^*)
+ =\{\delta\in[0,1]:
+       B_{C,\Gam}^{\MCA}(a(\delta))
+       \le B^*\},\qquad
+ B^*=\floor{\varepsilon^*\abs\Gam},                \tag{1.2}\label{eq:intro-safe-set}
+\]
+and not only a decimal approximation to one boundary point.  When the safe
+set is nonempty, report its real supremum
+\(\delta_{C,\Gam,\mathrm{off,sup}}^*\), its largest safe grid point
+\(\delta_{C,\Gam,\mathrm{off,grid}}^*\in\{0,1/n,\ldots,1\}\), and whether
+the supremum is attained.  When it is empty, report that fact separately;
+the number zero may be used as a placeholder but must not be read as saying
+that radius zero is safe.
+The concrete box emphasized in the accompanying preliminary problem
+discussion includes \(k\le2^{40}\), \(\abs\F<2^{256}\), and target
+\(2^{-128}\) \cite{ABF26}; the definitions and endpoint bookkeeping here do
+not depend on those numerical caps.
+\end{problem}
+
+The complete answer has three branches.  For a proper MDS code,
+\cref{prop:staircase} proves that \(B_{C,\Gam}^{\MCA}(n)=1\) and that the
+numerator is constant for \(a\le k+1\).  Hence \(B^*=0\) gives an empty safe
+set.  If \(B_{C,\Gam}^{\MCA}(k+1)\le B^*\), the row is saturated:
+\(\mathsf S_{C,\Gam}=[0,1]\), both official thresholds equal \(1\), and the
+endpoint is safe.  Otherwise \(B^*\ge1\), and if
+\[
+ a_C^*=\min\{a\in\{k+1,\ldots,n\}:
+                   B_{C,\Gam}^{\MCA}(a)\le B^*\},   \tag{1.3}\label{eq:intro-first-safe}
+\]
+then
+\[
+ \mathsf S_{C,\Gam}
+ =\left[0,\frac{n-a_C^*+1}{n}\right),\quad
+ \delta_{C,\Gam,\mathrm{off,grid}}^*=\frac{n-a_C^*}{n},\quad
+ \delta_{C,\Gam,\mathrm{off,sup}}^*=\frac{n-a_C^*+1}{n}, \tag{1.4}\label{eq:intro-staircase}
+\]
+and the supremal endpoint is unsafe.  These empty, saturated, grid, and
+half-open cases are part of the finite Prize answer; a subcapacity threshold
+alone is incomplete.
+
+The Prize statement uses a smooth evaluation domain.  Our refined term
+\emph{admissibly smooth} means that the row data include specified complete
+equal-fiber polynomial folding maps.  Here a folding \(\pi:D\to D_\pi\) is
+complete and \(c\)-to-one, for an integer \(c\ge1\), when
+\(\pi(D)=D_\pi\) and every fiber
+\(\pi^{-1}(y)\), \(y\in D_\pi\), has exactly \(c\) elements.  The principal examples are
+positive-density multiplicative domains, with power maps \(x\mapsto x^c\),
+and Chebyshev twin-coset domains, with the corresponding maps \(T_c\).  We
+write \(D\subseteq\B\subseteq\F\) when this locator and folding algebra is
+defined over a designated coefficient-and-folding field \(\B\), while slopes
+and codewords live over \(\F\).  This field is part of the public row data;
+for the asymptotic prediction it is the field generated by \(D\) and the
+coefficients of the declared folding maps, not an arbitrarily enlarged
+intermediate field.  A circle presentation enters only through an explicit
+coordinate bijection and nonzero diagonal scaling that give an
+agreement-preserving monomial equivalence with such an RS row
+\cite{HLP24,ChoShortening}.  Geometric resemblance alone is not used.
+For a sequence, \emph{positive density} means
+\(\liminf_n\abs{D_n}/\abs{\B_n}>0\); hence
+\(\log_2\abs{\B_n}=\log_2n+O(1)=o(n)\).
+
+The proved literature does not yet determine the grand frontier.  BCIKS
+established the foundational Reed--Solomon proximity-gap framework
+\cite{BCIKS20}.  Hab\"ock gave the quadratic predecessor of a Johnson-range
+MCA estimate \cite{Habock25}; BCHKS state a linear-in-\(n\) Johnson-range
+estimate, which the companion theorem paper treats as an imported input,
+as well as complementary proximity-gap obstructions \cite{BCHKS25}.  Jo
+proves an all-test-size MDS circuit-incidence envelope and an exact
+agreement-set shortening theorem, yielding polynomial control at any fixed
+number of steps beyond Johnson at fixed reciprocal-integer rates
+\cite{Jo26}.  BCHKS use degree at most \(d\); for \(\RS_{<K}\), their strict
+Johnson hypothesis is \((N-E)^2>N(K-1)\).
+
+Recent attacks show why no identity-only capacity law can be universal.
+Crites and Stewart disprove several correlated-agreement and MCA
+up-to-capacity conjectures \cite{CritesStewart25}.  Krachun, Kazanin, and
+Hab\"ock construct multiplicative-subgroup rows over prime fields with
+\(2^{\Omega_\rho(1/\eta)}\) close points on one affine line at a gap
+\(\eta=\Theta_\rho(1/\log n)\) from capacity \cite{KKH26}.  Gao, Yang, Xu,
+and Kan give a constructive conversion from list-decoding counterexamples to
+MCA lower bounds for a related code, including an RS specialization
+\cite{GaoYangXuKan26}.  These are nonidentity lower mechanisms: they sharpen
+the attack side and the profile taxonomy, but do not furnish fixed-row safe
+certificates for the benchmarks below.
+
+The preceding theorem paper, \emph{Shortening Bounds for Reed--Solomon MCA},
+version~9.2 \cite{ChoShortening}, is the source of the unconditional
+RS--MCA results used here.  It proves the official MDS plateau and exact
+endpoint conversion, the endpoint-exact linear-budget staircase in its
+below-half-distance range, finite MDS circuit and shortening certificates
+beyond Johnson, and a one-sided positive-radius safe-frontier certificate
+for positive exponential budgets.  It also proves the exact locator-prefix
+lower construction with collision-aware pole conversion, structured-domain
+and circle transfers under proved monomial equivalence, and the implication
+from an image-normalized Sidon payment to primitive Boolean-fiber flatness.
+The latter implication uses Balog--Szemer\'edi--Gowers and Boolean-cube
+difference growth; its Sidon premise and residual ray compiler remain open.
+It also determines complete safe sets for four explicit maximal-dimension
+\(k=2^{40}\) multiplicative rows in the tangent branch and four all-radius
+saturated rows \cite[Corollary~1.5 and Proposition~B.2]{ChoShortening}.
+Those exact instances do not determine the positive-density identity-profile regime
+studied here.
+This paper quotes those established frontiers instead of presenting them as
+new.  The short endpoint and analytic implications are restated where needed
+to make the present compiler auditable.
+
+The object of this companion is the missing classification.  A safe proof
+must classify every bad witness, normalize boundary maps by their attained
+images, convert each count to the relevant projection, and add the payments
+without overlap.  The exact first-match compiler in
+\cref{thm:first-match} formalizes these requirements.  The target-exact
+profile-closure meta-conjecture \cref{meta:profile-envelope} asks for one
+family-uniform, non-oracular atlas schema whose specializations determine
+every target comparison.  It is a meta-conjecture about a proposed proof
+architecture, not a substitute for a statement about the true numerator.
+
+The stable finite conjectures are therefore stated directly.  Here
+\(B_C^{\rm list}(a)\), defined formally in \cref{sec:setup}, denotes the
+maximum number of codewords of \(C\) agreeing with one received word on at
+least \(a\) coordinates.  The benchmark codes \(C_{\rm KB}\) and
+\(C_{\rm M}\), their fields, domains, and targets are defined in
+\cref{sec:finite}.  At
+\(n=2^{21}\), \(k=2^{20}\), they are
+\[
+ \begin{aligned}
+ B_{C_{\rm KB}}^{\MCA}(1116048)&\le274980728111395087,&
+ B_{C_{\rm M}}^{\MCA}(1116024)&\le16777215,\\
+ B_{C_{\rm KB}}^{\rm list}(1116047)&\le274980728111395087,&
+ B_{C_{\rm M}}^{\rm list}(1116023)&\le16777215.
+ \end{aligned}                                      \tag{1.5}\label{eq:intro-benchmarks}
+\]
+The top line contains the two MCA inequalities; the bottom line contains the
+two auxiliary agreeing-codeword inequalities.  Each preceding agreement is rigorously
+unsafe, but the four displayed upper inequalities remain open
+(\cref{conj:benchmark}).  Their exact margins, periodic audit, random-fiber
+heuristic, and falsifiers are recorded in \cref{sec:finite}.
+
+The new theorems concern the interfaces and barriers.  We prove
+realized-image moment and support-to-slope incidence inequalities, the
+necessary moment orders \(94196,94991,641594,680397\) for the stated
+ceiling-normalized route, a general projective incidence theorem, and a
+conditional correction-space diagnostic with dimensions near
+\(9.1\cdot10^5\).  We also isolate the moving-scale consequence of the
+Sidon--Balog--Szemer\'edi--Gowers--Boolean-cube implication already proved in
+\cite[Section~10]{ChoShortening}.  Closing any adjacent row still requires
+realized-image primitive-fiber control, residual slope or codeword payments,
+periodic/descent/extension/rank routing, and exact first-match add-back.
+
+The pole-adjusted identity profile has a precise conjectural asymptotic shape.  Write
+\(H_2(x)=-x\log_2x-(1-x)\log_2(1-x)\) for binary entropy, and let
+\(\rho_n=k_n/n\), \(\beta_n=\log_2\abs{\B_n}\), and
+\[
+ g^*(r,b)=\sup\bigl(\{g\in[0,1-r]:H_2(r+g)\ge bg\}\cup\{0\}\bigr).
+                                                               \tag{1.6}\label{eq:intro-gstar}
+\]
+For a declared target sequence \(0<\varepsilon_n\le1\), put
+\(q_n=\abs{\F_n}\), \(Q_n=q_n-n\), and
+\(B_n^*=\floor{\varepsilon_nq_n}\).  On the nonzero pole-admissible branch
+\(B_n^*\ge1\) and \(Q_n>k_nB_n^*\), let \(T_{{\rm pole},n}\) be the exact threshold in
+\eqref{eq:pole-threshold}, set
+\(\tau_n^{\rm pole}=n^{-1}\log_2T_{{\rm pole},n}\), and define
+\[
+ g_{{\rm pole},n}=\sup\left(
+ \left\{g\in[0,1-\rho_n^+]:
+ H_2(\rho_n^++g)-\beta_ng\ge\tau_n^{\rm pole}\right\}\cup\{0\}
+ \right),\qquad \rho_n^+=\frac{k_n+1}{n}.          \tag{1.7}\label{eq:intro-pole-crossing}
+\]
+The exact ceiling test uses \(T_{{\rm pole},n}-1\), rather than
+\(T_{{\rm pole},n}\); the normalized logarithmic levels differ by at most
+\(1/n\).  A matching exact certificate bracket of width \(o(g_n^*n)\) at
+this crossing gives
+\[
+ \delta_{C_n,\mathrm{off,sup}}^*
+ =1-\rho_n-g_{{\rm pole},n}+o(g_n^*),\qquad
+ g_n^*=g^*(\rho_n,\beta_n).                        \tag{1.8}\label{eq:intro-pole-prediction}
+\]
+If in addition the raw budget and the pole-conversion factor are
+subexponential,
+\[
+ \frac1n\log_2B_n^*=o(1),\qquad
+ \frac1n\log_2\frac{Q_n-k_n}{Q_n-k_nB_n^*}=o(1), \tag{1.9}\label{eq:intro-pole-condition}
+\]
+then \cref{lem:crossing-stability} gives
+\(g_{{\rm pole},n}=g_n^*+o(g_n^*)\).  Thus the sharper prediction becomes
+\[
+ \delta_{C_n,\mathrm{off,sup}}^*
+ =1-\rho_n-g_n^*+o(g_n^*).                        \tag{1.10}\label{eq:intro-sharp-prediction}
+\]
+At constant rate \(\rho_n=\rho\) this implies the coarser formula
+\[
+ \boxed{\displaystyle
+ \delta_{C_n,\mathrm{off,sup}}^*
+ =1-\rho-g^*(\rho,\log_2\abs{\B_n})+o(1)}.
+                                                               \tag{1.11}\label{eq:intro-coarse-prediction}
+\]
+The stronger collision-nonbinding condition
+\(k_nB_n^*/Q_n=o(1)\) implies the second condition in
+\eqref{eq:intro-pole-condition}.  Raw subexponential budget alone does not:
+there is no off-domain pole when \(Q_n=0\), and the certified pole lower
+bound never exceeds the budget when \(0<Q_n\le k_nB_n^*\), regardless of
+the locator-list size.
+
+These conclusions do not require every multiplicative loss to be
+\(2^{o(g_n^*n)}\).  Near the right crossing, one more agreement changes the
+base-two logarithm of the identity mean by \(-\beta_n+O(1)\); consequently a
+uniform aggregate factor \(2^{o(n)}\) already moves the crossing by
+\(o(n/\beta_n)=o(g_n^*n)\).  Moving-scale control is a useful stronger
+statement, especially for finite ledgers, but is not necessary for
+\eqref{eq:intro-sharp-prediction}.
+
+Here the tangent branch is \emph{nonbinding} when the previously proved
+linear-budget tangent edge has been tested and is not the active constraint
+in the crossing window.  To formulate a lower-side hypothesis, fix uniformly
+from the public row-family data, before evaluating the unknown MCA numerator
+or the eventual safe/unsafe outcome, the non-oracular finite catalogue
+\(\mathcal L^{\ne{\rm id}}\) containing every explicit nonidentity lower
+construction declared for that family in this manuscript or its pinned
+public row specification.  The catalogue is part of the fixed family data;
+no subcatalogue may be selected when testing candidate status.
+For \(\lambda\in\mathcal L^{\ne{\rm id}}\), write
+\(P_{\lambda,n}(a)\le B_{C_n}^{\MCA}(a)\) for its certified slope count and
+put
+\[
+ a_{\lambda,n}^{\rm low}
+ =\max\bigl(\{a\in\{k_n+1,\ldots,n\}:
+                   P_{\lambda,n}(a)>B_n^*\}\cup\{k_n\}\bigr). \tag{1.12}\label{eq:nonidentity-lower-edge}
+\]
+Define \(a_{{\rm id},n}^{\rm low}\) by the same formula using the exact
+pole-converted identity lower bound \(P_{{\rm id},n}\) from
+\eqref{eq:identity-lower}.  A pole-admissible sequence is
+\emph{identity-candidate}, relative to this fixed catalogue, when the
+empty, saturation, and tangent branches do not bind,
+\(a_{{\rm id},n}^{\rm low}\ge k_n+1\), and
+\[
+ \max_{\lambda\in\mathcal L^{\ne{\rm id}}}
+ a_{\lambda,n}^{\rm low}\le a_{{\rm id},n}^{\rm low}           \tag{1.13}\label{eq:identity-candidate-branch}
+\]
+for all sufficiently large \(n\); the maximum is \(k_n\) if the catalogue
+is empty.  This definition uses only realized lower constructions and does
+not assume an upper envelope.
+\begin{conjecture}[Identity dominance on candidate smooth branches]
+\label{conj:identity-frontier}
+Let \(C_n=\RS_{\F_n}(D_n,k_n)\) be an official full-field, positive-density
+admissibly smooth multiplicative or Chebyshev twin-coset sequence of fixed
+rate, with \(B_n^*\ge1\).  Suppose the rows are nonsaturated, the tangent
+branch is nonbinding, \(Q_n>k_nB_n^*\), and
+\eqref{eq:intro-pole-condition} holds, and the sequence is
+identity-candidate relative to the fixed declared catalogue above.  Then there
+are integer sequences
+\(a_{-,n}<a_{+,n}\) in \(\{k_n+1,\ldots,n\}\) and a family-uniform,
+non-oracular profile atlas whose specialization at \(a_{+,n}\) is
+witness-exhaustive and has exact first-match payments summing to at most
+\(B_n^*\).  Together with the pole-converted identity lower certificate at
+\(a_{-,n}\), these give
+\[
+ B_{C_n}^{\MCA}(a_{-,n})>B_n^*,\qquad
+ B_{C_n}^{\MCA}(a_{+,n})\le B_n^*,                 \tag{1.14}\label{eq:intro-exact-bracket}
+\]
+and
+\[
+ a_{\pm,n}=k_n+1+g_{{\rm pole},n}n+o(g_n^*n)
+ =k_n+1+g_n^*n+o(g_n^*n).                         \tag{1.15}\label{eq:intro-bracket-location}
+\]
+Consequently the first safe agreement is
+\(k_n+1+g_n^*n+o(g_n^*n)\), and the official supremum satisfies
+\eqref{eq:intro-sharp-prediction}.  The same assertion applies to a circle
+presentation only through a proved agreement-preserving monomial equivalence.
+\end{conjecture}
+We call a sequence satisfying this conclusion \emph{identity-dominant}.
+Thus identity dominance is the predicted conclusion, not part of the
+lower-side hypothesis.  Section~\ref{sec:asymptotic} proves the numerical
+conclusion from a matching exact certificate bracket; the conjectural
+content is witness-exhaustive closure with the asserted payments and bracket.
+
+These are conditional identity-candidate predictions, not unconditional
+frontiers: quotient, partial-occupancy, planted, image-collapse, tangent,
+or ray-saturation profiles may move the crossing.  Thus the general predicted
+answer is the right crossing of the complete image-normalized profile
+envelope, after separately testing the empty-budget, tangent, and saturation
+branches.
+
+No theorem here improves the safe threshold in \cite{ChoShortening}.  What is
+proved here is the compiler and barrier calculus, including the conditional
+moving-scale implication and the pole-aware crossing reduction; what remains open
+is the Sidon payment, the residual projection compiler, the other algebraic
+payments, the four adjacent inequalities, and uniform smooth/circle closure.
+The preliminary Prize welcomes partial progress, but any claimed resolution
+must survive scientific peer review \cite{ProximityPrize}.
+
+\section{Exact certificate compiler}\label{sec:setup}
+
+Retain the fields, code, challenge set, and budget of \cref{sec:intro}.  A
+word \(u\in\F^D\) is \emph{explained} on \(S\subseteq D\) if
+\(u|_S=f|_S\) for some \(f\in\F[X]_{<k}\); a pair is simultaneously
+explained if both words are, possibly by different polynomials.
+
+For an integer agreement \(a\), an MCA witness for a received pair
+\(r=(r_0,r_1)\) is a triple \(w=(\gamma,S,h)\) such that
+\[
+ \gamma\in\Gam,\qquad \abs S\ge a,\qquad
+ (r_0+\gamma r_1)|_S=h|_S,\quad \deg h<k,
+\]
+and \((r_0,r_1)\) is not simultaneously explained on \(S\).  Let
+\(\mathcal W_r(a)\) be the set of witnesses and let
+\(Z_r(a)=\{\gamma:(\gamma,S,h)\in\mathcal W_r(a)\}\).  Thus
+\[
+ B_{C,\Gam}^{\MCA}(a)=\max_{r\in(\F^D)^2}\abs{Z_r(a)}.
+\]
+
+The following endpoint conversion is
+\cite[Theorem~1.4, Remark~4.4 and Lemma~B.1]{ChoShortening}, restated because
+a subcapacity formula alone loses the all-radius branch.
+
+\begin{proposition}[Exact staircase conversion]\label{prop:staircase}
+Let \(C\) be a proper \([n,k]\) MDS code.  Then
+\(a\mapsto B_{C,\Gam}^{\MCA}(a)\) is nonincreasing,
+\[
+ B_{C,\Gam}^{\MCA}(a)=B_{C,\Gam}^{\MCA}(k+1)
+ \quad(0\le a\le k+1),
+ \qquad B_{C,\Gam}^{\MCA}(n)=1.                    \tag{2.1}\label{eq:endpoints}
+\]
+If \(B^*=0\), no radius is safe.  If
+\(B_{C,\Gam}^{\MCA}(k+1)\le B^*\), the complete official safe set is
+\([0,1]\).  Otherwise \(B^*\ge1\), and the first safe agreement
+\[
+ a^*=\min\{a\in\{k+1,\ldots,n\}:B_{C,\Gam}^{\MCA}(a)\le B^*\}
+\]
+is well defined.  Its complete real safe set is
+\[
+ \left[0,\frac{n-a^*+1}{n}\right),                 \tag{2.2}\label{eq:safe-set-conversion}
+\]
+whose right endpoint is unsafe; the largest safe grid radius is
+\((n-a^*)/n\).
+\end{proposition}
+
+\begin{proof}
+This is the cited endpoint theorem and its exact integer-to-radius conversion.
+\end{proof}
+
+For a support \(S\), write
+\(Q_S(X)=\prod_{x\in S}(X-x)\).  If \(m=\abs S\) and \(K\le m\), the first
+\(w=m-K\) nonleading coefficients define the locator-prefix map
+\[
+ \Phi_w(S)=(c_1(S),\ldots,c_w(S))\in\B^w,
+ \qquad Q_S=X^m+c_1(S)X^{m-1}+\cdots+c_m(S).
+\]
+Pigeonholing its fibers gives a received word with at least
+\(\ceil{\binom nm\abs\B^{-w}}\) agreeing codewords of dimension \(K\).
+For \(K=k+1\), a collision-aware simple-pole construction converts the list
+to MCA slopes.  In a full-field row, with \(q=\abs\F>n\), its exact
+consequence at agreement \(a\) is
+\[
+ L_{\rm id}(a)=\ceil{\binom na\abs{\B}^{-(a-k-1)}},\qquad
+ P_{\rm id}(a)=
+ \ceil{\frac{L_{\rm id}(a)(q-n)}{q-n+k(L_{\rm id}(a)-1)}}
+ \le B_C^{\MCA}(a).                                \tag{2.3}\label{eq:identity-lower}
+\]
+These exact lower mechanisms and their nontriviality checks
+are established in \cite[Proposition~8.1 and Theorem~8.2]{ChoShortening}.  We use their
+certified unsafe agreements below, but never interpret the next, smaller
+lower value as a safe bound.  In particular, the first agreement at which
+\(P_{\rm id}(a)\le B^*\) is only an identity-route candidate; identifying it
+with the first safe agreement requires a closed upper atlas.
+
+The following elementary conversion is essential when the challenge field
+is not so large that pole collisions are negligible.
+
+\begin{lemma}[Exact pole conversion]\label{lem:exact-pole-conversion}
+Let \(B\ge1\), \(Q=q-n>0\), and
+\[
+ M_{Q,k}(L)=\ceil{\frac{LQ}{Q+k(L-1)}}\qquad(L\in\mathbb Z_{\ge1}).
+\]
+Then
+\[
+ M_{Q,k}(L)>B
+ \quad\Longleftrightarrow\quad
+ L(Q-kB)>B(Q-k).                                  \tag{2.4}\label{eq:pole-equivalence}
+\]
+If \(Q\le kB\), then \(M_{Q,k}(L)\le B\) for every \(L\ge1\).  If
+\(Q>kB\), the least integer \(L\) for which \(M_{Q,k}(L)>B\) is
+\[
+ T_{\rm pole}(B;Q,k)
+ =\floor{\frac{B(Q-k)}{Q-kB}}+1.                 \tag{2.5}\label{eq:pole-threshold}
+\]
+Consequently the certified pole lower bound in \eqref{eq:identity-lower}
+exceeds \(B\) exactly when
+\[
+ L_{\rm id}(a)\ge T_{\rm pole}(B;Q,k)
+ \quad\Longleftrightarrow\quad
+ \binom na\abs{\B}^{-(a-k-1)}>T_{\rm pole}(B;Q,k)-1. \tag{2.6}\label{eq:exact-pole-mean}
+\]
+\end{lemma}
+
+\begin{proof}
+Since \(B\) is integral, \(\ceil{x}>B\) if and only if \(x>B\); clearing
+the positive denominator gives \eqref{eq:pole-equivalence}.  If
+\(Q\le kB\), then for \(L\ge1\),
+\(L(Q-kB)\le Q-kB\le B(Q-k)\), so the strict inequality cannot hold.
+If \(Q>kB\), then also \(Q>k\), and division by \(Q-kB\) gives
+\eqref{eq:pole-threshold}.  The last equivalence uses
+\(L_{\rm id}(a)=\ceil{\binom na\abs{\B}^{-(a-k-1)}}\).
+\end{proof}
+
+\begin{definition}[Admissibly smooth row]\label{def:admissibly-smooth}
+An RS row is \emph{admissibly smooth for a declared profile schema} if its
+public data include a finite specified family of polynomial folding maps
+\(\pi:D\to D_\pi\), each complete and \(c_\pi\)-to-one in the sense fixed
+in \cref{sec:intro}, with \(c_\pi\), every scale, and every occupancy
+parameter used by the schema included in those data.
+No folding map may be chosen after a heavy fiber or bad received line is
+observed.
+\end{definition}
+
+\begin{definition}[Declared profile rule]\label{def:profile-rule}
+Fix public row data \(P=(\B\subseteq\F,D,k,\Gam,a,B^*)\).  A declared profile
+rule is a finite ordered list \(\mathcal A(P)=(\mathcal P_1,\ldots,\mathcal
+P_s)\) of predicates on pairs \((r,w)\), where \(r\in(\F^D)^2\) and
+\(w\in\mathcal W_r(a)\).  The predicates and their order are specified from
+the public data before the values \(\abs{Z_r(a)}\), a maximizing received
+line, or the truth of the target inequality are known.  An instantiation is
+\emph{auditable} if every predicate is given by explicit algebraic equalities,
+inequalities, rank conditions, field-of-definition conditions, or occupancy
+conditions involving the received line, the support locator, and the declared
+folding maps on \(D\).
+\end{definition}
+
+A concrete atlas must display each cell's parameters, predicate, order,
+projection to affine slopes, and proved integer payment.  Defining a final
+cell as a residual may establish set-theoretic coverage, but it does not pay
+that residual.  Singleton predicates chosen from the computed bad set, or
+predicates involving the unknown numerator or target outcome, are excluded.
+Thus the theorem below is only the exact compiler; exhaustion and payment are
+the substantive work.
+
+For a rule and received line, let
+\(\mathcal C_i(r)=\{w\in\mathcal W_r(a):\mathcal P_i(r,w)\}\) and let
+\(Z_i(r)\) be its projection to \(\Gam\).  The rule is
+\emph{witness-exhaustive} for \(r\) if
+\(\mathcal W_r(a)=\bigcup_i\mathcal C_i(r)\).  Its first-match slope cells are
+\[
+ Z_i^\circ(r)=Z_i(r)\setminus\bigcup_{j<i}Z_j(r).
+\]
+A \emph{payment} is a proved integer inequality
+\(\abs{Z_i^\circ(r)}\le U_i(r)\), uniform when it holds for every received
+line.  The profile-closure meta-conjecture uses the stronger notion of an
+\emph{admissible algebraic payment}.  Such a payment is a specialization of a
+row-family-uniform formula
+\[
+ \abs{Z_i^\circ(r)}\le
+ F_i\bigl(P;\Xi_{i,1}(r),\ldots,\Xi_{i,t_i}(r)\bigr),
+\]
+where the integer formula \(F_i\), the source-side statistics \(\Xi_{i,j}\),
+and a proof of the inequality are declared before specialization to a
+maximizing received line.  Permitted statistics are explicitly named
+algebraic data: parameter-space sizes, degrees, ranks, field-orbit sizes,
+folding occupancies, attained images and certified fiber moments of
+predeclared maps, and proved incidence multiplicities.  An attained-image or
+fiber statistic may enter only through a separately stated row-uniform
+estimate.
+
+Neither \(F_i\) nor any \(\Xi_{i,j}\) may invoke, recover, or enumerate
+\(Z_i^\circ(r)\), \(Z_r(a)\), their cardinalities, an analogous list-codeword
+projection, the true numerator, a maximizing received datum, or the truth of
+the target comparison.  Optimization or exhaustive enumeration over received
+data, witnesses, slopes, or agreeing codewords is likewise excluded.  Thus
+the one-cell choice \(U_1(r)=\abs{Z_r(a)}\), and any disguised equivalent, is
+not admissible.  A set-theoretic residual cell is allowed, but it still
+requires an independently proved admissible payment.
+
+\begin{theorem}[Exact first-match compiler]\label{thm:first-match}
+Suppose a single declared rule \(\mathcal A(P)\), fixed from the public row
+data, is witness-exhaustive for every received line and has valid first-match
+payments satisfying \(\sum_iU_i(r)\le U\).  Then
+\(B_{C,\Gam}^{\MCA}(a)\le U\).  In particular, \(U\le B^*\) is a safe
+certificate.
+
+\end{theorem}
+
+\begin{proof}
+The sets \(Z_i^\circ(r)\) are disjoint and their union is \(Z_r(a)\).
+Therefore \(\abs{Z_r(a)}=\sum_i\abs{Z_i^\circ(r)}\le\sum_iU_i(r)\le U\).
+Maximize over \(r\).
+\end{proof}
+
+For an auxiliary list row and received word \(u\in\F^D\), define
+\[
+ \Lambda_C(u,a)=\{c\in C:\abs{\{x\in D:u_x=c_x\}}\ge a\},\qquad
+ B_C^{\rm list}(a)=\max_{u\in\F^D}\abs{\Lambda_C(u,a)}.
+\]
+A declared list rule classifies triples \((u,c,S)\) and projects its cells to
+agreeing codewords.  If \(Y_i^\circ(u)\) are the first-match codeword cells
+and \(\abs{Y_i^\circ(u)}\le V_i(u)\) with \(\sum_iV_i(u)\le V\), the same
+disjoint-union proof gives \(B_C^{\rm list}(a)\le V\).  This projection
+change is essential: an MCA ray or slope payment cannot substitute for a
+required agreeing-codeword payment, or conversely.  For an atlas at agreement
+\(a\), set
+\[
+\mathcal E_{\mathcal A}(P,a)=\max_r\sum_iU_i(P,r;a), \tag{2.7}\label{eq:profile-envelope-value}
+\]
+where the maximum ranges over received lines in the MCA case and received
+words in the list case.
+
+\begin{metaconjecture}[Target-exact profile-closure program]\label{meta:profile-envelope}
+For each declared unbounded-length admissibly smooth multiplicative or
+Chebyshev row family
+and each public target rule \(P\mapsto B^*(P)\), there is one finite,
+auditable algebraic atlas schema fixed uniformly over the family.  For every
+proper row \(P\) in the family and every \(k+1\le a\le n\), its
+specialization is witness-exhaustive and has admissible algebraic payments
+satisfying
+\[
+ \mathcal E_{\mathcal A}(P,a)\le B^*(P)
+ \quad\Longleftrightarrow\quad
+ B_{C,\Gam}^{\MCA}(a)\le B^*(P).                  \tag{2.8}\label{eq:profile-envelope}
+\]
+The schema has finite syntax independent of the row length.  It may depend on
+the declared family and target rule, but not on a literal encoding of one
+finite row or agreement.  The circle analogue is
+asserted only after a proved agreement-preserving monomial equivalence.
+\end{metaconjecture}
+
+The atlas must be frozen before the numerator is evaluated and may not encode
+the eventual answer.  In particular, one schema, rather than a separately
+hard-coded lookup table, must work at every agreement in every row of its
+declared family.  Thus
+\cref{meta:profile-envelope} is a falsifiable proposal for proof
+architecture: an escaping witness family or an unpayable first-match cell
+refutes a proposed instantiation.  Independently of this architecture,
+\cref{conj:benchmark} consists of four explicit inequalities for the true
+MCA or list numerators.
+
+For reference, in a full-field row with \(q=\abs\F>n\) and \(B^*\ge1\), the
+identity route singles out
+\[
+ a_{\rm id}^*
+ =\min\{a\in\{k+1,\ldots,n\}:P_{\rm id}(a)\le B^*\}. \tag{2.9}\label{eq:identity-candidate}
+\]
+When the empty, saturation, and tangent branches do not bind and every lower
+edge in the fixed declared nonidentity catalogue is no later than the corresponding
+identity edge, this is the identity candidate in the sense of
+\eqref{eq:identity-candidate-branch}.  Its preceding agreement is
+unconditionally unsafe by \eqref{eq:identity-lower}; safety at
+\(a_{\rm id}^*\) still requires a closed upper atlas and remains conjectural
+both for the direct rows in \cref{conj:benchmark} and for the asymptotic
+families in \cref{conj:identity-frontier}.
+
+The proposed atlas has four payment groups.  Algebraic routing must cover the
+endpoint and tangent branches, declared foldings with full and partial
+occupancy, quotient, remainder, and planted factors, and all descent,
+extension-orbit, rank-loss, sparse, and auxiliary cells.  Here auxiliary
+means in particular correlated-agreement and shortened or interleaved-list
+residuals; orbit stabilizers, extension degrees, and named rank
+multiplicities remain in the payment.  Primitive cells require estimates on
+the attained image together with max-fiber and incidence degrees.  Every
+residual chart requires a distinct-slope payment for MCA or a distinct
+codeword payment for a list row.  Finally, first-match deduplication must add
+the integer payments with a reserve below the target.  In particular, for a
+declared \(c\)-to-one folding \(\pi:D\to D'\), the public occupancy datum is
+\(\nu_\pi(S)=(\abs{S\cap\pi^{-1}(y)})_{y\in D'}\); ``primitive'' means only
+that the witness escaped the preceding declared cells, not that its boundary
+map is surjective or flat.
+
+For multiplicative rows the declared maps are \(x\mapsto x^c\); for
+Chebyshev twin-coset rows they are \(T_c\).  Circle presentations enter only
+after a coordinate bijection and nonzero diagonal scaling give a
+support-preserving monomial equivalence with an RS row
+\cite{HLP24,ChoShortening}.  The calculus itself is
+characteristic-independent, but the norm-one-torus presentation used here is
+in odd characteristic; in characteristic two we claim only statements for
+explicit RS rows and declared algebraic maps.
+
+\section{Primitive-fiber barriers}\label{sec:primitive}
+
+The primitive problem begins only after the earlier algebraic cells have been
+declared.  Its normalization must refer to the full reference slice before
+first-match deletion.  Let \(\Om^0\) be such a nonempty finite slice, let
+\(\Om^\circ\subseteq\Om^0\) be a residual leaf, and let
+\(\Phi:\Om^0\to A\) be a boundary map.  Write
+\[
+ I=\Phi(\Om^0),\qquad M=\abs{\Om^0},\qquad L=\abs I,
+ \qquad \barN=\frac ML,
+\]
+and, for \(y\in I\), put
+\(F_y=\Om^\circ\cap\Phi^{-1}(y)\), \(f_y=\abs{F_y}\), and
+\(W=\sum_yf_y=\abs{\Om^\circ}\).  Thus \(\barN\) is the mean fiber size of
+the reference slice, not the mean over the smaller residual image.  This is
+the normalization used by the finite incidence payment and by the
+Gowers/cube implication in \cite{ChoShortening}.
+
+For an integer \(r\ge2\), define the image-normalized residual moment
+\[
+ \Gamma_r=\frac1L\sum_{y\in I}\left(\frac{f_y}{\barN}\right)^r.
+                                                               \tag{3.1}\label{eq:residual-moment}
+\]
+The elementary maximum bound is
+\[
+ \max_y f_y\le \barN(L\Gamma_r)^{1/r}.              \tag{3.2}\label{eq:moment-max}
+\]
+Indeed, the largest summand in \eqref{eq:residual-moment} is at most the
+whole sum.  This already shows why an ordinary-moment conjecture strong enough
+to make \(\log(L\Gamma_r)/r=o(n)\) would itself prove max-fiber flatness;
+the Gowers/cube step is needed for a weaker, low-energy input instead.
+
+The exact support-fiber-to-slope interface also needs an incidence theorem.
+Let \(Z^\circ\) be the first-match slope projection of the leaf, and let
+\(\mathcal P=\{(u,v)\in(\Om^\circ)^2:\Phi(u)=\Phi(v)\}\).  Suppose an
+incidence relation \(\mathcal I\subseteq Z^\circ\times\mathcal P\) has degree
+at least \(H\ge1\) at every slope and degree at most \(J\) at every ordered
+pair.
+
+\begin{proposition}[Exact primitive incidence payment]\label{prop:primitive-payment}
+With the preceding notation,
+\[
+ \abs{Z^\circ}
+ \le \floor{\frac{JW}{H}\,\barN(L\Gamma_r)^{1/r}}. \tag{3.3}\label{eq:primitive-payment}
+\]
+An independent direct slope bound may be intersected with this one.
+\end{proposition}
+
+\begin{proof}
+Double counting gives
+\(H\abs{Z^\circ}\le J\sum_y f_y^2\).  Since
+\(\sum_yf_y^2\le W\max_yf_y\), \eqref{eq:moment-max} proves the result;
+the left side is an integer.
+\end{proof}
+
+The quantities \(H\) and \(J\) are not cosmetic.  A bound for
+\(\max_yf_y\), or even for all same-fiber pairs, does not bound slopes until
+one proves how many such pairs a slope supplies and how many slopes a pair may
+represent.
+
+For the full fiber distribution \(\Om^\circ=\Om^0\), set
+\(N_y=\abs{\Phi^{-1}(y)}\), \(\mu_y=N_y/M\), and
+\[
+ R=L\max_y\mu_y,
+ \qquad \Gamma_r^{\rm full}=L^{r-1}\sum_{y\in I}\mu_y^r.
+\]
+Here \(R\) is the maximum-fiber overhead relative to \(M/L\), and
+\(\Gamma_r^{\rm full}=1\) for a uniform distribution.
+
+\begin{proposition}[Exact moment sandwich]\label{prop:moment-sandwich}
+For every integer \(r\ge2\),
+\[
+ \frac{\log_2\Gamma_r^{\rm full}}{r-1}
+ \le\log_2R
+ \le\frac{\log_2L+\log_2\Gamma_r^{\rm full}}r.     \tag{3.4}\label{eq:moment-sandwich}
+\]
+Consequently \(R\le2^\Delta\) follows from
+\(\log_2L+\log_2\Gamma_r^{\rm full}\le r\Delta\).
+\end{proposition}
+
+\begin{proof}
+The inequalities
+\(\sum_y\mu_y^r\le(\max_y\mu_y)^{r-1}\) and
+\((\max_y\mu_y)^r\le\sum_y\mu_y^r\) give
+\(\Gamma_r^{\rm full}\le R^{r-1}\) and
+\(R^r\le L\Gamma_r^{\rm full}\), respectively.
+\end{proof}
+
+The image \(I\) cannot silently be replaced by the formal codomain \(A\).
+Let \(A_0=\abs A\), extend both \(f_y\) and \(N_y\) by zero on
+\(A\setminus I\), and put \(\barN^{\rm amb}=M/A_0\).  The residual ambient
+moment is
+\[
+ \Gamma_{r,\mathrm{res}}^{\rm amb}
+ =\frac1{A_0}\sum_{y\in A}
+   \left(\frac{f_y}{\barN^{\rm amb}}\right)^r
+ =\left(\frac{A_0}{L}\right)^{r-1}\Gamma_r.       \tag{3.5}\label{eq:ambient-image}
+\]
+For the full reference distribution, define
+\[
+ \Gamma_{r,\mathrm{full}}^{\rm amb}
+ =\frac1{A_0}\sum_{y\in A}
+   \left(\frac{N_y}{\barN^{\rm amb}}\right)^r
+ =A_0^{r-1}\sum_{y\in A}\left(\frac{N_y}{M}\right)^r\ge1. \tag{3.6}\label{eq:ambient-full}
+\]
+The last inequality follows from the power-mean inequality and
+\(\sum_yN_y/M=1\).  Thus an ambient residual-moment estimate implies its
+image-normalized residual counterpart, but the converse pays the exact
+factor \((A_0/L)^{r-1}\).  At exponent scale one may discard this factor
+only after proving \(\log(A_0/L)=o(n)\) at the relevant order.
+
+Two distinct failures are encoded here.  First, the reference map itself may
+have a small image \(I\), in which case \(M/L\) is much larger than the
+formal mean \(M/A_0\).  Second, first-match deletion may concentrate the
+residual leaf inside a few fibers even when the reference image is large.
+Resetting the denominator to \(\abs{\Phi(\Om^\circ)}\) after this deletion
+would change the conjecture and sever the link to the preceding payments.
+The reference-slice normalization keeps both losses visible: image collapse
+appears through \(A_0/L\), and residual concentration appears in the moment
+\(\Gamma_r\).
+
+\begin{proposition}[Ambient moment-order barrier]\label{prop:ambient-order}
+Suppose a prefix map has formal codomain \(\B^w\), and normalize its full
+distribution over all \(Q=\abs{\B}^w\) formal values, including empty fibers.
+Any argument using only the upper half of \cref{prop:moment-sandwich} and
+\(\Gamma_{r,\mathrm{full}}^{\rm amb}\ge1\) to force ambient maximum-fiber overhead at most
+\(2^\Delta\) must have
+\[
+ r\ge\ceil{\frac{w\log_2\abs\B}{\Delta}}.          \tag{3.7}\label{eq:order-floor}
+\]
+\end{proposition}
+
+\begin{proof}
+That route requires
+\(\log_2Q+\log_2\Gamma_{r,\mathrm{full}}^{\rm amb}\le r\Delta\).
+Discarding the nonnegative second term and using
+\(\log_2Q=w\log_2\abs\B\) gives the claim.
+\end{proof}
+
+We now state the missing analytic input at a general resolution scale.  Let
+\(\B_N\) be a finite field, let \(T_N\subseteq\B_N\) consist of \(N\)
+distinct points, let \(1\le d_N\le N\), and choose nonzero weights
+\(\omega_N(t)\in\B_N^\times\).  The weighted Vandermonde boundary map is
+\[
+ \Phi_N(x)=\sum_{t\in T_N}x_t\omega_N(t)
+ (1,t,\ldots,t^{d_N-1})^{\mathsf T}.               \tag{3.8}\label{eq:weighted-vandermonde}
+\]
+Fix \(0<\alpha\le1/2\), take
+\(\Omega_N^0=\{x\in\{0,1\}^{T_N}:\sum_tx_t=m_N\}\), where
+\(m_N/N\in[\alpha,1-\alpha]\), and let
+\(\Omega_N^\circ\subseteq\Omega_N^0\) be a residual leaf selected by one
+fixed declared rule.  Set
+\[
+ I_N=\Phi_N(\Omega_N^0),\quad L_N=\abs{I_N},\quad
+ \barN_N=\frac{\abs{\Omega_N^0}}{L_N},\quad
+ F_{N,y}=\Omega_N^\circ\cap\Phi_N^{-1}(y).
+\]
+For \(F\subseteq\Z^{T_N}\), its additive energy is
+\(E(F)=\abs{\{(x_1,x_2,x_3,x_4)\in F^4:x_1+x_2=x_3+x_4\}}\).
+Compute this energy in the torsion-free group \(\Z^{T_N}\), and put
+\(\Delta_{N,y}=E(F_{N,y})/\abs{F_{N,y}}^3\), with value zero for an empty
+fiber.  Let \(s_N\to\infty\), with \(s_N\le N\).  For \(q\ge2\) and
+\(\sigma>0\), define
+\[
+ \Gamma^{\rm sid}_{N,q,\sigma;s}
+ =\frac1{L_N}\sum_{\Delta_{N,y}<e^{-\sigma s_N}}
+   \left(\frac{\abs{F_{N,y}}}{\barN_N}\right)^q.   \tag{3.9}\label{eq:sidon-moment}
+\]
+
+\begin{problem}[Primitive Sidon payment]\label{prob:sidon}
+For primitive locator-prefix leaves in a fixed, predeclared multiplicative
+or Chebyshev atlas, prove that there are integer orders \(q_N\ge2\) such
+that, for every fixed \(\sigma>0\), uniformly over the declared leaves,
+\[
+ \frac{\log L_N}{q_N}=o(s_N),\qquad
+ \Gamma^{\rm sid}_{N,q_N,\sigma;s}\le e^{o(s_Nq_N)}. \tag{3.10}\label{eq:sidon-payment}
+\]
+The primary asymptotic scale is \(s_N=N\).  As a stronger localization
+problem one may take \(N=n\) and \(s_n=g_n^*n\), under the necessary
+assumption \(g_n^*n\to\infty\); this stronger scale is not required for the
+\(o(g_n^*)\) frontier once all aggregate certificate losses are uniformly
+\(2^{o(n)}\).
+\end{problem}
+
+The adjective primitive is an input to this problem, not a conclusion of an
+equidistribution theorem.  In particular, the rule defining the residual leaf
+must be fixed before a heavy fiber is known, and the moment is normalized by
+the image of the full reference slice.
+
+We import the following consequence of polynomial
+Balog--Szemer\'edi--Gowers and Boolean-quasicube difference growth from
+\cite[Proposition~10.4]{ChoShortening}.
+
+\begin{proposition}[Imported BSG--Boolean-cube consequence]
+\label{prop:high-energy}
+There is an absolute constant \(C_0\) such that, for every finite set \(T\),
+every nonempty \(F\subseteq\{0,1\}^T\), and every \(K\ge1\),
+\[
+ E(F)\ge\frac{\abs F^3}{K}\quad\Longrightarrow\quad
+ \abs F\le K^{C_0}.                                \tag{3.11}\label{eq:high-energy}
+\]
+Here energy is computed after embedding the Boolean cube in \(\Z^T\).
+\end{proposition}
+
+\begin{corollary}[Moving-scale primitive flatness]
+\label{cor:gowers-cube}
+If \eqref{eq:sidon-payment} holds at a scale \(s_N\to\infty\), then
+\[
+ \max_{y\in I_N}\abs{F_{N,y}}\le e^{o(s_N)}\barN_N. \tag{3.12}\label{eq:scale-flatness}
+\]
+For \(s_N=N\), this is \cite[Theorem~10.5]{ChoShortening}; the additional
+observation is that the same implication is valid at the displayed moving
+scale.
+\end{corollary}
+
+\begin{proof}
+If the conclusion fails, then along a subsequence there are \(\eta>0\) and
+fibers of size at least \(e^{\eta s_N}\barN_N\).  The ordinary moment from
+\eqref{eq:residual-moment}, with \(r=q_N\), is therefore at least
+\(L_N^{-1}e^{\eta s_Nq_N}\ge e^{3\eta s_Nq_N/4}\) for large \(N\), by
+\(\log L_N/q_N=o(s_N)\).  Choose \(0<\sigma<\eta/(4C_0)\).  The low-energy
+contribution is at most \(e^{\eta s_Nq_N/4}\), so the high-energy
+contribution is at least \(e^{\eta s_Nq_N/2}\).  Some high-energy fiber then
+satisfies \(\abs{F_{N,y}}/\barN_N\ge e^{\eta s_N/2}\).  Since
+\(I_N=\Phi_N(\Omega_N^0)\), one has \(L_N\le\abs{\Omega_N^0}\) and hence
+\(\barN_N\ge1\); this gives \(\abs{F_{N,y}}\ge e^{\eta s_N/2}\).
+The same fiber has normalized energy at least \(e^{-\sigma s_N}\), so
+\cref{prop:high-energy}, with \(K=e^{\sigma s_N}\), gives
+\(\abs{F_{N,y}}\le e^{C_0\sigma s_N}<e^{\eta s_N/4}\), a contradiction.
+\end{proof}
+
+\begin{corollary}[Analytic-to-slope interface]\label{cor:analytic-to-slope}
+Assume \cref{prob:sidon} and suppose the primitive algebraic analysis proves
+an incidence relation with parameters \(H_N,J_N\ge1\).  If
+\(W_N=\abs{\Omega_N^\circ}\) and \(Z_N^\circ\) is the realized slope set,
+then
+\[
+ \abs{Z_N^\circ}\le
+ \frac{J_NW_N}{H_N}\,e^{o(s_N)}\barN_N.           \tag{3.13}\label{eq:analytic-slope}
+\]
+\end{corollary}
+
+\begin{proof}
+Use the incidence double count from \cref{prop:primitive-payment} and
+\cref{cor:gowers-cube} in place of \eqref{eq:moment-max}.
+\end{proof}
+
+This implication does not solve \cref{prob:sidon}, prove reference-image
+coverage, supply the incidence degrees, or close the profile ledger.  At the
+coarse scale it yields only an \(e^{o(N)}\) loss, which does not fit a finite
+margin of a few bits, but would be asymptotically sufficient for the sharp
+identity crossing if every other loss were also uniform and \(e^{o(n)}\).
+For the optional stronger specialization \(s_n=g_n^*n\), the energy cutoff
+itself must be \(e^{-\sigma g_n^*n}\); changing only the moment order while
+retaining the coarse cutoff is not a valid moving-scale argument.  The phrase
+``Gowers/cube'' here means BSG followed by Boolean-quasicube difference
+growth, not a Gowers-uniformity norm or cube-counting theorem.
+
+
+\section{Ray-projection barriers}\label{sec:rays}
+
+A same-fiber pair is often called a shift pair.  Max-fiber control gives the
+support-level estimate
+\(\sum_y\binom{N_y}{2}\le N_{\max}M/2\), and hence at most
+\(\kappa M^2/(2L)\) when \(N_{\max}\le\kappa M/L\).  This does not supply
+the ray incidence required in \cref{prop:primitive-payment}.
+
+The next incidence bound identifies exactly what a one-parameter
+moving-root proof uses.  It is stated for a general-dimensional family to
+show how quickly that argument deteriorates.
+
+\begin{theorem}[Projective moving-root incidence]\label{thm:projective-incidence}
+Let \(d\ge1\), let \(V\le\F_q[X]\) be a \(d\)-dimensional polynomial subspace, and let
+\(G\subseteq D\) be its common zero set, of size \(g\).  Let \(h\ge1\), and suppose
+\(\mathcal A\subseteq\mathbb P(V)\) and every \([f]\in\mathcal A\) has at
+least \(h\) zeros in \(D\setminus G\).  Then
+\[
+ \abs{\mathcal A}h\le(n-g)\frac{q^{d-1}-1}{q-1}.    \tag{4.1}\label{eq:projective-incidence}
+\]
+For the affine analogue, let \(\mathcal F=f_0+V\) be an affine polynomial
+space with \(\dim V=d\), let \(G\) be the common zero set in \(D\) of every
+member of \(\mathcal F\), of size \(g\), and let
+\(\mathcal A\subseteq\mathcal F\).  If
+every member of \(\mathcal A\) has at least \(h\) zeros in \(D\setminus G\),
+then \(\abs{\mathcal A}h\le(n-g)q^{d-1}\).
+\end{theorem}
+
+\begin{proof}
+Count pairs \(([f],x)\) with \([f]\in\mathcal A\),
+\(x\in D\setminus G\), and \(f(x)=0\).  Every projective member contributes
+at least \(h\) pairs.  At a fixed \(x\notin G\), evaluation is a nonzero
+linear functional on \(V\), so its projective kernel has
+\((q^{d-1}-1)/(q-1)\) points.  This proves \eqref{eq:projective-incidence}.
+For the affine statement, evaluation at a point outside \(G\) is either a
+nonconstant affine linear functional, whose zero set has \(q^{d-1}\) points,
+or a nonzero constant, whose zero set is empty.  The same double count applies.
+\end{proof}
+
+\begin{corollary}[Moving-root pencil]\label{cor:moving-root}
+Let \(A,B\in\F_q[X]\) be linearly independent, let \(G\subseteq D\) be their
+common zero set, of size \(g\), and consider
+\(L_{[s:t]}=sA+tB\).  If every counted parameter has at least \(h\) zeros
+in \(D\setminus G\), then there are at most \(\floor{(n-g)/h}\) counted
+parameters.  If every counted member is squarefree, split over \(D\), and
+has degree \(j>g\), the bound is \(\floor{(n-g)/(j-g)}\).
+\end{corollary}
+
+\begin{proof}
+Use \cref{thm:projective-incidence} with \(d=2\).
+\end{proof}
+
+The pencil bound is strong because a point outside the base locus chooses at
+most one projective parameter.  In dimension \(d\), it instead chooses a
+projective hyperplane, and the factor in
+\eqref{eq:projective-incidence} is its exact one-coordinate worst-case
+multiplicity.  Thus for large \(d\) the raw bound is essentially
+\((n-g)q^{d-2}/h\).  A useful high-dimensional compiler must exploit several
+roots, restricted factorization or rank, or a lower-dimensional
+parametrization of the rays actually realized by MCA witnesses.
+
+\begin{proposition}[Dimension diagnostic for the declared correction spaces]\label{prop:not-pencil}
+At the four candidate adjacent agreements of \cref{tab:benchmark}, assume
+the declared prefix reduction parametrizes a residual chart by the full
+affine correction space
+\(A\in\F[X]_{\le\omega-w-1}\), where \(\omega=n-a^*\) and
+\(w=a^*-K\).  Hence its affine dimension is
+\(\omega-w=n-2a^*+K\), equal respectively to
+\[
+ 913633,\qquad913634,\qquad913681,\qquad913682.       \tag{4.2}\label{eq:benchmark-dimensions}
+\]
+Consequently the pencil case of \cref{thm:projective-incidence} cannot pay
+this declared full correction space without a further structural reduction.
+\end{proposition}
+
+\begin{proof}
+Under the stated parametrization there is one free coefficient in each degree from zero through
+\(\omega-w-1\).  Substitution of \(n=2097152\), the agreements and the values
+\(K=k+1\) for MCA and \(K=k\) for the auxiliary list rows gives the four
+integers.  A family of these dimensions is not a two-dimensional projective
+subspace or a one-dimensional affine pencil.
+\end{proof}
+
+The proposition verifies the correction-space arithmetic conditional on the
+declared parametrization.  The release source package contains
+\path{verify_profile_barriers.py}, which independently recomputes
+\eqref{eq:benchmark-dimensions}.  The lower-reserve artifacts in
+\cite{RSMCARepo} record the separate unsafe-side inputs; they are not evidence
+for witness exhaustion.  Proving that the declared charts exhaust the
+residual witnesses is part of \cref{prob:finite-closure}, not a consequence
+of the dimension count.
+
+\begin{problem}[Balanced-core ray payment]\label{prob:balanced-core}
+Every residual balanced-core cell in the benchmark rows admits an explicit
+witness-exhaustive decomposition into structured charts such that each chart
+is either a projective pencil covered by \cref{cor:moving-root}, a controlled
+finite union of such pencils, or a higher-dimensional chart with a proved
+distinct-slope payment.  After first-match deduplication and exact incidence
+multiplicities, the total balanced-core payment fits the row allocation in
+\cref{prob:finite-closure}.
+\end{problem}
+
+This is a slope statement, not merely a factorization statement.  It is
+falsified by a single residual chart whose actual slope projection exceeds
+the allocated budget and which cannot be routed to an earlier paid cell.
+
+\section{Finite benchmark rows}\label{sec:finite}
+
+We now record four adjacent rows that make the preceding obstructions
+quantitative.  Set
+\[
+ n=2^{21}=2097152,\qquad k=2^{20}=1048576,
+\]
+and define
+\[
+ p_{\rm KB}=2^{31}-2^{24}+1=2130706433,
+ \qquad p_{\rm M}=2^{31}-1=2147483647.
+\]
+Let \(D_{\rm KB}\subseteq\F_{p_{\rm KB}}^\times\) be the multiplicative
+subgroup of order \(n\), and put
+\(C_{\rm KB}=\RS_{\F_{p_{\rm KB}^6}}(D_{\rm KB},k)\).  Let \(D_{\rm M}\)
+be the Chebyshev twin-coset domain of size \(n\) specified in
+\cite{ChoShortening,RSMCARepo}, and put
+\(C_{\rm M}=\RS_{\F_{p_{\rm M}^4}}(D_{\rm M},k)\).  Their integer budgets are
+\[
+ B_{\rm KB}^*=\floor{p_{\rm KB}^6/2^{128}}
+ =274980728111395087,\qquad
+ B_{\rm M}^*=\floor{p_{\rm M}^4/2^{100}}=16777215. \tag{5.1}\label{eq:budgets}
+\]
+The Mersenne row is an auxiliary \(2^{-100}\) comparison; at target
+\(2^{-128}\) this challenge field has zero integer budget.
+
+The list numerator and its separate first-match codeword projection were
+defined in \cref{sec:setup}.  The two list rows below are auxiliary inputs,
+not Proximity Prize MCA thresholds.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Proved unsafe agreements, adjacent candidate agreements, and their
+candidate threshold intervals.  Only the first and third rows are MCA
+rows.}\label{tab:benchmark}
+\begin{tabular}{@{}lrrl@{}}
+\toprule
+row and target & proved unsafe \(a_0\) & candidate \(a^*=a_0+1\)
+& candidate threshold interval\\
+\midrule
+KoalaBear MCA, \(2^{-128}\) &1116047&1116048&
+\([0,981105/2097152)\)\\
+KoalaBear list, \(2^{-128}\)&1116046&1116047&
+\([0,490553/1048576)\)\\
+Mersenne--31 MCA, \(2^{-100}\)&1116023&1116024&
+\([0,981129/2097152)\)\\
+Mersenne--31 list, \(2^{-100}\)&1116022&1116023&
+\([0,490565/1048576)\)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The word ``candidate'' is essential.  The exact prefix construction proves
+that each \(a_0\) is unsafe, and hence that every smaller agreement is unsafe.
+At \(a^*\), that particular lower route drops below the budget.  This is not
+an upper bound for other witnesses.
+
+For completeness, the exact lower-route numerators at \(a_0\), in the order
+of \cref{tab:benchmark}, are
+\[
+ \begin{aligned}
+  &138634741058327852652,\qquad157702518233425975347,\\
+  &4281388998575706,\qquad4870025984688527.
+ \end{aligned}                                      \tag{5.2}\label{eq:unsafe-lower-values}
+\]
+Each is strictly larger than its row budget in \eqref{eq:budgets}.  The MCA
+values use the dimension-\(k+1\) locator-prefix list and the simple-pole
+conversion; the list values use dimension \(k\) directly.  In the two MCA
+rows the pole-separation condition is satisfied, so no collision factor is
+lost at these displayed agreements \cite[Proposition~8.6]{ChoShortening};
+the auxiliary values are recorded in \cite{RSMCARepo}, and
+\path{verify_profile_barriers.py} in the release source package independently
+recomputes all four displayed integers.
+
+The location of the one-step edge has a simple exact explanation.  For the
+unrounded prefix mean, put
+\(\mu_K(a)=\binom na p^{-(a-K)}\), with \(K=k+1\) in the MCA route and
+\(K=k\) in the auxiliary list route.  Then
+\(\mu_K(a)/\mu_K(a+1)=p(a+1)/(n-a)\).  In the four rate-one-half rows this
+is a drop of roughly \(31\) bits in one agreement step.  The identity route
+therefore identifies the microscopic candidate scale, but the ratio supplies
+no safe-side bound and does not rule out a later nonidentity crossing.
+
+\begin{conjecture}[Benchmark adjacent safe inequalities]\label{conj:benchmark}
+For the two MCA rows,
+\[
+ B_{C_{\rm KB}}^{\MCA}(1116048)\le274980728111395087,
+ \qquad
+ B_{C_{\rm M}}^{\MCA}(1116024)\le16777215.           \tag{5.3}\label{eq:mca-adjacent}
+\]
+For the two auxiliary list rows,
+\[
+ B_{C_{\rm KB}}^{\rm list}(1116047)\le274980728111395087,
+ \qquad
+ B_{C_{\rm M}}^{\rm list}(1116023)\le16777215.      \tag{5.4}\label{eq:list-adjacent}
+\]
+\end{conjecture}
+
+These are direct, falsifiable statements; they do not define their own proof
+method.  If either MCA inequality is proved, the corresponding preceding
+unsafe certificate and monotonicity make the displayed \(a^*\) the first safe
+agreement.  The exact integer-to-radius conversion then gives the associated
+half-open interval in \cref{tab:benchmark}.  The same observation applies to
+the auxiliary list staircase.
+
+To fix the notation used in the diagnostics, put
+\[
+ L_K(a)=\ceil{\binom na p^{-(a-K)}},\qquad
+ P_{\rm cand}(a)=
+ \begin{cases}
+ \displaystyle\ceil{\frac{L_{k+1}(a)(q-n)}
+ {q-n+k(L_{k+1}(a)-1)}},&\text{MCA},\\[6pt]
+ L_k(a),&\text{auxiliary list},
+ \end{cases}
+\]
+using the base prime \(p\) and challenge-field order \(q\) of the row.  With
+\(K=k+1\) for MCA and \(K=k\) for list, let
+\[
+ \Delta_{\rm ceil}=\log_2\frac{B^*}{P_{\rm cand}(a^*)},\qquad
+ w=a^*-K,\qquad
+ H_{\rm ext}=\floor{\frac{p^wB^*}{\binom n{a^*}}}.
+\]
+The candidate values and remaining margins are as follows.  They are
+reproduced by \path{verify_profile_barriers.py} in the release source package.
+
+\begin{table}[t]
+\centering
+\small
+\caption{Candidate-agreement diagnostics.  The necessary order refers only
+to the ceiling-normalized ambient-moment route of
+\cref{prop:ambient-order}.}\label{tab:diagnostics}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+row & \(P_{\rm cand}(a^*)\)& margin bits & necessary order & extension headroom\\
+\midrule
+KoalaBear MCA &57198030366&22.1969&94196&4807520\\
+KoalaBear list&65065153468&22.0109&94991&4226236\\
+Mersenne--31 MCA&1752700&3.2589&641594&9\\
+Mersenne--31 list&1993678&3.0730&680397&8\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The periodic lower-family audit has deliberately limited coverage.  In the
+repository labels, \(\mathrm{Gfloor}\) and \(\mathrm{Gceil}\) use
+\(m=\floor{a/c}\) and \(m=\ceil{a/c}\), respectively; \(\mathrm{Rem}\)
+adds the uncovered remainder, and \(\mathrm{Plant}\) tests a planted quotient
+core.  Gate G6 of the exact verifier scans all twenty-one dyadic scales
+\(c=2^j\), \(0\le j\le20\), and these four lower families at the historical
+packet pairs: \((1116043,1116044)\) for KoalaBear MCA,
+\((1116021,1116022)\) for Mersenne--31 MCA, and the unchanged list pairs in
+\cref{tab:benchmark}.  Gate G7 separately recomputes the moved MCA identity
+pairs in that table and the named Mersenne--31 MCA
+\(\mathrm{Gceil}\) watch item at \(c=2048\), which covers agreement
+\(1116160\) and has exact mass \(12769758<16777215=B^*\), a deficit of
+\(0.3938\) bits.  It does not perform a full twenty-one-scale G6 rescan at
+both moved MCA pairs and does not certify safety.  The precise executable is
+\path{experimental/scripts/verify_frontier_adjacent_v13_rows.py} at pinned
+repository commit \texttt{e190193cebce}.  The release source package contains
+a verbatim copy at that path and the four input packets under
+\path{experimental/data/certificates/frontier-adjacent/} \cite{RSMCARepo}.
+These checks veto only the lower
+constructions they actually enumerate; they are neither an upper payment nor
+an exhaustion theorem.
+
+There is also a useful but nonrigorous scale check.  If \(M\) objects were
+allocated independently and uniformly among \(L\) realized fibers, with
+mean \(\mu=M/L\), the Poisson extreme-value factor \(x\) would be predicted
+by
+\[
+ \mu(x\log x-x+1)\approx\log L.
+\]
+Under the additional full-image assumption, the four rows in table order
+give predicted maximum-to-mean factors approximately
+\(1.0071,1.0067,2.54,2.43\), while their target-to-mean factors are
+approximately
+\(4.81\cdot10^6,4.23\cdot10^6,9.57,8.42\).
+Thus the random-fiber model favors all four primitive inequalities, most
+strongly in the KoalaBear rows.  It is not evidence against effective-image
+collapse or algebraic concentration and is never used in a safe-side proof.
+
+The remaining safe-side obligations are not interchangeable.  Algebraic
+routing must cover the dense tangent/common-line cell, the full folded and
+periodic union, and all field, rank, extension, sparse, correlated-agreement,
+shortened, and interleaved-list cells, with orbit stabilizers and every
+degree and rank-loss multiplicity retained.
+Primitive leaves require a finite image-normalized estimate and the exact
+incidence degrees \(H,J\).  Every residual chart then needs a slope payment
+for MCA or a codeword payment for a list row.  Finally, the compiler must
+deduplicate and add all payments inside the exact integer reserve.
+
+Here the ceiling-normalized margin is the quantity \(\Delta_{\rm ceil}\)
+defined above.  A factor \(n^C\) costs
+\(21C\) bits, so an unspecified polynomial loss cannot decide any Mersenne
+adjacent row and can consume the entire KoalaBear margin even for modest
+\(C\).  Applying \cref{prop:ambient-order} at prefix depths
+\(67471,67471,67447,67447\) gives the four necessary orders in
+\cref{tab:diagnostics}.  This diagnoses only the ceiling-normalized ambient
+route; it is not a lower bound on every max-fiber theorem, and a smaller
+attained image creates an additional loss.
+
+The extension column has another exact interpretation.  The descended
+extension charts in the current ledger have prefix-normalized cost
+\(\Delta_0p^e\), where \(p\) is the base-field order, \(e\) is the chart
+dimension, and \(\Delta_0\ge1\) is a degree factor.  For each row its
+displayed headroom is \(H_{\rm ext}\) as defined above.  The largest displayed
+headroom is below \(2^{23}\), while both base primes exceed \(2^{30}\).
+Thus no positive-dimensional chart of this form fits: necessarily \(e=0\),
+and then \(\Delta_0\) must not exceed the corresponding headroom.  This is a
+useful veto, not a payment for all extension witnesses.
+
+\begin{problem}[Finite row-sharp closure]\label{prob:finite-closure}
+For either MCA row of \cref{tab:benchmark}, display a witness-exhaustive
+declared atlas at the candidate \(a^*\) and prove payments whose exact sum is
+at most \(B^*\).  In particular, the proof must:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item pay or witness-preservingly route the dense tangent/common-line cell;
+the full quotient, remainder, planted, periodic, and partial-occupancy union;
+every field-descent and extension orbit with its stabilizer and degree; every
+rank-loss multiplicity; and all sparse, correlated-agreement, shortened, and
+interleaved-list residuals;
+\item prove realized-image primitive-fiber estimates and the incidence
+degrees in \cref{prop:primitive-payment};
+\item prove a residual compiler for distinct affine slopes or projective rays
+in MCA, including the balanced-core payment of \cref{prob:balanced-core};
+\item deduplicate by first match and add every integer payment, rounding,
+degree, and multiplicity with a reserve that keeps the total at most \(B^*\).
+\end{enumerate}
+For either auxiliary list row, the corresponding closure problem uses
+first-match codeword projections throughout: the balanced core requires a
+direct codeword payment, and the ray-incidence item is inapplicable.
+\end{problem}
+
+A counterexample to \eqref{eq:mca-adjacent} is a received line with more than
+the displayed number of bad slopes; a counterexample to
+\eqref{eq:list-adjacent} is a received word with more than the displayed
+number of agreeing codewords.  A counterexample to a proposed profile
+proof may be weaker: one unpaid first-match cell, a collapsed realized image,
+or an underestimated pair-to-slope multiplicity is enough to invalidate that
+proof without deciding the true inequality.  Conversely, proving only
+\cref{prob:sidon} and \cref{prob:balanced-core} does not close a row; all
+four groups in \cref{prob:finite-closure} remain part of the certificate.
+
+\section{Target-aware asymptotic criterion}\label{sec:asymptotic}
+
+The asymptotic formula is best understood as a crossing calculation that a
+future certificate must realize on both sides.  Let
+\(C_n=\RS_{\F_n}(D_n,k_n)\), where \(D_n\subseteq\B_n\subseteq\F_n\), and
+assume \(k_n/n\to\rho\in(0,1)\).  Throughout this section the challenge is
+the official full field, \(\Gam_n=\F_n\), and \(\B_n\) is the designated
+generated coefficient-and-folding field fixed in \cref{sec:intro}; a sampled
+challenge or an arbitrary enlargement of \(\B_n\) is not covered by the
+formula below.  On the nonzero-budget branch, put
+\[
+ \begin{gathered}
+ B_n(a)=B_{C_n}^{\MCA}(a),\qquad
+ \rho_n=\frac{k_n}{n},\qquad \rho_n^+=\frac{k_n+1}{n},\qquad
+ \beta_n=\log_2\abs{\B_n},\\
+ q_n=\abs{\F_n},\qquad Q_n=q_n-n,\qquad
+ B_n^*=\floor{\varepsilon_nq_n}\ge1,\qquad
+ \tau_n=\frac1n\log_2B_n^*.
+ \end{gathered}
+\]
+We abbreviate the corresponding official quantities from
+\cref{prob:finite-prize} by
+\(\delta_{n,\mathrm{off,sup}}^*\) and
+\(\delta_{n,\mathrm{off,grid}}^*\).  Let
+\(H_2(x)=-x\log_2x-(1-x)\log_2(1-x)\).  For
+\(r\in(0,1)\) and \(b\ge0\), define
+\[
+ g^*(r,b)=\sup\left(\{g\in[0,1-r]:H_2(r+g)\ge bg\}\cup\{0\}\right),
+ \qquad g_n^*=g^*(\rho_n,\beta_n).
+\]
+The exact locator-prefix mean for
+the dimension-\(k_n+1\) lower route is
+\[
+ \barN_{1,n}(a)=\binom na\abs{\B_n}^{-(a-k_n-1)}.    \tag{6.1}\label{eq:identity-mean}
+\]
+For an integer \(a\), put \(g=(a-k_n-1)/n\).  Stirling's formula gives,
+uniformly away from rates zero and one,
+\[
+ \frac1n\log_2\barN_{1,n}(a)
+ =H_2(\rho_n^++g)-\beta_ng+O\!\left(\frac{\log n}{n}\right). \tag{6.2}\label{eq:identity-exponent}
+\]
+The pole conversion now imposes an additional exact branch condition.  If
+\(Q_n=0\), there is no off-domain pole.  If
+\(0<Q_n\le k_nB_n^*\), \cref{lem:exact-pole-conversion} says that the
+certified simple-pole lower bound never exceeds \(B_n^*\), regardless of the
+list size; this route then supplies no unsafe certificate.  Suppose henceforth that
+\(Q_n>k_nB_n^*\), and put
+\[
+ T_{{\rm pole},n}=T_{\rm pole}(B_n^*;Q_n,k_n),\qquad
+ \tau_n^{\rm pole}=\frac1n\log_2T_{{\rm pole},n},\qquad
+ A_n=\frac{Q_n-k_n}{Q_n-k_nB_n^*}\ge1.
+\]
+Since \(B_n^*A_n<T_{{\rm pole},n}\le B_n^*A_n+1\),
+\[
+ 0<\tau_n^{\rm pole}-\tau_n-\frac1n\log_2A_n
+ \le\frac1n\log_2\!\left(1+\frac1{B_n^*A_n}\right)
+ \le\frac1n.                                      \tag{6.3}\label{eq:pole-exponent-comparison}
+\]
+Thus \(\tau_n=o(1)\) alone does not control the pole-adjusted level.  The
+conditions \(Q_n>k_nB_n^*\), \(\tau_n=o(1)\), and
+\(n^{-1}\log_2A_n=o(1)\) imply \(\tau_n^{\rm pole}=o(1)\).  The stronger
+collision-nonbinding condition \(k_nB_n^*/Q_n=o(1)\) gives
+\(\tau_n^{\rm pole}=\tau_n+O(1/n)\); the error need not be \(o(1/n)\) when
+\(B_n^*\) remains bounded.
+
+The exact test for this certified pole lower bound to exceed \(B_n^*\) is
+\(\barN_{1,n}(a)>T_{{\rm pole},n}-1\).  Because
+\(T_{{\rm pole},n}\ge2\),
+\[
+ 0\le\frac1n\log_2\frac{T_{{\rm pole},n}}
+ {T_{{\rm pole},n}-1}\le\frac1n.                 \tag{6.4}\label{eq:pole-ceiling-error}
+\]
+It is therefore convenient to use the pole-adjusted analytic crossing
+\[
+ g_{{\rm pole},n}=\sup\left(
+ \left\{g\in[0,1-\rho_n^+]:
+ H_2(\rho_n^++g)-\beta_ng\ge\tau_n^{\rm pole}\right\}\cup\{0\}
+ \right).                                          \tag{6.5}\label{eq:pole-crossing}
+\]
+For a real \(\xi\), let \(g_{{\rm pole},n}(\xi)\) denote the same right
+crossing with \(\tau_n^{\rm pole}\) replaced by
+\(\tau_n^{\rm pole}+\xi\).
+
+\begin{lemma}[Stability of the pole-adjusted crossing]\label{lem:crossing-stability}
+Assume \(\rho_n\to\rho\in(0,1)\), \(\beta_n\to\infty\),
+\(Q_n>k_nB_n^*\), and \(\tau_n^{\rm pole}=o(1)\).  For every sequence
+\(0\le\eta_n=o(1)\), uniformly for \(\abs{\xi}\le\eta_n\),
+\[
+ g_{{\rm pole},n}(\xi)=g_n^*
+ +O_\rho\!\left(\frac{\tau_n^{\rm pole}+\eta_n+n^{-1}}{\beta_n}\right)
+ =g_n^*+o(g_n^*).                                  \tag{6.6}\label{eq:crossing-stability}
+\]
+Consequently a uniform multiplicative certificate loss \(2^{\eta_n n}\),
+with \(\eta_n=o(1)\), changes the crossing by \(o(g_n^*)\).
+\end{lemma}
+
+\begin{proof}
+Uniformly for \(r\) in a compact subinterval of \((0,1)\), the positive
+right zero of \(H_2(r+g)-\beta g\) is
+\(\Theta_\rho(\beta^{-1})\).  On this scale its derivative in \(g\) is
+\(-\beta+O_\rho(1)\).  The mean-value theorem shows that changing the right
+side from zero to \(\tau_n^{\rm pole}+\xi\) moves the crossing by
+\(O_\rho((\tau_n^{\rm pole}+\abs\xi)/\beta_n)\).  Replacing \(\rho_n\) by
+\(\rho_n^+=\rho_n+n^{-1}\) moves it by
+\(O_\rho((n\beta_n)^{-1})\).  Since
+\(g_n^*=\Theta_\rho(\beta_n^{-1})\), the total error is \(o(g_n^*)\).
+\end{proof}
+
+\begin{theorem}[Certificate bracket and pole-adjusted crossing]
+\label{thm:target-crossing}
+Assume \(Q_n>k_nB_n^*\).  Suppose there are agreements
+\(a_{-,n}<a_{+,n}\) in \(\{k_n+1,\ldots,n\}\) for which an exact lower certificate proves
+\(B_n(a_{-,n})>B_n^*\) and a closed exact upper certificate proves
+\(B_n(a_{+,n})\le B_n^*\).  If
+\[
+ a_{\pm,n}=k_n+1+g_{{\rm pole},n}n+o(n),           \tag{6.7}\label{eq:coarse-bracket}
+\]
+then the first safe agreement satisfies
+\(a_n^*=k_n+1+g_{{\rm pole},n}n+o(n)\), and in a nonsaturated row the
+largest safe grid radius and official real supremum are both
+\[
+ 1-\rho_n-g_{{\rm pole},n}+o(1).                  \tag{6.8}\label{eq:target-frontier}
+\]
+If the two errors in \eqref{eq:coarse-bracket} are \(o(g_n^*n)\),
+\(\tau_n^{\rm pole}=o(1)\), and \(\beta_n=o(n)\), then
+\[
+ g_{{\rm pole},n}=g_n^*+o(g_n^*),\qquad
+ \delta_{n,\mathrm{off,sup}}^*=1-\rho_n-g_n^*+o(g_n^*). \tag{6.9}\label{eq:sharp-frontier}
+\]
+\end{theorem}
+
+\begin{proof}
+Monotonicity places the first safe agreement in
+\((a_{-,n},a_{+,n}]\).  By \cref{prop:staircase}, in a nonsaturated row
+\[
+ \delta_{n,\mathrm{off,grid}}^*=1-\frac{a_n^*}{n},
+ \qquad
+ \delta_{n,\mathrm{off,sup}}^*=1-\frac{a_n^*-1}{n},
+\]
+which proves \eqref{eq:target-frontier}.  For the sharper statement,
+\(D_n\subseteq\B_n\) and \(\abs D_n=n\) imply
+\(\beta_n\ge\log_2n\).  Apply \cref{lem:crossing-stability}; since
+\(\beta_n=o(n)\), one has \(g_n^*n\to\infty\), so the endpoint discrepancy
+\(1/n\) is \(o(g_n^*)\).
+\end{proof}
+
+\begin{corollary}[Explicit pole-adjusted crossing]\label{cor:crossing-expansion}
+Fix \(0<\rho_0<1/2\), and suppose
+\(\rho_n\in[\rho_0,1-\rho_0]\), \(\beta_n\to\infty\), and
+\(\tau_n^{\rm pole}=o(1)\).  Uniformly in this range,
+\[
+ g_n^*=\frac{H_2(\rho_n)}
+ {\beta_n-H_2'(\rho_n)}+O_{\rho_0}(\beta_n^{-3}),  \tag{6.10}\label{eq:gstar-expansion}
+\]
+and
+\[
+ g_{{\rm pole},n}=\frac{H_2(\rho_n^+)-\tau_n^{\rm pole}}
+ {\beta_n-H_2'(\rho_n^+)}
+ +O_{\rho_0}(\beta_n^{-3}).                        \tag{6.11}\label{eq:gpole-expansion}
+\]
+In the collision-nonbinding pole regime, the coefficient-and-folding
+field sets the leading displacement from capacity; the challenge field
+enters through the target budget and the pole-conversion condition.
+\end{corollary}
+
+\begin{proof}
+Taylor expansion gives
+\(H_2(\rho+g)=H_2(\rho)+H_2'(\rho)g+O_{\rho_0}(g^2)\).
+The root equation implies \(g=O(\beta^{-1})\); substituting this estimate
+back and dividing by \(\beta-H_2'(\rho)\asymp\beta\) gives
+\eqref{eq:gstar-expansion}.  The same calculation at level
+\(\tau_n^{\rm pole}\), with \(\rho_n^+\), gives
+\eqref{eq:gpole-expansion}.  A sharper expansion may retain the quadratic
+entropy term.
+\end{proof}
+
+\begin{corollary}[Raw-budget form under subexponential pole conversion]
+\label{cor:raw-budget-form}
+Suppose \(Q_n>k_nB_n^*\), \(\tau_n=o(1)\),
+\(n^{-1}\log_2A_n=o(1)\), and \(\beta_n=o(n)\).  A sharp certificate bracket
+as in \cref{thm:target-crossing} then gives
+\[
+ \delta_{n,\mathrm{off,sup}}^*
+ =1-\rho_n-g^*(\rho_n,\log_2\abs{\B_n})+o(g_n^*). \tag{6.12}\label{eq:raw-budget-frontier}
+\]
+In particular, \(k_nB_n^*/Q_n=o(1)\) is a sufficient collision-nonbinding
+hypothesis for the pole-conversion part of this statement.
+\end{corollary}
+
+\begin{proof}
+Equation~\eqref{eq:pole-exponent-comparison} gives
+\(\tau_n^{\rm pole}=o(1)\); now apply
+\cref{lem:crossing-stability,thm:target-crossing}.
+\end{proof}
+
+The pole condition is a genuine restriction, not a technical restatement of
+subexponential budget.  For example, if \(\varepsilon_n=\varepsilon>0\),
+\(k_n\sim\rho n\), \(Q_n/q_n\) is bounded away from zero, and
+\(B_n^*\sim\varepsilon q_n\), then
+\(k_nB_n^*/Q_n=\Theta(n)\); hence pole admissibility eventually fails.
+Such a sequence requires a target shrinking on the scale \(1/k_n\) or a
+different unsafe mechanism before an identity-pole bracket can be proposed.
+
+Because \(D_n\subseteq\B_n\) has \(n\) distinct points,
+\(\beta_n\ge\log_2n\), and
+\cref{cor:crossing-expansion} gives \(g_n^*\asymp1/\beta_n\).  When
+\(\beta_n=o(n)\), the radius correction tends to zero while
+\(g_n^*n\asymp n/\beta_n\) diverges.  A loss \(2^{\eta_n n}\), with
+\(\eta_n=o(1)\), shifts the crossing by
+\(O(\eta_n/\beta_n)=o(g_n^*)\).  Thus a uniform aggregate \(e^{o(n)}\) loss
+is sufficient for the sharper identity displacement.  This fact does not
+help with the finite margins in \cref{sec:finite}, where an unspecified
+polynomial factor may exceed the entire reserve.  The stronger
+\(e^{o(g_n^*n)}\) control supplied by a moving-scale argument gives finer
+localization but is not necessary for \eqref{eq:raw-budget-frontier}.
+
+The theorem is a reduction, not the missing upper bound.  A full profile
+envelope for a received line is the sum of actual first-match payments,
+normalized at their realized images and followed through their actual slope
+projections.  The identity-candidate condition is entirely lower-side and
+supplies no upper bound.  If a family-uniform closed atlas supplies the
+matching upper certificate at \eqref{eq:pole-crossing}, the sequence is
+identity-dominant in the sense following \cref{conj:identity-frontier}.
+Quotient coefficient fields, partial occupancy, planted factors, image
+collapse, and ray saturation may move the crossing; then \(g_n^*\) is only
+the identity-profile candidate.
+
+\begin{problem}[Uniform asymptotic closure]\label{prob:asymptotic-closure}
+For official full-field positive-density multiplicative and Chebyshev
+twin-coset sequences, and for circle presentations proved monomially
+equivalent to them, construct an explicit family-uniform, non-oracular,
+witness-exhaustive declared atlas and certificate
+bracket of width \(o(n)\) around the right crossing of the full
+image-normalized envelope.  In a pole-admissible identity-candidate branch
+with subexponential raw budget and pole-conversion factor, prove a uniform
+aggregate \(2^{o(n)}\) loss and a bracket of width \(o(g_n^*n)\), thereby
+establishing identity dominance.  The proof must establish the
+Sidon payment of \cref{prob:sidon}, the residual support-to-slope incidence,
+the balanced-core payment of \cref{prob:balanced-core}, all remaining
+algebraic payments, and a reserve showing that their sum stays below the
+target.
+\end{problem}
+
+If this problem is solved in the stated pole-admissible identity-candidate window,
+\cref{cor:raw-budget-form} gives the precise formula
+\(\delta_{n,\mathrm{off,sup}}^*=1-\rho_n-
+g^*(\rho_n,\log_2\abs{\B_n})+o(g_n^*)\).  If
+\(Q_n=0\) or \(0<Q_n\le k_nB_n^*\), this pole lower route gives no such
+conclusion.  A zero
+integer budget gives an empty safe set, safety at \(k_n+1\) gives official
+threshold \(1\), and a binding tangent profile gives the linear-budget edge;
+these branches must be tested first.
+
+\section{Conclusion}\label{sec:conclusion}
+
+The paper separates four stable numerical conjectures from the conjectural
+profile architecture that might prove them.  The exact compiler identifies
+where primitive realized-image bounds, residual slope or codeword payments,
+algebraic routing, and first-match add-back must enter; the incidence and
+moment results show why none may be omitted, while the non-oracular payment
+condition prevents the architecture from encoding the desired answer.
+Known nonidentity attacks show why the identity-candidate hypothesis must
+test every explicitly declared nonidentity lower profile, while identity
+dominance remains the conclusion to be proved.  The exact pole conversion
+makes pole admissibility necessary for its stated unsafe route; another
+lower mechanism may behave differently.  No theorem here improves the
+safe MCA threshold of \cite{ChoShortening}; proving an MCA inequality in
+\cref{conj:benchmark} would give an exact adjacent threshold, while
+\cref{prob:asymptotic-closure} would yield the pole-adjusted identity formula
+and, under subexponential raw budget and pole-conversion factor, its simpler
+\(g^*\)-form.  Any
+circle transfer still requires a proved monomial equivalence.
+
+\paragraph{Acknowledgments.}
+The author thanks Scott Hughes for contributions to the frontier-adjacent
+verification materials and the contributors to the \texttt{rs-mca}
+repository for experimental audits and discussions that informed the
+finite-ledger program.  The release archive preserves the cited file paths
+and pinned commit so that the underlying contribution history remains
+auditable.
+
+\paragraph{AI-use disclosure.}
+OpenAI ChatGPT/Codex was used substantively to draft and restructure prose,
+propose and audit proof steps, check calculations, compare source versions,
+and edit \LaTeX.  The author supplied the research program, source
+manuscripts, repository materials, mathematical choices, and corrections,
+and retains sole responsibility for correctness and originality.
+
+\begin{thebibliography}{BCIKS20/23}
+\footnotesize
+
+\bibitem[ABF26]{ABF26}
+G.~Arnon, D.~Boneh, and G.~Fenzi,
+\newblock Open problems in list decoding and correlated agreement,
+\newblock Cryptology ePrint Archive, Paper 2026/680, 2026,
+\newblock \url{https://eprint.iacr.org/2026/680}.
+
+\bibitem[BCHKS26]{BCHKS25}
+E.~Ben-Sasson, D.~Carmon, U.~Hab\"ock, S.~Kopparty, and S.~Saraf,
+\newblock On proximity gaps of Reed--Solomon codes,
+\newblock in \emph{Proc. 58th ACM Symposium on Theory of Computing
+(STOC '26)}, 2026, 1157--1167,
+\newblock \url{https://doi.org/10.1145/3798129.3800827};
+extended version ECCC TR25-169 and ePrint 2025/2055.
+
+\bibitem[BCIKS20/23]{BCIKS20}
+E.~Ben-Sasson, D.~Carmon, Y.~Ishai, S.~Kopparty, and S.~Saraf,
+\newblock Proximity gaps for Reed--Solomon codes,
+\newblock \emph{J. ACM} 70 (2023), no.~5, 1--57,
+\newblock \url{https://doi.org/10.1145/3614423}.
+
+\bibitem[CS25]{CritesStewart25}
+E.~Crites and A.~Stewart,
+\newblock On Reed--Solomon proximity gaps conjectures,
+\newblock Cryptology ePrint Archive, Paper 2025/2046, 2025,
+\newblock \url{https://eprint.iacr.org/2025/2046}.
+
+\bibitem[Cho26a]{ChoShortening}
+P.~Chojecki,
+\newblock Shortening bounds for Reed--Solomon MCA,
+\newblock companion manuscript, version 9.2, July 2026,
+\newblock public source at
+\href{https://github.com/przchojecki/rs-mca/blob/9908454995f3f195cfe748f35a1135211609d066/experimental/RS_MCA_Paving_v9.2.tex}
+{repository snapshot \texttt{9908454995f3}}.
+
+\bibitem[Cho26b]{RSMCARepo}
+P.~Chojecki,
+\newblock \texttt{rs-mca}: proof development and exact certificate ledgers,
+\newblock source repository, pinned snapshot
+\href{https://github.com/przchojecki/rs-mca/tree/e190193cebced1d3752d068a1c24136bc69a85d9}{\texttt{e190193cebce}}, 2026,
+\newblock \url{https://github.com/przchojecki/rs-mca}, accessed July 19, 2026.
+
+\bibitem[GYXK26]{GaoYangXuKan26}
+Y.~Gao, H.~Yang, Y.~Xu, and H.~Kan,
+\newblock List-decoding counterexamples yield lower bounds on mutual
+correlated agreement error,
+\newblock arXiv:2607.10572, 2026,
+\newblock \url{https://arxiv.org/abs/2607.10572}.
+
+\bibitem[PP26]{ProximityPrize}
+{Ethereum Foundation},
+\newblock The Proximity Prize: \$1M Reed--Solomon Challenge,
+\newblock preliminary version, 2026,
+\newblock \url{https://proximityprize.org/}, accessed July 19, 2026.
+
+\bibitem[Hab25]{Habock25}
+U.~Hab\"ock,
+\newblock A note on mutual correlated agreement for Reed--Solomon codes,
+\newblock Cryptology ePrint Archive, Paper 2025/2110, 2025,
+\newblock \url{https://eprint.iacr.org/2025/2110}.
+
+\bibitem[HLP24]{HLP24}
+U.~Hab\"ock, D.~Levit, and S.~Papini,
+\newblock Circle STARKs,
+\newblock Cryptology ePrint Archive, Paper 2024/278, 2024,
+\newblock \url{https://eprint.iacr.org/2024/278}.
+
+\bibitem[Jo26]{Jo26}
+S.~Jo,
+\newblock Reed--Solomon mutual correlated agreement beyond the Johnson radius,
+\newblock Cryptology ePrint Archive, Paper 2026/1432, 2026,
+\newblock \url{https://eprint.iacr.org/2026/1432}.
+
+\bibitem[KKH26]{KKH26}
+D.~Krachun, S.~Kazanin, and U.~Hab\"ock,
+\newblock Failure of proximity gaps close to capacity,
+\newblock Cryptology ePrint Archive, Paper 2026/782, 2026,
+\newblock \url{https://eprint.iacr.org/2026/782}.
+
+\end{thebibliography}
+
+\end{document}
