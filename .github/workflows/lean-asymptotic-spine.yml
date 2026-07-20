@@ -1,7 +1,8 @@
 name: Lean - asymptotic spine build mirror
-run-name: Lean asymptotic spine — C8 primitive one-pencil candidate
+run-name: Lean asymptotic spine — final C8 primitive one-pencil head
 
-# Fork-only validation branch. Every push in this cycle builds the C8 candidate.
+# Fork-only validation/control branch. Prepare one clean C8 commit on top of the
+# clean C9 result, then build that exact final SHA.
 on:
   push:
     branches:
@@ -9,11 +10,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   statuses: write
 
 concurrency:
-  group: lean-asymptotic-spine-c8-one-pencil
+  group: lean-asymptotic-spine-c8-final
   cancel-in-progress: true
 
 jobs:
@@ -22,10 +23,60 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Check out C8 candidate
+      - name: Prepare clean C8 candidate
+        id: prepare
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_BRANCH: codex/c8-one-pencil-direct-slope-producer
+          BASE_COMMIT: 730362590cdb32f94a56459821a1ffe77d5fc6f2
+        run: |
+          set -euo pipefail
+          work="$(mktemp -d)"
+          trap 'rm -rf "$work"' EXIT
+          git clone --quiet --branch "$TARGET_BRANCH" \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+            "$work/repo"
+          cd "$work/repo"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 - <<'PY'
+          from pathlib import Path
+
+          log = Path("experimental/agents-log.md")
+          text = log.read_text(encoding="utf-8")
+          title = "### 2026-07-20 - Primitive one-parameter C8 direct-slope producer"
+          if title not in text:
+              entry = """### 2026-07-20 - Primitive one-parameter C8 direct-slope producer
+
+          - **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
+          - **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C8OnePencilDirectSlope.lean` and `C8OnePencilLineExtension.lean`; added `experimental/notes/audits/c8_one_pencil_direct_slope_producer.md`; updated the asymptotic-spine root import and README.
+          - **Status:** PROVED LOCAL / DIRECT DISTINCT-SLOPE PAYMENT / FORMALIZATION / CONDITIONAL GLOBAL USE / AUDIT.
+          - **What is being added:** A rooted producer for the actual primitive one-parameter split-pencil C8 chart. The final slope injects into the projective pencil parameter, the moving-root theorem gives `|Gamma|(omega-g)<=N-g`, earlier C1--C7 slopes are deleted, and the surviving image is paid directly at unit natural scale with polynomial loss.
+          - **How it is useful:** This closes the enumerative and interface payment for the object named by `cor:bc-one-pencil`, appends it to an earlier closed line, preserves `sup_line sum_profile`, and prevents future audits from reopening raw support or saturation counts for the one-pencil class.
+          - **What to do next:** Keep primitive one-parameter pencils closed. Classify every actual higher-dimensional post-common-core chart into paid one-parameter pencils, an earlier owner, or one sharply named residual; prove chart count and off-chart exclusion. General residual RC, actual `(UNIF)`, target comparison, and row closure remain open.
+          """
+              marker = "## Entries\n"
+              if marker not in text:
+                  raise SystemExit("agents-log marker not found")
+              log.write_text(text.replace(marker, marker + "\n" + entry + "\n", 1), encoding="utf-8")
+          PY
+          if ! git diff --quiet; then
+            git add experimental/agents-log.md
+            git commit -m "Record primitive C8 one-pencil producer"
+          fi
+          git fetch --quiet origin "$BASE_COMMIT"
+          if [[ "$(git rev-list --count "${BASE_COMMIT}..HEAD")" -gt 1 ]]; then
+            git reset --soft "$BASE_COMMIT"
+            git commit -m "Formalize primitive C8 one-pencil producer"
+          fi
+          git push --quiet --force-with-lease origin "HEAD:${TARGET_BRANCH}"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Check out final C8 head
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
-          ref: codex/c8-one-pencil-direct-slope-producer
+          ref: ${{ steps.prepare.outputs.sha }}
           persist-credentials: false
 
       - name: Set up Lean
