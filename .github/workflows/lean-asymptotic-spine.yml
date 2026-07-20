@@ -1,8 +1,8 @@
 name: Lean - asymptotic spine build mirror
-run-name: Lean asymptotic spine — modular high-rigidity C8 candidate
+run-name: Lean asymptotic spine — repaired modular high-rigidity C8 candidate
 
-# Fork-only validation branch. Every push in this cycle builds the root-free
-# modular-locator C8 direct-slope producer.
+# Fork-only validation/control branch. Repair the projection/theorem name clash,
+# then build the exact target commit.
 on:
   push:
     branches:
@@ -10,11 +10,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   statuses: write
 
 concurrency:
-  group: lean-asymptotic-spine-c8-modular-high-rigidity
+  group: lean-asymptotic-spine-c8-modular-high-rigidity-repair
   cancel-in-progress: true
 
 jobs:
@@ -23,10 +23,55 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Check out modular C8 candidate
+      - name: Repair theorem name
+        id: prepare
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_BRANCH: codex/c8-modular-high-rigidity-direct-slope
+        run: |
+          set -euo pipefail
+          work="$(mktemp -d)"
+          trap 'rm -rf "$work"' EXIT
+          git clone --quiet --depth 1 --branch "$TARGET_BRANCH" \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+            "$work/repo"
+          cd "$work/repo"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("experimental/lean/asymptotic_spine/AsymptoticSpine/C8ModularHighRigidityDirectSlope.lean")
+          text = path.read_text(encoding="utf-8")
+          text = text.replace(
+              "theorem plotkinGap_pos (data : C8ModularHighRigidityClass) :\n",
+              "theorem plotkinGap_positive (data : C8ModularHighRigidityClass) :\n",
+              1,
+          )
+          text = text.replace(
+              "have hgapOne : 1 <= data.plotkinGap := data.plotkinGap_pos",
+              "have hgapOne : 1 <= data.plotkinGap := data.plotkinGap_positive",
+              1,
+          )
+          text = text.replace(
+              "#print axioms plotkinGap_pos\n",
+              "#print axioms plotkinGap_positive\n",
+              1,
+          )
+          path.write_text(text, encoding="utf-8")
+          PY
+          if ! git diff --quiet; then
+            git add experimental/lean/asymptotic_spine/AsymptoticSpine/C8ModularHighRigidityDirectSlope.lean
+            git commit -m "Repair modular C8 Plotkin-gap theorem name"
+            git push --quiet origin "HEAD:${TARGET_BRANCH}"
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Check out repaired modular C8 head
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
-          ref: codex/c8-modular-high-rigidity-direct-slope
+          ref: ${{ steps.prepare.outputs.sha }}
           persist-credentials: false
 
       - name: Set up Lean
