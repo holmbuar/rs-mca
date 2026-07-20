@@ -10,6 +10,7 @@ import AsymptoticSpine.C7BasePoleProducer
 import AsymptoticSpine.C7BasePoleWitnessProducer
 import AsymptoticSpine.C7BasePoleLineExtension
 import AsymptoticSpine.C7SingletonPlantedAbsorption
+import AsymptoticSpine.C9TrueR2CollapseRegression
 import AsymptoticSpine.BooleanFiber
 import AsymptoticSpine.NoHighEnergy
 import AsymptoticSpine.SigmaDiagonal
