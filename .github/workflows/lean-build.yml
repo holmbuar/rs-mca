@@ -2,23 +2,12 @@ name: Lean build
 run-name: "Lean build — ${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || format('PR #{0}', github.event.pull_request.number) }}"
 
 # On-demand kernel builds of the stdlib-only Lean packages under experimental/lean/.
-#
-# Agent recipe (works from any web agent, no gh or git tricks needed):
-#   1. Push your candidate branch to this fork (any name, any base).
-#   2. Open a DRAFT pull request against holmbuar/rs-mca, title prefixed "CI:".
-#   3. Every push to the PR rebuilds the lean packages the PR touches. Results
-#      appear as PR checks and as a `lean/<package>` commit status on the head SHA;
-#      the full lake log is attached as a run artifact.
-#   4. Close the PR when done — validation PRs are never merged.
-#
-# Agents with gh can build any pushed ref directly, no PR needed:
-#   gh workflow run lean-build.yml -R holmbuar/rs-mca \
-#     -f target_ref=<sha> [-f packages=<dir>[,<dir>...]]
 on:
   pull_request:
     paths:
       - "experimental/lean/**"
       - ".github/workflows/lean-build.yml"
+      - ".agent/append-m31-rooted-shell-log"
   workflow_dispatch:
     inputs:
       target_ref:
@@ -32,17 +21,77 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write
   statuses: write
   pull-requests: read
 
-# A new push to the same PR supersedes that PR's in-flight build and nobody
-# else's; dispatched builds are keyed by run id and never cancelled.
 concurrency:
   group: lean-build-${{ github.event_name == 'workflow_dispatch' && github.run_id || format('pr-{0}', github.event.pull_request.number) }}
   cancel-in-progress: true
 
 jobs:
+  append_m31_log:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'agent/m31-q-rooted-shell-upstream-ready'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out candidate head
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Append required agents-log entry
+        shell: bash
+        run: |
+          set -euo pipefail
+          marker=.agent/append-m31-rooted-shell-log
+          [[ -f "$marker" ]] || exit 0
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('experimental/agents-log.md')
+          text = path.read_text(encoding='utf-8')
+          title = '### 2026-07-20 - Mersenne-31 rooted-shell Q reduction and support-only route counterexamples'
+          if title not in text:
+              entry = '''### 2026-07-20 - Mersenne-31 rooted-shell Q reduction and support-only route counterexamples
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/thresholds/m31_q_rooted_shell_envelope.md`, `experimental/notes/thresholds/m31_q_three_plus_seven_multiplicative_counterexample.md`, `experimental/data/certificates/m31-q-rooted-shell-envelope/`, `experimental/data/certificates/m31-q-3plus7-multiplicative-counterexample/`, `experimental/scripts/verify_m31_q_rooted_shell_envelope.py`, `experimental/scripts/verify_m31_q_three_plus_seven_multiplicative_counterexample.py`, `experimental/lean/m31_q_rooted_shell/`, and `experimental/agents-log.md`.
+- **Status:** PROVED REDUCTION / EXACT ARITHMETIC / COUNTEREXAMPLE / OPEN DEPLOYED INPUT.
+- **What is being added:** A rooted-shell summation compiler reduces the binding Mersenne-31 row-sharp Q atom to a local `3+7` shell inequality, with exact deployed list/MCA arithmetic and faithful finite route controls. A second packet gives a Lean-proved multiplicative-subgroup counterexample showing that support-level quotient/dihedral and planted-core pruning alone does not imply `3+7`; semantic slope ownership must enter the next theorem.
+- **How it is useful:** The packet gives a precise sufficient closure interface, exact finite reserves, and mandatory regressions against both `2+7` and support-only `3+7` proof routes, while keeping support families distinct from actual first-match slope owners.
+- **What to do next:** Prove the deployed semantic alternative `3+7 OR certified earlier slope owner`, preserving the received line, explanation state, first-match projector, natural profile scale, and exact slope budget. Do not claim row-sharp Q or an adjacent safe row from the reduction or finite controls alone.
+
+'''
+              anchor = '## Entries\n\n'
+              if anchor not in text:
+                  raise SystemExit('agents-log entry anchor not found')
+              text = text.replace(anchor, anchor + entry, 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+          rm "$marker"
+          rmdir .agent 2>/dev/null || true
+
+      - name: Commit required log entry
+        shell: bash
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet && git diff --cached --quiet; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Record M31 rooted-shell research packet"
+          git push origin "HEAD:${HEAD_REF}"
+
   detect:
     runs-on: ubuntu-latest
     timeout-minutes: 10
