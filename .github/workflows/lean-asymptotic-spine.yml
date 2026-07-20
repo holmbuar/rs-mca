@@ -1,26 +1,19 @@
 name: Lean - asymptotic spine build mirror
-run-name: Lean asymptotic spine — ${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.ref_name }}
+run-name: Lean asymptotic spine — C8 primitive one-pencil candidate
 
-# `codex/lean-build` is a validation mirror, not a research or integration branch.
-# Push a candidate commit there to kernel-build the complete stdlib-only package.
+# Fork-only validation branch. Every push in this cycle builds the C8 candidate.
 on:
   push:
     branches:
       - "codex/lean-build"
   workflow_dispatch:
-    inputs:
-      target_ref:
-        description: Branch, tag, or commit SHA to build
-        required: true
-        default: codex/lean-build
-        type: string
 
 permissions:
   contents: read
   statuses: write
 
 concurrency:
-  group: lean-asymptotic-spine-${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.ref }}
+  group: lean-asymptotic-spine-c8-one-pencil
   cancel-in-progress: true
 
 jobs:
@@ -29,10 +22,10 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Check out target
+      - name: Check out C8 candidate
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.sha }}
+          ref: codex/c8-one-pencil-direct-slope-producer
           persist-credentials: false
 
       - name: Set up Lean
@@ -75,10 +68,10 @@ jobs:
           target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
           if [[ "$BUILD_OUTCOME" == "success" ]]; then
             state="success"
-            description="Full asymptotic-spine lake build passed"
+            description="C8 one-pencil producer and full build passed"
           else
             state="failure"
-            description="Full asymptotic-spine lake build failed"
+            description="C8 one-pencil producer or full build failed"
           fi
           python3 - "$state" "$target_url" "$description" > status.json <<'PY'
           import json
