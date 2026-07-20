@@ -77,7 +77,10 @@ theorem flatten_basePoleC7ProfileSlopes :
   intro xs
   induction xs with
   | nil => simp
-  | cons gamma xs ih => simp [ih]
+  | cons gamma xs ih =>
+      simp only [List.map_cons, List.flatten_cons,
+        basePoleC7Profile_assignedSlopes, List.singleton_append]
+      exact ih
 
 /-- The producer's assigned slope image is exactly the post-earlier residual. -/
 theorem basePoleC7Profiles_flatten_assignedSlopes
@@ -96,7 +99,11 @@ theorem listSum_basePoleC7Profile_rayBudgets :
   intro xs
   induction xs with
   | nil => simp
-  | cons gamma xs ih => simp [ih]
+  | cons gamma xs ih =>
+      simp only [List.map_cons, basePoleC7Profile_rayBudget,
+        listSum_cons, List.length_cons]
+      rw [ih]
+      omega
 
 /-- Unit natural scales sum to the same line-local survivor count. -/
 theorem listSum_basePoleC7Profile_naturalScales :
@@ -106,7 +113,11 @@ theorem listSum_basePoleC7Profile_naturalScales :
   intro xs
   induction xs with
   | nil => simp
-  | cons gamma xs ih => simp [ih]
+  | cons gamma xs ih =>
+      simp only [List.map_cons, basePoleC7Profile_naturalScale,
+        listSum_cons, List.length_cons]
+      rw [ih]
+      omega
 
 /-- The surviving slope count is bounded by the raw constant-coefficient slope
 census. -/
