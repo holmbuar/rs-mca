@@ -8,14 +8,7 @@ on:
         required: true
         default: main
         type: string
-  push:
-    branches:
-      - main
-      - "codex/**"
-    paths:
-      - ".github/workflows/lean-asymptotic-spine.yml"
-      - "experimental/lean/asymptotic_spine/**"
-      - "experimental/lean/staircase_logic/**"
+  push: {}
 
 permissions:
   contents: read
