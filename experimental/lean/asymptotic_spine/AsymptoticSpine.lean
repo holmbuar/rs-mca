@@ -6,6 +6,7 @@ import AsymptoticSpine.Normalization
 import AsymptoticSpine.AddBack
 import AsymptoticSpine.UniformClosedLedger
 import AsymptoticSpine.SemanticAtlasOwnership
+import AsymptoticSpine.ClosedLedgerExtension
 import AsymptoticSpine.C7OwnerRegression
 import AsymptoticSpine.C7BasePoleProducer
 import AsymptoticSpine.C7BasePoleWitnessProducer
@@ -22,7 +23,9 @@ import AsymptoticSpine.ProfileEnvelope
 import AsymptoticSpine.StaircaseDeep
 import AsymptoticSpine.EffectiveClosure
 import AsymptoticSpine.HighKappaCoverage
+import AsymptoticSpine.C8ShallowClosureProducer
 import AsymptoticSpine.FullImageIdentityWindow
 import AsymptoticSpine.PrimitiveBoolean
+import AsymptoticSpine.C9ResidualMaxFiberProducer
 import AsymptoticSpine.BooleanDifferenceGrowth
 import AsymptoticSpine.RegressionLocks
