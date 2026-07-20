@@ -6,9 +6,13 @@ on:
       target_ref:
         description: Branch, tag, or commit SHA to build
         required: true
-        default: main
+        default: codex/lean-build
         type: string
-  push: {}
+  push:
+    branches:
+      - "codex/lean-build"
+      - "codex/c7-first-match-owner-regression"
+  pull_request: {}
 
 permissions:
   contents: read
