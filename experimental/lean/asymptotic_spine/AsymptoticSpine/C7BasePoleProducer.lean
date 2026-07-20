@@ -80,7 +80,7 @@ theorem flatten_basePoleC7ProfileSlopes :
   | cons gamma xs ih =>
       simp only [List.map_cons, List.flatten_cons,
         basePoleC7Profile_assignedSlopes, List.singleton_append]
-      exact ih
+      exact congrArg (List.cons gamma) ih
 
 /-- The producer's assigned slope image is exactly the post-earlier residual. -/
 theorem basePoleC7Profiles_flatten_assignedSlopes
