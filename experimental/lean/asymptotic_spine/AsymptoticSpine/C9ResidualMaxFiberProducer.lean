@@ -123,8 +123,9 @@ theorem ProfileData.extendLine_budgetTotal
       gamma ∉ data.slopeCell.slopes) :
     (data.extendLine line hdisjoint).budgetTotal =
       line.budgetTotal + compilerLoss * data.naturalScale := by
-  simpa [ProfileData.extendLine, ProfileData.payment] using
-    (ClosedLineLedger.appendPayment_budgetTotal line data.payment hdisjoint)
+  change (line.appendPayment data.payment hdisjoint).budgetTotal =
+    line.budgetTotal + data.payment.rayBudget
+  exact ClosedLineLedger.appendPayment_budgetTotal line data.payment hdisjoint
 
 /-- Exact C9 natural-scale telescope inside one received line. -/
 theorem ProfileData.extendLine_naturalTotal
@@ -135,8 +136,9 @@ theorem ProfileData.extendLine_naturalTotal
       gamma ∉ data.slopeCell.slopes) :
     (data.extendLine line hdisjoint).naturalTotal =
       line.naturalTotal + data.naturalScale := by
-  simpa [ProfileData.extendLine, ProfileData.payment] using
-    (ClosedLineLedger.appendPayment_naturalTotal line data.payment hdisjoint)
+  change (line.appendPayment data.payment hdisjoint).naturalTotal =
+    line.naturalTotal + data.payment.naturalScale
+  exact ClosedLineLedger.appendPayment_naturalTotal line data.payment hdisjoint
 
 #print axioms ProfileData.support_not_earlier
 #print axioms ProfileData.slopes_paid
