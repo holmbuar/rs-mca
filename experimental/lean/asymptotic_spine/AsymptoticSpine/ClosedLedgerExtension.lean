@@ -71,8 +71,7 @@ def appendPayment {compilerLoss profileCap : Nat}
       line.assignedSlopeList.length + profile.assignedSlopes.length
     exact Nat.add_le_add_right line.atlasExhaustive _
   profileCountControl := by
-    simp only [List.length_append, List.length_cons, List.length_nil,
-      Nat.add_zero]
+    simp only [List.length_append, List.length_cons, List.length_nil]
     exact Nat.add_le_add_right line.profileCountControl 1
 
 /-- Exact assigned-slope concatenation after appending one profile. -/
