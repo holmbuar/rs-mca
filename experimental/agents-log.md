@@ -30,6 +30,51 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-19 - PR 884 dense-shell INV-TAIL audit review
+
+- **Agent/model:** Codex, reviewing Holm Buar PR #884.
+- **Files added or changed:** `experimental/agents-log.md`.  The PR audit note, audit verifier, and dependency-audit certificate were already present on `main` byte-for-byte: `experimental/notes/audits/dense_shell_inv_tail_dependency_audit.md`, `experimental/scripts/verify_dense_shell_inv_tail_dependency_audit.py`, and `experimental/data/certificates/dense-shell-inv-tail-dependency-audit/dense_shell_inv_tail_dependency_audit.json`.
+- **Status:** AUDIT / OPEN GAP.
+- **What is being added:** A backfilled integration record for PR #884.  The PR is mathematically useful because it keeps `INV-TAIL` fail-closed: sharp and loose tail contracts are separated, P8 is implication-only, finite floating-grid checks remain computed evidence, C3b is one-way sufficiency rather than equivalence, and C6 uses the parity-dependent charge identity.
+- **How it is useful:** Prevents dense-shell finite certificates, the Lean shadow, or grid passes from being promoted as an all-depth class-sum theorem.  The current `dense_shell_class_charges` note/script/certificate on `main` are newer than the PR branch and include later audit repairs, so the PR branch should not be applied wholesale.
+- **What to do next:** Keep the exact correlated-pair tail contracts as open proof targets.  A promotion requires rigorous continuum/error enclosures for P7/P9/P12 and either the sharp correlated-pair/share tail theorem or the loose share/cross-child/L4 closure theorem, plus separate general-`K` positivity.
+
+### 2026-07-19 - Integrated PR report 1
+
+- **Agent/model:** Codex.
+- **Files added or changed:** `experimental/PR-report-1.tex`,
+  `experimental/PR-report-1.pdf`, `experimental/agents-log.md`.
+- **Status:** AUDIT / EXPERIMENTAL.
+- **What is being added:** A publishable-style audit report summarizing the
+  already integrated high-numbered PR wave, roughly PRs `#775--#985`, with
+  utility judgments and promotion guidance.
+- **How it is useful:** Gives maintainers and future agents a compact map of
+  what the recent PR integrations contributed: Paper D v13.2 authority,
+  Lean/formalization discharges, KoalaBear M1 route cuts, support-universe
+  repairs, strict-crossing counterexamples, L1/BC/L2 infrastructure, and which
+  pieces are not theorem-ready.
+- **What to do next:** Use the report as a triage index before promoting any
+  PR-derived result into a main TeX paper.  The finite adjacent safe certificate
+  and the asymptotic entropy-frontier upper theorem remain open.
+
+### 2026-07-19 - PR 985 M1 moving-root C5 boundary cut
+
+- **Agent/model:** Codex, integrating a reviewed draft PR from Scott Hughes (#985).
+- **Files added or changed:** Added `experimental/notes/m1/m1_kb_rank9_moving_root_slack_c5_boundary_v1.md` and `experimental/scripts/verify_m1_kb_rank9_moving_root_slack_c5_boundary_v1.sage`. Stacked duplicate #982 files, certificate JSON/README files, PR-side Python verifier scripts, and contributor `experimental/agents-log.md` edits were intentionally not imported.
+- **Status:** PROVED LOCAL / AUDIT / EXPERIMENTAL, with KoalaBear still open.
+- **What is being added:** A zero-ledger-movement M1 route cut composing whole-moving-set cofactor divisibility with the post-#982 source-rational survivor inequality. It excludes the zero-slack C5 boundary, raises the surviving full-outside source floor to `s >= 67,474`, and leaves only the two explicit one-slack nonbase linear residual components.
+- **How it is useful:** This sharpens the rank-nine KoalaBear residual from a broad high-degree full-outside terminal to concrete one-slack algebraic shapes: `UNPAID_NONBASE_COMMON_LINEAR_GCD_TWIST` and `UNPAID_SPLIT_GCD_NONBASE_LINEAR_MOVING_COFACTOR`.
+- **What to do next:** Classify those two one-slack components against the exact regular-locator equations and eight rank-nine outlier directions before attempting generic high-degree elimination, non-full-outside aggregation, or rank-at-least-ten work.
+
+### 2026-07-19 - PRs 980--984 formalization and audit curation
+
+- **Agent/model:** Codex, integrating reviewed PRs from Holm Buar (#980, #984), DannyExperiments (#981), Scott Hughes (#982), and Adam Mohammed A Latif / Latif Kasuli (#983).
+- **Files added or changed:** Added `experimental/lean/cs25_phi_fiber_repair_certificate/`, updated `experimental/lean/cs25_cap_v12/cs25_cap_v12/ECFFT.lean` and `experimental/lean/cs25_cap_v12/SKELETON_REPAIR_CORRESPONDENCE.md`, added `experimental/notes/audits/phi_fiber_repair_certificate.md`, `experimental/notes/audits/ecfft_constructive_discharge.md`, `experimental/notes/audits/caseb_counting_domain_size_correction.md`, `experimental/notes/thresholds/o5c_strict_crossing_counterexample.md`, `experimental/notes/m1/m1_kb_rank9_source_rational_owner_splice_v1.md`, and `experimental/scripts/verify_m1_kb_rank9_source_rational_owner_splice_v1.sage`. Contributor `experimental/agents-log.md` edits and PR-side Python replay packets were intentionally not imported in this curated pass.
+- **Status:** PROVED / COUNTEREXAMPLE / AUDIT / EXPERIMENTAL, according to the individual notes.
+- **What is being added:** #980 gives a Lean package refuting the exact old `lem:phi-fiber` skeleton signature over a symbolic `GF(16)/GF(4)` example and proving the coefficient-level wrapper matching Paper D v13.2. #983 proves the ECFFT `prop_rational_floor` and `cor_ecfft_onestep` Lean skeletons with byte-identical statements, reducing the documented sorry count. #981 records a sparse exact-deep counterexample to a universal O5c strict-crossing demand. #984 corrects a Case-B support-universe counting calibration and preserves the fixed-density/exponential-field lower picture. #982 adds a local M1 KoalaBear adaptive bounded-degree source-rational owner route cut, plus a Sage toy control, with zero ledger movement and the high-degree residual still open.
+- **How it is useful:** The Lean items directly improve formalization/audit coverage for Paper D. The O5c and Case-B notes prevent future proof programs from overclaiming false strict-crossing or wrong-universe counting statements. The M1 note sharpens one route cut for the KoalaBear rank-nine residual without claiming closure.
+- **What to do next:** Build the Lean packages only in a dedicated formalization environment. Treat the omitted Python replay packets as upstream provenance, not local repository artifacts. For proof work, connect the ECFFT discharge and phi-fiber repair to the current v13.2 audit map; for M1, freeze the first actual survivor satisfying `UNPAID_FULL_OUTSIDE_REDUCED_DEGREE_AT_LEAST_18418`; for Case-B, separate target-relevant lower constructions from any proposed constant-fraction equidistribution theorem.
+
 ### 2026-07-19 - PRs 976--979 affine-prefix and top-seam integration
 
 - **Agent/model:** Codex integrating reviewed PRs from DannyExperiments (#976, #979) and Holm Buar (#977, #978).
