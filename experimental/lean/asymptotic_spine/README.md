@@ -157,6 +157,35 @@ profiles, place C7 earlier, or accept C3 as the owner. No global fixed-before-
 line atlas, actual row-wide `(UNIF)`, target comparison, or row closure is
 asserted.
 
+## C8 and C9 semantic producer preflight
+
+`AsymptoticSpine.ClosedLedgerExtension` appends one already-paid profile to an
+earlier `ClosedLineLedger` only after an explicit cross-owner slope-disjointness
+proof. It proves exact assigned-slope concatenation and exact budget/natural-
+scale telescopes. This is bookkeeping only; it creates no semantic owner or
+payment theorem.
+
+`AsymptoticSpine.C8ShallowClosureProducer` consumes one actual supplied
+balanced-core residual chart: a reindexed prefix-fiber bridge, an `(SE2)`
+distinct-slope certificate, chart inclusion, and the existing shallow effective-
+span bounds. It turns `balancedCoreShallowClosure_to_directRC` into a direct C8
+`ProfilePayment` at scale `1 + average` and loss `|B|^w`, independently of the
+printed shortened-kernel label, then appends the profile after earlier owners.
+The million-label fixture kernel-checks the exact line-local telescopes.
+
+`AsymptoticSpine.C9ResidualMaxFiberProducer` replaces the informal phrase
+"surviving C1--C8" by an explicit finite owner function and an equality saying
+that the residual list is exactly its complement inside the complete fixed-
+weight slice. At one residual prefix key, an `(SE2)` support projection plus a
+row-sharp full-prefix max-fiber bound pays the actual C9 slope list by residual
+monotonicity. The payment is direct rather than routed through a synthetic Sidon
+field.
+
+These modules tighten the producer boundary but do not prove actual RS chart
+exhaustion, the row-sharp C9 max-fiber theorem, deep-prefix MI/MA, a large-kernel
+structure theorem outside shallow closure, realized profile count, global
+fixed-before-line atlas coherence, `(UNIF)`, target comparison, or row closure.
+
 ## Upgrade regression locks
 
 `AsymptoticSpine.RegressionLocks` restates the current general interfaces for
