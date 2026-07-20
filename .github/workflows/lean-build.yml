@@ -1,5 +1,4 @@
 name: Lean build
-run-name: "Lean build — PR #${{ github.event.pull_request.number }}"
 
 on:
   pull_request:
@@ -7,14 +6,15 @@ on:
     paths:
       - "experimental/lean/**"
       - ".github/workflows/lean-build.yml"
+      - ".agent/**"
 
 permissions:
-  contents: read
+  contents: write
   statuses: write
   pull-requests: read
 
 concurrency:
-  group: lean-m31-logstage-${{ github.event.pull_request.number }}
+  group: lean-m31-logstage4-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
@@ -82,3 +82,29 @@ jobs:
       - name: Fail workflow if Lean failed
         if: steps.lake.outcome != 'success'
         run: exit 1
+
+  append_log:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out validated candidate
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Append required agents-log entry
+        run: python3 .agent/append_m31_log.py
+
+      - name: Commit log entry to staging branch
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Record M31 rooted-shell research packet"
+          git push origin "HEAD:${HEAD_REF}"
