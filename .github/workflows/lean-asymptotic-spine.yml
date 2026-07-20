@@ -1,8 +1,8 @@
 name: Lean - asymptotic spine build mirror
-run-name: Lean asymptotic spine — final F97 C8 finite proof repair
+run-name: Lean asymptotic spine — stdlib F97 C8 proof repair
 
-# Fork-only validation/control branch. Close the two remaining finite goals,
-# then build the exact repaired target commit.
+# Fork-only validation/control branch. Replace the unavailable propositional
+# tactic with the package's existing stdlib tactics, then build the exact head.
 on:
   push:
     branches:
@@ -14,7 +14,7 @@ permissions:
   statuses: write
 
 concurrency:
-  group: lean-asymptotic-spine-c8-f97-final-repair
+  group: lean-asymptotic-spine-c8-f97-stdlib-repair
   cancel-in-progress: true
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Apply final finite proof repair
+      - name: Apply stdlib proof repair
         id: prepare
         shell: bash
         env:
@@ -44,30 +44,26 @@ jobs:
 
           path = Path("experimental/lean/asymptotic_spine/AsymptoticSpine/C8F97TwoCellFirstMatch.lean")
           text = path.read_text(encoding="utf-8")
-          old_cover = """  intro w
-            simp [f97C8WitnessCells, f97C8CellA, f97C8CellB, f97C8Witnesses]
-          """
-          new_cover = """  intro w
-            simp [f97C8WitnessCells, f97C8CellA, f97C8CellB, f97C8Witnesses]
-            tauto
-          """
-          if old_cover in text:
-              text = text.replace(old_cover, new_cover, 1)
-
-          old_last = """    · subst gamma
-                exact ⟨2, by decide, rfl, hnot⟩
-          """
-          new_last = """    · have h2' : gamma = 2 := by simpa using h2
-                subst gamma
-                exact ⟨2, by decide, rfl, hnot⟩
-          """
-          if old_last in text:
-              text = text.replace(old_last, new_last, 1)
+          text = text.replace(
+              "    simp [f97C8WitnessCells, f97C8CellA, f97C8CellB, f97C8Witnesses]\n    tauto\n",
+              "    simp [f97C8WitnessCells, f97C8CellA, f97C8CellB, f97C8Witnesses]\n    omega\n",
+              1,
+          )
+          text = text.replace(
+              "  simp only [List.mem_cons, List.mem_singleton] at hraw\n",
+              "  simp at hraw\n",
+              1,
+          )
+          text = text.replace(
+              "    · have h2' : gamma = 2 := by simpa using h2\n      subst gamma\n",
+              "    · subst gamma\n",
+              1,
+          )
           path.write_text(text, encoding="utf-8")
           PY
           if ! git diff --quiet; then
             git add experimental/lean/asymptotic_spine/AsymptoticSpine/C8F97TwoCellFirstMatch.lean
-            git commit -m "Finish exact F97 C8 finite proof repair"
+            git commit -m "Use stdlib tactics in exact F97 C8 proof"
             git push --quiet origin "HEAD:${TARGET_BRANCH}"
           fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
