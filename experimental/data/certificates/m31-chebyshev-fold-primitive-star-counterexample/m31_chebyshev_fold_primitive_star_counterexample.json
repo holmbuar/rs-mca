@@ -1,0 +1,180 @@
+{
+  "deployed_calibration": {
+    "B_star": 16777215,
+    "K": {
+      "decimal": 8.41520797240076,
+      "den": 1993678,
+      "num": 16777215
+    },
+    "K_minus_one": {
+      "decimal": 7.415207972400759,
+      "den": 1993678,
+      "num": 14783537
+    },
+    "atom_cross_lhs": 836056844012,
+    "atom_cross_rhs": 3378528447840,
+    "atom_passes": true,
+    "avg_ceil": 1993678,
+    "toy_atom_ratio": {
+      "decimal": 2.0824427935801686,
+      "den": 100688,
+      "num": 209677
+    }
+  },
+  "fold_primitive_star_counterexample": {
+    "alignment_sha256": "a341e08f852affb797d099f6b19f5329e3fdc358e2caa6ea2d6a7ff1c826c919",
+    "certified_fold_primitive_l1_lower": {
+      "den": 1000000000000000000000000,
+      "num": 1598306180642586439652124191350
+    },
+    "certified_normalized_l1_lower": {
+      "decimal": 7.936924860174929,
+      "den": 201376000000000000000000000000,
+      "num": 1598306180642586439652124191350
+    },
+    "cos_scale": 1000000000000000000000000,
+    "exact_cross_margin": 209458322699150447832767653562285300,
+    "fold_direction_count": 126,
+    "fold_primitive_direction_count": 16002,
+    "maximum_cos_interval_scaled_width": 1,
+    "orbit_lower_sha256": "548fa974d4f0abd7fb3711b529c42327a4fe0f26a2668c8e5ba50f10d46cdddb",
+    "pi_interval_width": {
+      "den": 6637253954789099564048671662077901881786933598488112723724808770944662528804294360167539697749200937427018799630307199777234927751123905181884765625,
+      "num": 26673262387214070960478598978663123766981034688340699203175557096490729368244
+    },
+    "star_fails": true,
+    "star_target": {
+      "den": 1993678,
+      "num": 2977049546912
+    }
+  },
+  "nonclaims": [
+    "Does not refute row-sharp Q at the deployed Mersenne-31 row.",
+    "Does not refute a signed-e_m theorem with a quantitative large-average, deployed-scale, or row-specific hypothesis.",
+    "Does not prove this toy slice survives every earlier semantic first-match owner; primitive here means only non-T_2-fold.",
+    "Does not provide a complete first-match atlas or finite adjacent-row certificate.",
+    "Does not treat three-or-more-shell residuals or balanced-core ray compilation."
+  ],
+  "prefix_census": {
+    "ambient_size": 16129,
+    "average": {
+      "decimal": 12.485336970673941,
+      "den": 16129,
+      "num": 201376
+    },
+    "census_sha256": "fbb3b35918aa7e4c3374a553cd4f77baef48fa86532c280471085c78f77a19a0",
+    "full_image": true,
+    "histogram": {
+      "10": 1455,
+      "11": 1706,
+      "12": 1761,
+      "13": 1750,
+      "14": 1620,
+      "15": 1334,
+      "16": 1062,
+      "17": 822,
+      "18": 494,
+      "19": 356,
+      "2": 7,
+      "20": 228,
+      "21": 112,
+      "22": 53,
+      "23": 14,
+      "24": 11,
+      "25": 6,
+      "26": 4,
+      "3": 20,
+      "4": 61,
+      "5": 138,
+      "6": 335,
+      "7": 568,
+      "8": 954,
+      "9": 1258
+    },
+    "histogram_sha256": "101f518ac85c2b5e318e2828f68491d3722aa6a192aa50f440f8b4e2ed91ad4d",
+    "image_size": 16129,
+    "max_fiber": 26
+  },
+  "proof_protocol": {
+    "alignment_radius": 4,
+    "cos_scale": 1000000000000000000000000,
+    "cosine_taylor_order": 35,
+    "pi_terms_arctan_1_over_239": 15,
+    "pi_terms_arctan_1_over_5": 50,
+    "prefix_census_methods": [
+      "direct_combinations",
+      "weight_indexed_dynamic_program"
+    ]
+  },
+  "schema": "m31-chebyshev-fold-primitive-star-counterexample-v1",
+  "source_head": "70954978f82e146d445731f81f6b96c19859479f",
+  "status": "COUNTEREXAMPLE_TO_UNIFORM_CHEBYSHEV_FOLD_PRIMITIVE_STAR / AUDIT / OPEN_DEPLOYED_Q",
+  "toy": {
+    "circle_generator": [
+      2,
+      39
+    ],
+    "domain": [
+      2,
+      5,
+      9,
+      19,
+      22,
+      23,
+      26,
+      27,
+      32,
+      38,
+      39,
+      42,
+      45,
+      50,
+      53,
+      62,
+      65,
+      74,
+      77,
+      82,
+      85,
+      88,
+      89,
+      95,
+      100,
+      101,
+      104,
+      105,
+      108,
+      118,
+      122,
+      125
+    ],
+    "domain_sha256": "fcb72d14a05048d72351e54fd23993b14afb2e143fe92cb9731ac1a21546ac7c",
+    "fold_iff_t1_zero": true,
+    "lifted_size": 64,
+    "m": 5,
+    "n": 32,
+    "not_product_closed": true,
+    "p": 127,
+    "t2_fiber_sizes": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "t2_image_size": 16,
+    "total_supports": 201376,
+    "w": 2
+  }
+}
