@@ -16,7 +16,7 @@ on:
         type: string
 
 permissions:
-  contents: write
+  contents: read
   statuses: write
 
 concurrency:
@@ -98,57 +98,6 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/statuses/${target_sha}" \
             --data-binary @status.json
-
-      # One-off, idempotent publication bookkeeping for the validated C7 packet.
-      # This workflow exists only on the fork build/research branches, not on the
-      # upstream publication branch.
-      - name: Append validated C7 result to project agents log
-        if: steps.lake.outcome == 'success'
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TARGET_BRANCH: codex/c7-base-pole-closed-ledger-producer
-        run: |
-          set -euo pipefail
-          work="$(mktemp -d)"
-          trap 'rm -rf "$work"' EXIT
-          git clone --quiet --depth 1 --branch "$TARGET_BRANCH" \
-            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
-            "$work/repo"
-          cd "$work/repo"
-          python3 - <<'PY'
-          from pathlib import Path
-
-          path = Path("experimental/agents-log.md")
-          text = path.read_text(encoding="utf-8")
-          title = "### 2026-07-20 - Rooted C7 base-pole closed-ledger producer"
-          if title in text:
-              raise SystemExit(0)
-
-          entry = """### 2026-07-20 - Rooted C7 base-pole closed-ledger producer
-
-          - **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
-          - **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C7BasePoleProducer.lean`, `C7BasePoleWitnessProducer.lean`, and `C7BasePoleLineExtension.lean`; retained `C7OwnerRegression.lean`; added `experimental/notes/audits/c7_base_pole_closed_ledger_producer.md`; updated the C7 audit, root import, and package README.
-          - **Status:** PROVED LOCAL / FORMALIZATION / CONDITIONAL GLOBAL USE / AUDIT.
-          - **What is being added:** A rooted deletion-aware producer for the established base-pole constant-coefficient C7 class. It starts from actual witness fibres and the exact coefficient-to-slope law, removes the aggregate C1--C6 assigned slope image, pays each surviving singleton directly at unit natural scale, and appends the survivors to an earlier closed line with exact budget and natural-scale telescopes.
-          - **How it is useful:** This supplies one genuine local C7 producer into `UniformClosedLedger`, preserves the required line-local `sup_line sum_profile` order, and corrects the earlier overstrong claim that the entire raw C7 cell must survive before any payment is possible.
-          - **What to do next:** Integrate as a focused follow-up to PR #987 after its interface is available on upstream. Global fixed-before-line atlas coherence, completeness over all received lines, survivor nonemptiness on every line, actual `(UNIF)`, target comparison, and row closure remain open.
-          """
-
-          marker = "## Entries\n"
-          if marker not in text:
-              raise SystemExit("agents-log marker not found")
-          text = text.replace(marker, marker + "\n" + entry + "\n", 1)
-          path.write_text(text, encoding="utf-8")
-          PY
-          if git diff --quiet -- experimental/agents-log.md; then
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add experimental/agents-log.md
-          git commit -m "Record rooted C7 closed-ledger producer"
-          git push --quiet origin "HEAD:${TARGET_BRANCH}"
 
       - name: Fail workflow if Lean failed
         if: steps.lake.outcome != 'success'
