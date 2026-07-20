@@ -1,8 +1,8 @@
 name: Lean - asymptotic spine build mirror
-run-name: Lean asymptotic spine — explicit F97 witness-cover proof
+run-name: Lean asymptotic spine — final exact F97 C8 two-cell head
 
-# Fork-only validation/control branch. Replace the stale unavailable tactic with
-# a core by-cases proof and build the exact repaired target commit.
+# Fork-only validation/control branch. Add template-complete bookkeeping, squash
+# one focused F97 commit, and build that exact final SHA.
 on:
   push:
     branches:
@@ -14,7 +14,7 @@ permissions:
   statuses: write
 
 concurrency:
-  group: lean-asymptotic-spine-c8-f97-explicit-cover
+  group: lean-asymptotic-spine-c8-f97-final
   cancel-in-progress: true
 
 jobs:
@@ -23,17 +23,18 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Replace witness-cover proof
+      - name: Prepare clean F97 C8 candidate
         id: prepare
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           TARGET_BRANCH: codex/c8-f97-two-cell-first-match-producer
+          BASE_COMMIT: 218b90779c1636e64258df856637b1b4be8ca888
         run: |
           set -euo pipefail
           work="$(mktemp -d)"
           trap 'rm -rf "$work"' EXIT
-          git clone --quiet --depth 1 --branch "$TARGET_BRANCH" \
+          git clone --quiet --branch "$TARGET_BRANCH" \
             "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
             "$work/repo"
           cd "$work/repo"
@@ -42,34 +43,62 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
 
-          path = Path("experimental/lean/asymptotic_spine/AsymptoticSpine/C8F97TwoCellFirstMatch.lean")
-          text = path.read_text(encoding="utf-8")
-          old = """theorem f97C8WitnessCells_cover :
-              forall w, w ∈ f97C8WitnessCells.flatten <-> w ∈ f97C8Witnesses := by
-            intro w
-            simp [f97C8WitnessCells, f97C8CellA, f97C8CellB, f97C8Witnesses]
-            tauto
+          readme = Path("experimental/lean/asymptotic_spine/README.md")
+          text = readme.read_text(encoding="utf-8")
+          title = "## Exact F97 C8 two-cell first-match producer"
+          if title not in text:
+              section = """## Exact F97 C8 two-cell first-match producer
+
+          `AsymptoticSpine.C8F97TwoCellFirstMatch` consumes the pinned
+          `F_97 / mu_16` first-interior certificate. Four rooted witnesses are
+          covered by two distinct common-GCD projective-plane cells, but both raw
+          cells project to the same slope image `[0,1,2]`. The module proves that
+          raw chart summation gives `6`, while ordered slope-level first match gives
+          the correct total `3` with leaves `[[0,1,2],[]]`.
+
+          After arbitrary earlier C1--C7 slope deletion, the surviving exact image
+          is paid directly at unit natural scale with loss three and can be appended
+          to an earlier closed line with exact `badCount`, `budgetTotal`, and
+          `naturalTotal` telescopes. This is a finite source-specific producer, not
+          an arbitrary-line modular-fibre theorem or row-wide `(UNIF)` closure.
+
           """
-          new = """theorem f97C8WitnessCells_cover :
-              forall w, w ∈ f97C8WitnessCells.flatten <-> w ∈ f97C8Witnesses := by
-            intro w
-            by_cases h0 : w = 0 <;>
-              by_cases h1 : w = 1 <;>
-              by_cases h2 : w = 2 <;>
-              by_cases h3 : w = 3 <;>
-              simp [f97C8WitnessCells, f97C8CellA, f97C8CellB,
-                f97C8Witnesses, h0, h1, h2, h3]
+              marker = "## Upgrade regression locks"
+              if marker not in text:
+                  raise SystemExit("README marker not found")
+              readme.write_text(text.replace(marker, section + marker, 1), encoding="utf-8")
+
+          log = Path("experimental/agents-log.md")
+          log_text = log.read_text(encoding="utf-8")
+          log_title = "### 2026-07-20 - Exact F97 C8 two-cell first-match producer"
+          if log_title not in log_text:
+              entry = """### 2026-07-20 - Exact F97 C8 two-cell first-match producer
+
+          - **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
+          - **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C8F97TwoCellFirstMatch.lean` and `experimental/notes/audits/c8_f97_two_cell_closed_ledger_producer.md`; updated the asymptotic-spine root import and README.
+          - **Status:** PROVED-SPECIAL / EXACT FINITE FIRST-MATCH PRODUCER / FORMALIZATION / AUDIT.
+          - **What is being added:** The pinned `F_97 / mu_16` first-interior certificate is connected to `UniformClosedLedger`. Four rooted witnesses are covered by two common-GCD projective-plane cells with identical raw slope images `{0,1,2}`; raw chart summation gives six, ordered slope first match gives three, and the surviving image is paid directly at unit natural scale.
+          - **How it is useful:** It closes the exact retained F97 subincidence, provides a concrete regression against summing overlapping chart projections, preserves `sup_line sum_profile`, and appends the exact C8 payment to an earlier closed line with explicit telescopes.
+          - **What to do next:** Keep this fixture closed. Attack the root-free nonconstant-`W1` modular-locator residual on arbitrary first-interior lines using mixed-character control, aggregate occupancy, or a direct slope theorem. General chart classification, actual `(UNIF)`, target comparison, and row closure remain open.
           """
-          if old not in text:
-              raise SystemExit("stale witness-cover block not found")
-          path.write_text(text.replace(old, new, 1), encoding="utf-8")
+              marker = "## Entries\n"
+              if marker not in log_text:
+                  raise SystemExit("agents-log marker not found")
+              log.write_text(log_text.replace(marker, marker + "\n" + entry + "\n", 1), encoding="utf-8")
           PY
-          git add experimental/lean/asymptotic_spine/AsymptoticSpine/C8F97TwoCellFirstMatch.lean
-          git commit -m "Replace stale F97 witness-cover tactic"
-          git push --quiet origin "HEAD:${TARGET_BRANCH}"
+          if ! git diff --quiet; then
+            git add experimental/agents-log.md experimental/lean/asymptotic_spine/README.md
+            git commit -m "Record exact F97 C8 two-cell producer"
+          fi
+          git fetch --quiet origin "$BASE_COMMIT"
+          if [[ "$(git rev-list --count "${BASE_COMMIT}..HEAD")" -gt 1 ]]; then
+            git reset --soft "$BASE_COMMIT"
+            git commit -m "Formalize exact F97 C8 two-cell first match"
+          fi
+          git push --quiet --force-with-lease origin "HEAD:${TARGET_BRANCH}"
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Check out repaired F97 C8 head
+      - name: Check out final F97 C8 head
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           ref: ${{ steps.prepare.outputs.sha }}
