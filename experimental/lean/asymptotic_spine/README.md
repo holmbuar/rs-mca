@@ -101,7 +101,7 @@ one global profile atlas fixed before the received line. `naturalTotal` contains
 only the profile sum, so the universal terms in the literal frontiers envelope
 must be absorbed by the supplied `envelope`.
 
-## C7 first-match owner regression
+## C7 first-match owner regression and base-pole producer
 
 `AsymptoticSpine.C7OwnerRegression` is a negative producer test layered on the
 minimal closed-ledger interface.  It models the established affine-Steiner
@@ -113,9 +113,16 @@ assigned cell empty.  In the finite one-slope interface model, the corrected
 line-local sum contains only the C1 term and replays through
 `UniformClosedLedger.compile`; this is not actual `(UNIF)` or row closure.
 
-This does not classify the base-pole constant-coefficient family.  It proves
-that its current one-ray theorem cannot be adapted as a nonempty C7 producer
-until survival from all earlier C1--C6 slope images is established.
+`AsymptoticSpine.C7BasePoleProducer` is the corresponding positive local
+adapter for the real base-pole constant-coefficient class.  It starts from the
+source-side theorem that the raw constant-coefficient cells have singleton slope
+images and at most `q - 1` realized slopes.  Given the aggregate earlier C1--C6
+slope image on the same received line, it defines the assigned C7 slopes as the
+post-deletion subset `raw \ earlier`, installs one direct unit-scale
+`ProfilePayment.ofDirect .c7` for each survivor, and proves that both the
+line-local budget sum and natural-scale sum equal the survivor count and are
+bounded by the raw `q - 1` census.  It asserts no survivor nonemptiness, global
+atlas, actual row-wide `(UNIF)`, target comparison, or row closure.
 
 ## Upgrade regression locks
 
