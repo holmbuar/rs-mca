@@ -87,7 +87,9 @@ theorem listSum_basePoleC7SingletonCell_lengths :
   induction xs with
   | nil => simp
   | cons gamma xs ih =>
-      simp [basePoleC7SingletonCell, ih]
+      change 1 + listSum ((xs.map basePoleC7SingletonCell).map List.length) =
+        xs.length + 1
+      omega
 
 /-- The direct line-local budget is exactly the number of surviving slopes. -/
 theorem basePoleC7DirectBudget_eq
