@@ -33,13 +33,28 @@ jobs:
           ref: ${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.sha }}
           persist-credentials: false
 
-      - name: Build asymptotic spine
+      - name: Set up Lean
         uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1.5.0
         with:
           lake-package-directory: experimental/lean/asymptotic_spine
           auto-config: false
-          build: true
+          build: false
           test: false
           lint: false
           use-mathlib-cache: false
           use-github-cache: false
+
+      - name: Lake build asymptotic spine
+        shell: bash
+        run: |
+          set -o pipefail
+          cd experimental/lean/asymptotic_spine
+          lake build 2>&1 | tee "$GITHUB_WORKSPACE/lean-build.log"
+
+      - name: Upload Lean build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lean-build-log
+          path: lean-build.log
+          if-no-files-found: warn
