@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-20 - C8/C9 semantic producer preflight
+
+- **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/ClosedLedgerExtension.lean`, `C8ShallowClosureProducer.lean`, and `C9ResidualMaxFiberProducer.lean`; added `experimental/notes/audits/c8_c9_semantic_producer_preflight.md`; updated the asymptotic-spine root import, package README, and `experimental/agents-log.md`.
+- **Status:** PROVED FINITE INTERFACE / CONDITIONAL GLOBAL USE / AUDIT.
+- **What is being added:** A generic one-profile closed-line extension with exact line-local telescopes; a shallow-prefix C8 adapter from an actual supplied residual chart and `(SE2)` certificate to a direct `ProfilePayment`; and a C9 adapter whose residual is exactly the complement of an explicit C1--C8 owner function and whose distinct slopes are paid from a supplied row-sharp full-prefix max-fiber theorem.
+- **How it is useful:** It carries two current Grande Finale v3 hard lanes into the existing `UniformClosedLedger` boundary without altering PR #997, manufacturing a Sidon claim, confusing raw high kernel with the live C8 wall, or treating an informal adjective as proof of C9 survival. The remaining C8 work is actual chart exhaustion/profile count plus deep-prefix payment; the remaining C9 work is the row-sharp max-fiber or image-normalized Sidon/MI+MA theorem on the exact residual, followed by the genuine slope projection.
+- **What to do next:** Instantiate the actual RS C1--C8 owner predicates and first-match residuals, prove the row-sharp C9 prefix bound or its Fourier/Sidon implication, and exhaust actual C8 charts into shallow direct closure, a small ray compiler, an earlier owner, or one named deep residual. Preserve `sup_line sum_profile` and keep global `(UNIF)`, target comparison, and row closure explicit.
+
 ### 2026-07-20 - Conjectures and Barriers ePrint package
 
 - **Agent/model:** Codex, reviewing maintainer-added `Conjectures_and_Barriers_RS_MCA_v4_1` paper and source package.
