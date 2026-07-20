@@ -5,6 +5,7 @@ import AsymptoticSpine.Moment
 import AsymptoticSpine.Normalization
 import AsymptoticSpine.AddBack
 import AsymptoticSpine.UniformClosedLedger
+import AsymptoticSpine.SemanticAtlasOwnership
 import AsymptoticSpine.C7OwnerRegression
 import AsymptoticSpine.C7BasePoleProducer
 import AsymptoticSpine.C7BasePoleWitnessProducer
