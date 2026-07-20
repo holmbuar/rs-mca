@@ -1,0 +1,164 @@
+name: Lean build
+run-name: "Lean build — ${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || format('PR #{0}', github.event.pull_request.number) }}"
+
+# On-demand kernel builds of the stdlib-only Lean packages under experimental/lean/.
+#
+# Agent recipe (works from any web agent, no gh or git tricks needed):
+#   1. Push your candidate branch to this fork (any name, any base).
+#   2. Open a DRAFT pull request against holmbuar/rs-mca, title prefixed "CI:".
+#   3. Every push to the PR rebuilds the lean packages the PR touches. Results
+#      appear as PR checks and as a `lean/<package>` commit status on the head SHA;
+#      the full lake log is attached as a run artifact.
+#   4. Close the PR when done — validation PRs are never merged.
+#
+# Agents with gh can build any pushed ref directly, no PR needed:
+#   gh workflow run lean-build.yml -R holmbuar/rs-mca \
+#     -f target_ref=<sha> [-f packages=<dir>[,<dir>...]]
+on:
+  pull_request:
+    paths:
+      - "experimental/lean/**"
+      - ".github/workflows/lean-build.yml"
+  workflow_dispatch:
+    inputs:
+      target_ref:
+        description: Branch, tag, or commit SHA to build
+        required: true
+        type: string
+      packages:
+        description: Comma-separated lake package directories
+        required: false
+        default: "experimental/lean/asymptotic_spine"
+        type: string
+
+permissions:
+  contents: read
+  statuses: write
+  pull-requests: read
+
+# A new push to the same PR supersedes that PR's in-flight build and nobody
+# else's; dispatched builds are keyed by run id and never cancelled.
+concurrency:
+  group: lean-build-${{ github.event_name == 'workflow_dispatch' && github.run_id || format('pr-{0}', github.event.pull_request.number) }}
+  cancel-in-progress: true
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      packages: ${{ steps.pkgs.outputs.packages }}
+    steps:
+      - name: Check out candidate head
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Resolve lake packages to build
+        id: pkgs
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PACKAGES_INPUT: ${{ inputs.packages }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            candidates="$(tr ',' '\n' <<<"$PACKAGES_INPUT")"
+          else
+            candidates="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files" \
+              --jq '.[].filename' \
+              | awk -F/ '$1 == "experimental" && $2 == "lean" && NF >= 4 {print $1 "/" $2 "/" $3}' \
+              | sort -u)"
+          fi
+          pkgs=()
+          while IFS= read -r dir; do
+            dir="${dir%/}"
+            [[ -z "$dir" ]] && continue
+            if [[ -f "$dir/lakefile.lean" || -f "$dir/lakefile.toml" ]]; then
+              pkgs+=("$dir")
+            else
+              echo "skipping $dir (no lakefile)"
+            fi
+          done <<<"$candidates"
+          packages="$(printf '%s\n' "${pkgs[@]:-}" | jq -R . | jq -cs 'map(select(length > 0))')"
+          echo "packages=$packages" >> "$GITHUB_OUTPUT"
+          echo "building: $packages"
+
+  build:
+    needs: detect
+    if: needs.detect.outputs.packages != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJSON(needs.detect.outputs.packages) }}
+    name: ${{ matrix.package }}
+    steps:
+      - name: Check out candidate head
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.target_ref || github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Set up Lean
+        uses: leanprover/lean-action@38fbc41a8c28c4cbaec22d7f7de508ec2e7c0dd9 # v1.5.0
+        with:
+          lake-package-directory: ${{ matrix.package }}
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: false
+          use-github-cache: true
+
+      - name: Lake build
+        id: lake
+        continue-on-error: true
+        shell: bash
+        env:
+          PKG_DIR: ${{ matrix.package }}
+        run: |
+          set -o pipefail
+          cd "$PKG_DIR"
+          lake build 2>&1 | tee "$GITHUB_WORKSPACE/lean-build.log"
+
+      - name: Upload Lean build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lean-build-log-${{ strategy.job-index }}
+          path: lean-build.log
+          if-no-files-found: warn
+
+      - name: Publish Lean commit status
+        if: always()
+        continue-on-error: true
+        shell: bash
+        env:
+          BUILD_OUTCOME: ${{ steps.lake.outcome }}
+          GH_TOKEN: ${{ github.token }}
+          PKG_DIR: ${{ matrix.package }}
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          pkg="$(basename "$PKG_DIR")"
+          if [[ "$BUILD_OUTCOME" == "success" ]]; then
+            state="success"
+            description="lake build passed"
+          else
+            state="failure"
+            description="lake build failed"
+          fi
+          gh api "repos/${GITHUB_REPOSITORY}/statuses/${sha}" \
+            -f state="$state" \
+            -f context="lean/${pkg}" \
+            -f description="$description" \
+            -f target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+      - name: Fail workflow if Lean failed
+        if: steps.lake.outcome != 'success'
+        run: exit 1
