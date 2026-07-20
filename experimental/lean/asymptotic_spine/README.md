@@ -143,6 +143,41 @@ owned raw slopes and appends exactly the two survivors. These modules assert no
 survivor nonemptiness on every line, global fixed-before-line atlas, actual
 row-wide `(UNIF)`, target comparison, or row closure.
 
+## High-redundancy C9 direct-slope producer
+
+`AsymptoticSpine.C9HighRedundancyDirectSlope` packages the positive
+high-redundancy range of the simple-pole C9 interface.  For one rooted boundary
+profile, the source theorem is stated directly on the duplicate-free final
+slope image:
+
+```text
+|Gamma| * (2 * R + 2 - N) <= 2 * (R + 1).
+```
+
+When `2 * R + 2 > N`, deleting the aggregate C1--C8 assigned slope image
+preserves this inequality and gives
+
+```text
+|Gamma_C9^o| <= 2 * (R + 1) <= 2 * (N + 1).
+```
+
+The surviving image is paid through `ProfilePayment.ofDirect .c9` at unit
+natural scale with polynomial compiler loss.  `rawSlopes` is the actual image
+of the rooted witness-to-slope map; the module never installs the size of the
+complete support fibre, a pair moment, a max-fibre estimate, or a fixed-chart
+bound as the MCA payment.
+
+`AsymptoticSpine.C9HighRedundancyLineExtension` appends the nonempty C9 profile
+to an already-closed C1--C8 line.  It preserves duplicate-free first-match
+ownership and proves exact telescopes for `badCount`, `budgetTotal`, and
+`naturalTotal`; the added ray budget is at most `2 * (R + 1)` and the added
+natural-profile cost is at most one.
+
+This closes one local high-redundancy C9 producer.  It does not prove that such
+a survivor exists on every line, cover the low-redundancy range, establish a
+general Sidon/MI--MA theorem, construct a row-complete atlas, prove actual
+row-wide `(UNIF)`, compare to the target, or close a row.
+
 ## Upgrade regression locks
 
 `AsymptoticSpine.RegressionLocks` restates the current general interfaces for

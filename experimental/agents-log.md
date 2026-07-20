@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-20 - High-redundancy C9 direct-slope producer
+
+- **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C9HighRedundancyDirectSlope.lean` and `C9HighRedundancyLineExtension.lean`; added `experimental/notes/audits/c9_high_redundancy_direct_slope_producer.md`; updated the asymptotic-spine root import and README.
+- **Status:** PROVED LOCAL / DIRECT DISTINCT-SLOPE PAYMENT / FORMALIZATION / CONDITIONAL GLOBAL USE / AUDIT.
+- **What is being added:** A rooted producer for one actual post-C1--C8 simple-pole boundary profile in the high-redundancy range `2R+2>N`. One representative is chosen per distinct slope; the MDS two-symbol pair count gives `|Gamma|(2R+2-N)<=2(R+1)`, earlier slopes are deleted, and the surviving image is paid directly at unit natural scale with polynomial loss.
+- **How it is useful:** This closes a genuine local C9 producer without replacing slopes by support counts, moments, max fibres, or fixed-chart estimates. It appends the survivor profile to an earlier closed line, preserves `sup_line sum_profile`, and narrows the live C9 lane to low redundancy plus row-global semantic ownership and `(UNIF)`.
+- **What to do next:** Keep the high-redundancy class closed. Attack the low-redundancy actual-survivor class or proceed to the established C8 higher-dimensional residual order. Global atlas completeness, survivor existence on every line, general Sidon/MI--MA, actual `(UNIF)`, target comparison, and row closure remain open.
+
+
 ### 2026-07-20 - Rooted C7 base-pole closed-ledger producer
 
 - **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).

@@ -9,6 +9,8 @@ import AsymptoticSpine.C7OwnerRegression
 import AsymptoticSpine.C7BasePoleProducer
 import AsymptoticSpine.C7BasePoleWitnessProducer
 import AsymptoticSpine.C7BasePoleLineExtension
+import AsymptoticSpine.C9HighRedundancyDirectSlope
+import AsymptoticSpine.C9HighRedundancyLineExtension
 import AsymptoticSpine.BooleanFiber
 import AsymptoticSpine.NoHighEnergy
 import AsymptoticSpine.SigmaDiagonal
