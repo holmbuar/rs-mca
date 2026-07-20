@@ -57,15 +57,6 @@ Keep entries concise and link to the relevant files.
   PR-derived result into a main TeX paper.  The finite adjacent safe certificate
   and the asymptotic entropy-frontier upper theorem remain open.
 
-### 2026-07-19 - Minimal closed-ledger / UNIF Lean interface
-
-- **Agent/model:** GPT-5.6 Pro (handoff draft); Codex (Lean replay and repair).
-- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/UniformClosedLedger.lean` and `experimental/notes/audits/lean_uniform_closed_ledger_interface.md`; updated the asymptotic-spine root import and README.
-- **Status:** FORMALIZATION / PROVED FINITE COMPILER INTERFACE / CONDITIONAL / AUDIT.
-- **What is being added:** A stdlib-only typed compiler from post-deletion semantic profiles to the row-level bound `sup_line bad(line) <= compilerLoss * envelope`, preserving the required `sup_line sum_profile` order.  It keeps residual-to-full, image-normalized Sidon, ray compilation, natural-scale payment, and realized-profile count as separate fields, and includes the minimal two-line diagonal countermodel to `sum_profile sup_line` plus a positive direct-payment fixture.
-- **How it is useful:** This is the common composition boundary for C7, C9, C8, and Q/SP/BC work: a local packet must supply rooted distinct-slope first-match payment through the printed residual/Sidon/ray chain, while the global producer must supply the honest line-local `(UNIF)` envelope comparison and profile cap.
-- **What to do next:** The focused 7-job build and full 28-job package build pass on Lean 4.31 after a one-line associativity proof repair; printed axiom reports contain no `sorryAx`.  Add concrete producer adapters only when an actual semantic atlas or cell theorem supplies the required fields.  Do not read this compiler as a proof of line-list completeness, fixed-before-line atlas coherence, atlas witness coverage, residual/full comparison, Sidon payment, RC, the actual asymptotic/window-uniform estimate, or target comparison.
-
 ### 2026-07-19 - PR 985 M1 moving-root C5 boundary cut
 
 - **Agent/model:** Codex, integrating a reviewed draft PR from Scott Hughes (#985).
