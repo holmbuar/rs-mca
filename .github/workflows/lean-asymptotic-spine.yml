@@ -1,10 +1,10 @@
 name: Lean - asymptotic spine build mirror
-run-name: Lean asymptotic spine — exact semantic atlas head forced run
+run-name: Lean asymptotic spine — exact semantic atlas PR validation
 
 on:
-  push:
+  pull_request:
     branches:
-      - "codex/lean-build"
+      - main
   workflow_dispatch:
 
 permissions:
@@ -12,7 +12,7 @@ permissions:
   statuses: write
 
 concurrency:
-  group: lean-asymptotic-spine-semantic-atlas-exact
+  group: lean-asymptotic-spine-semantic-atlas-pr-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
