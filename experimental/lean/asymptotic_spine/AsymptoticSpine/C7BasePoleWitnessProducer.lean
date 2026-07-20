@@ -176,8 +176,11 @@ theorem c7Line_flatten_assignedSlopes
     (((data.c7Line earlier).profiles.map
       (fun profile => profile.assignedSlopes)).flatten) =
         data.assignedSlopes earlier := by
-  simpa [c7Line, assignedSlopes] using
-    basePoleC7Profiles_flatten_assignedSlopes earlier data.rawSlopes
+  change
+    ((basePoleC7Profiles earlier data.rawSlopes).map
+      (fun profile => profile.assignedSlopes)).flatten =
+        basePoleC7AssignedSlopes earlier data.rawSlopes
+  exact basePoleC7Profiles_flatten_assignedSlopes earlier data.rawSlopes
 
 /-- The rooted line-local C7 ray budget is bounded by `q - 1`. -/
 theorem c7Line_budgetTotal_le_qMinusOne
@@ -231,7 +234,7 @@ def rootedFixture : BasePoleC7WitnessClass where
     rfl
   slopeOfCoeff_injective := by
     intro a b h
-    omega
+    exact Nat.add_right_cancel h
   qMinusOne := 4
   realizedCoeffCount := by decide
 
