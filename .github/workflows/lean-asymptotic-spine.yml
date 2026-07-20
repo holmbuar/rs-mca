@@ -1,5 +1,5 @@
 name: Lean - asymptotic spine build mirror
-run-name: Lean asymptotic spine — certified semantic atlas ownership
+run-name: Lean asymptotic spine — exact semantic atlas head
 
 on:
   push:
@@ -12,7 +12,7 @@ permissions:
   statuses: write
 
 concurrency:
-  group: lean-asymptotic-spine-semantic-atlas
+  group: lean-asymptotic-spine-semantic-atlas-exact
   cancel-in-progress: true
 
 jobs:
@@ -21,10 +21,10 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Check out semantic atlas branch
+      - name: Check out exact semantic atlas commit
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
-          ref: codex/c7-base-pole-closed-ledger-producer
+          ref: 15697b3ea93e086dfa03de0d8b0e4d4299a1a55b
           persist-credentials: false
 
       - name: Set up Lean
@@ -67,10 +67,10 @@ jobs:
           target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
           if [[ "$BUILD_OUTCOME" == "success" ]]; then
             state="success"
-            description="Certified semantic atlas ownership and full build passed"
+            description="Exact semantic atlas head and full build passed"
           else
             state="failure"
-            description="Certified semantic atlas ownership or full build failed"
+            description="Exact semantic atlas head or full build failed"
           fi
           python3 - "$state" "$target_url" "$description" > status.json <<'PY'
           import json
