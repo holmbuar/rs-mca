@@ -1,19 +1,15 @@
-# C7 raw-collapse payment does not imply post-prefix ownership
+# C7 raw-collapse payment, first-match ownership, and deletion-aware base-pole producer
 
-**Status:** `COUNTEREXAMPLE / FORMALIZATION PACKET / OPEN GAP`
+**Status:** `COUNTEREXAMPLE / FORMALIZATION PACKET / LOCAL PRODUCER ADAPTER / OPEN GLOBAL GAP`
 **Base interface:** `UniformClosedLedger` at commit
 `335b9634074fe3a1650749be5985b15e7c8b36ed`
 **Upstream base:** `9908454995f3f195cfe748f35a1135211609d066`
 
 ## Verdict
 
-The currently established one-ray/base-pole C7 packet cannot yet be installed
-as a nonempty `UniformClosedLedger` producer.  Its direct distinct-slope payment
-is real, but its survival under the earlier C1--C6 cells is not proved.
-
-This is not merely a missing bookkeeping lemma.  The integrated
-`affine_steiner_quotient_owner.md` family is an actual Reed--Solomon regression
-showing that the implication
+A raw C7-style one-slope payment is not, by itself, a semantic C7 owner.  The
+integrated affine-Steiner quotient-owner family is an actual Reed--Solomon
+regression showing that the implication
 
 ```text
 local C7-style collapse + one-slope direct payment
@@ -24,8 +20,16 @@ is false.  In that family, many support witnesses project to one slope, but the
 supports are complete fibres of `x -> x^p - gamma*x`; C1 therefore owns and
 deletes the slope before C7.
 
-The useful deliverable is option (2) from the task: a precise counterexample to
-the proposed owner/payment interface.  No genuine C7 producer is claimed.
+The correction is not to demand that every raw C7 slope always survive.  The
+right first-match object is the post-deletion assigned image:
+
+```text
+Z_C7_assigned(r, lambda) = Z_C7_raw(r, lambda) \ Z_<7(r),
+```
+
+where `Z_<7(r)` is the aggregate C1--C6 slope image on the same received line.
+The local producer may pay this assigned subset directly.  Nonemptiness is a
+separate semantic fact, not a requirement of the payment adapter.
 
 ## Candidate that was tested
 
@@ -37,8 +41,8 @@ C_d = {S in Fib_w(z) : c_m(S) = d}.
 ```
 
 Every nonempty `C_d` has final slope image exactly `{-d}`; there are at most
-`q-1` such cells; and they cover every exact-`m` witness of that pole line.
-Thus the raw projection and direct payment are strong enough for
+`q-1` such cells; and they cover every exact-`m` witness of that pole line.  Thus
+for each constant coefficient the raw rooted chain is
 
 ```text
 raw witness
@@ -47,51 +51,57 @@ raw witness
   -> ray budget 1.
 ```
 
-What the packet explicitly does not prove is that this raw cell survives the
-fixed earlier owner order.  Multiplicative aperiodicity rules out one narrow
-periodic quotient mechanism; it does not exclude every C1 quotient map or the
-C2--C6 owners.
+What the raw theorem alone does not prove is whether `-d` survives the fixed
+earlier owner order.  Multiplicative aperiodicity rules out one narrow periodic
+quotient mechanism; it does not exclude every C1 quotient map or the C2--C6
+owners.
 
-## Exact missing theorem
+## Exact deletion-aware owner
 
-For a proposed raw C7 slope cell `Z_C7(r,lambda)`, the adapter needs the
-line-local survival statement
-
-```text
-(C7-SURV)
-forall gamma in Z_C7(r,lambda),
-  forall earlier owner i in {C1,...,C6},
-    gamma notin Z_i(r).
-```
-
-Equivalently, after the already-fixed ordered atlas,
+For the base-pole constant-coefficient class, define
 
 ```text
-firstMatchSlopeCell(C7, r, lambda) = Z_C7(r,lambda).
+A_d(r) = {-d} \ Z_<7(r).
 ```
 
-Only after `(C7-SURV)` may the raw one-slope estimate be used as the assigned
-C7 payment.  A support predicate, aperiodicity, or a raw slope-image theorem is
-not a substitute.
+Because the raw cell is a singleton, `A_d(r)` is either `{-d}` or empty.  The
+payment is uniform:
 
-## Actual RS falsifier to the proposed implication
+```text
+|A_d(r)| <= 1.
+```
 
-The affine-Steiner equality family supplies the required falsifier:
+If `A_d(r) = {-d}`, C7 genuinely owns that slope.  If `A_d(r) = empty`, an
+earlier C1--C6 owner has already charged the slope and C7 contributes zero.  The
+line-local C7 contribution is therefore
+
+```text
+sum_d |A_d(r)| <= #{d : C_d nonempty} <= q - 1.
+```
+
+This preserves the required order: deletion and summation happen inside the
+received line before any outer supremum is taken.
+
+## Actual RS falsifier to the untrimmed implication
+
+The affine-Steiner equality family supplies the required falsifier to the
+untrimmed raw-owner implication:
 
 ```text
 pi_gamma(x) = x^p - gamma*x,
 ```
 
-with affine `F_p`-lines as complete fibres.  For each quotient profile there
-are `q/p` support witnesses and one realized slope `gamma`.  This has the local
+with affine `F_p`-lines as complete fibres.  For each quotient profile there are
+`q/p` support witnesses and one realized slope `gamma`.  This has the local
 C7-style collapse signature, but C1 precedes C7 and owns every witness and
-slope.  Hence `(C7-SURV)` fails:
+slope.  Hence the full-survival statement fails:
 
 ```text
 gamma in Z_C1(r) intersect Z_C7_raw(r).
 ```
 
-The post-C1 C7 assigned slope cell is empty.
+The post-C1 C7 assigned slope cell is empty.  This refutes charging the
+untrimmed raw C7 profile; it does not refute charging the post-deletion subset.
 
 ## Lean interface regression
 
@@ -123,43 +133,81 @@ Thus the failure is precisely semantic ownership.  It is not a failure of the
 one-slope payment, not a support-count argument, and not a change to the
 `sup_line sum_profile` order.
 
+## Lean producer adapter
+
+`AsymptoticSpine.C7BasePoleProducer` formalizes the deletion-aware local
+producer at the same interface boundary.  It starts from two finite slope lists:
+
+```text
+earlier : aggregate C1--C6 slope image on the received line
+raw     : duplicate-free base-pole constant-coefficient C7 raw slope image
+```
+
+and defines
+
+```text
+basePoleC7AssignedSlopes earlier raw = raw \ earlier.
+```
+
+It then maps each survivor `gamma` to a singleton direct payment
+
+```text
+ProfilePayment.ofDirect .c7 [gamma] 1 1 ...
+```
+
+and proves that the flattened assigned C7 slope image is exactly the survivor
+list, the budget total and natural-scale total both equal the survivor count,
+and the survivor count is bounded by the raw constant-coefficient census.  The
+source-facing wrapper is
+
+```text
+basePoleC7Line_budgetTotal_le_qMinusOne
+```
+
+which consumes only the raw theorem's `raw.length <= qMinusOne` bound.
+
 ## Ledger consequence
 
-In the finite one-slope interface model, the invalid sum is
+The invalid untrimmed sum is
 
 ```text
 U_C1(r) + U_C7_raw(r) = 1 + 1,
 ```
 
-because it charges the same slope twice.  The correct first-match line-local
-sum is
+when both terms charge the same slope.  The correct first-match line-local sum
+is
 
 ```text
-U_C1(r) + U_C7_assigned(r) = 1 + 0 = 1.
+U_C1(r) + U_C7_assigned(r) = 1 + 0 = 1
+```
+
+in the affine-Steiner deletion regression, and more generally
+
+```text
+sum_d U_C7_assigned(r,d) = #{surviving constant-coefficient slopes} <= q - 1.
 ```
 
 The outer supremum is taken only after this line-local deletion and sum.  No
 `sum_profile sup_line` interchange is introduced.
 
-## What would convert this negative result into a producer
+## What remains open
 
-A successor C7 packet must prove `(C7-SURV)` for a real post-prefix class, then
-supply one of:
+The local producer does not prove that a survivor exists, and it does not prove
+that every proposed base-pole slope avoids C1--C6.  It only shows how to populate
+the closed-ledger interface after the required first-match deletion has been
+performed.
 
-```text
-assigned C7 slope image <= natural profile scale,
-```
-
-or a typed residual/full -> ray chain ending in that inequality.  For the
-base-pole constant-coefficient cells, the direct one-slope payment is already
-available; only the actual earlier-owner exclusion is missing.
+A successor source theorem could strengthen the result by proving nonempty
+survival for a specific constant coefficient, or by classifying every deleted
+coefficient under a named earlier owner.  Neither strengthening is required for
+the local direct-payment adapter.
 
 ## Nonclaims
 
 - This is not a counterexample to every possible C7 survivor theorem.
 - It does not show that the base-pole constant-coefficient cells are always
-  earlier-owned; it shows that their current theorem does not establish
-  survival and that the proposed inference is false in an actual RS family.
+  earlier-owned; it shows that untrimmed raw ownership is invalid and that the
+  assigned subset is the correct producer object.
 - It does not prove completeness over all received lines, a global atlas fixed
   before the line, profile-count asymptotics, actual UNIF, row closure, or a
   target comparison.
@@ -173,9 +221,10 @@ After applying the patch on top of commit `335b9634074fe3a1650749be5985b15e7c8b3
 ```text
 cd experimental/lean/asymptotic_spine
 lake build AsymptoticSpine.C7OwnerRegression
+lake build AsymptoticSpine.C7BasePoleProducer
 lake build
 python3 ../../scripts/verify_c7_first_match_owner_regression.py
 ```
 
-The original PR #987 claims remain unchanged: this packet is a separate
-negative producer test layered on top of its interface.
+The original PR #987 claims remain unchanged: this packet is a separate C7
+consumer/producers test layered on top of its interface.
