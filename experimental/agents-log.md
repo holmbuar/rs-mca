@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-20 - Primitive one-parameter C8 direct-slope producer
+
+- **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C8OnePencilDirectSlope.lean` and `C8OnePencilLineExtension.lean`; added `experimental/notes/audits/c8_one_pencil_direct_slope_producer.md`; updated the asymptotic-spine root import and README.
+- **Status:** PROVED LOCAL / DIRECT DISTINCT-SLOPE PAYMENT / FORMALIZATION / CONDITIONAL GLOBAL USE / AUDIT.
+- **What is being added:** A rooted producer for the actual primitive one-parameter split-pencil C8 chart. The final slope injects into the projective pencil parameter, the moving-root theorem gives `|Gamma|(omega-g)<=N-g`, earlier C1--C7 slopes are deleted, and the surviving image is paid directly at unit natural scale with polynomial loss.
+- **How it is useful:** This closes the enumerative and interface payment for the object named by `cor:bc-one-pencil`, appends it to an earlier closed line, preserves `sup_line sum_profile`, and prevents future audits from reopening raw support or saturation counts for the one-pencil class.
+- **What to do next:** Keep primitive one-parameter pencils closed. Classify every actual higher-dimensional post-common-core chart into paid one-parameter pencils, an earlier owner, or one sharply named residual; prove chart count and off-chart exclusion. General residual RC, actual `(UNIF)`, target comparison, and row closure remain open.
+
+
 ### 2026-07-20 - High-redundancy C9 direct-slope producer
 
 - **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).

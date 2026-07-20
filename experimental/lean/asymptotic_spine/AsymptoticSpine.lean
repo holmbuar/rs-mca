@@ -11,6 +11,8 @@ import AsymptoticSpine.C7BasePoleWitnessProducer
 import AsymptoticSpine.C7BasePoleLineExtension
 import AsymptoticSpine.C9HighRedundancyDirectSlope
 import AsymptoticSpine.C9HighRedundancyLineExtension
+import AsymptoticSpine.C8OnePencilDirectSlope
+import AsymptoticSpine.C8OnePencilLineExtension
 import AsymptoticSpine.BooleanFiber
 import AsymptoticSpine.NoHighEnergy
 import AsymptoticSpine.SigmaDiagonal

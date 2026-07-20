@@ -178,6 +178,34 @@ a survivor exists on every line, cover the low-redundancy range, establish a
 general Sidon/MI--MA theorem, construct a row-complete atlas, prove actual
 row-wide `(UNIF)`, compare to the target, or close a row.
 
+## Primitive one-parameter C8 direct-slope producer
+
+`AsymptoticSpine.C8OnePencilDirectSlope` packages the source theorem for one
+actual post-common-core projective split-pencil chart.  The rooted interface
+records the final slope image, the slope-to-pencil-parameter injection, the
+fixed `D`-part degree `g`, and the moving-root incidence bound
+
+```text
+|Gamma| * (omega - g) <= N - g.
+```
+
+After deleting the aggregate C1--C7 assigned slope image, the survivor set is
+paid through `ProfilePayment.ofDirect .c8` at unit natural scale with polynomial
+loss `N-g <= N`.  The producer counts the final distinct slope image; it does
+not insert a raw support census, support-pair moment, max-fibre bound, or fixed
+chart size in place of MCA slopes.
+
+`AsymptoticSpine.C8OnePencilLineExtension` appends the nonempty C8 profile to an
+already-closed C1--C7 line, preserves first-match ownership, and proves exact
+telescopes for `badCount`, `budgetTotal`, and `naturalTotal`.  The added ray
+budget is at most `N-g`, and the added natural-profile cost is at most one.
+
+This closes the enumerative and interface payment for the primitive
+one-parameter C8 object named by `cor:bc-one-pencil`.  It does not prove that
+every post-common-core chart is one-dimensional, exhaust higher-dimensional
+charts, supply an unbounded-kernel ray compiler, prove actual row-wide `(UNIF)`,
+compare to the target, or close a row.
+
 ## Upgrade regression locks
 
 `AsymptoticSpine.RegressionLocks` restates the current general interfaces for
