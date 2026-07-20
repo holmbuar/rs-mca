@@ -1,8 +1,6 @@
 name: Lean - asymptotic spine build mirror
-run-name: Lean asymptotic spine — final modular high-rigidity C8 head
+run-name: Lean asymptotic spine — certified semantic atlas ownership
 
-# Fork-only validation/control branch. Add template-complete bookkeeping, squash
-# one focused modular C8 commit, and build that exact final SHA.
 on:
   push:
     branches:
@@ -10,11 +8,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   statuses: write
 
 concurrency:
-  group: lean-asymptotic-spine-c8-modular-high-rigidity-final
+  group: lean-asymptotic-spine-semantic-atlas
   cancel-in-progress: true
 
 jobs:
@@ -23,91 +21,10 @@ jobs:
     timeout-minutes: 30
 
     steps:
-      - name: Prepare clean modular C8 candidate
-        id: prepare
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          TARGET_BRANCH: codex/c8-modular-high-rigidity-direct-slope
-          BASE_COMMIT: 407b6b615da430c697b0e778500d7eeced57ca43
-        run: |
-          set -euo pipefail
-          work="$(mktemp -d)"
-          trap 'rm -rf "$work"' EXIT
-          git clone --quiet --branch "$TARGET_BRANCH" \
-            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
-            "$work/repo"
-          cd "$work/repo"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          python3 - <<'PY'
-          from pathlib import Path
-
-          readme = Path("experimental/lean/asymptotic_spine/README.md")
-          text = readme.read_text(encoding="utf-8")
-          title = "## High-rigidity modular C8 direct-slope producer"
-          if title not in text:
-              section = """## High-rigidity modular C8 direct-slope producer
-
-          `AsymptoticSpine.C8ModularHighRigidityDirectSlope` packages one
-          root-free fixed-multiplier first-interior modular-locator profile.  The
-          source exchange-rigidity theorem is applied after selecting one rooted
-          support/polynomial witness per distinct final slope, giving
-
-          ```text
-          |Gamma| * (N * (h+d+1) - m * (N-m)) <= N * (h+d+1).
-          ```
-
-          In the positive Plotkin-gap regime, the post-C1--C7 slope image is paid
-          directly at unit natural scale with quadratic loss at most `N^2`.
-          `AsymptoticSpine.C8ModularHighRigidityLineExtension` appends the profile
-          to an earlier closed line and proves exact budget and natural-profile
-          telescopes.
-
-          The active deployed first-interior rows have negative Plotkin gap, so
-          this module is explicitly nondeployed.  Their mixed-character or
-          aggregate first-match slope residual remains open.
-
-          """
-              marker = "## Upgrade regression locks"
-              if marker not in text:
-                  raise SystemExit("README marker not found")
-              readme.write_text(text.replace(marker, section + marker, 1), encoding="utf-8")
-
-          log = Path("experimental/agents-log.md")
-          log_text = log.read_text(encoding="utf-8")
-          log_title = "### 2026-07-20 - High-rigidity modular C8 direct-slope producer"
-          if log_title not in log_text:
-              entry = """### 2026-07-20 - High-rigidity modular C8 direct-slope producer
-
-          - **Agent/model:** GPT-5.6 Pro (research and formalization); GitHub Actions Lean 4.31 (kernel validation).
-          - **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C8ModularHighRigidityDirectSlope.lean` and `C8ModularHighRigidityLineExtension.lean`; added `experimental/notes/audits/c8_modular_high_rigidity_direct_slope_producer.md`; updated the asymptotic-spine root import and README.
-          - **Status:** PROVED LOCAL / NONDEPLOYED HIGH-RIGIDITY SUBREGIME / DIRECT DISTINCT-SLOPE PAYMENT / FORMALIZATION / CONDITIONAL GLOBAL USE / AUDIT.
-          - **What is being added:** On one root-free fixed-multiplier modular-locator profile, choose one rooted support/polynomial witness per distinct slope. Exchange rigidity and the constant-weight Plotkin count give `|Gamma|(N(h+d+1)-m(N-m))<=N(h+d+1)`; when the gap is positive, earlier C1--C7 slopes are deleted and the survivor image is paid directly at unit natural scale.
-          - **How it is useful:** This closes the positive Plotkin-gap modular C8 subregime without replacing slopes by support counts, pair moments, max fibres, or fixed-chart bounds. It appends the survivor profile to an earlier closed line and preserves `sup_line sum_profile`.
-          - **What to do next:** Do not apply this theorem to the active deployed rows: their calibrated Plotkin gaps are negative. Attack the nonpositive-gap mixed-character or aggregate first-match slope residual across multipliers. Actual `(UNIF)`, target comparison, and row closure remain open.
-          """
-              marker = "## Entries\n"
-              if marker not in log_text:
-                  raise SystemExit("agents-log marker not found")
-              log.write_text(log_text.replace(marker, marker + "\n" + entry + "\n", 1), encoding="utf-8")
-          PY
-          if ! git diff --quiet; then
-            git add experimental/agents-log.md experimental/lean/asymptotic_spine/README.md
-            git commit -m "Record high-rigidity modular C8 producer"
-          fi
-          git fetch --quiet origin "$BASE_COMMIT"
-          if [[ "$(git rev-list --count "${BASE_COMMIT}..HEAD")" -gt 1 ]]; then
-            git reset --soft "$BASE_COMMIT"
-            git commit -m "Formalize high-rigidity modular C8 producer"
-          fi
-          git push --quiet --force-with-lease origin "HEAD:${TARGET_BRANCH}"
-          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-
-      - name: Check out final modular C8 head
+      - name: Check out semantic atlas branch
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
-          ref: ${{ steps.prepare.outputs.sha }}
+          ref: codex/c7-base-pole-closed-ledger-producer
           persist-credentials: false
 
       - name: Set up Lean
@@ -150,10 +67,10 @@ jobs:
           target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
           if [[ "$BUILD_OUTCOME" == "success" ]]; then
             state="success"
-            description="Modular high-rigidity C8 producer and full build passed"
+            description="Certified semantic atlas ownership and full build passed"
           else
             state="failure"
-            description="Modular high-rigidity C8 producer or full build failed"
+            description="Certified semantic atlas ownership or full build failed"
           fi
           python3 - "$state" "$target_url" "$description" > status.json <<'PY'
           import json
