@@ -1,9 +1,0 @@
-{"plugins": [],
- "package": "m31QRootedShell",
- "options": {},
- "name": "M31QRootedShell.Deployed",
- "isModule": false,
- "importArts":
- {"M31QRootedShell.Envelope":
-  ["/private/tmp/claude-501/-Users-tor-src-rs-mca/ad4ee87a-dc4f-4245-924d-a345b8ab975a/scratchpad/wt-pad/experimental/lean/m31_q_rooted_shell/.lake/build/lib/lean/M31QRootedShell/Envelope.olean"]},
- "dynlibs": []}
