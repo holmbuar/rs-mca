@@ -1,0 +1,8 @@
+### 2026-07-21 - C8 common-core shortening and high-kappa owner compiler
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/lean/asymptotic_spine/AsymptoticSpine/C8HighKappaOwner.lean`, `experimental/lean/asymptotic_spine/AsymptoticSpine.lean`, `experimental/lean/asymptotic_spine/README.md`, `experimental/lean/asymptotic_spine/C8_HIGH_KAPPA_OWNER_CORRESPONDENCE.md`, and `experimental/notes/thresholds/c8_high_kappa_owner_or_payment.md`.
+- **Status:** PROVED FINITE COMPILER / AUDIT / CONDITIONAL.
+- **What is being added:** A stdlib-only finite compiler for C8 common-core shortening. It proves typed slope-preserving shortening and zero-loss add-back, transfers shortened support, direct `(RC)`, shallow-closure, and direct `(A6)` payments to the original distinct-slope cell, records the factor-aware kernel law `kappa = (k - c) - c_res`, and proves the exact high-kappa/small-core owner-or-payment dichotomy.
+- **How it is useful:** This supplies the formal compiler boundary needed to use a common-core factor without confusing the original code dimension with the shortened one or raw supports with distinct slopes. It isolates the remaining mathematical input as an actual post-first-match C8 instantiation together with either a certified earlier semantic owner on the high-kappa branch or a deep natural-scale payment.
+- **What to do next:** Instantiate the compiler on one genuine Reed--Solomon C8 residual after the complete earlier-owner deletion order, then prove either the high-kappa semantic owner or a deep-prefix MI/MA, Sidon, or direct ray payment. Do not claim exhaustive C8 coverage, a deployed adjacent upper ledger, or row closure from this packet alone.
