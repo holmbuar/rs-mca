@@ -182,25 +182,46 @@ The row-sharp max-fiber inequality is a field of `ProfileData`, not a theorem of
 this module.  This is the intended finite boundary of `def:primitive-q` and the
 row target `def:q-row-atom`.
 
-## Formalization census
+## Kernel validation and axiom census
 
-Static census of the three ported modules:
+Fork draft PR #70 ran the explicit target build
 
 ```text
-Lean version target: 4.31.0
-imports: Stdlib/package modules only
+lake build AsymptoticSpine
+  AsymptoticSpine.C8ShallowClosureProducer
+  AsymptoticSpine.C9ResidualMaxFiberProducer
+  AsymptoticSpine.ClosedLedgerExtension
+```
+
+and then the package default target.  Both builds completed successfully with
+33 jobs on Lean 4.31.0.  This validates compilation of every new module as an
+explicit target as well as the package root.
+
+Static and build-log census for the three ported modules:
+
+```text
 Mathlib imports: 0
 sorry: 0
 admit: 0
-sorryAx declarations: 0
+sorryAx occurrences: 0
 custom axiom declarations: 0
 unsafe declarations: 0
 ```
 
-The modules end with `#print axioms` checks for their nontrivial theorem groups.
-Fork draft-PR CI is the authoritative compilation validation; a green build
-certifies elaboration of the changed modules and the package root, not the
-external mathematical hypotheses documented below.
+The printed axiom dependencies are exactly standard Lean principles:
+
+- `ClosedLedgerExtension`: `assignedSlopeList_nodup` uses no axioms;
+  `listSum_append_extension` uses `propext`; the remaining printed theorems use
+  `propext` and `Quot.sound`.
+- `C8ShallowClosureProducer`: the three structural/payment theorems use
+  `propext` and `Quot.sound`; the two executable fixtures additionally use
+  `Classical.choice`.
+- `C9ResidualMaxFiberProducer`: every printed theorem uses only `propext` and
+  `Quot.sound`.
+
+Green CI proves elaboration and kernel checking of these statements.  It does
+not discharge any external mathematical field in `ProfileData` or any global
+nonclaim below.
 
 ## Explicit nonclaims
 
