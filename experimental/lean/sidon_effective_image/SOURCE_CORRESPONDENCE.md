@@ -13,20 +13,22 @@ note.
 
 ## Theorem map
 
-| Lean theorem | Source-level meaning | Status |
+The single fail-closed theorem `SidonEffectiveImage.packet_check` certifies every
+clause below in one kernel-decided conjunction.
+
+| `packetCheck` clause | Source-level meaning | Status |
 |---|---|---|
-| `support_count` | `M=binom(10,5)=252` | finite regression |
-| `support_shapes` | complete generated fixed-weight slice consists of duplicate-free five-subsets | finite regression |
-| `realized_image_count` | realized power-sum image has `L=251` targets | finite regression |
-| `max_fiber_eq_two` | exact full-slice maximum fiber is two | finite regression |
-| `unique_double_target` | zero is the only doubled syndrome | finite regression |
-| `displayed_collision` | the two printed supports form that doubled zero fiber | finite regression |
-| `image_normalized_q_loss_below_two` | cleared image-normalized loss `maxFiber*L/M` is below two | finite regression |
-| `two_coefficient_census_bound` | toy instance of the `p^2` locator-coefficient census | finite regression |
-| `basis_values` | three moment-column differences are the printed vectors | finite regression |
-| `effective_span_is_full` | an explicit inverse represents every vector of `F_11^3` | finite regression |
-| `effective_ambient_count` | `A_eff=11^3=1331` | finite regression |
-| `effective_span_over_image_gt_five` | exact sparse-image inequality `A_eff>5L` | finite regression |
+| `supports.length == 252` | `M=binom(10,5)=252` | finite regression |
+| support shape gate | complete generated fixed-weight slice consists of duplicate-free five-subsets | finite regression |
+| `image.length == 251` | realized power-sum image has `L=251` targets | finite regression |
+| `maxFiber == 2` | exact full-slice maximum fiber is two | finite regression |
+| unique-double-target gates | zero is the only doubled syndrome and the two printed supports form that fiber | finite regression |
+| cleared Q-loss gate | image-normalized loss `maxFiber*L/M` is below two | finite regression |
+| `maxFiber <= p^2` | toy instance of the two-free locator-coefficient census | finite regression |
+| three basis-value gates | moment-column differences are the printed vectors | finite regression |
+| `fullSpanCheck` | an explicit inverse represents every vector of `F_11^3` | finite regression |
+| `allVec3.length == 1331` | `A_eff=11^3=1331` | finite regression |
+| final sparse-image gate | exact inequality `A_eff>5L` | finite regression |
 
 ## Build contract
 
@@ -39,10 +41,11 @@ the authoritative build.  No local Lean build is claimed.
 ```text
 sorry declarations: 0
 axiom declarations: 0
+native-evaluation proof steps: 0
 Mathlib imports: 0
 external packages: 0
 ```
 
-The file imports only `Std.Tactic.NativeDecide`.  The finite theorems are closed
-by `native_decide`; compilation proves those decidable propositions, not the
-source-level asymptotic theorem.
+The file imports only the Lean `Std` root.  `packet_check` is closed by kernel
+reduction using `by decide`; compilation proves that decidable finite gate, not
+the source-level Parseval or asymptotic argument.
