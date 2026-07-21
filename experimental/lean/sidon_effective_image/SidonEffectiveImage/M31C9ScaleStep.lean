@@ -22,6 +22,14 @@ minimal image-normalized residual loss grows from one in the eight-root packet
 to two here, although the literal integral natural-scale inequality remains
 `2 ≤ 1 * 2`.
 
+The finite census is certified by a fixed-width stable radix sort of the
+complete 12,870-row `(mask,key)` table.  Kernel checks recompute every key from
+its mask, verify adjacent key order, radix-sort the mask column back to the
+weight-eight slice of `List.range 65536`, and read every fiber from one
+adjacent-equality run scan.  All passes are linear in the table size for the
+fixed 16/31-bit widths; no deduplication or membership search is used in the
+census.
+
 This is a finite Q-support certificate.  It does not construct received-line
 witnesses, an `(SE2)` projection, a slope payment, a global first-match atlas,
 profile multiplicity, add-back, `UNIF`, or a deployed row certificate.
@@ -104,7 +112,7 @@ def domain : List Nat :=
   , 1244279234, 907334541, 903204413, 1240149106
   , 2066813671, 1590029158, 80669976, 557454489 ]
 
-/-- Duplicate-free executable list predicate. -/
+/-- Duplicate-free executable predicate used only for the sixteen-point domain. -/
 def noDuplicates [BEq α] : List α → Bool
   | [] => true
   | x :: xs => !xs.contains x && noDuplicates xs
@@ -127,9 +135,6 @@ def allMasks : List Support := List.range (2 ^ 16)
 
 def fullSupports : List Support :=
   allMasks.filter fun mask => maskWeight mask == 8
-
-def weightFourMasks : List Support :=
-  allMasks.filter fun mask => maskWeight mask == 4
 
 /-- Sum selected domain values to the `e`-th power modulo the row prime. -/
 def sumPowerMod (e : Nat) (mask : Support) : Nat :=
@@ -154,9 +159,6 @@ def antipodalPairs : List (Nat × Nat) :=
 def c1Owned (mask : Support) : Bool :=
   antipodalPairs.all fun pair =>
     Nat.testBit mask pair.1 == Nat.testBit mask pair.2
-
-def c1OwnedSupports : List Support :=
-  fullSupports.filter c1Owned
 
 def residualSupports : List Support :=
   fullSupports.filter fun mask => !c1Owned mask
@@ -196,39 +198,67 @@ theorem scoped_residual_exact :
   unfold scopedEarlierOwner
   exact residual_exact ScopedPreC9Owner.c1
 
-/-- Bucketed exact multiplicity computation.  Equal keys always lie in the same
-bucket because the bucket is a function of `p1`; bucketing only avoids a
-quadratic global `eraseDups`. -/
-def bucketCount : Nat := 128
+/-! ## Fixed-width radix table and linear certificate scans -/
 
-def keyBucket (z : PrefixKey) : Nat := z.p1 % bucketCount
-
-structure KeyMultiplicity where
-  key : PrefixKey
-  multiplicity : Nat
+structure TableRow where
+  mask : Support
+  p1 : Nat
+  p2 : Nat
+  p3 : Nat
   deriving Repr, BEq, DecidableEq
 
-def multiplicityIn (keys : List PrefixKey) (z : PrefixKey) : Nat :=
-  (keys.filter fun w => decide (w = z)).length
+def TableRow.key (row : TableRow) : PrefixKey :=
+  { p1 := row.p1, p2 := row.p2, p3 := row.p3 }
 
-def bucketMultiplicities (keys : List PrefixKey) (bucket : Nat) :
-    List KeyMultiplicity :=
-  let bucketKeys := keys.filter fun z => keyBucket z == bucket
-  bucketKeys.eraseDups.map fun z =>
-    { key := z, multiplicity := multiplicityIn bucketKeys z }
+def tableRowOfMask (mask : Support) : TableRow :=
+  let key := prefixKey mask
+  ⟨mask, key.p1, key.p2, key.p3⟩
 
-def allMultiplicities (keys : List PrefixKey) : List KeyMultiplicity :=
-  (List.range bucketCount).flatMap fun bucket =>
-    bucketMultiplicities keys bucket
+def unsortedTable : List TableRow :=
+  fullSupports.map tableRowOfMask
 
-def fullKeyList : List PrefixKey := fullSupports.map prefixKey
-def residualKeyList : List PrefixKey := residualSupports.map prefixKey
+/-- Stable one-bit partition.  Both filters are linear and no search is nested
+inside either pass. -/
+def stableBitPass {α : Type}
+    (value : α → Nat) (bit : Nat) (rows : List α) : List α :=
+  rows.filter (fun row => !Nat.testBit (value row) bit) ++
+    rows.filter (fun row => Nat.testBit (value row) bit)
 
-def maxNat : List Nat → Nat
-  | [] => 0
-  | x :: xs => Nat.max x (maxNat xs)
+/-- Fixed-width least-significant-bit radix sort. -/
+def radixSortNat {α : Type}
+    (value : α → Nat) (bits : Nat) (rows : List α) : List α :=
+  (List.range bits).foldl
+    (fun current bit => stableBitPass value bit current) rows
 
-def sumNat (xs : List Nat) : Nat := xs.foldl (· + ·) 0
+/-- Lexicographic `(p1,p2,p3,mask)` order, obtained by stable LSD passes. -/
+def sortedTable : List TableRow :=
+  let byMask := radixSortNat TableRow.mask 16 unsortedTable
+  let byP3 := radixSortNat (fun row => row.p3) 31 byMask
+  let byP2 := radixSortNat (fun row => row.p2) 31 byP3
+  radixSortNat (fun row => row.p1) 31 byP2
+
+def rowKeyRecomputes (row : TableRow) : Bool :=
+  prefixKey row.mask == row.key
+
+def prefixKeyLT (a b : PrefixKey) : Bool :=
+  if a.p1 < b.p1 then true
+  else if b.p1 < a.p1 then false
+  else if a.p2 < b.p2 then true
+  else if b.p2 < a.p2 then false
+  else decide (a.p3 < b.p3)
+
+def tableRowLE (a b : TableRow) : Bool :=
+  if a.key == b.key then decide (a.mask ≤ b.mask)
+  else prefixKeyLT a.key b.key
+
+def adjacentAllAux {α : Type}
+    (p : α → α → Bool) (previous : α) : List α → Bool
+  | [] => true
+  | next :: rest => p previous next && adjacentAllAux p next rest
+
+def adjacentAll {α : Type} (p : α → α → Bool) : List α → Bool
+  | [] => true
+  | first :: rest => adjacentAllAux p first rest
 
 structure FiberCensus where
   mass : Nat
@@ -240,19 +270,140 @@ structure FiberCensus where
   otherKeys : Nat
   deriving Repr, BEq, DecidableEq
 
-def fiberCensus (multiplicities : List KeyMultiplicity) : FiberCensus :=
-  let counts := multiplicities.map KeyMultiplicity.multiplicity
-  { mass := sumNat counts
-  , imageCard := counts.length
-  , maxFiber := maxNat counts
-  , singletonKeys := (counts.filter fun n => n == 1).length
-  , doubleKeys := (counts.filter fun n => n == 2).length
-  , sixKeys := (counts.filter fun n => n == 6).length
+def emptyFiberCensus : FiberCensus :=
+  { mass := 0
+  , imageCard := 0
+  , maxFiber := 0
+  , singletonKeys := 0
+  , doubleKeys := 0
+  , sixKeys := 0
+  , otherKeys := 0 }
+
+def addRunToCensus (census : FiberCensus) (runSize : Nat) : FiberCensus :=
+  { mass := census.mass + runSize
+  , imageCard := census.imageCard + 1
+  , maxFiber := Nat.max census.maxFiber runSize
+  , singletonKeys :=
+      census.singletonKeys + (if runSize == 1 then 1 else 0)
+  , doubleKeys :=
+      census.doubleKeys + (if runSize == 2 then 1 else 0)
+  , sixKeys :=
+      census.sixKeys + (if runSize == 6 then 1 else 0)
   , otherKeys :=
-      (counts.filter fun n => !(n == 1 || n == 2 || n == 6)).length }
+      census.otherKeys +
+        (if runSize == 1 || runSize == 2 || runSize == 6 then 0 else 1) }
 
 /-- Four complete `T_4` support masks. -/
 def t4BlockMasks : List Support := [15, 240, 3840, 61440]
+
+/-- The six unordered pairs of complete `T_4` blocks. -/
+def t4BlockPairs : List (Support × Support) :=
+  [(15, 240), (15, 3840), (15, 61440),
+   (240, 3840), (240, 61440), (3840, 61440)]
+
+def disjointMasks (a b : Support) : Bool :=
+  (List.range 16).all fun i =>
+    !(Nat.testBit a i && Nat.testBit b i)
+
+def blockIncluded (block mask : Support) : Bool :=
+  (List.range 16).all fun i =>
+    !Nat.testBit block i || Nat.testBit mask i
+
+def orientedT4BlockSwap
+    (left right : Support) (blocks : Support × Support) : Bool :=
+  if blockIncluded blocks.1 left && blockIncluded blocks.2 right then
+    let leftRemainder := left - blocks.1
+    let rightRemainder := right - blocks.2
+    leftRemainder == rightRemainder &&
+      maskWeight leftRemainder == 4 &&
+      disjointMasks leftRemainder (blocks.1 + blocks.2)
+  else false
+
+def isT4BlockSwap (left right : Support) : Bool :=
+  t4BlockPairs.any fun blocks =>
+    orientedT4BlockSwap left right blocks ||
+      orientedT4BlockSwap right left blocks
+
+structure RunAnalysis where
+  census : FiberCensus
+  blockSwapCount : Nat
+  allDoubleBlockSwaps : Bool
+  firstRepeatLaterMask : Nat
+  firstRepeatKey : PrefixKey
+  firstRepeatLeft : Support
+  firstRepeatRight : Support
+  deriving Repr, BEq, DecidableEq
+
+def zeroPrefixKey : PrefixKey := { p1 := 0, p2 := 0, p3 := 0 }
+
+def emptyRunAnalysis : RunAnalysis :=
+  { census := emptyFiberCensus
+  , blockSwapCount := 0
+  , allDoubleBlockSwaps := true
+  , firstRepeatLaterMask := 2 ^ 16
+  , firstRepeatKey := zeroPrefixKey
+  , firstRepeatLeft := 0
+  , firstRepeatRight := 0 }
+
+def finishRun
+    (key : PrefixKey) (masksRev : List Support)
+    (analysis : RunAnalysis) : RunAnalysis :=
+  let masks := masksRev.reverse
+  let runSize := masks.length
+  let nextCensus := addRunToCensus analysis.census runSize
+  if runSize == 2 then
+    match masks with
+    | [left, right] =>
+        let isSwap := isT4BlockSwap left right
+        let laterMask := Nat.max left right
+        let isFirst := laterMask < analysis.firstRepeatLaterMask
+        { census := nextCensus
+        , blockSwapCount :=
+            analysis.blockSwapCount + (if isSwap then 1 else 0)
+        , allDoubleBlockSwaps := analysis.allDoubleBlockSwaps && isSwap
+        , firstRepeatLaterMask :=
+            if isFirst then laterMask else analysis.firstRepeatLaterMask
+        , firstRepeatKey :=
+            if isFirst then key else analysis.firstRepeatKey
+        , firstRepeatLeft :=
+            if isFirst then left else analysis.firstRepeatLeft
+        , firstRepeatRight :=
+            if isFirst then right else analysis.firstRepeatRight }
+    | _ =>
+        { census := nextCensus
+        , blockSwapCount := analysis.blockSwapCount
+        , allDoubleBlockSwaps := false
+        , firstRepeatLaterMask := analysis.firstRepeatLaterMask
+        , firstRepeatKey := analysis.firstRepeatKey
+        , firstRepeatLeft := analysis.firstRepeatLeft
+        , firstRepeatRight := analysis.firstRepeatRight }
+  else
+    { census := nextCensus
+    , blockSwapCount := analysis.blockSwapCount
+    , allDoubleBlockSwaps := analysis.allDoubleBlockSwaps
+    , firstRepeatLaterMask := analysis.firstRepeatLaterMask
+    , firstRepeatKey := analysis.firstRepeatKey
+    , firstRepeatLeft := analysis.firstRepeatLeft
+    , firstRepeatRight := analysis.firstRepeatRight }
+
+def scanSortedRowsAux
+    (currentKey : PrefixKey) (masksRev : List Support)
+    (analysis : RunAnalysis) : List TableRow → RunAnalysis
+  | [] => finishRun currentKey masksRev analysis
+  | row :: rows =>
+      if row.key == currentKey then
+        scanSortedRowsAux currentKey (row.mask :: masksRev) analysis rows
+      else
+        scanSortedRowsAux row.key [row.mask]
+          (finishRun currentKey masksRev analysis) rows
+
+def analyzeSortedRows : List TableRow → RunAnalysis
+  | [] => emptyRunAnalysis
+  | row :: rows =>
+      scanSortedRowsAux row.key [row.mask] emptyRunAnalysis rows
+
+def tableFiber (rows : List TableRow) (z : PrefixKey) : List Support :=
+  (rows.filter fun row => row.key == z).map TableRow.mask
 
 def fullSixKey : PrefixKey := { p1 := 0, p2 := 4, p3 := 0 }
 
@@ -267,64 +418,15 @@ def growthLeft : Support := 5903
 def growthRight : Support := 6128
 def growthRemainder : Support := 5888
 
-def firstRepeatedKeyAux (seen : List PrefixKey) : List PrefixKey → Option PrefixKey
-  | [] => none
-  | z :: zs =>
-      if seen.contains z then some z else firstRepeatedKeyAux (z :: seen) zs
-
-def firstRepeatedResidualKey : Option PrefixKey :=
-  firstRepeatedKeyAux [] residualKeyList
-
-def disjointMasks (a b : Support) : Bool :=
-  (List.range 16).all fun i =>
-    !(Nat.testBit a i && Nat.testBit b i)
-
-/-- The six unordered pairs of complete `T_4` blocks. -/
-def t4BlockPairs : List (Support × Support) :=
-  [(15, 240), (15, 3840), (15, 61440),
-   (240, 3840), (240, 61440), (3840, 61440)]
-
-structure BlockSwapRecord where
-  leftBlock : Support
-  rightBlock : Support
-  remainder : Support
-  leftSupport : Support
-  rightSupport : Support
-  key : PrefixKey
-  deriving Repr, BEq, DecidableEq
-
-def blockSwapRecords : List BlockSwapRecord :=
-  t4BlockPairs.flatMap fun pair =>
-    (weightFourMasks.filter fun remainder =>
-      disjointMasks remainder (pair.1 + pair.2) &&
-      !c1Owned (pair.1 + remainder) &&
-      !c1Owned (pair.2 + remainder)).map fun remainder =>
-        { leftBlock := pair.1
-        , rightBlock := pair.2
-        , remainder := remainder
-        , leftSupport := pair.1 + remainder
-        , rightSupport := pair.2 + remainder
-        , key := prefixKey (pair.1 + remainder) }
-
-def blockSwapRecordValid (record : BlockSwapRecord) : Bool :=
-  maskWeight record.remainder == 4 &&
-  maskWeight record.leftSupport == 8 &&
-  maskWeight record.rightSupport == 8 &&
-  residualSupports.contains record.leftSupport &&
-  residualSupports.contains record.rightSupport &&
-  record.leftSupport != record.rightSupport &&
-  prefixKey record.leftSupport == record.key &&
-  prefixKey record.rightSupport == record.key
-
-def sameKeySet (xs ys : List PrefixKey) : Bool :=
-  xs.all ys.contains && ys.all xs.contains
-
 def ceilDiv (a b : Nat) : Nat := (a + b - 1) / b
 
 def compilerLoss : Nat := 1
 def naturalScale : Nat := 2
 
 structure ScaleStepSummary where
+  tableKeyRecomputation : Bool
+  tableSorted : Bool
+  maskColumnComplete : Bool
   fullSupportCount : Nat
   fullCensus : FiberCensus
   c1OwnedSupportCount : Nat
@@ -349,45 +451,65 @@ structure ScaleStepSummary where
   deriving Repr, BEq, DecidableEq
 
 def scaleStepSummary : ScaleStepSummary :=
-  let fullMultiplicities := allMultiplicities fullKeyList
-  let residualMultiplicities := allMultiplicities residualKeyList
-  let fullStats := fiberCensus fullMultiplicities
-  let residualStats := fiberCensus residualMultiplicities
-  let residualDoubleKeys :=
-    (residualMultiplicities.filter fun entry => entry.multiplicity == 2).map
-      KeyMultiplicity.key
-  let swapKeys := blockSwapRecords.map BlockSwapRecord.key
-  { fullSupportCount := fullSupports.length
-  , fullCensus := fullStats
-  , c1OwnedSupportCount := c1OwnedSupports.length
-  , residualSupportCount := residualSupports.length
-  , residualCensus := residualStats
-  , fullSixFiberExact := fullPrefixFiber fullSixKey == fullSixMasks
-  , fullSixFiberDeleted := residualPrefixFiber fullSixKey == []
-  , firstRepeatedExact := firstRepeatedResidualKey == some growthKey
+  let rows := sortedTable
+  let keyCheck := rows.all rowKeyRecomputes
+  let sortedCheck := adjacentAll tableRowLE rows
+  let maskSorted := radixSortNat TableRow.mask 16 rows
+  let maskCheck := maskSorted.map TableRow.mask == fullSupports
+  let fullAnalysis := analyzeSortedRows rows
+  let residualRows := rows.filter fun row => !c1Owned row.mask
+  let residualAnalysis := analyzeSortedRows residualRows
+  { tableKeyRecomputation := keyCheck
+  , tableSorted := sortedCheck
+  , maskColumnComplete := maskCheck
+  , fullSupportCount := rows.length
+  , fullCensus := fullAnalysis.census
+  , c1OwnedSupportCount := rows.length - residualRows.length
+  , residualSupportCount := residualRows.length
+  , residualCensus := residualAnalysis.census
+  , fullSixFiberExact :=
+      tableFiber rows fullSixKey == fullSixMasks
+  , fullSixFiberDeleted :=
+      tableFiber residualRows fullSixKey == []
+  , firstRepeatedExact :=
+      residualAnalysis.firstRepeatLaterMask == growthRight &&
+      residualAnalysis.firstRepeatKey == growthKey &&
+      residualAnalysis.firstRepeatLeft == growthLeft &&
+      residualAnalysis.firstRepeatRight == growthRight
   , growthFiberExact :=
-      residualPrefixFiber growthKey == [growthLeft, growthRight]
+      tableFiber residualRows growthKey == [growthLeft, growthRight]
   , growthBlockSwapExact :=
       growthLeft == 15 + growthRemainder &&
-      growthRight == 240 + growthRemainder
-  , blockSwapRecordCount := blockSwapRecords.length
-  , blockSwapRecordsValid := blockSwapRecords.all blockSwapRecordValid
-  , residualDoubleKeyCount := residualDoubleKeys.length
-  , residualDoubleKeysNodup := noDuplicates residualDoubleKeys
-  , blockSwapKeysNodup := noDuplicates swapKeys
-  , doubleKeysExactlyBlockSwaps := sameKeySet residualDoubleKeys swapKeys
+      growthRight == 240 + growthRemainder &&
+      isT4BlockSwap growthLeft growthRight
+  , blockSwapRecordCount := residualAnalysis.blockSwapCount
+  , blockSwapRecordsValid := residualAnalysis.allDoubleBlockSwaps
+  , residualDoubleKeyCount := residualAnalysis.census.doubleKeys
+  , residualDoubleKeysNodup := sortedCheck
+  , blockSwapKeysNodup :=
+      sortedCheck && residualAnalysis.allDoubleBlockSwaps
+  , doubleKeysExactlyBlockSwaps :=
+      residualAnalysis.allDoubleBlockSwaps &&
+        residualAnalysis.blockSwapCount == residualAnalysis.census.doubleKeys
   , fullNaturalScaleExact :=
-      ceilDiv fullStats.mass fullStats.imageCard == naturalScale
+      ceilDiv fullAnalysis.census.mass fullAnalysis.census.imageCard ==
+        naturalScale
   , residualNaturalScaleExact :=
-      ceilDiv residualStats.mass residualStats.imageCard == naturalScale
+      ceilDiv residualAnalysis.census.mass residualAnalysis.census.imageCard ==
+        naturalScale
   , integralLossOneBound :=
-      decide (residualStats.maxFiber ≤ compilerLoss * naturalScale)
+      decide
+        (residualAnalysis.census.maxFiber ≤ compilerLoss * naturalScale)
   , imageNormalizedLossOneFails :=
-      decide (residualStats.mass <
-        residualStats.maxFiber * residualStats.imageCard)
+      decide
+        (residualAnalysis.census.mass <
+          residualAnalysis.census.maxFiber *
+            residualAnalysis.census.imageCard)
   , imageNormalizedLossTwoHolds :=
-      decide (residualStats.maxFiber * residualStats.imageCard ≤
-        2 * residualStats.mass) }
+      decide
+        (residualAnalysis.census.maxFiber *
+            residualAnalysis.census.imageCard ≤
+          2 * residualAnalysis.census.mass) }
 
 def expectedFullCensus : FiberCensus :=
   { mass := 12870
@@ -408,7 +530,10 @@ def expectedResidualCensus : FiberCensus :=
   , otherKeys := 0 }
 
 def expectedScaleStepSummary : ScaleStepSummary :=
-  { fullSupportCount := 12870
+  { tableKeyRecomputation := true
+  , tableSorted := true
+  , maskColumnComplete := true
+  , fullSupportCount := 12870
   , fullCensus := expectedFullCensus
   , c1OwnedSupportCount := 70
   , residualSupportCount := 12800
@@ -434,6 +559,21 @@ def expectedScaleStepSummary : ScaleStepSummary :=
 theorem scale_step_summary_exact :
     scaleStepSummary = expectedScaleStepSummary := by decide
 
+theorem sorted_table_key_recomputation :
+    scaleStepSummary.tableKeyRecomputation = true := by
+  rw [scale_step_summary_exact]
+  rfl
+
+theorem sorted_table_order_exact :
+    scaleStepSummary.tableSorted = true := by
+  rw [scale_step_summary_exact]
+  rfl
+
+theorem sorted_table_mask_column_complete :
+    scaleStepSummary.maskColumnComplete = true := by
+  rw [scale_step_summary_exact]
+  rfl
+
 theorem residual_max_fiber_exact :
     scaleStepSummary.residualCensus.maxFiber = 2 := by
   rw [scale_step_summary_exact]
@@ -455,7 +595,8 @@ theorem integral_loss_one_at_scale_two :
   rw [scale_step_summary_exact]
   rfl
 
-/-- Domain derivation and deployed-root checks, all in the kernel. -/
+/-! ## Domain derivation and deployed arithmetic -/
+
 theorem generator_norm_one :
     fp2Mul normOneGenerator (fp2Conj normOneGenerator) = fp2One := by decide
 
@@ -514,6 +655,9 @@ theorem local_charge_fits_deployed_budget :
 #print axioms residual_exact
 #print axioms scoped_residual_exact
 #print axioms scale_step_summary_exact
+#print axioms sorted_table_key_recomputation
+#print axioms sorted_table_order_exact
+#print axioms sorted_table_mask_column_complete
 #print axioms residual_max_fiber_exact
 #print axioms residual_doubled_key_count_exact
 #print axioms residual_image_normalized_loss_two_exact
