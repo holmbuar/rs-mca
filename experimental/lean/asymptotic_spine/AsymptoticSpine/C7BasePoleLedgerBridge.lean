@@ -103,6 +103,7 @@ def basePoleC7Line (earlier raw : List Nat) (hraw : raw.Nodup) :
     exact basePoleC7AssignedSlopes_nodup earlier raw hraw
   atlasExhaustive := by
     rw [basePoleC7Profiles_flatten_assignedSlopes]
+    exact Nat.le_refl _
   profileCountControl := by
     simpa [basePoleC7Profiles] using
       basePoleC7AssignedSlopes_length_le_raw earlier raw
