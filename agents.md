@@ -78,7 +78,7 @@ At this snapshot:
 | `experimental/Conjectures_and_Barriers_RS_MCA_v4_1.tex` | **Direct problem/falsifier authority:** benchmark conjectures, exact compiler requirements, finite barriers, and separation of finite from conjectural asymptotic claims. |
 | `experimental/grande_finale.tex` | **Active conditional completion architecture:** proved local theorems, order-32/rational-atom reductions, owner localization, spread-core incidence bounds, and exact completion problems. Hypotheses/problems are not row bounds. |
 | `tex/cs25_cap_v13_2.tex` | **Foundation/unsafe authority:** exact unsafe endpoints, field/domain conventions, reductions, and certificate grammar. |
-| `experimental/RS_MCA_Paving_v9.2.tex` | **Proved safe-bound toolbox:** shortening, MDS circuit, exact finite, exponential-budget, and conditional Sidon-to-flatness results. It does not solve the subexponential near-capacity frontier. |
+| `RS_MCA_Paving_v9.2.tex` | **Fixed ePrint basis for unconditional paving results:** shortening, MDS circuit, exact finite, exponential-budget, and conditional Sidon-to-flatness results from ePrint 2026/1463. It does not solve the subexponential near-capacity frontier. |
 | `experimental/rs_mca_thresholds.tex` | **Exact-regime/exposition source:** staircases, below-half-distance results, syndrome geometry, and examples; not unrestricted near-capacity closure authority. |
 | `tex/RS_disproof_v3.tex`, `tex/slackMCA_v4.tex`, `tex/snarks_v5.tex` | Stable background for no-slack obstructions, reserve/quotient theory, and later protocol accounting. |
 | `archived/` predecessors | Provenance only. Never bank an archived owner or charge without an explicit source-bound bridge. |
@@ -276,7 +276,7 @@ A declaration is certified only after the package builds and its statement is ma
 2. Introduction, exact compiler, finite benchmark, and finite-closure problem in `Conjectures_and_Barriers_RS_MCA_v4_1.tex`.
 3. Audited-status, finite-Q barrier, and exact-completion sections of `grande_finale.tex`.
 4. Exact unsafe-row/certificate sections of `cs25_cap_v13_2.tex`.
-5. Main theorem/status sections of `RS_MCA_Paving_v9.2.tex`.
+5. Main theorem/status sections of root-level `RS_MCA_Paving_v9.2.tex` (ePrint 2026/1463).
 6. Only then, row-specific notes and scripts named by the live compiler.
 7. Use `rs_mca_thresholds.tex` for solved exact regimes; use archives only for provenance.
 

@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-21 - Promote RS-MCA Paving v9.2 to root ePrint basis
+
+- **Agent/model:** Codex, following maintainer instruction after ePrint publication.
+- **Files added or changed:** Moved `experimental/RS_MCA_Paving_v9.2.tex` to `RS_MCA_Paving_v9.2.tex`, moved `experimental/RS_MCA_Paving_v9.2.pdf` to `RS_MCA_Paving_v9.2.pdf`, updated `agents.md`, `readme.md`, and this log entry.  The source-release bundle remains at `experimental/RS_MCA_Paving_v9.2_source/`.
+- **Status:** PROVED / CONDITIONAL / AUDIT, according to the theorem statements in the paper.
+- **What is being added:** `MDS Paving Bounds for Reed--Solomon MCA` is now linked as IACR ePrint 2026/1463 and promoted from an experimental manuscript to a root-level fixed basis for the repository's unconditional paving results.
+- **How it is useful:** Future work should cite the root-level Paving v9.2 files and ePrint 2026/1463 for shortening, MDS-circuit, exact finite, exponential-budget, and conditional Sidon-to-flatness results instead of treating the paper as a transient experimental artifact.
+- **What to do next:** Keep the root TeX/PDF stable unless preparing an explicit new version.  Use the experimental source bundle only for reproducibility and release provenance.
+
 ### 2026-07-21 - Grande Finale v4 promotion
 
 - **Agent/model:** Codex, reviewing maintainer-added `experimental/grande_finale_v4.tex` and `.pdf`.
