@@ -1,0 +1,94 @@
+{
+  "artifact_kind": "M31_COMMON_CORE_ADD_BACK",
+  "base": {
+    "branch": "gptpro/m31-common-core-addback",
+    "fork_main": "4e5f0b77c98f075ea7c8822cd4859847a232bc2a",
+    "fork_repository": "holmbuar/rs-mca",
+    "upstream_main": "a3017697ad1594521d2779fe1d83bccd45d4c06e",
+    "upstream_repository": "przchojecki/rs-mca"
+  },
+  "generated_date": "2026-07-21",
+  "import_blob_identity": {
+    "experimental/lean/asymptotic_spine/AsymptoticSpine/FirstMatch.lean": {
+      "fork": "44592371660c453c1f8522abb9c0f9364e4dd43d",
+      "upstream": "44592371660c453c1f8522abb9c0f9364e4dd43d",
+      "verdict": "BYTE_IDENTICAL"
+    },
+    "experimental/lean/m31_q_rooted_shell/M31QRootedShell/Deployed.lean": {
+      "fork": "7e21ff098567d26aba7330fbb2722d5cb952fb09",
+      "upstream": "7e21ff098567d26aba7330fbb2722d5cb952fb09",
+      "verdict": "BYTE_IDENTICAL"
+    }
+  },
+  "nonclaims": [
+    "no row-sharp Q",
+    "no list-interior coverage",
+    "no adjacent-row closure",
+    "no shortened-component payment or semantic owner/refund",
+    "no M31 row upper bound or deployed atom",
+    "no rank-two coloop theorem",
+    "no MCA slope or ray statement",
+    "no active global partition digest"
+  ],
+  "padded_frame": {
+    "forbidden_list_size": 16777216,
+    "marked_source_key_floor": 259881,
+    "padded_first_cap": 20765,
+    "padded_first_three_cap": 62295,
+    "padded_first_two_cap": 41530,
+    "padded_margin_to_w": 5152,
+    "signed_occupancy_allowance": 259880,
+    "signed_occupancy_baseline": 16517335
+  },
+  "payload_sha256": "d6686636125590d8a79b479f8e0a5b4fcef9d89cc62731cfaceea4b224cfe880",
+  "row": {
+    "B_star": 16777215,
+    "K": 1048576,
+    "agreement": 1116023,
+    "n": 2097152,
+    "name": "Mersenne-31 list",
+    "object": "LIST",
+    "p": 2147483647,
+    "radius": 981129,
+    "target_epsilon": "2^-100",
+    "w": 67447
+  },
+  "schema_version": 1,
+  "shortening_sweep": {
+    "all_agreement_gates": true,
+    "all_dimension_gates": true,
+    "all_excess_identities": true,
+    "all_radius_identities": true,
+    "core_degree_max": 62295,
+    "core_degree_min": 0,
+    "min_short_distance_minus_radius": 67448,
+    "min_short_length": 2034857,
+    "min_short_length_minus_K": 986281,
+    "min_short_radius": 918834,
+    "rows_checked": 62296,
+    "sweep_sha256": "2e4aea80a743f61d5adae9eca32fb90f9ab5da36cf4ce384872d5138a95c4d40"
+  },
+  "source_ledger": {
+    "B_star_plus_one": 16777216,
+    "add_back_factor": 1,
+    "allowance_plus_one": 259881,
+    "baseline_plus_floor": 16777216,
+    "owners_refunds_signed_credits": "DEFINITIONALLY_PRESERVED",
+    "root_masks": "DEFINITIONALLY_PRESERVED",
+    "selectors": "DEFINITIONALLY_PRESERVED",
+    "source_key_map": "POINTWISE_LENGTH_PRESERVING"
+  },
+  "source_note_git_blobs": {
+    "experimental/notes/thresholds/m31_canonical_popov_rank46_compiler.md": "11a1882d88ff8a3f725e61c0ce427cdaaa716fe9",
+    "pr1014:experimental/notes/audits/m31_padding_bridge_audit.md": "85ec62a4594e292456e6e7acf26394c73e2af34c",
+    "pr1022:experimental/notes/thresholds/m31_direct_padded_forney_frame_route_cut.md": "4e2652b5486e1f8d06b239142951cc7a6610451c",
+    "pr1025:experimental/notes/audits/m31_masked_diagonal_saturation.md": "cbb63ec62af7931b3fdb868f8d3745c8822edb09"
+  },
+  "terminal": {
+    "acceptance_criterion": 3,
+    "after": "PROVED_COMMON_CORE_LOSS_ONE_ADDBACK",
+    "before": "UNPAID_COMMON_CORE_ADD_BACK",
+    "deployed_atom_moved": false,
+    "remaining": "UNPAID_CANONICAL_LOCATOR_NUMERATOR_ESCAPE_OWNER_REFUND"
+  }
+}
