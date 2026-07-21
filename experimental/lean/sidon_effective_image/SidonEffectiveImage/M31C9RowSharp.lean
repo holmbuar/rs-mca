@@ -185,14 +185,29 @@ owner inside the complete fixed-weight slice. -/
 theorem residual_exact {Owner : Type} [DecidableEq Owner] (c1 : Owner) :
     IsExactOwnerComplement (earlierOwner c1) := by
   intro x
-  cases h : c1Owned x <;>
-    simp [IsExactOwnerComplement, leaf, residualPoints, earlierOwner, h]
+  show x ∈ residualPoints ↔ x ∈ fullPoints ∧ earlierOwner c1 x = none
+  unfold residualPoints earlierOwner
+  simp only [List.mem_filter]
+  constructor
+  · rintro ⟨hfull, hres⟩
+    refine ⟨hfull, ?_⟩
+    cases hcase : c1Owned x
+    · rfl
+    · rw [hcase] at hres
+      exact absurd hres (by decide)
+  · rintro ⟨hfull, hnone⟩
+    refine ⟨hfull, ?_⟩
+    cases hcase : c1Owned x
+    · rfl
+    · rw [hcase] at hnone
+      simp at hnone
 
 /-- Concrete scoped C1--C8 owner-complement witness.  Only C1 is nonempty in
 this local profile. -/
 theorem scoped_residual_exact :
-    IsExactOwnerComplement scopedEarlierOwner :=
-  residual_exact .c1
+    IsExactOwnerComplement scopedEarlierOwner := by
+  unfold scopedEarlierOwner
+  exact residual_exact ScopedPreC9Owner.c1
 
 /-- Exact selected and collision keys. -/
 def collisionKey : PrefixKey := { p1 := 0, p2 := 2, p3 := 0 }
