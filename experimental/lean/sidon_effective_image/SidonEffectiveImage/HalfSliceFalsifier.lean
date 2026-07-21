@@ -14,6 +14,8 @@ This module is a finite arithmetic/census regression.  It does not formalize
 finite fields, asymptotics, an RS first-match leaf, or an MCA denominator.
 -/
 
+set_option maxRecDepth 8192
+
 namespace SidonEffectiveImage.HalfSliceFalsifier
 
 /-- All `k`-subsets of `{0, ..., n-1}`, represented as duplicate-free lists. -/
