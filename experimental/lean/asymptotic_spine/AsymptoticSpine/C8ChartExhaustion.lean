@@ -325,11 +325,13 @@ theorem mem_bucketAtlas_flatten_iff {Key : Type} [DecidableEq Key]
 theorem existsUnique_bucket {Key : Type} [DecidableEq Key]
     (packet : C8ChartExhaustionPacket Key) (key : Key)
     (hkey : key ∈ packet.keys) :
-    ∃! bucket, key ∈ packet.bucketCell bucket := by
+    ∃ bucket,
+      key ∈ packet.bucketCell bucket ∧
+      ∀ other, key ∈ packet.bucketCell other → other = bucket := by
   refine ⟨packet.classify key, ?_, ?_⟩
   · exact (packet.mem_bucketCell_iff (packet.classify key) key).2 ⟨hkey, rfl⟩
-  · intro bucket hmem
-    have hclass := (packet.mem_bucketCell_iff bucket key).1 hmem
+  · intro other hmem
+    have hclass := (packet.mem_bucketCell_iff other key).1 hmem
     exact hclass.2.symm
 
 /-- Membership in the bounded-pencil bucket returns the original supplied
@@ -485,7 +487,10 @@ theorem c8Spine_deepResidual_exact :
 /-- Every realized calibration chart belongs to exactly one of the four buckets. -/
 theorem c8Spine_everyChart_exactlyOneBucket :
     ∀ key ∈ c8SpineCalibrationPacket.keys,
-      ∃! bucket, key ∈ c8SpineCalibrationPacket.bucketCell bucket := by
+      ∃ bucket,
+        key ∈ c8SpineCalibrationPacket.bucketCell bucket ∧
+        ∀ other,
+          key ∈ c8SpineCalibrationPacket.bucketCell other → other = bucket := by
   intro key hkey
   exact c8SpineCalibrationPacket.existsUnique_bucket key hkey
 
