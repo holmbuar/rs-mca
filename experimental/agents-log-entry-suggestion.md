@@ -1,0 +1,8 @@
+### 2026-07-21 - C7 closed-ledger bridge and semantic ownership boundary
+
+- **Agent/model:** GPT-5.6 Pro (research, audit, and formalization); GitHub Actions Lean 4.31 (kernel validation).
+- **Files added or changed:** Added `experimental/lean/asymptotic_spine/AsymptoticSpine/C7BasePoleLedgerBridge.lean`, `C7BasePoleWitnessLedgerBridge.lean`, `C7BasePoleLineExtension.lean`, `SemanticAtlasOwnership.lean`, `C7OwnerRegression.lean`, and `C7SingletonPlantedAbsorption.lean`; updated the package root and README; added three C7 audit notes, the fail-closed support verifier, and this entry suggestion.
+- **Status:** PROVED LOCAL / FORMALIZATION / COUNTEREXAMPLE / CONDITIONAL GLOBAL USE / AUDIT.
+- **What is being added:** The deferred third unit of the #997 split rebuilds the `ProfilePayment` and closed-ledger layer in new modules on top of the integrated narrow C7 producers. It proves rooted one-line ledger hand-off, exact budget and natural-scale telescopes under arbitrary compiler loss at least one, and finite ownership regressions separating certified semantic owners from witness-local refinements.
+- **How it is useful:** This completes the local C7 connection to `UniformClosedLedger` without rewriting the integrated public interfaces, preserves the required line-local `sup_line sum_profile` order, and blocks untrimmed double charging or unsupported singleton-planted ownership.
+- **What to do next:** Review and integrate this focused follow-up after exact-head Lean CI and source-statement audit. A fixed-before-line exhaustive atlas, C7 survivor nonemptiness, row-wide `(UNIF)`, target comparison, C8/C9 payment, and row closure remain open.
