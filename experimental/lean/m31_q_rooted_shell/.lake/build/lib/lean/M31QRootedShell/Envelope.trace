@@ -1,0 +1,32 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs":
+ {"o": ["c17142e047137b02.olean"],
+  "m": false,
+  "i": "34cc862df62dc5be.ilean",
+  "c": "253825fe78ee19cb.c"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/private/tmp/claude-501/-Users-tor-src-rs-mca/ad4ee87a-dc4f-4245-924d-a345b8ab975a/scratchpad/wt-pad/experimental/lean/m31_q_rooted_shell/.lake/build/lib/lean /Users/tor/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean /private/tmp/claude-501/-Users-tor-src-rs-mca/ad4ee87a-dc4f-4245-924d-a345b8ab975a/scratchpad/wt-pad/experimental/lean/m31_q_rooted_shell/M31QRootedShell/Envelope.lean -o /private/tmp/claude-501/-Users-tor-src-rs-mca/ad4ee87a-dc4f-4245-924d-a345b8ab975a/scratchpad/wt-pad/experimental/lean/m31_q_rooted_shell/.lake/build/lib/lean/M31QRootedShell/Envelope.olean -i /private/tmp/claude-501/-Users-tor-src-rs-mca/ad4ee87a-dc4f-4245-924d-a345b8ab975a/scratchpad/wt-pad/experimental/lean/m31_q_rooted_shell/.lake/build/lib/lean/M31QRootedShell/Envelope.ilean -c /private/tmp/claude-501/-Users-tor-src-rs-mca/ad4ee87a-dc4f-4245-924d-a345b8ab975a/scratchpad/wt-pad/experimental/lean/m31_q_rooted_shell/.lake/build/ir/M31QRootedShell/Envelope.c --setup /private/tmp/claude-501/-Users-tor-src-rs-mca/ad4ee87a-dc4f-4245-924d-a345b8ab975a/scratchpad/wt-pad/experimental/lean/m31_q_rooted_shell/.lake/build/ir/M31QRootedShell/Envelope.setup.json --json",
+   "level": "trace"}],
+ "inputs":
+ [["M31QRootedShell.Envelope:deps",
+   [["deps",
+     [["m31QRootedShell/M31QRootedShell:extraDep",
+       [["@m31QRootedShell:extraDep", "00000000000006bb"]]],
+      ["imports", "00000000000006bb"]]],
+    ["libs",
+     [["import dynlibs", "00000000000006bb"],
+      ["package external libraries", "00000000000006bb"],
+      ["module dynlibs", "00000000000006bb"],
+      ["module plugins", "00000000000006bb"]]]]],
+  ["Lean 4.31.0, commit 68218e876d2a38b1985b8590fff244a83c321783",
+   "fc45ac412f28501c"],
+  ["/private/tmp/claude-501/-Users-tor-src-rs-mca/ad4ee87a-dc4f-4245-924d-a345b8ab975a/scratchpad/wt-pad/experimental/lean/m31_q_rooted_shell/M31QRootedShell/Envelope.lean",
+   "8b06265dfdbe1516"],
+  ["options", "00000000000006bb"],
+  ["isModule: false", "feefd2a0d3a1847e"],
+  ["Module.name: M31QRootedShell.Envelope", "afaf61b4f00c3c0f"],
+  ["Package.id?: (some m31QRootedShell)", "047d3bea3635d73a"],
+  ["Module.leanArgs: #[]", "00000000000006bb"]],
+ "depHash": "31ed4714d1f16714"}
