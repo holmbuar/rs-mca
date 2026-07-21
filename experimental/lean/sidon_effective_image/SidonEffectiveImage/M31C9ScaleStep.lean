@@ -102,8 +102,11 @@ def supportVector (mask : Support) : Vector Bool 16 :=
 def maskWeight (mask : Support) : Nat :=
   boolWeight (supportVector mask)
 
+def isFullSupport (mask : Support) : Bool :=
+  decide (mask < 2 ^ 16) && decide (maskWeight mask = activeWeight)
+
 def IsFullSupport (mask : Support) : Prop :=
-  mask < 2 ^ 16 ∧ maskWeight mask = activeWeight
+  isFullSupport mask = true
 
 def sumPowerMod (e : Nat) (mask : Support) : Nat :=
   ((List.range 16).zip domain).foldl
@@ -131,8 +134,11 @@ def c1Owned (mask : Support) : Bool :=
   sameBit mask 12 14 &&
   sameBit mask 13 15
 
+def isResidual (mask : Support) : Bool :=
+  isFullSupport mask && !c1Owned mask
+
 def IsResidual (mask : Support) : Prop :=
-  IsFullSupport mask ∧ c1Owned mask = false
+  isResidual mask = true
 
 inductive ScopedPreC9Owner where
   | c1 | c2 | c3 | c4 | c5 | c6 | c7 | c8
@@ -152,8 +158,9 @@ def IsExactOwnerComplement {Owner : Type} [DecidableEq Owner]
 theorem residual_exact {Owner : Type} [DecidableEq Owner] (c1 : Owner) :
     IsExactOwnerComplement (earlierOwner c1) := by
   intro mask
-  unfold IsResidual earlierOwner
-  cases hcase : c1Owned mask <;> simp [hcase]
+  unfold IsResidual isResidual IsFullSupport earlierOwner
+  cases hfull : isFullSupport mask <;>
+    cases hown : c1Owned mask <;> simp [hfull, hown]
 
 theorem scoped_residual_exact :
     IsExactOwnerComplement scopedEarlierOwner := by
@@ -173,7 +180,7 @@ def selectedIndices (mask : Support) : List Nat :=
   (List.range 16).filter fun i => Nat.testBit mask i
 
 def earlierResidualMasks : List Support :=
-  (List.range firstGrowthSupport).filter fun mask => decide (IsResidual mask)
+  (List.range firstGrowthSupport).filter isResidual
 
 def ResidualPrefixInjective : Prop :=
   ∀ a b : Support,
@@ -233,11 +240,9 @@ theorem firstGrowth_not_c1Owned :
 theorem firstGrowthMate_not_c1Owned :
     c1Owned firstGrowthMate = false := by decide
 
-theorem firstGrowth_survives : IsResidual firstGrowthSupport :=
-  ⟨firstGrowth_full, firstGrowth_not_c1Owned⟩
+theorem firstGrowth_survives : IsResidual firstGrowthSupport := by decide
 
-theorem firstGrowthMate_survives : IsResidual firstGrowthMate :=
-  ⟨firstGrowthMate_full, firstGrowthMate_not_c1Owned⟩
+theorem firstGrowthMate_survives : IsResidual firstGrowthMate := by decide
 
 theorem firstGrowth_key_exact :
     prefixKey firstGrowthSupport = firstGrowthKey := by decide
