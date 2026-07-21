@@ -1,4 +1,4 @@
-import Std.Tactic.NativeDecide
+import Std
 
 /-!
 # Finite effective-image normalization regression
@@ -138,60 +138,33 @@ def allVec3 : List Vec3 :=
 def fullSpanCheck : Bool :=
   allVec3.all fun v => linComb (inverseCoeffs v) == v
 
-/-- The generated support slice is exactly `binom(10,5)`. -/
-theorem support_count : supports.length = 252 := by native_decide
+/--
+One fail-closed finite gate for the complete fixture.  Consolidating the checks
+avoids repeatedly reducing the same support catalogue.  The theorem below uses
+kernel reduction, not native evaluation.
+-/
+def packetCheck : Bool :=
+  supports.length == 252 &&
+  supports.all (fun S => S.length == m && noDuplicates S) &&
+  image.length == 251 &&
+  noDuplicates image &&
+  maxFiber == 2 &&
+  doubleTargets == [zeroSyndrome] &&
+  collisionA != collisionB &&
+  syndrome collisionA == zeroSyndrome &&
+  syndrome collisionB == zeroSyndrome &&
+  decide (maxFiber * image.length < 2 * supports.length) &&
+  decide (maxFiber ≤ p ^ 2) &&
+  basis1 == ({ x := 1, y := 3, z := 7 } : Vec3) &&
+  basis2 == ({ x := 2, y := 8, z := 4 } : Vec3) &&
+  basis3 == ({ x := 3, y := 4, z := 8 } : Vec3) &&
+  fullSpanCheck &&
+  allVec3.length == 1331 &&
+  decide (5 * image.length < allVec3.length)
 
-/-- Every generated support has the intended shape. -/
-theorem support_shapes :
-    supports.all (fun S => S.length == m && noDuplicates S) = true := by
-  native_decide
-
-/-- The realized image has 251 targets. -/
-theorem realized_image_count : image.length = 251 := by native_decide
-
-/-- The image representation itself has no duplicate target. -/
-theorem realized_image_is_duplicate_free : noDuplicates image = true := by
-  native_decide
-
-/-- The exact full-slice maximum fiber is two. -/
-theorem max_fiber_eq_two : maxFiber = 2 := by native_decide
-
-/-- Exactly one realized target has two preimages. -/
-theorem unique_double_target : doubleTargets = [zeroSyndrome] := by
-  native_decide
-
-/-- The two displayed supports are the double zero-syndrome fiber. -/
-theorem displayed_collision :
-    collisionA ≠ collisionB ∧
-      syndrome collisionA = zeroSyndrome ∧
-      syndrome collisionB = zeroSyndrome := by
-  native_decide
-
-/-- Cleared-denominator image-normalized Q loss is strictly below two. -/
-theorem image_normalized_q_loss_below_two :
-    maxFiber * image.length < 2 * supports.length := by
-  native_decide
-
-/-- The general two-free-coefficient census is valid on the toy row. -/
-theorem two_coefficient_census_bound : maxFiber <= p ^ 2 := by
-  native_decide
-
-/-- The displayed generator differences have the intended residue values. -/
-theorem basis_values :
-    basis1 = { x := 1, y := 3, z := 7 } ∧
-      basis2 = { x := 2, y := 8, z := 4 } ∧
-      basis3 = { x := 3, y := 4, z := 8 } := by
-  native_decide
-
-/-- The explicit inverse represents every ambient vector. -/
-theorem effective_span_is_full : fullSpanCheck = true := by native_decide
-
-/-- The effective ambient group has `11^3=1331` elements. -/
-theorem effective_ambient_count : allVec3.length = 1331 := by native_decide
-
-/-- The effective span is already more than five times the realized image. -/
-theorem effective_span_over_image_gt_five :
-    5 * image.length < allVec3.length := by
-  native_decide
+set_option maxRecDepth 1000000 in
+set_option maxHeartbeats 0 in
+/-- Exact finite regression certificate for the `p=11` packet. -/
+theorem packet_check : packetCheck = true := by decide
 
 end SidonEffectiveImage
