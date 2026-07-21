@@ -3,3 +3,4 @@ import M31QRootedShell.Deployed
 import M31QRootedShell.ToyCounterexample
 import M31QRootedShell.MultiplicativeCounterexample
 import M31QRootedShell.SemanticOwner
+import M31QRootedShell.SemanticNaturalScale
