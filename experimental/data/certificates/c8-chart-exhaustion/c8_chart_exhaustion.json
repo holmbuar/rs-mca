@@ -1,0 +1,71 @@
+{
+  "schema": "c8-chart-exhaustion-v1",
+  "status": "PROVED_FINITE_ROUTE_CUT_PARTIAL_EXHAUSTION",
+  "base_sha": "4e5f0b77c98f075ea7c8822cd4859847a232bc2a",
+  "bucket_priority": [
+    "earlier",
+    "shallow",
+    "bounded_pencil",
+    "deep_residual"
+  ],
+  "supplied_shallow_chart": "supplied-shallow",
+  "deep_residual_name": "DEEP_HIGHER_DIMENSIONAL_BALANCED_CORE_AFTER_C1_C7_SHALLOW_AND_ONE_PENCIL_DELETION",
+  "charts": [
+    {
+      "chart_id": "earlier-c4",
+      "earlier_owner": "C4",
+      "is_supplied_shallow": false,
+      "moving_root_certificate": null,
+      "expected_bucket": "earlier"
+    },
+    {
+      "chart_id": "supplied-shallow",
+      "earlier_owner": null,
+      "is_supplied_shallow": true,
+      "moving_root_certificate": null,
+      "expected_bucket": "shallow"
+    },
+    {
+      "chart_id": "moving-pencil-m31",
+      "earlier_owner": null,
+      "is_supplied_shallow": false,
+      "moving_root_certificate": {
+        "moving_points": 2097152,
+        "moving_roots_per_slope": 981128,
+        "slope_count": 2
+      },
+      "expected_bucket": "bounded_pencil"
+    },
+    {
+      "chart_id": "deep-higher-dimensional",
+      "earlier_owner": null,
+      "is_supplied_shallow": false,
+      "moving_root_certificate": null,
+      "expected_bucket": "deep_residual"
+    }
+  ],
+  "active_row_moving_root_caps": [
+    {
+      "row": "Mersenne-31 MCA",
+      "moving_points": 2097152,
+      "moving_roots_per_slope": 981128,
+      "claimed_cap": 2
+    },
+    {
+      "row": "KoalaBear MCA",
+      "moving_points": 2097152,
+      "moving_roots_per_slope": 981104,
+      "claimed_cap": 2
+    }
+  ],
+  "nonclaims": [
+    "ACTUAL_RS_C1_C7_OWNER_FUNCTION",
+    "ACTUAL_RS_SHALLOW_PREFIX_SE2_CERTIFICATE",
+    "ACTUAL_RS_COMMON_CORE_SHORTENING_CERTIFICATE",
+    "GENERAL_GENUINE_ONE_PENCIL_CLASSIFIER",
+    "DEEP_PREFIX_MI_MA_OR_SIDON_PAYMENT",
+    "DEEP_HIGHER_DIMENSIONAL_RAY_PAYMENT",
+    "ROW_UNIFORM_UNIF",
+    "DEPLOYED_ADJACENT_ROW_CLOSURE"
+  ]
+}
