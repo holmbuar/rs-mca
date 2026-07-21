@@ -375,7 +375,16 @@ def minorWitness : CharacterRep := { a1 := 0, a2 := 1, a3 := 0 }
 def majorWitness : CharacterRep := { a1 := 1, a2 := 0, a3 := 0 }
 
 theorem partition_nonempty :
-    IsMinor minorWitness ∧ IsMajor majorWitness := by decide
+    IsMinor minorWitness ∧ IsMajor majorWitness := by
+  constructor
+  · change (0 = 0 ∧ minorWitness ≠ zeroCharacter)
+    constructor
+    · rfl
+    · intro h
+      have h2 : (1 : Nat) = 0 := congrArg CharacterRep.a2 h
+      exact Nat.one_ne_zero h2
+  · change (1 : Nat) ≠ 0
+    exact Nat.one_ne_zero
 
 /-! ## Exact image-compensated aggregate arithmetic -/
 
