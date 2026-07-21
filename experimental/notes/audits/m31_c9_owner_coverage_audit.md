@@ -14,7 +14,7 @@ atom_or_cell: post-C1--C8 C9 prefix keys
 quantifier: every one of 70 supports and every one of 64 residual keys
 projection_and_unit: support-prefix fiber cardinality; slope projection remains external
 claimed_bound: 64/64 full fibers equal 1; no counterexample
-status: PROVED_SCOPED / KERNEL_VALIDATION_PENDING
+status: PROVED_SCOPED / KERNEL_VALIDATED
 impact: acceptance criterion 2; predecessor one-key restriction removed on the exact local profile
 falsifier: a residual key with full fiber size at least 2
 replay: python3 experimental/scripts/verify_m31_c9_owner_coverage.py --check
@@ -29,7 +29,7 @@ replay: python3 experimental/scripts/verify_m31_c9_owner_coverage.py --check
 ## 1. Scope and acceptance gate
 
 Upstream PR #1027 proved one selected key, mask `51`, after a six-support C1
-deletion.  Its named successor was
+deletion. Its named successor was
 `M31_C9_GLOBAL_OWNER_COMPLEMENT_AND_KEY_COVERAGE`.
 
 This packet performs the finite first half in full:
@@ -41,24 +41,24 @@ This packet performs the finite first half in full:
 5. it classifies every surviving realized key; and
 6. it proves that all `64` have singleton full-prefix fibers.
 
-No key is a counterexample.  The packet therefore satisfies criterion **2**:
-it bounds genuine post-C1--C8 survivors.  It is not an interface-only packet.
+No key is a counterexample. The packet satisfies acceptance criterion **2**: it
+bounds genuine post-C1--C8 survivors and is not an interface-only packet.
 
 ## 2. Overlap audit
 
 The ten latest upstream PR descriptions read before work were #1027, #1026,
-#1025, #1024, #1020, #1014, #1012, #1011, #1009, and #1006.  The ten latest
+#1025, #1024, #1020, #1014, #1012, #1011, #1009, and #1006. The ten latest
 fork draft descriptions were #78, #79, #76, #77, #75, #73, #74, #71, #70,
 and #72.
 
-Only #1027 owns this exact finite successor.  The nearby packets concern
+Only #1027 owns this exact finite successor. The nearby packets concern
 effective-image MI+MA floors (#1024/#1026), the C8/C9 producer interface
 (#1020), generic semantic-owner types (#1009), C7/C8 compilers
 (#1011/#1012), or M31 padding and masked-diagonal terminals
-(#1014/#1025).  None classifies all seventy supports or all sixty-four
-surviving keys of this local profile.  No open-PR module is imported.
+(#1014/#1025). None classifies all seventy supports or all sixty-four surviving
+keys of this local profile. No open-PR module is imported.
 
-## 3. Imported API byte identity
+## 3. Imported API byte identity and source labels
 
 The module has exactly two direct integrated package imports.
 
@@ -75,6 +75,19 @@ Authority blobs used by the notes are:
 | `experimental/rs_mca_thresholds.tex` | `01302a797c502a05ed0b11ba949b8756e0aa2b22` |
 | `tex/cs25_cap_v13_2.tex` | `5ceff5dbc4b1ac4cef53eae7eada32046e4bafeb` |
 
+The source-label correspondence is:
+
+| packet object | active source node |
+|---|---|
+| complete fixed-weight slice and primitive residual | `experimental/grande_finale.tex`, `def:primitive-leaf` |
+| realized image versus ambient scale | `eq:image-ambient-scales` |
+| full-prefix maximum fiber | `def:primitive-q`, `def:q-row-atom` |
+| exact deployed Q target | `prop:q-exact-target` |
+| power sums versus locator coefficients | `lem:newton-equivalence` |
+| support-to-slope separation | `(SE2)`, `hyp:ray-compiler`, `prop:q-sp-no-ray` |
+| exact completion boundary | `thm:exact-completion-certificate` |
+| deployed field and row constants | `tex/cs25_cap_v13_2.tex`; integrated `M31QRootedShell.Deployed` |
+
 ## 4. Package layout
 
 ```text
@@ -87,11 +100,11 @@ experimental/lean/sidon_effective_image/
   SidonEffectiveImage/M31C9OwnerCoverage.lean
 ```
 
-The root imports only `SidonEffectiveImage.M31C9OwnerCoverage`.  The lakefile
+The root imports only `SidonEffectiveImage.M31C9OwnerCoverage`. The lakefile
 requires only the integrated `asymptotic_spine` and `m31_q_rooted_shell`
-packages.  The manifest records those path dependencies and the inherited
-`staircase_logic` dependency.  No `.lake/`, generated build output, workflow,
-or `.github/` file is included.
+packages. The manifest records those path dependencies and the inherited
+`staircase_logic` dependency. No `.lake/`, generated build output, workflow, or
+`.github/` file is included.
 
 ## 5. Exact first-match semantics
 
@@ -101,35 +114,22 @@ The first-match order is literal:
 C1 -> C2 -> C3 -> C4 -> C5 -> C6 -> C7 -> C8.
 ```
 
-The local predicates and their proof boundaries are:
+| case | executable local predicate | raw hits | first-match owners |
+|---|---|---:|---:|
+| C1 | membership in the six unions of two antipodal pairs | 6 | 6 |
+| C2 | all four selected values have the same `T_4` value | 2 | 0 |
+| C3 | the active common core of all seventy supports is nonempty | 0 | 0 |
+| C4 | selected active values contain a duplicate | 0 | 0 |
+| C5 | active extension degree exceeds one | 0 | 0 |
+| C6 | `6(b-a)(c-a)(c-b)=0 mod p` for the first three selected roots | 0 | 0 |
+| C7 | the full prefix fiber has size greater than one | 2 | 0 |
+| C8 | the post-C1--C7 prefix fiber has size greater than one | 0 | 0 |
+| residual | no earlier owner | -- | 64 |
 
-| case | executable local predicate | audit meaning |
-|---|---|---|
-| C1 | membership in the six unions of two antipodal pairs | exact complete fibers of `x -> x^2` |
-| C2 | all four selected values have the same `T_4` value | exact complete `T_4` fibers |
-| C3 | the active common core of all seventy supports is nonempty | exact planted block fixed throughout this profile |
-| C4 | selected active values contain a duplicate | repeated-root active locator defect |
-| C5 | active extension degree exceeds one | extension/descent branch |
-| C6 | `6(b-a)(c-a)(c-b)=0 mod p` for the first three selected roots | rank drop of the active power-sum Jacobian |
-| C7 | the full prefix fiber has size greater than one | effective-image collapse |
-| C8 | the post-C1--C7 prefix fiber has size greater than one | surviving same-prefix balanced-core mate |
-
-The raw counts are
-
-```text
-C1=6, C2=2, C3=0, C4=0, C5=0, C6=0, C7=2, C8=0.
-```
-
-Both C2 and C7 detect exactly masks `15` and `240`; C1 owns both first.  The
-first-match census is therefore
-
-```text
-C1=6, C2=C3=C4=C5=C6=C7=C8=0, residual=64.
-```
-
-This is the actual executable owner function for the frozen local profile, not
-the predecessor's generic constructor label.  It is not claimed to classify
-other fixed-outside profiles or arbitrary received-line explanation states.
+Both C2 and C7 detect exactly masks `15` and `240`; C1 owns both first. This is
+first-match preemption, not double charging. The executable owner function is
+actual for the frozen local profile; it is not claimed to classify other
+fixed-outside profiles or arbitrary received-line explanation states.
 
 ## 6. Exact PROVED declaration table
 
@@ -169,8 +169,8 @@ Namespace: `SidonEffectiveImage.M31C9OwnerCoverage`.
 
 The module ends with `#print axioms` for the owner complement, order,
 deployed-domain checks, raw and first-match censuses, residual equality,
-collision deletion, all-key loss-one theorem, empty falsifier, normalized
-bound, and deployed budget comparison.
+collision deletion, all-key loss-one theorem, empty falsifier, normalized bound,
+and deployed budget comparison.
 
 ## 7. Machine certificate and replay
 
@@ -182,21 +182,21 @@ experimental/scripts/verify_m31_c9_owner_coverage.py
 ```
 
 The canonical compact JSON contains every one of the `70` owner rows and every
-one of the `64` residual key rows.  Its partition digest is
+one of the `64` residual key rows. Its partition digest is
 
 ```text
 sha256:c6a154c32e8950762a992e8631bfa49e62762d43bf374cbf8674b5c417d3952e
 ```
 
-and its current file digest is
+and its file digest is
 
 ```text
 sha256:46713b57f47456fc7b07cf5d22a8ecd6e1ea8bade1b0484b96ae9fce699c3091
 ```
 
-The independent stdlib verifier recomputes all arithmetic and exact tables.  It
+The independent stdlib verifier recomputes all arithmetic and exact tables. It
 uses explicit exceptions rather than `assert`, so optimized mode checks the
-same gates.  Local replay results:
+same gates. Replay results:
 
 ```text
 python3 ... --check                 PASS
@@ -206,7 +206,8 @@ python3 -O ... --tamper-selftest    PASS (4/4 rejected)
 ```
 
 The four mutations alter an owner, the priority order, a full fiber, and an
-imported blob pin.
+imported blob pin. Python is replay/exploration only; Lean is the validation
+authority.
 
 ## 8. Static source census
 
@@ -225,28 +226,52 @@ Lean version: `v4.31.0`, stdlib only.
 ## 9. Fork CI and kernel axiom census
 
 ```text
-validation_state: PENDING_FORK_DRAFT_CI
-fork_draft_pr: PENDING
-head_sha: PENDING
-workflow_run: PENDING
-lean_result: PENDING
-axiom_census: PENDING
+validation_state: GREEN
+fork_draft_pr: holmbuar/rs-mca#87
+validated_head_sha: 33a4dba576ef747693aeb42fb9f9608455ce2830
+workflow_run: 29852410576
+workflow_job: 88708361348
+artifact: lean-build-log-0 (id 8503968110)
+artifact_digest: sha256:fff2503173c88f3eeea8dcc426755a88e1deadc3d955c5dd0d2cc2de5f7af621
+explicit_command: lake build SidonEffectiveImage SidonEffectiveImage.M31C9OwnerCoverage
+explicit_result: Build completed successfully (19 jobs)
+default_target_replay: Build completed successfully (19 jobs)
+local_lean_build: NOT RUN
+post_validation_change: this audit stamp only; Lean, JSON, verifier, and theorem statements unchanged
 ```
 
-No local Lean build is run.  This section must be replaced with the final fork
-run and printed axiom census before the branch is declared ready.
+The explicit module build compiled `M31C9OwnerCoverage` and the cumulative root;
+the workflow then replayed the package default target. The module's first build
+completed in 123 seconds.
 
-## 10. Statement audit and nonclaims
+All twenty printed declarations depend only on standard Lean principles. Six
+pure-computation declarations are axiom-free:
+
+```text
+firstMatchOrder_exact
+deployed_dimensions
+domain_points_are_deployed_roots
+antipodal_pairs_exact
+t4_fibers_exact
+loss_one_fits_deployed_budget
+```
+
+Every other printed declaration uses only a subset of `propext`,
+`Classical.choice`, and `Quot.sound`. No `sorryAx`, custom axiom, or
+`Lean.ofReduceBool` appears. The audit-stamp commit is sent through the same
+draft PR for a final green-head check before branch readiness.
+
+## 10. Statement audit and explicit nonclaims
 
 The load-bearing theorem is stronger than the predecessor's producer field:
-each residual key has exact full fiber one.  The producer-shaped weakening is
+each residual key has exact full fiber one. The producer-shaped weakening is
 
 ```text
 full fiber length <= compilerLoss * naturalScale = 1 * 2.
 ```
 
-No support cardinality is called an MCA slope numerator.  A received-line
-`SE2Certificate` remains external.  The packet does not prove or claim:
+No support cardinality is called an MCA slope numerator. A received-line
+`SE2Certificate` remains external. The packet does not prove or claim:
 
 - fixed-outside profile multiplicity;
 - a received-line semantic explanation or slope construction;
