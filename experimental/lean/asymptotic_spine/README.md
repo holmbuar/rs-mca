@@ -101,6 +101,39 @@ one global profile atlas fixed before the received line. `naturalTotal` contains
 only the profile sum, so the universal terms in the literal frontiers envelope
 must be absorbed by the supplied `envelope`.
 
+## C8 and C9 semantic producer port
+
+`AsymptoticSpine.ClosedLedgerExtension` appends one already-paid semantic
+profile to an earlier `ClosedLineLedger` only after an explicit cross-owner
+slope-disjointness proof. It preserves duplicate-free first-match ownership and
+proves exact assigned-slope concatenation together with exact line-local budget
+and natural-scale telescopes. This is bookkeeping only: it creates no semantic
+owner or payment theorem.
+
+`AsymptoticSpine.C8ShallowClosureProducer` consumes one supplied balanced-core
+residual chart: a reindexed prefix-fiber bridge, an `(SE2)` distinct-slope
+certificate, chart inclusion, and the existing shallow effective-span bounds.
+It turns `balancedCoreShallowClosure_to_directRC` into a direct C8
+`ProfilePayment` at natural scale `1 + average` and compiler loss `|B|^w`,
+independently of the printed residual-kernel label, then appends the profile
+after earlier owners.
+
+`AsymptoticSpine.C9ResidualMaxFiberProducer` makes “post-C1--C8 residual” an
+exact finite condition by carrying an explicit earlier-owner function and
+proving that the residual list is precisely its complement in the complete
+fixed-weight slice. For one residual prefix key, an `(SE2)` support projection
+and a supplied row-sharp full-prefix max-fiber theorem pay the actual C9 slope
+list by residual monotonicity. The producer uses a direct payment and does not
+manufacture a Sidon claim.
+
+The port depends only on integrated spine interfaces; it restores no
+pre-narrowing C7 declarations and has no dependency on an open PR. It does not
+construct an actual RS shortening certificate or first-match C8 chart, prove
+C8 chart exhaustion, the high-kappa semantic owner, deep-prefix MI/MA or direct
+deep ray payment, the row-sharp C9 theorem, a fixed-before-line exhaustive
+atlas, a realized-profile census, residual-to-full add-back, row-wide `(UNIF)`,
+target comparison, a deployed adjacent-row certificate, or row closure.
+
 ## Upgrade regression locks
 
 `AsymptoticSpine.RegressionLocks` restates the current general interfaces for
