@@ -21,7 +21,7 @@ replay: python3 experimental/scripts/verify_c8_chart_exhaustion.py --check; pyth
 # C8 chart-exhaustion finite route-cut preflight
 
 **Date:** 2026-07-21  
-**Status:** `AUDIT / PROVED FINITE SPINE CALIBRATION / PARTIAL EXHAUSTION / PENDING_FORK_CI`  
+**Status:** `AUDIT / PROVED FINITE SPINE CALIBRATION / PARTIAL EXHAUSTION / GREEN_FORK_CI`  
 **Branch:** `gptpro/c8-chart-exhaustion`  
 **Branch base:** fork `main@4e5f0b77c98f075ea7c8822cd4859847a232bc2a`  
 **Lean target:** `AsymptoticSpine.C8ChartExhaustion`  
@@ -365,7 +365,7 @@ Python replay supports audit and packaging; it is not Lean validation.
 
 ## 11. Axiom and source census
 
-Static source census for the new Lean module before CI:
+Static source census for the new Lean module:
 
 ```text
 Mathlib imports:              0
@@ -377,25 +377,54 @@ unsafe declarations:          0
 native_decide:                0
 ```
 
-Expected printed dependencies are standard Lean principles arising from list
-filter/equality and quotient-backed list reasoning.  The exact kernel output is
-not claimed until the fork draft-PR build completes.
+The green build's terminal `#print axioms` output contains only standard Lean
+principles:
+
+- `propext` on the finite classifier, uniqueness, and closed computations;
+- `Quot.sound` on list/filter, first-match, shallow-closure, and moving-root
+  proofs; and
+- `Classical.choice` only in the executable shallow/post-deletion fixtures that
+  transitively use decidable finite-list constructions.
+
+`c8DeepResidualName_exact` is axiom-free.  There are no custom axiom
+declarations, `sorry`, `admit`, or `sorryAx` dependencies.
 
 ## 12. Kernel validation record
 
-At this preflight revision:
+Fork draft PR #90 validated the complete upstream-intended packet at head
+`ba47b3bf8b32744f12728b6ecbf589e8297f7d22` in workflow run
+`29853996330` (`Lean build — PR #90`, run number 187).
+
+The workflow first built the explicit changed targets:
 
 ```text
-fork draft PR:             pending creation
-explicit changed target:   AsymptoticSpine.C8ChartExhaustion
-package root target:       AsymptoticSpine
-Lean version:              4.31.0
-result:                    PENDING_FORK_CI
+lake build AsymptoticSpine AsymptoticSpine.C8ChartExhaustion
 ```
 
-The draft PR will contain the complete upstream-intended packet, not a Lean-only
-placeholder.  A green build proves elaboration and kernel checking of the Lean
-statements only; it does not prove the external deployed-RS semantic inputs.
+and then built the package default target:
+
+```text
+lake build
+```
+
+Both invocations completed successfully with 30 jobs on Lean 4.31.0.  The build
+artifact was `lean-build-log-0`, digest
+`sha256:3003b219c5552d839f019da3026fc424a00f85bdea8b5b80c2cf11f216a5546a`.
+The log contains no Lean errors.  Its only module-local diagnostics are
+non-fatal unused-`simp`-argument linter warnings; they do not alter statements
+or axiom dependencies.
+
+Two earlier validation heads exposed stdlib-surface syntax issues and were
+repaired without changing any theorem statement:
+
+```text
+225bf338...  unsupported by_contra tactic spelling
+4e411264...  unsupported exists-unique notation
+ba47b3bf...  explicit by_cases and expanded uniqueness statement; GREEN
+```
+
+Green CI proves elaboration and kernel checking of the Lean statements only; it
+does not prove the external deployed-RS semantic inputs.
 
 ## 13. Explicit nonclaims
 
