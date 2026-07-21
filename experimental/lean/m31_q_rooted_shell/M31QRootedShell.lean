@@ -2,3 +2,5 @@ import M31QRootedShell.Envelope
 import M31QRootedShell.Deployed
 import M31QRootedShell.ToyCounterexample
 import M31QRootedShell.MultiplicativeCounterexample
+import M31QRootedShell.PaddingBridgeAudit
+import M31QRootedShell.MaskedDiagonalSaturation
