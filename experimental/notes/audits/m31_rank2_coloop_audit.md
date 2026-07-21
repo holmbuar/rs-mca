@@ -64,7 +64,9 @@ The new Lean module has this complete imported integrated-API table:
 The module imports only `Std`.  Therefore the set of imported repository APIs is
 empty and byte-identity is vacuous; no open-PR module, including
 `M31C9RowSharp` or `HalfSliceFalsifier`, is in the dependency graph.  The
-package `lakefile.lean` has no `require`, so no `lake-manifest.json` is needed.
+package `lakefile.lean` has no `require`; its checked empty `lake-manifest.json`
+is present only because the pinned fork `lean-action` requires a manifest during
+configuration, before any build command runs.
 
 ## 3. Exact source-label map
 
@@ -148,7 +150,8 @@ The independent verifier:
 
 1. checks the pinned base and source blob table;
 2. checks the package has exactly one module, imports only `Std`, has no
-   `require`, and contains no `sorry`, `axiom`, `native_decide`, Mathlib, or
+   `require`, carries the canonical empty Lake manifest, and contains no
+   `sorry`, `axiom`, `native_decide`, Mathlib, or
    forbidden open-PR import;
 3. checks the source markers and exact constants;
 4. exhausts the printed small finite-field matrix suites;
@@ -162,14 +165,51 @@ deployed result.  The general proof is Theorem 2.1 and the Lean kernel theorem.
 
 ## 7. Validation record
 
-```text
-PENDING_FORK_CI
-```
+The authoritative proof build ran on fork draft PR `#88` against
+`holmbuar/rs-mca:main` at proof head
+`0c11da80beacfbcb4d5ae0f6538c84c21df92307`.
 
-The authoritative build must be the draft PR against `holmbuar/rs-mca:main` on
-Lean `v4.31.0`.  After the first green build, this section will record the run,
-explicit module target, root target, and printed axiom census; the final branch
-head will then be revalidated without further mathematical changes.
+| Validation item | Recorded result |
+|---|---|
+| Workflow run | `29853452863` (`Lean build — PR #88`, run number `178`) |
+| Package job | `88711871996`, `experimental/lean/sidon_effective_image` |
+| Lean toolchain | `leanprover/lean4:v4.31.0` |
+| Explicit targets | `lake build SidonEffectiveImage SidonEffectiveImage.M31RankTwoColoop` |
+| Explicit-target result | success |
+| Default package target | success |
+| Build-log artifact | `8504306481`, digest `sha256:beb6c73493d03dac9c5f32e29ab93ad9e54018686dc9e2fc262153bdb9eeb2ca` |
+| Workflow conclusion | success |
+
+The first setup attempt, run `29852581050`, exited before compilation because
+the pinned `lean-action` requires `lake-manifest.json` even when the lakefile has
+no dependencies.  The byte-identical canonical empty manifest from the already
+green sibling package repaired that workflow precondition.  The next
+source-bearing build exposed only stdlib portability errors (`Field` and unopened
+big-sum notation); the final module restates zero/add/mul and the 45-term fold
+explicitly and imports only `Std`.
+
+### Printed axiom census
+
+The successful artifact prints the following kernel results twice, once for the
+explicit targets and once for the default package target:
+
+| Declaration | `#print axioms` result |
+|---|---|
+| `paddedLocatorGivesNonzeroExtraDependence` | does not depend on any axioms |
+| `extraColumnIsNotColoop` | does not depend on any axioms |
+| `rankTwoColoopTerminalIsEmpty` | does not depend on any axioms |
+| `everyMarkedFrameExcludesRankTwoColoop` | does not depend on any axioms |
+| `deployedConstantsExact` | does not depend on any axioms |
+
+Census: **zero `sorry`, zero custom axioms, zero reported theorem axioms, zero
+`native_decide`**.  The independent verifier also passes under ordinary and
+optimized Python, with 15 exhaustive suites, 26,294 matrices, 20,012
+nonzero-extra relation checks, zero violations, and all four tamper mutations
+rejected.
+
+This audit-stamp update does not alter the Lean module, root, manifest,
+certificate, or theorem statement.  The final PR head must replay the same
+package check successfully before branch-ready status is declared.
 
 ## 8. Explicit nonclaims
 
