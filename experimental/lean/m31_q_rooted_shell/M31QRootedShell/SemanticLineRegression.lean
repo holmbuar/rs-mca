@@ -322,7 +322,22 @@ def ownerFn : FixedOwnerFunction Explanation where
 theorem classify_eq_some_iff (x : Explanation) (owner : OwnerId) :
     ownerFn.classify x = some owner ↔
       (x = ownerA ∨ x = ownerB) ∧ owner = OwnerId.c3 := by
-  simpa [ownerFn, c3Trigger, FixedOwnerFunction.classify, eq_comm]
+  by_cases hx : x = ownerA ∨ x = ownerB
+  · constructor
+    · intro hclass
+      have hsome : (some OwnerId.c3 : Option OwnerId) = some owner := by
+        simpa [ownerFn, c3Trigger, FixedOwnerFunction.classify, hx] using hclass
+      cases hsome
+      exact ⟨hx, rfl⟩
+    · rintro ⟨_, rfl⟩
+      simp [ownerFn, c3Trigger, FixedOwnerFunction.classify, hx]
+  · constructor
+    · intro hclass
+      have hnone : (none : Option OwnerId) = some owner := by
+        simpa [ownerFn, c3Trigger, FixedOwnerFunction.classify, hx] using hclass
+      cases hnone
+    · rintro ⟨h, _⟩
+      exact (hx h).elim
 
 /-- Exact natural numerator of the finite regression profile. -/
 theorem f241NaturalScale_naturalNumerator : f241NaturalScale.naturalNumerator = 5 := by
