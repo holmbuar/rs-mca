@@ -51,16 +51,20 @@ theorem residual_owned_length {Support : Type}
       by_cases h : earlierOwner x = none
       · simp [residualOf, ownedOf, h]
         calc
-          1 + ((residualOf xs earlierOwner).length +
-              (ownedOf xs earlierOwner).length) = 1 + xs.length :=
-            congrArg (fun t => 1 + t) ih
-          _ = xs.length + 1 := Nat.add_comm 1 xs.length
+          (residualOf xs earlierOwner).length + 1 +
+              (ownedOf xs earlierOwner).length =
+              ((residualOf xs earlierOwner).length +
+                (ownedOf xs earlierOwner).length) + 1 :=
+            Nat.add_right_comm _ _ _
+          _ = xs.length + 1 := congrArg (fun t => t + 1) ih
       · simp [residualOf, ownedOf, h]
         calc
-          1 + ((residualOf xs earlierOwner).length +
-              (ownedOf xs earlierOwner).length) = 1 + xs.length :=
-            congrArg (fun t => 1 + t) ih
-          _ = xs.length + 1 := Nat.add_comm 1 xs.length
+          (residualOf xs earlierOwner).length +
+              ((ownedOf xs earlierOwner).length + 1) =
+              ((residualOf xs earlierOwner).length +
+                (ownedOf xs earlierOwner).length) + 1 :=
+            (Nat.add_assoc _ _ _).symm
+          _ = xs.length + 1 := congrArg (fun t => t + 1) ih
 
 /-- A finite genuine `(SE2)` support projection, matching the integrated API. -/
 structure SE2Certificate (Support Slope : Type) where
