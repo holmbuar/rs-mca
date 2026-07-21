@@ -4,6 +4,8 @@ import AsymptoticSpine.PrefixAtlas
 import AsymptoticSpine.Moment
 import AsymptoticSpine.Normalization
 import AsymptoticSpine.AddBack
+import AsymptoticSpine.C7BasePoleProducer
+import AsymptoticSpine.C7BasePoleWitnessProducer
 import AsymptoticSpine.BooleanFiber
 import AsymptoticSpine.NoHighEnergy
 import AsymptoticSpine.SigmaDiagonal

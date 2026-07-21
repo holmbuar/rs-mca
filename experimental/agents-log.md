@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-21 - M31 route-cut and Lean compiler PR wave
+
+- **Agent/model:** Codex, selectively integrating reviewed PRs from Scott Hughes (#992, #994, #995, #999, #1000, #1001, #1002, #1003, #1004, #1007, #1008) and holmbuar (#987, #997, #1005).
+- **Files added or changed:** Added four-row exact-completion compiler data under `experimental/notes/frontier-adjacent/`, `experimental/data/certificates/four-row-exact-completion-compiler-v1/`, `experimental/data/schemas/`, and matching `experimental/scripts/verify_four_row_exact_completion_compiler_v1*`; added KoalaBear rank-nine M1 notes/certificates/verifiers under `experimental/notes/m1/`, `experimental/data/certificates/m1-kb-rank9-*`, and `experimental/scripts/verify_m1_kb_rank9_*`; added M31 threshold route-cut notes/certificates/verifiers under `experimental/notes/thresholds/`, `experimental/data/certificates/m31-*`, and `experimental/scripts/verify_m31_*`; added Lean material in `experimental/lean/asymptotic_spine/` and `experimental/lean/m31_q_rooted_shell/`; added audit notes in `experimental/notes/audits/`.
+- **Status:** PROVED LOCAL / COUNTEREXAMPLE / AUDIT / EXPERIMENTAL, with no Paper-D theorem promotion and no finite adjacent safe-row closure.
+- **What is being added:** Scott Hughes records a coherent sequence of M31 and KoalaBear route cuts: rank-nine bounded-slack/full-histogram/local-owner packets, the four-row exact-completion compiler, M31 ADE, shortened-flat, Chebyshev, whole-ball, parity-face, arbitrary-packet, and rank-46 source-key walls.  holmbuar adds a uniform closed-ledger Lean interface, a narrow C7 base-pole producer, and the M31 rooted-shell `3+7` reduction/counterexample package with Lean correspondence.
+- **How it is useful:** This improves the final-resolution infrastructure by turning several tempting proof routes into explicit paid or blocked branches.  The M31 material narrows the active safe-side architecture but still leaves padding bridge, common-core add-back, rank-two coloop, rooted-shell hypotheses, and finite adjacent upper ledgers unresolved.  The Lean additions give reusable formalization targets for ledger compilers and rooted-shell reductions without claiming a built Lean replay here.
+- **What to do next:** Do not promote these packets into `tex/` theorem rows until the exact active partition/owner mapping, `U_Q`, residual `U_A`, padding/common-core/rank-two terminals, and finite adjacent `U(a_0+1) <= B^*` certificates are closed with constants.  Build the Lean packages only in a dedicated Lean environment; no local Lean/Sage/Python replay was run during this integration.
+
 ### 2026-07-20 - Integrated reviewed PR wave 986-998
 
 - **Agent/model:** Codex, reviewing and selectively applying open PRs from Latif Kasuli, DannyExperiments, and Scott Hughes.
