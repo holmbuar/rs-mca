@@ -183,7 +183,8 @@ def shortenedComponent {Full Short : Type}
 theorem shortenedComponent_nodup {Full Short : Type}
     (e : RestrictionEquiv Full Short) (full : List Full) (h : full.Nodup) :
     (shortenedComponent e full).Nodup := by
-  exact h.map e.injective
+  exact List.Pairwise.map e.toShort
+    (fun a b hab hEq => hab (e.injective hEq)) h
 
 theorem mem_shortenedComponent_iff {Full Short : Type}
     (e : RestrictionEquiv Full Short) (full : List Full) (y : Short) :
@@ -327,12 +328,23 @@ theorem signed_credit_sum_preserved
 def sourceIdCells (keys : List ShortenedRank46Key) : List (List Nat) :=
   keys.map (fun key => [key.metadata.sourceKeyId])
 
+theorem sourceIdCells_sum_length (keys : List ShortenedRank46Key) :
+    AsymptoticSpine.listSum ((sourceIdCells keys).map List.length) = keys.length := by
+  induction keys with
+  | nil => simp [sourceIdCells, AsymptoticSpine.listSum]
+  | cons key keys ih =>
+      simp [sourceIdCells, AsymptoticSpine.listSum, ih]
+
 theorem firstMatch_addback_le_source_keys
     (certs : List CanonicalCommonCoreShortening) :
     AsymptoticSpine.firstMatchCount (sourceIdCells (compileAll certs)) ≤ certs.length := by
-  have h := AsymptoticSpine.firstMatch_le_sum_cellSizes
-    (sourceIdCells (compileAll certs))
-  simpa [sourceIdCells, compileAll] using h
+  calc
+    AsymptoticSpine.firstMatchCount (sourceIdCells (compileAll certs)) ≤
+        AsymptoticSpine.listSum
+          ((sourceIdCells (compileAll certs)).map List.length) :=
+      AsymptoticSpine.firstMatch_le_sum_cellSizes _
+    _ = (compileAll certs).length := sourceIdCells_sum_length _
+    _ = certs.length := compileAll_length certs
 
 theorem maximal_core_regression :
     length - paddedFirstThreeCap = 2034857 ∧
@@ -365,6 +377,7 @@ theorem maximal_core_regression :
 #print axioms source_key_ids_nodup_preserved
 #print axioms marked_source_key_floor_preserved
 #print axioms signed_credit_sum_preserved
+#print axioms sourceIdCells_sum_length
 #print axioms firstMatch_addback_le_source_keys
 #print axioms maximal_core_regression
 
