@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Verify the trace-linear cyclotomic phase-floor certificate.
 
-Stdlib only.  The p=3, r=2 row is exhaustively enumerated over all 3^10
-trace-linear phase words and all C(12,6) supports.  The p=3, r=5 falsifier is
+Stdlib only. The p=3, r=2 row is exhaustively enumerated over all 3^10
+trace-linear phase words and all C(12,6) supports. The p=3, r=5 falsifier is
 checked by independent exact combinatorial formulas and integer inequalities.
 """
 
@@ -87,6 +87,10 @@ def split_balanced(word: tuple[int, ...], p: int, r: int) -> bool:
     ] == target
 
 
+def globally_balanced(word: tuple[int, ...], p: int, r: int) -> bool:
+    return [word.count(a) for a in range(p)] == [2 * r] * p
+
+
 def support_vectors(p: int, r: int) -> list[tuple[int, ...]]:
     n = 2 * p * r
     m = p * r
@@ -97,7 +101,9 @@ def support_vectors(p: int, r: int) -> list[tuple[int, ...]]:
     return [zero, *basis, u]
 
 
-def add_vectors_mod(vectors: list[tuple[int, ...]], support: tuple[int, ...], p: int) -> tuple[int, ...]:
+def add_vectors_mod(
+    vectors: list[tuple[int, ...]], support: tuple[int, ...], p: int
+) -> tuple[int, ...]:
     d = len(vectors[0])
     out = [0] * d
     for idx in support:
@@ -118,12 +124,54 @@ def balanced_word_count(total: int, p: int, each: int) -> int:
     return value
 
 
+def multinomial(counts: tuple[int, ...]) -> int:
+    total = sum(counts)
+    value = math.factorial(total)
+    for count in counts:
+        value //= math.factorial(count)
+    return value
+
+
+def balanced_histogram_count_p3(r: int) -> int:
+    """Exact number of p=3 characters with global histogram (2r,2r,2r)."""
+    m = 3 * r
+    total = 0
+    for a0 in range(2 * r + 1):
+        for a1 in range(2 * r + 1):
+            a2 = m - a0 - a1
+            if not 0 <= a2 <= 2 * r:
+                continue
+            # The phase sum on S_* must vanish, exactly the trace-code relation.
+            if (a1 + 2 * a2) % 3 != 0:
+                continue
+            b0, b1, b2 = 2 * r - a0, 2 * r - a1, 2 * r - a2
+            # The distinguished base coordinate 0 already consumes one zero phase.
+            if b0 < 1:
+                continue
+            star_assignments = multinomial((a0, a1, a2))
+            complement_assignments = math.factorial(m - 1) // (
+                math.factorial(b0 - 1)
+                * math.factorial(b1)
+                * math.factorial(b2)
+            )
+            total += star_assignments * complement_assignments
+    return total
+
+
 def validate_certificate(cert: dict[str, Any], *, exhaustive: bool) -> int:
     checks = CheckCounter()
-    checks.require(cert["schema"] == "rs-mca/sidon-effective-image-cyclotomic-phase-floor/v1", "schema")
+    checks.require(
+        cert["schema"] == "rs-mca/sidon-effective-image-cyclotomic-phase-floor/v2",
+        "schema",
+    )
     checks.require(cert["status"] == "COUNTEREXAMPLE_NEW_FLOOR", "status")
     checks.require(cert["acceptance_criterion"] == 4, "criterion")
     checks.require(cert["route_cut"] == "PHASE_HISTOGRAM_LOCAL_MI_MA", "route cut")
+    checks.require(
+        cert["successor_obligation"]
+        == "ACTUAL_LEAF_CROSS_HISTOGRAM_CANCELLATION_OR_DIRECT_SIDON",
+        "successor",
+    )
 
     reg = cert["finite_enumeration_regression"]
     p = reg["p"]
@@ -133,6 +181,7 @@ def validate_certificate(cert: dict[str, Any], *, exhaustive: bool) -> int:
     d = n - 2
     checks.require((p, r, n, m, d) == (3, 2, 12, 6, 10), "regression parameters")
     checks.require(reg["N"] == n and reg["m"] == m, "regression N,m")
+    checks.require(reg["field_extension_degree"] == d, "regression field degree")
     checks.require(reg["phase_code_dimension"] == d, "regression phase dimension")
     checks.require(reg["phase_code_size"] == p**d, "regression phase-code size")
     checks.require(reg["source_mass"] == math.comb(n, m), "regression source mass")
@@ -143,6 +192,11 @@ def validate_certificate(cert: dict[str, Any], *, exhaustive: bool) -> int:
     anchored_complement = math.factorial(m - 1) // (
         math.factorial(r - 1) * math.factorial(r) ** (p - 1)
     )
+    split_count = half * anchored_complement
+    coefficient = math.comb(2 * r, r)
+    split_mass = split_count * coefficient
+    full_hist_count = balanced_histogram_count_p3(r)
+    full_hist_mass = full_hist_count * coefficient
     checks.require(half == 90, "regression half-balanced formula")
     checks.require(anchored_complement == 30, "regression anchored-complement formula")
     checks.require(reg["half_balanced_count"] == half, "regression half count certificate")
@@ -150,28 +204,43 @@ def validate_certificate(cert: dict[str, Any], *, exhaustive: bool) -> int:
         reg["anchored_complement_balanced_count"] == anchored_complement,
         "regression complement count certificate",
     )
-    checks.require(reg["coherent_block_count"] == half * anchored_complement, "regression block count")
-    checks.require(reg["cyclotomic_coefficient"] == math.comb(2 * r, r), "regression coefficient")
+    checks.require(reg["split_balanced_block_count"] == split_count, "regression split count")
+    checks.require(reg["cyclotomic_coefficient"] == coefficient, "regression coefficient")
+    checks.require(reg["split_balanced_block_mass"] == split_mass, "regression split mass")
+    checks.require(full_hist_count == 3900, "regression full histogram formula")
+    checks.require(reg["balanced_histogram_count"] == full_hist_count, "regression histogram count")
+    checks.require(reg["balanced_histogram_mass"] == full_hist_mass, "regression histogram mass")
     checks.require(
-        reg["coherent_block_mass"]
-        == reg["coherent_block_count"] * reg["cyclotomic_coefficient"],
-        "regression coherent mass",
+        reg["other_histogram_signed_sum"] == p**d - math.comb(n, m) - full_hist_mass,
+        "regression other-histogram balance",
     )
 
     if exhaustive:
-        block_count = 0
-        coherent_sum: Cyclo3 = ZERO
+        enumerated_split_count = 0
+        enumerated_split_sum: Cyclo3 = ZERO
+        enumerated_hist_count = 0
+        enumerated_hist_sum: Cyclo3 = ZERO
+        total_character_sum: Cyclo3 = ZERO
         for free in itertools.product(range(p), repeat=d):
             word = phase_word_from_free(free, m, p)
+            coefficient_exact = elementary_coefficient_3(word, m)
+            total_character_sum = cadd(total_character_sum, coefficient_exact)
             if split_balanced(word, p, r):
-                block_count += 1
-                coefficient = elementary_coefficient_3(word, m)
-                checks.require(coefficient == (6, 0), "enumerated block coefficient")
-                coherent_sum = cadd(coherent_sum, coefficient)
-        checks.require(block_count == reg["coherent_block_count"], "enumerated coherent block count")
-        checks.require(coherent_sum == (reg["coherent_block_mass"], 0), "enumerated coherent block sum")
+                enumerated_split_count += 1
+                checks.require(coefficient_exact == (6, 0), "enumerated split coefficient")
+                enumerated_split_sum = cadd(enumerated_split_sum, coefficient_exact)
+            if globally_balanced(word, p, r):
+                enumerated_hist_count += 1
+                checks.require(coefficient_exact == (6, 0), "enumerated histogram coefficient")
+                enumerated_hist_sum = cadd(enumerated_hist_sum, coefficient_exact)
+        checks.require(enumerated_split_count == split_count, "enumerated split block count")
+        checks.require(enumerated_split_sum == (split_mass, 0), "enumerated split block sum")
+        checks.require(enumerated_hist_count == full_hist_count, "enumerated histogram count")
+        checks.require(enumerated_hist_sum == (full_hist_mass, 0), "enumerated histogram sum")
+        checks.require(total_character_sum == (p**d, 0), "enumerated full Fourier balance")
 
         vectors = support_vectors(p, r)
+        checks.require(len(vectors) == n and len(set(vectors)) == n, "enumerated distinct domain")
         fibers: dict[tuple[int, ...], int] = {}
         zero = (0,) * d
         zero_supports: list[tuple[int, ...]] = []
@@ -206,55 +275,73 @@ def validate_certificate(cert: dict[str, Any], *, exhaustive: bool) -> int:
         math.factorial(r - 1) * math.factorial(r) ** (p - 1)
     )
     coefficient = math.comb(2 * r, r)
-    block = half * anchored_complement
-    mass = block * coefficient
+    split_count = half * anchored_complement
+    split_mass = split_count * coefficient
+    full_hist_count = balanced_histogram_count_p3(r)
+    full_hist_mass = full_hist_count * coefficient
     checks.require(half == 756756, "falsifier half-balanced exact")
     checks.require(anchored_complement == 252252, "falsifier anchored complement exact")
-    checks.require(block == 190893214512, "falsifier block exact")
+    checks.require(split_count == 190893214512, "falsifier split block exact")
     checks.require(coefficient == 252, "falsifier coefficient exact")
-    checks.require(mass == 48105090057024, "falsifier coherent mass exact")
+    checks.require(split_mass == 48105090057024, "falsifier split mass exact")
     checks.require(fin["half_balanced_count"] == half, "falsifier half certificate")
     checks.require(
         fin["anchored_complement_balanced_count"] == anchored_complement,
         "falsifier complement certificate",
     )
-    checks.require(fin["coherent_block_count"] == block, "falsifier block certificate")
+    checks.require(fin["split_balanced_block_count"] == split_count, "falsifier split count certificate")
     checks.require(fin["cyclotomic_coefficient"] == coefficient, "falsifier coefficient certificate")
-    checks.require(fin["coherent_block_mass"] == mass, "falsifier mass certificate")
-    checks.require(mass > 2 * p**d, "coherent mass defeats double effective target")
-    checks.require(fin["double_effective_target_gap"] == mass - 2 * p**d, "double-target gap")
-    checks.require(fin["double_effective_target_gap"] == 2351505147102, "double-target gap exact")
+    checks.require(fin["split_balanced_block_mass"] == split_mass, "falsifier split mass certificate")
+    checks.require(split_mass > 2 * p**d, "split block defeats double effective target")
+    checks.require(fin["split_double_effective_target_gap"] == split_mass - 2 * p**d, "split gap")
+    checks.require(fin["split_double_effective_target_gap"] == 2351505147102, "split gap exact")
+
+    checks.require(full_hist_count == 616779425262, "falsifier histogram count exact")
+    checks.require(full_hist_mass == 155428415166024, "falsifier histogram mass exact")
+    checks.require(fin["balanced_histogram_count"] == full_hist_count, "histogram count certificate")
+    checks.require(fin["balanced_histogram_mass"] == full_hist_mass, "histogram mass certificate")
+    checks.require(full_hist_mass > 6 * p**d, "histogram defeats six effective targets")
+    checks.require(
+        fin["six_effective_target_gap"] == full_hist_mass - 6 * p**d,
+        "six-target gap",
+    )
+    checks.require(fin["six_effective_target_gap"] == 18167660436258, "six-target gap exact")
 
     source = math.comb(n, m)
-    required_nontrivial_multiplier = (mass + source - 1) // source
-    kappa_floor = required_nontrivial_multiplier + 1
-    checks.require(kappa_floor == 310122, "source payment kappa floor exact")
-    checks.require(fin["source_payment_kappa_floor"] == kappa_floor, "kappa floor certificate")
+    split_kappa_floor = (split_mass + source - 1) // source + 1
+    histogram_kappa_floor = (full_hist_mass + source - 1) // source + 1
+    checks.require(split_kappa_floor == 310122, "split payment kappa floor exact")
+    checks.require(histogram_kappa_floor == 1002006, "histogram payment kappa floor exact")
+    checks.require(fin["split_source_payment_kappa_floor"] == split_kappa_floor, "split kappa certificate")
+    checks.require(fin["histogram_source_payment_kappa_floor"] == histogram_kappa_floor, "histogram kappa certificate")
 
-    debt = p**d - source - mass
-    checks.require(debt == -25228452719583, "signed complement debt exact")
-    checks.require(fin["signed_complement_debt"] == debt, "signed debt certificate")
-    checks.require(source + mass + debt == p**d, "exact Fourier balance")
+    outside_split = p**d - source - split_mass
+    other_histograms = p**d - source - full_hist_mass
+    checks.require(outside_split == -25228452719583, "outside-split signed sum exact")
+    checks.require(other_histograms == -132551777828583, "other-histogram debt exact")
+    checks.require(fin["outside_split_subblock_signed_sum"] == outside_split, "outside-split certificate")
+    checks.require(fin["other_histogram_signed_debt"] == other_histograms, "other-histogram certificate")
+    checks.require(source + full_hist_mass + other_histograms == p**d, "exact histogram Fourier balance")
     checks.require(fin["unique_zero_target_fiber"] == 1, "finite zero target")
 
-    # Verify the general exact formulas and the elementary lower bounds on a grid.
+    # Verify the general exact formulas and elementary lower bounds on a grid.
     for prime in (3, 5, 7):
         for rr in range(1, 7):
             nn = 2 * prime * rr
             mm = prime * rr
             h = balanced_word_count(mm, prime, rr)
-            b = h * h // prime
+            split = h * h // prime
             c = math.comb(2 * rr, rr)
             aeff = prime ** (nn - 2)
             source_mass = math.comb(nn, mm)
-            checks.require(h % 1 == 0 and h * h % prime == 0, "integral coherent block")
+            checks.require(h * h % prime == 0, "integral split-balanced block")
             checks.require(
-                h >= prime**mm // (mm + 1) ** (prime - 1),
+                h * (mm + 1) ** (prime - 1) >= prime**mm,
                 "balanced multinomial lower bound",
             )
             checks.require(c * (2 * rr + 1) >= 2 ** (2 * rr), "central binomial lower bound")
             cleared_fixed_p = (
-                b
+                split
                 * c
                 * (mm + 1) ** (2 * (prime - 1))
                 * (2 * rr + 1)
@@ -263,7 +350,7 @@ def validate_certificate(cert: dict[str, Any], *, exhaustive: bool) -> int:
                 cleared_fixed_p >= aeff * prime * 2 ** (2 * rr),
                 "fixed-p compensated lower bound",
             )
-            raw_lhs = b * c * prime * (mm + 1) ** (2 * (prime - 1)) * 2**nn
+            raw_lhs = split * c * prime * (mm + 1) ** (2 * (prime - 1)) * 2**nn
             raw_rhs = source_mass * prime**nn
             checks.require(raw_lhs >= raw_rhs, "raw phase-block lower bound")
 
@@ -273,10 +360,13 @@ def validate_certificate(cert: dict[str, Any], *, exhaustive: bool) -> int:
 def run_mutation_tests(cert: dict[str, Any]) -> int:
     mutations: list[tuple[list[str], int | str]] = [
         (["acceptance_criterion"], 3),
-        (["finite_enumeration_regression", "coherent_block_count"], 2699),
-        (["finite_falsifier", "coherent_block_mass"], 48105090057023),
-        (["finite_falsifier", "signed_complement_debt"], -25228452719582),
-        (["finite_falsifier", "source_payment_kappa_floor"], 310121),
+        (["finite_enumeration_regression", "split_balanced_block_count"], 2699),
+        (["finite_enumeration_regression", "balanced_histogram_count"], 3899),
+        (["finite_falsifier", "split_balanced_block_mass"], 48105090057023),
+        (["finite_falsifier", "balanced_histogram_count"], 616779425261),
+        (["finite_falsifier", "other_histogram_signed_debt"], -132551777828582),
+        (["finite_falsifier", "histogram_source_payment_kappa_floor"], 1002005),
+        (["route_cut"], "UNSCOPED_MI_MA"),
     ]
     passed = 0
     for path, value in mutations:
