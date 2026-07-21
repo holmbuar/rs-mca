@@ -1,0 +1,83 @@
+{
+  "acceptance_gate": {
+    "criterion": 4,
+    "name": "statement-changing counterexample / new obstruction floor",
+    "statement": "After exact C1 antipodal-quotient deletion on the sixteen-root weight-eight slice, the first realized residual key has fiber size two; loss-one injectivity fails at the next domain scale.",
+    "terminal": "M31_C9_SCALE_STEP_T4_BLOCK_SWAP_DOUBLING"
+  },
+  "c1_owner": {
+    "definition": "mask is a union of four antipodal pairs",
+    "owned_support_count": 70,
+    "residual_fiber_distribution": {
+      "1": 12032,
+      "2": 384
+    },
+    "residual_image_count": 12416,
+    "residual_integral_average_ceiling": 2,
+    "residual_max_fiber": 2,
+    "residual_support_count": 12800
+  },
+  "deployed_row": {
+    "B_star": 16777215,
+    "active_weight": 8,
+    "agreement": 1116023,
+    "availability_holds": true,
+    "complement_weight": 981129,
+    "fixed_outside_weight": 981121,
+    "outside_available": 2097136,
+    "prefix_depth": 67447,
+    "row": "Mersenne-31 list",
+    "target_epsilon": "2^-100"
+  },
+  "domain": {
+    "antipodal_index_pairs": [[0,2],[4,6],[8,10],[12,14],[1,3],[5,7],[9,11],[13,15]],
+    "block_bases": [256,768,1280,1792],
+    "chebyshev_degree": 2097152,
+    "exponents": [256,536871168,1073742080,1610612992,768,536871680,1073742592,1610613504,1280,536872192,1073743104,1610614016,1792,536872704,1073743616,1610614528],
+    "points": [434373082,614288294,1713110565,1533195353,1984437538,380812851,163046109,1766670796,1244279234,907334541,903204413,1240149106,2066813671,1590029158,80669976,557454489],
+    "quarter_turn_exponent": 536870912,
+    "t4_values": [1884637334,51044589,1916935773,116752674]
+  },
+  "field": {
+    "generator": {"im":1288490189,"re":1717986917},
+    "generator_full_order_power": {"exponent":2147483648,"value":{"im":0,"re":1}},
+    "generator_half_order_power": {"exponent":1073741824,"value":{"im":0,"re":2147483646}},
+    "generator_norm": 1,
+    "prime": 2147483647
+  },
+  "first_growth": {
+    "common_support": [4,5,6,8],
+    "first_mask_support": [0,1,2,3,4,5,6,8],
+    "first_residual_mask": 383,
+    "full_fiber": [383,61808],
+    "key": [1625092085,1544193364,2053033192],
+    "mate_mask": 61808,
+    "mate_mask_support": [4,5,6,8,12,13,14,15],
+    "residual_fiber": [383,61808],
+    "swapped_t4_blocks": [[0,1,2,3],[12,13,14,15]]
+  },
+  "nonclaims": [
+    "No exhaustive fixed-before-line C1-C8 owner theorem for the full deployed row.",
+    "No received-word or line-level list/MCA numerator is constructed.",
+    "No profile multiplicity, residual add-back, SE2/ray compiler, UNIF, or adjacent-row certificate.",
+    "The residual max-two census is exact only for the displayed sixteen-root active slice."
+  ],
+  "schema": "rs-mca.m31-c9-scale-step.v1",
+  "slice": {
+    "dimension": 16,
+    "full_fiber_distribution": {"1":12048,"2":408,"6":1},
+    "full_image_count": 12457,
+    "full_integral_average_ceiling": 2,
+    "full_max_fiber": 6,
+    "full_support_count": 12870,
+    "support_order": "ascending 16-bit mask",
+    "weight": 8
+  },
+  "source_pins": {
+    "fork_main": "b410c7ee14488bb751c5a89df10cb5b0323e3669",
+    "grande_finale_blob": "8a5d9791900ca9eed773feba146b92ad296704ce",
+    "rs_mca_thresholds_blob": "01302a797c502a05ed0b11ba949b8756e0aa2b22",
+    "upstream_main": "a3017697ad1594521d2779fe1d83bccd45d4c06e"
+  },
+  "status": "COUNTEREXAMPLE_NEW_FLOOR"
+}
