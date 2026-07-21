@@ -331,9 +331,11 @@ def sourceIdCells (keys : List ShortenedRank46Key) : List (List Nat) :=
 theorem sourceIdCells_sum_length (keys : List ShortenedRank46Key) :
     AsymptoticSpine.listSum ((sourceIdCells keys).map List.length) = keys.length := by
   induction keys with
-  | nil => simp [sourceIdCells, AsymptoticSpine.listSum]
+  | nil => rfl
   | cons key keys ih =>
-      simp [sourceIdCells, AsymptoticSpine.listSum, ih]
+      change 1 + AsymptoticSpine.listSum ((sourceIdCells keys).map List.length) =
+        keys.length + 1
+      omega
 
 theorem firstMatch_addback_le_source_keys
     (certs : List CanonicalCommonCoreShortening) :
