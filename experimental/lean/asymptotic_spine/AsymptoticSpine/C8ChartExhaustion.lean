@@ -120,16 +120,17 @@ theorem slopes_length_le_two_of_three_mul_gt
     (hthree : certificate.movingPoints <
       3 * certificate.movingRootsPerSlope) :
     certificate.slopes.length ≤ 2 := by
-  by_contra hle
-  have hcount : 3 ≤ certificate.slopes.length := by
-    omega
-  have hmul : 3 * certificate.movingRootsPerSlope ≤
-      certificate.slopes.length * certificate.movingRootsPerSlope :=
-    Nat.mul_le_mul_right certificate.movingRootsPerSlope hcount
-  have hbound : 3 * certificate.movingRootsPerSlope ≤
-      certificate.movingPoints :=
-    Nat.le_trans hmul certificate.incidenceBound
-  exact (Nat.not_lt_of_ge hbound) hthree
+  by_cases hle : certificate.slopes.length ≤ 2
+  · exact hle
+  · have hcount : 3 ≤ certificate.slopes.length := by
+      omega
+    have hmul : 3 * certificate.movingRootsPerSlope ≤
+        certificate.slopes.length * certificate.movingRootsPerSlope :=
+      Nat.mul_le_mul_right certificate.movingRootsPerSlope hcount
+    have hbound : 3 * certificate.movingRootsPerSlope ≤
+        certificate.movingPoints :=
+      Nat.le_trans hmul certificate.incidenceBound
+    exact False.elim ((Nat.not_lt_of_ge hbound) hthree)
 
 /-- Active KoalaBear MCA specialization of the one-pencil payment. -/
 theorem koalaBearMca_slopes_length_le_two
