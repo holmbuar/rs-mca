@@ -28,20 +28,24 @@ The package kernel-checks:
 - the literal natural-scale specialization
   `q_prof^w * max(d_e(A)-3,0) <= 7 H_e OR certified owner`, rather than a free
   normalization symbol;
-- the compilers showing that the semantic target yields `3+7` on the actual
-  post-C1--C8 residual and that a strict natural-scale violation forces a
-  concrete owner certificate;
+- the executable `none`-fiber construction of the actual post-C1--C8 residual,
+  with exact complementary cardinality for residual and earlier-owned
+  neighbors;
+- the compiler showing that a natural-scale bound on that executable residual
+  yields the semantic owner-or-envelope statement on the original shell;
 - the mandatory `F_241` regression showing that the exact natural denominator
-  is `241^2 = 58,081`, any semantic theorem on the violating ten-neighbor shell
-  must produce an earlier paid owner, and an all-residual or all-false
-  support-only adapter is rejected.
+  is `241^2 = 58,081`, the residual shell may retain at most eight of the ten
+  displayed neighbors, and therefore at least two neighbors must carry genuine
+  earlier-owner certificates;
+- rejection of all-residual and all-false support-only adapters.
 
 The multiplicative packet is a counterexample to a support-only proof route.
 It does **not** prove that its supports survive the actual slope-level C1--C8
 first-match atlas, and therefore does not refute the deployed Mersenne-31 exact
 residual.  The semantic modules likewise do not manufacture those missing
-explanations: they fix their required type and prove the semantic statement
-compilers and regression implications.
+explanations: they fix their required type, construct the executable residual
+from any supplied paid owner ledger, and prove the semantic statement compilers
+and regression implications.
 
 The package does **not** prove the open deployed local shell hypothesis, the
 gigantic binomial quotient values, row-sharp Q, an adjacent safe row, a deployed
