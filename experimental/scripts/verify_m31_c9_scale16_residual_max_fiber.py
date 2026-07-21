@@ -2,7 +2,8 @@
 """Replay the M31 C9 sixteen-root residual max-fiber certificate.
 
 Stdlib only.  This is an independent enumeration/replay layer; Lean CI is the
-proof-validation layer.
+proof-validation layer.  The `--emit-lean-table` mode generates the complete
+key-sorted literal table consumed by `M31C9ScaleStep.lean`.
 """
 
 from __future__ import annotations
@@ -87,7 +88,7 @@ def support_indices(mask: int, n: int) -> list[int]:
     return [i for i in range(n) if (mask >> i) & 1]
 
 
-def compute(data: dict[str, Any]) -> dict[str, Any]:
+def derived_roots(data: dict[str, Any]) -> tuple[list[int], list[int]]:
     domain_data = data["domain"]
     p = domain_data["field_prime"]
     generator = (domain_data["generator"]["re"], domain_data["generator"]["im"])
@@ -95,6 +96,37 @@ def compute(data: dict[str, Any]) -> dict[str, Any]:
     shift = domain_data["translate_step"]
     exponents = [base + j * shift for base in bases for j in range(4)]
     roots = [fp2_pow(generator, exponent, p)[0] for exponent in exponents]
+    return exponents, roots
+
+
+def literal_table_rows(data: dict[str, Any]) -> list[tuple[int, int, int, int]]:
+    p = data["domain"]["field_prime"]
+    _, roots = derived_roots(data)
+    n = data["slice"]["ambient_dimension"]
+    weight = data["slice"]["weight"]
+    masks = [mask for mask in range(1 << n) if mask.bit_count() == weight]
+    rows = [
+        (mask, *prefix_key(mask, roots, p))
+        for mask in masks
+    ]
+    rows.sort(key=lambda row: (row[1], row[2], row[3], row[0]))
+    return rows
+
+
+def emit_lean_table(data: dict[str, Any]) -> str:
+    rows = literal_table_rows(data)
+    lines = []
+    for index, (mask, p1, p2, p3) in enumerate(rows):
+        comma = "," if index + 1 < len(rows) else ""
+        lines.append(f"  ⟨{mask}, {p1}, {p2}, {p3}⟩{comma}")
+    return "\n".join(lines) + "\n"
+
+
+def compute(data: dict[str, Any]) -> dict[str, Any]:
+    domain_data = data["domain"]
+    p = domain_data["field_prime"]
+    generator = (domain_data["generator"]["re"], domain_data["generator"]["im"])
+    exponents, roots = derived_roots(data)
 
     if fp2_mul(generator, (generator[0], (-generator[1]) % p), p) != (1, 0):
         raise AssertionError("generator norm-one check failed")
@@ -113,8 +145,10 @@ def compute(data: dict[str, Any]) -> dict[str, Any]:
         full_fibers[keys[mask]].append(mask)
 
     c1_masks = [mask for mask in full_masks if is_c1_owned(mask, antipodal_pairs)]
-    residual_masks = [mask for mask in full_masks
-                      if not is_c1_owned(mask, antipodal_pairs)]
+    residual_masks = [
+        mask for mask in full_masks
+        if not is_c1_owned(mask, antipodal_pairs)
+    ]
     residual_fibers: dict[tuple[int, int, int], list[int]] = defaultdict(list)
     for mask in residual_masks:
         residual_fibers[keys[mask]].append(mask)
@@ -138,7 +172,9 @@ def compute(data: dict[str, Any]) -> dict[str, Any]:
                 left_key = keys[left]
                 right_key = keys[right]
                 if left_key != right_key:
-                    raise AssertionError("claimed T4 block swap changed the prefix key")
+                    raise AssertionError(
+                        "claimed T4 block swap changed the prefix key"
+                    )
                 if left_key in block_swap_keys:
                     raise AssertionError("duplicate block-swap key")
                 block_swap_keys[left_key] = (left, right, remainder)
@@ -237,13 +273,25 @@ def verify_files(data: dict[str, Any]) -> None:
         )
 
     source = lean_path.read_text(encoding="utf-8")
-    forbidden = ["native_decide", "M31C9RowSharp", "HalfSliceFalsifier",
-                 "sorry", "admit", "axiom "]
+    forbidden = [
+        "native_decide",
+        "M31C9RowSharp",
+        "HalfSliceFalsifier",
+        "sorry",
+        "admit",
+        "axiom ",
+        "eraseDups",
+        ".contains",
+        "def unsortedTable",
+    ]
     for token in forbidden:
         if token in source:
             raise AssertionError(f"forbidden Lean token/import present: {token}")
     required = [
         "set_option maxRecDepth 1000000",
+        "def sortedTable : List TableRow := [",
+        "theorem sorted_table_key_recomputation",
+        "theorem sorted_table_mask_column_complete",
         "theorem scale_step_summary_exact",
         "#print axioms scale_step_summary_exact",
     ]
@@ -268,6 +316,12 @@ def check(certificate_path: Path) -> None:
             + "actual="
             + canonical_json(result)
         )
+
+    rows = literal_table_rows(data)
+    if len(rows) != result["full_support_count"]:
+        raise AssertionError("literal table row count mismatch")
+    if rows != sorted(rows, key=lambda row: (row[1], row[2], row[3], row[0])):
+        raise AssertionError("literal table generator is not key sorted")
 
     if data["acceptance_gate"]["primary"] != 4:
         raise AssertionError("primary acceptance gate must be criterion 4")
@@ -306,10 +360,14 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--check", action="store_true")
     mode.add_argument("--tamper-selftest", action="store_true")
+    mode.add_argument("--emit-lean-table", action="store_true")
     args = parser.parse_args()
 
     try:
-        if args.check:
+        if args.emit_lean_table:
+            data = json.loads(args.certificate.read_text(encoding="utf-8"))
+            sys.stdout.write(emit_lean_table(data))
+        elif args.check:
             check(args.certificate)
         else:
             tamper_selftest(args.certificate)
