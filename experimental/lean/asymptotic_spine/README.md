@@ -101,6 +101,35 @@ one global profile atlas fixed before the received line. `naturalTotal` contains
 only the profile sum, so the universal terms in the literal frontiers envelope
 must be absorbed by the supplied `envelope`.
 
+## C8 common-core shortening and high-kappa ownership
+
+`AsymptoticSpine.C8HighKappaOwner` formalizes the exact finite composition around
+common-core shortening:
+
+```text
+actual first-match C8 slope/support certificate
+→ slope-preserving fixed-core shortening
+→ shortened support payment or shallow direct (RC)
+→ zero-loss add-back to the original slope cell.
+```
+
+It also keeps the factor-aware kernel law explicit:
+
+```text
+k' = k - |K|,
+kappa = k' - |C_res|.
+```
+
+Only under the stated maximal-core hypothesis `|C_res|=0` does the module derive
+`kappa=k-|K|` and the equivalent high-kappa/small-core threshold. The
+owner-or-payment theorems then compose a supplied earlier semantic owner on the
+high-kappa branch with a supplied shortened-chart payment on the small-kappa
+branch.
+
+This module proves the finite compiler, not the semantic owner or the deep
+analytic payment. See `C8_HIGH_KAPPA_OWNER_CORRESPONDENCE.md` for the exact
+statement map, proof census, and nonclaims.
+
 ## Upgrade regression locks
 
 `AsymptoticSpine.RegressionLocks` restates the current general interfaces for
