@@ -28,6 +28,7 @@ LEAN_PACKAGE = ROOT / "experimental/lean/sidon_effective_image"
 LEAN_MODULE = LEAN_PACKAGE / "SidonEffectiveImage/M31RankTwoColoop.lean"
 LEAN_ROOT = LEAN_PACKAGE / "SidonEffectiveImage.lean"
 LAKEFILE = LEAN_PACKAGE / "lakefile.lean"
+MANIFEST = LEAN_PACKAGE / "lake-manifest.json"
 TOOLCHAIN = LEAN_PACKAGE / "lean-toolchain"
 THRESHOLD_NOTE = ROOT / "experimental/notes/thresholds/m31_rank2_coloop_elimination.md"
 LOG_ENTRY = ROOT / "experimental/agents-log-entry-gptpro-m31-rank2-coloop.md"
@@ -204,12 +205,13 @@ def zero_extra_falsifier() -> dict[str, Any]:
 
 
 def source_gate() -> dict[str, str]:
-    for path in (LEAN_MODULE, LEAN_ROOT, LAKEFILE, TOOLCHAIN, THRESHOLD_NOTE, LOG_ENTRY):
+    for path in (LEAN_MODULE, LEAN_ROOT, LAKEFILE, MANIFEST, TOOLCHAIN, THRESHOLD_NOTE, LOG_ENTRY):
         require(path.is_file(), f"required packet file exists: {path.relative_to(ROOT)}")
 
     module = LEAN_MODULE.read_text()
     root = LEAN_ROOT.read_text()
     lakefile = LAKEFILE.read_text()
+    manifest = json.loads(MANIFEST.read_text())
     toolchain = TOOLCHAIN.read_text().strip()
     note = THRESHOLD_NOTE.read_text()
 
@@ -217,6 +219,14 @@ def source_gate() -> dict[str, str]:
     require(import_lines == ["import Std"], "Lean module imports only Std")
     require(root.strip() == "import SidonEffectiveImage.M31RankTwoColoop", "root imports only lane module")
     require("require " not in lakefile, "lakefile has no package requires")
+    require(manifest == {
+        "version": "1.2.0",
+        "packagesDir": ".lake/packages",
+        "packages": [],
+        "name": "sidonEffectiveImage",
+        "lakeDir": ".lake",
+        "fixedToolchain": False,
+    }, "empty Lake manifest is canonical")
     require(toolchain == "leanprover/lean4:v4.31.0", "Lean toolchain is exactly v4.31.0")
 
     modules = sorted(path.name for path in (LEAN_PACKAGE / "SidonEffectiveImage").glob("*.lean"))
@@ -267,6 +277,7 @@ def source_gate() -> dict[str, str]:
         "lean_module_sha256": sha256_path(LEAN_MODULE),
         "lean_root_sha256": sha256_path(LEAN_ROOT),
         "lakefile_sha256": sha256_path(LAKEFILE),
+        "lake_manifest_sha256": sha256_path(MANIFEST),
         "lean_toolchain_sha256": sha256_path(TOOLCHAIN),
         "threshold_note_sha256": sha256_path(THRESHOLD_NOTE),
         "agents_log_entry_sha256": sha256_path(LOG_ENTRY),
