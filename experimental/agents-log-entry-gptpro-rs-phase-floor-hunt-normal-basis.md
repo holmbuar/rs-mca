@@ -1,0 +1,8 @@
+### 2026-07-21 - Trace--Vandermonde coherent phase-orbit floor
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/thresholds/trace_vandermonde_coherent_orbit_floor.md`; `experimental/notes/audits/trace_vandermonde_coherent_orbit_floor_audit.md`; certificate and verifier under `experimental/data/certificates/trace-vandermonde-coherent-orbit-floor/` and `experimental/scripts/`; one new stdlib-only module in `experimental/lean/sidon_effective_image/`; this side-file only.
+- **Status:** PROVED / COUNTEREXAMPLE_NEW_FLOOR / CONDITIONAL_ON_NAMED_INPUT.
+- **What is being added:** For `q=2^s`, odd prime `s>=3`, the actual RS trace--Vandermonde map `h_t=(t,...,t^(q/2-1))` has exact fixed-weight image Q, but its canonical weight-`q/2` character orbit is phase-aligned.  After one signed orbit sum and exact `L/A_eff` compensation, the aggregate is at least `exp((log 2)N/4-O(log N))`.  The `F_8` Lean regression checks `M=L=21`, `A_eff=64`, 35 explicit trace characters with coefficient `-3`, and coherent magnitude `105`.
+- **How it is useful:** This establishes criterion 4, `RS_TRACE_VANDERMONDE_COHERENT_ORBIT_FLOOR`, and route-cuts any universal replacement based only on RS phase provenance plus orbitwise cancellation.  The remaining named input is `POST_C1_C8_RS_ORBIT_DECORRELATION_OR_DIRECT_SIDON`.
+- **What to do next:** Prove that actual first-match deletion destroys the coherent orbit, prove quantitative cross-orbit decorrelation, impose a justified characteristic/rank exclusion, or bypass the Fourier aggregate with direct realized-image Sidon/max-fiber control.
