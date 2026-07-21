@@ -1,0 +1,129 @@
+{
+  "acceptance_gate": 2,
+  "character_partition": {
+    "effective_size": 9903520300447984150353281023,
+    "lift": "identity",
+    "major_count": 9903520295836298136220860414,
+    "major_rule": "a1!=0",
+    "major_witness": [
+      1,
+      0,
+      0
+    ],
+    "minor_count": 4611686014132420608,
+    "minor_rule": "a1=0 and character!=0",
+    "minor_witness": [
+      0,
+      1,
+      0
+    ]
+  },
+  "compensated_bounds": {
+    "cleared_major_slack": 318206334975137022021,
+    "cleared_minor_slack": 9903519982241649175216259071,
+    "effective_size": 9903520300447984150353281023,
+    "full_loss": 69,
+    "major_loss": 69,
+    "minor_loss": 1,
+    "realized_image_size": 69,
+    "source_mass": 70
+  },
+  "imported_api_parity": [
+    {
+      "byte_identical": true,
+      "fork_blob": "777273e4377c31c815062769803622c6226988d3",
+      "path": "experimental/lean/asymptotic_spine/AsymptoticSpine/PrimitiveBoolean.lean",
+      "upstream_blob": "777273e4377c31c815062769803622c6226988d3"
+    },
+    {
+      "byte_identical": true,
+      "fork_blob": "7e21ff098567d26aba7330fbb2722d5cb952fb09",
+      "path": "experimental/lean/m31_q_rooted_shell/M31QRootedShell/Deployed.lean",
+      "upstream_blob": "7e21ff098567d26aba7330fbb2722d5cb952fb09"
+    }
+  ],
+  "leaf": {
+    "active_dimension": 8,
+    "c1_owner_masks": [
+      15,
+      85,
+      165,
+      90,
+      170,
+      240
+    ],
+    "collision_key": [
+      0,
+      2,
+      0
+    ],
+    "domain": [
+      434373082,
+      614288294,
+      1713110565,
+      1533195353,
+      1984437538,
+      380812851,
+      163046109,
+      1766670796
+    ],
+    "expected_c1_owned": 6,
+    "expected_full_image": 69,
+    "expected_full_mass": 70,
+    "expected_residual_image": 64,
+    "expected_residual_mass": 64,
+    "prefix_depth": 3,
+    "prime": 2147483647,
+    "selected_key": [
+      1266428118,
+      2,
+      458186840
+    ],
+    "selected_support_mask": 51,
+    "weight": 4
+  },
+  "packet": "m31-image-compensated-aggregates-v1",
+  "provenance": {
+    "fork_base_sha": "4e5f0b77c98f075ea7c8822cd4859847a232bc2a",
+    "grande_finale_v4_blob": "8a5d9791900ca9eed773feba146b92ad296704ce",
+    "upstream_main_sha": "a3017697ad1594521d2779fe1d83bccd45d4c06e"
+  },
+  "schema_version": 1,
+  "span_certificate": {
+    "basis_matrix": [
+      [
+        179915212,
+        1278737483,
+        1098822271
+      ],
+      [
+        887084793,
+        0,
+        887084793
+      ],
+      [
+        1154236547,
+        503705255,
+        1496952355
+      ]
+    ],
+    "effective_dimension": 3,
+    "inverse_matrix": [
+      [
+        1072773236,
+        2033842811,
+        1680180098
+      ],
+      [
+        970446555,
+        113640836,
+        1821586645
+      ],
+      [
+        1074710411,
+        2033842811,
+        467303549
+      ]
+    ]
+  }
+}
