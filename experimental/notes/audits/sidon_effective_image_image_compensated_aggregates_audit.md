@@ -157,16 +157,33 @@ Lean toolchain: 4.31.0
 stdlib only: yes
 Mathlib imports: 0
 native_decide: 0
-sorry/admit/sorryAx: 0 by source census
-custom axiom declarations: 0 by source census
-fork draft PR: AWAITING_CREATION
-workflow run: AWAITING_FORK_CI
-module/root result: AWAITING_FORK_CI
-#print axioms result: AWAITING_FORK_CI
+sorry/admit/sorryAx: 0
+custom axiom declarations: 0
+fork draft PR: #89, CI: M31 image-compensated aggregate payment
+initial workflow run: 29852615301 (run 164), head 695da94fd6039d3aee35499c3302f77ae4e1ea71
+initial result: failed only at partition_nonempty because `by decide` lacked a Decidable instance; replaced by an explicit proof
+validated workflow run: 29852945574 (run 172)
+validated head: e5d94357df20442d4cd8608db2e52cea86545379
+package job: 88710151003, experimental/lean/sidon_effective_image
+module/root target: `lake build SidonEffectiveImage SidonEffectiveImage.M31CompensatedAggregates`
+module/root result: PASS, 19 jobs
+build-log artifact: 8504150838
+build-log digest: sha256:6df83f1d9dddc8017f3e4a5158e73bd0290906e9598d943b85888c56d559a91e
 ```
 
-Green CI will prove compilation only.  The declaration/source comparison is the
-table in Section 4.
+The module ends with `#print axioms` for every load-bearing declaration.  The
+green run printed exactly the following census.
+
+| Printed axiom set | Declarations |
+|---|---|
+| none | `domain_points_are_deployed_roots`, `antipodal_pairs_exact`, `t4_fibers_exact`, `basis_matrix_exact`, `basis_inverse_certificate`, `character_partition`, `character_partition_disjoint`, `certifiedAmbientLift_eq`, `character_count_partition`, `compensated_minor_count`, `compensated_major_count`, `deployed_constants` |
+| `[propext]` | `full_slice_card`, `full_image_card`, `residual_slice_card`, `residual_prefix_injective`, `residual_image_card`, `selected_key_exact`, `partition_nonempty`, `source_image_constants_exact`, `compensated_minor_of_triangle`, `compensated_major_of_triangle`, `compensated_full_of_triangle` |
+| `[propext, Classical.choice, Quot.sound]` | `residual_exact`, `scoped_residual_exact`, `selected_residual_prefix_singleton`, `selected_not_earlier` |
+
+Thus the union of printed dependencies is only Lean's standard
+`propext`, `Classical.choice`, and `Quot.sound`.  There is no `sorryAx` and no
+custom axiom.  Green CI proves compilation only; the declaration/source
+comparison is the table in Section 4.
 
 ## 8. Explicit nonclaims
 
