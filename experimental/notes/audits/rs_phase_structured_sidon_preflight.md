@@ -108,17 +108,20 @@ Both return `VERDICT: PROVED_SCOPED_PHASE_PAYMENT`.
 - Lean: `v4.31.0`
 - Imports: `Std` only
 - Root: `SidonEffectiveImage.lean`, importing only `SidonEffectiveImage.RSPhaseStructuredSidon`
-- `sorry`: 0 by source audit
-- `admit`: 0 by source audit
+- `sorry`: 0 by source audit and green compilation
+- `admit`: 0 by source audit and green compilation
 - `native_decide`: 0 by source audit
-- custom axioms: 0 by source audit
-- CI draft PR: **PENDING**
-- CI head SHA: **PENDING**
-- `lean/sidon_effective_image`: **PENDING**
-- Workflow run: **PENDING**
-- `#print axioms` census: **PENDING CI LOG**
+- custom axioms: 0
+- CI draft PR: `holmbuar/rs-mca#81`, `CI: M31 RS phase-structured cancellation`
+- Recorded validation head SHA: `5ccf797ade4b73c586141c7dd5a4203d174c2c29`
+- `lean/sidon_effective_image`: **SUCCESS**
+- Workflow run: `29851661095` (`Lean build — PR #81`, run number 152)
+- Build-log artifact: `lean-build-log-0`, artifact `8503607048`, digest `sha256:3677164b0313522c23eeb9541264b577f670be91fdc0c51355498939738a587e`
+- Explicit targets built: `SidonEffectiveImage` and `SidonEffectiveImage.RSPhaseStructuredSidon`
+- Default package target built: `SidonEffectiveImage`
+- `#print axioms` census: `field_prime_exact`, `antipodal_pairs_exact`, `domain_points_are_deployed_roots`, and `deployed_dimensions` depend on no axioms; every other printed declaration depends only on standard `propext`. No declaration depends on `sorryAx`, a custom axiom, `Classical.choice`, or `Quot.sound`.
 
-Green CI will certify compilation only; the declaration/source match is the table in Section 3.
+Green CI certifies compilation only; the declaration/source match is the table in Section 3.
 
 ## 6. Explicit nonclaims
 
