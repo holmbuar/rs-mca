@@ -6,9 +6,11 @@ run-name: "Lean build — ${{ github.event_name == 'workflow_dispatch' && inputs
 # Agent recipe (works from any web agent, no gh or git tricks needed):
 #   1. Push your candidate branch to this fork (any name, any base).
 #   2. Open a DRAFT pull request against holmbuar/rs-mca, title prefixed "CI:".
-#   3. Every push to the PR rebuilds the lean packages the PR touches. Results
-#      appear as PR checks and as a `lean/<package>` commit status on the head SHA;
-#      the full lake log is attached as a run artifact.
+#   3. Every push to the PR rebuilds the lean packages the PR touches. Changed
+#      .lean files are built as explicit module targets first, so new modules
+#      are verified even when nothing imports them yet. Results appear as PR
+#      checks and as a `lean/<package>` commit status on the head SHA; the full
+#      lake log is attached as a run artifact.
 #   4. Close the PR when done — validation PRs are never merged.
 #
 # Agents with gh can build any pushed ref directly, no PR needed:
@@ -48,6 +50,7 @@ jobs:
     timeout-minutes: 10
     outputs:
       packages: ${{ steps.pkgs.outputs.packages }}
+      modules: ${{ steps.pkgs.outputs.modules }}
     steps:
       - name: Check out candidate head
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
@@ -65,13 +68,24 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          modules='{}'
           if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
             candidates="$(tr ',' '\n' <<<"$PACKAGES_INPUT")"
           else
-            candidates="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files" \
-              --jq '.[].filename' \
+            files="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files" \
+              --jq '[.[] | {filename, status}]' | jq -cs 'add // []')"
+            candidates="$(jq -r '.[].filename' <<<"$files" \
               | awk -F/ '$1 == "experimental" && $2 == "lean" && NF >= 4 {print $1 "/" $2 "/" $3}' \
               | sort -u)"
+            # Changed .lean files as explicit module targets, so additions that
+            # nothing imports yet still get elaborated (deleted files excluded).
+            modules="$(jq -c '[ .[]
+                | select(.status != "removed")
+                | .filename
+                | capture("^(?<pkg>experimental/lean/[^/]+)/(?<rest>.+)\\.lean$")
+                | select(.rest != "lakefile")
+                | {pkg: .pkg, mod: (.rest | gsub("/"; "."))} ]
+              | group_by(.pkg) | map({key: .[0].pkg, value: map(.mod)}) | from_entries' <<<"$files")"
           fi
           pkgs=()
           while IFS= read -r dir; do
@@ -85,7 +99,9 @@ jobs:
           done <<<"$candidates"
           packages="$(printf '%s\n' "${pkgs[@]:-}" | jq -R . | jq -cs 'map(select(length > 0))')"
           echo "packages=$packages" >> "$GITHUB_OUTPUT"
+          echo "modules=$modules" >> "$GITHUB_OUTPUT"
           echo "building: $packages"
+          echo "explicit modules: $modules"
 
   build:
     needs: detect
@@ -121,10 +137,20 @@ jobs:
         shell: bash
         env:
           PKG_DIR: ${{ matrix.package }}
+          MODULES_JSON: ${{ needs.detect.outputs.modules }}
         run: |
           set -o pipefail
+          mods="$(jq -r --arg p "$PKG_DIR" '.[$p] // [] | join(" ")' <<<"$MODULES_JSON")"
           cd "$PKG_DIR"
-          lake build 2>&1 | tee "$GITHUB_WORKSPACE/lean-build.log"
+          {
+            set -e
+            if [[ -n "$mods" ]]; then
+              echo ">>> lake build $mods"
+              lake build $mods
+            fi
+            echo ">>> lake build (package default target)"
+            lake build
+          } 2>&1 | tee "$GITHUB_WORKSPACE/lean-build.log"
 
       - name: Upload Lean build log
         if: always()
