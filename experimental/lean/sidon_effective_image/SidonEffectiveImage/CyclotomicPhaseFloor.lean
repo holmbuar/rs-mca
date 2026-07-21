@@ -21,21 +21,30 @@ namespace SidonEffectiveImage.CyclotomicPhaseFloor
 set_option maxRecDepth 8192
 set_option maxHeartbeats 0
 
+/-- Closed factorial used only to evaluate the finite certificate constants. -/
+def factorial : Nat → Nat
+  | 0 => 1
+  | n + 1 => (n + 1) * factorial n
+
+/-- Closed binomial evaluator; all certificate calls satisfy `k ≤ n`. -/
+def binomial (n k : Nat) : Nat :=
+  factorial n / (factorial k * factorial (n - k))
+
 /-- Exhaustive regression parameters: `p=3`, `r=2`, `N=12`, `m=6`. -/
 def regressionPhaseCodeSize : Nat := 3 ^ 10
 
-def regressionSourceMass : Nat := Nat.choose 12 6
+def regressionSourceMass : Nat := binomial 12 6
 
 def regressionHalfBalancedCount : Nat :=
-  Nat.choose 6 2 * Nat.choose 4 2
+  binomial 6 2 * binomial 4 2
 
 def regressionAnchoredComplementCount : Nat :=
-  Nat.choose 5 1 * Nat.choose 4 2
+  binomial 5 1 * binomial 4 2
 
 def regressionCoherentBlockCount : Nat :=
   regressionHalfBalancedCount * regressionAnchoredComplementCount
 
-def regressionCyclotomicCoefficient : Nat := Nat.choose 4 2
+def regressionCyclotomicCoefficient : Nat := binomial 4 2
 
 def regressionCoherentBlockMass : Nat :=
   regressionCoherentBlockCount * regressionCyclotomicCoefficient
@@ -61,25 +70,25 @@ theorem regression_coherent_block_mass_exact :
     regressionCoherentBlockMass = 16200 := by decide
 
 /-- Exact `p=3`, `r=5` source mass `M=L=binom(30,15)`. -/
-def sourceMass : Nat := Nat.choose 30 15
+def sourceMass : Nat := binomial 30 15
 
 /-- Exact effective target size `A_eff=3^28`. -/
 def effectiveTargetSize : Nat := 3 ^ 28
 
 /-- Balanced phase words on the attained zero-target half. -/
 def halfBalancedCount : Nat :=
-  Nat.choose 15 5 * Nat.choose 10 5
+  binomial 15 5 * binomial 10 5
 
 /-- Balanced phase words on the complementary half with the base phase fixed to zero. -/
 def anchoredComplementBalancedCount : Nat :=
-  Nat.choose 14 4 * Nat.choose 10 5
+  binomial 14 4 * binomial 10 5
 
 /-- Characters in the coherent split-balanced cyclotomic block. -/
 def coherentBlockCount : Nat :=
   halfBalancedCount * anchoredComplementBalancedCount
 
 /-- Common fixed-weight cyclotomic coefficient `[z^15](1+z^3)^10`. -/
-def cyclotomicCoefficient : Nat := Nat.choose 10 5
+def cyclotomicCoefficient : Nat := binomial 10 5
 
 /-- Signed block contribution at the attained zero target; every summand is positive. -/
 def coherentBlockMass : Nat :=
