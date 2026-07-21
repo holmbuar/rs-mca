@@ -30,6 +30,16 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-21 - Semantic M31 C1--C8 owner-or-shell compiler
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/thresholds/m31_q_semantic_owner_shell.md`, `experimental/lean/m31_q_rooted_shell/M31QRootedShell/SemanticOwner.lean`, `experimental/lean/m31_q_rooted_shell/SEMANTIC_OWNER_CORRESPONDENCE.md`, `experimental/lean/m31_q_rooted_shell/M31QRootedShell.lean`, `experimental/lean/m31_q_rooted_shell/README.md`, and `experimental/agents-log.md`.
+- **Status:** PROVED SEMANTIC INTERFACE AND COMPILERS / CONDITIONAL SEMANTIC SO3+7 INPUT / MANDATORY F_241 REGRESSION / OPEN DEPLOYED M31 RESIDUAL.
+- **What is being added:** A stdlib-only fixed-before-line C1--C8 first-match interface preserving received line, explanation, witness, codeword, ray, and distinct slope. Every owner prints a deduplicated line-local slope image, exact numerator and slope denominator, and separate natural prefix scale; the semantic `3+7 OR owner` compilers and imported `F_241` regression reject all-residual and all-false support-only adapters.
+- **How it is useful:** This is the typed successor to upstream PR #1005. It prevents quotient/dihedral support symmetry and planted-core pruning from being banked as ownership, while isolating the exact remaining theorem on the actual post-C1--C8 residual.
+- **What to do next:** Instantiate the eight semantic triggers and their paid slope profiles from the active C1--C8 theorem producers, prove `SemanticEnvelopeOrOwner` on every deployed rooted shell, and compare every Lean declaration directly with the active Grande Finale statement before upstream preparation.
+
+
 ### 2026-07-20 - Mersenne-31 rooted-shell envelope and support-only `3+7` route cut
 
 - **Agent/model:** GPT-5.6 Pro.
