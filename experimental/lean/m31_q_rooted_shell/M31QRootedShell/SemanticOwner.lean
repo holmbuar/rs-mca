@@ -174,6 +174,14 @@ structure EarlierOwnerCertificate
   owner : OwnerId
   classified : ledger.ownerFn.classify x = some owner
 
+/-- Propositional packaging of one concrete owner certificate. -/
+def HasEarlierOwner
+    {Line Explanation Witness Support Codeword Ray Slope Prefix : Type}
+    (chain : SemanticChain Line Explanation Witness Support Codeword Ray Slope Prefix)
+    (ledger : PaidOwnerLedger Line Explanation Witness Support Codeword Ray Slope Prefix chain)
+    (x : Explanation) : Prop :=
+  Nonempty (EarlierOwnerCertificate chain ledger x)
+
 /-- A certified owner is a genuine semantic explanation state. -/
 theorem EarlierOwnerCertificate.valid
     {Line Explanation Witness Support Codeword Ray Slope Prefix : Type}
@@ -262,7 +270,7 @@ def SemanticEnvelopeOrOwner
     (ledger : PaidOwnerLedger Line Explanation Witness Support Codeword Ray Slope Prefix chain)
     (s : RootedShell chain) (Q b c ambientShell : Nat) : Prop :=
   LocalEnvelopeAt s Q b c ambientShell ∨
-    ∃ x ∈ s.neighbors, EarlierOwnerCertificate chain ledger x
+    ∃ x ∈ s.neighbors, HasEarlierOwner chain ledger x
 
 /-- On the exact residual, the owner branch is impossible. -/
 theorem actualResidual_has_no_certified_owner
@@ -270,9 +278,10 @@ theorem actualResidual_has_no_certified_owner
     {chain : SemanticChain Line Explanation Witness Support Codeword Ray Slope Prefix}
     (ledger : PaidOwnerLedger Line Explanation Witness Support Codeword Ray Slope Prefix chain)
     (s : RootedShell chain) (hactual : IsActualPostC1C8Residual ledger s) :
-    ¬ ∃ x ∈ s.neighbors, EarlierOwnerCertificate chain ledger x := by
+    ¬ ∃ x ∈ s.neighbors, HasEarlierOwner chain ledger x := by
   intro howner
-  obtain ⟨x, hx, cert⟩ := howner
+  obtain ⟨x, hx, hcert⟩ := howner
+  obtain ⟨cert⟩ := hcert
   have hnone := hactual x hx
   have hsome : ledger.ownerFn.classify x = some cert.owner := cert.classified
   rw [hnone] at hsome
@@ -302,7 +311,7 @@ theorem violation_forces_certified_earlier_owner
     (s : RootedShell chain) (Q b c ambientShell : Nat)
     (hsemantic : SemanticEnvelopeOrOwner ledger s Q b c ambientShell)
     (hviol : c * ambientShell < Q * (s.neighbors.length - b)) :
-    ∃ x ∈ s.neighbors, EarlierOwnerCertificate chain ledger x := by
+    ∃ x ∈ s.neighbors, HasEarlierOwner chain ledger x := by
   cases hsemantic with
   | inl h => exact ((Nat.not_lt_of_ge h) hviol).elim
   | inr h => exact h
@@ -336,7 +345,7 @@ theorem f241_semantic_target_forces_certified_owner
     (hsemantic : SemanticEnvelopeOrOwner ledger s
       MultiplicativeCounterexample.q 3 7
       MultiplicativeCounterexample.ambientShell6) :
-    ∃ x ∈ s.neighbors, EarlierOwnerCertificate chain ledger x := by
+    ∃ x ∈ s.neighbors, HasEarlierOwner chain ledger x := by
   exact violation_forces_certified_earlier_owner ledger s
     MultiplicativeCounterexample.q 3 7
     MultiplicativeCounterexample.ambientShell6 hsemantic (by
