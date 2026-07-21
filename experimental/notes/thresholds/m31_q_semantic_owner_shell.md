@@ -41,7 +41,8 @@ No equality between `q_prof^w` and `q_slope` is assumed.
 
 The stdlib-only Lean modules
 `experimental/lean/m31_q_rooted_shell/M31QRootedShell/SemanticOwner.lean` and
-`experimental/lean/m31_q_rooted_shell/M31QRootedShell/SemanticNaturalScale.lean`
+`experimental/lean/m31_q_rooted_shell/M31QRootedShell/SemanticNaturalScale.lean`, and
+`experimental/lean/m31_q_rooted_shell/M31QRootedShell/SemanticResidualFilter.lean`
 formalize this statement, its literal `q_prof^w` specialization, its
 actual-residual consequence, and the mandatory `F_241` regression.  They import
 PR #1005's rooted-shell arithmetic and do not reprove the rooted-shell
@@ -51,8 +52,9 @@ summation reduction or either support-only counterexample.
 
 ```text
 PROVED SEMANTIC INTERFACE AND COMPILERS
+PROVED EXECUTABLE RESIDUAL FILTER
 CONDITIONAL SEMANTIC SO3+7 INPUT
-MANDATORY F_241 REGRESSION
+MANDATORY F_241 TWO-OWNER REGRESSION
 OPEN DEPLOYED M31 RESIDUAL
 ```
 
@@ -133,6 +135,21 @@ returns `none` on every neighbor.
 underlying certificate still contains the executable owner result and exposes
 the full chain and budget through the proved certificate theorems.
 
+### Executable actual residual
+
+`residualShell ledger shell` applies the same globally fixed owner function to
+every semantic neighbor and retains exactly the `classify = none` fiber.  The
+complementary `ownedNeighbors` filter retains exactly `classify != none`.
+Their lengths add to the original rooted degree, and the residual construction
+preserves the received line, prefix target, exchange shell, semantic validity,
+and duplicate-free support projections.
+
+Every member of `ownedNeighbors` has an `EarlierOwnerCertificate` through the
+`PaidOwnerLedger` soundness fields.  Thus the executable filter cannot delete a
+support merely because it has quotient/dihedral symmetry or an empty planted
+core: deletion requires the full semantic line-to-slope certificate and paid
+owner profile.
+
 ## Proved compiler statements
 
 ### Actual residual consequence
@@ -168,6 +185,14 @@ These are line-local statements.  They do not replace
 `sup_line sum_profile` by `sum_profile sup_line` and do not merge an earlier
 owner numerator with the C9 prefix-support count.
 
+### Executable residual compiler
+
+`semanticNaturalEnvelopeOrOwner_of_residualShell` proves that it is enough to
+establish the natural-scale shell inequality on the executable post-C1--C8
+residual.  If the earlier-owned filter is empty, the residual equals the full
+shell and the inequality is returned directly.  Otherwise the theorem returns
+a concrete certified earlier owner from the complement.
+
 ## Mandatory `F_241` regression
 
 The packet imports the exact multiplicative counterexample from PR #1005:
@@ -197,6 +222,13 @@ The theorem `f241_all_residual_rejects_semantic_natural_target` proves:
 
 > If every neighbor is declared post-C1--C8 residual, `(SO3+7)` is false on the
 > packet.
+
+The executable regression is sharper.  The exact inequality permits at most
+eight residual neighbors.  Since the displayed shell has rooted degree ten and
+the residual/owned filters partition it exactly,
+`f241_residualShell_bound_forces_two_owned_neighbors` proves that **at least two**
+distinct support projections must carry genuine earlier-owner certificates.
+One untyped owner label is therefore not enough to absorb the packet.
 
 Finally, `f241_owner_free_function_rejects_semantic_target` executes the fixed
 all-false C1--C8 classifier and rejects it.  This is the formal regression
