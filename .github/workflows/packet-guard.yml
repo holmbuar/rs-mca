@@ -1,0 +1,53 @@
+name: Packet guard
+run-name: "Packet guard — PR #${{ github.event.pull_request.number }}"
+
+# Enforces packet hygiene on validation PRs.
+#
+# Runs on pull_request_target so the BASE branch's version of this file always
+# executes — a PR cannot neuter the guard by editing it (the hole that let
+# earlier packets smuggle in workflow files). SECURITY: this workflow must
+# never check out or execute PR code; it only reads the changed-file list.
+on:
+  pull_request_target:
+
+permissions:
+  pull-requests: read
+
+concurrency:
+  group: packet-guard-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: No .github changes in packets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          bad="$(gh api --paginate "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/files" \
+            --jq '.[].filename' | grep -E '^\.github/' || true)"
+          if [[ -n "$bad" ]]; then
+            {
+              echo "## Packet guard: FAIL"
+              echo
+              echo "Validation packets must not add or modify CI/workflow files."
+              echo "Delete the following from this branch and push again:"
+              echo
+              sed 's/^/- /' <<<"$bad"
+              echo
+              echo "The Lean build for packets is provided by lean-build.yml on main;"
+              echo "packets never need their own workflow files."
+              echo
+              echo "(If this PR is intentional CI infrastructure maintained by the"
+              echo "repo owner, ignore this failing check.)"
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::Packet must not touch .github/** — delete from this branch: $(tr '\n' ' ' <<<"$bad")"
+            exit 1
+          fi
+          echo "No .github/** changes — OK" >> "$GITHUB_STEP_SUMMARY"
+          echo "packet guard OK"
