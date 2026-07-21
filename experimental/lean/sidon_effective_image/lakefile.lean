@@ -1,6 +1,8 @@
 import Lake
 open Lake DSL
 
-package sidon_effective_image
+package sidonEffectiveImage where
 
-lean_lib SidonEffectiveImage
+@[default_target]
+lean_lib SidonEffectiveImage where
+  roots := #[`SidonEffectiveImage]
