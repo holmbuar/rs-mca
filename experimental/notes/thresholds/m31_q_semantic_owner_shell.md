@@ -127,6 +127,11 @@ multiplicity with explanation or slope multiplicity.
 `IsActualPostC1C8Residual` states that the executable first-match projector
 returns `none` on every neighbor.
 
+`HasEarlierOwner` is `Nonempty` packaging of a concrete
+`EarlierOwnerCertificate`.  This keeps `(SO3+7)` proposition-valued while the
+underlying certificate still contains the executable owner result and exposes
+the full chain and budget through the proved certificate theorems.
+
 ## Proved compiler statements
 
 ### Actual residual consequence
