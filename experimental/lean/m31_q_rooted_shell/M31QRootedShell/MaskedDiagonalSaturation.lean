@@ -4,72 +4,33 @@ import M31QRootedShell.Deployed
 /-!
 # Masked diagonal saturation at the deployed Mersenne-31 list row
 
-This stdlib-only module is the finite arithmetic and metadata-preservation
-certificate for the successor of the padding-bridge audit.
-
-The polynomial-module input is kept explicit rather than reaxiomatized here:
-
-* the diagonal map identifies padded syzygies with the coordinatewise
-  `Q_i`-divisible submodule of the actual-error syzygy module and shifts every
-  row degree by `d = R - j`;
-* successive minima of a full-rank submodule cannot be smaller than those of
-  the ambient module;
-* the last actual-error Forney index is at least `K - j + 1`;
-* the primitive padded locator row has total Forney degree at most `R`.
-
-From those premises the kernel checks the deployed conclusion: the shifted
-padded frame has the same first-three bounds `20765`, `41530`, and `62295` at
-every interior weight.  It also checks that a list compiler can attach the new
-frame to each marked source key without changing the ordered selector,
-root-status masks, semantic owner, refunds, or signed occupancy credits.
+The general polynomial-module theorem is proved in the companion audit note.
+This stdlib-only module kernel-checks its deployed arithmetic consequences and
+a typed compiler that preserves all source-key metadata.
 -/
 
 namespace M31QRootedShell.MaskedDiagonalSaturation
 
 open M31QRootedShell.PaddingBridgeAudit
 
-/-- Deployed Mersenne-31 code length. -/
 def length : Nat := 2097152
-
-/-- Deployed Reed--Solomon dimension. -/
 def dimension : Nat := 1048576
-
-/-- Adjacent list-row agreement. -/
 def agreement : Nat := 1116023
-
-/-- Canonical boundary radius. -/
 def radius : Nat := 981129
-
-/-- Shifted-locator cutoff `K - R`. -/
 def cutoff : Nat := 67447
-
-/-- Number of locator columns in one marked source packet. -/
 def sourceColumns : Nat := 46
-
-/-- Rank of the syzygy module of a primitive 46-column locator row. -/
 def syzygyRank : Nat := 45
 
-/-- Exact cap for the first 44 padded indices after the last-index floor. -/
 def paddedPrefix44Cap : Nat := 913681
-
-/-- Deployed rank-46 bounds inherited by the padded frame. -/
 def paddedFirstCap : Nat := 20765
 def paddedFirstTwoCap : Nat := 41530
 def paddedFirstThreeCap : Nat := 62295
 
-/-- Exact number of source keys forced by the signed occupancy ledger. -/
 def markedSourceKeyFloor : Nat := 259881
-
-/-- Exact signed allowance below the forbidden-list crossing. -/
 def signedOccupancyAllowance : Nat := 259880
-
-/-- Constant part of the signed occupancy identity. -/
 def signedOccupancyBaseline : Nat := 16517335
-
-/-- First forbidden list size `B* + 1`. -/
 def forbiddenListSize : Nat := 16777216
 
-/-- The deployed constants and the shifted-last-index identity agree exactly. -/
 theorem deployed_parameter_identities :
     radius = length - agreement ∧
     cutoff = dimension - radius ∧
@@ -77,18 +38,13 @@ theorem deployed_parameter_identities :
     sourceColumns - 1 = syzygyRank := by
   decide
 
-/-- Exact signed-occupancy crossing used by the rank-46 source theorem. -/
 theorem signed_occupancy_crossing :
     signedOccupancyBaseline + markedSourceKeyFloor = forbiddenListSize ∧
     signedOccupancyAllowance + 1 = markedSourceKeyFloor ∧
     M31QRootedShell.Deployed.Bstar + 1 = forbiddenListSize := by
   decide
 
-/--
-The largest masked index cannot lie below the largest actual-error index, and
-subtracting the exact common padding degree leaves the deployed padded
-last-index floor `K - R + 1 = 67448`.
--/
+/-- Exact cancellation of the weight in the shifted largest-index floor. -/
 theorem shifted_last_index_floor
     (j actualLast maskedLast paddedLast : Nat)
     (hj : j ≤ radius)
@@ -99,7 +55,7 @@ theorem shifted_last_index_floor
   simp only [dimension, radius, cutoff] at *
   omega
 
-/-- Removing the last index leaves at most `913681` total degree. -/
+/-- Removing the largest padded index leaves the exact prefix-44 cap. -/
 theorem padded_prefix44_bound
     (first second third tail41 last : Nat)
     (htotal : first + second + third + tail41 + last ≤ radius)
@@ -108,10 +64,7 @@ theorem padded_prefix44_bound
   simp only [radius, cutoff, paddedPrefix44Cap] at *
   omega
 
-/--
-Exact rank-46 arithmetic.  `tail41` is the sum of indices four through 44; its
-lower bound records monotonicity of the ordered padded Forney indices.
--/
+/-- Exact ordered rank-46 extremal bounds. -/
 theorem padded_first_three_bounds
     (first second third tail41 last : Nat)
     (h12 : first ≤ second)
@@ -129,7 +82,6 @@ theorem padded_first_three_bounds
   · omega
   constructor <;> omega
 
-/-- The three exact contradiction thresholds used in the preceding proof. -/
 theorem rank46_extremal_arithmetic :
     44 * 20766 = 913704 ∧
     41531 + 42 * 20766 = 913703 ∧
@@ -137,7 +89,7 @@ theorem rank46_extremal_arithmetic :
     paddedPrefix44Cap < 913702 := by
   decide
 
-/-- Exact degree-shifted bound inside the diagonal-divisible submodule. -/
+/-- Exact common-degree shift for the first three masked minima. -/
 theorem masked_first_three_shifted_bound
     (j first second third maskedFirst maskedSecond maskedThird : Nat)
     (_hj : j ≤ radius)
@@ -149,23 +101,17 @@ theorem masked_first_three_shifted_bound
       paddedFirstThreeCap + 3 * (radius - j) := by
   omega
 
-/-- The exact margin below the shifted-locator cutoff remains positive. -/
 theorem padded_rank_three_margin :
     paddedFirstThreeCap < cutoff ∧
     cutoff - paddedFirstThreeCap = 5152 := by
   decide
 
-/-- Both bands blocked for direct transport are covered by the uniform theorem. -/
 theorem direct_transport_blocked_bands_are_covered :
     M31QRootedShell.PaddingBridgeAudit.m31FirstBlockedWeightMax ≤ radius ∧
     M31QRootedShell.PaddingBridgeAudit.m31ThreeBlockedWeightMax ≤ radius := by
   decide
 
-/--
-All source information that the compiler is required to retain.  The finite
-lists stand for the exact evaluations and masks already attached to a marked
-source key; no semantic owner is synthesized here.
--/
+/-- Exact source information retained through the algebraic compiler. -/
 structure SourceMetadata where
   sourceKeyId : Nat
   receivedCenter : List Nat
@@ -180,10 +126,7 @@ structure SourceMetadata where
   refunds : List Int
   signedOccupancyCredits : List Int
 
-/--
-A marked rank-46 source key together with the exact arithmetic premises supplied
-by the source theorem, the diagonal-saturation bridge, and padded primitivity.
--/
+/-- One marked source key and the explicit polynomial-theorem premises. -/
 structure MarkedRank46Key where
   metadata : SourceMetadata
   actualLast : Nat
@@ -209,7 +152,7 @@ structure MarkedRank46Key where
   second_shift : maskedSecond = paddedSecond + (radius - metadata.exactWeight)
   third_shift : maskedThird = paddedThird + (radius - metadata.exactWeight)
 
-/-- The compiled masked diagonal-saturation certificate on one source key. -/
+/-- The compiled saturation certificate attached to the same source key. -/
 structure SaturatedRank46Key where
   metadata : SourceMetadata
   paddedFirst : Nat
@@ -251,7 +194,7 @@ private theorem key_masked_first_three_bound (key : MarkedRank46Key) :
     key.maskedThird key.weight_le_radius (key_first_three_bounds key).2.2
     key.first_shift key.second_shift key.third_shift
 
-/-- Compile one source key, changing only its attached algebraic certificate. -/
+/-- Attach the intrinsic padded/masked frame; all metadata are definitionally fixed. -/
 def compileKey (key : MarkedRank46Key) : SaturatedRank46Key where
   metadata := key.metadata
   paddedFirst := key.paddedFirst
@@ -287,7 +230,7 @@ def compileKey (key : MarkedRank46Key) : SaturatedRank46Key where
     (compileKey key).metadata.signedOccupancyCredits =
       key.metadata.signedOccupancyCredits := rfl
 
-/-- Compile every marked source key without selecting, deleting, or duplicating it. -/
+/-- Compile every source key without selecting, deleting, or duplicating it. -/
 def compileAll (keys : List MarkedRank46Key) : List SaturatedRank46Key :=
   keys.map compileKey
 
@@ -295,64 +238,51 @@ def compileAll (keys : List MarkedRank46Key) : List SaturatedRank46Key :=
     (compileAll keys).length = keys.length := by
   simp [compileAll]
 
-/-- The exact `259881` source-key floor survives the compiler. -/
 theorem marked_source_key_floor_preserved
     (keys : List MarkedRank46Key)
     (hfloor : markedSourceKeyFloor ≤ keys.length) :
     markedSourceKeyFloor ≤ (compileAll keys).length := by
   simpa using hfloor
 
-/-- Source-key identities are unchanged, so no cross-key deduplication occurs. -/
 theorem source_key_ids_preserved (keys : List MarkedRank46Key) :
     (compileAll keys).map (fun key => key.metadata.sourceKeyId) =
       keys.map (fun key => key.metadata.sourceKeyId) := by
   simp [compileAll, compileKey]
 
-/-- Ordered first-agreement selectors are unchanged key by key. -/
 theorem selectors_preserved (keys : List MarkedRank46Key) :
     (compileAll keys).map (fun key => key.metadata.firstAgreementSelector) =
       keys.map (fun key => key.metadata.firstAgreementSelector) := by
   simp [compileAll, compileKey]
 
-/-- Root-status masks are unchanged key by key. -/
 theorem root_status_masks_preserved (keys : List MarkedRank46Key) :
     (compileAll keys).map (fun key => key.metadata.rootStatusMasks) =
       keys.map (fun key => key.metadata.rootStatusMasks) := by
   simp [compileAll, compileKey]
 
-/-- Semantic owners are neither synthesized nor reassigned. -/
 theorem semantic_owners_preserved (keys : List MarkedRank46Key) :
     (compileAll keys).map (fun key => key.metadata.semanticOwner) =
       keys.map (fun key => key.metadata.semanticOwner) := by
   simp [compileAll, compileKey]
 
-/-- Refund vectors are unchanged. -/
 theorem refunds_preserved (keys : List MarkedRank46Key) :
     (compileAll keys).map (fun key => key.metadata.refunds) =
       keys.map (fun key => key.metadata.refunds) := by
   simp [compileAll, compileKey]
 
-/-- Signed occupancy-credit vectors are unchanged. -/
 theorem signed_occupancy_credit_vectors_preserved (keys : List MarkedRank46Key) :
     (compileAll keys).map (fun key => key.metadata.signedOccupancyCredits) =
       keys.map (fun key => key.metadata.signedOccupancyCredits) := by
   simp [compileAll, compileKey]
 
-/-- The aggregate signed occupancy credit is unchanged exactly. -/
 theorem signed_occupancy_credit_sum_preserved (keys : List MarkedRank46Key) :
     ((compileAll keys).map
       (fun key => key.metadata.signedOccupancyCredits.sum)).sum =
       (keys.map (fun key => key.metadata.signedOccupancyCredits.sum)).sum := by
-  induction keys with
-  | nil => rfl
-  | cons key keys ih => simp [compileAll, ih]
+  simp [compileAll, Function.comp_def]
 
-/-- The aggregate refund is unchanged exactly. -/
 theorem refund_sum_preserved (keys : List MarkedRank46Key) :
     ((compileAll keys).map (fun key => key.metadata.refunds.sum)).sum =
       (keys.map (fun key => key.metadata.refunds.sum)).sum := by
-  induction keys with
-  | nil => rfl
-  | cons key keys ih => simp [compileAll, ih]
+  simp [compileAll, Function.comp_def]
 
 end M31QRootedShell.MaskedDiagonalSaturation
