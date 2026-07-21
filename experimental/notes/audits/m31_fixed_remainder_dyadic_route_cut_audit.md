@@ -150,7 +150,7 @@ All declarations are in
 | `postC1_cap_below_average` | `35 < 1993678` | margin comparison |
 | `postC1_cap_below_budget` | `35 < 16777215` | official budget comparison |
 | `deployed_margin_bracket` | `8*1993678 <= B* < 9*1993678` | integer form of the `8.4152...` calibration |
-| `antipodal_and_t4_are_c1_scales` | the `c=2` and `c=4` rows occur in the census and satisfy the visible-remainder C1 predicate | antipodal and `T_4` mechanisms |
+| `antipodal_and_t4_are_c1_scales` | executable `contains` checks put the `c=2` and `c=4` rows in the census and both satisfy the visible-remainder C1 predicate | antipodal and `T_4` mechanisms |
 | `named_route_cut_arithmetic` | conjunction of the all-row check, exact max `35`, and both margin comparisons | source theorem arithmetic payload |
 
 The module contains no theorem asserting a received-word list count, actual
@@ -235,15 +235,24 @@ unsafe declarations: 0
 Imported API comparison is recorded in Section 3.
 
 ```text
-Fork draft PR: AWAITING_CREATION
-Candidate head: AWAITING_CREATION
-Authoritative Lean run: AWAITING_FORK_CI
-Axiom output: AWAITING_FORK_CI
-Final validation state: AWAITING_FORK_CI
+Fork draft PR: holmbuar/rs-mca#91
+Lean-source validation head: 461bb4ea2cdedb28b5554ae7e3bf4ef71b677d7d
+Authoritative Lean run: 29853629889 (run number 180), conclusion SUCCESS
+Lean job: experimental/lean/sidon_effective_image, conclusion SUCCESS
+Build-log artifact: lean-build-log-0, artifact 8504388275
+Artifact digest: sha256:f53a67a3d1eeaaf1e0f785f834f15a79f142127660b6fc89d9db40b1198b94c2
+Targets: SidonEffectiveImage and SidonEffectiveImage.M31DyadicBlockRouteCut
+Axiom output: all eleven printed declarations do not depend on any axioms
+Validation state at Lean-source head: GREEN
 ```
 
-The audit will be updated with the authoritative fork run after the complete
-candidate packet is pushed. No local Lean build is used.
+The first fork run exposed only a proposition-level decidability failure in the
+finite `List` membership theorem. Replacing it by definitionally equivalent
+executable `List.contains` checks changed no constants, family definition,
+route predicate, or cap. Run 180 compiled the repaired complete package and its
+default target. The only branch change after that source-validation head is
+this audit record; the fork draft PR replays the whole changed Lean package on
+the resulting final candidate head. No local Lean build was used.
 
 ## 11. Remaining exact obligation
 
