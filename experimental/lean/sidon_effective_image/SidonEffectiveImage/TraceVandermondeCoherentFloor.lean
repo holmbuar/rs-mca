@@ -347,14 +347,24 @@ theorem coherent_multiplier_floor
     effective_target_size_exact, source_mass_exact] at h
   omega
 
+#print axioms field_arithmetic_exact
+#print axioms primitive_cycle_shape
+#print axioms source_mass_exact
 #print axioms syndrome_map_injective
+#print axioms singleton_fibers
+#print axioms max_fiber_exact
+#print axioms realized_image_size_exact
 #print axioms image_normalized_q_exact
 #print axioms effective_difference_span_exact
+#print axioms effective_target_size_exact
 #print axioms all_effective_trace_patterns_realized
+#print axioms coherent_orbit_size_exact
 #print axioms trace_phase_orbit_realized
 #print axioms anchor_translation_exact
 #print axioms coherent_orbit_coefficients_exact
 #print axioms coherent_signed_sum_exact
+#print axioms coherent_magnitude_exact
+#print axioms source_normalized_coherent_exact
 #print axioms image_compensated_coherent_strict
 #print axioms coherent_multiplier_floor
 
