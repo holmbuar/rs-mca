@@ -142,6 +142,7 @@ Namespace: `SidonEffectiveImage.M31CommonCoreAddBack`.
 | `source_key_ids_nodup_preserved` | duplicate-free source IDs remain duplicate-free |
 | `marked_source_key_floor_preserved` | the `259,881` key floor is unchanged |
 | `signed_credit_sum_preserved` | aggregate signed occupancy credits are unchanged |
+| `sourceIdCells_sum_length` | singleton source-ID cells have exact total size equal to the source-key list length |
 | `firstMatch_addback_le_source_keys` | singleton source-key cells cannot charge more than the source-key list length |
 | `maximal_core_regression` | exact worst-case finite gate at core degree `62,295` |
 
@@ -191,13 +192,26 @@ application is supplied by Theorem 4.1, not by a custom axiom.
 Lean toolchain: v4.31.0
 stdlib only: yes
 local Lean build: NOT RUN
-fork draft PR: PENDING
-workflow run: PENDING
-final validated head: PENDING
-compilation result: PENDING
+fork draft PR: holmbuar/rs-mca#93
+validated Lean-source head: 5ac70dd54d034554e50649a5d33c5a2a78d33d9f
+workflow: Lean build — PR #93, run 29855624079 (run number 197)
+package job: 88719127466, experimental/lean/sidon_effective_image
+build-log artifact: 8505156641, lean-build-log-0
+compilation result: SUCCESS, 10 jobs
 ```
 
-Static source census before CI:
+The build executed both
+
+```text
+lake build SidonEffectiveImage SidonEffectiveImage.M31CommonCoreAddBack
+lake build
+```
+
+and completed successfully. The only diagnostic was the nonfatal linter
+suggestion to replace one `simpa` with `simp`; there were no elaboration or
+kernel errors.
+
+Final static and kernel census:
 
 ```text
 sorry: 0
@@ -209,8 +223,18 @@ native_decide: 0
 Mathlib imports: 0
 ```
 
-The final CI run and printed axiom census will be recorded here before the
-branch is declared ready.
+The printed declarations use only standard Lean principles:
+
+- `propext` on list/filter and proposition-normalization proofs;
+- `Quot.sound` where the integrated equality/list machinery uses quotient
+  soundness; and
+- no axioms at all for `RestrictionEquiv.injective`,
+  `integrated_constant_alignment`, `deployed_parameter_identities`,
+  `signed_occupancy_crossing`, and `maximal_core_regression`.
+
+No declaration depends on `sorryAx`, `Classical.choice`, or a custom axiom. The
+audit-record successor changes no Lean source; its fork-PR rerun is the final
+branch-readiness gate.
 
 ## 9. Acceptance criterion and impact
 
