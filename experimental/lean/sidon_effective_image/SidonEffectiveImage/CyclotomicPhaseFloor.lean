@@ -21,21 +21,34 @@ set_option autoImplicit false
 set_option maxRecDepth 8192
 set_option maxHeartbeats 0
 
+/-- Executable factorial, restated locally to keep the module `Std`-only. -/
+def factorial : Nat → Nat
+  | 0 => 1
+  | n + 1 => (n + 1) * factorial n
+
+/--
+Executable binomial coefficient using the multiplicative recurrence
+`C(n,k+1)=C(n,k)(n-k)/(k+1)`. All calls below have `k≤n`.
+-/
+def binomial (n : Nat) : Nat → Nat
+  | 0 => 1
+  | k + 1 => binomial n k * (n - k) / (k + 1)
+
 /-- Exhaustive regression parameters: `p=3`, `r=2`, `N=12`, `m=6`. -/
 def regressionPhaseCodeSize : Nat := 3 ^ 10
 
-def regressionSourceMass : Nat := Nat.choose 12 6
+def regressionSourceMass : Nat := binomial 12 6
 
 def regressionHalfBalancedCount : Nat :=
-  Nat.choose 6 2 * Nat.choose 4 2
+  binomial 6 2 * binomial 4 2
 
 def regressionAnchoredComplementCount : Nat :=
-  Nat.choose 5 1 * Nat.choose 4 2
+  binomial 5 1 * binomial 4 2
 
 def regressionSplitBalancedBlockCount : Nat :=
   regressionHalfBalancedCount * regressionAnchoredComplementCount
 
-def regressionCyclotomicCoefficient : Nat := Nat.choose 4 2
+def regressionCyclotomicCoefficient : Nat := binomial 4 2
 
 def regressionSplitBalancedBlockMass : Nat :=
   regressionSplitBalancedBlockCount * regressionCyclotomicCoefficient
@@ -61,25 +74,25 @@ theorem regression_split_balanced_block_mass_exact :
     regressionSplitBalancedBlockMass = 16200 := by decide
 
 /-- Exact `p=3`, `r=5` source mass `M=L=binom(30,15)`. -/
-def sourceMass : Nat := Nat.choose 30 15
+def sourceMass : Nat := binomial 30 15
 
 /-- Exact effective target size `A_eff=3^28`. -/
 def effectiveTargetSize : Nat := 3 ^ 28
 
 /-- Balanced phase words on the attained zero-target half. -/
 def halfBalancedCount : Nat :=
-  Nat.choose 15 5 * Nat.choose 10 5
+  binomial 15 5 * binomial 10 5
 
 /-- Balanced phase words on the complementary half with the base phase fixed to zero. -/
 def anchoredComplementBalancedCount : Nat :=
-  Nat.choose 14 4 * Nat.choose 10 5
+  binomial 14 4 * binomial 10 5
 
 /-- Characters in the certified split-balanced cyclotomic subblock. -/
 def splitBalancedBlockCount : Nat :=
   halfBalancedCount * anchoredComplementBalancedCount
 
 /-- Common fixed-weight cyclotomic coefficient `[z^15](1+z^3)^10`. -/
-def cyclotomicCoefficient : Nat := Nat.choose 10 5
+def cyclotomicCoefficient : Nat := binomial 10 5
 
 /-- Signed split-balanced subblock contribution; every summand is positive. -/
 def splitBalancedBlockMass : Nat :=
@@ -107,8 +120,7 @@ def balancedHistogramTriples : List PhaseCountTriple :=
 
 /-- Three-part multinomial coefficient. -/
 def multinomial3 (n a b c : Nat) : Nat :=
-  Nat.factorial n /
-    (Nat.factorial a * Nat.factorial b * Nat.factorial c)
+  factorial n / (factorial a * factorial b * factorial c)
 
 /--
 Number of characters for one attained-support count triple. Globally there are
@@ -118,9 +130,9 @@ one zero on the complement.
 def balancedHistogramTerm : PhaseCountTriple → Nat
   | (a0, a1, a2) =>
       multinomial3 15 a0 a1 a2 *
-        (Nat.factorial 14 /
-          (Nat.factorial (9 - a0) *
-            Nat.factorial (10 - a1) * Nat.factorial (10 - a2)))
+        (factorial 14 /
+          (factorial (9 - a0) *
+            factorial (10 - a1) * factorial (10 - a2)))
 
 /-- Exact complete globally balanced histogram count at `p=3,r=5`. -/
 def balancedHistogramCount : Nat :=
