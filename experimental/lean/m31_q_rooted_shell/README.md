@@ -25,18 +25,22 @@ The package kernel-checks:
   line/explanation/witness/codeword-ray/distinct-slope chain, separate
   natural-prefix and slope-sampling denominators, and exact line-local slope
   budgets;
-- the exact `3+7 OR certified earlier paid slope owner` statement and the
-  compilers showing that it yields `3+7` on the actual post-C1--C8 residual and
-  that a strict envelope violation forces a concrete owner certificate;
-- the mandatory `F_241` regression showing that any semantic theorem on the
-  violating ten-neighbor shell must produce an earlier paid owner, while an
-  all-residual or all-false support-only adapter is rejected.
+- the literal natural-scale specialization
+  `q_prof^w * max(d_e(A)-3,0) <= 7 H_e OR certified owner`, rather than a free
+  normalization symbol;
+- the compilers showing that the semantic target yields `3+7` on the actual
+  post-C1--C8 residual and that a strict natural-scale violation forces a
+  concrete owner certificate;
+- the mandatory `F_241` regression showing that the exact natural denominator
+  is `241^2 = 58,081`, any semantic theorem on the violating ten-neighbor shell
+  must produce an earlier paid owner, and an all-residual or all-false
+  support-only adapter is rejected.
 
 The multiplicative packet is a counterexample to a support-only proof route.
 It does **not** prove that its supports survive the actual slope-level C1--C8
 first-match atlas, and therefore does not refute the deployed Mersenne-31 exact
-residual.  The semantic module likewise does not manufacture those missing
-explanations: it fixes their required type and proves the semantic statement
+residual.  The semantic modules likewise do not manufacture those missing
+explanations: they fix their required type and prove the semantic statement
 compilers and regression implications.
 
 The package does **not** prove the open deployed local shell hypothesis, the
