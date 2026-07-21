@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Support verifier for the C7 ledger bridge and ownership regressions.
+"""Support verifier for the conditional C7 adapter and atlas-order regressions.
 
-This script replays the finite first-match fixtures and checks the source/module
-boundary.  It is fail-closed under ``python -O``.  Lean compilation, not this
-script, is the proof-validation authority.
+This script replays finite fixtures and checks the source/module boundary.  It is
+fail-closed under ``python -O``.  Lean compilation, not this script, is the
+proof-validation authority.
 """
 
 from __future__ import annotations
@@ -42,6 +42,10 @@ MODULE_DECLARATIONS: dict[str, tuple[str, ...]] = {
         "rootedFixture_compiles",
     ),
     "C7BasePoleLineExtension.lean": (
+        "def liftLoss",
+        "basePoleC7ProfilesAtLoss_flatten_assignedSlopes",
+        "basePoleC7ProfilesAtLoss_budgetTotal",
+        "basePoleC7ProfilesAtLoss_naturalTotal",
         "lineAssignedSlopes_nodup",
         "earlier_append_assignedSlopes_nodup",
         "extendLine_flatten_assignedSlopes",
@@ -51,13 +55,15 @@ MODULE_DECLARATIONS: dict[str, tuple[str, ...]] = {
         "extendLine_naturalTotal_le_prior_add_qMinusOne",
         "extensionFixture_assignedSlopes",
         "extensionFixture_totals",
+        "extensionFixture_loss3_totals",
     ),
     "SemanticAtlasOwnership.lean": (
-        "structure CertifiedC3Profile",
+        "inductive C3ProvenanceLabel",
+        "structure LabeledC3Payment",
         "structure WitnessLocalRefinement",
-        "structure CertifiedC3ThenLater",
-        "CertifiedC3ThenLater.bad_le_loss_mul_naturalTotal",
-        "CertifiedC3ThenLater.ledger_compiles",
+        "structure LabeledC3ThenLater",
+        "LabeledC3ThenLater.bad_le_loss_mul_naturalTotal",
+        "LabeledC3ThenLater.ledger_compiles",
     ),
     "C7OwnerRegression.lean": (
         "affineSteinerC1C7_firstMatch",
@@ -86,19 +92,20 @@ AUDIT_MARKERS: dict[str, tuple[str, ...]] = {
     "c7_base_pole_closed_ledger_producer.md": (
         "deferred third unit",
         "Exact PROVED statements",
+        "ProfilePayment.liftLoss",
         "sorry / sorryAx placeholders: 0",
-        "row-wide `(UNIF)`",
+        "CONDITIONAL RS INSTANTIATION",
     ),
     "c7_first_match_owner_regression.md": (
-        "COUNTEREXAMPLE TO UNTRIMMED OWNERSHIP",
+        "COUNTEREXAMPLE TO ATLAS-INDEPENDENT C7 OWNERSHIP",
         "basePoleC7DirectBudget",
-        "CertifiedC3Profile",
-        "support verifier",
+        "LabeledC3Payment",
+        "fail-closed support verifier",
     ),
     "c7_singleton_planted_absorption.md": (
         "archived/asymptotic_rs_mca_frontiers.tex",
-        "ACTIVE SEMANTIC REPAIR",
-        "WitnessLocalRefinement",
+        "ACTIVE-ATLAS NONCANONICITY",
+        "POLICY DECISION REQUIRED",
         "Nonclaims",
     ),
 }
@@ -115,7 +122,7 @@ def require(condition: bool, message: str) -> None:
 
 
 def first_match(cells: list[list[int]]) -> list[list[int]]:
-    """Ordered duplicate-free first-match leaves for finite slope cells."""
+    """Ordered duplicate-free first-match leaves for finite numeric cells."""
     paid: set[int] = set()
     leaves: list[list[int]] = []
     for cell in cells:
@@ -138,7 +145,7 @@ def read_text(path: Path, overrides: Mapping[Path, str]) -> str:
 def verify(overrides: Mapping[Path, str] | None = None) -> dict[str, int]:
     overrides = {} if overrides is None else overrides
 
-    # Exact finite ownership regressions.
+    # Exact finite atlas-order regressions.
     require(
         first_match([[7], [7]]) == [[7], []],
         "affine-Steiner first-match regression changed",
@@ -155,13 +162,17 @@ def verify(overrides: Mapping[Path, str] | None = None) -> dict[str, int]:
     assigned = [slope for slope in raw if slope not in earlier]
     require(assigned == [101, 103], "rooted deletion fixture changed")
     require(len(assigned) == 2, "direct budget is not the survivor count")
-    require(2 + len(assigned) == 4, "line-extension telescope changed")
+    require(2 + len(assigned) == 4, "loss-one telescope changed")
+    require(6 + len(assigned) == 8, "larger-loss ray telescope changed")
+    require(2 + len(assigned) == 4, "larger-loss natural telescope changed")
 
     declaration_count = 0
     all_lean_texts: list[str] = []
+    module_texts: dict[str, str] = {}
     for filename, declarations in MODULE_DECLARATIONS.items():
         path = LEAN_DIR / filename
         text = read_text(path, overrides)
+        module_texts[filename] = text
         all_lean_texts.append(text)
         for declaration in declarations:
             require(
@@ -180,12 +191,16 @@ def verify(overrides: Mapping[Path, str] | None = None) -> dict[str, int]:
 
     combined_lean = "\n".join(all_lean_texts)
     require(
-        re.search(r"\bsorryAx\b|\bsorry\b", combined_lean) is None,
-        "Lean source contains a sorry placeholder",
+        re.search(r"\bsorryAx\b|\bsorry\b|\badmit\b", combined_lean) is None,
+        "Lean source contains a proof placeholder",
     )
     require(
         re.search(r"(?m)^\s*axiom\s+", combined_lean) is None,
         "Lean source introduces a custom axiom declaration",
+    )
+    require(
+        re.search(r"(?m)^\s*unsafe\s+", combined_lean) is None,
+        "Lean source introduces an unsafe declaration",
     )
 
     # The critical split: integrated narrow producers remain ledger-free.
@@ -206,19 +221,37 @@ def verify(overrides: Mapping[Path, str] | None = None) -> dict[str, int]:
             f"ledger layer leaked into integrated narrow file: {filename}",
         )
 
-    ledger_bridge = read_text(LEAN_DIR / "C7BasePoleLedgerBridge.lean", overrides)
-    witness_bridge = read_text(
-        LEAN_DIR / "C7BasePoleWitnessLedgerBridge.lean", overrides
-    )
+    ledger_bridge = module_texts["C7BasePoleLedgerBridge.lean"]
+    witness_bridge = module_texts["C7BasePoleWitnessLedgerBridge.lean"]
+    line_extension = module_texts["C7BasePoleLineExtension.lean"]
+    labeled_interface = module_texts["SemanticAtlasOwnership.lean"]
     require(
         "import AsymptoticSpine.C7BasePoleProducer" in ledger_bridge
         and "import AsymptoticSpine.UniformClosedLedger" in ledger_bridge,
-        "raw-slope bridge does not import both narrow producer and ledger",
+        "raw-list bridge does not import both narrow producer and ledger",
     )
     require(
         "import AsymptoticSpine.C7BasePoleWitnessProducer" in witness_bridge
         and "import AsymptoticSpine.C7BasePoleLedgerBridge" in witness_bridge,
-        "witness bridge does not layer on both integrated and bridge modules",
+        "conditional witness bridge does not layer on both interfaces",
+    )
+    require(
+        "ClosedLineLedger compilerLoss profileCap" in line_extension
+        and "profile.liftLoss hLoss" in line_extension,
+        "line extension is not generic in compilerLoss",
+    )
+    require(
+        "extensionFixture_loss3_totals" in line_extension,
+        "larger-loss unit-budget regression is missing",
+    )
+    require(
+        "CertifiedC3Profile" not in labeled_interface
+        and "CertifiedC3ThenLater" not in labeled_interface,
+        "semantic certification overclaim returned",
+    )
+    require(
+        "labels prove no semantic classification" in labeled_interface,
+        "numeric-only provenance boundary is not explicit",
     )
 
     root_text = read_text(ROOT_MODULE, overrides)
@@ -239,16 +272,17 @@ def verify(overrides: Mapping[Path, str] | None = None) -> dict[str, int]:
         "declarations": declaration_count,
         "sorry": 0,
         "custom_axiom": 0,
-        "finite_regressions": 3,
+        "unsafe": 0,
+        "finite_regressions": 4,
     }
 
 
 def tamper_selftest() -> None:
-    victim = LEAN_DIR / "C7BasePoleLedgerBridge.lean"
+    victim = LEAN_DIR / "C7BasePoleLineExtension.lean"
     original = victim.read_text(encoding="utf-8")
     tampered = original.replace(
-        "theorem basePoleC7Ledger_compiles",
-        "theorem removed_basePoleC7Ledger_compiles",
+        "theorem extensionFixture_loss3_totals",
+        "theorem removed_extensionFixture_loss3_totals",
         1,
     )
     require(tampered != original, "tamper self-test could not alter victim")
@@ -276,7 +310,8 @@ def main() -> None:
         "RESULT: PASS "
         f"(modules={summary['modules']}, declarations={summary['declarations']}, "
         f"finite_regressions={summary['finite_regressions']}, "
-        f"sorry={summary['sorry']}, custom_axiom={summary['custom_axiom']})"
+        f"sorry={summary['sorry']}, custom_axiom={summary['custom_axiom']}, "
+        f"unsafe={summary['unsafe']})"
     )
     if args.tamper_selftest:
         tamper_selftest()
