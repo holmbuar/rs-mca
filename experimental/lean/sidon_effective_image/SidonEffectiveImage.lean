@@ -162,9 +162,9 @@ theorem unique_double_target : doubleTargets = [zeroSyndrome] := by
 
 /-- The two displayed supports are the double zero-syndrome fiber. -/
 theorem displayed_collision :
-    collisionA != collisionB &&
-      syndrome collisionA == zeroSyndrome &&
-      syndrome collisionB == zeroSyndrome := by
+    collisionA ≠ collisionB ∧
+      syndrome collisionA = zeroSyndrome ∧
+      syndrome collisionB = zeroSyndrome := by
   native_decide
 
 /-- Cleared-denominator image-normalized Q loss is strictly below two. -/
@@ -178,8 +178,8 @@ theorem two_coefficient_census_bound : maxFiber <= p ^ 2 := by
 
 /-- The displayed generator differences have the intended residue values. -/
 theorem basis_values :
-    basis1 = { x := 1, y := 3, z := 7 } &&
-      basis2 = { x := 2, y := 8, z := 4 } &&
+    basis1 = { x := 1, y := 3, z := 7 } ∧
+      basis2 = { x := 2, y := 8, z := 4 } ∧
       basis3 = { x := 3, y := 4, z := 8 } := by
   native_decide
 
