@@ -140,7 +140,7 @@ theorem rank46_extremal_arithmetic :
 /-- Exact degree-shifted bound inside the diagonal-divisible submodule. -/
 theorem masked_first_three_shifted_bound
     (j first second third maskedFirst maskedSecond maskedThird : Nat)
-    (hj : j ≤ radius)
+    (_hj : j ≤ radius)
     (hfirst : first + second + third ≤ paddedFirstThreeCap)
     (hshift1 : maskedFirst = first + (radius - j))
     (hshift2 : maskedSecond = second + (radius - j))
@@ -343,12 +343,16 @@ theorem signed_occupancy_credit_sum_preserved (keys : List MarkedRank46Key) :
     ((compileAll keys).map
       (fun key => key.metadata.signedOccupancyCredits.sum)).sum =
       (keys.map (fun key => key.metadata.signedOccupancyCredits.sum)).sum := by
-  simp [compileAll, compileKey]
+  induction keys with
+  | nil => rfl
+  | cons key keys ih => simp [compileAll, ih]
 
 /-- The aggregate refund is unchanged exactly. -/
 theorem refund_sum_preserved (keys : List MarkedRank46Key) :
     ((compileAll keys).map (fun key => key.metadata.refunds.sum)).sum =
       (keys.map (fun key => key.metadata.refunds.sum)).sum := by
-  simp [compileAll, compileKey]
+  induction keys with
+  | nil => rfl
+  | cons key keys ih => simp [compileAll, ih]
 
 end M31QRootedShell.MaskedDiagonalSaturation
