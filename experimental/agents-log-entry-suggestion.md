@@ -1,0 +1,8 @@
+### 2026-07-21 - M31 interior padding-bridge audit
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/audits/m31_padding_bridge_audit.md`; `experimental/lean/m31_q_rooted_shell/M31QRootedShell/PaddingBridgeAudit.lean`; `experimental/lean/m31_q_rooted_shell/PADDING_BRIDGE_AUDIT_CORRESPONDENCE.md`; `experimental/lean/m31_q_rooted_shell/M31QRootedShell.lean`; `experimental/lean/m31_q_rooted_shell/README.md`; `experimental/agents-log-entry-suggestion.md`.
+- **Status:** COUNTEREXAMPLE_NEW_FLOOR / AUDIT / FORMALIZATION.
+- **What is being added:** The audit proves that the canonical interior padded-locator syzygy module is the degree-shifted coordinatewise diagonal-divisible submodule of the actual-error syzygy module, not the full module controlled by the current rank-46 Forney bounds. A genuine `RS[F_11,D,4]` pair keeps the actual-error frame fixed while changing the canonical order, direct transportability, and padded pair index; the stdlib-only Lean module checks the finite counterpacket and exact M31 blocked-weight arithmetic.
+- **How it is useful:** This replaces the vague `UNPAID_PADDING_BRIDGE` terminal for the Mersenne-31 list row by the precise `UNPAID_MASKED_DIAGONAL_SATURATION` obligation and prevents the inequality `mu_1+mu_2+mu_3 <= 62,295 < 67,447` from being banked as a canonical Popov payment without the selector and root-status masks. The deployed row remains open and ledger movement is zero.
+- **What to do next:** Prove a masked diagonal-saturation theorem on the `259,881` marked rank-46 source keys, with exact occupancy-credit transport, or route the blocked interior layers to an earlier semantic owner; only afterward address the separate common-core add-back and rank-two coloop terminals.
