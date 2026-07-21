@@ -137,8 +137,9 @@ theorem basePoleC7ProfilesAtLoss_flatten_assignedSlopes
     ((basePoleC7ProfilesAtLoss hLoss earlier raw).map
       (fun profile => profile.assignedSlopes)).flatten =
         basePoleC7AssignedSlopes earlier raw := by
-  simpa [basePoleC7ProfilesAtLoss, List.map_map] using
-    basePoleC7Profiles_flatten_assignedSlopes earlier raw
+  simpa [basePoleC7ProfilesAtLoss, List.map_map,
+    Function.comp_def] using
+      basePoleC7Profiles_flatten_assignedSlopes earlier raw
 
 /-- Loss lifting preserves the exact unit C7 ray-budget sum. -/
 theorem basePoleC7ProfilesAtLoss_budgetTotal
@@ -148,7 +149,7 @@ theorem basePoleC7ProfilesAtLoss_budgetTotal
       (fun profile => profile.rayBudget)) =
         (basePoleC7AssignedSlopes earlier raw).length := by
   simpa [basePoleC7ProfilesAtLoss, basePoleC7Profiles,
-    List.map_map] using
+    List.map_map, Function.comp_def] using
       listSum_basePoleC7Profile_rayBudgets
         (basePoleC7AssignedSlopes earlier raw)
 
@@ -160,7 +161,7 @@ theorem basePoleC7ProfilesAtLoss_naturalTotal
       (fun profile => profile.naturalScale)) =
         (basePoleC7AssignedSlopes earlier raw).length := by
   simpa [basePoleC7ProfilesAtLoss, basePoleC7Profiles,
-    List.map_map] using
+    List.map_map, Function.comp_def] using
       listSum_basePoleC7Profile_naturalScales
         (basePoleC7AssignedSlopes earlier raw)
 
