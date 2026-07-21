@@ -322,7 +322,7 @@ def ownerFn : FixedOwnerFunction Explanation where
 theorem classify_eq_some_iff (x : Explanation) (owner : OwnerId) :
     ownerFn.classify x = some owner ↔
       (x = ownerA ∨ x = ownerB) ∧ owner = OwnerId.c3 := by
-  simp [ownerFn, c3Trigger, FixedOwnerFunction.classify]
+  simpa [ownerFn, c3Trigger, FixedOwnerFunction.classify, eq_comm]
 
 /-- Exact natural numerator of the finite regression profile. -/
 theorem f241NaturalScale_naturalNumerator : f241NaturalScale.naturalNumerator = 5 := by
@@ -385,7 +385,9 @@ def shell : RootedShell chain where
   anchor := supportOf 10
   shell := 6
   neighbors := shellNeighbors
-  neighbors_valid := by native_decide
+  neighbors_valid := by
+    intro x _
+    exact all_explanations_semantically_valid x
   neighbors_on_line := by intro _ _; rfl
   neighbors_same_prefix := by native_decide
   neighbors_in_shell := by native_decide
@@ -427,7 +429,11 @@ theorem residualShell_degree_exact :
 theorem residualShell_three_plus_seven :
     LocalNaturalEnvelopeAt (residualShell ledger shell) f241NaturalScale
       3 7 ambientShell6 := by
-  native_decide
+  unfold LocalNaturalEnvelopeAt
+  rw [residualShell_degree_exact, f241NaturalScale_denominator,
+    MultiplicativeCounterexample.q_eq,
+    MultiplicativeCounterexample.ambientShell6_eq]
+  omega
 
 /-- The executable residual is definitionally the actual C9 `none` fibre. -/
 theorem residualShell_actual :
