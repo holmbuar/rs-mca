@@ -1,0 +1,9 @@
+{"plugins": [],
+ "package": "m31QRootedShell",
+ "options": {},
+ "name": "M31QRootedShell.Deployed",
+ "isModule": false,
+ "importArts":
+ {"M31QRootedShell.Envelope":
+  ["/Users/tor/src/wt-ship-scale16-up/experimental/lean/m31_q_rooted_shell/.lake/build/lib/lean/M31QRootedShell/Envelope.olean"]},
+ "dynlibs": []}

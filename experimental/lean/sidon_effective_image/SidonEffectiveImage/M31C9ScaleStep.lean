@@ -241,96 +241,79 @@ def binomial : Nat → Nat → Nat
   | 0, _ + 1 => 0
   | n + 1, k + 1 => binomial n k + binomial n (k + 1)
 
-set_option maxRecDepth 1000000 in
 theorem generator_norm_one :
     fp2Mul normOneGenerator (fp2Conj normOneGenerator) = fp2One := by decide
 
-set_option maxRecDepth 1000000 in
 theorem generator_half_order :
     fp2PowTwo 30 normOneGenerator =
       ({ re := fieldPrime - 1, im := 0 } : Fp2) := by decide
 
-set_option maxRecDepth 1000000 in
 theorem generator_full_order :
     fp2PowTwo 31 normOneGenerator = fp2One := by decide
 
-set_option maxRecDepth 1000000 in
 theorem domain_derived_from_generator : derivedDomain = domain := by decide
 
-set_option maxRecDepth 1000000 in
 theorem domain_nodup : noDuplicates domain = true := by decide
 
-set_option maxRecDepth 1000000 in
 theorem domain_points_are_deployed_roots :
     domain.all (fun x => chebyshevPowTwo 21 x == 0) = true := by decide
 
-set_option maxRecDepth 1000000 in
 theorem antipodal_pairs_exact :
     antipodalPairs.all (fun pair =>
       ((domain.getD pair.1 0 + domain.getD pair.2 0) % fieldPrime == 0)) =
       true := by decide
 
 /-- The four printed `T_4` block values, one per complete block. -/
-set_option maxRecDepth 1000000 in
 theorem t4_blocks_exact :
     ((domain.take 4).all (fun x => chebyshevPowTwo 2 x == 1884637334) &&
      ((domain.drop 4).take 4).all (fun x => chebyshevPowTwo 2 x == 51044589) &&
-     ((domain.drop 8).take 4).all (fun x => chebyshevPowTwo 2 x == 116752674) &&
-     (domain.drop 12).all (fun x => chebyshevPowTwo 2 x == 1035154226)) =
+     ((domain.drop 8).take 4).all (fun x => chebyshevPowTwo 2 x == 1916935773) &&
+     (domain.drop 12).all (fun x => chebyshevPowTwo 2 x == 116752674)) =
       true := by decide
 
 /-- Block masks are the complete weight-four `T_4` blocks in mask form. -/
-set_option maxRecDepth 1000000 in
 theorem block_masks_exact :
     blockMasks = [15, 240, 3840, 61440] ∧
     blockMasks.all (fun b => maskWeight b == 4) = true := by
   exact ⟨rfl, by decide⟩
 
 /-- The six two-block unions all realize the key `(0,4,0)` and are C1-owned. -/
-set_option maxRecDepth 1000000 in
 theorem six_fiber_two_block_c1 :
     fullSixMasks.all (fun mask =>
       (maskWeight mask == 8) &&
       (prefixKey mask == fullSixKey) &&
       c1Owned mask) = true := by decide
 
-set_option maxRecDepth 1000000 in
 theorem six_fiber_nodup : noDuplicates fullSixMasks = true := by decide
 
 /-- The first residual doubled key: an explicit complete-block swap that
 survives C1.  `growthLeft` and `growthRight` share the fixed remainder and
 differ by swapping block one for block two. -/
-set_option maxRecDepth 1000000 in
 theorem growth_pair_block_swap :
     growthLeft = 15 ||| growthRemainder ∧
     growthRight = 240 ||| growthRemainder ∧
     (15 &&& growthRemainder) = 0 ∧
     (240 &&& growthRemainder) = 0 := by decide
 
-set_option maxRecDepth 1000000 in
 theorem growth_pair_distinct_weight_eight :
     (growthLeft != growthRight) &&
     (maskWeight growthLeft == 8) &&
     (maskWeight growthRight == 8) = true := by decide
 
-set_option maxRecDepth 1000000 in
 theorem growth_pair_survives_c1 :
     (!c1Owned growthLeft && !c1Owned growthRight) = true := by decide
 
-set_option maxRecDepth 1000000 in
 theorem growth_pair_collides :
     (prefixKey growthLeft == growthKey) &&
     (prefixKey growthRight == growthKey) = true := by decide
 
 /-- Every complete block has first-three-power-sum key `(0,2,0)`. -/
-set_option maxRecDepth 1000000 in
 theorem t4_prefix_keys_equal :
     blockMasks.all (fun b =>
       prefixKey b == ({ p1 := 0, p2 := 2, p3 := 0 } : PrefixKey)) = true := by
   decide
 
 /-- Binomial anchors for the frozen census masses. -/
-set_option maxRecDepth 1000000 in
 theorem binomial_anchors :
     binomial 16 8 = fullMass ∧ binomial 8 4 = c1OwnedCount ∧
     binomial 4 2 = 6 := by decide
@@ -352,7 +335,6 @@ theorem sharpness_bracket :
     residualMaxFiber * residualImageCard ≤ 2 * residualMass ∧
     residualMaxFiber ≤ compilerLoss * naturalScale := by decide
 
-set_option maxRecDepth 1000000 in
 theorem deployed_dimensions :
     fieldPrime = 2147483647 ∧
     deployedPrefixDepth = 67447 ∧

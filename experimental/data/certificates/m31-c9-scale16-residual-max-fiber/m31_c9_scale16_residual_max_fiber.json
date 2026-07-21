@@ -205,7 +205,7 @@
     "certificate": "experimental/data/certificates/m31-c9-scale16-residual-max-fiber/m31_c9_scale16_residual_max_fiber.json",
     "lean_module": {
       "path": "experimental/lean/sidon_effective_image/SidonEffectiveImage/M31C9ScaleStep.lean",
-      "sha256": "0eb84b7e6d194fa0971ba460b0df7e77304973f52a11d13fb85a95037fd7080d"
+      "sha256": "12abfc99e6a6c053ce4600699d690c351b8753b2206120b438cc20293b5f5a3f"
     },
     "verifier": "experimental/scripts/verify_m31_c9_scale16_residual_max_fiber.py"
   },
