@@ -101,6 +101,30 @@ one global profile atlas fixed before the received line. `naturalTotal` contains
 only the profile sum, so the universal terms in the literal frontiers envelope
 must be absorbed by the supplied `envelope`.
 
+## C7 ledger bridge and semantic ownership
+
+The integrated narrow modules `C7BasePoleProducer` and
+`C7BasePoleWitnessProducer` remain independent of `UniformClosedLedger`.
+`C7BasePoleLedgerBridge` and `C7BasePoleWitnessLedgerBridge` add the deferred
+`ProfilePayment`, `ClosedLineLedger`, and one-line ledger hand-off without
+rewriting those producers.  The bridge proves that both the line-local budget
+and natural sum equal the existing deletion-aware `directBudget`, and bounds
+them by the raw census and the source-side `q - 1` count.
+
+`C7BasePoleLineExtension` appends the surviving C7 profiles to an earlier closed
+line, preserves duplicate-free first-match ownership, and proves exact budget
+and natural-scale telescopes. `SemanticAtlasOwnership` requires an earlier C3
+owner to carry a certified row-derived profile; witness-local factors alone are
+not semantic owners. `C7OwnerRegression` and
+`C7SingletonPlantedAbsorption` reject untrimmed double charging and preserve the
+possibility that the later C7 residual is empty.
+
+These modules prove finite composition interfaces only. They do not construct a
+global fixed-before-line C1--C9 atlas, prove C7 survivor nonemptiness, establish
+row-wide `(UNIF)`, compare the envelope with a target, or close an RS--MCA row.
+See `experimental/notes/audits/c7_base_pole_closed_ledger_producer.md` for the
+statement map and proof boundary.
+
 ## Upgrade regression locks
 
 `AsymptoticSpine.RegressionLocks` restates the current general interfaces for
