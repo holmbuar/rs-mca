@@ -1,0 +1,63 @@
+{
+  "schema": "m31-c9-full-prefix-owner-refund-floor/v1",
+  "status": "CONDITIONAL_ON_NAMED_INPUT",
+  "wall_id": "M31-C9-POST-C2048-OWNER-REFUND-RESIDUAL-3184405",
+  "claim_scope": "Exact arithmetic and falsifier threshold for the #1020 fullPrefixFiber field after the c=2048 earlier-owner floor; not an RS counterexample and not a proof of row-sharp Q.",
+  "row": {
+    "name": "Mersenne-31 list",
+    "n": 2097152,
+    "k": 1048576,
+    "a_plus": 1116023,
+    "w": 67447
+  },
+  "denominators": {
+    "q_gen": 2147483647,
+    "q_list": "21267647892944572736998860269687930881",
+    "q_line": "NOT_USED_IN_THIS_SUPPORT_MAX_FIBER_AUDIT",
+    "q_chal": "NOT_USED_IN_THIS_SUPPORT_MAX_FIBER_AUDIT",
+    "prefix_target_count": "q_gen^w",
+    "row_budget_formula": "floor(q_list / 2^100)"
+  },
+  "image_normalization": {
+    "full_slice_average_formula": "binomial(n,a_plus) / q_gen^w",
+    "full_slice_average_ceil": 1993678,
+    "residual_rule": "For residual mass M_res and realized residual image size L_res, normalize MI/MA by M_res/L_res. Do not replace L_res by q_gen^w without a full-image certificate."
+  },
+  "earlier_owner_floor": {
+    "scale": 2048,
+    "quotient_n": 1024,
+    "fixed_remainder_choose_n": 1023,
+    "fixed_remainder_choose_k": 544,
+    "quotient_prefix_depth": 32,
+    "formula": "ceil(binomial(1023,544) / q_gen^32)",
+    "value": 6796405,
+    "semantic_use": "Candidate earlier-owner floor at the planted c=2048 prefix key; exact C1-C8 ownership/co-location must be supplied by the row compiler."
+  },
+  "ledger_cut": {
+    "row_budget": 16777215,
+    "residual_allowance_after_owner_payment": 9980810,
+    "full_prefix_residual_cap_if_owner_floor_is_still_inside_the_fiber": 3184405,
+    "owner_refund_gap": 6796405,
+    "full_budget_plus_separate_owner_charge": 23573620,
+    "equalities": [
+      "16777215 - 6796405 = 9980810",
+      "9980810 - 6796405 = 3184405",
+      "16777215 + 6796405 = 23573620"
+    ]
+  },
+  "falsifier": {
+    "earlier_owned_prefix_supports_at_least": 6796405,
+    "residual_prefix_supports_at_least": 3184406,
+    "conclusion": "fullPrefixFiber.length > 9980810",
+    "named_search_target": "M31-C9-POST-C2048-COLOCATED-RESIDUAL-3184406"
+  },
+  "source_blobs": {
+    "experimental/grande_finale.tex": "759678e30639972e4f64b438d3d6ba76ff3ddf8f",
+    "experimental/rs_mca_thresholds.tex": "01302a797c502a05ed0b11ba949b8756e0aa2b22",
+    "experimental/lean/asymptotic_spine/AsymptoticSpine/PrimitiveBoolean.lean": "777273e4377c31c815062769803622c6226988d3",
+    "experimental/lean/asymptotic_spine/AsymptoticSpine/EffectiveClosure.lean": "9fb097e23d00e2f3ee3afeda021b86ba4192d2a4",
+    "experimental/lean/asymptotic_spine/AsymptoticSpine/UniformClosedLedger.lean": "deda34063f4629e245c37ba03e3cb3ab70502570",
+    "experimental/notes/thresholds/20260709_m31_chebyshev_fixed_remainder_floor/cap25_v13_m31_chebyshev_fixed_remainder_floor.md": "f25d9f5b7c6638ab5c7ef36a887b670de1f846c6",
+    "open_pr_1020_statement_reference_only_C9ResidualMaxFiberProducer.lean": "5318f56130a98c8224b3baa977108e213127517f"
+  }
+}
