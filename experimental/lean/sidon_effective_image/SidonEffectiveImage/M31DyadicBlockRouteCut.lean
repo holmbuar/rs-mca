@@ -161,8 +161,8 @@ theorem deployed_margin_bracket :
   decide
 
 theorem antipodal_and_t4_are_c1_scales :
-    antipodalRow ∈ scaleRows ∧
-    t4Row ∈ scaleRows ∧
+    scaleRows.contains antipodalRow = true ∧
+    scaleRows.contains t4Row = true ∧
     c1Visible antipodalRow = true ∧
     c1Visible t4Row = true := by
   decide
