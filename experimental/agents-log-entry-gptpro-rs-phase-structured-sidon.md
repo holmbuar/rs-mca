@@ -1,0 +1,8 @@
+### 2026-07-21 - M31 RS phase-structured Sidon payment
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/lean/sidon_effective_image/SidonEffectiveImage/RSPhaseStructuredSidon.lean`, `experimental/lean/sidon_effective_image/SidonEffectiveImage.lean`, `experimental/lean/sidon_effective_image/lakefile.lean`, `experimental/lean/sidon_effective_image/lean-toolchain`, `experimental/notes/thresholds/rs_phase_structured_sidon_payment.md`, `experimental/notes/audits/rs_phase_structured_sidon_preflight.md`, `experimental/data/certificates/rs-phase-structured-sidon/rs_phase_structured_sidon.json`, and `experimental/scripts/verify_rs_phase_structured_sidon.py`.
+- **Status:** PROVED / AUDIT / LOCAL_ONLY.
+- **What is being added:** On one explicit Mersenne-31 Reed--Solomon weight-four survivor after exact C1 antipodal complete-fiber deletion, a fixed-point-free antipodal involution preserves the realized second-power-sum key and flips the quadratic locator phase.  All nine realized signed coefficients vanish, so the phase-aware L1 aggregate and signed collision moment are exactly zero at `A_eff=L=9`, while the unsigned collision moment is `576`.
+- **How it is useful:** This supplies acceptance-gate criterion 2 for `RS_PHASE_STRUCTURED_SIDON_PAYMENT`: a cancellation-sensitive payment on an actual RS leaf that is invisible to absolute mass.  It does not bank a row atom or prove a full-prefix C9 max-fiber theorem.
+- **What to do next:** Extend the involution to the full surviving prefix partition, or classify the coordinates it fails to preserve into earlier owners; separately supply slope projection, profile census, add-back, and line-local `UNIF`.
