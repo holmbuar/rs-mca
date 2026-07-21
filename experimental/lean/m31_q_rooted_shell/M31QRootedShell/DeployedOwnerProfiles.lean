@@ -54,6 +54,7 @@ theorem M31ListNaturalScaleCalibration.naturalNumerator_eq
     scale.naturalNumerator = 1993679 := by
   unfold NaturalProfileScale.naturalNumerator
   rw [h.loss_eq, h.averageCeil_eq]
+  native_decide
 
 /-- A line-local certificate for the paid near-rational finite-slope branch. -/
 structure M31NearRationalCertificate (Slope : Type) where
