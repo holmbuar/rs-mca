@@ -50,9 +50,10 @@ theorem residualOf_length_add_ownedOf_length
   | nil => simp [residualOf, ownedOf]
   | cons x xs ih =>
       by_cases h : ownerFn.classify x = none
-      · simp [residualOf, ownedOf, h, ih]
-      · simp [residualOf, ownedOf, h, ih, Nat.add_assoc, Nat.add_comm,
-          Nat.add_left_comm]
+      · simp [residualOf, ownedOf, h] at ih ⊢
+        omega
+      · simp [residualOf, ownedOf, h] at ih ⊢
+        omega
 
 /-- Line-local executable C9 residual neighbors. -/
 def residualNeighbors
@@ -106,10 +107,14 @@ def residualShell
     intro x hx
     exact s.neighbors_in_shell x (mem_residualOf ledger.ownerFn s.neighbors x |>.mp hx).1
   neighborSupports_nodup := by
-    have hsub : residualNeighbors ledger s <+ s.neighbors := by
+    have hsub : List.Sublist (residualNeighbors ledger s) s.neighbors := by
       unfold residualNeighbors residualOf
       exact List.filter_sublist
-    exact (hsub.map chain.supportOf).nodup s.neighborSupports_nodup
+    have hmap : List.Sublist
+        ((residualNeighbors ledger s).map chain.supportOf)
+        (s.neighbors.map chain.supportOf) :=
+      hsub.map chain.supportOf
+    exact hmap.nodup s.neighborSupports_nodup
 
 /-- The constructed residual is definitionally the `none` fiber. -/
 theorem residualShell_is_actual
