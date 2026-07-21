@@ -39,12 +39,13 @@ U_owner <= loss_owner * (1 + ceil(M_profile / q_prof^w)).
 
 No equality between `q_prof^w` and `q_slope` is assumed.
 
-The stdlib-only Lean module
-`experimental/lean/m31_q_rooted_shell/M31QRootedShell/SemanticOwner.lean`
-formalizes this statement, its actual-residual consequence, and the mandatory
-`F_241` regression.  It imports PR #1005's rooted-shell arithmetic and does not
-reprove the rooted-shell summation reduction or either support-only
-counterexample.
+The stdlib-only Lean modules
+`experimental/lean/m31_q_rooted_shell/M31QRootedShell/SemanticOwner.lean` and
+`experimental/lean/m31_q_rooted_shell/M31QRootedShell/SemanticNaturalScale.lean`
+formalize this statement, its literal `q_prof^w` specialization, its
+actual-residual consequence, and the mandatory `F_241` regression.  They import
+PR #1005's rooted-shell arithmetic and do not reprove the rooted-shell
+summation reduction or either support-only counterexample.
 
 ## Status
 
@@ -136,11 +137,11 @@ the full chain and budget through the proved certificate theorems.
 
 ### Actual residual consequence
 
-`semantic_three_plus_seven_on_actual_residual` proves:
+`semantic_natural_three_plus_seven_on_actual_residual` proves:
 
 ```text
 IsActualPostC1C8Residual
-and SemanticEnvelopeOrOwner(q_prof^w,3,7,H_e)
+and SemanticNaturalEnvelopeOrOwner(q_prof^w,3,7,H_e)
   ==> q_prof^w * max(d_e(A)-3,0) <= 7 H_e.
 ```
 
@@ -150,11 +151,11 @@ impossible because any owner certificate includes an equality
 
 ### Violation-to-owner branch
 
-`violation_forces_certified_earlier_owner` proves:
+`natural_violation_forces_certified_earlier_owner` proves:
 
 ```text
-SemanticEnvelopeOrOwner(Q,b,c,H_e)
-and c H_e < Q * max(d_e(A)-b,0)
+SemanticNaturalEnvelopeOrOwner(q_prof^w,b,c,H_e)
+and c H_e < q_prof^w * max(d_e(A)-b,0)
   ==> a concrete neighbor has an EarlierOwnerCertificate.
 ```
 
@@ -187,12 +188,12 @@ The existing packet also proves that the fifteen-member support proxy has
 trivial dihedral stabilizers and empty common core.  Those facts remain route
 cuts only.
 
-The new theorem `f241_semantic_target_forces_certified_owner` proves:
+The new theorem `f241_semantic_natural_target_forces_certified_owner` proves:
 
 > Any instance of `(SO3+7)` on the ten-neighbor `F_241` shell must return a
 > certified earlier paid slope owner.
 
-The theorem `f241_all_residual_rejects_semantic_target` proves:
+The theorem `f241_all_residual_rejects_semantic_natural_target` proves:
 
 > If every neighbor is declared post-C1--C8 residual, `(SO3+7)` is false on the
 > packet.
