@@ -37,13 +37,14 @@ catalogue.
 | exact slope numerator and denominator | `ExactSlopeBudget` | Stores `U_owner`, positive `q_slope`, and `U_owner <= q_slope`; no equality with the prefix denominator is assumed. |
 | distinct line-local slope image | `PaidSlopeProfile` | The slope list is duplicate-free and its cardinality is at most the exact numerator, which is at most the natural numerator. |
 | semantic owner soundness | `PaidOwnerLedger` | The global owner function is separate from line-local profiles. Positive classification proves semantic validity and membership of the actual slope in the paid image. |
-| one earlier owner | `EarlierOwnerCertificate` | Stores the exact first-match equality `classify x = some owner`. |
+| one concrete earlier owner | `EarlierOwnerCertificate` | Stores the exact first-match equality `classify x = some owner`. |
+| proposition-valued owner branch | `HasEarlierOwner` | Defined as `Nonempty (EarlierOwnerCertificate ...)`, so the semantic disjunction remains a proposition without erasing the concrete certificate type. |
 | full chain preservation | `EarlierOwnerCertificate.preserves_chain` | Prints support/witness, codeword/witness, ray/codeword, slope/ray equalities and paid slope-image membership. |
 | exact and natural budget chain | `EarlierOwnerCertificate.budget_chain` | Produces `#slopes <= U_owner <= q_slope` and `U_owner <= naturalNumerator`. |
 | rooted semantic shell | `RootedShell` | One line, prefix target, anchor, shell, valid explanations, and duplicate-free support projections. |
 | local rooted-shell inequality | `LocalEnvelopeAt` | Exact natural subtraction `Q * (degree-b) <= c * ambientShell`. |
 | actual post-C1--C8 residual | `IsActualPostC1C8Residual` | Every shell explanation is classified `none` by the same global owner function. |
-| requested semantic disjunction | `SemanticEnvelopeOrOwner` | Local envelope or a concrete explanation with `EarlierOwnerCertificate`. |
+| requested semantic disjunction | `SemanticEnvelopeOrOwner` | Local envelope or a concrete explanation satisfying `HasEarlierOwner`. |
 | owner branch impossible on actual residual | `actualResidual_has_no_certified_owner` | Contradicts `classify x = none` with the certificate's `classify x = some owner`. |
 | actual-residual `3+7` compiler | `semantic_three_plus_seven_on_actual_residual` | The semantic disjunction at literal `(b,c)=(3,7)` implies the local envelope on the actual residual. |
 | violation-to-owner compiler | `violation_forces_certified_earlier_owner` | A strict local-envelope violation eliminates the first disjunct and returns the concrete owner certificate. |
