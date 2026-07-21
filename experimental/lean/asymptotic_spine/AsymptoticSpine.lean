@@ -17,6 +17,7 @@ import AsymptoticSpine.ProfileEnvelope
 import AsymptoticSpine.StaircaseDeep
 import AsymptoticSpine.EffectiveClosure
 import AsymptoticSpine.HighKappaCoverage
+import AsymptoticSpine.C8ChartExhaustion
 import AsymptoticSpine.FullImageIdentityWindow
 import AsymptoticSpine.PrimitiveBoolean
 import AsymptoticSpine.BooleanDifferenceGrowth

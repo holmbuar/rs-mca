@@ -1,0 +1,7 @@
+## 2026-07-21 — GPT-5.6 Pro — C8 finite spine chart exhaustion
+
+- **Workboard / activity:** K3; formalize one hard input, the finite/exact C8 chart-construction and exhaustion route cut.
+- **Files:** `experimental/lean/asymptotic_spine/AsymptoticSpine/C8ChartExhaustion.lean`, package root/README, `experimental/notes/thresholds/c8_chart_exhaustion_route_cut.md`, `experimental/notes/audits/c8_chart_exhaustion_preflight.md`, canonical JSON, and stdlib verifier.
+- **Status:** `PROVED FINITE SPINE CALIBRATION / PARTIAL EXHAUSTION / OPEN DEPLOYED RS INSTANTIATION`.  Raw slope cells `[[5],[5,7,9],[9,11,13],[13,17]]` first-match to `[[5],[7,9],[11,13],[17]]`; chart keys land uniquely in C1-owned, exact #1020 shallow-input, paid KoalaBear one-pencil, and `DEEP_HIGHER_DIMENSIONAL_BALANCED_CORE_AFTER_C1_C7_SHALLOW_AND_ONE_PENCIL_DELETION`.  The deep class is not paid.
+- **Validation:** Lean 4.31.0, stdlib only; 0 `sorry`/`admit`/custom axioms by source census; fork draft-PR CI is the compilation authority.  The independent verifier checks the enumeration, shallow data, moving-root arithmetic, blob pins, and five tamper mutations.
+- **Usefulness / next:** replaces an untyped calibration remainder with one exact duplicate-free residual class and preserves the nonautomatic ray boundary.  Next instantiate the same route cut on an actual deployed received-line chart catalogue, including the RS common-core shortening certificate or a precise obstruction.

@@ -56,7 +56,6 @@ arithmetic, profile envelopes, effective closure, rerouting, and the finite
 root-incidence core of the deep-regime upper bound. `AsymptoticSpine.lean`
 imports the complete package.
 
-
 ## Window-cell aggregation
 
 `AsymptoticSpine.WindowCells` aggregates the generic window engine over
@@ -91,15 +90,57 @@ sup_line bad(line)
 produces the row-level numerator bound. The executable diagonal regression
 `sup_sum_interchange_falsifier` proves that replacing `sup_line sum_profile` by
 `sum_profile sup_line` changes and can loosen the required quantity. The module
-does not construct the semantic
-atlas, C7/C8/C9 payments, residual/full comparison, image-normalized Sidon
-input, ray compiler, subexponential profile count, the actual asymptotic/window-
-uniform estimate, or profile-envelope comparison; those remain explicit
-producer obligations. Its finite `lines` list is supplied by the caller and is
-not itself a completeness proof over all received RS lines, nor does it enforce
-one global profile atlas fixed before the received line. `naturalTotal` contains
-only the profile sum, so the universal terms in the literal frontiers envelope
-must be absorbed by the supplied `envelope`.
+does not construct the semantic atlas, C7/C8/C9 payments, residual/full
+comparison, image-normalized Sidon input, ray compiler, subexponential profile
+count, the actual asymptotic/window-uniform estimate, or profile-envelope
+comparison; those remain explicit producer obligations. Its finite `lines`
+list is supplied by the caller and is not itself a completeness proof over all
+received RS lines, nor does it enforce one global profile atlas fixed before
+the received line. `naturalTotal` contains only the profile sum, so the
+universal terms in the literal frontiers envelope must be absorbed by the
+supplied `envelope`.
+
+## Actual C8 chart exhaustion at the spine calibration
+
+`AsymptoticSpine.C8ChartExhaustion` constructs four raw chart projections and
+applies the integrated first-match deletion operation.  The exact assigned
+slope cells are
+
+```text
+[[5], [7,9], [11,13], [17]].
+```
+
+They correspond, in order, to:
+
+```text
+C1-owned earlier chart,
+the supplied shallow closure chart,
+a paid one-parameter moving-root chart,
+DEEP_HIGHER_DIMENSIONAL_BALANCED_CORE_AFTER_C1_C7_SHALLOW_AND_ONE_PENCIL_DELETION.
+```
+
+The supplied shallow input is field-for-field the existing spine fixture used
+by the C8 producer boundary: `affineToyBridge`, syndrome key `1`,
+`highKappaToySE2`, its chart inclusion, `highKappaToyBounds`, and kernel label
+`1000000`.  Its post-deletion slopes are exactly `[7,9]` and the integrated
+shallow closure theorem proves their direct finite payment.  The bounded chart
+carries the actual slope list `[11,13]` and a KoalaBear moving-root certificate,
+which gives exact cap two.
+
+The module proves both chart-key uniqueness and slope-level duplicate freedom
+across the four buckets.  It does **not** pay the named deep residual, construct
+a deployed RS semantic owner function, prove a common-core shortening
+certificate, import open PR #1011/#1020, establish `UNIF`, or close a deployed
+row.  Exact statement correspondence and nonclaims are in
+`experimental/notes/audits/c8_chart_exhaustion_preflight.md`.
+
+The replay packet is checked with
+
+```sh
+python3 experimental/scripts/verify_c8_chart_exhaustion.py --check
+python3 -O experimental/scripts/verify_c8_chart_exhaustion.py --check
+python3 experimental/scripts/verify_c8_chart_exhaustion.py --tamper-selftest
+```
 
 ## Upgrade regression locks
 
