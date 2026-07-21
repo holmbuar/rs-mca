@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-21
 
-**Status:** `PROVED SCOPED FINITE STATEMENTS / CONDITIONAL GLOBAL USE / AWAITING_FORK_CI / AUDIT`
+**Status:** `PROVED SCOPED FINITE STATEMENTS / CONDITIONAL GLOBAL USE / KERNEL_VALIDATED / AUDIT`
 
 **Lane:** hard input 3, exact-residual C9 row-sharp max-fiber.
 
@@ -170,12 +170,36 @@ payment is direct because the max-fiber theorem is already supplied.
 ### Current state
 
 ```text
-Fork draft-PR Lean compilation: AWAITING_FORK_CI
+Fork draft-PR Lean compilation: GREEN
+Fork draft PR: holmbuar/rs-mca#78, head 465db0f
+Workflow run: 29847381530 (Lean build - PR #78), Lean 4.31.0
+Result: Build completed successfully (22 jobs, full sibling
+        dependency chain staircase_logic + asymptotic_spine +
+        m31_q_rooted_shell + this package)
 Local Lean build: NOT RUN
 ```
 
 The project process makes the fork draft PR authoritative.  No local Lean build
-or alternative compiler was used.
+or alternative compiler was used.  Between export and validation the ship side
+applied packaging completion (generated `lake-manifest.json` for the sibling
+path requires; cumulative package root also importing the `HalfSliceFalsifier`
+module carried byte-identical from upstream #1026 so the package composes with
+open #1024/#1026 in any integration order) and one tactic-only repair commit:
+the generic `residual_exact` simp proof was replaced by an explicit
+`List.mem_filter` case split, and the concrete `scoped_residual_exact`
+instantiation qualifies its constructor through an unfolded
+`scopedEarlierOwner`.  No statement, definition, constant, or hypothesis was
+changed.
+
+### Kernel axiom census (from the green run)
+
+All 23 printed declarations depend only on standard Lean principles —
+`propext`, `Classical.choice`, `Quot.sound` — and the pure-computation checks
+are axiom-free: `generator_norm_one`, `generator_half_order`,
+`generator_full_order`, `domain_points_are_deployed_roots`,
+`antipodal_pairs_exact`, `t4_fibers_exact`, `deployed_dimensions`, and
+`loss_one_fits_deployed_budget` depend on no axioms.  No `sorryAx`, no custom
+axiom, and no `Lean.ofReduceBool` (no `native_decide`) appears anywhere.
 
 ### Static source census before CI
 
