@@ -231,8 +231,13 @@ theorem firstGrowthMate_indices_exact :
 theorem block0_key_exact : prefixKey block0Mask = t4BlockKey := by decide
 theorem block3_key_exact : prefixKey block3Mask = t4BlockKey := by decide
 
-theorem firstGrowth_full : IsFullSupport firstGrowthSupport := by decide
-theorem firstGrowthMate_full : IsFullSupport firstGrowthMate := by decide
+theorem firstGrowth_full : IsFullSupport firstGrowthSupport := by
+  change isFullSupport firstGrowthSupport = true
+  decide
+
+theorem firstGrowthMate_full : IsFullSupport firstGrowthMate := by
+  change isFullSupport firstGrowthMate = true
+  decide
 
 theorem firstGrowth_not_c1Owned :
     c1Owned firstGrowthSupport = false := by decide
@@ -240,9 +245,13 @@ theorem firstGrowth_not_c1Owned :
 theorem firstGrowthMate_not_c1Owned :
     c1Owned firstGrowthMate = false := by decide
 
-theorem firstGrowth_survives : IsResidual firstGrowthSupport := by decide
+theorem firstGrowth_survives : IsResidual firstGrowthSupport := by
+  change isResidual firstGrowthSupport = true
+  decide
 
-theorem firstGrowthMate_survives : IsResidual firstGrowthMate := by decide
+theorem firstGrowthMate_survives : IsResidual firstGrowthMate := by
+  change isResidual firstGrowthMate = true
+  decide
 
 theorem firstGrowth_key_exact :
     prefixKey firstGrowthSupport = firstGrowthKey := by decide
