@@ -1,8 +1,9 @@
 # M31 Q rooted-shell Lean package
 
 This is the stdlib-only Lean validation package for
-`experimental/notes/thresholds/m31_q_rooted_shell_envelope.md` and
-`experimental/notes/thresholds/m31_q_three_plus_seven_multiplicative_counterexample.md`.
+`experimental/notes/thresholds/m31_q_rooted_shell_envelope.md`,
+`experimental/notes/thresholds/m31_q_three_plus_seven_multiplicative_counterexample.md`,
+and `experimental/notes/thresholds/m31_q_semantic_owner_shell.md`.
 
 ## Scope
 
@@ -18,16 +19,33 @@ The package kernel-checks:
   that support-level dihedral and planted-core pruning does not imply `3+7`:
   the retained fifteen-support target has trivial support stabilizers and empty
   common core, but one rooted shell has degree ten and exact violation margin
-  `97,867`.
+  `97,867`;
+- the semantic successor interface: one executable C1--C8 owner function fixed
+  before the line, the full
+  line/explanation/witness/codeword-ray/distinct-slope chain, separate
+  natural-prefix and slope-sampling denominators, and exact line-local slope
+  budgets;
+- the exact `3+7 OR certified earlier paid slope owner` statement and the
+  compilers showing that it yields `3+7` on the actual post-C1--C8 residual and
+  that a strict envelope violation forces a concrete owner certificate;
+- the mandatory `F_241` regression showing that any semantic theorem on the
+  violating ten-neighbor shell must produce an earlier paid owner, while an
+  all-residual or all-false support-only adapter is rejected.
 
 The multiplicative packet is a counterexample to a support-only proof route.
 It does **not** prove that its supports survive the actual slope-level C1--C8
 first-match atlas, and therefore does not refute the deployed Mersenne-31 exact
-residual.
+residual.  The semantic module likewise does not manufacture those missing
+explanations: it fixes their required type and proves the semantic statement
+compilers and regression implications.
 
 The package does **not** prove the open deployed local shell hypothesis, the
-gigantic binomial quotient values, row-sharp Q, an adjacent safe row, an MCA
-slope projection, or a complete first-match ledger.
+gigantic binomial quotient values, row-sharp Q, an adjacent safe row, a deployed
+C1--C8 owner classifier, or a complete first-match ledger.
+
+Source-to-Lean audits are recorded in
+`MULTIPLICATIVE_COUNTEREXAMPLE_CORRESPONDENCE.md` and
+`SEMANTIC_OWNER_CORRESPONDENCE.md`.
 
 ## Validation policy
 
