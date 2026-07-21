@@ -277,7 +277,7 @@ theorem c8Toy_smallKernel_payment :
     C8OwnerOrPayment False c8ToyShortening.original.slopes.length 2 := by
   exact ownerOrPayment_of_kernelDichotomy
     c8ToyShortening c8ToySmallKernelLedger False 4 2
-    (by intro h; omega)
+    (by intro h; simp [c8ToySmallKernelLedger] at h)
     (by intro h; decide)
 
 /-- The high-kernel branch is routed to the supplied earlier owner. -/
@@ -286,7 +286,7 @@ theorem c8Toy_highKernel_owner :
   exact ownerOrPayment_of_kernelDichotomy
     c8ToyShortening c8ToyHighKernelLedger True 4 0
     (by intro h; trivial)
-    (by intro h; omega)
+    (by intro h; simp [c8ToyHighKernelLedger] at h)
 
 /-- The finite fixture also checks the high-kappa/small-core equivalence. -/
 theorem c8Toy_highKernel_iff_smallCore :
