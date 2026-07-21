@@ -2,65 +2,117 @@
   "schema": "c8-chart-exhaustion-v1",
   "status": "PROVED_FINITE_ROUTE_CUT_PARTIAL_EXHAUSTION",
   "base_sha": "4e5f0b77c98f075ea7c8822cd4859847a232bc2a",
+  "workboard_item": "K3",
+  "row": "KoalaBear MCA",
+  "object": "MCA",
+  "target_epsilon": "2^-128",
+  "agreement": 1116048,
+  "B_star": 274980728111395087,
+  "projection_and_unit": "distinct affine slopes per received line",
   "bucket_priority": [
     "earlier",
     "shallow",
     "bounded_pencil",
     "deep_residual"
   ],
-  "supplied_shallow_chart": "supplied-shallow",
   "deep_residual_name": "DEEP_HIGHER_DIMENSIONAL_BALANCED_CORE_AFTER_C1_C7_SHALLOW_AND_ONE_PENCIL_DELETION",
-  "charts": [
-    {
-      "chart_id": "earlier-c4",
-      "earlier_owner": "C4",
-      "is_supplied_shallow": false,
-      "moving_root_certificate": null,
-      "expected_bucket": "earlier"
-    },
-    {
-      "chart_id": "supplied-shallow",
-      "earlier_owner": null,
-      "is_supplied_shallow": true,
-      "moving_root_certificate": null,
-      "expected_bucket": "shallow"
-    },
-    {
-      "chart_id": "moving-pencil-m31",
-      "earlier_owner": null,
-      "is_supplied_shallow": false,
-      "moving_root_certificate": {
-        "moving_points": 2097152,
-        "moving_roots_per_slope": 981128,
-        "slope_count": 2
+  "imported_api_blobs": {
+    "experimental/lean/asymptotic_spine/AsymptoticSpine/PrefixAtlas.lean": "d14c5fc6d93e0386fc9fb6ebfe0d0c3debc35cb1",
+    "experimental/lean/asymptotic_spine/AsymptoticSpine/FirstMatch.lean": "44592371660c453c1f8522abb9c0f9364e4dd43d",
+    "experimental/lean/asymptotic_spine/AsymptoticSpine/Util.lean": "5e09daceb9fa4d3fb72e3c59244ec348b51352c2",
+    "experimental/lean/asymptotic_spine/AsymptoticSpine/EffectiveClosure.lean": "9fb097e23d00e2f3ee3afeda021b86ba4192d2a4",
+    "experimental/lean/asymptotic_spine/AsymptoticSpine/HighKappaCoverage.lean": "cdb17177fe7f17a7e8b520d999fa925c5abfaea0"
+  },
+  "spine_calibration": {
+    "chart_order": [
+      "earlier-c1",
+      "supplied-shallow",
+      "moving-pencil-koalabear",
+      "deep-higher-dimensional"
+    ],
+    "charts": [
+      {
+        "chart_id": "earlier-c1",
+        "raw_slopes": [5],
+        "expected_post_deletion_slopes": [5],
+        "earlier_owner": "C1",
+        "is_supplied_shallow": false,
+        "moving_root_certificate": null,
+        "expected_bucket": "earlier"
       },
-      "expected_bucket": "bounded_pencil"
+      {
+        "chart_id": "supplied-shallow",
+        "raw_slopes": [5, 7, 9],
+        "expected_post_deletion_slopes": [7, 9],
+        "earlier_owner": null,
+        "is_supplied_shallow": true,
+        "moving_root_certificate": null,
+        "expected_bucket": "shallow"
+      },
+      {
+        "chart_id": "moving-pencil-koalabear",
+        "raw_slopes": [9, 11, 13],
+        "expected_post_deletion_slopes": [11, 13],
+        "earlier_owner": null,
+        "is_supplied_shallow": false,
+        "moving_root_certificate": {
+          "slopes": [11, 13],
+          "moving_points": 2097152,
+          "moving_roots_per_slope": 981104,
+          "claimed_cap": 2
+        },
+        "expected_bucket": "bounded_pencil"
+      },
+      {
+        "chart_id": "deep-higher-dimensional",
+        "raw_slopes": [13, 17],
+        "expected_post_deletion_slopes": [17],
+        "earlier_owner": null,
+        "is_supplied_shallow": false,
+        "moving_root_certificate": null,
+        "expected_bucket": "deep_residual"
+      }
+    ],
+    "expected_flattened_post_deletion_slopes": [5, 7, 9, 11, 13, 17]
+  },
+  "supplied_shallow_input": {
+    "producer_reference": "upstream PR #1020 C8ShallowClosure.ProfileData fixture",
+    "bridge": "affineToyBridge",
+    "full_slice": [0, 1, 2, 3, 4],
+    "syndrome_key": 1,
+    "depth_prefix_key": 11,
+    "supports": [1, 3],
+    "slopes": [7, 9],
+    "support_of": {
+      "7": 1,
+      "9": 3
     },
-    {
-      "chart_id": "deep-higher-dimensional",
-      "earlier_owner": null,
-      "is_supplied_shallow": false,
-      "moving_root_certificate": null,
-      "expected_bucket": "deep_residual"
-    }
-  ],
+    "base_size": 2,
+    "prefix_depth": 2,
+    "image_size": 3,
+    "effective_size": 4,
+    "average": 2,
+    "compiler_loss": 4,
+    "natural_scale": 3,
+    "kernel_dimension_label": 1000000
+  },
   "active_row_moving_root_caps": [
-    {
-      "row": "Mersenne-31 MCA",
-      "moving_points": 2097152,
-      "moving_roots_per_slope": 981128,
-      "claimed_cap": 2
-    },
     {
       "row": "KoalaBear MCA",
       "moving_points": 2097152,
       "moving_roots_per_slope": 981104,
       "claimed_cap": 2
+    },
+    {
+      "row": "Mersenne-31 MCA",
+      "moving_points": 2097152,
+      "moving_roots_per_slope": 981128,
+      "claimed_cap": 2
     }
   ],
   "nonclaims": [
-    "ACTUAL_RS_C1_C7_OWNER_FUNCTION",
-    "ACTUAL_RS_SHALLOW_PREFIX_SE2_CERTIFICATE",
+    "DEPLOYED_RS_C1_C7_OWNER_FUNCTION",
+    "DEPLOYED_RS_SHALLOW_PREFIX_SE2_CERTIFICATE",
     "ACTUAL_RS_COMMON_CORE_SHORTENING_CERTIFICATE",
     "GENERAL_GENUINE_ONE_PENCIL_CLASSIFIER",
     "DEEP_PREFIX_MI_MA_OR_SIDON_PAYMENT",
