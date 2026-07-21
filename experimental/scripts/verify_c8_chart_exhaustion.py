@@ -34,6 +34,8 @@ EXPECTED_CHART_ORDER = [
     "moving-pencil-koalabear",
     "deep-higher-dimensional",
 ]
+EXPECTED_RAW_CELLS = [[5], [5, 7, 9], [9, 11, 13], [13, 17]]
+EXPECTED_POST_DELETION_CELLS = [[5], [7, 9], [11, 13], [17]]
 EXPECTED_DEEP_RESIDUAL = (
     "DEEP_HIGHER_DIMENSIONAL_BALANCED_CORE_AFTER_"
     "C1_C7_SHALLOW_AND_ONE_PENCIL_DELETION"
@@ -214,6 +216,9 @@ def verify(data: dict[str, Any]) -> int:
             bounded_certificate = verify_moving_root_certificate(certificate, context)
         checks += 8
 
+    require(raw_cells == EXPECTED_RAW_CELLS, "raw spine chart projections mismatch")
+    require(expected_leaves == EXPECTED_POST_DELETION_CELLS,
+            "expected post-deletion cells mismatch")
     require(len(chart_ids) == len(set(chart_ids)), "chart IDs are not duplicate-free")
     require(observed_buckets == EXPECTED_PRIORITY, "calibration does not realize exact bucket order")
     require(sum(chart.get("is_supplied_shallow") is True for chart in charts) == 1,
@@ -221,7 +226,7 @@ def verify(data: dict[str, Any]) -> int:
     require(sum(bucket == "deep_residual" for bucket in observed_buckets) == 1,
             "calibration must contain exactly one deep residual chart")
     require(bounded_certificate is not None, "bounded-pencil certificate missing")
-    checks += 5
+    checks += 7
 
     actual_leaves = first_match_leaves(raw_cells)
     require(actual_leaves == expected_leaves, "first-match leaves do not match certificate")
@@ -246,7 +251,8 @@ def verify(data: dict[str, Any]) -> int:
     require(full_slice == [0, 1, 2, 3, 4], "affineToyBridge full slice mismatch")
     require(shallow.get("bridge") == "affineToyBridge", "bridge name mismatch")
     require(shallow.get("syndrome_key") == 1, "syndrome key mismatch")
-    require(shallow.get("depth_prefix_key") == 11, "translated prefix key mismatch")
+    require(shallow.get("depth_prefix_key") == 10 + shallow.get("syndrome_key"),
+            "translated prefix key mismatch")
     require(supports == [1, 3], "SE2 supports mismatch")
     require(slopes == [7, 9], "SE2 slopes mismatch")
     require(support_of == {"7": 1, "9": 3}, "SE2 support map mismatch")
