@@ -1,170 +1,241 @@
 import Std
 
 /-!
-# Finite effective-image normalization regression
+# C9 full-prefix owner-refund floor
 
-This stdlib-only module checks the `p=11`, `T=F_11^x`, `m=5`, `R=3`
-power-sum prefix fixture from
-`experimental/notes/audits/sidon_effective_image_mi_ma_normalization_floor.md`.
+This stdlib-only module mirrors the exact finite boundary of the C9 producer
+without importing an open-PR module.  It keeps the post-C1--C8 residual as the
+literal owner complement, keeps the `(SE2)` support projection genuine, and
+isolates the arithmetic obstruction created when a full-prefix payment is used
+inside a ledger that also pays an earlier owner.
 
-The module is deliberately finite.  It checks the support catalogue, realized
-image, max fiber, one double target, and an explicit inverse proving that three
-moment-column differences span all of `F_11^3`.  It does not formalize Fourier
-analysis, asymptotics, semantic first-match survival, or a ray compiler.
+The deployed Mersenne-31 list constants checked here are finite arithmetic only.
+The module does not enumerate the deployed support slice and does not prove the
+row-sharp Q inequality.
 -/
 
 namespace SidonEffectiveImage
 
-abbrev Support := List Nat
+/-- The only semantic owners allowed before C9. -/
+inductive PreC9Owner where
+  | c1 | c2 | c3 | c4 | c5 | c6 | c7 | c8
+  deriving DecidableEq, Repr, BEq
 
-structure Vec3 where
-  x : Nat
-  y : Nat
-  z : Nat
-deriving Repr, BEq, DecidableEq
+/-- Exact post-C1--C8 residual: full-slice membership plus no earlier owner. -/
+def residualOf {Support : Type} (full : List Support)
+    (earlierOwner : Support → Option PreC9Owner) : List Support :=
+  full.filter (fun x => decide (earlierOwner x = none))
 
-/-- Finite fixture parameters. -/
-def p : Nat := 11
-def n : Nat := 10
-def m : Nat := 5
-def r : Nat := 3
+/-- The complementary earlier-owned part of the same full prefix fiber. -/
+def ownedOf {Support : Type} (full : List Support)
+    (earlierOwner : Support → Option PreC9Owner) : List Support :=
+  full.filter (fun x => decide (earlierOwner x ≠ none))
 
-/-- The nonzero elements of `F_11`, represented by natural residues. -/
-def domain : List Nat := (List.range n).map (fun i => i + 1)
+/-- Standalone two-clause residual condition used by the C9 producer. -/
+theorem mem_residualOf_iff {Support : Type} {full : List Support}
+    {earlierOwner : Support → Option PreC9Owner} {x : Support} :
+    x ∈ residualOf full earlierOwner ↔
+      x ∈ full ∧ earlierOwner x = none := by
+  simp [residualOf]
 
-/-- All `k`-subsets of a duplicate-free input list. -/
-def choose {alpha : Type} : Nat -> List alpha -> List (List alpha)
-  | 0, _ => [[]]
-  | _ + 1, [] => []
-  | k + 1, x :: xs =>
-      (choose k xs).map (fun ys => x :: ys) ++ choose (k + 1) xs
+/-- The canonical owner complement is an exact cardinality partition. -/
+theorem residual_owned_length {Support : Type}
+    (earlierOwner : Support → Option PreC9Owner) :
+    ∀ full : List Support,
+      (residualOf full earlierOwner).length +
+          (ownedOf full earlierOwner).length = full.length := by
+  intro full
+  induction full with
+  | nil => simp [residualOf, ownedOf]
+  | cons x xs ih =>
+      by_cases h : earlierOwner x = none
+      · simp [residualOf, ownedOf, h, ih]
+      · simp [residualOf, ownedOf, h, ih]
 
-/-- The complete fixed-weight support slice. -/
-def supports : List Support := choose m domain
+/-- A finite genuine `(SE2)` support projection, matching the integrated API. -/
+structure SE2Certificate (Support Slope : Type) where
+  supports : List Support
+  slopes : List Slope
+  supportOf : Slope → Support
+  supports_nodup : supports.Nodup
+  slopes_nodup : slopes.Nodup
+  chosen_sublist : List.Sublist (slopes.map supportOf) supports
 
-/-- Modular power sum. -/
-def sumPowerMod (e : Nat) (S : Support) : Nat :=
-  S.foldl (fun acc t => (acc + (t ^ e) % p) % p) 0
+/-- Distinct slopes inject into their selected noncommon supports. -/
+theorem se2_support_injection {Support Slope : Type}
+    (certificate : SE2Certificate Support Slope) :
+    certificate.slopes.length ≤ certificate.supports.length := by
+  simpa using certificate.chosen_sublist.length_le
 
-/-- The first three power sums modulo `11`. -/
-def syndrome (S : Support) : Vec3 :=
-  { x := sumPowerMod 1 S
-  , y := sumPowerMod 2 S
-  , z := sumPowerMod 3 S }
+/-- Standalone mirror of the load-bearing C9 profile fields.
 
-/-- Duplicate-free list predicate, kept executable and stdlib-only. -/
-def noDuplicates [BEq alpha] : List alpha -> Bool
-  | [] => true
-  | x :: xs => !xs.contains x && noDuplicates xs
-
-/-- Retain one copy of each value. -/
-def dedup [BEq alpha] : List alpha -> List alpha
-  | [] => []
-  | x :: xs =>
-      let ys := dedup xs
-      if ys.contains x then ys else x :: ys
-
-/-- Realized full-slice image. -/
-def syndromeList : List Vec3 := supports.map syndrome
-def image : List Vec3 := dedup syndromeList
-
-/-- Exact full-slice fiber cardinality. -/
-def fiberCount (v : Vec3) : Nat :=
-  (syndromeList.filter fun w => w == v).length
-
-/-- Maximum of a natural list. -/
-def maxNat : List Nat -> Nat
-  | [] => 0
-  | x :: xs => Nat.max x (maxNat xs)
-
-/-- Exact maximum fiber over the realized image. -/
-def maxFiber : Nat := maxNat (image.map fiberCount)
-
-/-- The unique doubled target in the fixture. -/
-def zeroSyndrome : Vec3 := { x := 0, y := 0, z := 0 }
-def doubleTargets : List Vec3 := image.filter fun v => fiberCount v == 2
-
-def collisionA : Support := [1, 3, 4, 5, 9]
-def collisionB : Support := [2, 6, 7, 8, 10]
-
-/-- Coordinatewise modular vector operations. -/
-def addVec (a b : Vec3) : Vec3 :=
-  { x := (a.x + b.x) % p
-  , y := (a.y + b.y) % p
-  , z := (a.z + b.z) % p }
-
-def subMod (a b : Nat) : Nat := (a + p - (b % p)) % p
-
-def subVec (a b : Vec3) : Vec3 :=
-  { x := subMod a.x b.x
-  , y := subMod a.y b.y
-  , z := subMod a.z b.z }
-
-def scaleVec (c : Nat) (a : Vec3) : Vec3 :=
-  { x := (c * a.x) % p
-  , y := (c * a.y) % p
-  , z := (c * a.z) % p }
-
-/-- Moment column `g(t)=(t,t^2,t^3)`. -/
-def momentColumn (t : Nat) : Vec3 :=
-  { x := t % p
-  , y := (t ^ 2) % p
-  , z := (t ^ 3) % p }
-
-/-- Three differences from the base column `g(1)`. -/
-def basis1 : Vec3 := subVec (momentColumn 2) (momentColumn 1)
-def basis2 : Vec3 := subVec (momentColumn 3) (momentColumn 1)
-def basis3 : Vec3 := subVec (momentColumn 4) (momentColumn 1)
-
-/-- Linear combination of the three displayed difference columns. -/
-def linComb (c : Vec3) : Vec3 :=
-  addVec (scaleVec c.x basis1)
-    (addVec (scaleVec c.y basis2) (scaleVec c.z basis3))
-
-/-- Explicit inverse to the difference-column matrix modulo `11`. -/
-def inverseCoeffs (v : Vec3) : Vec3 :=
-  { x := (4 * v.x + 7 * v.y + 6 * v.z) % p
-  , y := (4 * v.x + 9 * v.y + 5 * v.z) % p
-  , z := (10 * v.y + 2 * v.z) % p }
-
-/-- All vectors in the ambient `F_11^3`, represented by residues. -/
-def residues : List Nat := List.range p
-def allVec3 : List Vec3 :=
-  residues.flatMap fun a =>
-    residues.flatMap fun b =>
-      residues.map fun c => { x := a, y := b, z := c }
-
-/-- Executable full-span certificate. -/
-def fullSpanCheck : Bool :=
-  allVec3.all fun v => linComb (inverseCoeffs v) == v
-
-/--
-One fail-closed finite gate for the complete fixture.  Consolidating the checks
-avoids repeatedly reducing the same support catalogue.  The theorem below uses
-kernel reduction, not native evaluation.
+The final field is deliberately the exact open-PR statement:
+`fullPrefixFiber.length ≤ compilerLoss * naturalScale`.
 -/
-def packetCheck : Bool :=
-  supports.length == 252 &&
-  supports.all (fun S => S.length == m && noDuplicates S) &&
-  image.length == 251 &&
-  noDuplicates image &&
-  maxFiber == 2 &&
-  doubleTargets == [zeroSyndrome] &&
-  collisionA != collisionB &&
-  syndrome collisionA == zeroSyndrome &&
-  syndrome collisionB == zeroSyndrome &&
-  decide (maxFiber * image.length < 2 * supports.length) &&
-  decide (maxFiber ≤ p ^ 2) &&
-  basis1 == ({ x := 1, y := 3, z := 7 } : Vec3) &&
-  basis2 == ({ x := 2, y := 8, z := 4 } : Vec3) &&
-  basis3 == ({ x := 3, y := 4, z := 8 } : Vec3) &&
-  fullSpanCheck &&
-  allVec3.length == 1331 &&
-  decide (5 * image.length < allVec3.length)
+structure C9ProfileData (Support Slope : Type) where
+  fullPrefixFiber : List Support
+  earlierOwner : Support → Option PreC9Owner
+  slopeCell : SE2Certificate Support Slope
+  supportsInResidual : List.Sublist slopeCell.supports
+    (residualOf fullPrefixFiber earlierOwner)
+  compilerLoss : Nat
+  naturalScale : Nat
+  rowSharpMaxFiber :
+    fullPrefixFiber.length ≤ compilerLoss * naturalScale
+
+/-- Every selected `(SE2)` support is literally outside the earlier-owner image. -/
+theorem C9ProfileData.support_not_earlier {Support Slope : Type}
+    (data : C9ProfileData Support Slope) {gamma : Slope}
+    (hgamma : gamma ∈ data.slopeCell.slopes) :
+    data.earlierOwner (data.slopeCell.supportOf gamma) = none := by
+  have hchosen : data.slopeCell.supportOf gamma ∈
+      data.slopeCell.slopes.map data.slopeCell.supportOf :=
+    List.mem_map.mpr ⟨gamma, hgamma, rfl⟩
+  have hsupport : data.slopeCell.supportOf gamma ∈ data.slopeCell.supports :=
+    data.slopeCell.chosen_sublist.subset hchosen
+  have hresidual : data.slopeCell.supportOf gamma ∈
+      residualOf data.fullPrefixFiber data.earlierOwner :=
+    data.supportsInResidual.subset hsupport
+  exact (mem_residualOf_iff.mp hresidual).2
+
+/-- The exact C9 direct-payment chain: genuine `(SE2)`, residual inclusion,
+full-prefix monotonicity, and the supplied full-prefix field. -/
+theorem C9ProfileData.slopes_paid {Support Slope : Type}
+    (data : C9ProfileData Support Slope) :
+    data.slopeCell.slopes.length ≤ data.compilerLoss * data.naturalScale := by
+  calc
+    data.slopeCell.slopes.length ≤ data.slopeCell.supports.length :=
+      se2_support_injection data.slopeCell
+    _ ≤ (residualOf data.fullPrefixFiber data.earlierOwner).length :=
+      data.supportsInResidual.length_le
+    _ ≤ data.fullPrefixFiber.length := by
+      unfold residualOf
+      exact List.filter_sublist.length_le
+    _ ≤ data.compilerLoss * data.naturalScale := data.rowSharpMaxFiber
+
+/-- If the full-prefix field is charged against a remaining budget while an
+owned subfamily is paid separately, the residual plus the owned floor must fit
+inside that same remaining budget. -/
+theorem residual_plus_ownerFloor_le_budget {Support : Type}
+    (full : List Support) (earlierOwner : Support → Option PreC9Owner)
+    (ownerFloor budget : Nat)
+    (hOwnerFloor : ownerFloor ≤ (ownedOf full earlierOwner).length)
+    (hFull : full.length ≤ budget) :
+    (residualOf full earlierOwner).length + ownerFloor ≤ budget := by
+  calc
+    (residualOf full earlierOwner).length + ownerFloor ≤
+        (residualOf full earlierOwner).length +
+          (ownedOf full earlierOwner).length :=
+      Nat.add_le_add_left hOwnerFloor _
+    _ = full.length := residual_owned_length earlierOwner full
+    _ ≤ budget := hFull
+
+/-- Mersenne-31 base-field order used by the prefix map. -/
+def qGen : Nat := 2 ^ 31 - 1
+
+/-- Quartic list field; this denominator is separate from `qGen`. -/
+def qList : Nat := qGen ^ 4
+
+/-- Exact list-row budget `floor(qList / 2^100)`. -/
+def rowBudget : Nat := qList / (2 ^ 100)
+
+/-- Exact `c=2048` fixed-remainder floor imported from the integrated
+fixed-remainder certificate.  The companion stdlib replay independently
+recomputes `ceil(binomial(1023,544) / qGen^32)`. -/
+def c2048OwnerFloor : Nat := 6796405
+
+/-- Budget left after paying that earlier quotient/fixed-remainder cell. -/
+def residualAllowance : Nat := rowBudget - c2048OwnerFloor
+
+/-- Maximum residual compatible with applying the *full-prefix* field at the
+remaining budget while the owner floor remains in the same prefix fiber. -/
+def fullPrefixResidualCap : Nat := residualAllowance - c2048OwnerFloor
+
+/-- First cardinality that falsifies the remaining-budget full-prefix field. -/
+def falsifierResidual : Nat := fullPrefixResidualCap + 1
+
+/-- Fail-closed exact arithmetic gate for the deployed M31 owner-refund cut. -/
+def m31ArithmeticCheck : Bool :=
+  qGen == 2147483647 &&
+  qList == 21267647892944572736998860269687930881 &&
+  rowBudget == 16777215 &&
+  c2048OwnerFloor == 6796405 &&
+  residualAllowance == 9980810 &&
+  fullPrefixResidualCap == 3184405 &&
+  falsifierResidual == 3184406 &&
+  decide (3184405 + 6796405 = 9980810) &&
+  decide (9980810 + 6796405 = 16777215) &&
+  decide (16777215 + 6796405 = 23573620) &&
+  decide (9980810 < 3184406 + 6796405)
 
 set_option maxRecDepth 1000000 in
 set_option maxHeartbeats 0 in
-/-- Exact finite regression certificate for the `p=11` packet. -/
-theorem packet_check : packetCheck = true := by decide
+/-- Kernel-checked M31 ledger arithmetic from the integrated exact owner floor.
+The large binomial ceiling itself is replayed by the companion stdlib verifier. -/
+theorem m31_arithmetic_check : m31ArithmeticCheck = true := by decide
+
+/-- Exact deployed falsifier interface.  A prefix key with at least `6,796,405`
+earlier-owned supports and at least `3,184,406` residual supports cannot satisfy
+the full-prefix field at the remaining budget `9,980,810`. -/
+theorem m31_full_bound_fails_of_falsifier {Support : Type}
+    (full : List Support) (earlierOwner : Support → Option PreC9Owner)
+    (hOwnerFloor : 6796405 ≤ (ownedOf full earlierOwner).length)
+    (hResidual : 3184406 ≤ (residualOf full earlierOwner).length) :
+    ¬ full.length ≤ 9980810 := by
+  intro hFull
+  have hCut :
+      (residualOf full earlierOwner).length + 6796405 ≤ 9980810 :=
+    residual_plus_ownerFloor_le_budget full earlierOwner 6796405 9980810
+      hOwnerFloor hFull
+  have hImpossible : 3184406 + 6796405 ≤ 9980810 :=
+    Nat.le_trans (Nat.add_le_add_right hResidual 6796405) hCut
+  exact (by decide : ¬ (3184406 + 6796405 ≤ 9980810)) hImpossible
+
+/-! A small executable regression for exact owner complement plus genuine SE2. -/
+
+def toyFull : List Nat := List.range 8
+
+def toyOwner (x : Nat) : Option PreC9Owner :=
+  if x < 3 then some .c1 else none
+
+/-- Three distinct slopes choose three distinct residual supports. -/
+def toySE2 : SE2Certificate Nat Nat where
+  supports := [3, 4, 5]
+  slopes := [101, 102, 103]
+  supportOf := fun gamma => gamma - 98
+  supports_nodup := by decide
+  slopes_nodup := by decide
+  chosen_sublist := by decide
+
+/-- The toy profile has the exact same full-prefix field shape as C9. -/
+def toyProfile : C9ProfileData Nat Nat where
+  fullPrefixFiber := toyFull
+  earlierOwner := toyOwner
+  slopeCell := toySE2
+  supportsInResidual := by decide
+  compilerLoss := 8
+  naturalScale := 1
+  rowSharpMaxFiber := by decide
+
+/-- Executable regression: owner complement and slope payment both compute. -/
+def toyCheck : Bool :=
+  residualOf toyFull toyOwner == [3, 4, 5, 6, 7] &&
+  ownedOf toyFull toyOwner == [0, 1, 2] &&
+  toyProfile.slopeCell.slopes.length == 3 &&
+  decide (toyProfile.slopeCell.slopes.length ≤
+    toyProfile.compilerLoss * toyProfile.naturalScale)
+
+/-- Kernel-checked toy owner-complement/SE2 regression. -/
+theorem toy_check : toyCheck = true := by decide
+
+#print axioms mem_residualOf_iff
+#print axioms residual_owned_length
+#print axioms se2_support_injection
+#print axioms C9ProfileData.support_not_earlier
+#print axioms C9ProfileData.slopes_paid
+#print axioms residual_plus_ownerFloor_le_budget
+#print axioms m31_arithmetic_check
+#print axioms m31_full_bound_fails_of_falsifier
+#print axioms toy_check
 
 end SidonEffectiveImage
