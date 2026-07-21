@@ -132,10 +132,15 @@ root imports only SidonEffectiveImage.CyclotomicPhaseFloor
 lakefile requires 0; no lake-manifest.json required
 ```
 
-Fork CI record: **AWAITING_FORK_CI**.
+Fork CI record: draft PR `holmbuar/rs-mca#84`, initial candidate head
+`927bd5081a3dc12c51d63ff9081e9bd77d6e3c91`, workflow run
+`29851916699`. Repeated attempts failed in the external `Set up Lean` step
+before `lake build` because the Lean 4.31.0 release download returned HTTP 502;
+these are infrastructure failures, not Lean validation results. Final green
+head/run: **PENDING**.
 
-Axiom output record: **AWAITING_FORK_CI**. The module ends with `#print axioms`
-for every load-bearing declaration.
+Axiom output record: **PENDING A COMPLETED LEAN BUILD**. The module ends with
+`#print axioms` for every load-bearing declaration.
 
 ## Explicit nonclaims
 
