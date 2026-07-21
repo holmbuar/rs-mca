@@ -119,7 +119,7 @@ identity set is empty.
 | `experimental/grande_finale.tex` | `8a5d9791900ca9eed773feba146b92ad296704ce` | `8a5d9791900ca9eed773feba146b92ad296704ce` | **BYTE-IDENTICAL** |
 | `experimental/rs_mca_thresholds.tex` | `01302a797c502a05ed0b11ba949b8756e0aa2b22` | `01302a797c502a05ed0b11ba949b8756e0aa2b22` | **BYTE-IDENTICAL** |
 
-## Lean census
+## Lean census and CI record
 
 ```text
 package: experimental/lean/sidon_effective_image
@@ -127,20 +127,48 @@ toolchain: Lean 4.31.0
 stdlib only; Mathlib imports 0
 repository API imports 0; open-PR imports 0
 native_decide 0
-sorry 0; admit 0; custom axioms 0; unsafe declarations 0
+sorry 0; admit 0; sorryAx 0; custom axioms 0; unsafe declarations 0
 root imports only SidonEffectiveImage.CyclotomicPhaseFloor
-lakefile requires 0; no lake-manifest.json required
+lakefile requires 0
+lake-manifest.json: deterministic empty manifest; packages=[]
 ```
 
-Fork CI record: draft PR `holmbuar/rs-mca#84`, initial candidate head
-`927bd5081a3dc12c51d63ff9081e9bd77d6e3c91`, workflow run
-`29851916699`. Repeated attempts failed in the external `Set up Lean` step
-before `lake build` because the Lean 4.31.0 release download returned HTTP 502;
-these are infrastructure failures, not Lean validation results. Final green
-head/run: **PENDING**.
+The initial draft-PR attempts failed before compilation while GitHub's Lean
+release download returned HTTP 502. Once the toolchain setup succeeded, the
+first build exposed the non-Std name `Nat.choose`; it was replaced by a local
+closed factorial/binomial evaluator. No theorem statement, numerical constant,
+hypothesis, or source claim changed.
 
-Axiom output record: **PENDING A COMPLETED LEAN BUILD**. The module ends with
-`#print axioms` for every load-bearing declaration.
+Green validation of the complete Lean source:
+
+```text
+fork draft PR: holmbuar/rs-mca#84
+validated head: b65b25e7c9de29480ffec1bc165d9661e97098bf
+workflow run: 29854654897
+job: 88715912071
+artifact: lean-build-log-0 (id 8504784163)
+artifact digest: sha256:f6da36e93265a969f6621066efa507f1ce8e9765fae7e3878d6a1d4a69969445
+explicit targets: SidonEffectiveImage SidonEffectiveImage.CyclotomicPhaseFloor
+default package target: PASS
+```
+
+The `#print axioms` output is exact:
+
+| Declaration | Printed axioms |
+|---|---|
+| `regression_coherent_block_mass_exact` | none |
+| `coherent_block_mass_exact` | none |
+| `coherent_block_double_gap_exact` | none |
+| `coherent_block_exceeds_double_effective_target` | none |
+| `source_payment_kappa_floor` | `propext`, `Quot.sound` |
+| `signed_complement_debt_exact` | none |
+| `exact_fourier_balance` | none |
+| `no_nonnegative_blockwise_balance` | `propext`, `Quot.sound` |
+
+These are Std/kernel axioms only; there are zero custom axioms and zero
+`sorryAx`. Green CI proves compilation only; the statement/source audit is the
+PROVED table above. This audit finalization changes no Lean source; the
+branch-ready head is separately required to remain green before handoff.
 
 ## Explicit nonclaims
 
@@ -152,7 +180,5 @@ Axiom output record: **PENDING A COMPLETED LEAN BUILD**. The module ends with
   different histograms before assigning nonnegative budgets.
 - `K`, `F_p`, the effective target, and deployed row fields remain distinct;
   no extension-field result is transferred to a live row.
-- Green CI proves compilation only; the statement/source audit is the table
-  above.
 
 COUNTEREXAMPLE_NEW_FLOOR
