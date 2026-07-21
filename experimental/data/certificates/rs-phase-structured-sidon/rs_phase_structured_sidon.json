@@ -1,0 +1,90 @@
+{
+  "acceptance_gate_criterion": 2,
+  "base": {
+    "fork_main_sha": "4e5f0b77c98f075ea7c8822cd4859847a232bc2a",
+    "fork_repository": "holmbuar/rs-mca",
+    "upstream_main_sha": "a3017697ad1594521d2779fe1d83bccd45d4c06e",
+    "upstream_repository": "przchojecki/rs-mca"
+  },
+  "expected": {
+    "c1_owned_card": 6,
+    "fiber_sizes": [8, 8, 8, 8, 16, 4, 4, 4, 4],
+    "full_slice_card": 70,
+    "max_unsigned_fiber": 16,
+    "natural_scale": 8,
+    "phase_aware_l1": 0,
+    "phase_coefficients": [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "phase_collision_moment": 0,
+    "phase_multiplier": 1,
+    "realized_image_card": 9,
+    "realized_image_keys": [
+      290319201,
+      1177403994,
+      970079657,
+      1857164450,
+      2,
+      1260398856,
+      887084795,
+      1467723193,
+      679760458
+    ],
+    "residual_slice_card": 64,
+    "unsigned_collision_moment": 576
+  },
+  "field": {
+    "antipodal_index_pairs": [[0, 2], [1, 3], [4, 6], [5, 7]],
+    "chebyshev_power": 21,
+    "domain": [
+      434373082,
+      614288294,
+      1713110565,
+      1533195353,
+      1984437538,
+      380812851,
+      163046109,
+      1766670796
+    ],
+    "prime": 2147483647
+  },
+  "nonclaims": [
+    "not a full three-coordinate C9 payment",
+    "not a slope or codeword projection",
+    "not an exhaustive C1-C8 atlas",
+    "not residual add-back or UNIF",
+    "not an adjacent-row certificate"
+  ],
+  "owner": {
+    "name": "C1 antipodal complete-fiber owner",
+    "owned_masks": [15, 85, 165, 90, 170, 240],
+    "residual_definition": "weight_four_masks minus owned_masks"
+  },
+  "phase": {
+    "cancellation_pairs": [
+      [23, 29], [27, 30], [39, 45], [43, 46],
+      [51, 54], [53, 101], [57, 60], [58, 106],
+      [71, 77], [75, 78], [83, 86], [89, 92],
+      [99, 102], [105, 108], [113, 116], [114, 120],
+      [135, 141], [139, 142], [147, 150], [149, 197],
+      [153, 156], [154, 202], [163, 166], [169, 172],
+      [177, 180], [178, 184], [195, 198], [201, 204],
+      [209, 212], [210, 216], [225, 228], [226, 232]
+    ],
+    "character": "quadratic Euler phase",
+    "coarse_key": "second power sum modulo p",
+    "effective_image": "realized residual p2 image only",
+    "locator_constant": "product of selected domain values modulo p"
+  },
+  "row": {
+    "B_star": 16777215,
+    "agreement": 1116023,
+    "complement_weight": 981129,
+    "fixed_outside_weight": 981125,
+    "length": 2097152,
+    "name": "Mersenne-31 list analytic stress calibration",
+    "outside_available": 2097144,
+    "prefix_depth": 67447,
+    "target_epsilon": "2^-100"
+  },
+  "schema": "rs-phase-structured-sidon-v1",
+  "status": "PROVED_SCOPED_PHASE_PAYMENT"
+}
