@@ -5,3 +5,5 @@ import M31QRootedShell.MultiplicativeCounterexample
 import M31QRootedShell.SemanticOwner
 import M31QRootedShell.SemanticNaturalScale
 import M31QRootedShell.SemanticResidualFilter
+import M31QRootedShell.DeployedOwnerProfiles
+import M31QRootedShell.SemanticLineRegression
