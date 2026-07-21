@@ -1,164 +1,369 @@
+---
+workboard_item: K3
+row: KoalaBear MCA
+object: MCA
+target_epsilon: 2^-128
+agreement: 1116048
+B_star: 274980728111395087
+direct_statement: Audit the exact finite spine calibration theorem that constructs overlapping raw C8 charts, performs first-match deletion, classifies every chart into one of four buckets, pays only the supplied shallow and certified one-pencil leaves, and leaves one exactly named deep residual unpaid.
+architecture: DIRECT
+partition_digest: not-applicable-direct-finite-calibration
+atom_or_cell: C8 chart exhaustion route cut
+quantifier: Every chart key and every slope in the four-chart finite spine calibration.
+projection_and_unit: Distinct affine-slope identifiers after first-match deletion.
+claimed_bound: exact assigned cells [[5],[7,9],[11,13],[17]]; shallow 2<=12; one-pencil 2<=2; one unpaid deep slope [17].
+status: AUDIT
+impact: ROUTE_CUT
+falsifier: Any mismatch between raw and assigned cells, duplicate charged slope, missing chart, additional deep class, shallow data not matching the PR-1020 fixture, or moving-root certificate not tied to the actual assigned pencil slopes.
+replay: python3 experimental/scripts/verify_c8_chart_exhaustion.py --check; python3 -O experimental/scripts/verify_c8_chart_exhaustion.py --check; python3 experimental/scripts/verify_c8_chart_exhaustion.py --tamper-selftest; Lean validation only through the fork draft PR.
+---
+
 # C8 chart-exhaustion finite route-cut preflight
 
 **Date:** 2026-07-21  
-**Status:** `AUDIT / PROVED FINITE INTERFACE / PARTIAL EXHAUSTION / PENDING_FORK_CI`  
+**Status:** `AUDIT / PROVED FINITE SPINE CALIBRATION / PARTIAL EXHAUSTION / PENDING_FORK_CI`  
 **Branch:** `gptpro/c8-chart-exhaustion`  
 **Branch base:** fork `main@4e5f0b77c98f075ea7c8822cd4859847a232bc2a`  
 **Lean target:** `AsymptoticSpine.C8ChartExhaustion`  
 **Toolchain:** Lean 4.31.0, stdlib only.
 
-## Audit question
+## 1. Audit question and result
 
-Does the packet prove a duplicate-free, exhaustive four-way C8 route cut while
-keeping all semantic hypotheses explicit and refusing to pay the nonautomatic
-deep ray boundary?
+Does the packet construct the **actual finite asymptotic-spine calibration**—not
+an arbitrary four-label partition—and prove both chart-level and slope-level
+first-match exhaustion while refusing to pay the nonautomatic deep ray boundary?
 
-**Verdict:** `PROVED FINITE ROUTE CUT / OPEN SEMANTIC RS INSTANTIATION`.
+**Finite audit result:** yes.
 
-The module constructs the partition from a total fixed-priority classifier.  It
-does not assume a pre-partition, but it does assume the finite realized key list,
-the C1--C7 semantic owner function, the one supplied shallow key, and optional
-moving-root certificates.  Those are exactly the field/semantic interfaces that
-must be instantiated by later RS work.
+The packet starts from the overlapping raw slope projections
 
-## Files in the packet
+```text
+[[5], [5,7,9], [9,11,13], [13,17]]
+```
+
+and computes the post-deletion leaves
+
+```text
+[[5], [7,9], [11,13], [17]].
+```
+
+It then classifies the four realized chart keys, in the same order, as
+
+```text
+earlier C1 owner,
+supplied shallow closure,
+paid one-parameter moving-root chart,
+DEEP_HIGHER_DIMENSIONAL_BALANCED_CORE_AFTER_C1_C7_SHALLOW_AND_ONE_PENCIL_DELETION.
+```
+
+The second leaf is exactly `highKappaToySE2.slopes`, with the same bridge,
+syndrome key, inclusion, bounds, and kernel label used by the open #1020 C8
+producer fixture.  The third leaf is exactly the slope list stored in its
+moving-root certificate.  The fourth is the sole named and unpaid remainder.
+
+The packet does **not** prove the deployed KoalaBear semantic owner function or
+all-line C8 chart construction.  The finite calibration is proved; the global
+K3 input remains open.
+
+## 2. Complete upstream-intended packet
+
+The validation branch contains every file intended for the eventual upstream
+packet:
 
 ```text
 experimental/lean/asymptotic_spine/AsymptoticSpine/C8ChartExhaustion.lean
+experimental/lean/asymptotic_spine/AsymptoticSpine.lean
+experimental/lean/asymptotic_spine/README.md
 experimental/notes/thresholds/c8_chart_exhaustion_route_cut.md
 experimental/notes/audits/c8_chart_exhaustion_preflight.md
 experimental/data/certificates/c8-chart-exhaustion/c8_chart_exhaustion.json
 experimental/scripts/verify_c8_chart_exhaustion.py
-experimental/lean/asymptotic_spine/AsymptoticSpine.lean
-experimental/lean/asymptotic_spine/README.md
 experimental/agents-log-entry-gptpro-c8-chart-exhaustion.md
 ```
 
-No path under `.github/` is modified.  The live shared
-`experimental/agents-log.md` is not read, reconstructed, or changed.
+No path under `.github/` is modified.  The shared
+`experimental/agents-log.md` is neither read nor changed; the packet carries
+only the required side-file suggestion.
 
-## Imported API provenance
+## 3. Imported API provenance
 
-The Lean module imports only the integrated
-`AsymptoticSpine.PrefixAtlas` module.  Its transitive first-match/list utility
-inputs are also recorded because they are load-bearing.  The blobs below are
-the blobs at both the exact branch base and current fork `main` when the packet
-was authored.
+The Lean module imports only integrated APIs:
+
+```text
+AsymptoticSpine.PrefixAtlas
+AsymptoticSpine.HighKappaCoverage
+```
+
+Their load-bearing transitive dependencies are recorded below.  Each blob is
+the exact blob at the branch base and current fork `main` when the packet was
+constructed.
 
 | imported API | blob SHA |
 | --- | --- |
 | `experimental/lean/asymptotic_spine/AsymptoticSpine/PrefixAtlas.lean` | `d14c5fc6d93e0386fc9fb6ebfe0d0c3debc35cb1` |
 | `experimental/lean/asymptotic_spine/AsymptoticSpine/FirstMatch.lean` | `44592371660c453c1f8522abb9c0f9364e4dd43d` |
 | `experimental/lean/asymptotic_spine/AsymptoticSpine/Util.lean` | `5e09daceb9fa4d3fb72e3c59244ec348b51352c2` |
+| `experimental/lean/asymptotic_spine/AsymptoticSpine/EffectiveClosure.lean` | `9fb097e23d00e2f3ee3afeda021b86ba4192d2a4` |
+| `experimental/lean/asymptotic_spine/AsymptoticSpine/HighKappaCoverage.lean` | `cdb17177fe7f17a7e8b520d999fa925c5abfaea0` |
 
-There is no import from open PR #1011, #1012, or #1020.  Small route-cut data
-needed by this packet are restated locally.  Post-integration adapters to a
-future shallow producer or high-kappa compiler can therefore be one-line
-constructors rather than dependencies of this validation lane.
+There is no import from open PR #1011, #1012, or #1020.  The six-field shallow
+input is restated locally with the same fields, so a post-integration adapter is
+one record constructor and introduces no mathematical hypothesis.
 
-## Exact declaration audit
+## 4. Actual first-match construction audit
 
-Namespace `AsymptoticSpine` unless otherwise shown.
+### 4.1 Raw charts are not already disjoint
 
-### Bucket and moving-root layer
+The raw calibration contains deliberate overlaps:
 
-| declaration | exact proved statement | status |
+| chart | raw slopes | overlap deleted by |
 | --- | --- | --- |
-| `c8ChartBuckets_nodup` | The ordered labels `[earlier, shallow, boundedPencil, deepResidual]` are duplicate-free. | `PROVED` |
-| `mem_c8ChartBuckets` | Every `C8ChartBucket` constructor occurs in the fixed bucket list. | `PROVED` |
-| `C8MovingRootCertificate.slopeCount_le_two_of_three_mul_gt` | From `z*h <= N` and `N < 3*h`, conclude `z <= 2`. | `PROVED` |
-| `C8MovingRootCertificate.m31Mca_slopeCount_le_two` | If `N=2097152` and `h=981128`, conclude `z<=2`. | `PROVED` |
-| `C8MovingRootCertificate.koalaBearMca_slopeCount_le_two` | If `N=2097152` and `h=981104`, conclude `z<=2`. | `PROVED` |
+| `earlierC1` | `[5]` | none |
+| `suppliedShallow` | `[5,7,9]` | C1 deletes `5` |
+| `movingPencil` | `[9,11,13]` | shallow deletes `9` |
+| `deepHigherDimensional` | `[13,17]` | pencil deletes `13` |
 
-The moving-root structure is an incidence certificate, not a theorem that a
-concrete residual family is a projective pencil.  Its semantic construction is
-an explicit nonclaim below.
+This guards against a vacuous theorem that merely assumes four disjoint cells.
+`C8ChartExhaustionPacket.postDeletionSlopeCells` is definitionally
+`firstMatchLeaves [] rawSlopeCells`.
 
-### Classifier exactness
+### 4.2 Exact assigned cells
 
-| declaration | exact proved statement | status |
-| --- | --- | --- |
-| `C8ChartExhaustionPacket.bucketAtlas_eq_cells` | The atlas is definitionally the four classifier fibres in fixed order. | `PROVED` |
-| `C8ChartExhaustionPacket.mem_bucketCell_iff` | `key` is in bucket `b` iff `key` is realized and `classify key=b`. | `PROVED` |
-| `C8ChartExhaustionPacket.classify_eq_earlier_iff` | Earlier iff an explicit C1--C7 owner is present. | `PROVED` |
-| `C8ChartExhaustionPacket.classify_eq_shallow_iff` | Shallow iff no earlier owner exists and the key is exactly the supplied shallow key. | `PROVED` |
-| `C8ChartExhaustionPacket.classify_eq_boundedPencil_iff` | Bounded pencil iff no earlier owner exists, the key is not the shallow key, and an original moving-root certificate is present. | `PROVED` |
-| `C8ChartExhaustionPacket.classify_eq_deepResidual_iff` | Deep residual iff no earlier owner, no shallow match, and no one-pencil certificate exists. | `PROVED` |
-| `C8ChartExhaustionPacket.mem_earlierCell_iff` | Exact earlier-cell formula including realized-key membership. | `PROVED` |
-| `C8ChartExhaustionPacket.mem_shallowCell_iff` | Exact supplied-shallow-cell formula including first-match deletion. | `PROVED` |
-| `C8ChartExhaustionPacket.mem_boundedPencilCell_iff` | Exact bounded-pencil-cell formula including certificate existence. | `PROVED` |
-| `C8ChartExhaustionPacket.mem_deepResidualCell_iff` | Exact final-complement formula for the sole named deep class. | `PROVED` |
-
-### Exhaustion and duplicate freedom
-
-| declaration | exact proved statement | status |
-| --- | --- | --- |
-| `C8ChartExhaustionPacket.bucketAtlas_nodup` | The flattened four-cell atlas is `Nodup`. | `PROVED` |
-| `C8ChartExhaustionPacket.mem_bucketAtlas_flatten_iff` | A key occurs in the flattened atlas iff it occurs in the realized-key list. | `PROVED` |
-| `C8ChartExhaustionPacket.mem_firstMatch_bucketAtlas_iff` | The generic first-match leaves cover exactly the realized-key list. | `PROVED` |
-| `C8ChartExhaustionPacket.existsUnique_bucket` | Every realized key belongs to exactly one bucket cell. | `PROVED` |
-| `C8ChartExhaustionPacket.onePencilCertificate_of_mem` | Membership in the bounded-pencil cell returns the supplied certificate; the classifier cannot synthesize one. | `PROVED` |
-
-### Named residual and executable calibration
-
-| declaration | exact proved statement | status |
-| --- | --- | --- |
-| `c8DeepResidualName_exact` | Locks the exact residual spelling `DEEP_HIGHER_DIMENSIONAL_BALANCED_CORE_AFTER_C1_C7_SHALLOW_AND_ONE_PENCIL_DELETION`. | `PROVED` |
-| `c8Calibration_classification` | The four calibration keys classify respectively as earlier, shallow, bounded pencil, and deep. | `PROVED` |
-| `c8Calibration_bucketAtlas_exact` | The calibration atlas is literally `[[earlierC4],[suppliedShallow],[movingPencil],[deepHigherDimensional]]`. | `PROVED` |
-| `c8Calibration_deepResidual_exact` | The only calibration key in the deep cell is `deepHigherDimensional`. | `PROVED` |
-| `c8Calibration_exhaustive` | The executable atlas is duplicate-free and covers exactly its four keys. | `PROVED` |
-| `c8Calibration_m31Pencil_paid` | The M31 calibration pencil has slope count at most two through the generic moving-root theorem. | `PROVED` |
-
-## Source correspondence
-
-| Lean object | source theorem/problem boundary |
-| --- | --- |
-| `bucketAtlas_nodup`, `mem_firstMatch_bucketAtlas_iff` | integrated first-match disjointization, source `lem:first-match` / `def:cells` lineage |
-| `mem_bucketAtlas_flatten_iff` | integrated prefix-atlas totality |
-| `C8MovingRootCertificate` and cap-two theorems | `experimental/grande_finale.tex`, `thm:bc-moving-root` and `cor:bc-one-pencil` |
-| absence of a deep payment | `hyp:ray-compiler`, `prop:q-sp-no-ray`, and `prop:curve-degree-ray-compiler` boundary |
-| semantic/global nonclaim | `agents.md`, Lane K3: exhaustive BC coverage in distinct affine-slope units remains a live input |
-
-The source is now Grande Finale v4.  The packet formalizes the inherited finite
-route-cut boundary and does not claim that the former v3 completion architecture
-is unconditional.
-
-## Duplicate-freedom audit
-
-The order is semantic and fixed before enumeration:
+`c8Spine_postDeletionSlopeCells_exact` proves
 
 ```text
-C1--C7 owner > supplied shallow > bounded pencil > named deep residual.
+postDeletionSlopeCells
+  = [[5], c8SpineShallowInput.slopeCell.slopes,
+     c8SpineMovingPencil.slopes, c8SpineDeepResidualSlopes]
+  = [[5], [7,9], [11,13], [17]].
 ```
 
-An earlier owner therefore removes a key even if it is also the supplied shallow
-key or carries a pencil certificate.  The shallow key removes the key before a
-pencil certificate is inspected.  Only the remaining keys reach the one-pencil
-test.  The deep class is the exact complement.  Because the classifier has one
-value and the key list is duplicate-free, the integrated fibre-atlas theorem
-proves that the flattened buckets are duplicate-free.  Disjointness is a theorem,
-not a prose remark.
+`c8Spine_postDeletionSlopeFlatten_exact` computes the flattened assigned list
+as `[5,7,9,11,13,17]`.
 
-## Certificate replay audit
+### 4.3 Slope-level disjointness
 
-The JSON certificate records:
+`C8ChartExhaustionPacket.postDeletionSlopeCells_nodup` applies the integrated
+first-match theorem and proves the flattened assigned slope list is `Nodup`.
+`mem_postDeletionSlopeCells_iff` proves that deletion preserves exactly the raw
+covered slope union.  Consequently there is neither double charging nor an
+uncovered calibration slope.
 
-- the exact base SHA and packet schema;
-- the four fixed bucket names and priority order;
-- one chart in each calibration bucket;
-- the exact shallow chart ID;
-- the exact deep residual spelling;
-- the M31 moving-root certificate; and
-- both active-row cap-two arithmetic checks.
+## 5. Four-bucket classifier audit
 
-`experimental/scripts/verify_c8_chart_exhaustion.py --check` recomputes the
-classification and arithmetic from the JSON.  It rejects duplicate chart IDs,
-wrong priority, multiple shallow/deep calibration keys, a mismatched expected
-bucket, an invalid incidence inequality, or a false cap.  The script is a replay
-certificate; Lean remains the proof validation authority.
+The classifier order is hard-coded:
 
-## Axiom and source census
+```text
+some C1--C7 owner
+  -> earlier
+else exact shallow key
+  -> shallow
+else some supplied moving-root certificate
+  -> boundedPencil
+else
+  -> deepResidual.
+```
+
+The four `classify_eq_*_iff` declarations prove the exact predicate of each
+branch.  In particular:
+
+- an earlier owner wins even if a later predicate also holds;
+- only the exact supplied shallow key reaches the shallow branch;
+- a one-pencil membership proof returns the original certificate; and
+- the deep branch is the exact complement, not a catch-all with a hidden
+  payment.
+
+The integrated fibre-atlas theorem proves the chart-key buckets are duplicate-
+free and cover exactly the realized keys.  `existsUnique_bucket` proves each
+realized chart has one and only one bucket.
+
+The closed computation
+
+```text
+c8Spine_bucketAtlas_exact
+```
+
+gives
+
+```text
+[[earlierC1], [suppliedShallow], [movingPencil],
+ [deepHigherDimensional]].
+```
+
+## 6. Shallow #1020-input audit
+
+The local `C8ShallowClosureInput` has exactly the producer-facing fields:
+
+```text
+bridge
+syndromeKey
+slopeCell
+chartInclusion
+bounds
+kernelDim.
+```
+
+The calibration value is
+
+```text
+bridge        = affineToyBridge
+syndromeKey   = 1
+slopeCell     = highKappaToySE2
+chartInclusion= by decide
+bounds        = highKappaToyBounds
+kernelDim     = 1000000.
+```
+
+Direct source checks:
+
+```text
+fullSlice            = [0,1,2,3,4]
+syndrome fibre at 1  = [1,3]
+raw translated key   = 11
+SE2 supports         = [1,3]
+SE2 slopes           = [7,9]
+baseSize             = 2
+prefixDepth          = 2
+imageSize            = 3
+effectiveSize        = 4
+average              = 2
+compilerLoss         = 4
+naturalScale         = 3.
+```
+
+`c8Spine_shallowSlopes_exact` proves the supplied slopes are `[7,9]`, exactly
+the second first-match leaf.  `c8Spine_shallow_paid` applies the integrated
+kernel-independent shallow theorem and proves
+
+```text
+2 <= 4 * 3 = 12.
+```
+
+This is precisely the data consumed by #1020.  This packet does not duplicate
+its closed-ledger extension or claim the open module is integrated.
+
+## 7. One-pencil audit
+
+`C8MovingRootCertificate` stores the actual assigned slope list, its `Nodup`
+proof, available moving points, moving roots per slope, positivity, and the
+cross-multiplied incidence inequality.
+
+The general theorem proves
+
+```text
+z*h <= N and N < 3h  ->  z <= 2.
+```
+
+The calibration certificate is
+
+```text
+slopes = [11,13]
+N      = 2097152
+h      = 981104.
+```
+
+Both inequalities are exact integers.  `c8Spine_movingPencil_paid` proves the
+actual assigned slope list has length at most two.  The verifier separately
+checks that its claimed cap is exact, not merely safe:
+
+```text
+2h <= N < 3h.
+```
+
+The source-semantic premise that a deployed chart is a genuine projective
+pencil with slope-to-parameter injection remains explicit.  No certificate is
+manufactured for a chart lacking that premise.
+
+## 8. Deep-boundary audit
+
+The exact residual name is
+
+```text
+DEEP_HIGHER_DIMENSIONAL_BALANCED_CORE_AFTER_C1_C7_SHALLOW_AND_ONE_PENCIL_DELETION
+```
+
+and `c8DeepResidualName_exact` regression-locks it.
+`c8Spine_deepResidual_exact` proves the unique deep calibration key is
+`deepHigherDimensional` and its exact assigned slope list is `[17]`.
+
+No declaration maps that chart to `DirectRC`, `A6RayCondition`,
+`ProfilePayment`, Q, SP, MI, MA, a curve cover, or a higher-dimensional ray
+bound.  This is deliberate.  The packet respects the boundaries named by
+
+```text
+hyp:ray-compiler
+prop:q-sp-no-ray
+prop:curve-degree-ray-compiler.
+```
+
+## 9. Exact PROVED declaration table
+
+Namespace `AsymptoticSpine` unless shown otherwise.
+
+| declaration | exact statement | source match |
+| --- | --- | --- |
+| `c8ChartBuckets_nodup` | Fixed four-bucket order is duplicate-free. | finite classifier |
+| `mem_c8ChartBuckets` | Every bucket constructor is in the fixed order. | finite classifier |
+| `C8ShallowClosureInput.slopes_paid` | Exact supplied `(SE2)` leaf is paid at `baseSize^prefixDepth*(1+average)`. | `EffectiveClosure`, `HighKappaCoverage`, #1020 input boundary |
+| `C8MovingRootCertificate.slopes_length_le_two_of_three_mul_gt` | `zh<=N` and `N<3h` imply `z<=2`. | `thm:bc-moving-root` |
+| `C8MovingRootCertificate.koalaBearMca_slopes_length_le_two` | KoalaBear active constants imply cap two. | `cor:bc-one-pencil` |
+| `C8MovingRootCertificate.m31Mca_slopes_length_le_two` | M31 active constants imply cap two. | same finite specialization |
+| `C8ChartExhaustionPacket.mem_bucketCell_iff` | Exact bucket membership formula. | finite classifier |
+| `C8ChartExhaustionPacket.classify_eq_earlier_iff` | Earlier iff an explicit C1--C7 owner exists. | first-match semantic boundary |
+| `C8ChartExhaustionPacket.classify_eq_shallow_iff` | Shallow iff no earlier owner and exact shallow key. | #1020 input boundary |
+| `C8ChartExhaustionPacket.classify_eq_boundedPencil_iff` | Pencil iff earlier/shallow tests fail and a certificate exists. | moving-root boundary |
+| `C8ChartExhaustionPacket.classify_eq_deepResidual_iff` | Deep iff all first three tests fail. | explicit residual cut |
+| `C8ChartExhaustionPacket.rawSlopeCells_nodup` | Every raw chart projection is duplicate-free. | finite chart data |
+| `C8ChartExhaustionPacket.postDeletionSlopeCells_nodup` | Flattened first-match leaves are duplicate-free. | integrated `FirstMatch` |
+| `C8ChartExhaustionPacket.mem_postDeletionSlopeCells_iff` | First-match leaves cover exactly the raw slope union. | integrated `FirstMatch` |
+| `C8ChartExhaustionPacket.bucketAtlas_nodup` | Flattened chart-key buckets are duplicate-free. | integrated `PrefixAtlas` |
+| `C8ChartExhaustionPacket.mem_bucketAtlas_flatten_iff` | Chart-key buckets cover exactly the realized keys. | integrated `PrefixAtlas` |
+| `C8ChartExhaustionPacket.existsUnique_bucket` | Every realized chart key has a unique bucket. | exact exhaustion |
+| `C8ChartExhaustionPacket.onePencilCertificate_of_mem` | Bounded membership returns the original certificate. | non-oracular payment guard |
+| `c8DeepResidualName_exact` | Locks exact deep-residual spelling. | route-cut requirement |
+| `c8Spine_postDeletionSlopeCells_exact` | Computes `[[5],[7,9],[11,13],[17]]`. | finite spine calibration |
+| `c8Spine_postDeletionSlopeFlatten_exact` | Computes `[5,7,9,11,13,17]`. | finite spine calibration |
+| `c8Spine_firstMatchOwnership_nodup` | Assigned calibration slopes are duplicate-free. | first-match disjointness |
+| `c8Spine_shallowSlopes_exact` | Shallow leaf is exactly `[7,9]`. | #1020 fixture |
+| `c8Spine_shallow_paid` | Shallow leaf satisfies the direct finite closure bound. | #1020 producer input |
+| `c8Spine_movingPencil_paid` | Pencil leaf satisfies exact cap two. | moving-root theorem |
+| `c8Spine_classification_exact` | Four chart keys reach the four expected branches. | finite spine calibration |
+| `c8Spine_bucketAtlas_exact` | One chart key occurs in each bucket. | exact chart exhaustion |
+| `c8Spine_deepResidual_exact` | Unique deep key and exact slope `[17]`. | exact named residual |
+| `c8Spine_everyChart_exactlyOneBucket` | Every realized calibration key has exactly one bucket. | exact chart exhaustion |
+
+Every load-bearing declaration has a terminal `#print axioms` command.
+
+## 10. Certificate and independent verifier
+
+Canonical JSON:
+
+```text
+experimental/data/certificates/c8-chart-exhaustion/c8_chart_exhaustion.json
+```
+
+Verifier:
+
+```text
+experimental/scripts/verify_c8_chart_exhaustion.py
+```
+
+The verifier independently recomputes the raw-to-leaf deletion, bucket
+classification, duplicate-freedom, exact shallow data, shallow payment,
+KoalaBear pencil payment, both active cap-two specializations, imported blob
+table, nonclaim set, and exact residual spelling.
+
+The tamper self-test must reject five mutations:
+
+1. changed deep name;
+2. changed raw overlap/first-match leaf;
+3. changed shallow `(SE2)` slope;
+4. changed moving-root constant; and
+5. changed bucket priority.
+
+Python replay supports audit and packaging; it is not Lean validation.
+
+## 11. Axiom and source census
 
 Static source census for the new Lean module before CI:
 
@@ -172,56 +377,46 @@ unsafe declarations:          0
 native_decide:                0
 ```
 
-The module ends with `#print axioms` for every load-bearing theorem and each
-executable calibration theorem.  The expected dependencies are standard Lean
-principles inherited from list equality/filtering and quotient-based list
-reasoning.  The exact printed kernel output is not claimed until the fork draft
-PR build completes.
+Expected printed dependencies are standard Lean principles arising from list
+filter/equality and quotient-backed list reasoning.  The exact kernel output is
+not claimed until the fork draft-PR build completes.
 
-## Kernel validation record
+## 12. Kernel validation record
 
-At authoring time:
+At this preflight revision:
 
 ```text
-fork draft PR:          pending creation
-explicit changed target: AsymptoticSpine.C8ChartExhaustion
-package root target:    AsymptoticSpine
-Lean version:           4.31.0
-result:                 PENDING_FORK_CI
+fork draft PR:             pending creation
+explicit changed target:   AsymptoticSpine.C8ChartExhaustion
+package root target:       AsymptoticSpine
+Lean version:              4.31.0
+result:                    PENDING_FORK_CI
 ```
 
-This section intentionally does not claim a green build before GitHub Actions
-has run.  A green build will establish elaboration and kernel checking of the
-Lean declarations only; it will not prove any external RS semantic field.
+The draft PR will contain the complete upstream-intended packet, not a Lean-only
+placeholder.  A green build proves elaboration and kernel checking of the Lean
+statements only; it does not prove the external deployed-RS semantic inputs.
 
-## Explicit nonclaims
+## 13. Explicit nonclaims
 
-The packet does not prove any of the following:
+This packet does not prove:
 
-- a complete fixed-before-line RS C1--C8 semantic owner function;
-- completeness over all received RS lines;
-- a realized-profile count or row-uniform sum;
-- nonempty late buckets on every line;
-- the actual reindexed prefix-fibre/SE2 data of the supplied shallow chart;
-- a shallow `ProfilePayment` or closed-ledger append from open PR #1020;
-- an actual common-core shortening certificate or high-kappa owner from open
-  PR #1011;
-- a theorem that every bounded key is a genuine projective pencil;
-- deep-prefix MI/MA, Sidon, primitive Q/SP, or direct deep ray payment;
-- a higher-dimensional balanced-core ray compiler;
-- exact residual add-back, target comparison, deployed adjacent-row closure, or
-  an official score change.
+- a complete deployed KoalaBear C1--C7 semantic owner function;
+- C8 chart completeness over all received lines;
+- deployed field-specific shallow prefix data;
+- the actual RS common-core shortening certificate named by #1011;
+- a high-kappa semantic owner;
+- the #1020 `ProfilePayment` / closed-ledger producer;
+- a general theorem that any bounded chart is a genuine one-parameter pencil;
+- deep-prefix MI/MA, image-normalized Sidon, primitive Q/SP, or direct deep ray
+  payment;
+- a curve-degree or higher-dimensional balanced-core ray compiler;
+- a realized-profile count, add-back, row-wide `UNIF`, target comparison,
+  bankable `U_BC`, adjacent safe row, or official score change.
 
-## Final audit verdict
+The exact remaining K3 theorem is a deployed, all-received-line instantiation
+of this route cut—or a sharper direct theorem—in actual distinct-slope units,
+with the named deep residual either proved absent, earlier-owned, or paid by an
+independently justified ray theorem.
 
-```text
-PROVED FINITE ROUTE CUT
-PARTIAL EXHAUSTION
-OPEN SEMANTIC RS INSTANTIATION
-PENDING_FORK_CI
-```
-
-The packet advances the chart-exhaustion hard input by replacing an untyped
-“other C8 charts” remainder with one exact, duplicate-free residual class.  It
-does not pay that class and therefore does not cross the nonautomatic ray
-boundary.
+# OPEN GAP
