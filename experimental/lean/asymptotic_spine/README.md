@@ -75,11 +75,13 @@ precise proof boundaries.
 
 ## Minimal closed-ledger / UNIF compiler
 
-`AsymptoticSpine.UniformClosedLedger` packages the post-deletion semantic
-boundary needed by the profile-envelope proof. Each profile carries a C1--C9
-or primitive owner, its assigned distinct-slope list, the residual/Sidon/ray
-payment chain, and its own natural scale. Each received line also exposes its
-realized-profile cap. The compiler proves
+`AsymptoticSpine.UniformClosedLedger` packages a finite numeric compiler
+boundary used after a separately proved first-match classification. Each
+profile carries a C1--C9 or primitive label, an assigned slope list, the
+residual/Sidon/ray payment chain, and its own natural scale. The labels and
+lists are caller-supplied data; the structure does not prove that they describe
+actual RS bad slopes or least semantic owners. Each supplied line also exposes
+its realized-profile cap. The compiler proves
 
 ```text
 sup_line bad(line)
@@ -87,19 +89,51 @@ sup_line bad(line)
   <= loss * sup_line sum_profile naturalScale(line,profile).
 ```
 
-`UniformClosedLedger.compile` consumes the honest line-local `(UNIF)` bound and
-produces the row-level numerator bound. The executable diagonal regression
+`UniformClosedLedger.compile` consumes the supplied line-local bound and
+produces the finite row-list numerator bound. The executable diagonal regression
 `sup_sum_interchange_falsifier` proves that replacing `sup_line sum_profile` by
 `sum_profile sup_line` changes and can loosen the required quantity. The module
-does not construct the semantic
-atlas, C7/C8/C9 payments, residual/full comparison, image-normalized Sidon
-input, ray compiler, subexponential profile count, the actual asymptotic/window-
-uniform estimate, or profile-envelope comparison; those remain explicit
-producer obligations. Its finite `lines` list is supplied by the caller and is
-not itself a completeness proof over all received RS lines, nor does it enforce
-one global profile atlas fixed before the received line. `naturalTotal` contains
-only the profile sum, so the universal terms in the literal frontiers envelope
-must be absorbed by the supplied `envelope`.
+does not construct the semantic atlas, prove line completeness, construct
+C7/C8/C9 payments, establish residual/full comparison or image-normalized Sidon,
+prove a ray compiler or subexponential profile count, supply actual asymptotic
+`(UNIF)`, or compare the profile envelope with a target. `naturalTotal` contains
+only the profile sum, so any universal terms must be absorbed by the supplied
+`envelope`.
+
+## Conditional C7 ledger adapter and atlas-order regressions
+
+The integrated narrow modules `C7BasePoleProducer` and
+`C7BasePoleWitnessProducer` remain independent of `UniformClosedLedger` and are
+unchanged by this packet. `C7BasePoleLedgerBridge` and
+`C7BasePoleWitnessLedgerBridge` add the deferred `ProfilePayment`,
+`ClosedLineLedger`, and one-line hand-off on top of their existing
+`directBudget` interface. The bridge proves that both line-local totals equal
+the deletion-aware `directBudget`, and bounds them by the raw census and the
+supplied `q - 1` value.
+
+`BasePoleC7WitnessClass` assumes its source-facing witness, coefficient, exact
+slope-law, injectivity, and census fields. The new modules do not formalize the
+finite field, locator algebra, received pole line, or `d ↦ -d`; they are
+conditional finite adapters. `C7BasePoleLineExtension` lifts the unit C7
+payments to any compiler loss at least one, appends them to an earlier numeric
+line, preserves disjointness, and proves exact budget and natural-scale
+telescopes without inflating the local C7 ray budget.
+
+The historical filename `SemanticAtlasOwnership` now contains only a labeled
+C3 numeric interface. Its provenance labels prove no semantic classification
+and select no active-atlas policy. `C7OwnerRegression` rejects an untrimmed C7
+payment after an earlier duplicate assignment.
+`C7SingletonPlantedAbsorption` shows that a broader supplied singleton-root
+order can leave the later C7 residual empty; it records atlas noncanonicity, not
+a theorem choosing singleton C3 owners.
+
+These asymptotic-spine modules are interface/provenance formalizations, not the
+active theorem authority. They do not construct a fixed-before-line C1--C9
+atlas, prove a concrete RS semantic C7 owner or survivor, establish completeness
+over received lines or actual row-wide `(UNIF)`, compare an envelope with a
+target, prove an adjacent safe row, or close an RS--MCA row. See
+`experimental/notes/audits/c7_base_pole_closed_ledger_producer.md` for the exact
+statement map and proof boundary.
 
 ## Upgrade regression locks
 
