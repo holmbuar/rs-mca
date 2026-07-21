@@ -199,7 +199,7 @@ theorem scoped_residual_exact :
 /-- Bucketed exact multiplicity computation.  Equal keys always lie in the same
 bucket because the bucket is a function of `p1`; bucketing only avoids a
 quadratic global `eraseDups`. -/
-def bucketCount : Nat := 1024
+def bucketCount : Nat := 128
 
 def keyBucket (z : PrefixKey) : Nat := z.p1 % bucketCount
 
