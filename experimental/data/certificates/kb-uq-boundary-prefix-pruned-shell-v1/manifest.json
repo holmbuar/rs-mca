@@ -1,0 +1,112 @@
+{
+  "schema": "kb-uq-boundary-prefix-pruned-shell-v1",
+  "status": "PROVED_PRUNING_CONDITIONAL_CAP_PROVED_LOWER_FLOOR_NO_REFUND",
+  "workboard_item": "K2",
+  "row": "KoalaBear MCA at 2^-128",
+  "object": "MCA",
+  "target_epsilon": "2^-128",
+  "architecture": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1",
+  "partition_digest": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc",
+  "source_pin_policy": "EXACT_GIT_BLOBS_STRICT_IN_REPOSITORY_CHECKOUT",
+  "owner_order": [
+    "SOURCE_COORDINATE_TANGENT_IMAGE",
+    "ACTIVE_V4_BOUNDARY_PREFIX_Q",
+    "ACTIVE_V4_BALANCED_CORE",
+    "UNPAID_V4_COMPLEMENT"
+  ],
+  "contract": {
+    "p": 2130706433,
+    "extension_degree": 6,
+    "n": 2097152,
+    "k": 1048576,
+    "a": 1116048,
+    "j": 981104,
+    "K": 1048577,
+    "w": 67471,
+    "B_star": 274980728111395087,
+    "tangent_charge": 981104,
+    "reserve": 274980728110413983
+  },
+  "result": {
+    "hypothesis": "KB_V4_PRUNED_Q_ROOTED_SHELL",
+    "b": 0,
+    "c": 1,
+    "first_boundary_exchange": 67472,
+    "first_sparse_exchange": 67473,
+    "column_far_shell_count": 913633,
+    "sparse_shell_count": 913632,
+    "full_floor": 57198030365,
+    "full_ceiling": 57198030366,
+    "column_far_tail_floor": 57198030365,
+    "sparse_tail_floor": 57198030365,
+    "column_far_cap": 57198030366,
+    "sparse_cap": 57198030365,
+    "conditional_U_Q": 57198030366,
+    "certified_lower_floor": 57198030366,
+    "remaining_reserve": 274980670912383617
+  },
+  "window": {
+    "b0": {
+      "c_min": 1,
+      "c_max": 4807520
+    },
+    "c0": {
+      "b_min": 62606,
+      "b_max": 300975039332
+    },
+    "c4807520": {
+      "b_min": 0,
+      "b_max": 58194
+    },
+    "last_admitted": {
+      "cap": 274980728109989882,
+      "margin": 424101
+    },
+    "first_excluded": {
+      "cap": 274980728110903515,
+      "excess": 489532
+    }
+  },
+  "lower_floor": {
+    "separation_lhs": 1715268316138129359421571072,
+    "field_cardinality": 93571093019388561295270373781649880353786165192103559169,
+    "separation_margin": 93571093019388561295270373779934612037648035832681988097,
+    "relation": ">="
+  },
+  "source_git_blobs": {
+    "local": {
+      "experimental/grande_finale.tex": "8a5d9791900ca9eed773feba146b92ad296704ce",
+      "experimental/rs_mca_thresholds.tex": "01302a797c502a05ed0b11ba949b8756e0aa2b22",
+      "experimental/lean/rs_mca_thresholds/RsMcaThresholds/ExactSparsification.lean": "b4a89c7aa45fc068c010ebed9cd96073e6a2ec03",
+      "experimental/lean/grande_finale/GrandeFinale/RSExactSupportUpper.lean": "314a7406221433582129dcdda865945ab2036672",
+      "experimental/lean/grande_finale/GrandeFinale/SyndromeLine.lean": "d93e93e8dd6f1d5f121b03fcfc4f1baad501689c",
+      "experimental/lean/grande_finale/GrandeFinale/PrefixPigeonhole.lean": "55eb966c883a825a5b413a467cf8cf33f8db629d",
+      "experimental/lean/grande_finale/GrandeFinale/ExactPrefixList.lean": "e9c655772faf83bacfb62300127f68789298482e",
+      "experimental/lean/grande_finale/GrandeFinale/PrefixRigidityPacking.lean": "130d8b07edef41e1a264bff10819a774dee13d9d",
+      "experimental/lean/grande_finale/GrandeFinale/ScalarExtensionListLine.lean": "781c9e91e5d3a41e3c92c25c9a3371759e9af276",
+      "experimental/lean/grande_finale/GrandeFinale/SeparatingPole.lean": "be7c084db1ed8ed409ea7759790d8a5aa9c1fc36",
+      "experimental/lean/grande_finale/GrandeFinale/CollisionAwarePole.lean": "4b477c437b46da26ad27bfad739d2fcd59f28b6a",
+      "experimental/lean/grande_finale/GrandeFinale/ExactListLine.lean": "c3642f07e260ec11f8f032d523d1f95843f3d580"
+    },
+    "external_round1": {
+      "repository": "przchojecki/rs-mca",
+      "head_sha": "c15927c90091602035f617226da9ecf03cfc7316",
+      "note_blob": "c17d8f0f2f72450ebda548089bb8274300e5c8d8",
+      "row_manifest_blob": "15731acc39a4cc38d8175fd09535b149490f8551"
+    }
+  },
+  "artifact_sha256": {
+    "PR_BODY.md": "fed86f1f1d06600100772cdfba0752faa5ad70b89537b5c0ac75406b084d207a",
+    "experimental/agents-log-entry-gptpro-kb-uq-boundary-prefix.md": "22cf5c328918da7b91cbacc0e30b780748b8741b9a8e1cc2943546f946f0dba6",
+    "experimental/lean/kb_uq_boundary_prefix/CORRESPONDENCE.md": "5298147d707f78dec36c5b0886569e05536bea49a8c837def0ea80ed9ac82797",
+    "experimental/lean/kb_uq_boundary_prefix/KbUqBoundaryPrefix.lean": "f600687029c2cb1c844cf351d0a88bf066504581f76de2f98f0e07db2560929e",
+    "experimental/lean/kb_uq_boundary_prefix/KbUqBoundaryPrefix/Deployed.lean": "8ac595e7e81247c126cd5bcca155a80a88f390ac49569b975648cf3686c1e68c",
+    "experimental/lean/kb_uq_boundary_prefix/KbUqBoundaryPrefix/Envelope.lean": "a84bae9a41f9839304dbae189b158e8c110c8793309e780cdf5ff937b4b1130a",
+    "experimental/lean/kb_uq_boundary_prefix/lake-manifest.json": "86332296c899d5b6d4d2bab4fdde8b4390c271fd5b2f0e43f64813535189b378",
+    "experimental/lean/kb_uq_boundary_prefix/lakefile.lean": "c35d2aef5445e70ec6f2d3e35474bdd0aeedc3dae8175552319f8ee811afa0cb",
+    "experimental/lean/kb_uq_boundary_prefix/lean-toolchain": "efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee",
+    "experimental/notes/frontier-adjacent/kb_uq_boundary_prefix_pruned_shell_v1.md": "f5247077887f21693613bf825af91e997175d36d4cd3d04c5e1a8f4925bff52b",
+    "experimental/scripts/verify_kb_uq_boundary_prefix_pruned_shell_v1.py": "ab2bc458b53392b26a4c261188cc1eb564911912db2d2b4d4a80047bb4deac04"
+  },
+  "terminal": "OPEN GAP"
+}
