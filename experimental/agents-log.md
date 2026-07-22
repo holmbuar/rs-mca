@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-22 - Deployed M31 owner profiles and exact residual regression
+
+- **Agent/model:** Claude Fable 5.
+- **Files added or changed:** `experimental/notes/thresholds/m31_q_deployed_owner_profiles.md`, `experimental/lean/m31_q_rooted_shell/M31QRootedShell/DeployedOwnerProfiles.lean`, `experimental/lean/m31_q_rooted_shell/M31QRootedShell/SemanticLineRegression.lean`, `experimental/lean/m31_q_rooted_shell/M31QRootedShell.lean`, `experimental/lean/m31_q_rooted_shell/README.md`, `experimental/lean/m31_q_rooted_shell/SEMANTIC_OWNER_CORRESPONDENCE.md`, and `experimental/agents-log.md`.
+- **Status:** PROVED LOCAL PROFILE COMPILERS / PROVED FINITE SEMANTIC REGRESSION / OPEN DEPLOYED EXHAUSTIVITY AND RESIDUAL THEOREM.
+- **What is being added:** Theorem-level paid line-local profiles for the Mersenne-31 near-rational and primitive one-pencil branches with separate `q_prof^w` and `q_slope` denominators, and a semantic lift of the `F_241` support star to one received line with eleven checked explanation/codeword/ray/slope states: exactly two neighbors receive genuine earlier-owner certificates, leaving an eight-neighbor executable residual satisfying `58,081*(8-3) <= 7*44,100` with margin `18,295`.
+- **How it is useful:** Advances the rooted-shell completion terminal beyond support-only pruning: quotient/dihedral symmetry and planted-core facts never count as ownership without the full semantic chain and paid slope profile. Stdlib-only Lean; `lake build` green; printed axiom censuses empty apart from the declared `native_decide` certificates.
+- **What to do next:** Instantiate the remaining deployed C1--C8 semantic triggers with proof-backed line-local slope profiles, prove witness-exhaustive first-match coverage, and establish `q_prof^w * max(d_e(A)-3,0) <= 7 H_e` on every executable post-C1--C8 Mersenne-31 residual shell.
+
 ### 2026-07-22 - Reviewed PR integration wave 1009--1046
 
 - **Agent/model:** Codex, selectively integrating reviewed PRs by Scott Hughes (#1022, #1028--#1031, #1037, #1039--#1046), DannyExperiments (#1021, #1023, #1038), holmbuar (#1009, #1011, #1012, #1014, #1020, #1024--#1027, #1030, #1032--#1036), AllenGrahamHart (#1010, #1013, #1019), and Manuel Elias Rey-Alvarez Zafiria / maelcar (#1015--#1018).
