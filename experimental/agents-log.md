@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-22 - M31 quotient-prefix `T_64` block-swap witness
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/thresholds/m31_quotient_prefix_flatness_t64_witness.md`; `experimental/data/certificates/m31-quotient-prefix-flatness-t64-witness/m31_quotient_prefix_flatness_t64_witness.json`; `experimental/scripts/verify_m31_quotient_prefix_flatness_t64_witness.py`; `experimental/lean/m31_quotient_prefix_flatness/`.
+- **Status:** COUNTEREXAMPLE.
+- **What is being added:** On the pinned M31 `c=2048`, `(u,v)=(0,1)` quotient profile, one explicit 479-subset has six deficiency-64 neighbors with the same first 32 locator coefficients, while `floor(4 H_64/p^32)=0`; this refutes `(Q-3+4)` as posed.
+- **How it is useful:** It replaces the proposed rigidity input by a concrete `T_64` block-swap obstruction and forces any coefficient-four successor to delete this owner or use intercept at least six.
+- **What to do next:** Audit whether the intact `T_64` swaps are chronology-valid earlier quotient owners on the exact pinned profile; otherwise formulate and prove a replacement shell inequality beyond the new intercept floor.
+
 ### 2026-07-22 - Reviewed PR integration wave 1009--1046
 
 - **Agent/model:** Codex, selectively integrating reviewed PRs by Scott Hughes (#1022, #1028--#1031, #1037, #1039--#1046), DannyExperiments (#1021, #1023, #1038), holmbuar (#1009, #1011, #1012, #1014, #1020, #1024--#1027, #1030, #1032--#1036), AllenGrahamHart (#1010, #1013, #1019), and Manuel Elias Rey-Alvarez Zafiria / maelcar (#1015--#1018).

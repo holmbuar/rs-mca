@@ -1,0 +1,80 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs":
+ {"o": ["913c76b353879167.olean"],
+  "m": false,
+  "i": "130f1666096305c1.ilean",
+  "c": "fb20f5303eeb450c.c"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/Users/tor/src/wt-ship-t64/experimental/lean/m31_quotient_prefix_flatness/.lake/build/lib/lean /Users/tor/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean /Users/tor/src/wt-ship-t64/experimental/lean/m31_quotient_prefix_flatness/M31QuotientPrefixFlatness/T64Witness.lean -o /Users/tor/src/wt-ship-t64/experimental/lean/m31_quotient_prefix_flatness/.lake/build/lib/lean/M31QuotientPrefixFlatness/T64Witness.olean -i /Users/tor/src/wt-ship-t64/experimental/lean/m31_quotient_prefix_flatness/.lake/build/lib/lean/M31QuotientPrefixFlatness/T64Witness.ilean -c /Users/tor/src/wt-ship-t64/experimental/lean/m31_quotient_prefix_flatness/.lake/build/ir/M31QuotientPrefixFlatness/T64Witness.c --setup /Users/tor/src/wt-ship-t64/experimental/lean/m31_quotient_prefix_flatness/.lake/build/ir/M31QuotientPrefixFlatness/T64Witness.setup.json --json",
+   "level": "trace"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:280:0: 'M31QuotientPrefixFlatness.T64Witness.generator_norm_one' does not depend on any axioms",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:281:0: 'M31QuotientPrefixFlatness.T64Witness.generator_full_order' does not depend on any axioms",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:282:0: 'M31QuotientPrefixFlatness.T64Witness.quotient_domain_exact' depends on axioms: [propext,\n quotient_domain_exact._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:283:0: 'M31QuotientPrefixFlatness.T64Witness.quotient_labels_are_T1024_roots' depends on axioms: [quotient_labels_are_T1024_roots._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:284:0: 'M31QuotientPrefixFlatness.T64Witness.active_profile_punctures_exact' depends on axioms: [propext,\n active_profile_punctures_exact._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:285:0: 'M31QuotientPrefixFlatness.T64Witness.t64_fibers_exact' depends on axioms: [propext,\n t64_fibers_exact._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:286:0: 'M31QuotientPrefixFlatness.T64Witness.common_core_exact' depends on axioms: [common_core_exact._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:287:0: 'M31QuotientPrefixFlatness.T64Witness.supports_exact' depends on axioms: [supports_exact._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:288:0: 'M31QuotientPrefixFlatness.T64Witness.all_prefixes_match_eta' depends on axioms: [propext,\n all_prefixes_match_eta._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:289:0: 'M31QuotientPrefixFlatness.T64Witness.first_sixty_three_coefficients_match' depends on axioms: [propext,\n first_sixty_three_coefficients_match._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:290:0: 'M31QuotientPrefixFlatness.T64Witness.six_deficiency_64_neighbors' depends on axioms: [propext,\n six_deficiency_64_neighbors._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:291:0: 'M31QuotientPrefixFlatness.T64Witness.H64_exact' depends on axioms: [H64_exact._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:292:0: 'M31QuotientPrefixFlatness.T64Witness.four_H64_lt_Q32' depends on axioms: [four_H64_lt_Q32._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:293:0: 'M31QuotientPrefixFlatness.T64Witness.shell_floor_zero' depends on axioms: [shell_floor_zero._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:294:0: 'M31QuotientPrefixFlatness.T64Witness.Q_minus_3_plus_4_violated' depends on axioms: [Q_minus_3_plus_4_violated._native.native_decide.ax_1_1]",
+   "level": "info"},
+  {"message":
+   "M31QuotientPrefixFlatness/T64Witness.lean:295:0: 'M31QuotientPrefixFlatness.T64Witness.conditional_b6_c4_arithmetic' does not depend on any axioms",
+   "level": "info"}],
+ "inputs":
+ [["M31QuotientPrefixFlatness.T64Witness:deps",
+   [["deps",
+     [["m31QuotientPrefixFlatness/M31QuotientPrefixFlatness:extraDep",
+       [["@m31QuotientPrefixFlatness:extraDep", "00000000000006bb"]]],
+      ["imports", "00000000000006bb"]]],
+    ["libs",
+     [["import dynlibs", "00000000000006bb"],
+      ["package external libraries", "00000000000006bb"],
+      ["module dynlibs", "00000000000006bb"],
+      ["module plugins", "00000000000006bb"]]]]],
+  ["Lean 4.31.0, commit 68218e876d2a38b1985b8590fff244a83c321783",
+   "fc45ac412f28501c"],
+  ["/Users/tor/src/wt-ship-t64/experimental/lean/m31_quotient_prefix_flatness/M31QuotientPrefixFlatness/T64Witness.lean",
+   "331cf883e5ef77fd"],
+  ["options", "00000000000006bb"],
+  ["isModule: false", "feefd2a0d3a1847e"],
+  ["Module.name: M31QuotientPrefixFlatness.T64Witness", "6971837d5bf71c0e"],
+  ["Package.id?: (some m31QuotientPrefixFlatness)", "e7a41a17548a83d1"],
+  ["Module.leanArgs: #[]", "00000000000006bb"]],
+ "depHash": "6aea579b97b214a0"}
