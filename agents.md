@@ -30,6 +30,9 @@ B^MCA_C(1116048) <= 274980728111395087.
 
 Agreement `1116047` is already proved unsafe. Proving the displayed upper bound therefore determines the first safe agreement exactly.
 
+
+There is also a high-priority list-decoding objective: obtain better ordinary Reed--Solomon list-decoding bounds beyond the Johnson radius. These may come either directly from the list-side machinery in the papers and experimental notes, or indirectly from sufficiently strong CA/MCA upper bounds through the BCHKS25 and CS25 conversions surveyed in `open-proximity.tex` Theorems 5.2 and 5.3. Any such contribution must state the exact code (`C` or `C^+`), radius shifts, list-size bound, field denominator, and whether the result is theorem-level, conditional, or computational.
+
 A result counts as resolution progress only if it does at least one of these:
 
 1. proves or refutes a direct benchmark inequality;
@@ -160,11 +163,37 @@ If true, isolate exactly what transfers to KoalaBear Q or other list/MCA cells, 
 
 Never describe this auxiliary `2^-100` row as an unresolved `2^-128` Prize row.
 
+### Lane L — improve ordinary RS list decoding beyond Johnson
+
+Produce a theorem, conditional theorem, or exact computational certificate giving a better ordinary Reed--Solomon list-size bound at a radius beyond the Johnson radius. This lane is separate from MCA: the output unit is codewords in a Hamming ball around one received word.
+
+Valid routes include:
+
+- direct list-side proofs from the locator-prefix, shortening, prefix-fiber, affine-span, rank-flat, or interior-list machinery in `slackMCA_v4.tex`, `RS_MCA_Paving_v9.2.tex`, `tex/cs25_cap_v13_2.tex`, and `experimental/grande_finale.tex`;
+- computational certificates for exact finite list-size upper bounds or counterexamples at declared rows;
+- indirect derivations from a proved CA/MCA upper bound using `open-proximity.tex` Theorem 5.2 (BCHKS25) or Theorem 5.3 (CS25), with the theorem's radius shift, intrinsic-radius condition, and `C` versus `C^+` code shift printed explicitly.
+
+A useful list-decoding packet must print:
+
+```text
+row:                 (F, D, k, n, rho)
+object:              ordinary LIST, not MCA
+radius/agreement:    exact delta and integer agreement
+Johnson comparison:  exact Johnson radius and post-Johnson gap
+bound:               exact list-size upper bound, or exact lower counterexample
+route:               DIRECT_LIST / BCHKS_CA_TO_LIST / CS_CA_TO_LIST / COMPUTATIONAL
+CA_or_MCA_input:     exact epsilon bound if using a conversion
+code_shift:          C or C^+ = RS(k+1)
+status:              PROVED / CONDITIONAL / EXPERIMENTAL / COUNTEREXAMPLE / AUDIT
+```
+
+Do not claim an MCA bad-slope numerator as a list bound. Conversely, if a list lower bound is converted into MCA failure by a simple-pole or deep-point argument, record it under the MCA row as a lower/unsafe result, not as list safety.
+
 ### Lane T — cross-row theorems only when they specialize to a live integer
 
 A Sidon/Fourier, entropy, incidence, shortening, or ray theorem belongs here only if it supplies:
 
-- a bankable exact atom in Lane K or M;
+- a bankable exact atom in Lane K, L, or M;
 - a direct benchmark upper theorem;
 - a direct benchmark counterexample; or
 - a rigorous route cut that updates the compiler residual.
