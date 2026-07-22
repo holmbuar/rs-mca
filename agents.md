@@ -1,7 +1,7 @@
 # AGENTS.md — RS–MCA Resolution Protocol
 
-> **Updated:** 2026-07-21
-> **State snapshot:** `main@18cfc199d4612f5dfc01bf6c0155a65a1eaa3832`
+> **Updated:** 2026-07-22
+> **State snapshot:** `main@32a41660e3088eeeb15a16645330856794302ff0`
 > **Supersedes:** all older priority lists in this file.
 
 Edit this workboard in place. Never append another “current focus”, “highest priority”, or competing task list.
@@ -67,7 +67,7 @@ At this snapshot:
 - No row has complete active-architecture `U_paid`, exhaustive MCA balanced-core or list-interior payment, zero/exact residual, and chronology-correct add-back.
 - The KoalaBear legacy M1 stack records local `U_paid=422354730332` and local remainder `274980305756664755`, but neither is banked in Grande Finale v4 because the source-bound owner/partition bridge is missing.
 - Under the latest corrected direct extension charge, positive extension dimension is excluded on Mersenne-31 and dimension at least two is excluded on KoalaBear. These are route cuts, not payments or nonexistence theorems.
-- Padding, common-core add-back, rank-two/coloop, rooted-shell, residual, and final finite-ledger terminals remain open.
+- The newly integrated M31 packets add local padding-bridge, masked-saturation, common-core add-back, rank-two/coloop, rooted-shell, C7--C9, and route-cut infrastructure.  These are not adjacent-row payments: source-bound owner/refund, rooted-shell completion, residual projection, and final finite-ledger terminals remain open.
 - A schema/hash pass is structural preflight only. The trusted-source registry is empty; parsing a manifest does not prove an atom.
 
 ## 3. Document authority
@@ -78,7 +78,7 @@ At this snapshot:
 | `experimental/Conjectures_and_Barriers_RS_MCA_v4_1.tex` | **Direct problem/falsifier authority:** benchmark conjectures, exact compiler requirements, finite barriers, and separation of finite from conjectural asymptotic claims. |
 | `experimental/grande_finale.tex` | **Active conditional completion architecture:** proved local theorems, order-32/rational-atom reductions, owner localization, spread-core incidence bounds, and exact completion problems. Hypotheses/problems are not row bounds. |
 | `tex/cs25_cap_v13_2.tex` | **Foundation/unsafe authority:** exact unsafe endpoints, field/domain conventions, reductions, and certificate grammar. |
-| `experimental/RS_MCA_Paving_v9.2.tex` | **Proved safe-bound toolbox:** shortening, MDS circuit, exact finite, exponential-budget, and conditional Sidon-to-flatness results. It does not solve the subexponential near-capacity frontier. |
+| `RS_MCA_Paving_v9.2.tex` | **Fixed ePrint basis for unconditional paving results:** shortening, MDS circuit, exact finite, exponential-budget, and conditional Sidon-to-flatness results from ePrint 2026/1463. It does not solve the subexponential near-capacity frontier. |
 | `experimental/rs_mca_thresholds.tex` | **Exact-regime/exposition source:** staircases, below-half-distance results, syndrome geometry, and examples; not unrestricted near-capacity closure authority. |
 | `tex/RS_disproof_v3.tex`, `tex/slackMCA_v4.tex`, `tex/snarks_v5.tex` | Stable background for no-slack obstructions, reserve/quotient theory, and later protocol accounting. |
 | `archived/` predecessors | Provenance only. Never bank an archived owner or charge without an explicit source-bound bridge. |
@@ -276,7 +276,7 @@ A declaration is certified only after the package builds and its statement is ma
 2. Introduction, exact compiler, finite benchmark, and finite-closure problem in `Conjectures_and_Barriers_RS_MCA_v4_1.tex`.
 3. Audited-status, finite-Q barrier, and exact-completion sections of `grande_finale.tex`.
 4. Exact unsafe-row/certificate sections of `cs25_cap_v13_2.tex`.
-5. Main theorem/status sections of `RS_MCA_Paving_v9.2.tex`.
+5. Main theorem/status sections of root-level `RS_MCA_Paving_v9.2.tex` (ePrint 2026/1463).
 6. Only then, row-specific notes and scripts named by the live compiler.
 7. Use `rs_mca_thresholds.tex` for solved exact regimes; use archives only for provenance.
 
