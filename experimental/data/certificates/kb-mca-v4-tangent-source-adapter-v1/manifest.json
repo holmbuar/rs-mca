@@ -1,0 +1,168 @@
+{
+ "architecture_id": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1",
+ "atoms": [
+  {
+   "architecture_id": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1",
+   "atom_id": "U_paid",
+   "bankable": true,
+   "owner_ids": [
+    "SOURCE_COORDINATE_TANGENT_IMAGE"
+   ],
+   "partition_sha256": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc",
+   "quantifier": "UNIFORM_OVER_ALL_ADMISSIBLE_RECEIVED_LINES",
+   "source_statement": "For every received line, the bad slopes in the canonical source-coordinate ratio image form a first-match cell of cardinality at most n-a=981104.",
+   "status": "BANKABLE_SOURCE_BOUND_EXACT_UPPER",
+   "unit": "DISTINCT_BAD_FINITE_SLOPES_PER_RECEIVED_LINE",
+   "unresolved_hypotheses": [],
+   "value": 981104
+  },
+  {
+   "architecture_id": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1",
+   "atom_id": "U_Q",
+   "bankable": false,
+   "owner_ids": [
+    "ACTIVE_V4_BOUNDARY_PREFIX_Q"
+   ],
+   "partition_sha256": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc",
+   "quantifier": "UNIFORM_OVER_ALL_ADMISSIBLE_RECEIVED_LINES",
+   "source_statement": "After tangent deletion, the active v4 boundary-prefix-Q certificate predicate defines the next exact owner; this packet does not supply its row-sharp maximum.",
+   "status": "OPEN_UNPAID",
+   "unit": "DISTINCT_BAD_FINITE_SLOPES_PER_RECEIVED_LINE",
+   "unresolved_hypotheses": [
+    "KB_V4_PRUNED_ROW_SHARP_Q_OPEN"
+   ],
+   "value": null
+  },
+  {
+   "architecture_id": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1",
+   "atom_id": "U_BC",
+   "bankable": false,
+   "owner_ids": [
+    "ACTIVE_V4_BALANCED_CORE"
+   ],
+   "partition_sha256": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc",
+   "quantifier": "UNIFORM_OVER_ALL_ADMISSIBLE_RECEIVED_LINES",
+   "source_statement": "After tangent and Q deletion, the active v4 balanced-core certificate predicate defines the next exact owner; this packet does not supply an exhaustive slope payment.",
+   "status": "OPEN_UNPAID",
+   "unit": "DISTINCT_BAD_FINITE_SLOPES_PER_RECEIVED_LINE",
+   "unresolved_hypotheses": [
+    "KB_V4_BALANCED_CORE_EXHAUSTIVE_PAYMENT_OPEN"
+   ],
+   "value": null
+  },
+  {
+   "architecture_id": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1",
+   "atom_id": "U_new",
+   "bankable": false,
+   "owner_ids": [
+    "UNPAID_V4_COMPLEMENT"
+   ],
+   "partition_sha256": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc",
+   "quantifier": "UNIFORM_OVER_ALL_ADMISSIBLE_RECEIVED_LINES",
+   "source_statement": "Every bad slope not owned by the first three declared owners belongs to the iterated exact active-v4 complement; its upper payment remains open.",
+   "status": "OPEN_UNPAID",
+   "unit": "DISTINCT_BAD_FINITE_SLOPES_PER_RECEIVED_LINE",
+   "unresolved_hypotheses": [
+    "KB_V4_FINAL_COMPLEMENT_PAYMENT_OPEN"
+   ],
+   "value": null
+  }
+ ],
+ "closure_state": {
+  "B_star": 274980728111395087,
+  "closed": false,
+  "known_sum": 981104,
+  "legacy_recorded_U_paid": 422354730332,
+  "legacy_stack_imported": false,
+  "remaining_budget_after_known_sum": 274980728110413983,
+  "row_closed": false,
+  "unpaid_owner_ids": [
+   "ACTIVE_V4_BOUNDARY_PREFIX_Q",
+   "ACTIVE_V4_BALANCED_CORE",
+   "UNPAID_V4_COMPLEMENT"
+  ]
+ },
+ "nonclaims": [
+  "DOES_NOT_IMPORT_LEGACY_M1_U_PAID",
+  "DOES_NOT_PAY_ACTIVE_V4_Q",
+  "DOES_NOT_PAY_ACTIVE_V4_BALANCED_CORE",
+  "DOES_NOT_PAY_ACTIVE_V4_FINAL_COMPLEMENT",
+  "DOES_NOT_CLOSE_KOALABEAR_ROW",
+  "DOES_NOT_MOVE_SAFE_ENDPOINT",
+  "DOES_NOT_USE_ARCHIVED_FIRST_MATCH_AS_AUTHORITY",
+  "DOES_NOT_TREAT_PYTHON_AS_PROOF_VALIDATION"
+ ],
+ "partition_sha256": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc",
+ "payload_sha256": "536b08f23e552b2cb4fb226d74d42d54750118dae2efe619ff6e67d69d0370bf",
+ "proof_status": "PROVED_GATE_B_BANKABLE_ATOM_ROW_OPEN",
+ "row_manifest_binding": {
+  "path": "experimental/data/certificates/kb-mca-v4-tangent-source-adapter-v1/row_manifest.json",
+  "sha256": "574c6fd6d3a993260e2dc947235a92a56189e4197c069c3ff24b962944dda5c1"
+ },
+ "schema": "rs-mca-kb-mca-v4-tangent-source-adapter-v1",
+ "source_bindings": [
+  {
+   "binding_id": "KB_TAN_V4::row_manifest",
+   "hash": "574c6fd6d3a993260e2dc947235a92a56189e4197c069c3ff24b962944dda5c1",
+   "hash_kind": "SHA256",
+   "path": "experimental/data/certificates/kb-mca-v4-tangent-source-adapter-v1/row_manifest.json",
+   "role": "K0_FIELD_PARTITION_OWNER_ORDER_QUANTIFIER_AND_UNIT_BINDING"
+  },
+  {
+   "binding_id": "KB_TAN_V4::source_note",
+   "hash": "2ca3653b066b7cb2e3b54f7db1ab407d05d72b77f45496f2d7cd8efcf59b1590",
+   "hash_kind": "SHA256",
+   "path": "experimental/notes/frontier-adjacent/kb_mca_v4_tangent_source_adapter_v1.md",
+   "role": "ACTIVE_V4_REPROOF_OWNER_SCOPE_AND_NONCLAIMS"
+  },
+  {
+   "binding_id": "KB_TAN_V4::lean_kernel",
+   "hash": "620a07cf941b08d642492a4cbccfeb02e0dd06cbdd9894731f30a7d2a603a2db",
+   "hash_kind": "SHA256",
+   "path": "experimental/lean/kb_m1_source_bound_bridge/KbM1SourceBoundBridge.lean",
+   "role": "FINITE_IMAGE_FOUR_CELL_PARTITION_AND_DEPLOYED_INTEGER_FORMALIZATION"
+  },
+  {
+   "binding_id": "KB_TAN_V4::lean_correspondence",
+   "hash": "7245dc991d59cabad1d1a70fcc8e93a43a268423f798f64807fc3d26f75a5afb",
+   "hash_kind": "SHA256",
+   "path": "experimental/lean/kb_m1_source_bound_bridge/CORRESPONDENCE.md",
+   "role": "LEAN_TO_SOURCE_STATEMENT_AUDIT"
+  },
+  {
+   "binding_id": "KB_TAN_V4::schema",
+   "hash": "c23caffc75b88307429752ee9f62f24735fd95d9753001348b01ad2f0f33d306",
+   "hash_kind": "SHA256",
+   "path": "experimental/data/schemas/kb_mca_v4_tangent_source_adapter_v1.schema.json",
+   "role": "MACHINE_CONTRACT"
+  },
+  {
+   "binding_id": "KB_TAN_V4::sp3_source",
+   "hash": "01302a797c502a05ed0b11ba949b8756e0aa2b22",
+   "hash_kind": "GIT_BLOB_SHA1",
+   "path": "experimental/rs_mca_thresholds.tex",
+   "role": "EXACT_SPARSIFICATION_AND_TRANSLATION_SOURCE_THEOREM"
+  },
+  {
+   "binding_id": "KB_TAN_V4::sp3_lean",
+   "hash": "b4a89c7aa45fc068c010ebed9cd96073e6a2ec03",
+   "hash_kind": "GIT_BLOB_SHA1",
+   "path": "experimental/lean/rs_mca_thresholds/RsMcaThresholds/ExactSparsification.lean",
+   "role": "CHECKED_POINTWISE_MCA_BAD_TRANSLATION_EQUIVALENCE"
+  },
+  {
+   "binding_id": "KB_TAN_V4::active_v4",
+   "hash": "8a5d9791900ca9eed773feba146b92ad296704ce",
+   "hash_kind": "GIT_BLOB_SHA1",
+   "path": "experimental/grande_finale.tex",
+   "role": "ACTIVE_Q_BC_NEW_CERTIFICATE_PREDICATES_AND_ORDER32_RATIONAL_ATOM_CONSUMER"
+  },
+  {
+   "binding_id": "KB_TAN_V4::legacy_tangent_provenance",
+   "hash": "1e68be66bc39ba28e70a169d75470d6775b5fe3d",
+   "hash_kind": "GIT_BLOB_SHA1",
+   "path": "experimental/notes/m1/m1_kb_rank9_tangent_owner_splice_v1.md",
+   "role": "PROVENANCE_ONLY_NOT_PROOF_DEPENDENCY"
+  }
+ ]
+}

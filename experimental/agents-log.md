@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-22 - KoalaBear v4 tangent source payment
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/frontier-adjacent/kb_mca_v4_tangent_source_adapter_v1.md`, `experimental/data/certificates/kb-mca-v4-tangent-source-adapter-v1/`, `experimental/data/schemas/kb_mca_v4_tangent_source_adapter_v1.schema.json`, `experimental/scripts/verify_kb_mca_v4_tangent_source_adapter_v1.py`, and `experimental/lean/kb_m1_source_bound_bridge/`.
+- **Status:** PROVED / BANKABLE_ATOM / ROW OPEN.
+- **What is being added:** A gate-(B) active-v4 re-proof banks `U_paid'=981104` for the canonical source-coordinate tangent image. The frozen four-cell first-match partition passes the exact complement through active Q, balanced-core, and final residual owners; no legacy M1 charge is imported.
+- **How it is useful:** It gives Lane K1 one source-bound positive atom in exact units of distinct bad slopes per received line while preserving the full unpaid v4 residual.
+- **What to do next:** Prove exact source-bound values for `U_Q`, `U_BC`, and `U_new` under the frozen partition digest; do not import the remaining legacy `422354730332`.
+
 ### 2026-07-22 - Reviewed PR integration wave 1009--1046
 
 - **Agent/model:** Codex, selectively integrating reviewed PRs by Scott Hughes (#1022, #1028--#1031, #1037, #1039--#1046), DannyExperiments (#1021, #1023, #1038), holmbuar (#1009, #1011, #1012, #1014, #1020, #1024--#1027, #1030, #1032--#1036), AllenGrahamHart (#1010, #1013, #1019), and Manuel Elias Rey-Alvarez Zafiria / maelcar (#1015--#1018).

@@ -1,0 +1,71 @@
+{"synthetic": false,
+ "schemaVersion": "2025-09-10",
+ "outputs":
+ {"o": ["eab33c88779c596b.olean"],
+  "m": false,
+  "i": "6209868d7e197ccd.ilean",
+  "c": "8285c890aab04ccb.c"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/Users/tor/src/wt-ship-kb-tangent/experimental/lean/kb_m1_source_bound_bridge/.lake/build/lib/lean /Users/tor/.elan/toolchains/leanprover--lean4---v4.31.0/bin/lean /Users/tor/src/wt-ship-kb-tangent/experimental/lean/kb_m1_source_bound_bridge/KbM1SourceBoundBridge.lean -o /Users/tor/src/wt-ship-kb-tangent/experimental/lean/kb_m1_source_bound_bridge/.lake/build/lib/lean/KbM1SourceBoundBridge.olean -i /Users/tor/src/wt-ship-kb-tangent/experimental/lean/kb_m1_source_bound_bridge/.lake/build/lib/lean/KbM1SourceBoundBridge.ilean -c /Users/tor/src/wt-ship-kb-tangent/experimental/lean/kb_m1_source_bound_bridge/.lake/build/ir/KbM1SourceBoundBridge.c --setup /Users/tor/src/wt-ship-kb-tangent/experimental/lean/kb_m1_source_bound_bridge/.lake/build/ir/KbM1SourceBoundBridge.setup.json --json",
+   "level": "trace"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:217:0: 'KbM1SourceBoundBridge.tangentImageEnvelope_length_eq' depends on axioms: [propext]",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:218:0: 'KbM1SourceBoundBridge.mem_tangentImageEnvelope_iff' depends on axioms: [propext, Quot.sound]",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:219:0: 'KbM1SourceBoundBridge.paidEnvelope_length_le_tangentCharge' depends on axioms: [propext]",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:220:0: 'KbM1SourceBoundBridge.firstOwner_cases' depends on axioms: [propext]",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:221:0: 'KbM1SourceBoundBridge.activeOwner_cases_of_bad' depends on axioms: [propext]",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:222:0: 'KbM1SourceBoundBridge.firstOwner_unique' does not depend on any axioms",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:223:0: 'KbM1SourceBoundBridge.activeOwners_pairwiseDisjoint' does not depend on any axioms",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:224:0: 'KbM1SourceBoundBridge.tangentImage_card_le_support' depends on axioms: [propext, Quot.sound]",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:225:0: 'KbM1SourceBoundBridge.paidCell_card_le_tangentCharge' depends on axioms: [propext]",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:226:0: 'KbM1SourceBoundBridge.activeCells_pairwiseDisjoint' does not depend on any axioms",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:227:0: 'KbM1SourceBoundBridge.activeCells_union' depends on axioms: [propext]",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:228:0: 'KbM1SourceBoundBridge.deployedConstantsExact' does not depend on any axioms",
+   "level": "info"},
+  {"message":
+   "KbM1SourceBoundBridge.lean:229:0: 'KbM1SourceBoundBridge.activePaymentIsStrictlySmallerThanLegacy' does not depend on any axioms",
+   "level": "info"}],
+ "inputs":
+ [["KbM1SourceBoundBridge:deps",
+   [["deps",
+     [["kbM1SourceBoundBridge/KbM1SourceBoundBridge:extraDep",
+       [["@kbM1SourceBoundBridge:extraDep", "00000000000006bb"]]],
+      ["imports", "00000000000006bb"]]],
+    ["libs",
+     [["import dynlibs", "00000000000006bb"],
+      ["package external libraries", "00000000000006bb"],
+      ["module dynlibs", "00000000000006bb"],
+      ["module plugins", "00000000000006bb"]]]]],
+  ["Lean 4.31.0, commit 68218e876d2a38b1985b8590fff244a83c321783",
+   "fc45ac412f28501c"],
+  ["/Users/tor/src/wt-ship-kb-tangent/experimental/lean/kb_m1_source_bound_bridge/KbM1SourceBoundBridge.lean",
+   "5b0273fb54973aa6"],
+  ["options", "00000000000006bb"],
+  ["isModule: false", "feefd2a0d3a1847e"],
+  ["Module.name: KbM1SourceBoundBridge", "8dcd06c2de3b9924"],
+  ["Package.id?: (some kbM1SourceBoundBridge)", "a8d7ce86fa84580a"],
+  ["Module.leanArgs: #[]", "00000000000006bb"]],
+ "depHash": "35fd9fc323d3feeb"}

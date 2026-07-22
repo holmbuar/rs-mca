@@ -1,0 +1,282 @@
+{
+  "$defs": {
+    "nullAtom": {
+      "additionalProperties": false,
+      "properties": {
+        "architecture_id": {
+          "const": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1"
+        },
+        "atom_id": {
+          "enum": [
+            "U_Q",
+            "U_BC",
+            "U_new"
+          ]
+        },
+        "bankable": {
+          "const": false
+        },
+        "owner_ids": {
+          "maxItems": 1,
+          "minItems": 1,
+          "type": "array"
+        },
+        "partition_sha256": {
+          "const": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc"
+        },
+        "quantifier": {
+          "const": "UNIFORM_OVER_ALL_ADMISSIBLE_RECEIVED_LINES"
+        },
+        "source_statement": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "status": {
+          "const": "OPEN_UNPAID"
+        },
+        "unit": {
+          "const": "DISTINCT_BAD_FINITE_SLOPES_PER_RECEIVED_LINE"
+        },
+        "unresolved_hypotheses": {
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "value": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "atom_id",
+        "owner_ids",
+        "value",
+        "bankable",
+        "status",
+        "architecture_id",
+        "partition_sha256",
+        "quantifier",
+        "unit",
+        "source_statement",
+        "unresolved_hypotheses"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://rsmca.xyz/schemas/kb_mca_v4_tangent_source_adapter_v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "architecture_id": {
+      "const": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1"
+    },
+    "atoms": {
+      "items": false,
+      "maxItems": 4,
+      "minItems": 4,
+      "prefixItems": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "architecture_id": {
+              "const": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1"
+            },
+            "atom_id": {
+              "const": "U_paid"
+            },
+            "bankable": {
+              "const": true
+            },
+            "owner_ids": {
+              "const": [
+                "SOURCE_COORDINATE_TANGENT_IMAGE"
+              ]
+            },
+            "partition_sha256": {
+              "const": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc"
+            },
+            "quantifier": {
+              "const": "UNIFORM_OVER_ALL_ADMISSIBLE_RECEIVED_LINES"
+            },
+            "source_statement": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "status": {
+              "const": "BANKABLE_SOURCE_BOUND_EXACT_UPPER"
+            },
+            "unit": {
+              "const": "DISTINCT_BAD_FINITE_SLOPES_PER_RECEIVED_LINE"
+            },
+            "unresolved_hypotheses": {
+              "const": []
+            },
+            "value": {
+              "const": 981104
+            }
+          },
+          "required": [
+            "atom_id",
+            "owner_ids",
+            "value",
+            "bankable",
+            "status",
+            "architecture_id",
+            "partition_sha256",
+            "quantifier",
+            "unit",
+            "source_statement",
+            "unresolved_hypotheses"
+          ],
+          "type": "object"
+        },
+        {
+          "$ref": "#/$defs/nullAtom"
+        },
+        {
+          "$ref": "#/$defs/nullAtom"
+        },
+        {
+          "$ref": "#/$defs/nullAtom"
+        }
+      ],
+      "type": "array"
+    },
+    "closure_state": {
+      "additionalProperties": false,
+      "properties": {
+        "B_star": {
+          "const": 274980728111395087
+        },
+        "closed": {
+          "const": false
+        },
+        "known_sum": {
+          "const": 981104
+        },
+        "legacy_recorded_U_paid": {
+          "const": 422354730332
+        },
+        "legacy_stack_imported": {
+          "const": false
+        },
+        "remaining_budget_after_known_sum": {
+          "const": 274980728110413983
+        },
+        "row_closed": {
+          "const": false
+        },
+        "unpaid_owner_ids": {
+          "const": [
+            "ACTIVE_V4_BOUNDARY_PREFIX_Q",
+            "ACTIVE_V4_BALANCED_CORE",
+            "UNPAID_V4_COMPLEMENT"
+          ]
+        }
+      },
+      "required": [
+        "B_star",
+        "known_sum",
+        "remaining_budget_after_known_sum",
+        "closed",
+        "row_closed",
+        "legacy_stack_imported",
+        "legacy_recorded_U_paid",
+        "unpaid_owner_ids"
+      ],
+      "type": "object"
+    },
+    "nonclaims": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 6,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "partition_sha256": {
+      "const": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc"
+    },
+    "payload_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "proof_status": {
+      "const": "PROVED_GATE_B_BANKABLE_ATOM_ROW_OPEN"
+    },
+    "row_manifest_binding": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "const": "experimental/data/certificates/kb-mca-v4-tangent-source-adapter-v1/row_manifest.json"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "type": "object"
+    },
+    "schema": {
+      "const": "rs-mca-kb-mca-v4-tangent-source-adapter-v1"
+    },
+    "source_bindings": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "binding_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "hash": {
+            "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$",
+            "type": "string"
+          },
+          "hash_kind": {
+            "enum": [
+              "SHA256",
+              "GIT_BLOB_SHA1"
+            ]
+          },
+          "path": {
+            "pattern": "^(agents\\.md|experimental|tex)/",
+            "type": "string"
+          },
+          "role": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "binding_id",
+          "path",
+          "role",
+          "hash_kind",
+          "hash"
+        ],
+        "type": "object"
+      },
+      "minItems": 6,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema",
+    "payload_sha256",
+    "row_manifest_binding",
+    "architecture_id",
+    "partition_sha256",
+    "atoms",
+    "closure_state",
+    "source_bindings",
+    "proof_status",
+    "nonclaims"
+  ],
+  "title": "KoalaBear MCA Grande Finale v4 tangent source adapter",
+  "type": "object"
+}
