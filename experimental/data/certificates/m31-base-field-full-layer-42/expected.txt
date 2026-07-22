@@ -1,0 +1,10 @@
+R38_M31_BASE_FIELD_FULL_LAYER_42_VERIFIER
+mode=check
+field=F_p p=2147483647 n=2097152 K=1048576 R=981129
+budget=PASS B=16777215 L=16777216
+packing=PASS thresholds_sha256=ddfb56f76c3d529e430c42a0c1b3b244d43d9c74ca9e17ceda61fb8a436077fc delta42_pre=-111 delta42=1107 monotonicity_checks=19187280
+layer_cake=PASS high=16065819 total=16590107 gap=187109 forced_layer=42 j_floor=606936
+forney=PASS S=913681 D0_min=67447 mu1=22842 mu12=45684 high_rows_at_most=13
+scope=BASE_FIELD_ONLY owner=NONE addback=UNCLAIMED quartic_transfer=UNCLAIMED
+ledger=0 official_score=0/2
+RESULT=PASS

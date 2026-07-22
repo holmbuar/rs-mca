@@ -1,0 +1,64 @@
+{
+  "schema": "rs-mca-r38-role02-publication-v1",
+  "status": "independent_hostile_audit_accept_narrowed_zero_payment",
+  "source_base": {
+    "commit": "32a41660e3088eeeb15a16645330856794302ff0",
+    "tree": "1a6bf7731dc0717bbd38e887b390813d8f04ec6b",
+    "audited_v4_commit": "a3017697ad1594521d2779fe1d83bccd45d4c06e",
+    "relevant_source_delta": "none; later commit only promotes Paving v9.2 and updates documentation"
+  },
+  "dependency": {
+    "pull_request": 1023,
+    "head": "895d15ee9a67fee0fff9c3098306d5f93ca3bcbd",
+    "use": "full-packet exact-support and locator-Forney theorem"
+  },
+  "claimant": {
+    "conversation_id": "6a5f913b-9c2c-83ec-a70d-67af53212923",
+    "original_archive_sha256": "adcf6caf9e494e95675e169e8a90c31829c843ecce44207fbdb736ee3781b927",
+    "repair_packet_sha256": "4e8f0774a99aa75fe01684ef8f3cb3f00299e7b1ce273a5bbaa6909c0bdc5c5a",
+    "final_bundle_sha256": "968c6c2139e4eab203c039e5ce03bbc99111ded81282fa4b94c60f164b62a815"
+  },
+  "independent_hostile_audit": {
+    "verdict": "ACCEPT_NARROWED",
+    "conversation_id": "6a5fdcf5-8450-83ec-8f4f-6b218b211537",
+    "packet_sha256": "9cc8da64c349c547259b63d126a0fa129dfc276fdb9936fcd6355259418d82d3",
+    "captured_at": "2026-07-21T21:39:48.545Z",
+    "public_text_sha256": "e2afcb299230c39dc98b6b1f8aeaad734584fc8a9a3805bfea0930680ac9abc9",
+    "full_rendered_sha256": "499193895b0aa685c4ddb8a1291c0557bdc7c73e45f6f715928cbafc6a5a6a45"
+  },
+  "live_overlap": {
+    "checked_at": "2026-07-21T21:48:11.579Z",
+    "open_pr_count": 29,
+    "snapshot_sha256": "1792339cefd4bbc3f76063a174f8c12ab267130d06c40fcbf8c0f6b41156764b",
+    "overlapping_prs": [1023, 1028, 1029, 1031, 1037],
+    "nonduplicate_delta": [
+      "base-field full-layer multiplicity at least 42",
+      "least maximizing weight at least 606936",
+      "max-41 total upper 16590107 and strict-mass gap 187109",
+      "base-field mu1 upper 22842 and mu1+mu2 upper 45684",
+      "at least M-15 locator rows below D0"
+    ]
+  },
+  "files": {
+    "experimental/notes/thresholds/m31_base_field_full_layer_42.md": "f9edbe214368aa1b01cfc675671169299ecf5beece44485e8019519a089607f2",
+    "experimental/scripts/verify_m31_base_field_full_layer_42.py": "f3802feb2d63a6323bcf5d422d2ea0ee9058be081a7b5c867ebdc0f1df8d8d88",
+    "experimental/data/certificates/m31-base-field-full-layer-42/README.md": "9aa0fa1744cb14957998664a20073cb1542dc3857ef6cc816c1f8f239ff480d1",
+    "experimental/data/certificates/m31-base-field-full-layer-42/expected.txt": "0efbcff5600cc6edc71c993d14c2337c22046bb8a54f8b911a8e855c9c212da2"
+  },
+  "director_replay": {
+    "normal_check": "PASS",
+    "optimized_check": "PASS",
+    "normal_tamper": "PASS_6_OF_6",
+    "optimized_tamper": "PASS_6_OF_6",
+    "exact_monotonicity_comparisons": 19187280
+  },
+  "effect": {
+    "field": "F_p only",
+    "owner": null,
+    "addback": "UNCLAIMED",
+    "quartic_transfer": "UNCLAIMED",
+    "ledger_movement": 0,
+    "accepted_payment": 0,
+    "official_score": "0/2"
+  }
+}

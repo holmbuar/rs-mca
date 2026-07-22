@@ -1,0 +1,256 @@
+{
+  "acceptance_gate": {
+    "additional": 2,
+    "additional_description": "exact bound on the actual C1-complement residual: every surviving key has fiber at most 2",
+    "primary": 4,
+    "primary_description": "statement-changing counterexample/new obstruction floor: residual injectivity fails and the minimal image-normalized loss is exactly 2"
+  },
+  "base": {
+    "fork_main_sha": "4e5f0b77c98f075ea7c8822cd4859847a232bc2a",
+    "upstream_main_sha": "a3017697ad1594521d2779fe1d83bccd45d4c06e"
+  },
+  "computed": {
+    "all_block_swap_fibers_exact": true,
+    "all_doubled_keys_are_block_swaps": true,
+    "all_t_2_21_roots": true,
+    "block_swap_key_count": 384,
+    "c1_owned_support_count": 70,
+    "doubled_residual_key_count": 384,
+    "exponents": [
+      256,
+      536871168,
+      1073742080,
+      1610612992,
+      768,
+      536871680,
+      1073742592,
+      1610613504,
+      1280,
+      536872192,
+      1073743104,
+      1610614016,
+      1792,
+      536872704,
+      1073743616,
+      1610614528
+    ],
+    "first_repeated_key": [
+      826664565,
+      1588616718,
+      1026140363
+    ],
+    "first_repeated_masks": [
+      5903,
+      6128
+    ],
+    "first_repeated_remainder": 5888,
+    "first_repeated_supports": [
+      [
+        0,
+        1,
+        2,
+        3,
+        8,
+        9,
+        10,
+        12
+      ],
+      [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12
+      ]
+    ],
+    "full_histogram": {
+      "1": 12048,
+      "2": 408,
+      "6": 1
+    },
+    "full_image_count": 12457,
+    "full_max_fiber": 6,
+    "full_six_key": [
+      0,
+      4,
+      0
+    ],
+    "full_six_masks": [
+      255,
+      3855,
+      4080,
+      61455,
+      61680,
+      65280
+    ],
+    "full_support_count": 12870,
+    "residual_exact_image_loss": 2,
+    "residual_histogram": {
+      "1": 12032,
+      "2": 384
+    },
+    "residual_image_count": 12416,
+    "residual_loss_one_fails": true,
+    "residual_loss_two_holds": true,
+    "residual_max_fiber": 2,
+    "residual_support_count": 12800,
+    "roots": [
+      434373082,
+      614288294,
+      1713110565,
+      1533195353,
+      1984437538,
+      380812851,
+      163046109,
+      1766670796,
+      1244279234,
+      907334541,
+      903204413,
+      1240149106,
+      2066813671,
+      1590029158,
+      80669976,
+      557454489
+    ],
+    "roots_nodup": true,
+    "t4_prefix_keys": [
+      [
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        2,
+        0
+      ],
+      [
+        0,
+        2,
+        0
+      ]
+    ],
+    "t4_values": [
+      1884637334,
+      51044589,
+      1916935773,
+      116752674
+    ]
+  },
+  "date": "2026-07-21",
+  "domain": {
+    "antipodal_pairs": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        4,
+        6
+      ],
+      [
+        5,
+        7
+      ],
+      [
+        8,
+        10
+      ],
+      [
+        9,
+        11
+      ],
+      [
+        12,
+        14
+      ],
+      [
+        13,
+        15
+      ]
+    ],
+    "base_exponents": [
+      256,
+      768,
+      1280,
+      1792
+    ],
+    "field_prime": 2147483647,
+    "generator": {
+      "im": 1288490189,
+      "re": 1717986917
+    },
+    "group_order": 2147483648,
+    "t4_block_masks": [
+      15,
+      240,
+      3840,
+      61440
+    ],
+    "translate_step": 536870912
+  },
+  "files": {
+    "certificate": "experimental/data/certificates/m31-c9-scale16-residual-max-fiber/m31_c9_scale16_residual_max_fiber.json",
+    "lean_module": {
+      "path": "experimental/lean/sidon_effective_image/SidonEffectiveImage/M31C9ScaleStep.lean",
+      "sha256": "12abfc99e6a6c053ce4600699d690c351b8753b2206120b438cc20293b5f5a3f"
+    },
+    "verifier": "experimental/scripts/verify_m31_c9_scale16_residual_max_fiber.py"
+  },
+  "imported_api_blobs": [
+    {
+      "fork_main_blob": "9fb097e23d00e2f3ee3afeda021b86ba4192d2a4",
+      "path": "experimental/lean/asymptotic_spine/AsymptoticSpine/EffectiveClosure.lean",
+      "upstream_main_blob": "9fb097e23d00e2f3ee3afeda021b86ba4192d2a4"
+    },
+    {
+      "fork_main_blob": "deda34063f4629e245c37ba03e3cb3ab70502570",
+      "path": "experimental/lean/asymptotic_spine/AsymptoticSpine/UniformClosedLedger.lean",
+      "upstream_main_blob": "deda34063f4629e245c37ba03e3cb3ab70502570"
+    },
+    {
+      "fork_main_blob": "7e21ff098567d26aba7330fbb2722d5cb952fb09",
+      "path": "experimental/lean/m31_q_rooted_shell/M31QRootedShell/Deployed.lean",
+      "upstream_main_blob": "7e21ff098567d26aba7330fbb2722d5cb952fb09"
+    }
+  ],
+  "packet_id": "m31-c9-scale16-residual-max-fiber-v1",
+  "repository": "holmbuar/rs-mca",
+  "row_contract": {
+    "B_star": 16777215,
+    "agreement": 1116023,
+    "deployed_complement_weight": 981129,
+    "deployed_length": 2097152,
+    "object": "OTHER: exact C9/Q support fiber",
+    "prefix_depth": 67447,
+    "row": "Mersenne-31 list auxiliary stress-test calibration",
+    "target_epsilon": "2^-100",
+    "workboard_item": "T"
+  },
+  "schema_version": 1,
+  "slice": {
+    "ambient_dimension": 16,
+    "weight": 8
+  },
+  "source_labels": [
+    "experimental/grande_finale.tex:def:primitive-q",
+    "experimental/grande_finale.tex:lem:newton-equivalence",
+    "experimental/grande_finale.tex:eq:profile-envelope",
+    "experimental/grande_finale.tex:lem:profile-multiplicity",
+    "experimental/grande_finale.tex:hyp:ray-compiler",
+    "experimental/notes/frontier-adjacent/four_row_exact_completion_compiler_v1.md:Section 4"
+  ],
+  "terminal": "M31_C9_SCALE16_T4_BLOCK_SWAP_RESIDUAL_LOSS_2"
+}

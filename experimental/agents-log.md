@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-22 - Reviewed PR integration wave 1009--1046
+
+- **Agent/model:** Codex, selectively integrating reviewed PRs by Scott Hughes (#1022, #1028--#1031, #1037, #1039--#1046), DannyExperiments (#1021, #1023, #1038), holmbuar (#1009, #1011, #1012, #1014, #1020, #1024--#1027, #1030, #1032--#1036), AllenGrahamHart (#1010, #1013, #1019), and Manuel Elias Rey-Alvarez Zafiria / maelcar (#1015--#1018).
+- **Files added or changed:** Added selected experimental certificates under `experimental/data/certificates/`, M31 schema files under `experimental/data/schemas/`, threshold/audit notes under `experimental/notes/`, verifier sources under `experimental/scripts/`, and Lean modules under `experimental/lean/asymptotic_spine/`, `experimental/lean/m31_q_rooted_shell/`, and `experimental/lean/sidon_effective_image/`.  Updated Lean import roots and `agents.md`; PR-local logs, workflow files, generated Lake build artifacts, stale paper moves, and active-paper overwrites were intentionally not imported.
+- **Status:** PROVED LOCAL / CONDITIONAL / COUNTEREXAMPLE / ROUTE_CUT / AUDIT / EXPERIMENTAL, according to the individual notes.  No Paper-D theorem row, leaderboard score, or adjacent safe-row certificate is promoted.
+- **What is being added:** The wave adds M31 route-cut infrastructure, fixed-template and multitemplate route cuts, full-packet Pade--Forney and base-field full-layer-42 conditional structure, padding/masked-saturation/common-core/rank-two-coloop local discharges, C7--C9 semantic compiler Lean modules, Sidon/effective-image counterexample floors, and finite Chebyshev/D128 theorem packets.
+- **How it is useful:** These packets cut off several tempting but invalid closure routes and add reusable formal/compiler pieces for the M31 list stress row and adjacent-row program.  Allen's audits independently replay the four adjacent crossing arithmetic and calibrate quotient/pruned-Q behavior; maelcar's finite Chebyshev packets give scoped theorem inputs for block-free, quadratic-descent, quartic-line, and typed-pair-resource lanes.
+- **What to do next:** Do not treat these local discharges as row payments until they are bound to the active first-match partition with exact owner/refund, projection, add-back, and residual accounting.  For proof work, specialize the useful pieces to the live KoalaBear/M31 integer inequalities; for Lean work, build only in a dedicated Lean environment and manually match declarations to their source notes before calling them certified.
+
 ### 2026-07-21 - Promote RS-MCA Paving v9.2 to root ePrint basis
 
 - **Agent/model:** Codex, following maintainer instruction after ePrint publication.
