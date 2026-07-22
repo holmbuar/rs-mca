@@ -1,0 +1,23 @@
+{
+  "algorithm": "sha256",
+  "excluded": [
+    "experimental/data/certificates/kb-uq-boundary-prefix-tangent-rooted-shell-v1/hashes.json"
+  ],
+  "files": {
+    "PR_BODY.md": "7ee36ed30beb11b96183e7770e0791c05daf2b037d5f0ecb0a7bf5a39efa26a3",
+    "experimental/agents-log-entry-gptpro-kb-uq-boundary-prefix.md": "f3aed8fde5c7560dd550209c1a36d2aeaa6ef84d30e37cb1196d6a546b9a4220",
+    "experimental/agents-log-kb-uq-boundary-prefix.patch": "a67264cbc2f50fe7f4a94c64c89818d41197d18a182fe104e4afef8fd8445c33",
+    "experimental/data/certificates/kb-uq-boundary-prefix-tangent-rooted-shell-v1/README.md": "d532366d6b9117d2b60a3df084d6ce20d287fd9e2d948dd7beff89c25315e145",
+    "experimental/data/certificates/kb-uq-boundary-prefix-tangent-rooted-shell-v1/manifest.json": "c83c9be6bfb589d86320d534d67b423f0a1c02e1e949100d419f4d445e10a152",
+    "experimental/data/certificates/kb-uq-boundary-prefix-tangent-rooted-shell-v1/round1_row_manifest.json": "574c6fd6d3a993260e2dc947235a92a56189e4197c069c3ff24b962944dda5c1",
+    "experimental/lean/kb_uq_boundary_prefix/.gitignore": "5375c2c5e323f40c0031aa8c82f66bb9197214001039e6a8c9ff2a5eb3aa24a9",
+    "experimental/lean/kb_uq_boundary_prefix/CORRESPONDENCE.md": "f361add045a3ce36793543eb62ec55f68de0ccc1b6acf1094b0d1ac9639a03be",
+    "experimental/lean/kb_uq_boundary_prefix/KbUqBoundaryPrefix.lean": "4e7514e488afcde46a9f834f12479c7c80be3104dd7e6e659311ef61d0deae3d",
+    "experimental/lean/kb_uq_boundary_prefix/README.md": "429edbb986defe7db2de16d3d4acb598e4153980a8aca609e8cc8def8a5cb73a",
+    "experimental/lean/kb_uq_boundary_prefix/lake-manifest.json": "86332296c899d5b6d4d2bab4fdde8b4390c271fd5b2f0e43f64813535189b378",
+    "experimental/lean/kb_uq_boundary_prefix/lakefile.lean": "c35d2aef5445e70ec6f2d3e35474bdd0aeedc3dae8175552319f8ee811afa0cb",
+    "experimental/lean/kb_uq_boundary_prefix/lean-toolchain": "efac0b94923b2d8b6840cd35be9177ad0fc5ab2332f4f4311c98712cee92fdee",
+    "experimental/notes/frontier-adjacent/kb_uq_boundary_prefix_tangent_rooted_shell_v1.md": "09d6ced30841ce54c56f495dec6001b039af5e0cdc7c302af9b16cd03b08986a",
+    "experimental/scripts/verify_kb_uq_boundary_prefix_tangent_rooted_shell_v1.py": "55c81598b3a212cc4c50f96ca85cbb69d88809c358819c9e61e6399776ad3535"
+  }
+}
