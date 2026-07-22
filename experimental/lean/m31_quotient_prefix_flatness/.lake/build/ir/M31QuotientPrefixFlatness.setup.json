@@ -1,9 +1,0 @@
-{"plugins": [],
- "package": "m31QuotientPrefixFlatness",
- "options": {},
- "name": "M31QuotientPrefixFlatness",
- "isModule": false,
- "importArts":
- {"M31QuotientPrefixFlatness.T64Witness":
-  ["/Users/tor/src/wt-ship-t64/experimental/lean/m31_quotient_prefix_flatness/.lake/build/lib/lean/M31QuotientPrefixFlatness/T64Witness.olean"]},
- "dynlibs": []}
