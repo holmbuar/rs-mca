@@ -8,7 +8,7 @@ from pathlib import Path
 P=2**31-1; S2048=pow(2,-2047,P); S32=pow(2,-63,P)
 BASE="d968e1cb9a3a6dbcfba35ecf9f448b4a373a35bb"
 UPSTREAM="71f64349a8fa8cbf05678a6e9d4e00e8e06d7de5"
-BRANCH="gptpro/m31-flatness-keystone-s3"
+BRANCH="agent/m31-t32-skeleton-cap"
 CERT=Path("experimental/data/certificates/m31-t32-skeleton-flatness-keystone-v1/m31_t32_skeleton_flatness_keystone.json")
 FILES=[
  "experimental/notes/thresholds/m31_t32_skeleton_flatness_keystone.md",
