@@ -1,0 +1,27 @@
+python3 experimental/scripts/verify_pole_tolerant_scalar_locator_localization.py --check
+PASS certificate, manifest, source pin, audit scope, and nonclaims
+PASS pole-tolerant localization and exact-locator cancellation fixtures
+PASS extra-root guard and exhaustive g=m boundary
+PASS deployed constants; no deployed payment claimed
+RESULT: PASS (138 checks)
+
+python3 -O experimental/scripts/verify_pole_tolerant_scalar_locator_localization.py --check
+PASS certificate, manifest, source pin, audit scope, and nonclaims
+PASS pole-tolerant localization and exact-locator cancellation fixtures
+PASS extra-root guard and exhaustive g=m boundary
+PASS deployed constants; no deployed payment claimed
+RESULT: PASS (138 checks)
+
+python3 experimental/scripts/verify_pole_tolerant_scalar_locator_localization.py --tamper-selftest
+PASS tamper rejected: source pin
+PASS tamper rejected: theorem set
+PASS tamper rejected: nonclaim
+PASS tamper rejected: M31 agreement
+RESULT: PASS (4/4 mutations rejected)
+
+python3 -O experimental/scripts/verify_pole_tolerant_scalar_locator_localization.py --tamper-selftest
+PASS tamper rejected: source pin
+PASS tamper rejected: theorem set
+PASS tamper rejected: nonclaim
+PASS tamper rejected: M31 agreement
+RESULT: PASS (4/4 mutations rejected)

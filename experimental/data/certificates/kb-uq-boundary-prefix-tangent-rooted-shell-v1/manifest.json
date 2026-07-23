@@ -1,0 +1,186 @@
+{
+  "architecture_id": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1",
+  "compiler": {
+    "U_Q_sparse": 400388953453,
+    "U_Q_uniform": 400389155870,
+    "ceil_X_over_Q": 57198030366,
+    "column_far_formula": "1 + b*981104 + floor(c*(C(n,a)-1)/p^w)",
+    "floor_7X_over_Q": 400386212557,
+    "floor_7Xm1_over_Q": 400386212557,
+    "floor_X_over_Q": 57198030365,
+    "partial_total": 400390136974,
+    "pruning_dividend": 202417,
+    "remaining_reserve": 274980327721258113,
+    "sparse_formula": "b*913632 + floor(c*C(n,a)/p^w)",
+    "sparse_shell_count": 913632
+  },
+  "conditional_hypothesis": {
+    "b": 3,
+    "c": 7,
+    "column_far_root": "selected support of public-order first slope in nonempty Z_Q; root slope removed",
+    "column_far_shell_range": [
+      1,
+      981104
+    ],
+    "name": "KB_TANGENT_ROOTED_Q_SHELL",
+    "non_column_far_root": "public-order first a-subset of D\\Sigma after the one frozen translation",
+    "non_column_far_shell_range": [
+      67473,
+      981104
+    ],
+    "pointwise": "p^w * max(d_e-b,0) <= c * C(a,e) * C(t,e)",
+    "prefix_depth_w": 67471,
+    "scale": "p^w"
+  },
+  "impact": "BANKABLE_ATOM",
+  "independent_replay": {
+    "H_w1_bit_length": 721939,
+    "H_w1_decimal_sha256": "a3d7f5cb854cdbf23260eac5d24bf2c8223a9176011d08ec89590b7b537ef90b",
+    "Q_bit_length": 2090838,
+    "Q_decimal_sha256": "f3cd891754f52acf2ea27de139afeccf396336284d1bb321a9a8bf4b6af9406f",
+    "X_bit_length": 2090874,
+    "X_decimal_sha256": "e2a3e4a63e81ffc3388cf4f33a6592b7ced29f14219b74d5c6d67e9b5036e066",
+    "nonzero_binomial_prime_factors": 105726,
+    "prime_count_to_n": 155611,
+    "remainder_decimal_sha256": "eab3fa93125841b71210ec5881d434852033524e3e72ea9fed7aab3a91c8c465",
+    "shell_monotonicity_margin": 953462079457
+  },
+  "nonclaims": [
+    "A1_UNCONDITIONAL_Q",
+    "A2_UNCONDITIONAL_CAP",
+    "REFUND_REORDER",
+    "ROW_REFUTATION",
+    "BC_PAYMENT",
+    "COMPLEMENT_ZERO",
+    "ROW_CLOSURE",
+    "ENDPOINT_MOVE",
+    "LEGACY_M1_TRANSPORT"
+  ],
+  "owner_order": [
+    "SOURCE_COORDINATE_TANGENT_IMAGE",
+    "ACTIVE_V4_BOUNDARY_PREFIX_Q",
+    "ACTIVE_V4_BALANCED_CORE",
+    "UNPAID_V4_COMPLEMENT"
+  ],
+  "partition_sha256": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc",
+  "round1": {
+    "U_paid": 981104,
+    "head_sha": "c15927c90091602035f617226da9ecf03cfc7316",
+    "lean_blob": "3c0a7c4e24478a6517da628406e0b2df24a06e9a",
+    "local_frozen_row_manifest": "experimental/data/certificates/kb-uq-boundary-prefix-tangent-rooted-shell-v1/round1_row_manifest.json",
+    "manifest_blob": "c29987f43f7526aacbbf4c238ee6887687876879",
+    "note_blob": "c17d8f0f2f72450ebda548089bb8274300e5c8d8",
+    "reserve": 274980728110413983,
+    "row_manifest_blob": "15731acc39a4cc38d8175fd09535b149490f8551",
+    "upstream_pr": 1049
+  },
+  "row_contract": {
+    "B_star": 274980728111395087,
+    "agreement": 1116048,
+    "base_prime": 2130706433,
+    "extension_degree": 6,
+    "field_cardinality": "93571093019388561295270373781649880353786165192103559169",
+    "k": 1048576,
+    "n": 2097152,
+    "object": "MCA",
+    "quantifier": "UNIFORM_OVER_ALL_ADMISSIBLE_RECEIVED_LINES",
+    "row": "KoalaBear MCA at 2^-128",
+    "t": 981104,
+    "target_epsilon": "2^-128",
+    "unit": "DISTINCT_BAD_FINITE_SLOPES_PER_RECEIVED_LINE"
+  },
+  "schema": "rs-mca-kb-uq-boundary-prefix-tangent-rooted-shell-v1",
+  "source_bindings": [
+    {
+      "anchors": [
+        "K2",
+        "exact bankability contract"
+      ],
+      "blob": "30d8b9f1b4caa3c7504fe3d24fc7ce8da84de434",
+      "path": "agents.md",
+      "ref": "c49e45eed71af9c24e3599c2fca3b76e02692be9"
+    },
+    {
+      "anchors": [
+        "thm:exact-sparsification",
+        "sec:primitive-leaf",
+        "eq:exact-power-sum-map",
+        "def:primitive-q",
+        "thm:canonical-partial-occupancy-atlas",
+        "PO6"
+      ],
+      "blob": "8a5d9791900ca9eed773feba146b92ad296704ce",
+      "path": "experimental/grande_finale.tex",
+      "ref": "c49e45eed71af9c24e3599c2fca3b76e02692be9"
+    },
+    {
+      "anchors": [
+        "prop:q-boundary-divisor",
+        "conj:q-active",
+        "rem:q-not-proved"
+      ],
+      "blob": "53e69c9c1915400f6122d57da49cce7120a9819d",
+      "path": "experimental/grande_finale_work/q_section.tex",
+      "ref": "c49e45eed71af9c24e3599c2fca3b76e02692be9"
+    },
+    {
+      "anchors": [
+        "prop:gf-bc-slope-elimination",
+        "prop:gf-bc-boundary-is-q"
+      ],
+      "blob": "a97fa32e13077deb757d465fb4a7a777368653e0",
+      "path": "experimental/grande_finale_work/bc_section.tex",
+      "ref": "c49e45eed71af9c24e3599c2fca3b76e02692be9"
+    },
+    {
+      "anchors": [
+        "thm:exact-sparsification",
+        "SP3"
+      ],
+      "blob": "01302a797c502a05ed0b11ba949b8756e0aa2b22",
+      "path": "experimental/rs_mca_thresholds.tex",
+      "ref": "c49e45eed71af9c24e3599c2fca3b76e02692be9"
+    },
+    {
+      "anchors": [
+        "mcaBad_sub_mem_iff",
+        "exact_sparsification_challenge"
+      ],
+      "blob": "b4a89c7aa45fc068c010ebed9cd96073e6a2ec03",
+      "path": "experimental/lean/rs_mca_thresholds/RsMcaThresholds/ExactSparsification.lean",
+      "ref": "c49e45eed71af9c24e3599c2fca3b76e02692be9"
+    },
+    {
+      "anchors": [
+        "mcaBad_has_exact_support",
+        "rsMcaBadSlopes_eq_exactCardWitnessSlopeImage"
+      ],
+      "blob": "72eb087e6a2fbf1d269ebbcefd9a0453e8dd9fb5",
+      "path": "experimental/lean/grande_finale/GrandeFinale/RSExactCardWitnessBridge.lean",
+      "ref": "c49e45eed71af9c24e3599c2fca3b76e02692be9"
+    },
+    {
+      "anchors": [
+        "assignedResidualSupports",
+        "firstMatchSlopeCell_card_le_boundaryRayMomentBudget"
+      ],
+      "blob": "013c33dc3206a64c650b95f8ab1d0bbcaa4d801c",
+      "path": "experimental/lean/grande_finale/GrandeFinale/RSExactCardBoundaryPaymentBridge.lean",
+      "ref": "c49e45eed71af9c24e3599c2fca3b76e02692be9"
+    }
+  ],
+  "status": "CONDITIONAL",
+  "viable_window": {
+    "b_max_at_c0": 280276839265,
+    "b_max_at_c_max": 54192,
+    "c_max_at_b0": 4807520,
+    "corner_cap": 274980728110019048,
+    "corner_remaining": 394935,
+    "inequality": "1+b*t+floor(c*(X-1)/p^w) <= reserve",
+    "next_b_cap": 274980728111000152,
+    "next_b_excess": 586169,
+    "next_c_cap": 274980732140061446,
+    "next_c_excess": 4029647463
+  },
+  "workboard_item": "K2"
+}

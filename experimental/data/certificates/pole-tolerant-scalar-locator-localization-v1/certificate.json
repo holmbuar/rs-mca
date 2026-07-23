@@ -1,0 +1,46 @@
+{
+  "audit": {
+    "conversation_id": "6a600aa4-d744-83ec-9d85-b3c588daa00f",
+    "packet_sha256": "bbf233bb0c29701e840c881cf0a2a888a80442c94123dc817339fd7a724df0c0",
+    "public_text_sha256": "6e0ea5e0cabdca117aee894dbbc2264f1c2d82e0b2b7da48cc8158e0906e1f8f",
+    "verdict": "ACCEPT_NARROWED"
+  },
+  "author_repair": {
+    "archive_sha256": "12389f7fbe6064e1e6f964597212f2603cc081808995a4192958be637e476c20",
+    "verdict": "REPAIR"
+  },
+  "base": {
+    "commit": "fb6d9555339b43911c59c498373c43ed6c5cd391",
+    "tree": "fa7b8d86cb5b65fed52e427648161a9397f19670"
+  },
+  "deployed_rows": {
+    "koalabear_mca": {
+      "budget": 274980728111395087,
+      "k": 1048576,
+      "m": 1116048,
+      "n": 2097152
+    },
+    "mersenne31_mca": {
+      "budget": 16777215,
+      "k": 1048576,
+      "m": 1116024,
+      "n": 2097152
+    }
+  },
+  "nonclaims": [
+    "NO_ACTIVE_V4_FIRST_MATCH_ADAPTER",
+    "NO_CAP25_OR_CA_IMPORT",
+    "NO_DEPLOYED_LEDGER_PAYMENT",
+    "NO_ENDPOINT_CLOSURE",
+    "NO_OFFICIAL_SCORE_MOVEMENT",
+    "NO_PRESERVATION_OF_MCA_NONTRIVIALITY_AFTER_CANCELLATION"
+  ],
+  "schema": "pole-tolerant-scalar-locator-localization-v1",
+  "source_pins": {
+    "experimental/grande_finale.tex": "8a5d9791900ca9eed773feba146b92ad296704ce"
+  },
+  "theorems": [
+    "POLE_TOLERANT_EXCLUSIVE_LOCALIZATION",
+    "EXACT_LOCATOR_COMMON_POLE_CANCELLATION"
+  ]
+}

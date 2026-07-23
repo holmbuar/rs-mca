@@ -1,0 +1,41 @@
+{
+  "schema": "base-field-coordinate-span-confinement-v1",
+  "source": {
+    "commit": "fb6d9555339b43911c59c498373c43ed6c5cd391",
+    "tree": "fa7b8d86cb5b65fed52e427648161a9397f19670"
+  },
+  "bindings": {
+    "note_sha256": "2847ac634852529804b87dea54d07d530e7c81b0d3ad8be6f26040a8407c8ef2"
+  },
+  "audit": {
+    "verdict": "ACCEPT_NARROWED",
+    "packet_sha256": "fec01fd7f9350f02f4c1a3ef31ea7899d77d365bc21183799c411e8ed0e979ec",
+    "public_text_sha256": "f6456d6fec2ca247b75be89f335d8544eb5588d13a2b60137d8dddcc1d2d97f4",
+    "author_repair_sha256": "fa90f2e10fde920d293f7947f027ba02159f9863c8aa3e62975a1f77ba609f86"
+  },
+  "koalabear": {
+    "p": 2130706433,
+    "field_size": 93571093019388561295270373781649880353786165192103559169,
+    "n": 2097152,
+    "k": 1048576,
+    "agreement": 1116048,
+    "support_cap": 981104,
+    "budget": 274980728111395087,
+    "projective_rank_one_cap": 2130706434,
+    "secant_margin": 274980725980688653,
+    "rank_12_raw": 4539909903627583490,
+    "radial_threshold": 129056130,
+    "paid_at_threshold": 274980726538140422,
+    "paid_margin": 1573254665,
+    "failed_at_next": 274980728668846856,
+    "next_excess": 557451769
+  },
+  "nonclaims": [
+    "no KoalaBear numerator inequality",
+    "no uniform radial occupancy theorem",
+    "no higher-rank tangent bound",
+    "no rank-one-disjoint-plane bound",
+    "no active-ledger payment",
+    "no endpoint or official score movement"
+  ]
+}

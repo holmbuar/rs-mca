@@ -1,0 +1,417 @@
+{
+  "B_star": 16777215,
+  "active_profile": {
+    "Q_prime_size": 1022,
+    "active_fold_labels": [
+      778433895,
+      778433895,
+      778433895,
+      778433895,
+      173262001,
+      173262001,
+      173262001,
+      173262001
+    ],
+    "active_four_subset_indices": [
+      0,
+      1,
+      4,
+      5
+    ],
+    "active_roots": [
+      434373082,
+      614288294,
+      1713110565,
+      1533195353,
+      1984437538,
+      380812851,
+      163046109,
+      1766670796
+    ],
+    "c": 2048,
+    "h": 2,
+    "m_complete": 479,
+    "punctured_labels": [
+      778433895,
+      173262001
+    ],
+    "punctured_reps": [
+      1,
+      3
+    ],
+    "r_err": 137,
+    "u": 0,
+    "v": 1
+  },
+  "activity": "FALSIFY",
+  "agreement": 1116023,
+  "architecture": "DIRECT_PINNED_C2048_U0_V1_QUOTIENT_PROFILE",
+  "atom_or_cell": "Q / fixed-template quotient-prefix family",
+  "base_sha": "c49e45eed71af9c24e3599c2fca3b76e02692be9",
+  "branch": "gptpro/m31-quotient-prefix-flatness",
+  "direct_statement": "At deficiency e=64 the anchor has d_64(A)>=6 while floor(4*H_64/p^32)=0, so p^32*(d_64(A)-3)_+>4*H_64.",
+  "field": {
+    "monic_T2048_scale": 1073741824,
+    "norm_one_generator": [
+      1717986917,
+      1288490189
+    ],
+    "p": 2147483647,
+    "p_power_32": 41855804344513474996659235398101492226513356497450298740932889847998693318143069882098996132602011303952349637025722282585533160693229396196872386718816372844518146497415885223313922264348563527038409009746582412510577609691239404142296725925022012935690228019787759005225367255740944911962461962241
+  },
+  "nonclaims": [
+    "No row-global U_Q integer is banked.",
+    "No received-word or exact-boundary codeword family is constructed.",
+    "No first-match survival after a T64 quotient owner is claimed.",
+    "No slope or ray projection is claimed.",
+    "No rigidity statement for any e is proved.",
+    "No (6+4) or other replacement shell hypothesis is proved.",
+    "No adjacent-row certificate or safe agreement is claimed."
+  ],
+  "object": "LIST",
+  "partition_digest": "N/A; fixed local profile, no row atom banked",
+  "projection_and_unit": "479-subsets of the 1022-point quotient domain per first-32 locator coefficient target; no codeword, ray, or slope projection.",
+  "quantifier": "Existential target eta and anchor A in the pinned punctured quotient domain, with six explicitly listed same-prefix neighbors.",
+  "quotient_parameterization": {
+    "formula": "q_r = 2^(-2047) * Re(g^(r*2^19)) mod p, r odd, 1<=r<=2047",
+    "punctured_label_sha256": "6acc2ac34675e1dc0bece06fa2041038fe0ec0b1c7337cb30b6703add191134c",
+    "punctured_rep_set": "all odd r in [1,2047] except 1 and 3",
+    "quotient_label_sha256": "082950c9e4f02d32329b2c49353c53a4b63c15aa54f461941fc78903be44fe55",
+    "rep_set": "all odd integers r with 1<=r<=2047"
+  },
+  "recalibration": {
+    "coefficient_c": 4,
+    "conditional_b6_c4_reserve_below_B_star": 2318056,
+    "conditional_b6_c4_rooted_shell_total": 14459159,
+    "intercepts_refuted_by_witness": [
+      3,
+      4,
+      5
+    ],
+    "minimum_intercept_not_refuted_by_the_six_listed_neighbors": 6,
+    "warning": "(6+4) is only an arithmetically viable successor.  This packet does not prove its pointwise shell hypothesis, and any actual d_64(A)>6 could raise the required intercept."
+  },
+  "row": "Mersenne-31 list at 2^-100",
+  "schema": "m31-quotient-prefix-flatness-t64-witness-v1",
+  "shell_arithmetic": {
+    "H_64": 586374616784432967317447344396311850952251481404090129066339701269086144611744331859382537679275957595113162682732279972248681107329260801825759429939073953027297000,
+    "floor_four_H_64_over_p32": 0,
+    "four_H_64": 2345498467137731869269789377585247403809005925616360516265358805076344578446977327437530150717103830380452650730929119888994724429317043207303037719756295812109188000,
+    "strict_margin": 125567413033540424989977706194304476679540069492350896222798669543996079954429209646296988397806033911857048911077166847756599482079685843092150022424579848744176854244843846664016150432529425222310150684661300260204295298923001108596509725124335109687181689334933959972468798729503078440075276698723,
+    "three_p32": 125567413033540424989977706194304476679540069492350896222798669543996079954429209646296988397806033911857048911077166847756599482079688188590617160156449118533554439492247655669941766793045690581115227029239747237531732829073718212426890177775066038807070684059363277015676101767222834735887385886723,
+    "violation_lhs_lower_bound": 125567413033540424989977706194304476679540069492350896222798669543996079954429209646296988397806033911857048911077166847756599482079688188590617160156449118533554439492247655669941766793045690581115227029239747237531732829073718212426890177775066038807070684059363277015676101767222834735887385886723,
+    "witness_threshold": 4
+  },
+  "source_blob_pins": {
+    "agents.md": "30d8b9f1b4caa3c7504fe3d24fc7ce8da84de434",
+    "experimental/grande_finale.tex": "8a5d9791900ca9eed773feba146b92ad296704ce",
+    "experimental/notes/thresholds/m31_c2048_fixed_template_interleaved_quotient_route_cut.md": "3f69250b63b861963da03759b46d726f3e8754d1",
+    "experimental/notes/thresholds/m31_c2048_guarded_support_flat_separator.md": "8de0d71a7d01070035711fdc33965f7f6ab8c3ce",
+    "experimental/notes/thresholds/m31_c2048_partial_occupancy_30carrier_reduction.md": "7460c0830ac5d47db9f96e6f74f2a42d89ff8cbb",
+    "experimental/notes/thresholds/m31_c2048_vt_multitemplate_global_rank_route_cut.md": "63418702fee4da749dd87c76821ab820d104cb09",
+    "experimental/notes/thresholds/m31_q_rooted_shell_envelope.md": "45fd288abd2173d06af3fab244ed20568c991607",
+    "experimental/notes/thresholds/sidon_effective_image_mi_ma_c9_rowsharp.md": "ecfdfc5610f27c53fe40bb4d35692374d8af4d62"
+  },
+  "status": "COUNTEREXAMPLE_NEW_FLOOR",
+  "t64_fibers": [
+    {
+      "class": 1,
+      "label_sha256": "808b5d4ca28f2b0536706b80dde1f633a28151f9015d459e61ef783d0ba3999d",
+      "punctured": true,
+      "rep_congruences_mod_64": [
+        1,
+        63
+      ],
+      "tau": 26164677
+    },
+    {
+      "class": 3,
+      "label_sha256": "01d6946790a31ce8f009b1d5ea4b4c14da2f244acd401e72a5414162493af53a",
+      "punctured": true,
+      "rep_congruences_mod_64": [
+        3,
+        61
+      ],
+      "tau": 1580223790
+    },
+    {
+      "class": 5,
+      "label_sha256": "cb8ed706e0748f9fb8ca3190330a4d30bab947e9c23de949bba4127e27b393a6",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        5,
+        59
+      ],
+      "tau": 280947147
+    },
+    {
+      "class": 7,
+      "label_sha256": "e673e61690f3f2f375d3727b247b2cfa35e82ebcea378b984a652d066d6511e8",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        7,
+        57
+      ],
+      "tau": 456695729
+    },
+    {
+      "class": 9,
+      "label_sha256": "b3cf7448d4e299651ea1f7f9cc3e44f0e75508383375afd45c3cd14f1db76980",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        9,
+        55
+      ],
+      "tau": 579625837
+    },
+    {
+      "class": 11,
+      "label_sha256": "f9c0ad3570c5e7c1997402f6efed3498d9a3b2a86535fe64f5c3fc447fa6a329",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        11,
+        53
+      ],
+      "tau": 1013961365
+    },
+    {
+      "class": 13,
+      "label_sha256": "0cae4ddc7d71d9a91a612be00f868b457353b4486bbbc0378ec686b4fb15d454",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        13,
+        51
+      ],
+      "tau": 194696271
+    },
+    {
+      "class": 15,
+      "label_sha256": "f402d5575d527b7e5d8c3192b5122a70b2dd9f1b3de0e10d74f283498899608e",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        15,
+        49
+      ],
+      "tau": 505542828
+    },
+    {
+      "class": 17,
+      "label_sha256": "096ee2313c24debe0428f6c0cea979561c21aa34a2d25c5c06b96e62a8371428",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        17,
+        47
+      ],
+      "tau": 1641940819
+    },
+    {
+      "class": 19,
+      "label_sha256": "45880c833446458d61564516d723933af2cccd30b6bc831c5469c674d4f3a637",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        19,
+        45
+      ],
+      "tau": 1952787376
+    },
+    {
+      "class": 21,
+      "label_sha256": "3e52a01dfef12dc01e5412c05d513db175b8095a4807c120984a242939625418",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        21,
+        43
+      ],
+      "tau": 1133522282
+    },
+    {
+      "class": 23,
+      "label_sha256": "6f28751087e719587b630631cab54616a5cab423e4016c2622bdc592beba13f6",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        23,
+        41
+      ],
+      "tau": 1567857810
+    },
+    {
+      "class": 25,
+      "label_sha256": "f4c9fb91b7a05ea2ff8b665fdc14cc2f7f5ca44b65ec757198b8811351554bd1",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        25,
+        39
+      ],
+      "tau": 1690787918
+    },
+    {
+      "class": 27,
+      "label_sha256": "4b99e78dd26a316ddbc075225883f38072f3875050f7f313772b4e7b7e288f40",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        27,
+        37
+      ],
+      "tau": 1866536500
+    },
+    {
+      "class": 29,
+      "label_sha256": "7ac9dddea0cce0d29c1514febc861dbe629d5781bc4a342ff040f862a5faa7fa",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        29,
+        35
+      ],
+      "tau": 567259857
+    },
+    {
+      "class": 31,
+      "label_sha256": "e9df552607f9ae7131390d1a6eb58714ad028e6764160528c7c370c9643d8b97",
+      "punctured": false,
+      "rep_congruences_mod_64": [
+        31,
+        33
+      ],
+      "tau": 2121318970
+    }
+  ],
+  "target_epsilon": "2^-100",
+  "validation": {
+    "lean_package": "experimental/lean/m31_quotient_prefix_flatness",
+    "python_mutation": "python3 experimental/scripts/verify_m31_quotient_prefix_flatness_t64_witness.py --tamper-selftest",
+    "python_optimized_replay": "python3 -O experimental/scripts/verify_m31_quotient_prefix_flatness_t64_witness.py --check",
+    "python_replay": "python3 experimental/scripts/verify_m31_quotient_prefix_flatness_t64_witness.py --check"
+  },
+  "witness": {
+    "common_full_t64_classes": [
+      15,
+      17,
+      19,
+      21,
+      23,
+      25
+    ],
+    "common_label_sha256": "0acffc6cd015ae3244f53da9d5c7957b97aa2b5d463e20d9879d3838bc1e242b",
+    "common_partial_reps": [
+      27,
+      37,
+      91,
+      101,
+      155,
+      165,
+      219,
+      229,
+      283,
+      293,
+      347,
+      357,
+      411,
+      421,
+      475,
+      485,
+      539,
+      549,
+      603,
+      613,
+      667,
+      677,
+      731,
+      741,
+      795,
+      805,
+      859,
+      869,
+      923,
+      933,
+      987
+    ],
+    "common_partial_t64_class": 27,
+    "common_rep_sha256": "8234d2cb9b1de2c6f09c3db5d813186cc81ddc95ddc71322e8c4b12aef8779b0",
+    "common_size": 415,
+    "deficiency": 64,
+    "eta": [
+      2144970186,
+      693846040,
+      254084710,
+      1501952290,
+      1904231690,
+      558873387,
+      1400618348,
+      1749425225,
+      2110682204,
+      1763030673,
+      102589073,
+      1770388691,
+      971529856,
+      948975681,
+      774218929,
+      1490251835,
+      2095038705,
+      838625156,
+      774891784,
+      644995098,
+      888552471,
+      1685238706,
+      1330006363,
+      1053276022,
+      1544945819,
+      100722017,
+      1420529349,
+      1803184017,
+      1196844108,
+      324775767,
+      591689729,
+      1982980281
+    ],
+    "eta_convention": "For V_E(Y)=Y^479+eta_1 Y^478+...+eta_32 Y^447+..., eta=[eta_1,...,eta_32].",
+    "listed_neighbor_count": 6,
+    "matching_nonleading_coefficients": 63,
+    "rooted_degree_lower_bound": 6,
+    "support_formula": "A=C union C_5; B1=C union C_7; B2=C union C_9; B3=C union C_11; B4=C union C_13; B5=C union C_29; B6=C union C_31",
+    "supports": {
+      "A": {
+        "label_sha256": "00625b95e7f0132d9e346c7fb083db95364d1ecb7750c5511c9e4b4851643156",
+        "moving_t64_class": 5,
+        "rep_sha256": "5cbe18e37147a0ff16821f980dc058cfa813addf71e61ae8a9c89857457c6657",
+        "size": 479
+      },
+      "B1": {
+        "label_sha256": "0bec3329017b3b1906c2636084c0b21ca44c5484d71f0967541b071679eeb27e",
+        "moving_t64_class": 7,
+        "rep_sha256": "0d4bcda49e9f8c2378eaaa2a8203716a5b1e97307c447454a1638c0c33969c37",
+        "size": 479
+      },
+      "B2": {
+        "label_sha256": "ed4b30069fb700f884de8f363ff6c269d6d1bdf10e6574c8d9a5dccef3ed866e",
+        "moving_t64_class": 9,
+        "rep_sha256": "805f402ff29ecd8c938f8f70346e33e6fa6ded62bd85ac2e8253a2b2de700535",
+        "size": 479
+      },
+      "B3": {
+        "label_sha256": "6566f196821b0a4409f8e37308362445f091a2f014f4e575766a7fe078a1c6ac",
+        "moving_t64_class": 11,
+        "rep_sha256": "ca2bd1c038916b219d784723c9ef44e543039c94c2724cc8992df253dbdc462b",
+        "size": 479
+      },
+      "B4": {
+        "label_sha256": "1090895c4eee40f515bd4eea405b4b4dbed4d6a1473552418b2b6b4371596cf4",
+        "moving_t64_class": 13,
+        "rep_sha256": "720e4f7d1f3384514d58cb3f30b802f5b367a9cc5938e3bc71c28992d2c1fd73",
+        "size": 479
+      },
+      "B5": {
+        "label_sha256": "9c9bfb928049ce52a68dfe28e4e04c7fd1f73dde9034905ef8b5966f2b967067",
+        "moving_t64_class": 29,
+        "rep_sha256": "78ce57cbac0611632711986de4b0b54d1a0b795a96d22ef1fdb9597722f09891",
+        "size": 479
+      },
+      "B6": {
+        "label_sha256": "62cc0a07f30aa987653418e45b54c9bae233bfcf7b74f3d3c49bf4197ab292a4",
+        "moving_t64_class": 31,
+        "rep_sha256": "fc095bc9cbe4ced7a231e4329b6c4d741f2c53400e81fb193c7945b5bef6ad56",
+        "size": 479
+      }
+    }
+  },
+  "workboard_item": "M1"
+}

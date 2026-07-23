@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-23 - Reviewed PR integration wave 1047--1069
+
+- **Agent/model:** Codex, selectively integrating reviewed PRs by Holm Buar (#1047--#1049, #1054--#1057), AllenGrahamHart with Claude Fable 5 (#1050), Vadim Avdeev (#1063), DannyExperiments (#1067, #1069), and Scott Hughes (#1052, #1058--#1061, #1064--#1066, #1068 through the cumulative #1068 stack).
+- **Files added or changed:** Added KoalaBear frontier-adjacent tangent/Q notes, manifests, schemas, Lean skeletons, and local verifiers; added M31 list/quotient/profile route-cut notes, exact-data packets, schemas, Lean modules, Sage/C++ sources, and verifier scripts under `experimental/`; added the M31 post-Johnson conversion contract; added singleton-MASTER route-cut material; added Danny's pole-tolerant scalar-locator and base-field coordinate-span local theorem packets; and added Allen's WCL ten-slot contributor-request register. PR-local `agents.md` rewrites, root `PR_BODY.md`, and standalone per-PR log fragments were intentionally not imported.
+- **Status:** PROVED LOCAL / CONDITIONAL / COUNTEREXAMPLE_NEW_FLOOR / ROUTE_CUT / AUDIT / EXPERIMENTAL, according to the individual notes. No adjacent safe-row certificate, Paper-D theorem promotion, leaderboard endpoint movement, or official score movement is claimed.
+- **What is being added:** The batch banks a KoalaBear tangent-source local payment and a conditional tangent-rooted Q-shell cap; records M31 quotient T64/T16 support-level counterexample floors; fixes the exact M31 post-Johnson conversion contract needed for beyond-Johnson list work; adds singleton-MASTER factorization/source-entry route cuts; adds M31 LIST v4/rank-six/rank-seven route-cut infrastructure narrowing the rank-seven obstruction to the printed middle interval; and adds two local MCA syndrome-line tools from Danny.
+- **How it is useful:** These packets make future KoalaBear and M31 adjacent-row work more mechanical by naming the remaining residuals instead of hiding them inside point estimates. The list-side additions are especially relevant to the repository goal of deriving or refuting RS list-decoding improvements beyond Johnson from CA/MCA-style bounds.
+- **What to do next:** Independently replay any verifier before promotion; bind local payments to the active first-match partition before treating them as row atoms; finish the missing KoalaBear Q/BC/residual upper ledgers; decide the M31 list middle interval and rank-at-least-eight branches; and keep draft PRs or superseded local packets out of theorem papers until split, audited, or explicitly promoted.
+
 ### 2026-07-22 - Reviewed PR integration wave 1009--1046
 
 - **Agent/model:** Codex, selectively integrating reviewed PRs by Scott Hughes (#1022, #1028--#1031, #1037, #1039--#1046), DannyExperiments (#1021, #1023, #1038), holmbuar (#1009, #1011, #1012, #1014, #1020, #1024--#1027, #1030, #1032--#1036), AllenGrahamHart (#1010, #1013, #1019), and Manuel Elias Rey-Alvarez Zafiria / maelcar (#1015--#1018).

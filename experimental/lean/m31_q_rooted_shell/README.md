@@ -1,8 +1,10 @@
 # M31 Q rooted-shell Lean package
 
 This is the stdlib-only Lean validation package for
-`experimental/notes/thresholds/m31_q_rooted_shell_envelope.md` and
-`experimental/notes/thresholds/m31_q_three_plus_seven_multiplicative_counterexample.md`.
+`experimental/notes/thresholds/m31_q_rooted_shell_envelope.md`,
+`experimental/notes/thresholds/m31_q_three_plus_seven_multiplicative_counterexample.md`,
+`experimental/notes/thresholds/m31_q_semantic_owner_shell.md`, and
+`experimental/notes/thresholds/m31_q_deployed_owner_profiles.md`.
 
 ## Scope
 
@@ -18,20 +20,56 @@ The package kernel-checks:
   that support-level dihedral and planted-core pruning does not imply `3+7`:
   the retained fifteen-support target has trivial support stabilizers and empty
   common core, but one rooted shell has degree ten and exact violation margin
-  `97,867`.
+  `97,867`;
+- the semantic successor interface: one executable C1--C8 owner function fixed
+  before the line, the full
+  line/explanation/witness/codeword-ray/distinct-slope chain, separate
+  natural-prefix and slope-sampling denominators, and exact line-local slope
+  budgets;
+- the literal natural-scale specialization
+  `q_prof^w * max(d_e(A)-3,0) <= 7 H_e OR certified owner`, rather than a free
+  normalization symbol;
+- the executable `none`-fiber construction of the actual post-C1--C8 residual,
+  with exact complementary cardinality for residual and earlier-owned
+  neighbors;
+- the compiler showing that a natural-scale bound on that executable residual
+  yields the semantic owner-or-envelope statement on the original shell;
+- the mandatory generic `F_241` regression showing that the exact natural
+  denominator is `241^2 = 58,081`, the residual shell may retain at most eight
+  of ten displayed neighbors, and therefore at least two neighbors must carry
+  genuine earlier-owner certificates;
+- theorem-level paid profile constructors for the active Mersenne-31
+  near-rational branch and primitive C8 one-pencil branch, including
+  `floor(2,097,152/981,129)=2`, the separate denominators
+  `q_prof^67,447` and `q_slope=p`, and the exact natural numerator `1,993,679`;
+- an explicit semantic lift of the `F_241` star to one received line with
+  eleven checked explanation polynomials, parity certificates, normalized
+  codeword rays, and distinct slopes;
+- a fixed earlier common-GCD/pencil trigger selecting exactly two semantic
+  explanations, an exact paid slope image `[115,22]`, and an executable
+  eight-neighbor residual satisfying `3+7` with margin `18,295`;
+- rejection of all-residual and all-false support-only adapters.
 
-The multiplicative packet is a counterexample to a support-only proof route.
-It does **not** prove that its supports survive the actual slope-level C1--C8
-first-match atlas, and therefore does not refute the deployed Mersenne-31 exact
-residual.
+The multiplicative packet remains a counterexample to a support-only proof
+route.  The new semantic line fixture does not infer ownership from its common
+core: ownership is accepted only after the received-line agreements, noncommon
+parity certificates, normalized rays, exact slopes, two-endpoint pencil census,
+and paid profile have all been supplied.
 
-The package does **not** prove the open deployed local shell hypothesis, the
-gigantic binomial quotient values, row-sharp Q, an adjacent safe row, an MCA
-slope projection, or a complete first-match ledger.
+The deployed profile constructors pay supplied theorem-certified line profiles.
+They do **not** construct an exhaustive deployed C1--C8 classifier, count all
+realized pencils on one line, or prove the open natural-scale bound on every
+Mersenne-31 residual shell.  The package also does not prove the gigantic
+binomial quotient values, row-sharp Q, an adjacent safe row, or a complete
+first-match ledger.
+
+Source-to-Lean audits are recorded in
+`MULTIPLICATIVE_COUNTEREXAMPLE_CORRESPONDENCE.md` and
+`SEMANTIC_OWNER_CORRESPONDENCE.md`.
 
 ## Validation policy
 
-There is no Mathlib dependency. Do not build this package locally in agent
-sessions. Push the complete research packet to a fork branch and open a draft
-PR targeting `holmbuar/rs-mca:main`; the repository's PR-triggered GitHub
-Actions workflow is the authoritative Lean build.
+There is no Mathlib dependency. The package builds stdlib-only with
+`lake build`; every load-bearing declaration ends with `#print axioms`. The
+census is empty apart from the `native_decide` certificates declared in the
+deployed-profile and line-regression modules.

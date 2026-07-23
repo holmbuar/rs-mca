@@ -1,0 +1,140 @@
+{
+  "architecture_id": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1",
+  "partition": {
+    "architecture_id": "GRANDE_FINALE_V4_KB_MCA_TANGENT_SOURCE_ADAPTER_V1",
+    "atom_order": [
+      "U_paid",
+      "U_Q",
+      "U_BC",
+      "U_new"
+    ],
+    "canonical_translation": {
+      "alternative_translation_union_forbidden": true,
+      "column_far_case": "EMPTY_SOURCE_COORDINATE_TANGENT_IMAGE",
+      "non_column_far_case": "LEXICOGRAPHICALLY_FIRST_COMMON_EXPLAINING_TRIPLE",
+      "public_order_sources": [
+        "evaluation-domain order",
+        "coefficient-basis lexicographic order",
+        "support lexicographic order"
+      ],
+      "translation_preserves_complete_bad_slope_set": true
+    },
+    "chronology_stages": [
+      {
+        "atom_id": "U_paid",
+        "owner_id": "SOURCE_COORDINATE_TANGENT_IMAGE",
+        "paid": true,
+        "predicate": "BAD_SLOPE_AND_MEMBER_OF_CANONICAL_SOURCE_COORDINATE_RATIO_IMAGE",
+        "predicate_available": true,
+        "priority": 0
+      },
+      {
+        "atom_id": "U_Q",
+        "owner_id": "ACTIVE_V4_BOUNDARY_PREFIX_Q",
+        "paid": false,
+        "predicate": "BAD_SLOPE_NOT_EARLIER_AND_HAS_ACTIVE_V4_BOUNDARY_PREFIX_Q_CERTIFICATE",
+        "predicate_available": true,
+        "priority": 1
+      },
+      {
+        "atom_id": "U_BC",
+        "owner_id": "ACTIVE_V4_BALANCED_CORE",
+        "paid": false,
+        "predicate": "BAD_SLOPE_NOT_EARLIER_AND_HAS_ACTIVE_V4_BALANCED_CORE_CERTIFICATE",
+        "predicate_available": true,
+        "priority": 2
+      },
+      {
+        "atom_id": "U_new",
+        "owner_id": "UNPAID_V4_COMPLEMENT",
+        "paid": false,
+        "predicate": "BAD_SLOPE_NOT_OWNED_BY_ANY_EARLIER_DECLARED_OWNER",
+        "predicate_available": true,
+        "priority": 3
+      }
+    ],
+    "first_match": true,
+    "first_match_disjoint": true,
+    "object_kind": "MCA",
+    "owner_order": [
+      "SOURCE_COORDINATE_TANGENT_IMAGE",
+      "ACTIVE_V4_BOUNDARY_PREFIX_Q",
+      "ACTIVE_V4_BALANCED_CORE",
+      "UNPAID_V4_COMPLEMENT"
+    ],
+    "partition_digest_method": "SHA256_CANONICAL_JSON_WITHOUT_PARTITION_SHA256_AND_METHOD",
+    "partition_sha256": "4fade91abc408264989babcff6f8f9bbd80bcec52545a5db15ac376bf17d88fc",
+    "quantifier": "UNIFORM_OVER_ALL_ADMISSIBLE_RECEIVED_LINES",
+    "residual_passes_to": "experimental/grande_finale.tex#part:rank-atoms",
+    "residual_rule": "ITERATED_EXACT_SET_DIFFERENCE",
+    "same_partition_for_all_atoms": true,
+    "unit": "DISTINCT_BAD_FINITE_SLOPES_PER_RECEIVED_LINE",
+    "unresolved_cells": [
+      "ACTIVE_V4_BOUNDARY_PREFIX_Q",
+      "ACTIVE_V4_BALANCED_CORE",
+      "UNPAID_V4_COMPLEMENT"
+    ],
+    "witness_exhaustive": true
+  },
+  "payload_sha256": "a05d8caf2b772c9c5cc7e7683631c9db7f5b3f2ba4cf8f436f6d3b16f4bdc189",
+  "row_contract": {
+    "B_star": 274980728111395087,
+    "agreement": 1116048,
+    "budget_floor_identity": "floor(|F|/2^128)=274980728111395087",
+    "challenge_denominator": "FIELD_CARDINALITY",
+    "code": {
+      "dimension": 1048576,
+      "redundancy": 1048576
+    },
+    "domain": {
+      "cardinality": 2097152,
+      "description": "deployed KoalaBear evaluation domain fixed by the foundation source"
+    },
+    "endpoint_convention": {
+      "first_safe_agreement_candidate": 1116048,
+      "largest_safe_grid_radius_candidate": "981104/2097152",
+      "status": "ROW_OPEN_NOT_PROMOTED"
+    },
+    "field": {
+      "base_prime": 2130706433,
+      "cardinality": "93571093019388561295270373781649880353786165192103559169",
+      "extension_degree": 6
+    },
+    "object": "MCA",
+    "projection_and_unit": "DISTINCT_BAD_FINITE_SLOPES_PER_RECEIVED_LINE",
+    "received_object_quantifier": "FOR_EVERY_ADMISSIBLE_RECEIVED_LINE",
+    "row": "KoalaBear MCA at 2^-128",
+    "target_epsilon": "2^-128"
+  },
+  "schema": "rs-mca-kb-v4-row-contract-v1",
+  "source_bindings": [
+    {
+      "binding_id": "KB_V4_ROW::workboard",
+      "hash": "30d8b9f1b4caa3c7504fe3d24fc7ce8da84de434",
+      "hash_kind": "GIT_BLOB_SHA1",
+      "path": "agents.md",
+      "role": "K0_K1_AND_EXACT_BANKABILITY_CONTRACT"
+    },
+    {
+      "binding_id": "KB_V4_ROW::active_v4",
+      "hash": "8a5d9791900ca9eed773feba146b92ad296704ce",
+      "hash_kind": "GIT_BLOB_SHA1",
+      "path": "experimental/grande_finale.tex",
+      "role": "ACTIVE_Q_BC_NEW_CERTIFICATE_PREDICATES_AND_ORDER32_RATIONAL_ATOM_CONSUMER"
+    },
+    {
+      "binding_id": "KB_V4_ROW::admissibility",
+      "hash": "f50d296131b471ec1e986bc0a28d81d6e0af0b11",
+      "hash_kind": "GIT_BLOB_SHA1",
+      "path": "experimental/Conjectures_and_Barriers_RS_MCA_v4_1.tex",
+      "role": "ACTIVE_NON_ORACULAR_COMPILER_AND_BARRIER_AUTHORITY"
+    },
+    {
+      "binding_id": "KB_V4_ROW::foundation",
+      "hash": "5ceff5dbc4b1ac4cef53eae7eada32046e4bafeb",
+      "hash_kind": "GIT_BLOB_SHA1",
+      "path": "tex/cs25_cap_v13_2.tex",
+      "role": "DEPLOYED_FIELD_DOMAIN_ENDPOINT_AND_UNSAFE_AUTHORITY"
+    }
+  ]
+}
