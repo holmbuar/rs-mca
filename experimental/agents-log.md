@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-23 - M31 990-moment flatness obstruction
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/thresholds/m31_flatness_keystone_moment_blind_pair.md`; `experimental/data/certificates/m31-flatness-keystone-moment-blind-pair/`; `experimental/scripts/verify_m31_flatness_keystone_moment_blind_pair.py`.
+- **Status:** PROVED / COUNTEREXAMPLE_TO_HISTOGRAM_MOMENT_ONLY_INFERENCE / ROUTE_CUT / OPEN_RS_PREFIX_REALIZABILITY.
+- **What is being added:** At the exact M31 quotient cardinalities, two surjective abstract support-to-target maps have identical raw and falling fiber moments through order 990, but maxima `16777215` and `16794161`.
+- **How it is useful:** It proves that average, full-image normalization, and any unlabelled collision-moment ledger through order 990 cannot certify the M31 LIST budget without an additional RS-realizability or target-labelled input.
+- **What to do next:** Prove a locator-prefix realizability restriction, target-labelled Fourier/kernel constraint, or pointwise shell theorem that excludes the unsafe occupancy vector on the actual punctured quotient map.
+
 ### 2026-07-23 - Reviewed PR integration wave 1047--1069
 
 - **Agent/model:** Codex, selectively integrating reviewed PRs by Holm Buar (#1047--#1049, #1054--#1057), AllenGrahamHart with Claude Fable 5 (#1050), Vadim Avdeev (#1063), DannyExperiments (#1067, #1069), and Scott Hughes (#1052, #1058--#1061, #1064--#1066, #1068 through the cumulative #1068 stack).
