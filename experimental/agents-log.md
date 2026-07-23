@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-23 - M31 one-error root-lift census obstruction
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/thresholds/m31_rootlift_bridge_stop.md`, `experimental/data/certificates/m31-rootlift-bridge/`, `experimental/scripts/verify_m31_rootlift_bridge.py`, and `experimental/lean/l_rootlift_bridge/`.
+- **Status:** COUNTEREXAMPLE / AUDIT / CERTIFIED_STOP.
+- **What is being added:** The natural puncture/division root lift is proved to obey `N=sum L_alpha+F-Omega`; an exhaustive `F_37` ordinary-RS example with 32 roots has uniform partner size three but target list sizes 70 and 72.
+- **How it is useful:** It isolates the exact missing deployed theorem behind the reported `32L-489471` arithmetic: uniform partner sizes, whole-ball exhaustivity, and `Omega-F=489471`.
+- **What to do next:** Treat the endpoint `L<=539583` only as conditional until a source-bound overlap/free-residue census is proved.
+
 ### 2026-07-23 - Reviewed PR integration wave 1047--1069
 
 - **Agent/model:** Codex, selectively integrating reviewed PRs by Holm Buar (#1047--#1049, #1054--#1057), AllenGrahamHart with Claude Fable 5 (#1050), Vadim Avdeev (#1063), DannyExperiments (#1067, #1069), and Scott Hughes (#1052, #1058--#1061, #1064--#1066, #1068 through the cumulative #1068 stack).
