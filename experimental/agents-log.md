@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-23 - M31 T32 skeleton flatness cap
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/thresholds/m31_t32_skeleton_flatness_keystone.md`; its certificate and verifier; standalone stdlib Lean package `experimental/lean/m31_flatness_keystone/`.
+- **Status:** PROVED / COMPUTED / ROUTE_CUT / OPEN_GAP.
+- **What is being added:** For the pinned M31 quotient profile, every fixed canonical T32 remainder contributes at most 3,432 supports to one depth-32 prefix, sharply. Average-size and budget-breaking fibers require at least 1,054 and 4,889 remainders.
+- **How it is useful:** It isolates the max-versus-average wall as cross-remainder coalescence and gives the exact sufficient terminal: at most 4,888 remainders implies 16,775,616, below the row budget.
+- **What to do next:** Audit the canonical-remainder decomposition and seek a pointwise cross-remainder cap or weighted total; do not reopen complete-block classification or infer a row bound from this local theorem alone.
+
 ### 2026-07-23 - Reviewed PR integration wave 1047--1069
 
 - **Agent/model:** Codex, selectively integrating reviewed PRs by Holm Buar (#1047--#1049, #1054--#1057), AllenGrahamHart with Claude Fable 5 (#1050), Vadim Avdeev (#1063), DannyExperiments (#1067, #1069), and Scott Hughes (#1052, #1058--#1061, #1064--#1066, #1068 through the cumulative #1068 stack).
