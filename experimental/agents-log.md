@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-23 - M31 constant-shift flatness obstruction
+
+- **Agent/model:** GPT-5.6 Pro.
+- **Files added or changed:** `experimental/notes/thresholds/m31_flatness_keystone_constant_shift_obstruction.md`, its canonical certificate and verifier, and the stdlib-only package `experimental/lean/m31_alt_domain_fiber/`.
+- **Status:** COUNTEREXAMPLE.
+- **What is being added:** An explicit same-field, same-parameter two-puncture domain has a depth-32 479-subset prefix fiber of `145422675`, exceeding eight M31 budgets and forty ceiling ambient averages.
+- **How it is useful:** It rules out parameter-only or arbitrary-domain maximum-versus-average control; any deployed theorem must use Chebyshev-specific structure to exclude or pay hidden constant-shift packets.
+- **What to do next:** Audit the deployed quotient for all degree-above-prefix constant-shift packings and separate them from the non-block residual.
+
 ### 2026-07-23 - Reviewed PR integration wave 1047--1069
 
 - **Agent/model:** Codex, selectively integrating reviewed PRs by Holm Buar (#1047--#1049, #1054--#1057), AllenGrahamHart with Claude Fable 5 (#1050), Vadim Avdeev (#1063), DannyExperiments (#1067, #1069), and Scott Hughes (#1052, #1058--#1061, #1064--#1066, #1068 through the cumulative #1068 stack).
