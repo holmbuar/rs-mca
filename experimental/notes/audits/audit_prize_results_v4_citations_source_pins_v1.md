@@ -1,19 +1,23 @@
 # Audit: v4 synthesis bibliography and source pins
 
 ```yaml
-audit_target: experimental/proximity_prize_results_v4.tex @ f6a20fa (bibliography + source pins)
-row: whole v4 catalogue (Proth, F_{17^32}, corridor, deployed KoalaBear/Mersenne-31)
-object: CITATION_AND_PIN (bibliography, cite/bibitem integrity, blob pins, printed integers, status labels)
-target_epsilon: n/a; the row targets 2^-128 and 2^-100 are carried through unchanged
-direct_statement: on the checked scope every cite resolves, every printed integer and status label re-derives from its named source or from exact arithmetic, and every pinned path exists at both 5ecb9ab5 and f6a20fa
+workboard_item: n/a — synthesis-wide citation/source-pin audit (supports external submission prep; advances no K/L/M/T atom)
+row: whole v4 catalogue (four Proth rows, F_{17^32}, corridor rows, deployed KoalaBear and Mersenne-31)
+object: OTHER (bibliography, cite/bibitem integrity, blob pins, printed integers, status labels)
+target_epsilon: n/a (row targets 2^-128 and 2^-100 carried through unchanged)
+agreement: n/a (audit spans rows)
+B_star: n/a (checked B* values include 274980728111395087 and 16777215)
+direct_statement: on the checked scope every \cite resolves to a \bibitem, every printed integer and status label re-derives from its named source or from exact arithmetic, and all 18 pinned paths exist at both 5ecb9ab5 and f6a20fa; 0 integer defects and 0 status-inflation defects; 5 pre-circulation bibliography/label fixes (F1-F5)
 architecture: DIRECT (provenance audit; no partition)
-quantifier: exhaustive over the checked scope defined below; the unchecked scope is enumerated explicitly
+partition_digest: n/a (DIRECT)
+atom_or_cell: DIRECT
+quantifier: exhaustive over the checked scope; the unchecked scope is enumerated explicitly
 projection_and_unit: bibliography entries, cite/bibitem keys, blob-pin paths, exact integers, status labels
-claimed_bound: 0 integer defects and 0 status-inflation defects on the checked scope; 5 pre-circulation bibliography/label fixes
+claimed_bound: 0 integer defects, 0 status-inflation defects on the checked scope; 5 pre-circulation fixes
 status: AUDIT
-impact: LOCAL_ONLY (provenance verification only; banks no atom and moves no row numerator)
-falsifier: any checked integer that does not re-derive; any cite without a bibitem; any pinned path missing at either commit; any checked status label stronger than its source supports
-replay: python3 experimental/scripts/verify_prize_results_v4_citation_audit.py --check
+impact: LOCAL_ONLY
+falsifier: any checked integer that does not re-derive; any \cite without a \bibitem; any pinned path missing at either commit; any checked status label stronger than its source supports
+replay: python3 experimental/scripts/verify_prize_results_v4_citation_audit.py --check   (45/45, < 1 s, stdlib-only; --tamper-selftest injects one defect and exits nonzero). Kernel-checked Lean is not applicable to a bibliography/pin audit; this verifier is the machine-checkable replay.
 ```
 
 - **Status:** AUDIT / NO ISSUE on checked scope.
