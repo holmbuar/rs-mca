@@ -7,13 +7,13 @@ object: OTHER (bibliography, cite/bibitem integrity, blob pins, printed integers
 target_epsilon: n/a (row targets 2^-128 and 2^-100 carried through unchanged)
 agreement: n/a (audit spans rows)
 B_star: n/a (checked B* values include 274980728111395087 and 16777215)
-direct_statement: on the checked scope every \cite resolves to a \bibitem, every printed integer and status label re-derives from its named source or from exact arithmetic, and all 18 pinned paths exist at both 5ecb9ab5 and f6a20fa; 0 integer defects and 0 status-inflation defects; 5 pre-circulation bibliography/label fixes (F1-F5)
+direct_statement: on the checked scope every \cite resolves to a \bibitem, every printed integer and status label re-derives from its named source or from exact arithmetic, and all 18 pinned paths exist at both 5ecb9ab5 and f6a20fa; 0 integer defects and 0 status-inflation defects; 6 pre-circulation bibliography/label fixes (F1-F5, F7)
 architecture: DIRECT (provenance audit; no partition)
 partition_digest: n/a (DIRECT)
 atom_or_cell: DIRECT
 quantifier: exhaustive over the checked scope; the unchecked scope is enumerated explicitly
 projection_and_unit: bibliography entries, cite/bibitem keys, blob-pin paths, exact integers, status labels
-claimed_bound: 0 integer defects, 0 status-inflation defects on the checked scope; 5 pre-circulation fixes
+claimed_bound: 0 integer defects, 0 status-inflation defects on the checked scope; 6 pre-circulation fixes
 status: AUDIT
 impact: LOCAL_ONLY
 falsifier: any checked integer that does not re-derive; any \cite without a \bibitem; any pinned path missing at either commit; any checked status label stronger than its source supports
@@ -32,7 +32,7 @@ replay: python3 experimental/scripts/verify_prize_results_v4_citation_audit.py -
   `5ecb9ab538a0a57dcb81018b17f32849049fb998`. Prompted by the maintainer's
   request to audit the v4 bibliography and source pins before external
   circulation. This note edits neither the manuscript nor any source;
-  it records five pre-circulation fixes and the verified-clean inventory behind
+  it records six pre-circulation fixes and the verified-clean inventory behind
   them.
 
 ## Verdict
@@ -40,10 +40,10 @@ replay: python3 experimental/scripts/verify_prize_results_v4_citation_audit.py -
 **CLEAN ON CHECKED SCOPE: 0 integer defects, 0 status-inflation defects.** Every
 exact integer and every status label re-derives from its named source or from
 exact arithmetic; every `\cite` resolves; all eighteen pinned repository paths
-exist at both the pin commit and the source commit. Five bibliography/label
-items (F1-F5) should be fixed before external circulation; none of them changes a
-theorem, an exact value, or the truth of a status label. F6 records seven
-descriptive citation brackets that are correct as printed.
+exist at both the pin commit and the source commit. Six bibliography/label
+items (F1-F5, F7) should be fixed before external circulation; none of them
+changes a theorem, an exact value, or the truth of a status label. F6 records
+seven descriptive citation brackets that are correct as printed.
 
 ## Findings
 
@@ -154,6 +154,46 @@ reads "Shortening Bounds...".
 *Fix.* Reconcile the two: update the file's `\title` to the published title, or
 match the bibliography to the file's `\title`.
 
+### F7 [LABEL-IMPRECISE] the Acknowledgements misname the attribution mechanism
+
+The Acknowledgements state where contributor credit lives:
+
+> "Contributor-specific results are attributed in theorem headings and
+> bibliography entries." (v4:708)
+
+In v4 the theorem headings carry no contributor names at all. Across every
+`theorem`, `proposition`, `lemma`, `corollary`, and `conjecture` heading in the
+manuscript, the count of occurrences of any acknowledged contributor's name is
+zero; the headings are uniformly descriptive, e.g. `[Source-coordinate tangent
+atom]` and `[KoalaBear rank-nine moving-root boundary cut]`.
+
+Per-result attribution in v4 lives instead in the 33 `\source{...}` lines, which
+do name contributors explicitly:
+
+> "\source{Holm Buar, \cite{BuarKBTangent26}. ...}" (v4:496)
+>
+> "\source{Danny, \cite{DannyCoordinateSpan26}. ...}" (v4:509)
+>
+> "\source{Scott Hughes, \cite{HughesKBM126}. ...}" (v4:544)
+
+The sentence is inherited rather than newly wrong. Its v3 ancestor read "The
+theorem headings and bibliography identify the source of each collaborative
+result" (`proximity_prize_results_v3.tex` at `5ecb9ab5`), and that was accurate
+for v3: v3 carried twelve name-bearing headings — `[Buar: source-coordinate
+tangent atom]`, `[Danny: pole-tolerant scalar-locator localization]`, `[Hughes:
+fixed-$G$ universal embedding]`, and nine more — and zero `\source` lines. The
+v3->v4 rewrite inverted the mechanism (12 named headings -> 0; 0 `\source` lines
+-> 33) and reworded the sentence, but kept "theorem headings".
+
+The "bibliography entries" half remains correct, including for the two
+contributors who appear in no `\source` name position: Latif and Hart are
+credited through the packets cited at v4:292 and v4:207, whose `\bibitem`
+entries carry their names.
+
+*Fix.* Reword to name the mechanism v4 actually uses, e.g. "Contributor-specific
+results are attributed in the per-result source lines and bibliography entries."
+No theorem, exact value, or status label is affected.
+
 ## F6 [NO ISSUE] descriptive citation brackets that paraphrase source titles
 
 Seven `\cite[...]` brackets restate the cited source's own section/theorem title
@@ -249,8 +289,8 @@ Source commit `f6a20fa39f8b3ebbf98056726c69133c82309e51`; pin commit
 `5ecb9ab538a0a57dcb81018b17f32849049fb998`. Kernel-checked Lean is not applicable
 to a bibliography/pin audit; the verifier above is the machine-checkable replay.
 
-**Audit verdict: NO ISSUE (checked scope).** Five pre-circulation
-bibliography/label fixes are recorded (F1-F5); the strongest, F1, gates external
-circulation of the `ChoComp26` companion. Credit to Latif for the `Corridor26`
+**Audit verdict: NO ISSUE (checked scope).** Six pre-circulation
+bibliography/label fixes are recorded (F1-F5, F7); the strongest, F1, gates
+external circulation of the `ChoComp26` companion. Credit to Latif for the `Corridor26`
 packet cross-checked in F2/clean-item 3 and to Hart for the `F17Audit26` note
 pinned in clean-item 7.
