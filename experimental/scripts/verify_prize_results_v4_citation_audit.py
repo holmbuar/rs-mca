@@ -86,7 +86,21 @@ EXPECT = {
     "cap_edges": [(Fraction(1, 4), Fraction(1, 512), Fraction(383, 512)),
                   (Fraction(1, 8), Fraction(1, 512), Fraction(447, 512)),
                   (Fraction(1, 16), Fraction(1, 1024), Fraction(959, 1024))],
+    # F7: the Acknowledgements name a mechanism the manuscript no longer uses.
+    "attribution_sentence": ("Contributor-specific results are attributed in "
+                             "theorem headings and bibliography entries"),
+    "contributor_names": ["Buar", "Hughes", "Danny", "Avdeev", "Zafiria",
+                          "Latif", "Hart"],
+    "n_named_headings": 0,
+    "n_source_lines": 33,
+    "n_named_source_lines": 12,
+    "v4_blob": "1abf81fae2fa9754a3cb04a9563b39a3d752716e",
 }
+
+# Theorem-class environments whose optional-argument brackets carry the heading.
+HEADING_RE = re.compile(
+    r"\\begin\{(?:theorem|proposition|lemma|corollary|conjecture)\}\[[^]]*\]"
+)
 
 
 # ---------------------------------------------------------------------------
@@ -132,6 +146,15 @@ def git_object_exists(commit, path):
         return r.returncode == 0
     except Exception:
         return False
+
+
+def git_blob_sha(*args):
+    """`git <args>` returning a single blob sha, or None when git is unavailable."""
+    try:
+        r = subprocess.run(["git"] + list(args), cwd=ROOT, capture_output=True)
+        return r.stdout.decode().strip() if r.returncode == 0 else None
+    except Exception:
+        return None
 
 
 def parse_corridor_readme(text):
@@ -272,6 +295,36 @@ def run_battery():
                 f"pin={at_pin} source={at_src}")
     add("all pinned paths resolve at pin commit AND source commit", all_pin_ok)
 
+    # 12. the v4 text read above IS the blob pinned at the source commit, so
+    #     every content check in this battery is a check against pinned content.
+    on_disk_blob = git_blob_sha("hash-object", V4)
+    pinned_blob = git_blob_sha(
+        "rev-parse", f"{SOURCE_COMMIT}:experimental/proximity_prize_results_v4.tex")
+    add("v4 read here == v4 blob pinned at the source commit",
+        on_disk_blob is not None and on_disk_blob == EXPECT["v4_blob"]
+        and (pinned_blob is None or pinned_blob == EXPECT["v4_blob"]),
+        f"on-disk {on_disk_blob} pinned {pinned_blob}")
+
+    # 13. F7: the Acknowledgements name an attribution mechanism v4 dropped.
+    names = EXPECT["contributor_names"]
+    add("acknowledgements attribution sentence present in v4",
+        EXPECT["attribution_sentence"] in v4)
+    headings = HEADING_RE.findall(v4)
+    named_headings = [h for h in headings if any(n in h for n in names)]
+    add(f"contributor names in theorem-class headings == "
+        f"{EXPECT['n_named_headings']}",
+        len(named_headings) == EXPECT["n_named_headings"],
+        f"found {len(named_headings)}: {named_headings[:3]}")
+    source_lines = [ln for ln in v4.splitlines() if "\\source{" in ln]
+    add(f"\\source lines == {EXPECT['n_source_lines']}",
+        len(source_lines) == EXPECT["n_source_lines"],
+        f"found {len(source_lines)}")
+    named_sources = [ln for ln in source_lines if any(n in ln for n in names)]
+    add(f"\\source lines naming a contributor == "
+        f"{EXPECT['n_named_source_lines']}",
+        len(named_sources) == EXPECT["n_named_source_lines"],
+        f"found {len(named_sources)}")
+
     return results
 
 
@@ -299,17 +352,34 @@ def main(argv):
     mode = argv[1] if len(argv) > 1 else "--run"
 
     if mode == "--tamper-selftest":
-        # Inject exactly one defect and confirm the battery catches it.
-        print("[tamper-selftest] injecting defect: owner_star 59838 -> 59839")
-        EXPECT["owner_star"] = 59839
-        results = run_battery()
-        nfail = report(results, verbose=True)
-        if nfail > 0:
-            print("[tamper-selftest] PASS: battery caught the injected defect; "
-                  "exiting nonzero as designed.")
-            return 1
-        print("[tamper-selftest] ERROR: injected defect was NOT caught.")
-        return 2
+        # Inject one defect at a time, each in isolation, and confirm the
+        # battery catches every one.  Each injection targets a different check
+        # family: exact arithmetic, source-pin integrity, and the F7
+        # attribution-mechanism group.
+        injections = [
+            ("owner_star", 59838, 59839),
+            ("v4_blob", EXPECT["v4_blob"], "0" * 40),
+            ("n_named_headings", 0, 1),
+            ("n_source_lines", 33, 32),
+            ("n_named_source_lines", 12, 11),
+            ("attribution_sentence", EXPECT["attribution_sentence"],
+             "Contributor-specific results are attributed by carrier pigeon"),
+        ]
+        missed = []
+        for key, good, bad in injections:
+            print(f"[tamper-selftest] injecting defect: {key} -> {bad!r}")
+            EXPECT[key] = bad
+            nfail = report(run_battery(), verbose=False)
+            EXPECT[key] = good
+            if nfail == 0:
+                missed.append(key)
+                print(f"[tamper-selftest] ERROR: defect in {key} was NOT caught.")
+        if missed:
+            print(f"[tamper-selftest] ERROR: uncaught injections: {missed}")
+            return 2
+        print(f"[tamper-selftest] PASS: battery caught all "
+              f"{len(injections)} injected defects; exiting nonzero as designed.")
+        return 1
 
     verbose = (mode != "--check")
     results = run_battery()

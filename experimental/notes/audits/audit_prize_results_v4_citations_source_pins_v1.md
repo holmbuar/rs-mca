@@ -17,15 +17,16 @@ claimed_bound: 0 integer defects, 0 status-inflation defects on the checked scop
 status: AUDIT
 impact: LOCAL_ONLY
 falsifier: any checked integer that does not re-derive; any \cite without a \bibitem; any pinned path missing at either commit; any checked status label stronger than its source supports
-replay: python3 experimental/scripts/verify_prize_results_v4_citation_audit.py --check   (45/45, < 1 s, stdlib-only; --tamper-selftest injects one defect and exits nonzero). Kernel-checked Lean is not applicable to a bibliography/pin audit; this verifier is the machine-checkable replay.
+replay: python3 experimental/scripts/verify_prize_results_v4_citation_audit.py --check   (50/50, < 1 s, stdlib-only; --tamper-selftest injects six defects one at a time, across exact arithmetic, pin integrity, and the F7 group, and exits nonzero). Kernel-checked Lean is not applicable to a bibliography/pin audit; this verifier is the machine-checkable replay.
 ```
 
 - **Status:** AUDIT / NO ISSUE on checked scope.
 - **Date:** 2026-07-24.
 - **Author:** Holm Buar.
 - **Verifier:** `experimental/scripts/verify_prize_results_v4_citation_audit.py`
-  (stdlib-only, < 1 s; `--check` exits 0 at 45/45, `--tamper-selftest` injects one
-  defect and correctly exits nonzero).
+  (stdlib-only, < 1 s; `--check` exits 0 at 50/50, `--tamper-selftest` injects
+  six defects one at a time — across exact arithmetic, source-pin integrity, and
+  the F7 attribution group — and correctly exits nonzero on each).
 - **Scope.** Bibliography, citation integrity, printed exact integers and status
   labels, and source pins of `experimental/proximity_prize_results_v4.tex` at
   `f6a20fa`, checked against the cited manuscripts and packets pinned at
@@ -167,8 +168,8 @@ manuscript, the count of occurrences of any acknowledged contributor's name is
 zero; the headings are uniformly descriptive, e.g. `[Source-coordinate tangent
 atom]` and `[KoalaBear rank-nine moving-root boundary cut]`.
 
-Per-result attribution in v4 lives instead in the 33 `\source{...}` lines, which
-do name contributors explicitly:
+Per-result attribution in v4 lives instead in the `\source{...}` lines. There are
+33 of them; 12 name a contributor directly:
 
 > "\source{Holm Buar, \cite{BuarKBTangent26}. ...}" (v4:496)
 >
@@ -280,7 +281,7 @@ no ledger term.
 ## Replay
 
 ```bash
-python3 experimental/scripts/verify_prize_results_v4_citation_audit.py            # verbose, 45/45
+python3 experimental/scripts/verify_prize_results_v4_citation_audit.py            # verbose, 50/50
 python3 experimental/scripts/verify_prize_results_v4_citation_audit.py --check    # exit 0, gate mode
 python3 experimental/scripts/verify_prize_results_v4_citation_audit.py --tamper-selftest  # must exit nonzero
 ```
