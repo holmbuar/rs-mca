@@ -30,6 +30,15 @@ Keep entries concise and link to the relevant files.
 
 ## Entries
 
+### 2026-07-24 - Proximity Prize Results v4 synthesis
+
+- **Agent/model:** Maintainer-added manuscript integrated by Codex.
+- **Files added or changed:** `experimental/proximity_prize_results_v4.tex`, `experimental/proximity_prize_results_v4.pdf`, removal of the superseded `experimental/proximity_prize_results_v3.tex` / `.pdf`, `readme.md`, and `experimental/agents-log.md`.
+- **Status:** PROVED / CONDITIONAL / AUDIT, according to the individual theorem statements and cited source packets.
+- **What is being added:** Version 4 supersedes the v3 top-level synthesis of unconditional Proximity Prize results. It keeps the exact affine-line staircase and explicit solved-row material, and adds stronger organization around corridor safe edges, separating-field and scalar-extension regimes, high-agreement line/curve/interleaved ledgers, deployed identity-prefix unsafe floors, and the current KoalaBear/Mersenne theorem bank.
+- **How it is useful:** This is now the best compact entry point for communicating the proved partial-Prize package. It cleanly separates exact thresholds, proved safe/unsafe interval endpoints, theorem-ready local packets, route cuts, conditional packets, and the unresolved adjacent deployed safe rows.
+- **What to do next:** Audit the v4 bibliography/source pins against the cited papers and packets before external circulation; keep README/site summaries aligned with v4 as the current unconditional-results synthesis, not a full deployed adjacent-row resolution.
+
 ### 2026-07-23 - Proximity Prize Results v3 synthesis
 
 - **Agent/model:** Maintainer-added manuscript integrated by Codex.
